@@ -9,7 +9,7 @@ Runs on Python 3.5.x and has the following dependencies: [mdtraj](https://www.md
 
 ## Overview
 
-Manipulates and analyzes the pi-stacking interactions in the output of a molecular dynamics run. 
+Manipulates the outputs of an MD simulation and analyzes the pi-stacking interactions. Creates a "Pi-Stacking Fingerprint" for a structure at each frame. Presents Pi-stacking interactions between two residues through analysis of their relevant movement.
 
 ## Proposed Features
 
