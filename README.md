@@ -22,3 +22,6 @@ Manipulates the outputs of an MD simulation and analyzes the pi-stacking interac
     - Heatmap: matrix where x-axis and y-axis are residue idenities within the strucutre (eg. residue 1, residue 48, etc.) and matrix(i,j) is colored by distance between the residues, where stacking interactions occur at around 3-4 Angstroms apart.
 
 ## Stakeholders and Intended Users
+
+The package is intended to be used by anyone in academic or computational biology centers running molecular dynamics. No explicit prerequisites, but a conceptual understanding of MD output files is beneficial. The stakeholders include the users, other researchers reliant on the computational data, and any beneficiaries of the overall research conducted using StACKER.
+
