@@ -96,11 +96,21 @@ class Vector:
         '''
         a_dot_product_b = self.x*b.x+self.y*b.y+self.z*b.z
         b_magnitude = b.magnitude()
+        if b_magnitude == 0: raise ZeroDivisionError("You cannot project onto the Zero Vector")
         normalize_factor = a_dot_product_b / (b_magnitude**2)
         proj_vector = Vector(normalize_factor*b.x, normalize_factor*b.y, normalize_factor*b.z)
         return proj_vector
     
 if __name__ == "__main__":
-    add_result = Vector(1,2,3) + Vector(3,2,1)
-    expected_result = Vector(4,4,4)
-    assert (add_result == expected_result)
+    assert (Vector(1,2,3) + Vector(3,2,1) == Vector(4,4,4))
+    assert (Vector(1,2,3).y == 2)
+    assert (Vector(1,2,3) - Vector(-1,0,4) == Vector(2,2,-1))
+    assert (Vector(1,0,0).calculate_cross_product(Vector(0,1,0)) == Vector(0,0,1))
+    assert (Vector(1,0,0).calculate_cross_product(Vector(0,0,0)) == Vector(0,0,0))
+    assert (Vector(1,0,0).magnitude() == 1)
+    assert (Vector(0,3,4).magnitude() == 5)
+    assert (Vector(-1,-2,-2).magnitude() == 3)
+    assert (Vector(3,1,0).calculate_projection(Vector(1,0,0)) == Vector(3,0,0))
+    assert (Vector(1,2,3).calculate_projection(Vector(0,0,0)) == Vector(0,0,0))
+
+
