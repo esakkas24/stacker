@@ -46,7 +46,20 @@ class Vector:
         '''
         return Vector(self.x - other.x, self.y - other.y, self.z - other.z)
 
+    def __eq__(self, other: "Vector") -> bool:
+        '''Checks if two Vectors are equal
+        
+        Args:
+            other (Vector) : Vector to check equality to
 
+        Returns:    
+            equal (bool) : True if vectors are equal, False otherwise
+        '''
+        if (self.x == other.x and self.y == other.y and self.z == other.z):
+            return True
+        else:
+            return False
+        
     def calculate_cross_product(self, b : 'Vector') -> 'Vector':
         '''Calculates the cross product of 2 vectors
         
@@ -87,4 +100,7 @@ class Vector:
         proj_vector = Vector(normalize_factor*b.x, normalize_factor*b.y, normalize_factor*b.z)
         return proj_vector
     
-   
+if __name__ == "__main__":
+    add_result = Vector(1,2,3) + Vector(3,2,1)
+    expected_result = Vector(4,4,4)
+    assert (add_result == expected_result)
