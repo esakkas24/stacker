@@ -38,4 +38,26 @@ def convert_to_python_command(parsed_input : dict) -> tuple:
         input: {command : save_AmberParm, r : 100, s : chr2, outfile : test.pdb, input : input.pdb}
         ouput: (save_amber_parm, {region : 100, section : chr2, outfile : test.pdb, input : input.pdb})
     '''
+    pass
+
+def run_python_command(module_function : function, arguments : dict):
+    '''Runs a python function with passed in dictionary of arguments
+
+    Runs a python function with named inputs based on a dictionary of arguments
+        for the function to take.
+
+    Args:
+        module_function (function) : function from the module to run
+        arguments (dict) : dictionary of arguments for function. Keys are the names of args.
+            in the module_function implementation, values are the input values to attach.
+
+    Returns:
+        Ouput of module_function
+
+    Example:
+        module_function: save_amber_parm
+        arguments: {region : 100, section : chr2, outfile : test.pdb, input : input.pdb})
+        runs: save_amber_parm(region = 100, section = "chr2", outfile = test.pdb, input = input.pdb)
+    '''
+    pass
 
