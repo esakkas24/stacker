@@ -1,8 +1,10 @@
 import matplotlib.pyplot as plt
 import residue_movement
+import pairwise_distance
+import numpy as np
 
 def visualize_two_residue_movement_scatterplot(csv_filepath : str) -> None:
-    '''Creates scatterplot of two-residue movement relative to each other
+    '''Creates scatterplot of two-residue movement relative to each other.
 
     Args:
         csv_filepath (str) : filepath to csv file containing data on the movement
@@ -17,7 +19,7 @@ def visualize_two_residue_movement_scatterplot(csv_filepath : str) -> None:
     pass
 
 def visualize_two_residue_movement_heatmap(csv_filepath : str) -> None:
-    '''Creates heatmap of two-residue movement relative to each other
+    '''Creates heatmap of two-residue movement relative to each other.
 
     Args:
         csv_filepath (str) : filepath to csv file containing data on the movement
@@ -32,3 +34,18 @@ def visualize_two_residue_movement_heatmap(csv_filepath : str) -> None:
     '''
     pass
 
+def visualize_pairwise_residue(pairwise_matrix : np.typing.ArrayLike) -> None:
+    '''Creates matrix heatmap of the matrix created in the pairwise comparison.
+
+    Args:
+        pairwise_matrix (NumPy array) : matrix where position i,j represents the distance from 
+            residue i to residue j. Output of pairwise_distance.get_residue_distance_for_frame()
+
+    Returns:
+        None
+
+    Implementation very similar to game of life where a cell is colored by the presence of a 1 value
+        in matrix position i,j. Here values can range >1 and we care about values 0-8 Angstroms, as 
+        this is where stacking occurs.
+    '''
+    pass
