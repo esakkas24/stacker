@@ -48,3 +48,9 @@ def file_convert(input_file : str, ouput_filetype : str) -> None:
     Uses mdtraj.save() commands to save to convert trajectories to various filetypes
         mdtraj.save_mdcrd(), mdtraj.save_pdb(), mdtraj.save_xyz(), etc'''
     pass
+
+if __name__ == "__main__":
+    filtered_traj = filter_traj_to_pdb('5JUP_N2_wCCC_+1GCU_nowat.mdcrd', '5JUP_N2_wCCC_+1GCU_nowat_posttleap.pdb', {'C2','C4','C6'}, {426,427})
+    print([residue for residue in filtered_traj.topology.residues])
+    table, bonds = filtered_traj.topology.to_dataframe()
+    print(table)
