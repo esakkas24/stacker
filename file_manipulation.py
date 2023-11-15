@@ -35,3 +35,16 @@ def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str,
     filtered_trajectory = trajectory.atom_slice(selection_indices)
     filtered_trajectory.save_pdb('test.pdb')
     return filtered_trajectory
+
+def file_convert(input_file : str, ouput_filetype : str) -> None:
+    '''Converts trajectory input file to new output type
+    
+    Args:
+        input file (str) : path name of the input file to be converted
+        output_file (str) : desired filetype to convert to (mdcrd, pdb, etc.)
+    Returns:
+        None
+
+    Uses mdtraj.save() commands to save to convert trajectories to various filetypes
+        mdtraj.save_mdcrd(), mdtraj.save_pdb(), mdtraj.save_xyz(), etc'''
+    pass
