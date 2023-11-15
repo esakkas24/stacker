@@ -49,3 +49,22 @@ def visualize_pairwise_residue(pairwise_matrix : np.typing.ArrayLike) -> None:
         this is where stacking occurs.
     '''
     pass
+
+def visualize_pairwise_trajectory(heatmap_frames : list) -> None:
+    '''Creates movie of heatmaps across all frames.
+
+    Displays the pairwise heatmaps for every frame of a trajectory to visualize
+        stacking fingerprint overtime.
+
+    Args:
+        heatmap_frames (list) : list of NumPy arrays where each array is matrix where position i,j 
+            represents the distance from residue i to residue j. Each is the output of 
+            pairwise_distance.get_residue_distance_for_frame(). 
+    
+    Returns:
+        None
+
+    heatmap_frames[i] is the heatmap created at frame i+1 (since frames are 1-indexed). 
+    Implementation is similar to the updating game of life.
+    '''
+    pass
