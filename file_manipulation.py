@@ -1,6 +1,5 @@
 import mdtraj as md
 
-
 def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str, 
                         atomnames_desired : set = {},
                         residues_desired : set = {}) -> md.Trajectory:
@@ -25,6 +24,7 @@ def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str,
     trajectory = md.load(trajectory_filename, top = topology_filename)
     first_10_frames = trajectory[0:10]
     first_10_frames.save_mdcrd('first10_'+trajectory_filename)
+    
     print("Getting topology...")
     topology = trajectory.topology
     
