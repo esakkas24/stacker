@@ -2,7 +2,8 @@ import mdtraj as md
 import pandas
 import numpy as np
 
-def calculate_residue_distance(res1_num : int, res2_num : int, 
+def calculate_residue_distance(trajectory : md.Trajectory, 
+                               res1_num : int, res2_num : int, 
                                 res1_atoms : tuple = ("C2","C4","C6"),
                                 res2_atoms : tuple = ("C2","C4","C6")) -> float:
     '''Calculates the distance between two residues in Angstroms
@@ -11,6 +12,7 @@ def calculate_residue_distance(res1_num : int, res2_num : int,
         by the average x,y,z position of three passed atoms for each residue.
 
     Args:
+        trajectory (md.Trajectory) : trajectory to analyze (must have topology aspect)
         res1_num (int) : the residue number of the first residue (PDB Column 5)
         res2_num (int) : the residue number of the second residue (PDB Column 5)
         res1_atoms (tuple) : a tuple of the atom names of the three atoms whose position
@@ -20,7 +22,7 @@ def calculate_residue_distance(res1_num : int, res2_num : int,
     '''
     pass
 
-def get_residue_distance_for_frame(trajectory  : md.Trajectory, frame : int) -> np.array:
+def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int) -> np.array:
     '''Calculates pairwise the distance between all residues in a given frame
 
     Args:
