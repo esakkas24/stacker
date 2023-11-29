@@ -152,14 +152,15 @@ def calculate_bottaro_values_for_frame(perspective_base_coords : Base, viewed_mi
     return values
 
 def write_bottaro_to_csv(pdb_filename : str, output_csv_name : str, 
-                         res1_atom_names : tuple = ("C2", "C4","C6"), res2_atom_names : tuple = ("C2", "C4","C6")) -> None:
+                         res1_atom_names : tuple = ("C2", "C4","C6"), 
+                         res2_atom_names : tuple = ("C2", "C4","C6")) -> None:
     '''Write the Bottaro r, rho, and theta values from a trajectory pdb to a CSV
 
     Calculates the r, rho, and theta values as described in Bottaro et al. from a
     perspective nucleotide to a viewed nucleotide per frame. Writes the results to a CSV file.
 
     Args:
-        pdb_filename (str) : name of pdb containing information for two residues (perspective and viewed
+        pdb_filename (str) : name of pdb containing information for ONLY two residues (perspective and viewed
             nucleotide) at each frame.
         output_csv_name (str) : filename of CSV file to write to
         res1_atom_names (tuple) : tuple of the atom names (eg. "C2", "C4", "C6") to use from
