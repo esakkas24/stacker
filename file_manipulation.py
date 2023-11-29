@@ -13,17 +13,14 @@ def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str,
         trajectory_filename (str) : path to file of the concatenated trajectory
             - Should be concatenation of the 1 in 50 frames sampled trajectories for each replicate
         topology_filename (str) : path to file of the topology of the molecule
-        filtered_pdb_filename (str) : path to file of the filtered PDB to write to
-        atomnames_desired (set) : atomnames to keep if the line represents this type of atom
-        residues_desired (set) : residue numbers of residues to keep if the line represents this type of residue
+        atomnames_desired (set) : atomnames to keep in the trajectory
+        residues_desired (set) : residue numbers of residues to keep in the trajectory
 
     Returns:
         filtered_trajectory (md.Trajectory) : a trajectory object representing the filtered structure across all frames
     '''
     print("Reading trajectory...")
     trajectory = md.load(trajectory_filename, top = topology_filename)
-    first_10_frames = trajectory[0:10]
-    first_10_frames.save_mdcrd('first10_'+trajectory_filename)
     
     print("Getting topology...")
     topology = trajectory.topology
@@ -31,9 +28,8 @@ def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str,
     print("Filtering trajectory...")
     atomnames_query = " or ".join([f"name == '{atom}'" for atom in atomnames_desired])
     residues_query = " or ".join([f"residue == {resnum}" for resnum in residues_desired])
-    selection_indices = topology.select('(' + atomnames_query + ') and (' + residues_query + ')')
-    filtered_trajectory = trajectory.atom_slice(selection_indices)
-    filtered_trajectory.save_pdb('test.pdb')
+    atom_indices_selection = topology.select('(' + atomnames_query + ') and (' + residues_query + ')')
+    filtered_trajectory = trajectory.atom_slice(atom_indices_selection)
     return filtered_trajectory
 
 def file_convert(input_file : str, ouput_filetype : str) -> None:
@@ -50,7 +46,8 @@ def file_convert(input_file : str, ouput_filetype : str) -> None:
     pass
 
 if __name__ == "__main__":
-    filtered_traj = filter_traj_to_pdb('5JUP_N2_wCCC_+1GCU_nowat.mdcrd', '5JUP_N2_wCCC_+1GCU_nowat_posttleap.pdb', {'C2','C4','C6'}, {426,427})
+    filtered_traj = filter_traj_to_pdb('first10_5JUP_N2_wCCC_+1GCU_nowat.mdcrd', '5JUP_N2_wCCC_+1GCU_nowat.prmtop', {'C2','C4','C6'}, {426,427})
     print([residue for residue in filtered_traj.topology.residues])
+    print([atom for atom in filtered_traj.topology.atoms])
     table, bonds = filtered_traj.topology.to_dataframe()
     print(table)
