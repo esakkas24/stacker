@@ -101,6 +101,9 @@ class Vector:
         proj_vector = Vector(normalize_factor*b.x, normalize_factor*b.y, normalize_factor*b.z)
         return proj_vector
     
+    def __str__(self):
+        return "[ " + str(self.x) + "\n  " + str(self.y) + "\n  " + str(self.z) + " ]"
+    
 if __name__ == "__main__":
     assert (Vector(1,2,3) + Vector(3,2,1) == Vector(4,4,4))
     assert (Vector(1,2,3).y == 2)
