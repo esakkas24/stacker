@@ -9,10 +9,11 @@ def calculate_residue_distance(trajectory : md.Trajectory,
     '''Calculates the distance between two residues in Angstroms
 
     Calcualtes the distance between the center of two residues. The center is denoted
-        by the average x,y,z position of three passed atoms for each residue.
+        by the average x,y,z position of three passed atoms for each residue (typically
+        every other carbon on the 6-C ring of the nucleotide base).
 
     Args:
-        trajectory (md.Trajectory) : trajectory to analyze (must have topology aspect)
+        trajectory (md.Trajectory) : single frame trajectory
         res1_num (int) : the residue number of the first residue (PDB Column 5)
         res2_num (int) : the residue number of the second residue (PDB Column 5)
         res1_atoms (tuple) : a tuple of the atom names of the three atoms whose position
@@ -20,7 +21,14 @@ def calculate_residue_distance(trajectory : md.Trajectory,
         res2_atoms (tuple) : a tuple of the atom names of the three atoms whose position
             to average to find the center of residue 2 [("C2","C4","C6")]
     '''
-    pass
+    topology = trajectory.topology
+    res1_atom_idx_query = "(name " + res1_atoms[0] + " or name " + res1_atoms[1] + " or name " + res1_atoms[2] + ") and residue " + str(res1_num)
+    res1_atom_idices = topology.select(res1_atom_idx_query)
+    res2_atom_idx_query = "(name " + res2_atoms[0] + " or name " + res2_atoms[1] + " or name " + res2_atoms[2] + ") and residue " + str(res2_num)
+    res2_atom_idices = topology.select(res2_atom_idx_query)
+
+    
+
 
 def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int) -> np.array:
     '''Calculates pairwise the distance between all residues in a given frame
@@ -36,6 +44,7 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int) -> n
     Only need to implement for the top right triangle of the matrix since distance i -> j
         is the same as distance j -> i. 
     '''
+    # np.array[i,j] = dist(nres1, nres2)
     pass
 
 if __name__ == "__main__":
