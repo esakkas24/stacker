@@ -22,6 +22,9 @@ def calculate_residue_distance(trajectory : md.Trajectory,
             to average to find the center of residue 1 [("C2","C4","C6")]
         res2_atoms (tuple) : a tuple of the atom names of the three atoms whose position
             to average to find the center of residue 2 [("C2","C4","C6")]
+    
+    Returns:
+        distance_res12 (float) : scalar distance between the center of geometry of the two residues
     '''
     topology = trajectory.topology
     res1_atom_idx_query = "(name " + res1_atoms[0] + " or name " + res1_atoms[1] + " or name " + res1_atoms[2] + ") and residue " + str(res1_num)
@@ -36,7 +39,9 @@ def calculate_residue_distance(trajectory : md.Trajectory,
     res2_atom_xyz = trajectory.xyz[0, res2_atom_idices,:]
     vectorized_res2_atom_xyz = [Vector(x,y,z) for [x,y,z] in res2_atom_xyz]
     res2_center_of_geometry = residue_movement.calc_center_3pts(*vectorized_res2_atom_xyz)
-    print(res1_center_of_geometry)
+
+    distance_res12 = (res1_center_of_geometry - res2_center_of_geometry).magnitude()
+    return distance_res12
 
 def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int) -> np.array:
     '''Calculates pairwise the distance between all residues in a given frame
@@ -56,21 +61,5 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int) -> n
     pass
 
 if __name__ == "__main__":
-    ########JOB VARIABLES#######
-    #load pdb file
-    topology_filename = '5JUP_N2_wCCC_+1GCU_nowat_posttleap.pdb'
-
-    trajectory_filename = '5JUP_N2_wCCC_+1GCU_nowat.mdcrd'
-    ############################
-
-    ########OPTIONAL VARS#######
-    perspective_atom1_name = "C2"
-    perspective_atom2_name = "C4"
-    perspective_atom3_name = "C6"
-    viewed_atom1_name = "C2"
-    viewed_atom2_name = "C4"
-    viewed_atom3_name = "C6"
-    ############################
-
     trj = md.load('first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', top = '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop')
-    calculate_residue_distance(trj[0], 426,427)
+    print(calculate_residue_distance(trj[0], 426, 427))
