@@ -102,6 +102,10 @@ class Vector:
         return proj_vector
     
     def __str__(self):
+        '''Redefinition of printing for Vectors
+
+        Redefines the output of print(Vector()) to display the x,y,z attributes
+        '''
         return "[ " + str(self.x) + "\n  " + str(self.y) + "\n  " + str(self.z) + " ]"
     
 if __name__ == "__main__":
