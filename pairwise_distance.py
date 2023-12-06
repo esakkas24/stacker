@@ -7,6 +7,8 @@ from vector import *
 class MultiFrameTraj(Exception):
     pass
 
+_NUCLEOTIDE_NAMES = {"A", "G", "C", "T", "U"}
+
 def calculate_residue_distance(trajectory : md.Trajectory, 
                                res1_num : int, res2_num : int, 
                                 res1_atoms : tuple = ("C2","C4","C6"),
@@ -36,6 +38,11 @@ def calculate_residue_distance(trajectory : md.Trajectory,
     res2_num = res2_num - 1
 
     topology = trajectory.topology
+    res1_name = topology.residue(res1_num).name
+    res2_name = topology.residue(res2_num).name
+    if (res1_name not in _NUCLEOTIDE_NAMES) or (res2_name not in _NUCLEOTIDE_NAMES):
+        return -1
+
     res1_atom_idx_query = "(name " + res1_atoms[0] + " or name " + res1_atoms[1] + " or name " + res1_atoms[2] + ") and residue " + str(res1_num)
     res2_atom_idx_query = "(name " + res2_atoms[0] + " or name " + res2_atoms[1] + " or name " + res2_atoms[2] + ") and residue " + str(res2_num)
     res1_atom_idices = topology.select(res1_atom_idx_query)
@@ -52,30 +59,47 @@ def calculate_residue_distance(trajectory : md.Trajectory,
     distance_res12 = (res1_center_of_geometry - res2_center_of_geometry).magnitude()
     return distance_res12
 
-def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int) -> np.array:
+def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int, 
+                                res1_atoms : tuple = ("C2","C4","C6"),
+                                res2_atoms : tuple = ("C2","C4","C6")) -> np.array:
     '''Calculates pairwise the distance between all residues in a given frame
 
     Args:
         trajectory (md.Trajectory) : trajectory to analyze (must have topology aspect)
-        frame (int) : frame to analyze
+        frame (int) : 1-indexed frame to analyze
+        res1_atoms (tuple) : a tuple of the atom names of the three atoms whose position
+            to average to find the center of residue 1 [("C2","C4","C6")]
+        res2_atoms (tuple) : a tuple of the atom names of the three atoms whose position
+            to average to find the center of residue 2 [("C2","C4","C6")]
     
     Returns:
-        distances (2D NumPy array) : matrix where position i,j represents the distance from 
+        pairwise_distances (2D NumPy array) : matrix where position i,j represents the distance from 
             residue i to residue j
     
     Only need to implement for the top right triangle of the matrix since distance i -> j
         is the same as distance j -> i. 
     '''
-    # np.array[i,j] = dist(nres1, nres2)
-    pass
+    trajectory = trajectory[frame-1]
+    n_residues = trajectory.n_residues
+
+    pairwise_distances = np.empty([n_residues,n_residues])
+
+    for i in range(1, n_residues):
+        for j in range(1, n_residues):
+            pairwise_distances[i,j] = calculate_residue_distance(trajectory, i, j, res1_atoms, res2_atoms)
+    
+    print(pairwise_distances)
+    return(pairwise_distances)
 
 if __name__ == "__main__":
     # Load test trajectory and topology
     trj = md.load('first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', top = '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop')
-
+    get_residue_distance_for_frame(trj, 1)
     # "Correct" residue distances determined using PyMOL, a standard interface
     # for visualizing 3D molecules (distances limited to 3 decimal places)
     assert (round(calculate_residue_distance(trj[0], 426, 427), 3) == 7.525)
     assert (round(calculate_residue_distance(trj[0], 3, 430), 3) == 22.043)
+
+    # Multi-frame exception
     assert (round(calculate_residue_distance(trj[0:10], 3, 430), 3) == 22.043)
 
