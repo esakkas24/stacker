@@ -26,14 +26,18 @@ def calculate_residue_distance(trajectory : md.Trajectory,
     Returns:
         distance_res12 (float) : scalar distance between the center of geometry of the two residues
     '''
+    # Correct for mdtraj 0-indexing
+    res1_num = res1_num - 1 
+    res2_num = res2_num - 1
+
     topology = trajectory.topology
     res1_atom_idx_query = "(name " + res1_atoms[0] + " or name " + res1_atoms[1] + " or name " + res1_atoms[2] + ") and residue " + str(res1_num)
     res1_atom_idices = topology.select(res1_atom_idx_query)
     res2_atom_idx_query = "(name " + res2_atoms[0] + " or name " + res2_atoms[1] + " or name " + res2_atoms[2] + ") and residue " + str(res2_num)
     res2_atom_idices = topology.select(res2_atom_idx_query)
-
-    # TRY MAKING IT A PDB
     
+    # THE PDB sees 426 as a C which it celarly isn't, let's save as full PDB and see hwere the issur is
+
     table, bonds = trajectory.atom_slice(res1_atom_idices).topology.to_dataframe()
     print(table.head())
     res1_atom_xyz = trajectory.xyz[0, res1_atom_idices,:]
