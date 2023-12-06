@@ -4,7 +4,8 @@ import numpy as np
 from residue_movement import calc_center_3pts
 from vector import *
 
-
+class MultiFrameTraj(Exception):
+    pass
 
 def calculate_residue_distance(trajectory : md.Trajectory, 
                                res1_num : int, res2_num : int, 
@@ -28,6 +29,8 @@ def calculate_residue_distance(trajectory : md.Trajectory,
     Returns:
         distance_res12 (float) : scalar distance between the center of geometry of the two residues
     '''
+    if len(trajectory) > 1: raise MultiFrameTraj("calculate_residue_distance() expects a 1-frame trajectory")
+
     # Correct for mdtraj 0-indexing
     res1_num = res1_num - 1 
     res2_num = res2_num - 1
