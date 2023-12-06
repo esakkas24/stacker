@@ -4,6 +4,8 @@ import numpy as np
 from residue_movement import calc_center_3pts
 from vector import *
 
+
+
 def calculate_residue_distance(trajectory : md.Trajectory, 
                                res1_num : int, res2_num : int, 
                                 res1_atoms : tuple = ("C2","C4","C6"),
@@ -32,17 +34,16 @@ def calculate_residue_distance(trajectory : md.Trajectory,
 
     topology = trajectory.topology
     res1_atom_idx_query = "(name " + res1_atoms[0] + " or name " + res1_atoms[1] + " or name " + res1_atoms[2] + ") and residue " + str(res1_num)
-    res1_atom_idices = topology.select(res1_atom_idx_query)
     res2_atom_idx_query = "(name " + res2_atoms[0] + " or name " + res2_atoms[1] + " or name " + res2_atoms[2] + ") and residue " + str(res2_num)
+    res1_atom_idices = topology.select(res1_atom_idx_query)
     res2_atom_idices = topology.select(res2_atom_idx_query)
 
     # convert nanometer units in trajectory.xyz to Angstroms
     res1_atom_xyz = trajectory.xyz[0, res1_atom_idices,:] * 10
-    vectorized_res1_atom_xyz = [Vector(x,y,z) for [x,y,z] in res1_atom_xyz]
-    res1_center_of_geometry = calc_center_3pts(*vectorized_res1_atom_xyz)
-
     res2_atom_xyz = trajectory.xyz[0, res2_atom_idices,:] * 10
+    vectorized_res1_atom_xyz = [Vector(x,y,z) for [x,y,z] in res1_atom_xyz]
     vectorized_res2_atom_xyz = [Vector(x,y,z) for [x,y,z] in res2_atom_xyz]
+    res1_center_of_geometry = calc_center_3pts(*vectorized_res1_atom_xyz)
     res2_center_of_geometry = calc_center_3pts(*vectorized_res2_atom_xyz)
 
     distance_res12 = (res1_center_of_geometry - res2_center_of_geometry).magnitude()
@@ -66,5 +67,12 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int) -> n
     pass
 
 if __name__ == "__main__":
+    # Load test trajectory and topology
     trj = md.load('first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', top = '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop')
-    print(calculate_residue_distance(trj[0], 426, 427))
+
+    # "Correct" residue distances determined using PyMOL, a standard interface
+    # for visualizing 3D molecules (distances limited to 3 decimal places)
+    assert (round(calculate_residue_distance(trj[0], 426, 427), 3) == 7.525)
+    assert (round(calculate_residue_distance(trj[0], 3, 430), 3) == 22.043)
+    assert (round(calculate_residue_distance(trj[0:10], 3, 430), 3) == 22.043)
+
