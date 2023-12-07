@@ -38,7 +38,7 @@ def calculate_residue_distance(trajectory : md.Trajectory,
     res2_num = res2_num - 1
 
     topology = trajectory.topology
-    res1_name = topology.residue(res1_num).name
+    res1_name = topology.residue(res1_num).name # 
     res2_name = topology.residue(res2_num).name
     if (res1_name not in _NUCLEOTIDE_NAMES) or (res2_name not in _NUCLEOTIDE_NAMES):
         return -1
@@ -84,15 +84,15 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
 
     pairwise_distances = np.zeros([n_residues,n_residues])
 
-    for i in range(1, n_residues):
+    for i in range(0, n_residues):
         print(i)
-        for j in range(1, n_residues):
+        for j in range(0, n_residues):
             if i == j: 
                 pairwise_distances[i,j] = 0
             elif pairwise_distances[j,i] != 0:
                 pairwise_distances[i,j] = pairwise_distances[j,i]
             else:
-                pairwise_distances[i,j] = calculate_residue_distance(trajectory, i, j, res1_atoms, res2_atoms)
+                pairwise_distances[i,j] = calculate_residue_distance(trajectory, i+1, j+1, res1_atoms, res2_atoms)
     
     print(pairwise_distances)
     return(pairwise_distances)
@@ -100,13 +100,14 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
 if __name__ == "__main__":
     # Load test trajectory and topology
     trj = md.load('first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', top = '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop')
-    
+    trj_sub = trj.atom_slice(trj.top.select('resi 0 to 20'))
+    get_residue_distance_for_frame(trj_sub, 1)
+
     # "Correct" residue distances determined using PyMOL, a standard interface
     # for visualizing 3D molecules (distances limited to 3 decimal places)
     assert (round(calculate_residue_distance(trj[0], 426, 427), 3) == 7.525)
     assert (round(calculate_residue_distance(trj[0], 3, 430), 3) == 22.043)
 
-    get_residue_distance_for_frame(trj, 1)
 
     # Multi-frame exception
     assert (round(calculate_residue_distance(trj[0:10], 3, 430), 3) == 22.043)
