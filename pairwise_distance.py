@@ -1,8 +1,32 @@
 import mdtraj as md
 import pandas
 import numpy as np
+from numpy import typing
 from residue_movement import calc_center_3pts
 from vector import *
+
+import matplotlib.pyplot as plt
+
+def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike) -> None:
+    '''Displays list/array of NumPy arrays as video
+
+    Takes list/array of 2D NumPy arrays and treats them as frames 
+    in a video, filling in a grid at position i,j by the value 
+    at i,j in the array.
+
+    Args:
+        numpy_arrays: list or array of NumPy arrays
+    Returns:
+        None
+        Displays video of NumPy arrays
+    '''
+    _ , ax = plt.subplots()
+    plt.ion()
+    for hist in numpy_arrays:
+        ax.clear()
+        ax.imshow(hist, cmap = 'Greys', vmin=0.01, vmax=4.5)
+        ax.set_title('The Game of Life')
+        plt.pause(10)
 
 class MultiFrameTraj(Exception):
     pass
@@ -61,7 +85,7 @@ def calculate_residue_distance(trajectory : md.Trajectory,
 
 def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int, 
                                 res1_atoms : tuple = ("C2","C4","C6"),
-                                res2_atoms : tuple = ("C2","C4","C6")) -> np.array:
+                                res2_atoms : tuple = ("C2","C4","C6")) -> typing.ArrayLike:
     '''Calculates pairwise the distance between all residues in a given frame
 
     Args:
@@ -94,20 +118,20 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
             else:
                 pairwise_distances[i,j] = calculate_residue_distance(trajectory, i+1, j+1, res1_atoms, res2_atoms)
     
-    print(pairwise_distances)
     return(pairwise_distances)
 
 if __name__ == "__main__":
     # Load test trajectory and topology
     trj = md.load('first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', top = '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop')
-    trj_sub = trj.atom_slice(trj.top.select('resi 0 to 20'))
-    get_residue_distance_for_frame(trj_sub, 1)
+    trj_sub = trj.atom_slice(trj.top.select('resi 0 to 100'))
+    frames = [get_residue_distance_for_frame(trj_sub, i) for i in range(1,3)]
+    print(frames)
+    display_arrays_as_video(frames)
 
     # "Correct" residue distances determined using PyMOL, a standard interface
     # for visualizing 3D molecules (distances limited to 3 decimal places)
     assert (round(calculate_residue_distance(trj[0], 426, 427), 3) == 7.525)
     assert (round(calculate_residue_distance(trj[0], 3, 430), 3) == 22.043)
-
 
     # Multi-frame exception
     assert (round(calculate_residue_distance(trj[0:10], 3, 430), 3) == 22.043)
