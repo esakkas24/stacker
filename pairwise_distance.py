@@ -62,19 +62,20 @@ def calculate_residue_distance(trajectory : md.Trajectory,
     res2_num = res2_num - 1
 
     topology = trajectory.topology
-    res1_name = topology.residue(res1_num).name # 
-    res2_name = topology.residue(res2_num).name
+    res1_atom_indices = topology.select("resSeq " + str(res1_num))
+    res2_atom_indices = topology.select("resSeq " + str(res2_num))
+    res1_name = topology.atom(res1_atom_indices[0]).residue.name
+    res2_name = topology.atom(res2_atom_indices[0]).residue.name
+
     if (res1_name not in _NUCLEOTIDE_NAMES) or (res2_name not in _NUCLEOTIDE_NAMES):
         return -1
-
-    res1_atom_idx_query = "(name " + res1_atoms[0] + " or name " + res1_atoms[1] + " or name " + res1_atoms[2] + ") and residue " + str(res1_num)
-    res2_atom_idx_query = "(name " + res2_atoms[0] + " or name " + res2_atoms[1] + " or name " + res2_atoms[2] + ") and residue " + str(res2_num)
-    res1_atom_idices = topology.select(res1_atom_idx_query)
-    res2_atom_idices = topology.select(res2_atom_idx_query)
+    
+    desired_res1_atom_indices = topology.select("(name " + res1_atoms[0] + " or name " + res1_atoms[1] + " or name " + res1_atoms[2] + ") and residue " + str(res1_num))
+    desired_res2_atom_indices = topology.select("(name " + res2_atoms[0] + " or name " + res2_atoms[1] + " or name " + res2_atoms[2] + ") and residue " + str(res2_num))
 
     # convert nanometer units in trajectory.xyz to Angstroms
-    res1_atom_xyz = trajectory.xyz[0, res1_atom_idices,:] * 10
-    res2_atom_xyz = trajectory.xyz[0, res2_atom_idices,:] * 10
+    res1_atom_xyz = trajectory.xyz[0, desired_res1_atom_indices, :] * 10
+    res2_atom_xyz = trajectory.xyz[0, desired_res2_atom_indices, :] * 10
     vectorized_res1_atom_xyz = [Vector(x,y,z) for [x,y,z] in res1_atom_xyz]
     vectorized_res2_atom_xyz = [Vector(x,y,z) for [x,y,z] in res2_atom_xyz]
     res1_center_of_geometry = calc_center_3pts(*vectorized_res1_atom_xyz)
@@ -105,25 +106,31 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
     '''
     trajectory = trajectory[frame-1]
     n_residues = trajectory.n_residues
+    res_indices = [res.resSeq for res in trajectory.topology.residues]
+    print(res_indices)
 
     pairwise_distances = np.zeros([n_residues,n_residues])
 
-    for i in range(0, n_residues):
+    mat_i = 0
+    for i in res_indices:
         print(i)
-        for j in range(0, n_residues):
+        mat_j = 0
+        for j in res_indices:
             if i == j: 
-                pairwise_distances[i,j] = 0
-            elif pairwise_distances[j,i] != 0:
-                pairwise_distances[i,j] = pairwise_distances[j,i]
+                pairwise_distances[mat_i,mat_j] = 0
+            elif pairwise_distances[mat_i,mat_j] != 0:
+                pairwise_distances[mat_i,mat_j] = pairwise_distances[mat_j,mat_i]
             else:
-                pairwise_distances[i,j] = calculate_residue_distance(trajectory, i+1, j+1, res1_atoms, res2_atoms)
-    
+                pairwise_distances[mat_i,mat_j] = calculate_residue_distance(trajectory, i+1, j+1, res1_atoms, res2_atoms)
+            mat_j+=1
+        mat_i+=1
+
     return(pairwise_distances)
 
 if __name__ == "__main__":
     # Load test trajectory and topology
     trj = md.load('first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', top = '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop')
-    trj_sub = trj.atom_slice(trj.top.select('resi 0 to 100'))
+    trj_sub = trj.atom_slice(trj.top.select('resi 94 to 100'))
     frames = [get_residue_distance_for_frame(trj_sub, i) for i in range(1,3)]
     print(frames)
     display_arrays_as_video(frames)
