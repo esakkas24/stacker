@@ -34,7 +34,7 @@ def visualize_two_residue_movement_heatmap(csv_filepath : str) -> None:
     '''
     pass
 
-def visualize_pairwise_residue(pairwise_matrix : np.typing.ArrayLike) -> None:
+def visualize_pairwise_one_frame(pairwise_matrix : np.typing.ArrayLike) -> None:
     '''Creates matrix heatmap of the matrix created in the pairwise comparison.
 
     Args:
