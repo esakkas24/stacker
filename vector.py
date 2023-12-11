@@ -108,6 +108,10 @@ class Vector:
         '''
         return "[ " + str(self.x) + "\n  " + str(self.y) + "\n  " + str(self.z) + " ]"
     
+    def scale(self, a):
+        '''Scale the self vector by a scalar a'''
+        return Vector(a * self.x, a * self.y, a * self.z)
+    
 if __name__ == "__main__":
     assert (Vector(1,2,3) + Vector(3,2,1) == Vector(4,4,4))
     assert (Vector(1,2,3).y == 2)
