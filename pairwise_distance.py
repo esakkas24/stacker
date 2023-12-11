@@ -25,14 +25,14 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike) -> None:
                        orange_colormap(np.linspace(0, 1, 128))))
     newcmp = mpl.colors.ListedColormap(newcolors, name='OrangeBellcurve')
     
-    fig , ax = plt.subplots()
+    fig , ax = plt.subplots(figsize=(8,8))
     plt.ion()
     for hist in numpy_arrays:
         ax.clear()
-        neg = ax.imshow(hist, cmap = newcmp, vmin=2, vmax=5)
-        ax.set_title('The Game of Life')
+        neg = ax.imshow(hist, cmap = newcmp, vmin=2, vmax=5, interpolation = 'nearest')
+        ax.set_title('Distance Between Residues Center of Geometries')
         colorbar = fig.colorbar(neg, ax=ax, location='right', anchor=(0, 0.3), shrink=0.7)
-        plt.pause(1)
+        plt.pause(60)
         colorbar.remove()
 
 class MultiFrameTraj(Exception):
@@ -127,8 +127,13 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
                 pairwise_distances[mat_i,mat_j] = zero_vector
             elif pairwise_distances[mat_j,mat_i] != zero_vector:
                 pairwise_distances[mat_i,mat_j] = pairwise_distances[mat_j,mat_i]
-            elif pairwise_distances[mat_i-1, mat_i] != zero_vector and pairwise_distances[mat_i-1, mat_j] != zero_vector:
-                pairwise_distances[mat_i,mat_j] = pairwise_distances[mat_i-1, mat_i].scale(-1) + pairwise_distances[mat_i-1, mat_j]
+            elif any([(pairwise_distances[intermediate_res, mat_i] != zero_vector and 
+                       pairwise_distances[intermediate_res, mat_j] != zero_vector)
+                       for intermediate_res in range(mat_i-1, -1, -1)]):
+                for intermediate_res in range(mat_i-1, -1, -1):
+                    if (pairwise_distances[intermediate_res, mat_i] != zero_vector and pairwise_distances[intermediate_res, mat_j] != zero_vector):
+                        pairwise_distances[mat_i,mat_j] = pairwise_distances[intermediate_res, mat_i].scale(-1) + pairwise_distances[intermediate_res, mat_j]
+                        break
             else:
                 pairwise_distances[mat_i,mat_j] = calculate_residue_distance(trajectory, i+1, j+1, res1_atoms, res2_atoms)
             mat_j+=1
@@ -143,15 +148,20 @@ if __name__ == "__main__":
     # Load test trajectory and topology
     trj = md.load('first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', top = '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop')
     trj_sub = trj.atom_slice(trj.top.select('resi 94 to 100 or resi 408 to 428'))
-    frames = [get_residue_distance_for_frame(trj_sub, i) for i in range(1,11)]
-    print(frames)
+    trj_sub = trj.atom_slice(trj.top.select('resi 150 to 400'))
+    frames = [get_residue_distance_for_frame(trj, i) for i in range(1,2)]
     display_arrays_as_video(frames)
 
     # "Correct" residue distances determined using PyMOL, a standard interface
     # for visualizing 3D molecules (distances limited to 3 decimal places)
-    assert (round(calculate_residue_distance(trj[0], 426, 427), 3) == 7.525)
-    assert (round(calculate_residue_distance(trj[0], 3, 430), 3) == 22.043)
+    assert (round(calculate_residue_distance(trj[0], 426, 427).magnitude(), 3) == 7.525)
+    assert (round(calculate_residue_distance(trj[0], 3, 430).magnitude(), 3) == 22.043)
 
     # Multi-frame exception
-    assert (round(calculate_residue_distance(trj[0:10], 3, 430), 3) == 22.043)
+    try:
+        round(calculate_residue_distance(trj[0:10], 3, 430).magnitude(), 3) == 22.043
+    except MultiFrameTraj:
+        print("calculate_residue_distance_vector() fails on multiple-frame trajectory")
 
+    # WRITE three-residue test with a three-res subset where we know
+    # each of the distances.
