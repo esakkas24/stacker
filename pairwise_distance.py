@@ -6,7 +6,7 @@ from vector import *
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 
-def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike) -> None:
+def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, n_res, residues) -> None:
     '''Displays list/array of NumPy arrays as video
 
     Takes list/array of 2D NumPy arrays and treats them as frames 
@@ -32,7 +32,12 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike) -> None:
         neg = ax.imshow(hist, cmap = newcmp, vmin=2, vmax=5, interpolation = 'nearest')
         ax.set_title('Distance Between Residues Center of Geometries')
         colorbar = fig.colorbar(neg, ax=ax, location='right', anchor=(0, 0.3), shrink=0.7)
-        plt.pause(60)
+        ticks = [res for res in range(0,n_res)]
+        labels = residues
+        plt.xticks(ticks, labels, rotation = 'vertical')
+        plt.yticks(ticks, labels)
+        ax.tick_params(top=True, bottom=False, labeltop=True, labelbottom=False)
+        plt.pause(10)
         colorbar.remove()
 
 class MultiFrameTraj(Exception):
@@ -152,10 +157,11 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
 if __name__ == "__main__":
     # Load test trajectory and topology
     trj = md.load('first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', top = '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop')
-    # trj_sub = trj.atom_slice(trj.top.select('resi 94 to 100 or resi 408 to 428'))
-    trj_sub = trj.atom_slice(trj.top.select('resi 0 to 100'))
-    frames = [get_residue_distance_for_frame(trj, i) for i in range(1,2)]
-    display_arrays_as_video(frames)
+    trj_sub = trj.atom_slice(trj.top.select('resi 94 to 100 or resi 408 to 428'))
+    frames = [get_residue_distance_for_frame(trj_sub, i) for i in range(1,2)]
+    resSeqs = [res.resSeq for res in trj_sub.topology.residues]
+    print(resSeqs)
+    display_arrays_as_video(frames, trj_sub.n_residues, resSeqs)
 
     # "Correct" residue distances determined using PyMOL, a standard interface
     # for visualizing 3D molecules (distances limited to 3 decimal places)
