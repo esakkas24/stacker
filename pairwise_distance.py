@@ -1,11 +1,10 @@
 import mdtraj as md
-import pandas
 import numpy as np
 from numpy import typing
 from residue_movement import calc_center_3pts
 from vector import *
-
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 
 def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike) -> None:
     '''Displays list/array of NumPy arrays as video
@@ -20,13 +19,21 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike) -> None:
         None
         Displays video of NumPy arrays
     '''
-    _ , ax = plt.subplots()
+    orange_colormap = mpl.colormaps['Oranges_r'].resampled(100)
+
+    newcolors = np.vstack((orange_colormap(np.linspace(1, 0, 128)),
+                       orange_colormap(np.linspace(0, 1, 128))))
+    newcmp = mpl.colors.ListedColormap(newcolors, name='OrangeBellcurve')
+    
+    fig , ax = plt.subplots()
     plt.ion()
     for hist in numpy_arrays:
         ax.clear()
-        ax.imshow(hist, cmap = 'Greys', vmin=0.01, vmax=4.5)
+        neg = ax.imshow(hist, cmap = newcmp, vmin=2, vmax=5)
         ax.set_title('The Game of Life')
-        plt.pause(10)
+        colorbar = fig.colorbar(neg, ax=ax, location='right', anchor=(0, 0.3), shrink=0.7)
+        plt.pause(1)
+        colorbar.remove()
 
 class MultiFrameTraj(Exception):
     pass
@@ -68,7 +75,7 @@ def calculate_residue_distance(trajectory : md.Trajectory,
     res2_name = topology.atom(res2_atom_indices[0]).residue.name
 
     if (res1_name not in _NUCLEOTIDE_NAMES) or (res2_name not in _NUCLEOTIDE_NAMES):
-        return -1
+        return Vector(0,0,0)
     
     desired_res1_atom_indices = topology.select("(name " + res1_atoms[0] + " or name " + res1_atoms[1] + " or name " + res1_atoms[2] + ") and residue " + str(res1_num))
     desired_res2_atom_indices = topology.select("(name " + res2_atoms[0] + " or name " + res2_atoms[1] + " or name " + res2_atoms[2] + ") and residue " + str(res2_num))
@@ -81,7 +88,7 @@ def calculate_residue_distance(trajectory : md.Trajectory,
     res1_center_of_geometry = calc_center_3pts(*vectorized_res1_atom_xyz)
     res2_center_of_geometry = calc_center_3pts(*vectorized_res2_atom_xyz)
 
-    distance_res12 = (res1_center_of_geometry - res2_center_of_geometry).magnitude()
+    distance_res12 = res2_center_of_geometry - res1_center_of_geometry
     return distance_res12
 
 def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int, 
@@ -107,9 +114,9 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
     trajectory = trajectory[frame-1]
     n_residues = trajectory.n_residues
     res_indices = [res.resSeq for res in trajectory.topology.residues]
-    print(res_indices)
+    zero_vector = Vector(0,0,0)
 
-    pairwise_distances = np.zeros([n_residues,n_residues])
+    pairwise_distances = np.full((n_residues, n_residues), zero_vector)
 
     mat_i = 0
     for i in res_indices:
@@ -117,21 +124,26 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
         mat_j = 0
         for j in res_indices:
             if i == j: 
-                pairwise_distances[mat_i,mat_j] = 0
-            elif pairwise_distances[mat_i,mat_j] != 0:
+                pairwise_distances[mat_i,mat_j] = zero_vector
+            elif pairwise_distances[mat_j,mat_i] != zero_vector:
                 pairwise_distances[mat_i,mat_j] = pairwise_distances[mat_j,mat_i]
+            elif pairwise_distances[mat_i-1, mat_i] != zero_vector and pairwise_distances[mat_i-1, mat_j] != zero_vector:
+                pairwise_distances[mat_i,mat_j] = pairwise_distances[mat_i-1, mat_i].scale(-1) + pairwise_distances[mat_i-1, mat_j]
             else:
                 pairwise_distances[mat_i,mat_j] = calculate_residue_distance(trajectory, i+1, j+1, res1_atoms, res2_atoms)
             mat_j+=1
         mat_i+=1
 
-    return(pairwise_distances)
+    get_magnitude = np.vectorize(Vector.magnitude)
+    pairwise_res_magnitudes = get_magnitude(pairwise_distances)
+
+    return(pairwise_res_magnitudes)
 
 if __name__ == "__main__":
     # Load test trajectory and topology
     trj = md.load('first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', top = '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop')
-    trj_sub = trj.atom_slice(trj.top.select('resi 94 to 100'))
-    frames = [get_residue_distance_for_frame(trj_sub, i) for i in range(1,3)]
+    trj_sub = trj.atom_slice(trj.top.select('resi 94 to 100 or resi 408 to 428'))
+    frames = [get_residue_distance_for_frame(trj_sub, i) for i in range(1,11)]
     print(frames)
     display_arrays_as_video(frames)
 
