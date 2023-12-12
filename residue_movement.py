@@ -3,6 +3,7 @@ import math
 import csv
 import mdtraj as md
 from vector import *
+from file_manipulation import filter_traj_to_pdb
 
 '''
 Eric Sakkas - Weir Lab, Wesleyan University
@@ -242,11 +243,11 @@ def write_bottaro_to_csv(pdb_filename : str, output_csv_name : str,
 
 if __name__ == "__main__":
     ########JOB VARIABLES#######
-    #load pdb file
-    pdb_filename = 'new_short_wCCC_+1GCU_GC.pdb'
+    trajectory_file = 'first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd'
+    topology_file = '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop'
 
     #name of output file
-    output_csv_name = "wCCC_+1GCU_GC_plot.csv"
+    output_csv_name = "tUAG_aCUA_+1GCU_GC_plot.csv"
     ############################
 
     ########OPTIONAL VARS#######
@@ -257,6 +258,10 @@ if __name__ == "__main__":
     viewed_atom2_name = "C4"
     viewed_atom3_name = "C6"
     ############################
+
+    pdb_filename = '5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb'
+    filter_traj_to_pdb(trajectory_filename=trajectory_file, topology_filename=topology_file, output_pdb_filename=pdb_filename,
+                       residues_desired={425,426}, atomnames_desired={"C2", "C4", "C6"})
 
     # Two Residue movement test
     write_bottaro_to_csv(pdb_filename, 

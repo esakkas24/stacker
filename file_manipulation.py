@@ -66,10 +66,10 @@ def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str,
         trajectory_filename : str
             path to file of the concatenated trajectory. Should be resampled to the
             1 in 50 frames sampled trajectories for each replicate.
-        output_pdb_filename : str
-            path to the output pdb file
         topology_filename : str
             path to file of the topology of the molecule
+        output_pdb_filename : str
+            path to the output pdb file
         residues_desired : set
             residue numbers of residues to keep in the trajectory
         atomnames_desired : set 
