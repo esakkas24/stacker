@@ -10,63 +10,80 @@ Email : esakkas@wesleyan.edu
 
 This code takes a pdb file with multiple frames and two residues. 
 It then calculates the r, rho, and theta values at each frame
-as defined in the Bottaro paper (), and exports these values to a .csv file.
+as defined in the Bottaro paper (https://doi.org/10.1093/nar/gku972), 
+and exports these values to a .csv file.
 '''
 
-def collect_atom_locations_by_frame(pdb : md.Trajectory, residue_num : int, atom_id : str) -> list:
-    '''Creates a list of all atom locations for a particular residue per frame
+def collect_atom_locations_by_frame(traj : md.Trajectory, residue_num : int, atom_id : str) -> list:
+    '''Creates a list of all atom locations for a particular atom and residue number per frame
 
     Curates a list coords_by_frame where coords_by_frame[i] is the (x,y,z) positions at 
         of a provided atom_id of a residue residue_num at the ith frame.
 
     Args:
-        topology (topology) : topology object of the pdb created by pdb.topology
-        residue_num (int) : the residue number of the residue where atom_id is found (PDB Column 5)
-        atom_id (str) : the name of the atom to get coordinates for (PDB Column 2)
+        traj : md.Trajectory
+            trajectory to analyze
+        residue_num : int
+            the residue number of the residue where atom_id is found (PDB Column 5)
+        atom_id : str
+            the name of the atom to get coordinates for (PDB Column 2)
     Returns:
-        coords_by_frame (list) : list of (x,y,z) coordinates of atom_id in residue_num for each frame
+        coords_by_frame : list
+            list of (x,y,z) coordinates of atom_id in residue_num for each frame
     '''
-    topology = pdb.topology
-    number_of_frames = pdb.n_frames
+    topology = traj.topology
+    number_of_frames = traj.n_frames
     atomic_index = topology.select("name " + atom_id + " and residue " + str(residue_num))[0]
-    coords_by_frame = [tuple(pdb.xyz[frame_idx, atomic_index,:]) for frame_idx in range(0, number_of_frames)]
+    coords_by_frame = [tuple(traj.xyz[frame_idx, atomic_index,:]) for frame_idx in range(0, number_of_frames)]
     return coords_by_frame
 
 def calc_center_3pts(a : Vector, b : Vector, c : Vector) -> Vector:
-    '''Finds average x,y,z position of three x,y,z tuples
+    '''Finds average x,y,z position of three x,y,z Vectors
     
-    Takes in three tuples generated using the pdb.xyz method and finds their center. Works 
+    Takes in three Vectors generated using the pdb.xyz method and finds their center. Works 
     with three points that make up a triangle (like those within a 6-member ring). 
         
     Args: 
-        (a1,a2,a3) (Vector) : x,y,z coordinates of first point
-        (b1,b2,b3) (Vector) : x,y,z coordinates of second point
-        (c1,c2,c3) (Vector) : x,y,z coordinates of third point
+        a : Vector
+            x,y,z coordinates of first point
+        b : Vector
+            x,y,z coordinates of second point
+        c : Vector
+            x,y,z coordinates of third point
     Returns:
-        midpoint (tuple) : one tuple with (x,y,z) coordinates at the center of the three input points.
+        midpoint : tuple
+            one Vector with (x,y,z) coordinates at the center of the three input Vectors.
     '''
     midpoint = Vector((a.x+b.x+c.x)/3,(a.y+b.y+c.y)/3,(a.z+b.z+c.z)/3)
     return midpoint
 
 class Base:
-    '''Represents a Base data type with coordinates for C2, C4, C6, and their midpoint at a single frame.
+    '''Represents a Base data type with x,y,z coordinates for C2, C4, and C6 atoms,
+      and their average position at a single frame.
 
     This class defines a data type 'Base' that consists of coordinates for the atoms
     C2, C4, and C6, as well as the midpoint of these atoms for a single residue at a single frame.
 
     Attributes:
-        c2_coords (Vector) : (x, y, z) coordinates for the atom C2.
-        c4_coords (Vector) : (x, y, z) coordinates for the atom C4.
-        c6_coords (Vector) : (x, y, z) coordinates for the atom C6.
-        midpoint_coords (list) : (x, y, z) coordinates representing the midpoint of C2, C4, and C6.
+        c2_coords : Vector
+            (x, y, z) coordinates for the atom C2.
+        c4_coords : Vector
+            (x, y, z) coordinates for the atom C4.
+        c6_coords : Vector
+            (x, y, z) coordinates for the atom C6.
+        midpoint_coords : list
+            (x, y, z) coordinates representing the midpoint of C2, C4, and C6.
     '''
     def __init__(self, c2_coords : tuple, c4_coords : tuple, c6_coords : tuple, midpoint_coords : tuple) -> None:
         '''Initialize a Base instance.
 
         Args:
-            c2 (tuple): (x, y, z) coordinates for C2.
-            c4 (tuple): (x, y, z) coordinates for C4.
-            c6 (tuple): (x, y, z) coordinates for C6.
+            c2 : tuple
+                (x, y, z) coordinates for C2.
+            c4 : tuple
+                (x, y, z) coordinates for C4.
+            c6 : tuple
+                (x, y, z) coordinates for C6.
         '''
         self.c2_coords = Vector(*c2_coords)
         self.c4_coords = Vector(*c4_coords)
@@ -76,52 +93,64 @@ class Base:
 def create_base_from_coords_list(frame : int, C2_coords : list, C4_coords : list, C6_coords : list, midpoint_coords : list) -> list:
     '''Combines C2, C4, C6 positiions with midpoint positions for a given frame
 
-    Takes a frame (indexed at 0) and outputs a list of the x,y,z locations of C2,C4,C6, and midpoint 
+    Takes a frame (0-indexed) and outputs a list of the x,y,z locations of C2,C4,C6, and midpoint 
     of the same residue at that frame. 
     
     Args: 
-        frame (int) : frame number index 0
-        C2_coords (list) : list of (x,y,z) coordinates of C2 in some residue for each frame
-        C4_coords (list) : list of (x,y,z) coordinates of C4 in some residue for each frame
-        C6_coords (list) : list of (x,y,z) coordinates of C6 in some residue for each frame
-        midpoint_coords (list) : list of (x,y,z) coordinates of the midpoint of residue for each frame
+        frame : int
+            frame number (0-indexed)
+        C2_coords : list
+            list of (x,y,z) coordinates of C2 atom in some residue for each frame
+        C4_coords : list
+            list of (x,y,z) coordinates of C4 atom in some residue for each frame
+        C6_coords : list
+            list of (x,y,z) coordinates of C6 atom in some residue for each frame
+        midpoint_coords : list
+            list of (x,y,z) coordinates of the midpoint of residue for each frame
     Returns:
-        coords_at_frame (list): list of 4 tuples; structure:[C2 location,C4 location,C6 location,midpoint location]
+        coords_at_frame : list
+            list of 4 tuples; structure:[C2 location,C4 location,C6 location,midpoint location]
     '''
     midpoint_tuple = midpoint_coords[frame].x, midpoint_coords[frame].y, midpoint_coords[frame].z
     return Base(C2_coords[frame], C4_coords[frame], C6_coords[frame], midpoint_tuple)
 
 def correct_theta_sign(rho : Vector, y_axis : Vector, theta : float) -> float:
-    '''Corrects sign of Bottaro calculated theta to account for 3D Space
+    '''Corrects sign of an angle theta with the x-axis within a plane defined by a given y-axis
 
     When calculating the angle theta between two vectors in 3D space, once the vectors move
-        >180 degrees apart, the angle becomes the shortest path. To correct this, we calculate
+        >180 degrees apart, the angle becomes the shortest path. To have 360 degrees of freedom, we calculate
         theta within the plane by checking if it faces the same direction as a vector y, and correcting
         otherwise.
 
     Args:
-        rho (Vector) : the vector compared to the x-axis to form theta
-        y_axis (Vector) : directional vector to define a plane with x-axis
-        theta (float) : the calculated angle in 3D space to be corrected
+        rho : Vector
+            the vector compared to the x-axis to form theta
+        y_axis : Vector
+            directional vector to define a plane with x-axis; orthagonal to x-axis
+        theta : float
+            the calculated angle of rho with x-axis to be corrected
     Returns:
-        theta (float) : theta as calculated on the plane
+        corrected_theta : float
+            theta as calculated on the plane
     '''
     proj_rho_on_y = rho.calculate_projection(y_axis)
     opposite_direction = (proj_rho_on_y.x/y_axis.x < 0)
     if opposite_direction:
-        theta = 360-theta
-    return theta
+        corrected_theta = 360-theta
+    return corrected_theta
     
-def calculate_bottaro_values_for_frame(perspective_base_coords : Base, viewed_midpoint : tuple) -> list:
+def calculate_bottaro_values_for_frame(perspective_base_coords : Base, viewed_midpoint : Vector) -> list:
     '''Calculates the r, rho, and theta values as expressed in the Bottaro paper
 
     Calculates the r, rho, and theta values between two nucleotides in a single frame
     as presented in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)
     
     Args: 
-        perspective_base_coords (Base) : list of the x,y,z coords of C2, C4, C6 and their midpoint for 
+        perspective_base_coords : Base
+            list of the x,y,z coords of C2, C4, C6 and their midpoint for 
             the perspective residue in a single frame
-        viewed_midpoint (tuple) : x,y,z position of the midpoint of the viewed nucleotide at the same frame.
+        viewed_midpoint : Vector
+            x,y,z position of the midpoint of the viewed nucleotide at the same frame.
     Returns: 
         values (list) : a list containing 3 floats from Bottaro; structure: [r_dist, rho_dist, theta]
     '''
@@ -157,15 +186,20 @@ def write_bottaro_to_csv(pdb_filename : str, output_csv_name : str,
     '''Write the Bottaro r, rho, and theta values from a trajectory pdb to a CSV
 
     Calculates the r, rho, and theta values as described in Bottaro et al. from a
-    perspective nucleotide to a viewed nucleotide per frame. Writes the results to a CSV file.
+    perspective nucleotide residue to a viewed nucleotide residue per frame. Writes the 
+    results to a CSV file.
 
     Args:
-        pdb_filename (str) : name of pdb containing information for ONLY two residues (perspective and viewed
+        pdb_filename : str
+            name of pdb containing information for ONLY two residues (perspective and viewed
             nucleotide) at each frame.
-        output_csv_name (str) : filename of CSV file to write to
-        res1_atom_names (tuple) : tuple of the atom names (eg. "C2", "C4", "C6") to use from
+        output_csv_name : str
+            filename of CSV file to write to
+        res1_atom_names : tuple, default = ("C2", "C4","C6")
+            tuple of the atom names (eg. "C2", "C4", "C6") to use from
             residue 1 to find center of geometry for perspective nucleotide
-        res2_atom_names (tuple) : tuple of the atom names (eg. "C2", "C4", "C6") to use from
+        res2_atom_names : tuple, default = ("C2", "C4","C6")
+            tuple of the atom names (eg. "C2", "C4", "C6") to use from
             residue 2 to find center of geometry for viewed nucleotide
     '''
     res1_atom1,res1_atom2,res1_atom3 = res1_atom_names
@@ -187,6 +221,7 @@ def write_bottaro_to_csv(pdb_filename : str, output_csv_name : str,
     residue1_midpoint_list = [calc_center_3pts(Vector(*residue1_C2_list[i]),
                                                Vector(*residue1_C4_list[i]),
                                                Vector(*residue1_C6_list[i])) for i in range(0, number_of_frames)]
+    
     residue2_midpoint_list = [calc_center_3pts(Vector(*residue2_C2_list[i]),
                                                Vector(*residue2_C4_list[i]),
                                                Vector(*residue2_C6_list[i])) for i in range(0, number_of_frames)]
@@ -223,6 +258,7 @@ if __name__ == "__main__":
     viewed_atom3_name = "C6"
     ############################
 
+    # Two Residue movement test
     write_bottaro_to_csv(pdb_filename, 
                          output_csv_name, 
                          (perspective_atom1_name, perspective_atom2_name, perspective_atom3_name), 
