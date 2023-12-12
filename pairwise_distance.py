@@ -14,18 +14,20 @@ class NoResidues(Exception):
 
 _NUCLEOTIDE_NAMES = {"A", "G", "C", "T", "U"}
 
-def create_axis_labels(res_indicies : typing.ArrayLike) -> list:
+def create_axis_labels(res_indicies : typing.ArrayLike, tick_distance : int = 10) -> list:
     '''Designates the axis labels to use in the pairwise plot
     
     Returns the x-axis tick positions and labels to use on the ticks based on the 
         residues used in a specific pairwise analysis. Meant to be used when many 
-        disjoint sets of residue indices are used. Ticks will be present every 10 
+        disjoint sets of residue indices are used. Ticks will be present every tick_distance 
         residues in a collection of adjacent residues, and a tick will exist at both
         ends of any consecutive residue sequence.
 
     Args:
         res_indicies : list
             The list of residue indices used in the pairwise analysis.
+        tick_distance : int, default = 10
+            Distance between ticks in blocks of consecutive residues
     Returns:
         tick_locations : array_like
             List of tick positions (0-based) to place labels on in the axes
@@ -38,10 +40,10 @@ def create_axis_labels(res_indicies : typing.ArrayLike) -> list:
 
     >>> create_axis_labels([94,95,96,97,98,99,100,408,409,410,411,412,413,414,415,416,417,418,419,420,421,422,423,424,425,426,427,428])
     [0,6,7,17,27], [94,100,408,418,428]
-         '''
+    '''
     n_residues = len(res_indicies)
 
-    if n_residues == 0: raise NoResidues("pairwise analysis must include at least one residue")
+    if n_residues < 1: raise NoResidues("pairwise analysis must include at least one residue")
 
     tick_locations = [0]
     tick_labels = [res_indicies[0]]
@@ -51,14 +53,15 @@ def create_axis_labels(res_indicies : typing.ArrayLike) -> list:
     for i in range(1, n_residues):
         if res_indicies[i] == res_indicies[i-1] + 1:
             res_sequence_length += 1
+
         if res_indicies[i] > res_indicies[i-1] + 1:
             tick_locations += [i-1, i]
             tick_labels += [res_indicies[i-1], res_indicies[i]]
             res_sequence_length = 1
-        elif res_sequence_length == 10:
+        elif res_sequence_length == tick_distance+1:
             tick_locations += [i]
             tick_labels += [res_indicies[i]]
-            res_sequence_length = 0
+            res_sequence_length = 1
     
     if n_residues-1 not in tick_locations:
         tick_locations += [n_residues-1]
@@ -66,7 +69,7 @@ def create_axis_labels(res_indicies : typing.ArrayLike) -> list:
     
     return tick_locations, tick_labels
         
-def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies : typing.ArrayLike) -> None:
+def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies : typing.ArrayLike, seconds_per_frame : int = 10, tick_distance : int = 10) -> None:
     '''Displays list/array of 2D NumPy arrays as matrix heatmaps
 
     Takes list/array of 2D NumPy arrays and treats them as frames 
@@ -78,6 +81,10 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies
             List or array of 2D NumPy arrays
         res_indicies : list
             The list of residue indices used in the pairwise analysis.
+        seconds_per_frame : int, default = 10
+            Number of seconds to display each matrix for.
+        tick_distance : int, default = 10
+            Distance between ticks in blocks of consecutive residues
     Returns:
         None
         Displays video of NumPy arrays
@@ -99,30 +106,36 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies
         plt.xticks(ticks, labels, rotation = 'vertical')
         plt.yticks(ticks, labels)
         ax.tick_params(top=True, bottom=False, labeltop=True, labelbottom=False)
-        plt.pause(10)
+        plt.pause(seconds_per_frame)
         colorbar.remove()
 
 def calculate_residue_distance(trajectory : md.Trajectory, 
                                res1_num : int, res2_num : int, 
                                 res1_atoms : tuple = ("C2","C4","C6"),
-                                res2_atoms : tuple = ("C2","C4","C6")) -> float:
-    '''Calculates the distance between two residues in Angstroms
+                                res2_atoms : tuple = ("C2","C4","C6")) -> Vector:
+    '''Calculates the vector between two residues with x,y,z units in Angstroms
 
     Calcualtes the distance between the center of two residues. The center is denoted
         by the average x,y,z position of three passed atoms for each residue (typically
         every other carbon on the 6-C ring of the nucleotide base).
 
     Args:
-        trajectory (md.Trajectory) : single frame trajectory
-        res1_num (int) : the residue number of the first residue (PDB Column 5)
-        res2_num (int) : the residue number of the second residue (PDB Column 5)
-        res1_atoms (tuple) : a tuple of the atom names of the three atoms whose position
-            to average to find the center of residue 1 [("C2","C4","C6")]
-        res2_atoms (tuple) : a tuple of the atom names of the three atoms whose position
+        trajectory : md.Trajectory 
+            single frame trajectory
+        res1_num : int
+            the residue number of the first residue (PDB Column 5)
+        res2_num : int
+            the residue number of the second residue (PDB Column 5)
+        res1_atoms : tuple, default = ("C2","C4","C6")
+            a tuple of the atom names of the three atoms whose position
+            to average to find the center of residue 1 
+        res2_atoms : tuple, default = ("C2","C4","C6")
+            a tuple of the atom names of the three atoms whose position
             to average to find the center of residue 2 [("C2","C4","C6")]
     
     Returns:
-        distance_res12 (float) : scalar distance between the center of geometry of the two residues
+        distance_res12 : Vector
+            Vector from center of geometry of residue 1 to center of geometry of residue 2
     '''
     if len(trajectory) > 1: raise MultiFrameTraj("calculate_residue_distance() expects a 1-frame trajectory")
 
@@ -159,19 +172,21 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
     '''Calculates pairwise the distance between all residues in a given frame
 
     Args:
-        trajectory (md.Trajectory) : trajectory to analyze (must have topology aspect)
-        frame (int) : 1-indexed frame to analyze
-        res1_atoms (tuple) : a tuple of the atom names of the three atoms whose position
-            to average to find the center of residue 1 [("C2","C4","C6")]
-        res2_atoms (tuple) : a tuple of the atom names of the three atoms whose position
-            to average to find the center of residue 2 [("C2","C4","C6")]
+        trajectory : md.Trajectory
+            trajectory to analyze (must have topology aspect)
+        frame : int
+            1-indexed frame to analyze
+        res1_atoms : tuple, default = ("C2","C4","C6")
+            a tuple of the atom names of the three atoms whose position
+            to average to find the center of residue 1 
+        res2_atoms : tuple, default = ("C2","C4","C6")
+            a tuple of the atom names of the three atoms whose position
+            to average to find the center of residue 2 
     
     Returns:
-        pairwise_distances (2D NumPy array) : matrix where position i,j represents the distance from 
+        pairwise_distances : array_like
+            matrix where position i,j represents the distance from 
             residue i to residue j
-    
-    Only need to implement for the top right triangle of the matrix since distance i -> j
-        is the same as distance j -> i. 
     '''
     trajectory = trajectory[frame-1]
     n_residues = trajectory.n_residues
@@ -208,27 +223,45 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
 
     get_magnitude = np.vectorize(Vector.magnitude)
     pairwise_res_magnitudes = get_magnitude(pairwise_distances)
-
     return(pairwise_res_magnitudes)
 
 if __name__ == "__main__":
     # Load test trajectory and topology
     trj = md.load('first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', top = '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop')
-    trj_sub = trj.atom_slice(trj.top.select('resi 94 to 100 or resi 408 to 428'))
-    frames = [get_residue_distance_for_frame(trj, i) for i in range(1,2)]
-    resSeqs = [res.resSeq for res in trj_sub.topology.residues]
-    display_arrays_as_video(frames, resSeqs)
 
     # "Correct" residue distances determined using PyMOL, a standard interface
     # for visualizing 3D molecules (distances limited to 3 decimal places)
+
+    # calculate_residue_distance() tests
     assert (round(calculate_residue_distance(trj[0], 426, 427).magnitude(), 3) == 7.525)
     assert (round(calculate_residue_distance(trj[0], 3, 430).magnitude(), 3) == 22.043)
-
-    # Multi-frame exception
+    ### Multi-frame exception
     try:
         round(calculate_residue_distance(trj[0:10], 3, 430).magnitude(), 3) == 22.043
     except MultiFrameTraj:
-        print("calculate_residue_distance_vector() fails on multiple-frame trajectory")
+        print("MultiFrameTraj: calculate_residue_distance_vector() fails on multiple-frame trajectory")
 
-    # WRITE three-residue test with a three-res subset where we know
-    # each of the distances.
+    # create_axis_labels() test
+    assert(create_axis_labels([0,1,2,3,4,5,6,7,8,9,10,11,12,98,99,100]) == ([0,10,12,13,15], [0,10,12,98,100]))
+    assert(create_axis_labels([94,95,96,97,98,99,100,408,409,410,411,412,413,414,415,416,417,418,419,420,421,422,423,424,425,426,427,428]) == ([0,6,7,17,27], [94,100,408,418,428]))
+    ### No passed in residues exception
+    try:
+        assert(create_axis_labels([]) == ([],[]))
+    except NoResidues:
+        print("NoResidues: create_axis_labels() fails on empty residue list")
+
+    # get_residue_distance_for_frame() test
+    trj_three_residues = trj.atom_slice(trj.top.select('resi 407 or resi 425 or resi 426'))
+    assert(np.all(np.vectorize(round)(get_residue_distance_for_frame(trj_three_residues, 2), 3) == np.array([[0,      8.231,   11.712], 
+                                                                                                              [8.231,  0,       6.885], 
+                                                                                                               [11.712, 6.885,   0]])))
+
+    # display_arrays_as_video() tests
+    trj_sub = trj.atom_slice(trj.top.select('resi 50 to 100 or resi 150 to 200'))
+    resSeqs = [res.resSeq for res in trj_sub.topology.residues]
+    frames = [get_residue_distance_for_frame(trj_sub, i) for i in range(1,10)]
+    display_arrays_as_video(frames, resSeqs, seconds_per_frame=1)
+
+    resSeqs = [res.resSeq for res in trj.topology.residues]
+    frames = [get_residue_distance_for_frame(trj, i) for i in range(1,2)]
+    display_arrays_as_video(frames, resSeqs, seconds_per_frame=60, tick_distance=20)
