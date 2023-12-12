@@ -57,7 +57,7 @@ def create_axis_labels(res_indicies : typing.ArrayLike) -> list:
             res_sequence_length = 1
         elif res_sequence_length == 10:
             tick_locations += [i]
-            tick_labels += res_indicies[i]
+            tick_labels += [res_indicies[i]]
             res_sequence_length = 0
     
     if n_residues-1 not in tick_locations:
@@ -66,15 +66,18 @@ def create_axis_labels(res_indicies : typing.ArrayLike) -> list:
     
     return tick_locations, tick_labels
         
-def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, n_res, residues) -> None:
-    '''Displays list/array of NumPy arrays as video
+def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies : typing.ArrayLike) -> None:
+    '''Displays list/array of 2D NumPy arrays as matrix heatmaps
 
     Takes list/array of 2D NumPy arrays and treats them as frames 
     in a video, filling in a grid at position i,j by the value 
     at i,j in the array.
 
     Args:
-        numpy_arrays: list or array of NumPy arrays
+        numpy_arrays: array_like
+            List or array of 2D NumPy arrays
+        res_indicies : list
+            The list of residue indices used in the pairwise analysis.
     Returns:
         None
         Displays video of NumPy arrays
@@ -92,8 +95,7 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, n_res, resid
         neg = ax.imshow(hist, cmap = newcmp, vmin=2, vmax=5, interpolation = 'nearest')
         ax.set_title('Distance Between Residues Center of Geometries')
         colorbar = fig.colorbar(neg, ax=ax, location='right', anchor=(0, 0.3), shrink=0.7)
-        ticks = [res for res in range(0,n_res)]
-        labels = residues
+        ticks, labels = create_axis_labels(res_indicies)
         plt.xticks(ticks, labels, rotation = 'vertical')
         plt.yticks(ticks, labels)
         ax.tick_params(top=True, bottom=False, labeltop=True, labelbottom=False)
@@ -213,10 +215,9 @@ if __name__ == "__main__":
     # Load test trajectory and topology
     trj = md.load('first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', top = '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop')
     trj_sub = trj.atom_slice(trj.top.select('resi 94 to 100 or resi 408 to 428'))
-    frames = [get_residue_distance_for_frame(trj_sub, i) for i in range(1,2)]
+    frames = [get_residue_distance_for_frame(trj, i) for i in range(1,2)]
     resSeqs = [res.resSeq for res in trj_sub.topology.residues]
-    print(resSeqs)
-    display_arrays_as_video(frames, trj_sub.n_residues, resSeqs)
+    display_arrays_as_video(frames, resSeqs)
 
     # "Correct" residue distances determined using PyMOL, a standard interface
     # for visualizing 3D molecules (distances limited to 3 decimal places)
