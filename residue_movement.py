@@ -137,8 +137,8 @@ def correct_theta_sign(rho : Vector, y_axis : Vector, theta : float) -> float:
     proj_rho_on_y = rho.calculate_projection(y_axis)
     opposite_direction = (proj_rho_on_y.x/y_axis.x < 0)
     if opposite_direction:
-        corrected_theta = 360-theta
-    return corrected_theta
+        theta = 360-theta
+    return theta
     
 def calculate_bottaro_values_for_frame(perspective_base_coords : Base, viewed_midpoint : Vector) -> list:
     '''Calculates the r, rho, and theta values as expressed in the Bottaro paper
@@ -265,4 +265,6 @@ if __name__ == "__main__":
                          (perspective_atom1_name, perspective_atom2_name, perspective_atom3_name), 
                          (viewed_atom1_name,viewed_atom2_name,viewed_atom3_name))
     
-    
+    multiframe_pdb = '5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb'
+    multiframe_csv = 'tUAG_aCUA_+1GCU_GC_plot_3200frames.csv'
+    write_bottaro_to_csv(multiframe_pdb, multiframe_csv)

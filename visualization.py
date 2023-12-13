@@ -162,7 +162,7 @@ def visualize_two_residue_movement_scatterplot(csv_filepath : str) -> None:
 
     ax = set_polar_grid()
 
-    ax.scatter(theta_values_rad, rho_values, color = 'purple', s=1)
+    ax.scatter(theta_values_rad, rho_values, color = 'purple', s=1, alpha = 0.5)
     plt.show()
 
 def visualize_two_residue_movement_heatmap(csv_filepath : str) -> None:
@@ -182,4 +182,9 @@ def visualize_two_residue_movement_heatmap(csv_filepath : str) -> None:
     pass
 
 if __name__ == '__main__':
+    # 10 frame test
     visualize_two_residue_movement_scatterplot('tUAG_aCUA_+1GCU_GC_plot.csv')
+
+    # Multi-frame test
+    visualize_two_residue_movement_scatterplot('tUAG_aCUA_+1GCU_GC_plot_3200frames.csv')
+
