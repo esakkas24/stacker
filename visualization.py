@@ -1,7 +1,9 @@
 import numpy as np
 from numpy import typing
-import matplotlib.pyplot as plt
 import matplotlib as mpl
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+from matplotlib.collections import PatchCollection
 import pandas as pd
 
 class NoResidues(Exception):
@@ -102,8 +104,46 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies
         plt.pause(seconds_per_frame)
         colorbar.remove()
 
+def set_polar_grid() -> mpl.projections.polar.PolarAxes:
+    '''Set up axes for polar plots
+
+    Creates polar plot background for two-residue movement comparison
+    with theta 0 to 360, a radial maximum of 15 Angstroms, and a visualization 
+    of the perspective residue at the center.
+
+    Args:
+        None
+    Returns:
+        ax : matplotlib.projections.polar.PolarAxes
+            axis object for the created polar plot
+    
+    '''
+    fig = plt.figure()
+    ax = fig.add_subplot(polar=True)
+
+    r_for_ring = np.ones(7)*1.3
+    theta_for_ring = np.linspace(0, 2 * np.pi, 7)   
+    ax.fill(theta_for_ring,r_for_ring, color = 'black', fill=False)
+
+    ax.set_xticks(np.pi/180. * np.linspace(0,  360, 3, endpoint=False))
+    ax.set_xticklabels([r"$\theta=0^\circ$",r"$\theta=120^\circ$",r"$\theta=240^\circ$"])
+
+    ax.set_rlim(0,15)
+    ax.set_rticks(np.linspace(0,  15, 4, endpoint=True))
+    ax.set_rlabel_position(180)
+    plt.text(x=np.radians(178), y=17, s=r"$\rho\text{ }(\AA)$", ha="center",va='center',fontsize=11)
+    plt.text(x=0, y=2, s="C2", ha="center",va='center',fontsize=7.5)
+    plt.text(x=np.radians(240), y=2, s="C4", ha="center",va='center',fontsize=7.5)
+    plt.text(x=np.radians(120), y=1.8, s="C6", ha="center",va='center',fontsize=7.5)
+
+    ax.grid(color='gray', linestyle='--', linewidth=0.5)
+    return ax
+
 def visualize_two_residue_movement_scatterplot(csv_filepath : str) -> None:
     '''Creates scatterplot of two-residue movement relative to each other.
+
+    Takes the data created in residue_movement and visualizes it as a polar coordinate
+        scatterplot similar to the Figure D link in Proposal Feature 4.
 
     Args:
         csv_filepath (str) : filepath to csv file containing data on the movement
@@ -111,28 +151,18 @@ def visualize_two_residue_movement_scatterplot(csv_filepath : str) -> None:
             in residue_movement
     Returns:
         None
-    
-    takes the data created in residue_movement and visualizes it as a polar coordinate
-        scatterplot similar to the Figure D link in Proposal Feature 4.
     '''
     bottaro_values = pd.read_csv(csv_filepath, sep=',')
 
     theta_values = bottaro_values['theta']
-
-    # convert rho values from nm to Angstroms
-    rho_values = bottaro_values['rho_dist'] * 10
-
     theta_values_rad = np.radians(theta_values)
 
-    fig = plt.figure()
-    ax = fig.add_subplot(polar=True)
-    ax.scatter(theta_values_rad, rho_values, s=1)
-    ax.set_ylim(0,15)
-    ax.set_xticks(np.pi/180. * np.linspace(0,  360, 3, endpoint=False))
-    ax.set_xticklabels([r"$\theta=0^\circ$",r"$\theta=120^\circ$",r"$\theta=240^\circ$"])
-    ax.set_yticks(np.linspace(0,  15, 4, endpoint=True))
+    # convert rho values from nm to Angstroms
+    rho_values = bottaro_values['rho_dist'] * 10 
 
-    ax.grid(color='gray', linestyle='--', linewidth=0.5)
+    ax = set_polar_grid()
+
+    ax.scatter(theta_values_rad, rho_values, color = 'purple', s=1)
     plt.show()
 
 def visualize_two_residue_movement_heatmap(csv_filepath : str) -> None:
