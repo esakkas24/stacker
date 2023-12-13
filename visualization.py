@@ -1,8 +1,8 @@
-import matplotlib.pyplot as plt
 import numpy as np
 from numpy import typing
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+import pandas as pd
 
 class NoResidues(Exception):
     pass
@@ -115,7 +115,25 @@ def visualize_two_residue_movement_scatterplot(csv_filepath : str) -> None:
     takes the data created in residue_movement and visualizes it as a polar coordinate
         scatterplot similar to the Figure D link in Proposal Feature 4.
     '''
-    pass
+    bottaro_values = pd.read_csv(csv_filepath, sep=',')
+
+    theta_values = bottaro_values['theta']
+
+    # convert rho values from nm to Angstroms
+    rho_values = bottaro_values['rho_dist'] * 10
+
+    theta_values_rad = np.radians(theta_values)
+
+    fig = plt.figure()
+    ax = fig.add_subplot(polar=True)
+    ax.scatter(theta_values_rad, rho_values, s=1)
+    ax.set_ylim(0,15)
+    ax.set_xticks(np.pi/180. * np.linspace(0,  360, 3, endpoint=False))
+    ax.set_xticklabels([r"$\theta=0^\circ$",r"$\theta=120^\circ$",r"$\theta=240^\circ$"])
+    ax.set_yticks(np.linspace(0,  15, 4, endpoint=True))
+
+    ax.grid(color='gray', linestyle='--', linewidth=0.5)
+    plt.show()
 
 def visualize_two_residue_movement_heatmap(csv_filepath : str) -> None:
     '''Creates heatmap of two-residue movement relative to each other.
@@ -132,3 +150,6 @@ def visualize_two_residue_movement_heatmap(csv_filepath : str) -> None:
         Should now look identical to Figure D link in the proposal.
     '''
     pass
+
+if __name__ == '__main__':
+    visualize_two_residue_movement_scatterplot('tUAG_aCUA_+1GCU_GC_plot.csv')
