@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from matplotlib.collections import PatchCollection
 import pandas as pd
+from seaborn import kdeplot
 
 class NoResidues(Exception):
     pass
@@ -104,7 +105,7 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies
         plt.pause(seconds_per_frame)
         colorbar.remove()
 
-def set_polar_grid() -> mpl.projections.polar.PolarAxes:
+def set_polar_grid(kde=False) -> mpl.projections.polar.PolarAxes:
     '''Set up axes for polar plots
 
     Creates polar plot background for two-residue movement comparison
@@ -161,7 +162,6 @@ def visualize_two_residue_movement_scatterplot(csv_filepath : str) -> None:
     rho_values = bottaro_values['rho_dist'] * 10 
 
     ax = set_polar_grid()
-
     ax.scatter(theta_values_rad, rho_values, color = 'purple', s=1, alpha = 0.5)
     plt.show()
 
@@ -179,7 +179,19 @@ def visualize_two_residue_movement_heatmap(csv_filepath : str) -> None:
         a scatterplot of the data and then adjust this scatterplot to be a heatmap instead.
         Should now look identical to Figure D link in the proposal.
     '''
-    pass
+    bottaro_values = pd.read_csv(csv_filepath, sep=',')
+
+    theta_values = bottaro_values['theta']
+    theta_values_rad = np.radians(theta_values)
+
+    # convert rho values from nm to Angstroms
+    rho_values = bottaro_values['rho_dist'] * 10 
+
+    ax = set_polar_grid()
+    ax = kdeplot(x=theta_values_rad, y=rho_values, fill=True, bw_method=0.12, cbar = True)
+    plt.xlabel('')
+    plt.ylabel('')
+    plt.show()
 
 if __name__ == '__main__':
     # 10 frame test
@@ -188,3 +200,5 @@ if __name__ == '__main__':
     # Multi-frame test
     visualize_two_residue_movement_scatterplot('tUAG_aCUA_+1GCU_GC_plot_3200frames.csv')
 
+    # Multi-frame heatmap test
+    visualize_two_residue_movement_heatmap('tUAG_aCUA_+1GCU_GC_plot_3200frames.csv')
