@@ -5,7 +5,7 @@ Analyzes pi-stacking interactions between residues in [Molecular Dynamics (MD)](
 
 Developed by Eric Sakkas ([esakkas@wesleyan.edu](mailto:esakkas@wesleyan.edu)) in the [Weir Lab](https://weirlab.research.wesleyan.edu/) at Wesleyan University.
 
-Runs on Python 3.5.x and has the following dependencies: [mdtraj](https://www.mdtraj.org/1.9.8.dev0/index.html), [pandas](https://pandas.pydata.org/), [NumPy](https://numpy.org/doc/stable/index.html), [matplotlib](https://matplotlib.org/stable/)
+Runs on Python 3.5.x and has the following dependencies: [mdtraj](https://www.mdtraj.org/1.9.8.dev0/index.html), [pandas](https://pandas.pydata.org/), [NumPy](https://numpy.org/doc/stable/index.html), [matplotlib](https://matplotlib.org/stable/), [seaborn](https://seaborn.pydata.org/index.html)
 
 ## Overview
 
