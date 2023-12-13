@@ -2,10 +2,9 @@ import numpy as np
 from numpy import typing
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-from matplotlib.collections import PatchCollection
 import pandas as pd
 from seaborn import kdeplot
+import seaborn
 
 class NoResidues(Exception):
     pass
@@ -105,7 +104,7 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies
         plt.pause(seconds_per_frame)
         colorbar.remove()
 
-def set_polar_grid(kde=False) -> mpl.projections.polar.PolarAxes:
+def set_polar_grid() -> mpl.projections.polar.PolarAxes:
     '''Set up axes for polar plots
 
     Creates polar plot background for two-residue movement comparison
@@ -140,16 +139,20 @@ def set_polar_grid(kde=False) -> mpl.projections.polar.PolarAxes:
     ax.grid(color='gray', linestyle='--', linewidth=0.5)
     return ax
 
-def visualize_two_residue_movement_scatterplot(csv_filepath : str) -> None:
+def visualize_two_residue_movement_scatterplot(csv_filepath : str, plot_outfile : str = None) -> None:
     '''Creates scatterplot of two-residue movement relative to each other.
 
     Takes the data created in residue_movement and visualizes it as a polar coordinate
         scatterplot similar to the Figure D link in Proposal Feature 4.
 
     Args:
-        csv_filepath (str) : filepath to csv file containing data on the movement
+        csv_filepath : str
+            filepath to csv file containing data on the movement
             of two residues relative to each other (r, rho, and theta values). Created
             in residue_movement
+        plot_outfile : str
+            filepath of the image file to write to. Format infered from file extension.
+                png, pdf, ps, eps and svg supported.
     Returns:
         None
     '''
@@ -163,21 +166,29 @@ def visualize_two_residue_movement_scatterplot(csv_filepath : str) -> None:
 
     ax = set_polar_grid()
     ax.scatter(theta_values_rad, rho_values, color = 'purple', s=1, alpha = 0.5)
-    plt.show()
 
-def visualize_two_residue_movement_heatmap(csv_filepath : str) -> None:
+    if plot_outfile != None:
+        plt.savefig(plot_outfile)
+    else:
+        plt.show()
+
+
+def visualize_two_residue_movement_heatmap(csv_filepath : str, plot_outfile : str = None) -> None:
     '''Creates heatmap of two-residue movement relative to each other.
 
+    2D shaded contour plot of the density of points in the 
+    visualize_two_residue_movement_scatterplot() scatterplot.
+
     Args:
-        csv_filepath (str) : filepath to csv file containing data on the movement
+        csv_filepath : str
+            filepath to csv file containing data on the movement
             of two residues relative to each other (r, rho, and theta values). Created
             in residue_movement
+        plot_outfile : str
+            filepath of the image file to write to. Format infered from file extension.
+                png, pdf, ps, eps and svg supported.
     Returns:
         None
-    
-    Should run visualize_two_residue_movement_scatterplot() to set the current pyplot as
-        a scatterplot of the data and then adjust this scatterplot to be a heatmap instead.
-        Should now look identical to Figure D link in the proposal.
     '''
     bottaro_values = pd.read_csv(csv_filepath, sep=',')
 
@@ -191,7 +202,11 @@ def visualize_two_residue_movement_heatmap(csv_filepath : str) -> None:
     ax = kdeplot(x=theta_values_rad, y=rho_values, fill=True, bw_method=0.12, cbar = True)
     plt.xlabel('')
     plt.ylabel('')
-    plt.show()
+
+    if plot_outfile != None:
+        plt.savefig(plot_outfile)
+    else:
+        plt.show()
 
 if __name__ == '__main__':
     # 10 frame test
@@ -202,3 +217,7 @@ if __name__ == '__main__':
 
     # Multi-frame heatmap test
     visualize_two_residue_movement_heatmap('tUAG_aCUA_+1GCU_GC_plot_3200frames.csv')
+
+    # Write to outfile tests
+    visualize_two_residue_movement_scatterplot('tUAG_aCUA_+1GCU_GC_plot_3200frames.csv', plot_outfile='tUAG_aCUA_+1GCU_GC_plot_3200frames_scatter.png')
+    visualize_two_residue_movement_heatmap('tUAG_aCUA_+1GCU_GC_plot_3200frames.csv', plot_outfile='tUAG_aCUA_+1GCU_GC_plot_3200frames_heatmap.png')
