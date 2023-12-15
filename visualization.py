@@ -4,7 +4,6 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import pandas as pd
 from seaborn import kdeplot
-import seaborn
 
 class NoResidues(Exception):
     pass
@@ -221,3 +220,4 @@ if __name__ == '__main__':
     # Write to outfile tests
     visualize_two_residue_movement_scatterplot('tUAG_aCUA_+1GCU_GC_plot_3200frames.csv', plot_outfile='tUAG_aCUA_+1GCU_GC_plot_3200frames_scatter.png')
     visualize_two_residue_movement_heatmap('tUAG_aCUA_+1GCU_GC_plot_3200frames.csv', plot_outfile='tUAG_aCUA_+1GCU_GC_plot_3200frames_heatmap.png')
+
