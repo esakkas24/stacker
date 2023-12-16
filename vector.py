@@ -123,5 +123,3 @@ if __name__ == "__main__":
     assert (Vector(-1,-2,-2).magnitude() == 3)
     assert (Vector(3,1,0).calculate_projection(Vector(1,0,0)) == Vector(3,0,0))
     assert (Vector(1,2,3).calculate_projection(Vector(0,0,0)) == Vector(0,0,0))
-
-

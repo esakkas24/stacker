@@ -4,10 +4,15 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import pandas as pd
 from seaborn import kdeplot
-from stacker import create_parent_directories
+import os
 
 class NoResidues(Exception):
     pass
+
+def create_parent_directories(outfile_prefix : str) -> None:
+    '''Creates necessary parent directories to write an outfile given a prefix'''
+    dir_name = os.path.dirname(outfile_prefix)
+    os.makedirs(dir_name, exist_ok=True)
 
 def create_axis_labels(res_indicies : typing.ArrayLike, tick_distance : int = 10) -> list:
     '''Designates the axis labels to use in the pairwise plot

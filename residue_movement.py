@@ -4,7 +4,7 @@ import csv
 import mdtraj as md
 from vector import *
 from file_manipulation import filter_traj_to_pdb
-from stacker import create_parent_directories
+import os
 
 '''
 Eric Sakkas - Weir Lab, Wesleyan University
@@ -241,6 +241,11 @@ def write_bottaro_to_csv(pdb_filename : str, output_csv_name : str,
         csvwriter = csv.writer(csvfile) 
         csvwriter.writerow(fields) 
         csvwriter.writerows(rows)
+
+def create_parent_directories(outfile_prefix : str) -> None:
+    '''Creates necessary parent directories to write an outfile given a prefix'''
+    dir_name = os.path.dirname(outfile_prefix)
+    os.makedirs(dir_name, exist_ok=True)
 
 if __name__ == "__main__":
     trajectory_file = 'first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd'
