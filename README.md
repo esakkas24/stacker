@@ -62,6 +62,15 @@ MD Files are provided for testing convenience:
 - 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop : The associated Topology File with the above trajectory.
 - 5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb : A larger Trajectory combined with a Topology file with 3200 frames.
 
+## Future Features
+
+- Loading Screen Text outputed to standard output to display how much of trajectories have been filtered
+- The ability to output Stacking fingerprint frames as a .mov rather than individual frames
+- Cleaner UI implementation, and the ability to see flags for specific commands (eg. the flags neccessary for running -s bottaro)
+- Dependency checks for easier installation, auto installation of dependencies
+- Jupyter Notebooks showing the inputs and outputs of specific example trajectories
+- Usage for more trajectory types beyond mdcrd prmtop and pdbs
+
 ## Proposed Features
 
 1) A frontend UI where users can call "stacker" in the command line and pull up an interface to input stacker-specific functions (similar to how the "python" command works in the Terminal)
