@@ -39,7 +39,7 @@ def run_python_command() -> None:
 
     # Organizes all possible arguments
     ## Determines which script/subroutine is to be run
-    parser.add_argument("-s", "--script", help="Name of command to use (eg. filter_traj, bottaro, res_distance, pairwise)", required=True, default='')
+    parser.add_argument("-s", "--script", metavar="ROUTINE", help="Name of command to use (eg. filter_traj, bottaro, res_distance, pairwise)", required=True, default='')
 
     ## filter_traj requirements (--script filter_traj)
     parser.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=False)
@@ -90,7 +90,7 @@ def filter_traj_routine() -> None:
         with the determined inputs from passed in flags
         
     Example Usage:
-        [user]$ python3 stacker.py -s filter_traj -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -o command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -r 425,427 -a C2,C4,C6
+        [user]$ python3 stacker.py -s filter_traj -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -o command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -r 425,426 -a C2,C4,C6
     '''
     if args.residues is not None:
         residues_desired = {res.strip() for res in args.residues.split(",")}

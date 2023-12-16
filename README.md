@@ -13,12 +13,45 @@ Manipulates the outputs of an MD simulation and analyzes the pi-stacking interac
 
 ## Installation Instructions
 
-- Clone Stacker
-- Download mdtraj
-- Download numpy
+#### Clone StACKER repository to local computer
+
+In the command line, run:
+```
+git clone https://github.com/esakkas24/stacker.git
+```
+
+#### Download mdtraj
+Installing mdtraj presents issues on the newest version of pip. To fix this, run the script get-pip.py to download an older version of pip:
+```
+python3 get-pip.py
+```
+The output should come with a warning showing the location of the new pip version:
+```
+WARNING: The scripts pip, pip3, and pip3.8 are installed in '/Users/ericsakkas/Library/Python/3.8/bin' which is not on PATH
+```
+
+Use this path to install `mdtraj`:
+```
+/Users/ericsakkas/Library/Python/3.8/bin/pip3 install mdtraj
+```
+
+If successful, this will also install the NumPy dependency:
+
+```
+Successfully installed astunparse-1.6.3 mdtraj-1.9.9 numpy-1.24.4 ...
+```
 - Download pandas
 - Download matplotlib
 - Download seaborn
+
+## Testing Features
+
+All features can be tested by running the unit tests at the end of each Python script, or by running StACKER in the command line. All tests are explained in the testing.md file.
+
+MD Files are provided for testing convenience:
+- first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd : A 10-frame trajectory file
+- 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop : The associated Topology File with the above trajectory.
+- 5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb : A larger Trajectory combined with a Topology file with 3200 frames.
 
 ## Proposed Features
 
