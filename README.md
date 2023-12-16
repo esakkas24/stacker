@@ -13,14 +13,14 @@ Manipulates the outputs of an MD simulation and analyzes the pi-stacking interac
 
 ## Installation Instructions
 
-#### Clone StACKER repository to local computer
+### Clone StACKER repository to local computer
 
 In the command line, run:
 ```
 git clone https://github.com/esakkas24/stacker.git
 ```
 
-#### Download mdtraj
+### Download mdtraj
 Installing mdtraj presents issues on the newest version of pip. To fix this, run the script get-pip.py to download an older version of pip:
 ```
 python3 get-pip.py
@@ -40,10 +40,19 @@ If successful, this will also install the NumPy dependency:
 ```
 Successfully installed astunparse-1.6.3 mdtraj-1.9.9 numpy-1.24.4 ...
 ```
-- Download pandas
-- Download matplotlib
-- Download seaborn
 
+### Install Pandas
+```
+pip3 install pandas
+```
+### Install matplotlib
+```
+pip3 install matplotlib
+```
+### Install seaborn
+```
+pip3 install seaborn
+```
 ## Testing Features
 
 All features can be tested by running the unit tests at the end of each Python script, or by running StACKER in the command line. All tests are explained in the testing.md file.
