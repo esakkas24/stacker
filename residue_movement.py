@@ -4,6 +4,7 @@ import csv
 import mdtraj as md
 from vector import *
 from file_manipulation import filter_traj_to_pdb
+from stacker import create_parent_directories
 
 '''
 Eric Sakkas - Weir Lab, Wesleyan University
@@ -244,7 +245,8 @@ def write_bottaro_to_csv(pdb_filename : str, output_csv_name : str,
 if __name__ == "__main__":
     trajectory_file = 'first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd'
     topology_file = '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop'
-    output_csv_name = "tUAG_aCUA_+1GCU_GC_plot.csv"
+    output_csv_name = "script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv"
+    create_parent_directories(output_csv_name)
 
     ########OPTIONAL VARS#######
     perspective_atom1_name = "C2"
@@ -255,7 +257,7 @@ if __name__ == "__main__":
     viewed_atom3_name = "C6"
     ############################
 
-    pdb_filename = '5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb'
+    pdb_filename = 'script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb'
     filter_traj_to_pdb(trajectory_filename=trajectory_file, topology_filename=topology_file, output_pdb_filename=pdb_filename,
                        residues_desired={425,426}, atomnames_desired={"C2", "C4", "C6"})
 
@@ -266,5 +268,5 @@ if __name__ == "__main__":
                          (viewed_atom1_name,viewed_atom2_name,viewed_atom3_name))
     
     multiframe_pdb = '5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb'
-    multiframe_csv = 'tUAG_aCUA_+1GCU_GC_plot_3200frames.csv'
+    multiframe_csv = 'script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv'
     write_bottaro_to_csv(multiframe_pdb, multiframe_csv)
