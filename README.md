@@ -11,6 +11,15 @@ Runs on Python 3.5.x and has the following dependencies: [mdtraj](https://www.md
 
 Manipulates the outputs of an MD simulation and analyzes the pi-stacking interactions. Creates a "Pi-Stacking Fingerprint" for a structure at each frame. Presents Pi-stacking interactions between two residues through analysis of their relevant movement.
 
+## Installation Instructions
+
+- Clone Stacker
+- Download mdtraj
+- Download numpy
+- Download pandas
+- Download matplotlib
+- Download seaborn
+
 ## Proposed Features
 
 1) A frontend UI where users can call "stacker" in the command line and pull up an interface to input stacker-specific functions (similar to how the "python" command works in the Terminal)

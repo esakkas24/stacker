@@ -33,7 +33,6 @@ def filter_traj(trajectory_filename : str, topology_filename : str,
     print("Filtering trajectory...")
     atomnames_query = " or ".join([f"name == '{atom}'" for atom in atomnames_desired])
     residues_query = " or ".join([f"residue == {resnum}" for resnum in residues_desired])
-    print(atomnames_query,residues_query)
 
     if len(atomnames_query) == 0:
         if len(residues_query) == 0:
@@ -47,7 +46,6 @@ def filter_traj(trajectory_filename : str, topology_filename : str,
             filtered_trajectory = trajectory.atom_slice(atom_indices_selection)
         else:
             atom_indices_selection = topology.select('(' + atomnames_query + ') and (' + residues_query + ')')
-            print(atom_indices_selection)
             filtered_trajectory = trajectory.atom_slice(atom_indices_selection)
     return filtered_trajectory
 
@@ -80,6 +78,8 @@ def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str,
     '''
     filtered_trajectory = filter_traj(trajectory_filename, topology_filename, residues_desired, atomnames_desired)
     filtered_trajectory.save_pdb(output_pdb_filename)
+    print("Filtered trajectory written to: ", output_pdb_filename)
+
 
 def file_convert(trajectory_filename : str, topology_filename : str, output_file : str) -> None:
     '''Converts trajectory input file to new output type
@@ -100,6 +100,7 @@ def file_convert(trajectory_filename : str, topology_filename : str, output_file
     '''
     trajectory = md.load(trajectory_filename, top = topology_filename)
     trajectory.save(output_file)
+    print("Trajectory written to: ", output_file)
 
 if __name__ == "__main__":
     # filter_traj tests

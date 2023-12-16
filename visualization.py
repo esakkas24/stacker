@@ -63,7 +63,9 @@ def create_axis_labels(res_indicies : typing.ArrayLike, tick_distance : int = 10
     
     return tick_locations, tick_labels
         
-def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies : typing.ArrayLike, seconds_per_frame : int = 10, tick_distance : int = 10) -> None:
+def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies : typing.ArrayLike, 
+                            seconds_per_frame : int = 10, tick_distance : int = 10,
+                            outfile_prefix : str = None) -> None:
     '''Displays list/array of 2D NumPy arrays as matrix heatmaps
 
     Takes list/array of 2D NumPy arrays and treats them as frames 
@@ -79,6 +81,9 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies
             Number of seconds to display each matrix for.
         tick_distance : int, default = 10
             Distance between ticks in blocks of consecutive residues
+        outfile_prefix : str
+            prefix for filepath of the file to write frames to. Format infered from file extension.
+                png, pdf, ps, eps and svg supported.
     Returns:
         None
         Displays video of NumPy arrays
@@ -91,17 +96,21 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies
     
     fig , ax = plt.subplots(figsize=(8,8))
     plt.ion()
+    frame_num = 1
     for hist in numpy_arrays:
         ax.clear()
         neg = ax.imshow(hist, cmap = newcmp, vmin=2, vmax=5, interpolation = 'nearest')
         ax.set_title('Distance Between Residues Center of Geometries')
         colorbar = fig.colorbar(neg, ax=ax, location='right', anchor=(0, 0.3), shrink=0.7)
-        ticks, labels = create_axis_labels(res_indicies)
+        ticks, labels = create_axis_labels(res_indicies, tick_distance)
         plt.xticks(ticks, labels, rotation = 'vertical')
         plt.yticks(ticks, labels)
         ax.tick_params(top=True, bottom=False, labeltop=True, labelbottom=False)
         plt.pause(seconds_per_frame)
+        if outfile_prefix != None:
+            plt.savefig(outfile_prefix + "frame" + str(frame_num) + ".png")
         colorbar.remove()
+        frame_num+=1
 
 def set_polar_grid() -> mpl.projections.polar.PolarAxes:
     '''Set up axes for polar plots
