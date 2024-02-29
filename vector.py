@@ -1,4 +1,5 @@
 import math
+import numpy as np
 
 class Vector:
     '''Represents a 3D vector with x, y, and z components.
@@ -22,6 +23,7 @@ class Vector:
         self.x = x
         self.y = y
         self.z = z
+        self.components = np.array([x, y, z])
 
     def __add__(self, other : 'Vector') -> 'Vector':
         '''Add two vectors element-wise.
@@ -32,7 +34,7 @@ class Vector:
         Returns:
             Vector: A new Vector representing the element-wise sum of the two vectors.
         '''
-        return Vector(self.x + other.x, self.y + other.y, self.z + other.z)
+        return Vector(*(self.components + other.components))
 
 
     def __sub__(self, other : 'Vector') -> 'Vector':
@@ -44,7 +46,7 @@ class Vector:
         Returns:
             Vector: A new Vector representing the element-wise difference of the two vectors.
         '''
-        return Vector(self.x - other.x, self.y - other.y, self.z - other.z)
+        return Vector(*(self.components - other.components))
 
     def __eq__(self, other: "Vector") -> bool:
         '''Checks if two Vectors are equal
@@ -55,10 +57,7 @@ class Vector:
         Returns:    
             equal (bool) : True if vectors are equal, False otherwise
         '''
-        if (self.x == other.x and self.y == other.y and self.z == other.z):
-            return True
-        else:
-            return False
+        return np.all(self.components == other.components)
         
     def calculate_cross_product(self, b : 'Vector') -> 'Vector':
         '''Calculates the cross product of 2 vectors
@@ -72,10 +71,8 @@ class Vector:
         Returns:
             c (Vector) : x,y,z of vector resulting from a x b
         '''
-        c = Vector(self.y*b.z - self.z*b.y,
-             self.z*b.x - self.x*b.z,
-             self.x*b.y - self.y*b.x)
-        return c
+        c = np.cross(self.components, b.components)
+        return Vector(*c)
 
     def magnitude(self):
         '''Calculate the magnitude (length) of the vector.
@@ -83,7 +80,7 @@ class Vector:
         Returns:
             float: The magnitude (length) of the vector.
         '''
-        return math.sqrt(self.x ** 2 + self.y ** 2 + self.z ** 2)
+        return np.linalg.norm(self.components)
         
     def calculate_projection(self, b : 'Vector') -> 'Vector':
         '''Calculates the projection of this vector onto vector b.
@@ -94,23 +91,22 @@ class Vector:
         Returns: 
             proj_vector (Vector) : x,y,z of vector resulting from proj_b(a)
         '''
-        a_dot_product_b = self.x*b.x+self.y*b.y+self.z*b.z
-        b_magnitude = b.magnitude()
-        if b_magnitude == 0: raise ZeroDivisionError("You cannot project onto the Zero Vector")
-        normalize_factor = a_dot_product_b / (b_magnitude**2)
-        proj_vector = Vector(normalize_factor*b.x, normalize_factor*b.y, normalize_factor*b.z)
-        return proj_vector
-    
+        b_np = b.components
+        projected_vector = (np.dot(self.components, b_np) / np.dot(b_np, b_np)) * b_np
+        return Vector(*projected_vector)
+
     def __str__(self):
         '''Redefinition of printing for Vectors
 
         Redefines the output of print(Vector()) to display the x,y,z attributes
         '''
-        return "[ " + str(self.x) + "\n  " + str(self.y) + "\n  " + str(self.z) + " ]"
+        x,y,z = self.components
+        return "[ " + str(x) + "\n  " + str(y) + "\n  " + str(z) + " ]"
     
     def scale(self, a):
         '''Scale the self vector by a scalar a'''
-        return Vector(a * self.x, a * self.y, a * self.z)
+        scaled_vector = a * self.components
+        return Vector(*scaled_vector)
     
 if __name__ == "__main__":
     assert (Vector(1,2,3) + Vector(3,2,1) == Vector(4,4,4))
