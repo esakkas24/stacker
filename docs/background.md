@@ -12,3 +12,5 @@ Contains background on Molecular Dynamics (MD) simulations and pi-stacking inter
 - For now: a type of attractive interaction between two ring molecules within a structure.
 - Simplified discussion of electron clouds on aromatic rings
 - Orbital hybridization and the pi/pi* interactions that lead to pi-stacking
+
+![alt text](image.png)
