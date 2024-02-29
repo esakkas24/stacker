@@ -126,6 +126,22 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
     pairwise_res_magnitudes = get_magnitude(pairwise_distances)
     return(pairwise_res_magnitudes)
 
+def get_frame_average(frames : typing.ArrayLike) -> typing.ArrayLike:
+    '''Calculates an average pairwise matrix across multiple frames of a trajectory
+
+    Args:
+        frames : array_like
+            List or array of 2D NumPy arrays representing a pairwise distance matrix
+            of an MD structure. All 2D NumPy arrays must be of the same dimenstions.
+    Returns:
+        avg_frame : array_like
+            A single 2D NumPy array representing a pairwise distance matrix where each
+            position i,j is the average distance from residue i to j across all matrices
+            in frames.
+    '''
+    avg_frame = np.mean(frames, axis = 0)
+    return avg_frame
+
 if __name__ == "__main__":
     # Load test trajectory and topology
     trj = md.load('first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', top = '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop')
@@ -158,10 +174,11 @@ if __name__ == "__main__":
                                                                                                                [11.712, 6.885,   0]])))
 
     # display_arrays_as_video() tests
-    trj_sub = trj.atom_slice(trj.top.select('resi 50 to 100 or resi 150 to 200'))
+    trj_sub = trj.atom_slice(trj.top.select('resi 90 to 215'))
     resSeqs = [res.resSeq for res in trj_sub.topology.residues]
-    frames = [get_residue_distance_for_frame(trj_sub, i) for i in range(1,10)]
-    display_arrays_as_video(frames, resSeqs, seconds_per_frame=1)
+    frames = [get_residue_distance_for_frame(trj_sub, i) for i in range(1,2)]
+    display_arrays_as_video([get_frame_average(frames)], resSeqs, seconds_per_frame=60)
+    display_arrays_as_video(frames, resSeqs, seconds_per_frame=10)
 
     resSeqs = [res.resSeq for res in trj.topology.residues]
     frames = [get_residue_distance_for_frame(trj, i) for i in range(1,2)]
