@@ -56,7 +56,8 @@ def calc_center_3pts(a : Vector, b : Vector, c : Vector) -> Vector:
         midpoint : tuple
             one Vector with (x,y,z) coordinates at the center of the three input Vectors.
     '''
-    midpoint = Vector((a.x+b.x+c.x)/3,(a.y+b.y+c.y)/3,(a.z+b.z+c.z)/3)
+    vectorized = (a.components + b.components + c.components ) / 3
+    midpoint = Vector(*vectorized)
     return midpoint
 
 class Base:
@@ -182,9 +183,10 @@ def calculate_bottaro_values_for_frame(perspective_base_coords : Base, viewed_mi
     values = [r_magnitude,rho_dist,corrected_theta]
     return values
 
-def write_bottaro_to_csv(pdb_filename : str, output_csv_name : str, 
+def write_bottaro_to_csv(pdb_filename : str = '', output_csv_name : str = '', 
+                         perspective_residue_num : int = -1, viewed_residue_num : int = -1,
                          res1_atom_names : tuple = ("C2", "C4","C6"), 
-                         res2_atom_names : tuple = ("C2", "C4","C6")) -> None:
+                         res2_atom_names : tuple = ("C2", "C4","C6"), index : int = 1) -> None:
     '''Write the Bottaro r, rho, and theta values from a trajectory pdb to a CSV
 
     Calculates the r, rho, and theta values as described in Bottaro et al. from a
@@ -197,12 +199,19 @@ def write_bottaro_to_csv(pdb_filename : str, output_csv_name : str,
             nucleotide) at each frame.
         output_csv_name : str
             filename of CSV file to write to
+        perspective_residue_num : int
+            residue index of the perspective residue whose plane to project onto
+        viewed_res_id : int
+            residue index of the viewed residue whose midpoint to project to pers_res plane
         res1_atom_names : tuple, default = ("C2", "C4","C6")
             tuple of the atom names (eg. "C2", "C4", "C6") to use from
             residue 1 to find center of geometry for perspective nucleotide
         res2_atom_names : tuple, default = ("C2", "C4","C6")
             tuple of the atom names (eg. "C2", "C4", "C6") to use from
             residue 2 to find center of geometry for viewed nucleotide
+        index : int, default = 1
+            index of the residues. 1-indexed (default) means residue ids start at 1.
+            cpptraj uses 1-indexed residues. mdtraj pdb outputs will be 0-indexed.
     '''
     res1_atom1,res1_atom2,res1_atom3 = res1_atom_names
     res2_atom1,res2_atom2,res2_atom3 = res2_atom_names
@@ -210,8 +219,6 @@ def write_bottaro_to_csv(pdb_filename : str, output_csv_name : str,
     pdb = md.load(pdb_filename)
     topology = pdb.topology
     number_of_frames = pdb.n_frames
-    perspective_residue_num = [residue for residue in topology.residues][0].resSeq
-    viewed_residue_num = [residue for residue in topology.residues][1].resSeq
 
     residue1_C2_list = collect_atom_locations_by_frame(pdb, perspective_residue_num, res1_atom1)
     residue1_C4_list = collect_atom_locations_by_frame(pdb, perspective_residue_num, res1_atom2)
