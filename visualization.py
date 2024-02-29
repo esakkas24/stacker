@@ -104,6 +104,7 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies
     plt.ion()
     frame_num = 1
     for hist in numpy_arrays:
+        print(hist.shape)
         ax.clear()
         neg = ax.imshow(hist, cmap = newcmp, vmin=2, vmax=5, interpolation = 'nearest')
         ax.set_title('Distance Between Residues Center of Geometries')
