@@ -16,7 +16,7 @@ def filter_traj(trajectory_filename : str, topology_filename : str,
         topology_filename : str
             path to file of the topology of the molecule
         residues_desired : set
-            residue numbers of residues to keep in the trajectory
+            1-indexed residue numbers of residues to keep in the trajectory
         atomnames_desired : set 
             atomnames to keep in the trajectory
 
@@ -24,6 +24,8 @@ def filter_traj(trajectory_filename : str, topology_filename : str,
         filtered_trajectory : md.Trajectory
             a trajectory object representing the filtered structure across all frames
     '''
+    print("WARNING: Residue Indices are expected to be 1-indexed")
+    
     print("Reading trajectory...")
     trajectory = md.load(trajectory_filename, top = topology_filename)
     
@@ -31,6 +33,9 @@ def filter_traj(trajectory_filename : str, topology_filename : str,
     topology = trajectory.topology
     
     print("Filtering trajectory...")
+    # make resSeq 0-indexed for mdtraj query
+    residues_desired = {resnum-1 for resnum in residues_desired} 
+
     atomnames_query = " or ".join([f"name == '{atom}'" for atom in atomnames_desired])
     residues_query = " or ".join([f"residue == {resnum}" for resnum in residues_desired])
 
@@ -47,8 +52,8 @@ def filter_traj(trajectory_filename : str, topology_filename : str,
         else:
             atom_indices_selection = topology.select('(' + atomnames_query + ') and (' + residues_query + ')')
             filtered_trajectory = trajectory.atom_slice(atom_indices_selection)
-    print("WARNING: Filtered traj atom, residue, and chain indices are zero-indexed")
-    
+    print("WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed")
+
     return filtered_trajectory
 
 def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str, 
@@ -71,7 +76,7 @@ def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str,
         output_pdb_filename : str
             path to the output pdb file
         residues_desired : set
-            residue numbers of residues to keep in the trajectory
+            1-indexed residue numbers of residues to keep in the trajectory
         atomnames_desired : set 
             atomnames to keep in the trajectory
 
@@ -109,8 +114,8 @@ def file_convert(trajectory_filename : str, topology_filename : str, output_file
 
 if __name__ == "__main__":
     # filter_traj tests
-    print('Known Res: 425 = G and 426 = C')
-    filtered_traj = filter_traj('first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', {425,426}, {'C2','C4','C6'})
+    print('Known Res: 426 = G and 427 = C')
+    filtered_traj = filter_traj('first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', {426,427}, {'C2','C4','C6'})
     table, bonds = filtered_traj.topology.to_dataframe()
     print(table)
 
