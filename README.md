@@ -14,6 +14,8 @@ Manipulates the outputs of an MD simulation and analyzes the pi-stacking interac
 ## Installation Instructions
 
 ### Clone StACKER repository to local computer
+A video of the installation is present in `installation.mp4`
+
 
 In the command line, run:
 ```
@@ -25,15 +27,16 @@ Installing mdtraj presents issues on the newest version of pip. To fix this, run
 ```
 python3 get-pip.py
 ```
-The output should come with a warning showing the location of the new pip version:
+The output may come with a warning showing the location of the new pip version:
 ```
 WARNING: The scripts pip, pip3, and pip3.8 are installed in '/Users/ericsakkas/Library/Python/3.8/bin' which is not on PATH
 ```
 
-Use this path to install `mdtraj`:
+If it does, use this new path to install `mdtraj`:
 ```
 /Users/ericsakkas/Library/Python/3.8/bin/pip3 install mdtraj
 ```
+Else, use the usual pip3 install (as shown in installation.mp4)
 
 If successful, this will also install the NumPy dependency:
 

@@ -45,7 +45,7 @@ MODEL        1
 Users can get the r, rho, and theta values specified in the Bottaro paper (https://doi.org/10.1093/nar/gku972) directly in the command line by specifying a PDB file with only two residues and the atomnames necessary to determine each residue's center of geometry:
 
 ```
-[user]$ python3 stacker.py -s bottaro -pdb 5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -o command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv -p C2,C4,C6 -v C2,C4,C6
+[user]$ python3 stacker.py -s bottaro -pdb command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -o command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv -p C2,C4,C6 -v C2,C4,C6
 ```
 
 This creates the CSV file:
@@ -99,7 +99,7 @@ python3 vector.py
 ```
 Will test vector addition, coordinate extraction, subtraction, cross product, magnitude, and projection. Additionally it tests for the catching of edge-cases like projecting to the zero-vector
 
-## Proposed Feature 3: Convert trajectroy to PDB
+## Proposed Feature 3: Convert trajectory to PDB
 
 Trajectory Files must be combined with a topology file to operate, but PDB files contain trajectory and topology information in one file. The unit tests in `file_manipulation.py` display the feature of converting a trajectory+topology into a PDB file, alongside the ability to filter by residue and atomname.
 ```
