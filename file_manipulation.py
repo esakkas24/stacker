@@ -47,6 +47,8 @@ def filter_traj(trajectory_filename : str, topology_filename : str,
         else:
             atom_indices_selection = topology.select('(' + atomnames_query + ') and (' + residues_query + ')')
             filtered_trajectory = trajectory.atom_slice(atom_indices_selection)
+    print("WARNING: Filtered traj atom, residue, and chain indices are zero-indexed")
+    
     return filtered_trajectory
 
 def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str, 
@@ -76,6 +78,8 @@ def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str,
     Returns:
         None
     '''
+    print("WARNING: Output file atom, residue, and chain indices are zero-indexed")
+
     filtered_trajectory = filter_traj(trajectory_filename, topology_filename, residues_desired, atomnames_desired)
     filtered_trajectory.save_pdb(output_pdb_filename)
     print("Filtered trajectory written to: ", output_pdb_filename)
@@ -98,6 +102,7 @@ def file_convert(trajectory_filename : str, topology_filename : str, output_file
     Returns:
         None
     '''
+    print("WARNING: Output file atom, residue, and chain indices are zero-indexed")
     trajectory = md.load(trajectory_filename, top = topology_filename)
     trajectory.save(output_file)
     print("Trajectory written to: ", output_file)
