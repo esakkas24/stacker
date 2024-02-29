@@ -99,7 +99,7 @@ python3 vector.py
 ```
 Will test vector addition, coordinate extraction, subtraction, cross product, magnitude, and projection. Additionally it tests for the catching of edge-cases like projecting to the zero-vector
 
-## Proposed Feature 3: Convert trajectroy to PDB
+## Proposed Feature 3: Convert trajectory to PDB
 
 Trajectory Files must be combined with a topology file to operate, but PDB files contain trajectory and topology information in one file. The unit tests in `file_manipulation.py` display the feature of converting a trajectory+topology into a PDB file, alongside the ability to filter by residue and atomname.
 ```
