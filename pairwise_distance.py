@@ -13,7 +13,8 @@ _NUCLEOTIDE_NAMES = {"A", "G", "C", "T", "U"}
 def calculate_residue_distance(trajectory : md.Trajectory, 
                                res1_num : int, res2_num : int, 
                                 res1_atoms : tuple = ("C2","C4","C6"),
-                                res2_atoms : tuple = ("C2","C4","C6")) -> Vector:
+                                res2_atoms : tuple = ("C2","C4","C6"),
+                                frame : int = 1) -> Vector:
     '''Calculates the vector between two residues with x,y,z units in Angstroms
 
     Calcualtes the distance between the center of two residues. The center is denoted
@@ -24,21 +25,23 @@ def calculate_residue_distance(trajectory : md.Trajectory,
         trajectory : md.Trajectory 
             single frame trajectory
         res1_num : int
-            the residue number of the first residue (PDB Column 5)
+            1-indexed residue number of the first residue (PDB Column 5)
         res2_num : int
-            the residue number of the second residue (PDB Column 5)
+            1-indexed residue number of the second residue (PDB Column 5)
         res1_atoms : tuple, default = ("C2","C4","C6")
             a tuple of the atom names of the three atoms whose position
             to average to find the center of residue 1 
         res2_atoms : tuple, default = ("C2","C4","C6")
             a tuple of the atom names of the three atoms whose position
             to average to find the center of residue 2 [("C2","C4","C6")]
+        frame : int, default = 1
+            1-indexed frame number of trajectory to get distance in
     
     Returns:
         distance_res12 : Vector
             Vector from center of geometry of residue 1 to center of geometry of residue 2
     '''
-    if len(trajectory) > 1: raise MultiFrameTraj("calculate_residue_distance() expects a 1-frame trajectory")
+    trajectory = trajectory[frame-1]
 
     # Correct for mdtraj 0-indexing
     res1_num = res1_num - 1 
@@ -150,11 +153,12 @@ if __name__ == "__main__":
     # for visualizing 3D molecules (distances limited to 3 decimal places)
 
     # calculate_residue_distance() tests
-    assert (round(calculate_residue_distance(trj[0], 426, 427).magnitude(), 3) == 7.525)
-    assert (round(calculate_residue_distance(trj[0], 3, 430).magnitude(), 3) == 22.043)
+    tolerance = 1e-6
+    assert round(calculate_residue_distance(trj[0], 426, 427).magnitude(), 3) - 7.525 < tolerance
+    assert (round(calculate_residue_distance(trj[0], 3, 430).magnitude(), 3) - 22.043 < tolerance)
     ### Multi-frame exception
     try:
-        round(calculate_residue_distance(trj[0:10], 3, 430).magnitude(), 3) == 22.043
+        round(calculate_residue_distance(trj[0:10], 3, 430).magnitude(), 3) - 22.043 < tolerance
     except MultiFrameTraj:
         print("MultiFrameTraj: calculate_residue_distance_vector() fails on multiple-frame trajectory")
 
