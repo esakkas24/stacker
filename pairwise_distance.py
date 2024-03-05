@@ -8,7 +8,7 @@ from visualization import NoResidues, create_axis_labels, display_arrays_as_vide
 class MultiFrameTraj(Exception):
     pass
 
-_NUCLEOTIDE_NAMES = {"A", "G", "C", "T", "U"}
+_NUCLEOTIDE_NAMES = {"A", "G", "C", "T", "U", "INO"}
 
 def calculate_residue_distance(trajectory : md.Trajectory, 
                                res1_num : int, res2_num : int, 
