@@ -94,6 +94,7 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
             residue i to residue j
     '''
     trajectory = trajectory[frame-1]
+    topology = trajectory.topology
     n_residues = trajectory.n_residues
     res_indices = [res.resSeq for res in trajectory.topology.residues]
     zero_vector = Vector(0,0,0)
@@ -105,8 +106,7 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
         percent_done = round((mat_i+1) / n_residues * 100, 2)
         sys.stdout.write(f'\rLoading: [{"#" * int(percent_done)}{" " * (100 - int(percent_done))}] Current Residue: {mat_i+1}/{n_residues} ({percent_done}%)')
         mat_j = 0
-        res1_atom_indices = trajectory.topology.select("resSeq " + str(i))
-        res1_name = trajectory.topology.atom(res1_atom_indices[0]).residue.name
+        res1_name = topology.residue(mat_i).name
         for j in res_indices:
             if i == j: 
                 pairwise_distances[mat_i,mat_j] = zero_vector
