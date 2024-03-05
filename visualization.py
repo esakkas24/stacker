@@ -105,7 +105,7 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies
     frame_num = 1
     for hist in numpy_arrays:
         ax.clear()
-        neg = ax.imshow(hist, cmap = newcmp, vmin=2, vmax=5, interpolation = 'nearest')
+        neg = ax.imshow(hist, cmap = newcmp, vmin=0, vmax=7, interpolation = 'nearest')
         ax.set_title('Distance Between Residues Center of Geometries')
         colorbar = fig.colorbar(neg, ax=ax, location='right', anchor=(0, 0.3), shrink=0.7)
         ticks, labels = create_axis_labels(res_indicies, tick_distance)
