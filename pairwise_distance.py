@@ -4,6 +4,7 @@ from numpy import typing
 from residue_movement import calc_center_3pts
 from vector import *
 from visualization import NoResidues, create_axis_labels, display_arrays_as_video
+import sys
 
 class MultiFrameTraj(Exception):
     pass
@@ -101,7 +102,8 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
 
     mat_i = 0
     for i in res_indices:
-        print(i)
+        percent_done = int((mat_i+1) / n_residues * 100)
+        sys.stdout.write(f'\rLoading: [{"#" * percent_done}{" " * (100 - percent_done)}] Current Residue: {mat_i+1}/{n_residues} ({percent_done}%)')
         mat_j = 0
         res1_atom_indices = trajectory.topology.select("resSeq " + str(i))
         res1_name = trajectory.topology.atom(res1_atom_indices[0]).residue.name
@@ -124,6 +126,7 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
                     pairwise_distances[mat_i,mat_j] = calculate_residue_distance(trajectory, i+1, j+1, res1_atoms, res2_atoms)
             mat_j+=1
         mat_i+=1
+        sys.stdout.flush()
 
     get_magnitude = np.vectorize(Vector.magnitude)
     pairwise_res_magnitudes = get_magnitude(pairwise_distances)
