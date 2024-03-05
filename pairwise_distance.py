@@ -6,6 +6,7 @@ from vector import *
 from visualization import NoResidues, create_axis_labels, display_arrays_as_video
 import sys
 
+
 class MultiFrameTraj(Exception):
     pass
 
@@ -102,8 +103,8 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
 
     mat_i = 0
     for i in res_indices:
-        percent_done = int((mat_i+1) / n_residues * 100)
-        sys.stdout.write(f'\rLoading: [{"#" * percent_done}{" " * (100 - percent_done)}] Current Residue: {mat_i+1}/{n_residues} ({percent_done}%)')
+        percent_done = round((mat_i+1) / n_residues * 100, 2)
+        sys.stdout.write(f'\rLoading: [{"#" * int(percent_done)}{" " * (100 - int(percent_done))}] Current Residue: {mat_i+1}/{n_residues} ({percent_done}%)')
         mat_j = 0
         res1_atom_indices = trajectory.topology.select("resSeq " + str(i))
         res1_name = trajectory.topology.atom(res1_atom_indices[0]).residue.name
@@ -184,9 +185,10 @@ if __name__ == "__main__":
     trj_sub = trj.atom_slice(trj.top.select('resi 90 to 215'))
     resSeqs = [res.resSeq for res in trj_sub.topology.residues]
     frames = [get_residue_distance_for_frame(trj_sub, i) for i in range(1,2)]
-    display_arrays_as_video([get_frame_average(frames)], resSeqs, seconds_per_frame=60)
+    display_arrays_as_video([get_frame_average(frames)], resSeqs, seconds_per_frame=10)
     display_arrays_as_video(frames, resSeqs, seconds_per_frame=10)
 
+    # All Residues one large matrix
     resSeqs = [res.resSeq for res in trj.topology.residues]
     frames = [get_residue_distance_for_frame(trj, i) for i in range(1,2)]
-    display_arrays_as_video(frames, resSeqs, seconds_per_frame=60, tick_distance=20)
+    display_arrays_as_video(frames, resSeqs, seconds_per_frame=10, tick_distance=20)
