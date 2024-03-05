@@ -6,7 +6,6 @@ from vector import *
 from visualization import NoResidues, create_axis_labels, display_arrays_as_video
 import sys
 
-
 class MultiFrameTraj(Exception):
     pass
 
@@ -190,5 +189,6 @@ if __name__ == "__main__":
 
     # All Residues one large matrix
     resSeqs = [res.resSeq for res in trj.topology.residues]
+    print('\n')
     frames = [get_residue_distance_for_frame(trj, i) for i in range(1,2)]
     display_arrays_as_video(frames, resSeqs, seconds_per_frame=10, tick_distance=20)
