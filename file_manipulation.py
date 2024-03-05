@@ -83,27 +83,27 @@ def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str,
     Returns:
         None
     '''
-    print("WARNING: Output file atom, residue, and chain indices are zero-indexed")
-
+    print("WARNING: Residue Indices are expected to be 1-indexed")
     filtered_trajectory = filter_traj(trajectory_filename, topology_filename, residues_desired, atomnames_desired)
     filtered_trajectory.save_pdb(output_pdb_filename)
+    print("WARNING: Output file atom, residue, and chain indices are zero-indexed")
     print("Filtered trajectory written to: ", output_pdb_filename)
 
 
 def file_convert(trajectory_filename : str, topology_filename : str, output_file : str) -> None:
-    '''Converts trajectory input file to new output type
+    '''Converts mdcrd trajectory input file to new output type
     
     Output filetype determined by output_file extension. Uses mdtraj.save() commands to convert 
     trajectory files to various filetypes mdtraj.save_mdcrd(), mdtraj.save_pdb(), mdtraj.save_xyz(), etc
 
     Args:
         trajectory_filename : str
-            path to file of the concatenated trajectory. Should be resampled to the
+            path to file of the concatenated trajectory (.mdcrd file). Should be resampled to the
             1 in 50 frames sampled trajectories for each replicate.
         topology_filename : str
-            path to file of the topology of the molecule
+            path to file of the topology of the molecule (.prmtop file)
         output_file : str
-            desired filetype to convert to (mdcrd, pdb, etc.)
+            output filename (include .mdcrd, .pdb, etc.)
     Returns:
         None
     '''
