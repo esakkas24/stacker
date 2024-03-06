@@ -132,6 +132,36 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
     pairwise_res_magnitudes = get_magnitude(pairwise_distances)
     return(pairwise_res_magnitudes)
 
+def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, output_csv : str = '',
+                     n_events : int = 5) -> None:
+    top_stacking_indices = np.argsort(np.abs(matrix - 3.5), axis = None)
+    rows, cols = np.unravel_index(top_stacking_indices, matrix.shape)
+    closest_values = matrix[rows, cols]
+    non_adjacent_indices = [(row, col, value) for row, col, value in zip(rows, cols, closest_values) if abs(row - col) > 1]
+
+    no_mirrored_indices = [] # keep only one side of x=y line, since mat[i,j] = mat[j,i]
+    for row, col, value in non_adjacent_indices:
+        if (col, row, value) not in no_mirrored_indices:
+            no_mirrored_indices += [(row, col, value)]
+    no_mirrored_indices = no_mirrored_indices[:n_events]
+
+    if output_csv:
+        with open(output_csv, 'w') as csv_file:
+            csv_file.write('Row,Column,Value\n')
+            for row, col, value in no_mirrored_indices:
+                res1 = str(trajectory.topology.residue(row))
+                res2 = str(trajectory.topology.residue(col))
+                csv_file.write(f"{res1},{res2},{value:.2f}\n")
+    else:
+        print('\nRow\tColumn\tValue')
+        for row, col, value in no_mirrored_indices:
+            res1 = str(trajectory.topology.residue(row))
+            res2 = str(trajectory.topology.residue(col))
+            print(f"{res1}\t{res2}\t{value:.2f}")
+    
+
+
+
 def get_frame_average(frames : typing.ArrayLike) -> typing.ArrayLike:
     '''Calculates an average pairwise matrix across multiple frames of a trajectory
 
@@ -184,6 +214,7 @@ if __name__ == "__main__":
     trj_sub = trj.atom_slice(trj.top.select('resi 90 to 215'))
     resSeqs = [res.resSeq for res in trj_sub.topology.residues]
     frames = [get_residue_distance_for_frame(trj_sub, i) for i in range(1,2)]
+    get_top_stacking(trj_sub, frames[0])
     display_arrays_as_video([get_frame_average(frames)], resSeqs, seconds_per_frame=10)
     display_arrays_as_video(frames, resSeqs, seconds_per_frame=10)
 
