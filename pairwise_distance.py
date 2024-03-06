@@ -215,7 +215,7 @@ def get_frame_average(frames : typing.ArrayLike) -> typing.ArrayLike:
 
 if __name__ == "__main__":
     # Load test trajectory and topology
-    trj = md.load('first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', top = '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop')
+    trj = md.load('testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', top = 'testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop')
 
     # "Correct" residue distances determined using PyMOL, a standard interface
     # for visualizing 3D molecules (distances limited to 3 decimal places)
