@@ -72,13 +72,16 @@ def run_python_command() -> None:
 
     ## bottaro requirements (--script bottaro)
     if args.script == 'bottaro':
-        parser.add_argument("-pdb", "--pdb_input", metavar="PDB_INPUT", help="Filepath to input PDB file containing two residues, the perspective and viewed nucleotide", required=False)
+        parser.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=False)
+        parser.add_argument("-top", "--topology", metavar="TOPOLOGY_FILENAME", help="Filepath to Topology file for the MD simulation", required=False)
+        parser.add_argument("-pdb", "--pdb_input", metavar="PDB_INPUT", help="Filepath to intermediary PDB file containing two residues, the perspective and viewed nucleotide, if empty it uses the same prefix as the trajectory file", required=False, default = '')
+        parser.add_argument("-o", "--output", metavar="OUTPUT_FILE", help="Filepath to output to, or prefix of output file if multiple outputs expected.", required=False)
         parser.add_argument("-p", "--pers_res", metavar="PERSPECTIVE_RES", help="residue index of the perspective residue whose plane to project onto. 0-/1-indexed based on -i flag (default: 1-indexed)", required=False)
         parser.add_argument("-v", "--view_res", metavar="VIEWED_RES", help="residue index of the viewed residue whose midpoint will be projected onto perspective residue plane. 0-/1-indexed based on -i flag (default: 1-indexed)", required=False)
         parser.add_argument("-pa", "--pers_atoms", metavar="PERSPECTIVE_ATOMS", help="Comma-separated list of atomnames to use from residue 1 to find center of geometry for perspective nucleotide", required=False)
         parser.add_argument("-va", "--view_atoms", metavar="VIEWED_ATOMS", help="Comma-separated list of atomnames to use from residue 2 to find center of geometry for viewed nucleotide", required=False)
-        parser.add_argument("-i", "--index", metavar="INDEX", help="index (0-index or 1-index) for perspective/viewed residue numbers (default: 1-indexed)", required=False, default = 1)
-        parser.add_argument("-pt", "--plot_type", metavar="PLOT_TYPE", help="plot type (scatter or heat) to visualize Bottaro values. If empty string, then just write to csv with no visualization", required=False, default = '')
+        parser.add_argument("-i", "--index", metavar="INDEX", type=int, help="index (0-index or 1-index) for perspective/viewed residue numbers (default: 1-indexed)", required=False, default = 1)
+        parser.add_argument("-pt", "--plot_type", metavar="PLOT_TYPE", choices = ['scatter', 'heat', ''], help="plot type (scatter or heat) to visualize Bottaro values. If empty string, then just write to csv with no visualization", required=False, default = '')
         parser.add_argument("-po", "--plot_outfile", metavar="PLOT_OUTFILE", help="filename to output plot png to. If empty string, outputs to standard Python vis", required=False, default = '')
 
     ## res_distance requirements (--script res_distance)
@@ -184,11 +187,14 @@ def bottaro_routine() -> None:
         r, rho, and theta values for each frame of the PDB trajectory between the two residues.
         
     Example Usage:
-        [user]$ python3 stacker.py -s bottaro -pdb 5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -o command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv -pa C2,C4,C6 -va C2,C4,C6
-        [user]$ python3 stacker.py -s bottaro -pdb 5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb -o command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv -pa C2,C4,C6 -va C2,C4,C6
+        [user]$ python3 stacker.py -s bottaro -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -pdb 5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -o command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6
+        [user]$ python3 stacker.py -s bottaro -pdb 5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb -o command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6
     '''
-
-    ##### check if PDB or MDTRAJ+TOP was passed in
+    if args.pdb_input == '':
+        trj_prefix = args.pdb_input.rsplit('.', 1)[0] 
+        pdb_filename = trj_prefix + '.pdb'
+    else:
+        pdb_filename = args.pdb_input
 
     if args.pers_atoms is not None:
         perspective_atom_names = {res.strip() for res in args.pers_atoms.split(",")}
@@ -199,19 +205,33 @@ def bottaro_routine() -> None:
         viewed_atom_names = {res.strip() for res in args.view_atoms.split(",")}
     else:
         AtomEmpty("Must include a list of atom names to define Viewed Residue center of geometry")
-    
+
     if args.pers_res is not None:
-        pers_res_num = args.pers_res
+        pers_res_num = int(args.pers_res)
     else:
         AtomEmpty("Must include a 1-indexed residue index for the perspective residue")
     
     if args.view_res is not None:
-        view_res_num = args.view_res
+        view_res_num = int(args.view_res)
     else:
         AtomEmpty("Must include a 1-indexed residue index for the perspective residue")
 
+    print(pdb_filename)
+    create_parent_directories(pdb_filename)
+    filter_traj_to_pdb(trajectory_filename=args.trajectory, topology_filename=args.topology, output_pdb_filename=pdb_filename,
+                       residues_desired={pers_res_num,view_res_num}, atomnames_desired=perspective_atom_names.union(viewed_atom_names))
+    
     create_parent_directories(args.output)
-    write_bottaro_to_csv(pdb_filename=args.pdb_input, output_csv_name=args.output, perspective_residue_num=pers_res_num, viewed_residue_num=view_res_num, res1_atom_names=perspective_atom_names, res2_atom_names=viewed_atom_names, index=args.index)
+    perspective_atom_names = list(perspective_atom_names)
+    viewed_atom_names = list(viewed_atom_names)
+    perspective_atom_names.sort()
+    viewed_atom_names.sort()
+
+    write_bottaro_to_csv(pdb_filename=pdb_filename, 
+                         output_csv_name=args.output, perspective_residue_num=pers_res_num, viewed_residue_num=view_res_num,
+                         res1_atom_names=tuple(perspective_atom_names), 
+                         res2_atom_names=tuple(viewed_atom_names), index = args.index)
+    
     if args.plot_type == 'heat':
         visualize_two_residue_movement_heatmap(args.output, plot_outfile=args.plot_outfile)
     elif args.plot_type == 'scatter':
@@ -270,6 +290,7 @@ def pairwise_routine() -> None:
 def create_parent_directories(outfile_prefix : str) -> None:
     '''Creates necessary parent directories to write an outfile given a prefix'''
     dir_name = os.path.dirname(outfile_prefix)
+    if dir_name == '': dir_name = '.'
     os.makedirs(dir_name, exist_ok=True)
 
 if __name__ == '__main__':
