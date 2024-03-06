@@ -9,7 +9,8 @@ import sys
 class MultiFrameTraj(Exception):
     pass
 
-_NUCLEOTIDE_NAMES = {"A", "G", "C", "T", "U", "INO"}
+_NUCLEOTIDE_NAMES = {"A", "A5", "A3", "G", "G5", "G3", "C", "C5", "C3",
+                     "T" "T5", "T3", "U", "U5", "U3", "INO"}
 
 def calculate_residue_distance(trajectory : md.Trajectory, 
                                res1_num : int, res2_num : int, 
@@ -168,7 +169,7 @@ def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, outp
         output_csv : str, default = '',
             output filename of the csv to write data to. If empty, data printed to standard output
         n_events : int, default = 5
-            maximum number of stacking events to display
+            maximum number of stacking events to display, if -1 display all residue pairings
     '''
     top_stacking_indices = np.argsort(np.abs(matrix - 3.5), axis = None)
     rows, cols = np.unravel_index(top_stacking_indices, matrix.shape)
@@ -179,20 +180,21 @@ def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, outp
     for row, col, value in non_adjacent_indices:
         if (col, row, value) not in no_mirrored_indices:
             no_mirrored_indices += [(row, col, value)]
+    if n_events == -1: n_events = len(no_mirrored_indices) 
     no_mirrored_indices = no_mirrored_indices[:n_events]
 
     if output_csv:
         with open(output_csv, 'w') as csv_file:
             csv_file.write('Row,Column,Value\n')
             for row, col, value in no_mirrored_indices:
-                res1 = str(trajectory.topology.residue(row))
-                res2 = str(trajectory.topology.residue(col))
+                res1 = increment_residue(str(trajectory.topology.residue(row)))
+                res2 = increment_residue(str(trajectory.topology.residue(col)))
                 csv_file.write(f"{res1},{res2},{value:.2f}\n")
     else:
         print('\nRow\tColumn\tValue')
         for row, col, value in no_mirrored_indices:
-            res1 = str(trajectory.topology.residue(row))
-            res2 = str(trajectory.topology.residue(col))
+            res1 = increment_residue(str(trajectory.topology.residue(row)))
+            res2 = increment_residue(str(trajectory.topology.residue(col)))
             print(f"{res1}\t{res2}\t{value:.2f}")
     
 def get_frame_average(frames : typing.ArrayLike) -> typing.ArrayLike:
