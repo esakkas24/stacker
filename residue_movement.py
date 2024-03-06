@@ -277,9 +277,9 @@ def create_parent_directories(outfile_prefix : str) -> None:
     os.makedirs(dir_name, exist_ok=True)
 
 if __name__ == "__main__":
-    trajectory_file = 'first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd'
-    topology_file = '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop'
-    output_csv_name = "script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv"
+    trajectory_file = 'testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd'
+    topology_file = 'testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop'
+    output_csv_name = "testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv"
     perspective_residue = 426 # 1-indexed
     viewed_residue = 427 # 1-indexed
     create_parent_directories(output_csv_name)
@@ -293,7 +293,7 @@ if __name__ == "__main__":
     viewed_atom3_name = "C6"
     ############################
 
-    pdb_filename = 'script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb'
+    pdb_filename = 'testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb'
     filter_traj_to_pdb(trajectory_filename=trajectory_file, topology_filename=topology_file, output_pdb_filename=pdb_filename,
                        residues_desired={perspective_residue,viewed_residue}, atomnames_desired={"C2", "C4", "C6"})
 
@@ -303,6 +303,6 @@ if __name__ == "__main__":
                          res1_atom_names={perspective_atom1_name, perspective_atom2_name, perspective_atom3_name}, 
                          res2_atom_names={viewed_atom1_name,viewed_atom2_name,viewed_atom3_name})
     
-    multiframe_pdb = '5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb'
-    multiframe_csv = 'script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv'
+    multiframe_pdb = 'testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb'
+    multiframe_csv = 'testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv'
     write_bottaro_to_csv(multiframe_pdb, multiframe_csv)
