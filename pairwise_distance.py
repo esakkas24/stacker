@@ -132,6 +132,26 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
     pairwise_res_magnitudes = get_magnitude(pairwise_distances)
     return(pairwise_res_magnitudes)
 
+def increment_residue(residue_id : str) -> str:
+    '''Increments residue ID by 1
+    
+    Useful when converting from mdtraj 0-index residue naming to 1-indexed
+    
+    Args:
+        residue_id : str
+            The residue id given by trajectory.topology.residue(i)
+    Returns:
+        incremented_id : str
+            The residue id with the sequence number increased by 1
+    Examples:
+    >>> increment_residue('G43')
+    'G44'
+    '''
+    letter_part = ''.join(filter(str.isalpha, residue_id))
+    number_part = ''.join(filter(str.isdigit, residue_id))
+    incremented_number = str(int(number_part) + 1)
+    return letter_part + incremented_number
+
 def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, output_csv : str = '',
                      n_events : int = 5) -> None:
     top_stacking_indices = np.argsort(np.abs(matrix - 3.5), axis = None)
