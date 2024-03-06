@@ -40,7 +40,8 @@ def run_python_command() -> None:
 
     args, remaining_args = parser.parse_known_args()
 
-    if '--help' in remaining_args or '-h' in remaining_args:
+    # help when no script specified
+    if '-s' not in remaining_args and '--script' not in remaining_args and ('--help' in remaining_args or '-h' in remaining_args): 
         parser.add_argument("-s", "--script", metavar="ROUTINE", help='Name of command to use. OPTIONS:\n\n' + \
                             "  filter_traj:\n\tfilters trajectory and topology files to desired residue numbers and atom names\n" + \
                             "  bottaro:\n\tCreate polar plots like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)\n" + \
@@ -50,10 +51,14 @@ def run_python_command() -> None:
         parser.add_argument("-h", "--help", help="show this help message and exit", action='help')
         args = parser.parse_args()
 
-    parser.add_argument("-s", "--script", metavar="ROUTINE", help="Name of command to use (eg. filter_traj, bottaro, res_distance, pairwise)", required=True, default='')
-    
+    parser.add_argument("-s", "--script", metavar="ROUTINE", help='Name of command to use. OPTIONS:\n\n' + \
+                            "  filter_traj:\n\tfilters trajectory and topology files to desired residue numbers and atom names\n" + \
+                            "  bottaro:\n\tCreate polar plots like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)\n" + \
+                            "  res_distance:\n\tGet the distance between two residues in a given frame\n" +\
+                            "  pairwise:\n\tCreate a stacking fingerprint of distances by residue\n  ", required=True, default='',
+                            choices=['filter_traj', 'bottaro', 'res_distance', 'pairwise'])  
+      
     args, remaining_args = parser.parse_known_args()
-    print('getting here')
 
     # Organizes all possible arguments
     ## Determines which script/subroutine is to be run
@@ -84,6 +89,7 @@ def run_python_command() -> None:
     if args.script == 'pairwise':
         parser.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze", required=False, action=SmartIndexingAction)
     
+    # help for specific scripts
     if '--help' in remaining_args or '-h' in remaining_args:
         parser.add_argument("-h", "--help", help="show this help message and exit", action='help')
         args = parser.parse_args()
