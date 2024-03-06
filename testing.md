@@ -45,7 +45,7 @@ MODEL        1
 Users can get the r, rho, and theta values specified in the Bottaro paper (https://doi.org/10.1093/nar/gku972) directly in the command line by specifying a PDB file with only two residues and the atomnames necessary to determine each residue's center of geometry:
 
 ```
-[user]$ python3 stacker.py -s bottaro -pdb command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -o command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv -p C2,C4,C6 -v C2,C4,C6
+[user]$ python3 stacker.py -s bottaro -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -pdb 5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -o command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt scatter
 ```
 
 This creates the CSV file:
@@ -63,9 +63,11 @@ frame,r_dist,rho_dist,theta
 8,1.7376113774148076,1.6822224271193191,5.31271410698154
 ```
 
+It also outputs a scatterplot.
+
 We can test it again with a 3200-frame trajectory and see that the data for 3200 frames is written to the output:
 ```
-[user]$ python3 stacker.py -s bottaro -pdb 5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb -o command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv -p C2,C4,C6 -v C2,C4,C6
+[user]$ python3 stacker.py -s bottaro -pdb 5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb -o command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat
 [user]$ wc -l command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv
     3201 command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv
 ```
@@ -73,9 +75,9 @@ We can test it again with a 3200-frame trajectory and see that the data for 3200
 ### Get Residue Distance
 Users can determine the distance between two residues given an input frame. Below we get the distance between residues 425 and 426 in frame 2.
 ```
-[user]$ python3 stacker.py -s res_distance -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -f 2 --residues 425,426 --atom_names C2,C4,C6
-
-    6.884639597485905
+[user]$ python3 stacker.py -s res_distance -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -f 2 --residues 426,427 --atom_names C2,C4,C6
+        
+6.8846416
 ```
 
 We can match our output with the third-party software PyMol, which shows the same distance of 6.885 between Res426 and Res427 (1-indexed in PyMol)
@@ -89,7 +91,7 @@ We can use the command line to create Distance Matrices like the one seen below 
 The below command line code creates matrices for frames 1-2 and residues 1-10 and writes the plots to the folder `command_line_tests/pairwise/`
 
 ```
-[user]$ python3 stacker.py -s pairwise -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 1,2,3,4,5,6,7,8,9,10 -fl 1,2 -o command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_
+[user]$ python3 stacker.py -s pairwise -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2 
 ```
 
 ## Proposed Feature 2: Vector Class
