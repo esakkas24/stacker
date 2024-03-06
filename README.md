@@ -14,7 +14,7 @@ Manipulates the outputs of an MD simulation and analyzes the pi-stacking interac
 ## Installation Instructions
 
 ### Clone StACKER repository to local computer
-A video of the installation is present in `installation.mp4`
+A video of the installation is present in `installation/installation.mp4`
 
 
 In the command line, run:
@@ -23,9 +23,14 @@ git clone https://github.com/esakkas24/stacker.git
 ```
 
 ### Download mdtraj
-Installing mdtraj presents issues on the newest version of pip. To fix this, run the script get-pip.py to download an older version of pip:
+
 ```
-python3 get-pip.py
+pip3 install mdtraj
+```
+
+If installing mdtraj presents issues on the newest version of pip, run the script get-pip.py to download an older version of pip:
+```
+python3 installation/get-pip.py
 ```
 The output may come with a warning showing the location of the new pip version:
 ```
@@ -58,25 +63,20 @@ pip3 install seaborn
 ```
 ## Testing Features
 
-All features can be tested by running the unit tests at the end of each Python script, or by running StACKER in the command line. All tests are explained in the testing.md file.
+All features can be tested by running the unit tests at the end of each Python script, or by running stacker.py in the command line. All tests are explained in the `testing/testing.md` file.
 
-MD Files are provided for testing convenience:
-- first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd : A 10-frame trajectory file
-- 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop : The associated Topology File with the above trajectory.
-- 5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb : A larger Trajectory combined with a Topology file with 3200 frames.
+MD Files are provided for testing convenience in the `testing` folder:
+- `first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd` : A 10-frame trajectory file
+- `5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop` : The associated Topology File with the above trajectory.
+- `5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb` : A larger Trajectory combined with a Topology file with 3200 frames.
 
 ## Future Features
-
-- Loading Screen Text outputed to standard output to display how much of trajectories have been filtered
-- The ability to output Stacking fingerprint frames as a .mov rather than individual frames
-- Cleaner UI implementation, and the ability to see flags for specific commands (eg. the flags neccessary for running -s bottaro)
 - Dependency checks for easier installation, auto installation of dependencies
-- Jupyter Notebooks showing the inputs and outputs of specific example trajectories
 - Usage for more trajectory types beyond mdcrd prmtop and pdbs
 
-## Proposed Features
+## Features
 
-1) A frontend UI where users can call "stacker" in the command line and pull up an interface to input stacker-specific functions (similar to how the "python" command works in the Terminal)
+1) Command Line Interface to run stacker commands
 2) A Vector Class to compute distances within the 3D space of the MD simulation.
 3) Users can convert the .trj output of an MD simulation (which contains atom position, velocities, and forces per frame with no info on atom identity) to a .pdb file (which has atom idenity, position, the residue they make up, and more).
 4) Users can input an MD simulation and two residues and get a map of how those two residues move relative to each other ([Figure D](https://www.mdpi.com/ijms/ijms-23-01417/article_deploy/html/images/ijms-23-01417-g005.png) shows a heatmap of how one residue moves in the perspective of another).
