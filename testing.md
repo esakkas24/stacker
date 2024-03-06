@@ -18,13 +18,13 @@ python3 stacker.py --help
 
 Users can filter a trajectory file and associated topology with multiple residues and atomnames to a smaller PDB file (combined trajectory and topology)
 
-The command line prompt below takes the trajectory `first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd` and topology `5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop` which have around 500 Residues with 20 atoms each and filters to an outputed PDB `command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb` with just Residues 425 and 426 and just atoms C2, C4, and C6
+The command line prompt below takes the trajectory `first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd` and topology `5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop` which have around 500 Residues with 20 atoms each and filters to an outputed PDB `command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb` with just Residues 426 and 427 and just atoms C2, C4, and C6
 
 ```
-[user]$ python3 stacker.py -s filter_traj -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -o command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -r 425,426 -a C2,C4,C6
+[user]$ python3 stacker.py -s filter_traj -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -o command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -r 426,427 -a C2,C4,C6
 ```
 
-Looking into this file we see only residues 425/426 (Column 6) and only atoms C2, C4, and C6 (Column 3):
+Looking into this file we see only residues 426/427 (Column 6) and only atoms C2, C4, and C6 (Column 3):
 
 ```
 $ head command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb
