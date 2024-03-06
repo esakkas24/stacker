@@ -230,10 +230,6 @@ def bottaro_routine() -> None:
                            residues_desired={pers_res_num,view_res_num}, atomnames_desired=perspective_atom_names.union(viewed_atom_names))
     
     create_parent_directories(args.output)
-    perspective_atom_names = list(perspective_atom_names)
-    viewed_atom_names = list(viewed_atom_names)
-    perspective_atom_names.sort()
-    viewed_atom_names.sort()
 
     write_bottaro_to_csv(pdb_filename=pdb_filename, 
                          output_csv_name=args.output, perspective_residue_num=pers_res_num, viewed_residue_num=view_res_num,

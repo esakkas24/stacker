@@ -185,8 +185,8 @@ def calculate_bottaro_values_for_frame(perspective_base_coords : Base, viewed_mi
 
 def write_bottaro_to_csv(pdb_filename : str = '', output_csv_name : str = '', 
                          perspective_residue_num : int = -1, viewed_residue_num : int = -1,
-                         res1_atom_names : tuple = ("C2", "C4","C6"), 
-                         res2_atom_names : tuple = ("C2", "C4","C6"), index : int = 1) -> None:
+                         res1_atom_names : set = {"C2", "C4","C6"}, 
+                         res2_atom_names : set = {"C2", "C4","C6"}, index : int = 1) -> None:
     '''Write the Bottaro r, rho, and theta values from a trajectory pdb to a CSV
 
     Calculates the r, rho, and theta values as described in Bottaro et al. from a
@@ -217,6 +217,12 @@ def write_bottaro_to_csv(pdb_filename : str = '', output_csv_name : str = '',
             index of the residues. 1-indexed (default) means residue ids start at 1.
             cpptraj uses 1-indexed residues. mdtraj pdb outputs will be 0-indexed.
     '''
+    # Keep atomname order consistent between runs
+    res1_atom_names = list(res1_atom_names)
+    res2_atom_names = list(res2_atom_names)
+    res1_atom_names.sort()
+    res2_atom_names.sort()
+
     res1_atom1,res1_atom2,res1_atom3 = res1_atom_names
     res2_atom1,res2_atom2,res2_atom3 = res2_atom_names
     
@@ -294,8 +300,8 @@ if __name__ == "__main__":
     # Two Residue movement test 10 frames
     write_bottaro_to_csv(pdb_filename, 
                          output_csv_name, perspective_residue_num=perspective_residue, viewed_residue_num=viewed_residue,
-                         res1_atom_names=(perspective_atom1_name, perspective_atom2_name, perspective_atom3_name), 
-                         res2_atom_names=(viewed_atom1_name,viewed_atom2_name,viewed_atom3_name))
+                         res1_atom_names={perspective_atom1_name, perspective_atom2_name, perspective_atom3_name}, 
+                         res2_atom_names={viewed_atom1_name,viewed_atom2_name,viewed_atom3_name})
     
     multiframe_pdb = '5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb'
     multiframe_csv = 'script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv'
