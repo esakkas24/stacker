@@ -39,7 +39,6 @@ def run_python_command() -> None:
                                      description="Wrapper to run stacker subroutines using the -s flag.\n" + \
                                         "More info on each routine given by `python stacker.py -s ROUTINE -h`")
     global args;
-
     args, remaining_args = parser.parse_known_args()
 
     # help when no script specified
@@ -70,23 +69,32 @@ def run_python_command() -> None:
     if args.script == 'filter_traj':
         parser.description = 'Filters trajectory and topology files to desired residue numbers and atom names and outputs to a PDB\n\nExamples:\n' +\
                             '[user]$ python3 stacker.py -s filter_traj -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -o command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -r 426,427 -a C2,C4,C6'
+        
         required_group = parser.add_argument_group('Required Arguments')
         required_group.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=True)
         required_group.add_argument("-top", "--topology", metavar="TOPOLOGY_FILENAME", help="Filepath to Topology file for the MD simulation", required=True)
         required_group.add_argument("-o", "--output", metavar="OUTPUT_FILE", help="Filepath of PDB to output to", required=True)
+        
+        # optional arguments
         parser.add_argument("-r", "--residues", metavar="RESIDUES", help="Smart-indexed list of 1-indexed residues, also accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)", required=False, action = SmartIndexingAction)
         parser.add_argument("-a", "--atom_names", metavar="ATOM_NAMES", help="Comma-separated list of atom names to filter", required=False, default="C2,C4,C6")
 
     ## bottaro requirements (--script bottaro)
     if args.script == 'bottaro':
-        parser.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=False)
-        parser.add_argument("-top", "--topology", metavar="TOPOLOGY_FILENAME", help="Filepath to Topology file for the MD simulation", required=False)
-        parser.add_argument("-pdb", "--pdb_input", metavar="PDB_INPUT", help="Filepath to intermediary PDB file containing two residues, the perspective and viewed nucleotide, if empty it uses the same prefix as the trajectory file", required=False, default = '')
-        parser.add_argument("-o", "--output", metavar="OUTPUT_FILE", help="Filepath to output to, or prefix of output file if multiple outputs expected.", required=False)
-        parser.add_argument("-p", "--pers_res", metavar="PERSPECTIVE_RES", help="residue index of the perspective residue whose plane to project onto. 0-/1-indexed based on -i flag (default: 1-indexed)", required=False)
-        parser.add_argument("-v", "--view_res", metavar="VIEWED_RES", help="residue index of the viewed residue whose midpoint will be projected onto perspective residue plane. 0-/1-indexed based on -i flag (default: 1-indexed)", required=False)
-        parser.add_argument("-pa", "--pers_atoms", metavar="PERSPECTIVE_ATOMS", help="Comma-separated list of atomnames to use from residue 1 to find center of geometry for perspective nucleotide", required=False)
-        parser.add_argument("-va", "--view_atoms", metavar="VIEWED_ATOMS", help="Comma-separated list of atomnames to use from residue 2 to find center of geometry for viewed nucleotide", required=False)
+        parser.description = 'Create polar plots of the movement of a "viewed residue" from the perspective of a "perspective residue"\nlike those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972). Creates CSV of these values' + \
+                                '\n\nExamples:\n' +\
+                                '\n[user]$ python3 stacker.py -s bottaro -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -pdb 5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -o command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt scatter\n' +\
+                            '\n[user]$ python3 stacker.py -s bottaro -pdb 5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb -o command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat'
+        
+        required_group = parser.add_argument_group('Required Arguments')
+        parser.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation, if empty then 2-residue PDB expected", required=False, default = '')
+        parser.add_argument("-top", "--topology", metavar="TOPOLOGY_FILENAME", help="Filepath to Topology file for the MD simulation, if empty then 2-residue PDB expected", required=False, default = '')
+        parser.add_argument("-pdb", "--pdb_input", metavar="PDB_INPUT", help="If trajectory provided: filepath to intermediary PDB file containing two residues, the perspective and viewed nucleotide.\nIf no trajectory given, PDB is expected to already be 2-residue (use -s filter_traj if needed).\nIf empty, will use the same prefix as the trajectory file", required=False, default = '')
+        parser.add_argument("-o", "--output", metavar="OUTPUT_FILE", help="Filepath to output Bottaro values (frame, r, rho, theta) to.", required=False)
+        required_group.add_argument("-p", "--pers_res", metavar="PERSPECTIVE_RES", help="residue index of the perspective residue whose plane to project onto. 0-/1-indexed based on -i flag (default: 1-indexed)", required=False)
+        required_group.add_argument("-v", "--view_res", metavar="VIEWED_RES", help="residue index of the viewed residue whose midpoint will be projected onto perspective residue plane. 0-/1-indexed based on -i flag (default: 1-indexed)", required=False)
+        required_group.add_argument("-pa", "--pers_atoms", metavar="PERSPECTIVE_ATOMS", help="Comma-separated list of atomnames to use from residue 1 to find center of geometry for perspective nucleotide", required=False)
+        required_group.add_argument("-va", "--view_atoms", metavar="VIEWED_ATOMS", help="Comma-separated list of atomnames to use from residue 2 to find center of geometry for viewed nucleotide", required=False)
         parser.add_argument("-i", "--index", metavar="INDEX", type=int, help="index (0-index or 1-index) for perspective/viewed residue numbers (default: 1-indexed)", required=False, default = 1)
         parser.add_argument("-pt", "--plot_type", metavar="PLOT_TYPE", choices = ['scatter', 'heat', ''], help="plot type (scatter or heat) to visualize Bottaro values. If empty string, then just write to csv with no visualization", required=False, default = '')
         parser.add_argument("-po", "--plot_outfile", metavar="PLOT_OUTFILE", help="filename to output plot png to. If empty string, outputs to standard Python vis", required=False, default = '')
@@ -218,17 +226,17 @@ def bottaro_routine() -> None:
         [user]$ python3 stacker.py -s bottaro -pdb 5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb -o command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat
         '''
     if args.pdb_input == '':
-        trj_prefix = args.pdb_input.rsplit('.', 1)[0] 
+        trj_prefix = args.trajectory.rsplit('.', 1)[0] 
         pdb_filename = trj_prefix + '.pdb'
     else:
         pdb_filename = args.pdb_input
 
-    if args.pers_atoms is not None:
+    if args.pers_atoms:
         perspective_atom_names = {res.strip() for res in args.pers_atoms.split(",")}
     else:
         raise AtomEmpty("Must include a list of atom names to define Pespective Residue center of geometry")
     
-    if args.view_atoms is not None:
+    if args.view_atoms:
         viewed_atom_names = {res.strip() for res in args.view_atoms.split(",")}
     else:
         raise AtomEmpty("Must include a list of atom names to define Viewed Residue center of geometry")
