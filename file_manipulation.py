@@ -83,7 +83,6 @@ def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str,
     Returns:
         None
     '''
-    print("WARNING: Residue Indices are expected to be 1-indexed")
     filtered_trajectory = filter_traj(trajectory_filename, topology_filename, residues_desired, atomnames_desired)
     filtered_trajectory.save_pdb(output_pdb_filename)
     print("WARNING: Output file atom, residue, and chain indices are zero-indexed")

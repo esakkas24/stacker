@@ -94,6 +94,7 @@ def run_python_command() -> None:
         parser.add_argument("-h", "--help", help="show this help message and exit", action='help')
         args = parser.parse_args()
 
+    args = parser.parse_args()
     convert_to_python_command()
 
 class SmartIndexingAction(argparse.Action):
@@ -161,10 +162,10 @@ def filter_traj_routine() -> None:
         with the determined inputs from passed in flags
         
     Example Usage:
-        [user]$ python3 stacker.py -s filter_traj -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -o command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -r 425,426 -a C2,C4,C6
+        [user]$ python3 stacker.py -s filter_traj -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -o command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -r 426,427 -a C2,C4,C6
     '''
     if args.residues is not None:
-        residues_desired = {res.strip() for res in args.residues.split(",")}
+        residues_desired = set(args.residues)
     else:
         ResEmpty("Must include a list of residues to keep in the trajectory")
 
