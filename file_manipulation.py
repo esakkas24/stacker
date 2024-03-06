@@ -114,12 +114,12 @@ def file_convert(trajectory_filename : str, topology_filename : str, output_file
 if __name__ == "__main__":
     # filter_traj tests
     print('Known Res: 426 = G and 427 = C')
-    filtered_traj = filter_traj('first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', {426,427}, {'C2','C4','C6'})
+    filtered_traj = filter_traj('testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 'testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', {426,427}, {'C2','C4','C6'})
     table, bonds = filtered_traj.topology.to_dataframe()
     print(table)
 
     ### No Filtering
     print("No Filtering, known trj has 12089 atoms")
-    filtered_traj = filter_traj('first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', '5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', residues_desired={}, atomnames_desired={})
+    filtered_traj = filter_traj('testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 'testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', residues_desired={}, atomnames_desired={})
     table, bonds = filtered_traj.topology.to_dataframe()
     print(table)
