@@ -1,8 +1,8 @@
 import argparse
 import sys, os
-from file_manipulation import filter_traj_to_pdb, filter_traj
+from file_manipulation import *
 from residue_movement import write_bottaro_to_csv
-from pairwise_distance import calculate_residue_distance, get_residue_distance_for_frame
+from pairwise_distance import calculate_residue_distance, get_residue_distance_for_frame, get_frame_average, get_top_stacking
 from visualization import display_arrays_as_video, visualize_two_residue_movement_heatmap, visualize_two_residue_movement_scatterplot
 
 class InvalidRoutine(Exception):
@@ -35,7 +35,9 @@ def run_python_command() -> None:
     Reads the command line input, runs the associated command with the
         added flags.
     '''
-    parser = argparse.ArgumentParser(add_help=False, formatter_class=argparse.RawTextHelpFormatter)
+    parser = argparse.ArgumentParser(add_help=False, formatter_class=argparse.RawTextHelpFormatter, 
+                                     description="Wrapper to run stacker subroutines using the -s flag.\n" + \
+                                        "More info on each routine given by `python stacker.py -s ROUTINE -h`")
     global args;
 
     args, remaining_args = parser.parse_known_args()
@@ -46,8 +48,9 @@ def run_python_command() -> None:
                             "  filter_traj:\n\tfilters trajectory and topology files to desired residue numbers and atom names\n" + \
                             "  bottaro:\n\tCreate polar plots like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)\n" + \
                             "  res_distance:\n\tGet the distance between two residues in a given frame\n" +\
-                            "  pairwise:\n\tCreate a stacking fingerprint of distances by residue", required=True, default='',
-                            choices=['filter_traj', 'bottaro', 'res_distance', 'pairwise'])
+                            "  pairwise:\n\tCreate a stacking fingerprint of distances by residue\n" + \
+                            "  stack_events:\n\tGet list of residues with most stacking events (distance closest to 3.5Å)\n   ", required=True, default='',
+                            choices=['filter_traj', 'bottaro', 'res_distance', 'pairwise', 'stack_events'])
         parser.add_argument("-h", "--help", help="show this help message and exit", action='help')
         args = parser.parse_args()
 
@@ -55,8 +58,9 @@ def run_python_command() -> None:
                             "  filter_traj:\n\tfilters trajectory and topology files to desired residue numbers and atom names\n" + \
                             "  bottaro:\n\tCreate polar plots like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)\n" + \
                             "  res_distance:\n\tGet the distance between two residues in a given frame\n" +\
-                            "  pairwise:\n\tCreate a stacking fingerprint of distances by residue\n  ", required=True, default='',
-                            choices=['filter_traj', 'bottaro', 'res_distance', 'pairwise'])  
+                            "  pairwise:\n\tCreate a stacking fingerprint of distances by residue\n" + \
+                            "  stack_events:\n\tGet list of residues with most stacking events (distance closest to 3.5Å)\n   ", required=True, default='',
+                            choices=['filter_traj', 'bottaro', 'res_distance', 'pairwise', 'stack_events'])  
       
     args, remaining_args = parser.parse_known_args()
 
@@ -64,11 +68,12 @@ def run_python_command() -> None:
     ## Determines which script/subroutine is to be run
     ## filter_traj requirements (--script filter_traj)
     if args.script == 'filter_traj':
-        parser.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=False, default = '')
-        parser.add_argument("-top", "--topology", metavar="TOPOLOGY_FILENAME", help="Filepath to Topology file for the MD simulation", required=False, default = '')
-        parser.add_argument("-o", "--output", metavar="OUTPUT_FILE", help="Filepath to output to, or prefix of output file if multiple outputs expected.", required=False)
-        parser.add_argument("-r", "--residues", metavar="RESIDUES", help="Smart-indexed list of 1-indexed residues, also accepts dash (-) list creation (eg. 1-6,10 = 1,2,3,4,5,10)", required=False, action = SmartIndexingAction)
-        parser.add_argument("-a", "--atom_names", metavar="ATOM_NAMES", help="Comma-separated list of atom names", required=False, default="C2,C4,C6")
+        parser.description = 'Filters trajectory and topology files to desired residue numbers and atom names and outputs to a PDB'
+        parser.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=True)
+        parser.add_argument("-top", "--topology", metavar="TOPOLOGY_FILENAME", help="Filepath to Topology file for the MD simulation", required=True)
+        parser.add_argument("-o", "--output", metavar="OUTPUT_FILE", help="Filepath of PDB to output to", required=True)
+        parser.add_argument("-r", "--residues", metavar="RESIDUES", help="Smart-indexed list of 1-indexed residues, also accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)", required=False, action = SmartIndexingAction)
+        parser.add_argument("-a", "--atom_names", metavar="ATOM_NAMES", help="Comma-separated list of atom names to filter", required=False, default="C2,C4,C6")
 
     ## bottaro requirements (--script bottaro)
     if args.script == 'bottaro':
@@ -86,19 +91,29 @@ def run_python_command() -> None:
 
     ## res_distance requirements (--script res_distance)
     if args.script == 'res_distance':
-        parser.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=False)
-        parser.add_argument("-top", "--topology", metavar="TOPOLOGY_FILENAME", help="Filepath to Topology file for the MD simulation", required=False)
-        parser.add_argument("-f", "--frame", type=int, metavar="FRAME_NUM", help="1-indexed Frame Number within trajectory to analyze", required=False)
-        parser.add_argument("-r", "--residues", metavar="RESIDUES", help="Smart-indexed list of 1-indexed residues, also accepts dash (-) list creation (eg. 1-6,10 = 1,2,3,4,5,10)", required=False, action = SmartIndexingAction)
-        parser.add_argument("-a", "--atom_names", metavar="ATOM_NAMES", help="Comma-separated list of atom names", required=False, default="C2,C4,C6")
+        parser.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=True)
+        parser.add_argument("-top", "--topology", metavar="TOPOLOGY_FILENAME", help="Filepath to Topology file for the MD simulation", required=True)
+        parser.add_argument("-f", "--frame", type=int, metavar="FRAME_NUM", help="1-indexed Frame Number within trajectory to analyze", required=True)
+        parser.add_argument("-r", "--residues", metavar="RESIDUES", help="Smart-indexed list of 1-indexed residues, must provide only 2 residues, accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)", required=True, action = SmartIndexingAction)
+        parser.add_argument("-a", "--atom_names", metavar="ATOM_NAMES", help="Comma-separated list of atom names. Three required to get center of geometry for a residue", required=False, default="C2,C4,C6")
 
     ## pairwise requirements (--script pairwise)
     if args.script == 'pairwise':
-        parser.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=False)
-        parser.add_argument("-top", "--topology", metavar="TOPOLOGY_FILENAME", help="Filepath to Topology file for the MD simulation", required=False)
-        parser.add_argument("-r", "--residues", metavar="RESIDUES", help="Smart-indexed list of 1-indexed residues, also accepts dash (-) list creation (eg. 1-6,10 = 1,2,3,4,5,10)", required=False, action = SmartIndexingAction)
-        parser.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyz, if empty all frames are used", required=False, action=SmartIndexingAction)
+        parser.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=True)
+        parser.add_argument("-top", "--topology", metavar="TOPOLOGY_FILENAME", help="Filepath to Topology file for the MD simulation", required=True)
+        parser.add_argument("-r", "--residues", metavar="RESIDUES", help="Smart-indexed list of 1-indexed residues, also accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)", required=False, action = SmartIndexingAction)
+        parser.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze, if empty all frames are used", required=False, action=SmartIndexingAction)
         parser.add_argument("-o", "--output", metavar="OUTPUT_FILE", help="Prefix of output file if multiple outputs expected. If empty, will output displays to Python visual", default = '', required=False)
+
+    if args.script == 'stack_events':
+        parser.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=True)
+        parser.add_argument("-top", "--topology", metavar="TOPOLOGY_FILENAME", help="Filepath to Topology file for the MD simulation", required=True)
+        parser.add_argument("-r", "--residues", metavar="RESIDUES", help="Smart-indexed list of 1-indexed residues to subset trajectory, also accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)", required=False, action = SmartIndexingAction)
+        parser.add_argument("-o", "--output", metavar="OUTPUT_FILE", help="Output CSV to write top stacking events to. If empty, will output displays to standard output", default = '', required=False)
+        parser.add_argument("-n", "--n_events", type = int, metavar="N_EVENTS", help="Number of stacking events to display. If -1 display all events", default = '', required=False)
+        frame_group = parser.add_mutually_exclusive_group()
+        frame_group.add_argument("-f", "--frame", type=int, metavar="FRAME_NUM", help="1-indexed Frame Number within trajectory to analyze, cannot be used with -fl", required=False)
+        frame_group.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,\ngets average distance between residues across these frames\nif empty all frames are used, cannot be used with -fl", required=False, action=SmartIndexingAction)
 
     # help for specific scripts
     if '--help' in remaining_args or '-h' in remaining_args:
@@ -163,6 +178,8 @@ def convert_to_python_command() -> None:
         res_distance_routine()
     elif command == 'pairwise':
         pairwise_routine()
+    elif command == 'stack_events':
+        stack_events_routine()
     else:
         raise InvalidRoutine(args.script + " is not a valid routine")
     
@@ -175,15 +192,15 @@ def filter_traj_routine() -> None:
     Example Usage:
         [user]$ python3 stacker.py -s filter_traj -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -o command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -r 426,427 -a C2,C4,C6
     '''
-    if args.residues is not None:
+    if args.residues:
         residues_desired = set(args.residues)
     else:
-        ResEmpty("Must include a list of residues to keep in the trajectory")
+        raise ResEmpty("Must include a list of residues to keep in the trajectory")
 
-    if args.atom_names is not None:
+    if args.atom_names:
         atomnames_desired = {atom.strip() for atom in args.atom_names.split(",")}
     else:
-        AtomEmpty("Must include a list of atom names to keep in the trajectory")
+        raise AtomEmpty("Must include a list of atom names to keep in the trajectory")
 
     create_parent_directories(args.output)
     filter_traj_to_pdb(trajectory_filename=args.trajectory, topology_filename=args.topology, output_pdb_filename=args.output, residues_desired=residues_desired, atomnames_desired=atomnames_desired)
@@ -207,22 +224,22 @@ def bottaro_routine() -> None:
     if args.pers_atoms is not None:
         perspective_atom_names = {res.strip() for res in args.pers_atoms.split(",")}
     else:
-        AtomEmpty("Must include a list of atom names to define Pespective Residue center of geometry")
+        raise AtomEmpty("Must include a list of atom names to define Pespective Residue center of geometry")
     
     if args.view_atoms is not None:
         viewed_atom_names = {res.strip() for res in args.view_atoms.split(",")}
     else:
-        AtomEmpty("Must include a list of atom names to define Viewed Residue center of geometry")
+        raise AtomEmpty("Must include a list of atom names to define Viewed Residue center of geometry")
 
     if args.pers_res is not None:
         pers_res_num = int(args.pers_res)
     else:
-        AtomEmpty("Must include a 1-indexed residue index for the perspective residue")
+        raise AtomEmpty("Must include a 1-indexed residue index for the perspective residue")
     
     if args.view_res is not None:
         view_res_num = int(args.view_res)
     else:
-        AtomEmpty("Must include a 1-indexed residue index for the perspective residue")
+        raise AtomEmpty("Must include a 1-indexed residue index for the perspective residue")
 
     create_parent_directories(pdb_filename)
     if args.trajectory and args.topology:
@@ -247,15 +264,17 @@ def res_distance_routine() -> None:
     Example Usage:
         [user]$ python3 stacker.py -s res_distance -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -f 2 --residues 426,427 --atom_names C2,C4,C6
         '''
-    if args.residues is not None:
+    if len(args.residues) != 2:
+        raise ResEmpty("Must include only 2 residues")
+    elif args.residues:
         residues_desired = set(args.residues)
     else:
-        ResEmpty("Must include a list of residues to keep in the trajectory")
+        raise ResEmpty("Must include a list of residues to keep in the trajectory")
 
     if args.atom_names is not None:
         atomnames_desired = {atom.strip() for atom in args.atom_names.split(",")}
     else:
-        AtomEmpty("Must include a list of atom names to keep in the trajectory")
+        raise AtomEmpty("Must include a list of atom names to keep in the trajectory")
 
     block_printing()
     filtered_trj = filter_traj(trajectory_filename=args.trajectory, topology_filename=args.topology, residues_desired=residues_desired, atomnames_desired=atomnames_desired)
@@ -275,7 +294,7 @@ def pairwise_routine() -> None:
     Example Usage:
         [user]$ python3 stacker.py -s pairwise -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2 
         '''
-    if args.residues is not None:
+    if args.residues:
         residues_desired = set(args.residues)
     else:
         residues_desired = {}
@@ -292,6 +311,28 @@ def pairwise_routine() -> None:
         frames = [get_residue_distance_for_frame(trj_sub, i) for i in range(0,trj_sub.n_frames)]
     create_parent_directories(args.output)
     display_arrays_as_video(frames, list(residues_desired), seconds_per_frame=1, outfile_prefix=args.output)
+
+def stack_events_routine() -> None:
+    '''Runs the routine to get the residue pairings with the most pi stacking (center of geometry distance closest to 3.5Å)
+
+    Example Usage:
+    [user]$ python stacker.py -s stack_events -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -f 1 -n 5
+    [user]$ python stacker.py -s stack_events -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-100 -fl 1-10 -n 5
+    '''
+    if args.residues:
+        residues_desired = set(args.residues)
+    else:
+        residues_desired = {}
+
+    trj_sub = filter_traj(trajectory_filename=args.trajectory, topology_filename=args.topology, residues_desired=residues_desired)
+
+    if args.frame:
+        frame = get_residue_distance_for_frame(trj_sub, frame = args.frame)
+    elif args.frame_list:
+        frames = [get_residue_distance_for_frame(trj_sub, frame_i) for frame_i in args.frame_list]
+        frame = get_frame_average(frames)
+
+    get_top_stacking(trj_sub, frame, output_csv = args.output, n_events = args.n_events)
 
 def create_parent_directories(outfile_prefix : str) -> None:
     '''Creates necessary parent directories to write an outfile given a prefix'''
