@@ -154,6 +154,22 @@ def increment_residue(residue_id : str) -> str:
 
 def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, output_csv : str = '',
                      n_events : int = 5) -> None:
+    '''Returns top stacking events for a given stacking fingerprint
+
+    Given a trajectory and a stacking fingerprint made from get_residue_distance_for_frame(),
+        prints the residue pairings with the strongest stacking events (ie. the residue pairings
+        with center of geometry distance closest to 3.5Å)
+
+    Args:
+        trajectory : md.Trajectory
+            trajectory used to get the stacking fingerprint
+        matrix : typing.ArrayLike
+            stacking fingerprint matrix created by get_residue_distance_for_frame()
+        output_csv : str, default = '',
+            output filename of the csv to write data to. If empty, data printed to standard output
+        n_events : int, default = 5
+            maximum number of stacking events to display
+    '''
     top_stacking_indices = np.argsort(np.abs(matrix - 3.5), axis = None)
     rows, cols = np.unravel_index(top_stacking_indices, matrix.shape)
     closest_values = matrix[rows, cols]
@@ -179,9 +195,6 @@ def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, outp
             res2 = str(trajectory.topology.residue(col))
             print(f"{res1}\t{res2}\t{value:.2f}")
     
-
-
-
 def get_frame_average(frames : typing.ArrayLike) -> typing.ArrayLike:
     '''Calculates an average pairwise matrix across multiple frames of a trajectory
 
