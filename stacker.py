@@ -87,7 +87,10 @@ def run_python_command() -> None:
     ## res_distance requirements (--script res_distance)
     if args.script == 'res_distance':
         parser.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=False)
+        parser.add_argument("-top", "--topology", metavar="TOPOLOGY_FILENAME", help="Filepath to Topology file for the MD simulation", required=False)
         parser.add_argument("-f", "--frame", type=int, metavar="FRAME_NUM", help="1-indexed Frame Number within trajectory to analyze", required=False)
+        parser.add_argument("-r", "--residues", metavar="RESIDUES", help="Smart-indexed list of 1-indexed residues, also accepts dash (-) list creation (eg. 1-6,10 = 1,2,3,4,5,10)", required=False, action = SmartIndexingAction)
+        parser.add_argument("-a", "--atom_names", metavar="ATOM_NAMES", help="Comma-separated list of atom names", required=False, default="C2,C4,C6")
 
     ## pairwise requirements (--script pairwise)
     if args.script == 'pairwise':
@@ -242,10 +245,10 @@ def res_distance_routine() -> None:
     '''Runs the Residue distance routine to determine the distance between the center of masses of two given residues
     
     Example Usage:
-        [user]$ python3 stacker.py -s res_distance -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -f 1 --residues 425,426 --atom_names C2,C4,C6
+        [user]$ python3 stacker.py -s res_distance -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -f 2 --residues 426,427 --atom_names C2,C4,C6
         '''
     if args.residues is not None:
-        residues_desired = {res.strip() for res in args.residues.split(",")}
+        residues_desired = set(args.residues)
     else:
         ResEmpty("Must include a list of residues to keep in the trajectory")
 
@@ -260,7 +263,7 @@ def res_distance_routine() -> None:
 
     residues_desired = list(residues_desired)
     # Correct that calculate_residue_distance res_nums are 1-indexed
-    distance_vector = calculate_residue_distance(trajectory=trj_frame, res1_num=int(residues_desired[0])+1, res2_num=int(residues_desired[1])+1, res1_atoms=tuple(atomnames_desired), res2_atoms=tuple(atomnames_desired))
+    distance_vector = calculate_residue_distance(trajectory=trj_frame, res1_num=int(residues_desired[0]), res2_num=int(residues_desired[1]), res1_atoms=tuple(atomnames_desired), res2_atoms=tuple(atomnames_desired))
     enable_printing()
     print(distance_vector.magnitude())
 
