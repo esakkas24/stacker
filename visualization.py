@@ -71,7 +71,7 @@ def create_axis_labels(res_indicies : typing.ArrayLike, tick_distance : int = 10
         
 def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies : typing.ArrayLike, 
                             seconds_per_frame : int = 10, tick_distance : int = 10,
-                            outfile_prefix : str = None) -> None:
+                            outfile_prefix : str = '') -> None:
     '''Displays list/array of 2D NumPy arrays as matrix heatmaps
 
     Takes list/array of 2D NumPy arrays and treats them as frames 
@@ -113,7 +113,7 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies
         plt.yticks(ticks, labels)
         ax.tick_params(top=True, bottom=False, labeltop=True, labelbottom=False)
         plt.pause(seconds_per_frame)
-        if outfile_prefix != None:
+        if outfile_prefix:
             plt.savefig(outfile_prefix + "frame" + str(frame_num) + ".png")
         colorbar.remove()
         frame_num+=1

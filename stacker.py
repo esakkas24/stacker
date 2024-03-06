@@ -94,8 +94,12 @@ def run_python_command() -> None:
 
     ## pairwise requirements (--script pairwise)
     if args.script == 'pairwise':
-        parser.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze", required=False, action=SmartIndexingAction)
-    
+        parser.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=False)
+        parser.add_argument("-top", "--topology", metavar="TOPOLOGY_FILENAME", help="Filepath to Topology file for the MD simulation", required=False)
+        parser.add_argument("-r", "--residues", metavar="RESIDUES", help="Smart-indexed list of 1-indexed residues, also accepts dash (-) list creation (eg. 1-6,10 = 1,2,3,4,5,10)", required=False, action = SmartIndexingAction)
+        parser.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyz, if empty all frames are used", required=False, action=SmartIndexingAction)
+        parser.add_argument("-o", "--output", metavar="OUTPUT_FILE", help="Prefix of output file if multiple outputs expected. If empty, will output displays to Python visual", default = '', required=False)
+
     # help for specific scripts
     if '--help' in remaining_args or '-h' in remaining_args:
         parser.add_argument("-h", "--help", help="show this help message and exit", action='help')
@@ -273,23 +277,25 @@ def pairwise_routine() -> None:
     Runs the routine to create a pairwise distance matrix for a passed in trajectory and frame.
 
     Example Usage:
-        [user]$ python3 stacker.py -s pairwise -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 1,2,3,4,5,6,7,8,9,10 -fl 1,2 -o command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_
-    '''
+        [user]$ python3 stacker.py -s pairwise -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2 
+        '''
     if args.residues is not None:
-        residues_desired = {int(res.strip()) for res in args.residues.split(",")}
+        residues_desired = set(args.residues)
     else:
         residues_desired = {}
 
-    if args.frame_list is not None:
-        frame_list = [int(frame.strip()) for frame in args.frame_list.split(",")]
+    if args.frame_list:
+        frame_list = args.frame_list
     else:
-        FrameEmpty("Must include a list of frames to analyze in the trajectory")    
-    
+        frame_list = []
+
     trj_sub = filter_traj(trajectory_filename=args.trajectory, topology_filename=args.topology, residues_desired=residues_desired)
-    residues_desired = list(residues_desired)
-    frames = [get_residue_distance_for_frame(trj_sub, i) for i in frame_list]
+    if frame_list:
+        frames = [get_residue_distance_for_frame(trj_sub, i) for i in frame_list]
+    else:
+        frames = [get_residue_distance_for_frame(trj_sub, i) for i in range(0,trj_sub.n_frames)]
     create_parent_directories(args.output)
-    display_arrays_as_video(frames, residues_desired, seconds_per_frame=1, outfile_prefix=args.output)
+    display_arrays_as_video(frames, list(residues_desired), seconds_per_frame=1, outfile_prefix=args.output)
 
 def create_parent_directories(outfile_prefix : str) -> None:
     '''Creates necessary parent directories to write an outfile given a prefix'''
