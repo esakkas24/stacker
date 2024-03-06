@@ -153,7 +153,7 @@ def set_polar_grid() -> mpl.projections.polar.PolarAxes:
     ax.grid(color='gray', linestyle='--', linewidth=0.5)
     return ax
 
-def visualize_two_residue_movement_scatterplot(csv_filepath : str, plot_outfile : str = None) -> None:
+def visualize_two_residue_movement_scatterplot(csv_filepath : str, plot_outfile : str = '') -> None:
     '''Creates scatterplot of two-residue movement relative to each other.
 
     Takes the data created in residue_movement and visualizes it as a polar coordinate
@@ -181,13 +181,13 @@ def visualize_two_residue_movement_scatterplot(csv_filepath : str, plot_outfile 
     ax = set_polar_grid()
     ax.scatter(theta_values_rad, rho_values, color = 'purple', s=1, alpha = 0.5)
 
-    if plot_outfile != None:
+    if plot_outfile:
         plt.savefig(plot_outfile)
     else:
         plt.show()
 
 
-def visualize_two_residue_movement_heatmap(csv_filepath : str, plot_outfile : str = None) -> None:
+def visualize_two_residue_movement_heatmap(csv_filepath : str, plot_outfile : str = '') -> None:
     '''Creates heatmap of two-residue movement relative to each other.
 
     2D shaded contour plot of the density of points in the 
@@ -217,7 +217,7 @@ def visualize_two_residue_movement_heatmap(csv_filepath : str, plot_outfile : st
     plt.xlabel('')
     plt.ylabel('')
 
-    if plot_outfile != None:
+    if plot_outfile:
         plt.savefig(plot_outfile)
     else:
         plt.show()
