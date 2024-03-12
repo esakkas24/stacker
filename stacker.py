@@ -1,9 +1,11 @@
 import argparse
 import sys, os
+import numpy as np
 from file_manipulation import *
 from residue_movement import write_bottaro_to_csv
 from pairwise_distance import calculate_residue_distance, get_residue_distance_for_frame, get_frame_average, get_top_stacking
 from visualization import display_arrays_as_video, visualize_two_residue_movement_heatmap, visualize_two_residue_movement_scatterplot
+
 
 class InvalidRoutine(Exception):
     pass
@@ -40,10 +42,32 @@ def run_python_command() -> None:
                                         "More info on each routine given by `python stacker.py -s ROUTINE -h`")
     global args;
     args, remaining_args = parser.parse_known_args()
+    
+    # If no flags specified at all
+    if not any(vars(args)) and not remaining_args:
+        print('usage: stacker.py -s ROUTINE [-h]\n\n' + \
+            'Wrapper to run stacker subroutines using the -s flag.\n' + \
+            'More info on each routine given by `python stacker.py -s ROUTINE -h` or `python stacker.py -s ROUTINE --help`\n\n' + \
+            'options:\n' +\
+            '-s ROUTINE, --script ROUTINE\n' +\
+            '            Name of command to use. Options for ROUTINE:\n\n' + \
+            '              filter_traj:\n' +\
+            '                    filters trajectory and topology files to desired residue numbers and atom names\n' + \
+            '              bottaro:\n' +\
+            '                    Create polar plots like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)\n' + \
+            '              res_distance:\n' + \
+            '                    Get the distance between two residues in a given frame\n' + \
+            '              pairwise:\n' + \
+            '                    Create a stacking fingerprint of distances by residue\n' + \
+            '              stack_events:\n' + \
+            '                    Get list of residues with most stacking events (distance closest to 3.5Å)\n\n' + \
+                           
+            '-h, --help            show this help message and exit\n')
+        return
 
     # help when no script specified
-    if '-s' not in remaining_args and '--script' not in remaining_args and ('--help' in remaining_args or '-h' in remaining_args): 
-        parser.add_argument("-s", "--script", metavar="ROUTINE", help='Name of command to use. OPTIONS:\n\n' + \
+    if ('-s' not in remaining_args and '--script' not in remaining_args and ('--help' in remaining_args or '-h' in remaining_args)): 
+        parser.add_argument("-s", "--script", metavar="ROUTINE", help='Name of command to use. Options for ROUTINE:\n\n' + \
                             "  filter_traj:\n\tfilters trajectory and topology files to desired residue numbers and atom names\n" + \
                             "  bottaro:\n\tCreate polar plots like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)\n" + \
                             "  res_distance:\n\tGet the distance between two residues in a given frame\n" +\
@@ -53,7 +77,7 @@ def run_python_command() -> None:
         parser.add_argument("-h", "--help", help="show this help message and exit", action='help')
         args = parser.parse_args()
 
-    parser.add_argument("-s", "--script", metavar="ROUTINE", help='Name of command to use. OPTIONS:\n\n' + \
+    parser.add_argument("-s", "--script", metavar="ROUTINE", help='Name of command to use. Options for ROUTINE:\n\n' + \
                             "  filter_traj:\n\tfilters trajectory and topology files to desired residue numbers and atom names\n" + \
                             "  bottaro:\n\tCreate polar plots like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)\n" + \
                             "  res_distance:\n\tGet the distance between two residues in a given frame\n" +\
@@ -105,21 +129,38 @@ def run_python_command() -> None:
         parser.add_argument("-a", "--atom_names", metavar="ATOM_NAMES", help="Comma-separated list of atom names. Three required to get center of geometry for a residue", required=False, default="C2,C4,C6")
 
     if args.script == 'pairwise':
+        parser.description = 'Creates a stacking fingerprint of the average structure across the chosen frames of a trajectory.' + \
+                                '\n\nExamples:\n' +\
+                                '\n[user]$ python stacker.py -s pairwise -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2\n' +\
+                            '\n[user]$ python stacker.py -s pairwise -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2 -g 10 -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt\n'
+        
         parser.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=True)
         parser.add_argument("-top", "--topology", metavar="TOPOLOGY_FILENAME", help="Filepath to Topology file for the MD simulation", required=True)
         parser.add_argument("-r", "--residues", metavar="RESIDUES", help="Smart-indexed list of 1-indexed residues, also accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)", required=False, action = SmartIndexingAction)
-        parser.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze, if empty all frames are used", required=False, action=SmartIndexingAction)
-        parser.add_argument("-o", "--output", metavar="OUTPUT_FILE", help="Prefix of output file if multiple outputs expected. If empty, will output displays to Python visual", default = '', required=False)
+        frame_group = parser.add_mutually_exclusive_group()
+        frame_group.add_argument("-f", "--frame", type=int, metavar="FRAME_NUM", help="1-indexed Frame Number within trajectory to analyze, cannot be used with -fl", required=False)
+        frame_group.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,\ngets average distance between residues across these frames\nif empty all frames are used, cannot be used with -fl", required=False, action=SmartIndexingAction)
+        parser.add_argument("-o", "--output", metavar="OUTPUT_FILE", help="Filename of output PNG to write plot to. If empty, will output displays to Python visual", default = '', required=False)
+        parser.add_argument("-g", "--get_stacking", metavar="N_EVENTS", help="Get list of N_EVENTS residues with most stacking events (distance closest to 3.5Å) in the average structure across all frames.\nPrint to standard output. Equivalent to -s stack_events -n N_EVENTS", type = int, required=False)
+        parser.add_argument("-d", "--data_output", metavar="OUTPUT_FILE", help="Output the calculated per-frame numpy arrays that create the stacking fingerprint matrix to a file", default = '', required=False)
 
     if args.script == 'stack_events':
+        parser.description = 'Get list of residues with most stacking events (distance closest to 3.5Å) in the stacking fingerprint of the average structure across all frames of a trajectory' + \
+                                '\n\nExamples:\n' +\
+                                '\n[user]$ python stacker.py -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -f 1 -n 5\n' +\
+                                '[user]$ python stacker.py -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-100 -fl 1-10 -n 5\n' +\
+                                '[user]$ python stacker.py -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -n 5 -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt\n' 
+
         parser.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=True)
         parser.add_argument("-top", "--topology", metavar="TOPOLOGY_FILENAME", help="Filepath to Topology file for the MD simulation", required=True)
         parser.add_argument("-r", "--residues", metavar="RESIDUES", help="Smart-indexed list of 1-indexed residues to subset trajectory, also accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)", required=False, action = SmartIndexingAction)
         parser.add_argument("-o", "--output", metavar="OUTPUT_FILE", help="Output CSV to write top stacking events to. If empty, will output displays to standard output", default = '', required=False)
         parser.add_argument("-n", "--n_events", type = int, metavar="N_EVENTS", help="Number of stacking events to display. If -1 display all events", default = '', required=False)
+        parser.add_argument("-i", "--input", metavar="INPUT_FILE", help="Input .txt file containing per-frame stacking information, in lieu of running stacking fingerprint analysis again.\nTXT file can be created by running `python stacker.py -s pairwise -d OUTPUT_FILE`\n-r flag must match the residues used to create the TXT file")
         frame_group = parser.add_mutually_exclusive_group()
         frame_group.add_argument("-f", "--frame", type=int, metavar="FRAME_NUM", help="1-indexed Frame Number within trajectory to analyze, cannot be used with -fl", required=False)
         frame_group.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,\ngets average distance between residues across these frames\nif empty all frames are used, cannot be used with -fl", required=False, action=SmartIndexingAction)
+
 
     # help for specific scripts
     if '--help' in remaining_args or '-h' in remaining_args:
@@ -299,6 +340,7 @@ def pairwise_routine() -> None:
 
     Example Usage:
         [user]$ python3 stacker.py -s pairwise -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2 
+        [user]$ python stacker.py -s pairwise -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2 -g 10 -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
         '''
     if args.residues:
         residues_desired = set(args.residues)
@@ -312,11 +354,24 @@ def pairwise_routine() -> None:
 
     trj_sub = filter_traj(trajectory_filename=args.trajectory, topology_filename=args.topology, residues_desired=residues_desired)
     if frame_list:
-        frames = [get_residue_distance_for_frame(trj_sub, i) for i in frame_list]
+        frames = np.array([get_residue_distance_for_frame(trj_sub, i) for i in frame_list])
+    elif args.frame:
+        frames = np.array([get_residue_distance_for_frame(trj_sub, args.frame)])
     else:
-        frames = [get_residue_distance_for_frame(trj_sub, i) for i in range(0,trj_sub.n_frames)]
+        frames = np.array([get_residue_distance_for_frame(trj_sub, i) for i in range(1,trj_sub.n_frames+1)])
+
+    if args.data_output:
+        print(frames.shape[2])
+        frames_to_save = frames.reshape(frames.shape[0], -1)
+        np.savetxt(args.data_output, frames_to_save)
+
+    avg_frames = [get_frame_average(frames)]
+
+    if args.get_stacking:
+        get_top_stacking(trj_sub, avg_frames[0], output_csv = '', n_events = args.get_stacking)
+
     create_parent_directories(args.output)
-    display_arrays_as_video(frames, list(residues_desired), seconds_per_frame=1, outfile_prefix=args.output)
+    display_arrays_as_video(avg_frames, list(residues_desired), seconds_per_frame=1, outfile_prefix=args.output)
 
 def stack_events_routine() -> None:
     '''Runs the routine to get the residue pairings with the most pi stacking (center of geometry distance closest to 3.5Å)
@@ -324,6 +379,7 @@ def stack_events_routine() -> None:
     Example Usage:
     [user]$ python stacker.py -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -f 1 -n 5
     [user]$ python stacker.py -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-100 -fl 1-10 -n 5
+    [user]$ python stacker.py -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -n 5 -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
     '''
     if args.residues:
         residues_desired = set(args.residues)
@@ -332,7 +388,11 @@ def stack_events_routine() -> None:
 
     trj_sub = filter_traj(trajectory_filename=args.trajectory, topology_filename=args.topology, residues_desired=residues_desired)
 
-    if args.frame:
+    if args.input:
+        loaded_arr = np.loadtxt(args.input)
+        frames = loaded_arr.reshape(loaded_arr.shape[0], loaded_arr.shape[1] // len(residues_desired), len(residues_desired))
+        frame = get_frame_average(frames)
+    elif args.frame:
         frame = get_residue_distance_for_frame(trj_sub, frame = args.frame)
     elif args.frame_list:
         frames = [get_residue_distance_for_frame(trj_sub, frame_i) for frame_i in args.frame_list]
@@ -348,4 +408,3 @@ def create_parent_directories(outfile_prefix : str) -> None:
 
 if __name__ == '__main__':
     run_python_command()
-

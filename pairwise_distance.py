@@ -128,7 +128,7 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
             mat_j+=1
         mat_i+=1
         sys.stdout.flush()
-
+    print('\n')
     get_magnitude = np.vectorize(Vector.magnitude)
     pairwise_res_magnitudes = get_magnitude(pairwise_distances)
     return(pairwise_res_magnitudes)
