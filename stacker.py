@@ -1,6 +1,7 @@
 import argparse
 import sys, os
 import numpy as np
+import pandas as pd
 from file_manipulation import *
 from residue_movement import write_bottaro_to_csv
 from pairwise_distance import calculate_residue_distance, get_residue_distance_for_frame, get_frame_average, get_top_stacking
@@ -60,8 +61,9 @@ def run_python_command() -> None:
             '              pairwise:\n' + \
             '                    Create a stacking fingerprint of distances by residue\n' + \
             '              stack_events:\n' + \
-            '                    Get list of residues with most stacking events (distance closest to 3.5Å)\n\n' + \
-                           
+            '                    Get list of residues with most stacking events (distance closest to 3.5Å)\n' + \
+            '              compare:\n' +\
+            '                    Get the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events\n\n' +\
             '-h, --help            show this help message and exit\n')
         return
 
@@ -72,8 +74,9 @@ def run_python_command() -> None:
                             "  bottaro:\n\tCreate polar plots like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)\n" + \
                             "  res_distance:\n\tGet the distance between two residues in a given frame\n" +\
                             "  pairwise:\n\tCreate a stacking fingerprint of distances by residue\n" + \
-                            "  stack_events:\n\tGet list of residues with most stacking events (distance closest to 3.5Å)\n   ", required=True, default='',
-                            choices=['filter_traj', 'bottaro', 'res_distance', 'pairwise', 'stack_events'])
+                            "  stack_events:\n\tGet list of residues with most stacking events (distance closest to 3.5Å)\n" +\
+                            "  compare:\n\tGet the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events\n",
+                             required=True, default='', choices=['filter_traj', 'bottaro', 'res_distance', 'pairwise', 'stack_events', 'compare'])
         parser.add_argument("-h", "--help", help="show this help message and exit", action='help')
         args = parser.parse_args()
 
@@ -82,8 +85,9 @@ def run_python_command() -> None:
                             "  bottaro:\n\tCreate polar plots like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)\n" + \
                             "  res_distance:\n\tGet the distance between two residues in a given frame\n" +\
                             "  pairwise:\n\tCreate a stacking fingerprint of distances by residue\n" + \
-                            "  stack_events:\n\tGet list of residues with most stacking events (distance closest to 3.5Å)\n   ", required=True, default='',
-                            choices=['filter_traj', 'bottaro', 'res_distance', 'pairwise', 'stack_events'])  
+                            "  stack_events:\n\tGet list of residues with most stacking events (distance closest to 3.5Å)\n" +\
+                            "  compare:\n\tGet the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events\n",
+                             required=True, default='', choices=['filter_traj', 'bottaro', 'res_distance', 'pairwise', 'stack_events', 'compare'])
       
     args, remaining_args = parser.parse_known_args()
 
@@ -167,6 +171,17 @@ def run_python_command() -> None:
         frame_group.add_argument("-f", "--frame", type=int, metavar="FRAME_NUM", help="1-indexed Frame Number within trajectory to analyze, cannot be used with -fl", required=False)
         frame_group.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,\ngets average distance between residues across these frames\nif empty all frames are used, cannot be used with -fl", required=False, action=SmartIndexingAction)
 
+    if args.script == 'compare':
+        parser.description = 'Print the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events' +\
+                                '\n\nExamples:\n' +\
+                                '[user]$ python stacker.py -s compare -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997 -SA _tUAG_aCUA_+1GCU -SB _tUAG_aCUA_+1CGU\n'
+
+        required_group = parser.add_argument_group('Required Arguments')
+        required_group.add_argument("-A", "--file_A", metavar="FILENAME_A", help = "Filepath to the output log of python stacker.py -s stack_events for the first stacking fingerprint", required = True)
+        required_group.add_argument('-B', '--file_B', metavar="FILENAME_B", help = 'Filepath to the output log of python stacker.py -s stack_events for the second stacking fingerprint', required = True)
+        required_group.add_argument('-SA', '--source_A', metavar="SOURCE_A", help = 'String describing source of file A, e.g. `_tUAG_aCUA_+1GCU`', required = True)
+        required_group.add_argument('-SB', '--source_B', metavar="SOURCE_B", help = 'String describing source of file B, e.g. `_tUAG_aCUA_+1CGU`', required = True)
+
     # help for specific scripts
     if '--help' in remaining_args or '-h' in remaining_args:
         parser.add_argument("-h", "--help", help="show this help message and exit", action='help')
@@ -232,6 +247,8 @@ def convert_to_python_command() -> None:
         pairwise_routine()
     elif command == 'stack_events':
         stack_events_routine()
+    elif command == 'compare':
+        compare_routine()
     else:
         raise InvalidRoutine(args.script + " is not a valid routine")
     
@@ -414,11 +431,82 @@ def stack_events_routine() -> None:
 
     get_top_stacking(trj_sub, frame, output_csv = args.output, n_events = args.n_events)
 
+def compare_routine() -> None:
+    '''Runs the routine to return the most changed stacking events
+
+    Example Usage:
+    [user]$ python stacker.py -s compare -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997 -SA _tUAG_aCUA_+1GCU -SB _tUAG_aCUA_+1CGU
+    '''
+    file1 = args.file_A
+    file2 = args.file_B
+    file1_source = args.source_A
+    file2_source = args.source_B
+
+    header = "Row\tColumn\tValue"
+
+    # Process first file
+    row_number = find_row_with_header(file1,header)
+    data1 = pd.read_csv(file1, sep='\t', skiprows=row_number)
+    data1 = preprocess_df(data1)
+    print(data1.shape)
+
+    # Read the second file
+    row_number = find_row_with_header(file2,header)
+    data2 = pd.read_csv(file2, sep='\t', skiprows=row_number)
+    data2 = preprocess_df(data2)
+    print(data2.shape)
+
+    # Find discrepancies
+    merged_data = pd.merge(data1, data2, on=['Row', 'Column'], suffixes=[file1_source, file2_source], how='inner')
+    merged_data['Discrepancy'] = abs(merged_data['Value' + file1_source] - merged_data['Value' + file2_source])
+    print(merged_data.shape)
+
+    print(merged_data[(merged_data['Row'] == 15) & (merged_data['Column'] == 27)])
+
+    subset_data = merged_data[(merged_data['Value' + file1_source] < 4) | (merged_data['Value' + file2_source] < 4)]
+    subset_data = subset_data.sort_values(by='Discrepancy', ascending=False)
+    print(subset_data.shape)
+    print(subset_data)
+
 def create_parent_directories(outfile_prefix : str) -> None:
     '''Creates necessary parent directories to write an outfile given a prefix'''
     dir_name = os.path.dirname(outfile_prefix)
     if dir_name == '': dir_name = '.'
     os.makedirs(dir_name, exist_ok=True)
+
+def preprocess_df(df):
+    '''Preprocess the DataFrame by sorting Row and Column alphabetically
+    
+    Args:
+        df : Pandas Dataframe
+            inputted df with at least columns Row, Column
+    Returns:
+        df : Pandas Dataframe
+            inputted df with rows organized alphabetically at the Row, Column variable
+    '''
+    cols_to_sort = ['Row','Column']
+    df = pd.concat([pd.DataFrame(np.sort(df[cols_to_sort].values), columns=cols_to_sort, index=df.index), df[df.columns[~df.columns.isin(cols_to_sort)]]], axis=1)
+    return df
+
+def find_row_with_header(filename, header):
+    '''Get the row number in file that matches a given header
+
+    Given a filename that represents a spreadsheet, find the row number
+        in the file that contains the passed header string.
+
+    Args:
+        filename : str
+            file path to spreadsheet file
+        header : str
+            string representng a header
+    Returns:
+        row_number : int
+            row number where the header appears in the file
+    '''
+    with open(filename, 'r') as file:
+        for idx, line in enumerate(file):
+            if line.strip() == header:
+                return idx
 
 if __name__ == '__main__':
     run_python_command()
