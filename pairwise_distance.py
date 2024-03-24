@@ -154,7 +154,7 @@ def increment_residue(residue_id : str) -> str:
     return letter_part + incremented_number
 
 def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, output_csv : str = '',
-                     n_events : int = 5) -> None:
+                     n_events : int = 5, include_adjacent : bool = False) -> None:
     '''Returns top stacking events for a given stacking fingerprint
 
     Given a trajectory and a stacking fingerprint made from get_residue_distance_for_frame(),
@@ -170,11 +170,18 @@ def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, outp
             output filename of the csv to write data to. If empty, data printed to standard output
         n_events : int, default = 5
             maximum number of stacking events to display, if -1 display all residue pairings
+        include_adjacent : bool, default = False
+            True if adjacent residues should be included in the printed output
     '''
     top_stacking_indices = np.argsort(np.abs(matrix - 3.5), axis = None)
     rows, cols = np.unravel_index(top_stacking_indices, matrix.shape)
     closest_values = matrix[rows, cols]
-    non_adjacent_indices = [(row, col, value) for row, col, value in zip(rows, cols, closest_values) if abs(row - col) > 1]
+
+    if include_adjacent:
+        # non_adjacent_indices includes adjacent indices in this case
+        non_adjacent_indices = [(row, col, value) for row, col, value in zip(rows, cols, closest_values)]
+    else:
+        non_adjacent_indices = [(row, col, value) for row, col, value in zip(rows, cols, closest_values) if abs(row - col) > 1]
 
     no_mirrored_indices = [] # keep only one side of x=y line, since mat[i,j] = mat[j,i]
     for row, col, value in non_adjacent_indices:
@@ -187,14 +194,14 @@ def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, outp
         with open(output_csv, 'w') as csv_file:
             csv_file.write('Row,Column,Value\n')
             for row, col, value in no_mirrored_indices:
-                res1 = increment_residue(str(trajectory.topology.residue(row)))
-                res2 = increment_residue(str(trajectory.topology.residue(col)))
+                res1 = increment_residue(str(trajectory.topology.residue(row).resSeq))
+                res2 = increment_residue(str(trajectory.topology.residue(col).resSeq))
                 csv_file.write(f"{res1},{res2},{value:.2f}\n")
     else:
         print('\nRow\tColumn\tValue')
         for row, col, value in no_mirrored_indices:
-            res1 = increment_residue(str(trajectory.topology.residue(row)))
-            res2 = increment_residue(str(trajectory.topology.residue(col)))
+            res1 = increment_residue(str(trajectory.topology.residue(row).resSeq))
+            res2 = increment_residue(str(trajectory.topology.residue(col).resSeq))
             print(f"{res1}\t{res2}\t{value:.2f}")
     
 def get_frame_average(frames : typing.ArrayLike) -> typing.ArrayLike:
