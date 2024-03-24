@@ -167,7 +167,7 @@ def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, outp
         matrix : typing.ArrayLike
             stacking fingerprint matrix created by get_residue_distance_for_frame()
         output_csv : str, default = '',
-            output filename of the csv to write data to. If empty, data printed to standard output
+            output filename of the tab-separated txt file to write data to. If empty, data printed to standard output
         n_events : int, default = 5
             maximum number of stacking events to display, if -1 display all residue pairings
         include_adjacent : bool, default = False
@@ -192,11 +192,11 @@ def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, outp
 
     if output_csv:
         with open(output_csv, 'w') as csv_file:
-            csv_file.write('Row,Column,Value\n')
+            csv_file.write('Row\tColumn\tValue\n')
             for row, col, value in no_mirrored_indices:
                 res1 = increment_residue(str(trajectory.topology.residue(row).resSeq))
                 res2 = increment_residue(str(trajectory.topology.residue(col).resSeq))
-                csv_file.write(f"{res1},{res2},{value:.2f}\n")
+                csv_file.write(f"{res1}\t{res2}\t{value:.2f}\n")
     else:
         print('\nRow\tColumn\tValue')
         for row, col, value in no_mirrored_indices:
