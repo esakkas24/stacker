@@ -124,6 +124,7 @@ def run_python_command() -> None:
         parser.add_argument("-i", "--index", metavar="INDEX", type=int, help="index (0-index or 1-index) for perspective/viewed residue numbers (default: 1-indexed)", required=False, default = 1)
         parser.add_argument("-pt", "--plot_type", metavar="PLOT_TYPE", choices = ['scatter', 'heat', ''], help="plot type (scatter or heat) to visualize Bottaro values. If empty string, then just write to csv with no visualization", required=False, default = '')
         parser.add_argument("-po", "--plot_outfile", metavar="PLOT_OUTFILE", help="filename to output plot png to. If empty string, outputs to standard Python vis", required=False, default = '')
+        parser.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,\ngets average distance between residues across these frames\nif empty all frames are used, cannot be used with -f", required=False, action=SmartIndexingAction)
 
     if args.script == 'res_distance':
         parser.description = 'Get the distance between two residues in a given frame\n\n' + \
@@ -148,7 +149,7 @@ def run_python_command() -> None:
         parser.add_argument("-r", "--residues", metavar="RESIDUES", help="Smart-indexed list of 1-indexed residues, also accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)", required=False, action = SmartIndexingAction)
         frame_group = parser.add_mutually_exclusive_group()
         frame_group.add_argument("-f", "--frame", type=int, metavar="FRAME_NUM", help="1-indexed Frame Number within trajectory to analyze, cannot be used with -fl", required=False)
-        frame_group.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,\ngets average distance between residues across these frames\nif empty all frames are used, cannot be used with -fl", required=False, action=SmartIndexingAction)
+        frame_group.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,\ngets average distance between residues across these frames\nif empty all frames are used, cannot be used with -f", required=False, action=SmartIndexingAction)
         parser.add_argument("-o", "--output", metavar="OUTPUT_FILE", help="Filename of output PNG to write plot to. If empty, will output displays to Python visual", default = '', required=False)
         parser.add_argument("-g", "--get_stacking", metavar="N_EVENTS", help="Get list of N_EVENTS residues with most stacking events (distance closest to 3.5Å) in the average structure across all frames.\nPrint to standard output. Equivalent to -s stack_events -n N_EVENTS", type = int, required=False, default = -1)
         parser.add_argument("-d", "--data_output", metavar="OUTPUT_FILE", help="Output the calculated per-frame numpy arrays that create the stacking fingerprint matrix to a file", default = '', required=False)
@@ -170,7 +171,7 @@ def run_python_command() -> None:
         parser.add_argument("-j", "--include_adjacent", help="Boolean whether to include adjacent residues in the printed output", action = 'store_true', default=False)
         frame_group = parser.add_mutually_exclusive_group()
         frame_group.add_argument("-f", "--frame", type=int, metavar="FRAME_NUM", help="1-indexed Frame Number within trajectory to analyze, cannot be used with -fl", required=False)
-        frame_group.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,\ngets average distance between residues across these frames\nif empty all frames are used, cannot be used with -fl", required=False, action=SmartIndexingAction)
+        frame_group.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,\ngets average distance between residues across these frames\nif empty all frames are used, cannot be used with -f", required=False, action=SmartIndexingAction)
 
     if args.script == 'compare':
         parser.description = 'Print the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events' +\
@@ -318,6 +319,11 @@ def bottaro_routine() -> None:
     else:
         raise AtomEmpty("Must include a 1-indexed residue index for the perspective residue")
 
+    if args.frame_list:
+        frame_list = set(args.frame_list)
+    else:
+        frame_list = {}
+
     create_parent_directories(pdb_filename)
     if args.trajectory and args.topology:
         filter_traj_to_pdb(trajectory_filename=args.trajectory, topology_filename=args.topology, output_pdb_filename=pdb_filename,
@@ -332,10 +338,10 @@ def bottaro_routine() -> None:
     
     if args.plot_type == 'heat':
         create_parent_directories(args.plot_outfile)
-        visualize_two_residue_movement_heatmap(output_name, plot_outfile=args.plot_outfile)
+        visualize_two_residue_movement_heatmap(output_name, plot_outfile=args.plot_outfile, frame_list = frame_list)
     elif args.plot_type == 'scatter':
         create_parent_directories(args.plot_outfile)
-        visualize_two_residue_movement_scatterplot(output_name, plot_outfile=args.plot_outfile)
+        visualize_two_residue_movement_scatterplot(output_name, plot_outfile=args.plot_outfile, frame_list = frame_list)
 
 def res_distance_routine() -> None:
     '''Runs the Residue distance routine to determine the distance between the center of masses of two given residues

@@ -150,7 +150,7 @@ def set_polar_grid() -> mpl.projections.polar.PolarAxes:
     ax.grid(color='gray', linestyle='--', linewidth=0.5)
     return ax
 
-def visualize_two_residue_movement_scatterplot(csv_filepath : str, plot_outfile : str = '') -> None:
+def visualize_two_residue_movement_scatterplot(csv_filepath : str, plot_outfile : str = '', frame_list : set = {}) -> None:
     '''Creates scatterplot of two-residue movement relative to each other.
 
     Takes the data created in residue_movement and visualizes it as a polar coordinate
@@ -164,10 +164,15 @@ def visualize_two_residue_movement_scatterplot(csv_filepath : str, plot_outfile 
         plot_outfile : str
             filepath of the image file to write to. Format infered from file extension.
                 png, pdf, ps, eps and svg supported.
+        frame_list : set, default = {}
+            Set of frames to use in csv, if empty use all frames
     Returns:
         None
     '''
     bottaro_values = pd.read_csv(csv_filepath, sep=',')
+
+    if frame_list:
+        bottaro_values = bottaro_values[bottaro_values['frame'].isin(frame_list)]
 
     theta_values = bottaro_values['theta']
     theta_values_rad = np.radians(theta_values)
@@ -178,6 +183,7 @@ def visualize_two_residue_movement_scatterplot(csv_filepath : str, plot_outfile 
     ax = set_polar_grid()
     ax.scatter(theta_values_rad, rho_values, color = 'purple', s=1, alpha = 0.5)
 
+    # Draw nucleotide ring in polar plot
     r_for_ring = np.ones(7)*1.3
     theta_for_ring = np.linspace(0, 2 * np.pi, 7)   
     ax.fill(theta_for_ring,r_for_ring, color = 'black', fill=False)
@@ -192,7 +198,7 @@ def visualize_two_residue_movement_scatterplot(csv_filepath : str, plot_outfile 
         plt.show()
 
 
-def visualize_two_residue_movement_heatmap(csv_filepath : str, plot_outfile : str = '') -> None:
+def visualize_two_residue_movement_heatmap(csv_filepath : str, plot_outfile : str = '', frame_list : set = {}) -> None:
     '''Creates heatmap of two-residue movement relative to each other.
 
     2D shaded contour plot of the density of points in the 
@@ -206,10 +212,15 @@ def visualize_two_residue_movement_heatmap(csv_filepath : str, plot_outfile : st
         plot_outfile : str
             filepath of the image file to write to. Format infered from file extension.
                 png, pdf, ps, eps and svg supported.
+        frame_list : set, default = {}
+            Set of frames to use in csv, if empty use all frames
     Returns:
         None
     '''
     bottaro_values = pd.read_csv(csv_filepath, sep=',')
+
+    if frame_list:
+        bottaro_values = bottaro_values[bottaro_values['frame'].isin(frame_list)]
 
     theta_values = bottaro_values['theta']
     theta_values_rad = np.radians(theta_values)
@@ -222,6 +233,7 @@ def visualize_two_residue_movement_heatmap(csv_filepath : str, plot_outfile : st
     plt.xlabel('')
     plt.ylabel('')
 
+    # Draw nucleotide ring in polar plot
     r_for_ring = np.ones(7)*1.3
     theta_for_ring = np.linspace(0, 2 * np.pi, 7)   
     ax.fill(theta_for_ring,r_for_ring, color = 'black', fill=False)
