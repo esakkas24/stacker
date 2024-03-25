@@ -179,7 +179,7 @@ def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, outp
 
     if include_adjacent:
         # non_adjacent_indices includes adjacent indices in this case
-        non_adjacent_indices = [(row, col, value) for row, col, value in zip(rows, cols, closest_values)]
+        non_adjacent_indices = [(row, col, value) for row, col, value in zip(rows, cols, closest_values) if abs(row - col) > 0]
     else:
         non_adjacent_indices = [(row, col, value) for row, col, value in zip(rows, cols, closest_values) if abs(row - col) > 1]
 
