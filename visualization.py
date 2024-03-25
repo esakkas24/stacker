@@ -135,17 +135,14 @@ def set_polar_grid() -> mpl.projections.polar.PolarAxes:
     fig = plt.figure()
     ax = fig.add_subplot(polar=True)
 
-    r_for_ring = np.ones(7)*1.3
-    theta_for_ring = np.linspace(0, 2 * np.pi, 7)   
-    ax.fill(theta_for_ring,r_for_ring, color = 'black', fill=False)
-
     ax.set_xticks(np.pi/180. * np.linspace(0,  360, 3, endpoint=False))
     ax.set_xticklabels([r"$\theta=0^\circ$",r"$\theta=120^\circ$",r"$\theta=240^\circ$"])
+    ax.tick_params(pad = -10)
 
-    ax.set_rlim(0,15)
-    ax.set_rticks(np.linspace(0,  15, 4, endpoint=True))
+    ax.set_rlim(0,10)
+    ax.set_rticks(np.linspace(0,  10, 3, endpoint=True))
     ax.set_rlabel_position(180)
-    plt.text(x=np.radians(178), y=17, s=r"$\rho\text{ }(\AA)$", ha="center",va='center',fontsize=11)
+    plt.text(x=np.radians(178), y=12, s=r"$\rho\text{ }(\AA)$", ha="center",va='center',fontsize=11)
     plt.text(x=0, y=2, s="C2", ha="center",va='center',fontsize=7.5)
     plt.text(x=np.radians(240), y=2, s="C4", ha="center",va='center',fontsize=7.5)
     plt.text(x=np.radians(120), y=1.8, s="C6", ha="center",va='center',fontsize=7.5)
@@ -181,6 +178,14 @@ def visualize_two_residue_movement_scatterplot(csv_filepath : str, plot_outfile 
     ax = set_polar_grid()
     ax.scatter(theta_values_rad, rho_values, color = 'purple', s=1, alpha = 0.5)
 
+    r_for_ring = np.ones(7)*1.3
+    theta_for_ring = np.linspace(0, 2 * np.pi, 7)   
+    ax.fill(theta_for_ring,r_for_ring, color = 'black', fill=False)
+
+    r_for_purine = np.array([1.3, 1.3, 2.58575693, 3.075, 2.58575693, 3.49, 2.58575693, 1.3])
+    theta_for_purine = np.array([4*np.pi/3, np.pi, -3.04534743, -2.61795,-2.19064032, -1.88, -2.19064032, 4*np.pi/3])  
+    ax.fill(theta_for_purine, r_for_purine, color = 'black', fill=False, alpha = 0.5)
+
     if plot_outfile:
         plt.savefig(plot_outfile)
     else:
@@ -213,9 +218,17 @@ def visualize_two_residue_movement_heatmap(csv_filepath : str, plot_outfile : st
     rho_values = bottaro_values['rho_dist'] * 10 
 
     ax = set_polar_grid()
-    ax = kdeplot(x=theta_values_rad, y=rho_values, fill=True, bw_method=0.12, cbar = True)
+    ax = kdeplot(x=theta_values_rad, y=rho_values, fill=True, bw_method=0.12, cbar = True, cmap = 'gist_earth_r')
     plt.xlabel('')
     plt.ylabel('')
+
+    r_for_ring = np.ones(7)*1.3
+    theta_for_ring = np.linspace(0, 2 * np.pi, 7)   
+    ax.fill(theta_for_ring,r_for_ring, color = 'black', fill=False)
+
+    r_for_purine = np.array([1.3, 1.3, 2.58575693, 3.075, 2.58575693, 3.49, 2.58575693, 1.3])
+    theta_for_purine = np.array([4*np.pi/3, np.pi, -3.04534743, -2.61795,-2.19064032, -1.88, -2.19064032, 4*np.pi/3])  
+    ax.fill(theta_for_purine, r_for_purine, color = 'black', fill=False, alpha = 0.5)
 
     if plot_outfile:
         plt.savefig(plot_outfile)
