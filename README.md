@@ -1,11 +1,11 @@
 # StACKER
 **St**acking **A**nalysis and **C**onformational **K**inetics for **E**xamining **R**esidues
 
-Analyzes pi-stacking interactions between residues in [Molecular Dynamics (MD)](https://github.com/esakkas24/stacker/docs/background.md) trajectories.
+Analyzes pi-stacking interactions between residues in [Molecular Dynamics (MD)](https://github.com/esakkas24/stacker/blob/main/docs/background.md) trajectories.
 
 Developed by Eric Sakkas ([esakkas@wesleyan.edu](mailto:esakkas@wesleyan.edu)) in the [Weir Lab](https://weirlab.research.wesleyan.edu/) at Wesleyan University.
 
-Runs on Python 3.5.x and has the following dependencies: [mdtraj](https://www.mdtraj.org/1.9.8.dev0/index.html), [pandas](https://pandas.pydata.org/), [NumPy](https://numpy.org/doc/stable/index.html), [matplotlib](https://matplotlib.org/stable/), [seaborn](https://seaborn.pydata.org/index.html)
+Runs on Python 3.5.x+ and has the following dependencies: [mdtraj](https://www.mdtraj.org/1.9.8.dev0/index.html), [pandas](https://pandas.pydata.org/), [NumPy](https://numpy.org/doc/stable/index.html), [matplotlib](https://matplotlib.org/stable/), [seaborn](https://seaborn.pydata.org/index.html)
 
 ## Overview
 
