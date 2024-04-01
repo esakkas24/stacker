@@ -112,6 +112,31 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies
         plt.xticks(ticks, labels, rotation = 'vertical')
         plt.yticks(ticks, labels)
         ax.tick_params(top=True, bottom=False, labeltop=True, labelbottom=False)
+
+        # seperate ticks by region
+        last_res = 1
+        last_label = 0
+        long_tick_region = False
+        for res_i, label_i, tick_object, y_object in zip(ticks, labels, ax.xaxis.get_major_ticks(), ax.yaxis.get_major_ticks()): 
+            if res_i == last_res+1 and not label_i == last_label+1:
+                long_tick_region = not long_tick_region
+
+            if long_tick_region:
+                tick_object.set_pad(22.)
+                tick_object.tick2line.set_markersize(22.)
+                y_object.set_pad(22.)
+                y_object.tick1line.set_markersize(22.)
+            else:
+                tick_object.set_pad(2.)
+                tick_object.tick2line.set_markersize(3.)
+                y_object.set_pad(2.)
+                y_object.tick1line.set_markersize(3.)
+            
+            last_res = res_i
+            last_label = label_i
+
+        for xtick in plt.xticks()[-1]: xtick.set_fontsize(10)
+
         plt.pause(seconds_per_frame)
         if outfile_prefix:
             plt.savefig(outfile_prefix + "frame" + str(frame_num) + ".png")
