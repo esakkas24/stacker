@@ -7,7 +7,6 @@ from residue_movement import write_bottaro_to_csv
 from pairwise_distance import calculate_residue_distance, get_residue_distance_for_frame, get_frame_average, get_top_stacking
 from visualization import display_arrays_as_video, visualize_two_residue_movement_heatmap, visualize_two_residue_movement_scatterplot
 
-
 class InvalidRoutine(Exception):
     pass
 
@@ -125,6 +124,7 @@ def run_python_command() -> None:
         parser.add_argument("-pt", "--plot_type", metavar="PLOT_TYPE", choices = ['scatter', 'heat', ''], help="plot type (scatter or heat) to visualize Bottaro values. If empty string, then just write to csv with no visualization", required=False, default = '')
         parser.add_argument("-po", "--plot_outfile", metavar="PLOT_OUTFILE", help="filename to output plot png to. If empty string, outputs to standard Python vis", required=False, default = '')
         parser.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,\ngets average distance between residues across these frames\nif empty all frames are used, cannot be used with -f", required=False, action=SmartIndexingAction)
+        parser.add_argument("-n", "--no_inter", help="Delete intermediate files after command runs", action = 'store_true', default=False)
 
     if args.script == 'res_distance':
         parser.description = 'Get the distance between two residues in a given frame\n\n' + \
@@ -147,12 +147,14 @@ def run_python_command() -> None:
         required_group.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=True)
         required_group.add_argument("-top", "--topology", metavar="TOPOLOGY_FILENAME", help="Filepath to Topology file for the MD simulation", required=True)
         parser.add_argument("-r", "--residues", metavar="RESIDUES", help="Smart-indexed list of 1-indexed residues, also accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)", required=False, action = SmartIndexingAction)
+        parser.add_argument("-i", "--input", metavar="INPUT_FILE", help="Input .txt file containing per-frame stacking information, in lieu of running stacking fingerprint analysis again.\nTXT file can be created by running `python stacker.py -s pairwise -d OUTPUT_FILE`\n-r flag must match the residues used to create the TXT file")
         frame_group = parser.add_mutually_exclusive_group()
         frame_group.add_argument("-f", "--frame", type=int, metavar="FRAME_NUM", help="1-indexed Frame Number within trajectory to analyze, cannot be used with -fl", required=False)
         frame_group.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,\ngets average distance between residues across these frames\nif empty all frames are used, cannot be used with -f", required=False, action=SmartIndexingAction)
         parser.add_argument("-o", "--output", metavar="OUTPUT_FILE", help="Filename of output PNG to write plot to. If empty, will output displays to Python visual", default = '', required=False)
         parser.add_argument("-g", "--get_stacking", metavar="N_EVENTS", help="Get list of N_EVENTS residues with most stacking events (distance closest to 3.5Å) in the average structure across all frames.\nPrint to standard output. Equivalent to -s stack_events -n N_EVENTS", type = int, required=False, default = -1)
         parser.add_argument("-d", "--data_output", metavar="OUTPUT_FILE", help="Output the calculated per-frame numpy arrays that create the stacking fingerprint matrix to a file", default = '', required=False)
+        parser.add_argument("-B", "--input_B", metavar="INPUT_FILE", help="Input .txt file containing per-frame stacking information for a second fingerprint, creates fingerprint where top left is initial input, bottom right is second fingerprint.\n Used in lieu of running stacking fingerprint analysis again.\nTXT file can be created by running `python stacker.py -s pairwise -d OUTPUT_FILE`\n-r flag must match the residues used to create the TXT file")
 
     if args.script == 'stack_events':
         parser.description = 'Get list of residues with most stacking events (distance closest to 3.5Å) in the stacking fingerprint of the average structure across all frames of a trajectory' + \
@@ -343,6 +345,12 @@ def bottaro_routine() -> None:
         create_parent_directories(args.plot_outfile)
         visualize_two_residue_movement_scatterplot(output_name, plot_outfile=args.plot_outfile, frame_list = frame_list)
 
+    if args.no_inter:
+        if args.trajectory and args.topology: #intermediate pdb created
+            os.remove(pdb_filename)
+        if os.path.exists(output_name):
+            os.remove(output_name)
+
 def res_distance_routine() -> None:
     '''Runs the Residue distance routine to determine the distance between the center of masses of two given residues
     
@@ -391,7 +399,12 @@ def pairwise_routine() -> None:
         frame_list = []
 
     trj_sub = filter_traj(trajectory_filename=args.trajectory, topology_filename=args.topology, residues_desired=residues_desired)
-    if frame_list:
+
+    if args.input:
+        print("Loaded fingerprint data from:", args.input)
+        loaded_arr = np.loadtxt(args.input)
+        frames = loaded_arr.reshape(loaded_arr.shape[0], loaded_arr.shape[1] // trj_sub.n_residues, trj_sub.n_residues)
+    elif args.frame_list:
         frames = np.array([get_residue_distance_for_frame(trj_sub, i) for i in frame_list])
     elif args.frame:
         frames = np.array([get_residue_distance_for_frame(trj_sub, args.frame)])
@@ -405,11 +418,31 @@ def pairwise_routine() -> None:
 
     avg_frames = [get_frame_average(frames)]
 
+    if args.input_B:
+        print("Loaded second fingerprint data from:", args.input_B)
+        loaded_arr = np.loadtxt(args.input_B)
+        frames_B = loaded_arr.reshape(loaded_arr.shape[0], loaded_arr.shape[1] // trj_sub.n_residues, trj_sub.n_residues)
+        avg_frames_B = [get_frame_average(frames_B)]
+        avg_frames = [combine_frames(avg_frames[0], avg_frames_B[0])]
+        print(avg_frames)
+
     if args.get_stacking:
         get_top_stacking(trj_sub, avg_frames[0], output_csv = '', n_events = args.get_stacking)
 
+    sorted_res = list(residues_desired)
+    sorted_res.sort()
+
     create_parent_directories(args.output)
-    display_arrays_as_video(avg_frames, list(residues_desired), seconds_per_frame=1, outfile_prefix=args.output)
+    display_arrays_as_video(avg_frames, sorted_res, seconds_per_frame=1, outfile_prefix=args.output)
+
+def combine_frames(frames_A, frames_B):
+    Am, An = frames_A.shape
+    array_to_fill = np.zeros((Am,An))
+    for i in range(Am):
+        array_to_fill[i,i:] = frames_A[i,i:] 
+    for j in range(An):
+        array_to_fill[j:,j] = frames_B[j:,j]
+    return array_to_fill
 
 def stack_events_routine() -> None:
     '''Runs the routine to get the residue pairings with the most pi stacking (center of geometry distance closest to 3.5Å)
