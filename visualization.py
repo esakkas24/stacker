@@ -71,7 +71,8 @@ def create_axis_labels(res_indicies : typing.ArrayLike, tick_distance : int = 10
         
 def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies : typing.ArrayLike, 
                             seconds_per_frame : int = 10, tick_distance : int = 10,
-                            outfile_prefix : str = '') -> None:
+                            outfile_prefix : str = '', scale_limits : tuple = (0,7),
+                            scale_style : str = 'bellcurve', xy_line : bool = False) -> None:
     '''Displays list/array of 2D NumPy arrays as matrix heatmaps
 
     Takes list/array of 2D NumPy arrays and treats them as frames 
@@ -90,22 +91,34 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies
         outfile_prefix : str
             prefix for filepath of the file to write frames to. Format infered from file extension.
                 png, pdf, ps, eps and svg supported.
+        scale_limits : tuple, default = (0,7)
+            limits of the color scale
+        scale_styles : str, default = 'bellcurve'
+            style of color scale. {bellcurve, gradient}
+        xy_line : bool, default = False
+            draw x = y line to separate matrix halfs
+        
     Returns:
         None
         Displays video of NumPy arrays
     '''
     orange_colormap = mpl.colormaps['Oranges_r'].resampled(100)
 
-    newcolors = np.vstack((orange_colormap(np.linspace(1, 0, 128)),
-                       orange_colormap(np.linspace(0, 1, 128))))
-    newcmp = mpl.colors.ListedColormap(newcolors, name='OrangeBellcurve')
+    if scale_style == 'gradient':
+        newcolors = np.vstack((orange_colormap(np.linspace(1, 1, 1)), orange_colormap(np.linspace(0, 0, 128)),
+                        orange_colormap(np.linspace(0, 1, 128))))
+        newcmp = mpl.colors.ListedColormap(newcolors, name='OrangeBellcurve')
+    elif scale_style == 'bellcurve':
+        newcolors = np.vstack((orange_colormap(np.linspace(1, 0, 128)), orange_colormap(np.linspace(0, 1, 128))))
+        newcmp = mpl.colors.ListedColormap(newcolors, name='OrangeBellcurve')
     
     fig , ax = plt.subplots(figsize=(8,8))
     plt.ion()
     frame_num = 1
     for hist in numpy_arrays:
         ax.clear()
-        neg = ax.imshow(hist, cmap = newcmp, vmin=0, vmax=7, interpolation = 'nearest')
+        vmin, vmax = scale_limits
+        neg = ax.imshow(hist, cmap = newcmp, vmin=vmin, vmax=vmax, interpolation = 'nearest')
         ax.set_title('Distance Between Residues Center of Geometries')
         colorbar = fig.colorbar(neg, ax=ax, location='right', anchor=(0, 0.3), shrink=0.7)
         ticks, labels = create_axis_labels(res_indicies, tick_distance)
@@ -135,7 +148,11 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies
             last_res = res_i
             last_label = label_i
 
-        for xtick in plt.xticks()[-1]: xtick.set_fontsize(10)
+        if xy_line:
+            lims = [np.min([ax.get_xlim(), ax.get_ylim()]),  # min of both axes
+                    np.max([ax.get_xlim(), ax.get_ylim()]),  # max of both axes
+                    ]
+            ax.plot(lims, lims, 'k-', zorder = 0, alpha = 0.75, linewidth = 0.5) 
 
         plt.pause(seconds_per_frame)
         if outfile_prefix:

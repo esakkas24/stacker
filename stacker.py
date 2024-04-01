@@ -155,6 +155,8 @@ def run_python_command() -> None:
         parser.add_argument("-g", "--get_stacking", metavar="N_EVENTS", help="Get list of N_EVENTS residues with most stacking events (distance closest to 3.5Å) in the average structure across all frames.\nPrint to standard output. Equivalent to -s stack_events -n N_EVENTS", type = int, required=False, default = -1)
         parser.add_argument("-d", "--data_output", metavar="OUTPUT_FILE", help="Output the calculated per-frame numpy arrays that create the stacking fingerprint matrix to a file", default = '', required=False)
         parser.add_argument("-B", "--input_B", metavar="INPUT_FILE", help="Input .txt file containing per-frame stacking information for a second fingerprint, creates fingerprint where top left is initial input, bottom right is second fingerprint.\n Used in lieu of running stacking fingerprint analysis again.\nTXT file can be created by running `python stacker.py -s pairwise -d OUTPUT_FILE`\n-r flag must match the residues used to create the TXT file")
+        parser.add_argument("-l", "--limits", metavar="LIMITS", help="limits of the color scale, default = (0,7)", default = '0,7')
+        parser.add_argument("-y", "--scale_style", metavar="SCALE_STYLE", help=" style of color scale. {bellcurve, gradient}", default = 'bellcurve')
 
     if args.script == 'stack_events':
         parser.description = 'Get list of residues with most stacking events (distance closest to 3.5Å) in the stacking fingerprint of the average structure across all frames of a trajectory' + \
@@ -416,6 +418,9 @@ def pairwise_routine() -> None:
         frames_to_save = frames.reshape(frames.shape[0], -1)
         np.savetxt(args.data_output, frames_to_save)
 
+    if args.limits:
+        scale_limits = tuple(float(i) for i in args.limits.replace('(','').replace(')','').replace('...', '').split(','))
+
     avg_frames = [get_frame_average(frames)]
 
     if args.input_B:
@@ -433,7 +438,7 @@ def pairwise_routine() -> None:
     sorted_res.sort()
 
     create_parent_directories(args.output)
-    display_arrays_as_video(avg_frames, sorted_res, seconds_per_frame=1, outfile_prefix=args.output)
+    display_arrays_as_video(avg_frames, sorted_res, seconds_per_frame=1, outfile_prefix=args.output, scale_limits=scale_limits, scale_style=args.scale_style)
 
 def combine_frames(frames_A, frames_B):
     Am, An = frames_A.shape
