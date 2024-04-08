@@ -5,7 +5,6 @@ from residue_movement import calc_center_3pts
 from vector import *
 from visualization import NoResidues, create_axis_labels, display_arrays_as_video
 import sys
-import time
 
 class MultiFrameTraj(Exception):
     pass
@@ -105,9 +104,8 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
 
     mat_i = 0
     for i in res_indices:
-        start = time.perf_counter()
         percent_done = round((mat_i+1) / n_residues * 100, 2)
-        #sys.stdout.write(f'\rLoading: [{"#" * int(percent_done)}{" " * (100 - int(percent_done))}] Current Residue: {mat_i+1}/{n_residues} ({percent_done}%)')
+        sys.stdout.write(f'\rLoading: [{"#" * int(percent_done)}{" " * (100 - int(percent_done))}] Current Residue: {mat_i+1}/{n_residues} ({percent_done}%)')
         mat_j = 0
         res1_name = topology.residue(mat_i).name
         for j in res_indices:
@@ -129,9 +127,7 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
                     pairwise_distances[mat_i,mat_j] = calculate_residue_distance(trajectory, i+1, j+1, res1_atoms, res2_atoms)
             mat_j+=1
         mat_i+=1
-        end = time.perf_counter()
-        print(end - start)
-        #sys.stdout.flush()
+        sys.stdout.flush()
     print('\n')
     get_magnitude = np.vectorize(Vector.magnitude)
     pairwise_res_magnitudes = get_magnitude(pairwise_distances)
