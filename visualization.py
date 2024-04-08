@@ -112,7 +112,7 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies
         newcolors = np.vstack((orange_colormap(np.linspace(1, 0, 128)), orange_colormap(np.linspace(0, 1, 128))))
         newcmp = mpl.colors.ListedColormap(newcolors, name='OrangeBellcurve')
     
-    fig , ax = plt.subplots(figsize=(8,8))
+    fig, ax = plt.subplots(figsize=(8,8))
     plt.ion()
     frame_num = 1
     for hist in numpy_arrays:
@@ -271,7 +271,7 @@ def visualize_two_residue_movement_heatmap(csv_filepath : str, plot_outfile : st
     rho_values = bottaro_values['rho_dist'] * 10 
 
     ax = set_polar_grid()
-    ax = kdeplot(x=theta_values_rad, y=rho_values, fill=True, bw_method=0.12, cbar = True, cmap = 'gist_earth_r')
+    ax = kdeplot(x=theta_values_rad, y=rho_values, fill=True, levels = [0.1*i for i in range(1,11)], cbar = True, cmap = 'gist_earth_r')
     plt.xlabel('')
     plt.ylabel('')
 
