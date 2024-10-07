@@ -177,6 +177,11 @@ def calculate_bottaro_values_for_frame(perspective_base_coords : Base, viewed_mi
     x_axis_dot_rho = x_axis.x*rho.x+x_axis.y*rho.y+x_axis.z*rho.z
     denominator = x_axis.magnitude()*rho_dist
     cos_theta = x_axis_dot_rho/denominator
+
+    # edge cases where rounding leads to minor error
+    if cos_theta > 1: cos_theta = 1 
+    if cos_theta < -1: cos_theta = -1
+
     theta = math.degrees(math.acos(cos_theta))
     corrected_theta = correct_theta_sign(rho, y_axis, theta)
     
