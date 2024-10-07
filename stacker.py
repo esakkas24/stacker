@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from file_manipulation import *
 from residue_movement import write_bottaro_to_csv
-from pairwise_distance import calculate_residue_distance, get_residue_distance_for_frame, get_frame_average, get_top_stacking
+from pairwise_distance import calculate_residue_distance, get_residue_distance_for_frame, get_residue_distance_for_trajectory, get_frame_average, get_top_stacking
 from visualization import display_arrays_as_video, visualize_two_residue_movement_heatmap, visualize_two_residue_movement_scatterplot
 import random
 
@@ -55,11 +55,11 @@ def run_python_command() -> None:
             '              filter_traj:\n' +\
             '                    filters trajectory and topology files to desired residue numbers and atom names\n' + \
             '              bottaro OR pairwise OR psf:\n' +\
-            '                    Create polar plots like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)\n' + \
+            '                    Create a Pairwise Stacking Fingerprint (PSF): polar plots like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)\n' + \
             '              res_distance:\n' + \
             '                    Get the distance between two residues in a given frame\n' + \
             '              system OR ssf:\n' + \
-            '                    Create a stacking fingerprint of distances by residue\n' + \
+            '                    Create a System Stacking Fingerprint (SSF) with pairwise distances for each residue\n' + \
             '              stack_events:\n' + \
             '                    Get list of residues with most stacking events (distance closest to 3.5Å)\n' + \
             '              compare:\n' +\
@@ -71,9 +71,9 @@ def run_python_command() -> None:
     if ('-s' not in remaining_args and '--script' not in remaining_args and ('--help' in remaining_args or '-h' in remaining_args)): 
         parser.add_argument("-s", "--script", metavar="ROUTINE", help='Name of command to use. Options for ROUTINE:\n\n' + \
                             "  filter_traj:\n\tfilters trajectory and topology files to desired residue numbers and atom names\n" + \
-                            "  bottaro OR pairwise OR psf:\n\tCreate polar plots like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)\n" + \
+                            "  bottaro OR pairwise OR psf:\n\tCreate Polar Stacking Fingerprint like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)\n" + \
                             "  res_distance:\n\tGet the distance between two residues in a given frame\n" +\
-                            "  system OR ssf:\n\tCreate a stacking fingerprint of distances by residue\n" + \
+                            "  system OR ssf:\n\tCreate a System Stacking Fingerprint of distances by residue\n" + \
                             "  stack_events:\n\tGet list of residues with most stacking events (distance closest to 3.5Å)\n" +\
                             "  compare:\n\tGet the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events\n",
                              required=True, default='', choices=['filter_traj', 'bottaro', 'pairwise', 'psf', 'res_distance', 'system', 'ssf', 'stack_events', 'compare'])
@@ -82,9 +82,9 @@ def run_python_command() -> None:
 
     parser.add_argument("-s", "--script", metavar="ROUTINE", help='Name of command to use. Options for ROUTINE:\n\n' + \
                             "  filter_traj:\n\tfilters trajectory and topology files to desired residue numbers and atom names\n" + \
-                            "  bottaro OR pairwise OR psf:\n\tCreate polar plots like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)\n" + \
+                            "  bottaro OR pairwise OR psf:\n\tCreate Polar Stacking Fingerprint like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)\n" + \
                             "  res_distance:\n\tGet the distance between two residues in a given frame\n" +\
-                            "  system OR ssf:\n\tCreate a stacking fingerprint of distances by residue\n" + \
+                            "  system OR ssf:\n\tCreate a System Stacking Fingerprint of distances by residue\n" + \
                             "  stack_events:\n\tGet list of residues with most stacking events (distance closest to 3.5Å)\n" +\
                             "  compare:\n\tGet the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events\n",
                              required=True, default='', choices=['filter_traj', 'bottaro', 'pairwise', 'psf', 'res_distance', 'system', 'ssf', 'stack_events', 'compare'])
@@ -107,7 +107,7 @@ def run_python_command() -> None:
         parser.add_argument("-a", "--atom_names", metavar="ATOM_NAMES", help="Comma-separated list of atom names to filter", required=False, default="C2,C4,C6")
 
     if args.script == 'bottaro' or args.script == 'pairwise' or args.script == 'psf':
-        parser.description = 'Create polar plots of the movement of a "viewed residue" from the perspective of a "perspective residue"\nlike those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972). Creates CSV of these values' + \
+        parser.description = 'Create Polar Stacking Fingerprint (PSF) of the movement of a "viewed residue" from the perspective of a "perspective residue"\nlike those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972). Creates CSV of these values' + \
                                 '\n\nExamples:\n' +\
                                 '\n[user]$ python3 stacker.py -s bottaro -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt scatter\n' +\
                             '\n[user]$ python3 stacker.py -s bottaro -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat'
@@ -140,7 +140,7 @@ def run_python_command() -> None:
         parser.add_argument("-a", "--atom_names", metavar="ATOM_NAMES", help="Comma-separated list of atom names. Three required to get center of geometry for a residue. default = C2,C4,C6", required=False, default="C2,C4,C6")
 
     if args.script == 'system' or args.script == 'ssf':
-        parser.description = 'Creates a stacking fingerprint of the average structure across the chosen frames of a trajectory.' + \
+        parser.description = 'Creates a System Stacking Fingerprint of the average structure across the chosen frames of a trajectory.' + \
                                 '\n\nExamples:\n' +\
                                 '\n[user]$ python stacker.py -s system -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2\n' +\
                                 '\n[user]$ python stacker.py -s ssf -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2 -g 10 -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt\n'
@@ -149,16 +149,18 @@ def run_python_command() -> None:
         required_group.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=True)
         required_group.add_argument("-top", "--topology", metavar="TOPOLOGY_FILENAME", help="Filepath to Topology file for the MD simulation", required=True)
         parser.add_argument("-r", "--residues", metavar="RESIDUES", help="Smart-indexed list of 1-indexed residues, also accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)", required=False, action = SmartIndexingAction)
-        parser.add_argument("-i", "--input", metavar="INPUT_FILE", help="Input .txt file containing per-frame stacking information, in lieu of running stacking fingerprint analysis again.\nTXT file can be created by running `python stacker.py -s pairwise -d OUTPUT_FILE`\n-r flag must match the residues used to create the TXT file")
+        parser.add_argument("-i", "--input", metavar="INPUT_FILE", help="Input .txt file containing per-frame stacking information, in lieu of running stacking fingerprint analysis again.\nTXT file can be created by running `python stacker.py -s system -d OUTPUT_FILE`\n-r flag must match the residues used to create the TXT file")
         frame_group = parser.add_mutually_exclusive_group()
         frame_group.add_argument("-f", "--frame", type=int, metavar="FRAME_NUM", help="1-indexed Frame Number within trajectory to analyze, cannot be used with -fl", required=False)
         frame_group.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,\ngets average distance between residues across these frames\nif empty all frames are used, cannot be used with -f", required=False, action=SmartIndexingAction)
         parser.add_argument("-o", "--output", metavar="OUTPUT_FILE", help="Filename of output PNG to write plot to. If empty, will output displays to Python visual", default = '', required=False)
         parser.add_argument("-g", "--get_stacking", metavar="N_EVENTS", help="Get list of N_EVENTS residues with most stacking events (distance closest to 3.5Å) in the average structure across all frames.\nPrint to standard output. Equivalent to -s stack_events -n N_EVENTS", type = int, required=False, default = -1)
         parser.add_argument("-d", "--data_output", metavar="OUTPUT_FILE", help="Output the calculated per-frame numpy arrays that create the stacking fingerprint matrix to a file", default = '', required=False)
-        parser.add_argument("-B", "--input_B", metavar="INPUT_FILE", help="Input .txt file containing per-frame stacking information for a second fingerprint, creates fingerprint where top left is initial input, bottom right is second fingerprint.\n Used in lieu of running stacking fingerprint analysis again.\nTXT file can be created by running `python stacker.py -s pairwise -d OUTPUT_FILE`\n-r flag must match the residues used to create the TXT file")
+        parser.add_argument("-B", "--input_B", metavar="INPUT_FILE", help="Input .txt file containing per-frame stacking information for a second fingerprint, creates fingerprint where top left is initial input, bottom right is second fingerprint.\n Used in lieu of running stacking fingerprint analysis again.\nTXT file can be created by running `python stacker.py -s system -d OUTPUT_FILE`\n-r flag must match the residues used to create the TXT file")
         parser.add_argument("-l", "--limits", metavar="LIMITS", help="limits of the color scale, default = (0,7)", default = '0,7')
         parser.add_argument("-y", "--scale_style", metavar="SCALE_STYLE", help=" style of color scale. {bellcurve, gradient}", default = 'bellcurve')
+        parser.add_argument("-h", "--threads", metavar="N_THREADS", help="Use multithreading with INT worker threads", required = False, default = 1)
+
 
     if args.script == 'stack_events':
         parser.description = 'Get list of residues with most stacking events (distance closest to 3.5Å) in the stacking fingerprint of the average structure across all frames of a trajectory' + \
@@ -173,7 +175,7 @@ def run_python_command() -> None:
         parser.add_argument("-r", "--residues", metavar="RESIDUES", help="Smart-indexed list of 1-indexed residues to subset trajectory, also accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)", required=False, action = SmartIndexingAction)
         parser.add_argument("-o", "--output", metavar="OUTPUT_FILE", help="Output tab-separated txt file to write top stacking events to. If empty, will output displays to standard output", default = '', required=False)
         parser.add_argument("-n", "--n_events", type = int, metavar="N_EVENTS", help="Number of stacking events to display. If -1 display all events", default = -1, required=False)
-        parser.add_argument("-i", "--input", metavar="INPUT_FILE", help="Input .txt file containing per-frame stacking information, in lieu of running stacking fingerprint analysis again.\nTXT file can be created by running `python stacker.py -s pairwise -d OUTPUT_FILE`\n-r flag must match the residues used to create the TXT file")
+        parser.add_argument("-i", "--input", metavar="INPUT_FILE", help="Input .txt file containing per-frame stacking information, in lieu of running stacking fingerprint analysis again.\nTXT file can be created by running `python stacker.py -s system -d OUTPUT_FILE`\n-r flag must match the residues used to create the TXT file")
         parser.add_argument("-j", "--include_adjacent", help="Boolean whether to include adjacent residues in the printed output", action = 'store_true', default=False)
         frame_group = parser.add_mutually_exclusive_group()
         frame_group.add_argument("-f", "--frame", type=int, metavar="FRAME_NUM", help="1-indexed Frame Number within trajectory to analyze, cannot be used with -fl", required=False)
@@ -290,7 +292,7 @@ def bottaro_routine() -> None:
         
     Example Usage:
         [user]$ python3 stacker.py -s bottaro -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt scatter
-        [user]$ python3 stacker.py -s bottaro -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat
+        [user]$ python3 stacker.py -s pairwise -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat
         '''
     trj_prefix = args.trajectory.rsplit('.', 1)[0] 
 
@@ -401,13 +403,13 @@ def res_distance_routine() -> None:
         print(res_distances[0])
 
 def system_routine() -> None:
-    '''Runs the Pairwise distance routine to create a single pairwise distance matrix for a chosen frame
+    '''Runs the System Stacking Fingerprint routine to create a single SSF for a chosen frame
 
-    Runs the routine to create a pairwise distance matrix for a passed in trajectory and frame.
+    Runs the routine to create a SSF for a passed in trajectory and frame.
 
     Example Usage:
-        [user]$ python3 stacker.py -s pairwise -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2 
-        [user]$ python stacker.py -s pairwise -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2 -g 10 -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
+        [user]$ python3 stacker.py -s system -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2 
+        [user]$ python stacker.py -s ssf -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2 -g 10 -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
         '''
     if args.residues:
         residues_desired = set(args.residues)
@@ -426,14 +428,14 @@ def system_routine() -> None:
         loaded_arr = np.loadtxt(args.input)
         frames = loaded_arr.reshape(loaded_arr.shape[0], loaded_arr.shape[1] // trj_sub.n_residues, trj_sub.n_residues)
     elif args.frame_list:
-        frames = np.array([get_residue_distance_for_frame(trj_sub, i) for i in frame_list])
+        frames = get_residue_distance_for_trajectory(trj_sub, frame_list, threads = args.threads)
     elif args.frame:
         frames = np.array([get_residue_distance_for_frame(trj_sub, args.frame)])
     else:
-        frames = np.array([get_residue_distance_for_frame(trj_sub, i) for i in range(1,trj_sub.n_frames+1)])
+        frames = get_residue_distance_for_trajectory(trj_sub, [i for i in range(1,trj_sub.n_frames+1)], threads = args.threads)
 
     if args.data_output:
-        print(frames.shape[2])
+        print(f"Number of SSFs made:{frames.shape}")
         frames_to_save = frames.reshape(frames.shape[0], -1)
         np.savetxt(args.data_output, frames_to_save)
 
@@ -490,7 +492,7 @@ def stack_events_routine() -> None:
     elif args.frame:
         frame = get_residue_distance_for_frame(trj_sub, frame = args.frame)
     elif args.frame_list:
-        frames = [get_residue_distance_for_frame(trj_sub, frame_i) for frame_i in args.frame_list]
+        frames = get_residue_distance_for_trajectory(trj_sub, args.frame_list, threads = args.threads)
         frame = get_frame_average(frames)
 
     get_top_stacking(trj_sub, frame, output_csv = args.output, n_events = args.n_events, include_adjacent = args.include_adjacent)

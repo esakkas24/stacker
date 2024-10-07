@@ -169,8 +169,8 @@ def get_residue_distance_for_trajectory(trajectory : md.Trajectory, frames : typ
         write_output = True
 
     with concurrent.futures.ProcessPoolExecutor(max_workers = threads) as executor:            
-        SSFs = list(executor.map(get_residue_distance_for_frame, [trajectory]*len(frames), frames,
-                                    [res1_atoms]*len(frames),[res2_atoms]*len(frames), [write_output]*len(frames)))
+        SSFs = np.array(list(executor.map(get_residue_distance_for_frame, [trajectory]*len(frames), frames,
+                                    [res1_atoms]*len(frames),[res2_atoms]*len(frames), [write_output]*len(frames))))
     return SSFs
 
 
