@@ -5,6 +5,7 @@ from residue_movement import calc_center_3pts
 from vector import *
 from visualization import NoResidues, create_axis_labels, display_arrays_as_video
 import sys
+import concurrent.futures
 
 class MultiFrameTraj(Exception):
     pass
@@ -74,7 +75,8 @@ def calculate_residue_distance(trajectory : md.Trajectory,
 
 def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int, 
                                 res1_atoms : tuple = ("C2","C4","C6"),
-                                res2_atoms : tuple = ("C2","C4","C6")) -> typing.ArrayLike:
+                                res2_atoms : tuple = ("C2","C4","C6"),
+                                write_output : bool = True) -> typing.ArrayLike:
     '''Calculates pairwise the distance between all residues in a given frame
 
     Args:
@@ -88,6 +90,8 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
         res2_atoms : tuple, default = ("C2","C4","C6")
             a tuple of the atom names of the three atoms whose position
             to average to find the center of residue 2 
+        write_output : bool, default = False
+            Write a loading screen to standard output
     
     Returns:
         pairwise_distances : array_like
@@ -104,8 +108,9 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
 
     mat_i = 0
     for i in res_indices:
-        percent_done = round((mat_i+1) / n_residues * 100, 2)
-        sys.stdout.write(f'\rLoading: [{"#" * int(percent_done)}{" " * (100 - int(percent_done))}] Current Residue: {mat_i+1}/{n_residues} ({percent_done}%)')
+        if write_output:
+            percent_done = round((mat_i+1) / n_residues * 100, 2)
+            sys.stdout.write(f'\rLoading: [{"#" * int(percent_done)}{" " * (100 - int(percent_done))}] Current Residue: {mat_i+1}/{n_residues} ({percent_done}%)')
         mat_j = 0
         res1_name = topology.residue(mat_i).name
         for j in res_indices:
@@ -128,10 +133,46 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
             mat_j+=1
         mat_i+=1
         sys.stdout.flush()
-    print('\n')
+    print(f"\nFrame {frame} done.")
     get_magnitude = np.vectorize(Vector.magnitude)
     pairwise_res_magnitudes = get_magnitude(pairwise_distances)
     return(pairwise_res_magnitudes)
+
+
+def get_residue_distance_for_trajectory(trajectory : md.Trajectory, frames : typing.ArrayLike,
+                                res1_atoms : tuple = ("C2","C4","C6"),
+                                res2_atoms : tuple = ("C2","C4","C6"),
+                                threads : int = 1) -> typing.ArrayLike:
+    '''Calculates SSF all residues for all frames of a trajectory
+
+    Args:
+        trajectory : md.Trajectory
+            trajectory to analyze (must have topology aspect)
+        frames : array_like
+            frame indices to create SSFs for (1-indexed)
+        res1_atoms : tuple, default = ("C2","C4","C6")
+            a tuple of the atom names of the three atoms whose position
+            to average to find the center of residue 1 
+        res2_atoms : tuple, default = ("C2","C4","C6")
+            a tuple of the atom names of the three atoms whose position
+            to average to find the center of residue 2 
+        threads : int, default = 1
+            Use multithreading with INT worker threads
+    
+    Returns:
+        ssf_per_frame : array_like
+            list where pairwise_distances[f] is the output of
+            get_residue_distance_for_frame(trajectory, f, res1_atoms, res2_atoms)
+    '''
+    write_output = False
+    if threads <= 1:
+        write_output = True
+
+    with concurrent.futures.ProcessPoolExecutor(max_workers = threads) as executor:            
+        SSFs = list(executor.map(get_residue_distance_for_frame, [trajectory]*len(frames), frames,
+                                    [res1_atoms]*len(frames),[res2_atoms]*len(frames), [write_output]*len(frames)))
+    return SSFs
+
 
 def increment_residue(residue_id : str) -> str:
     '''Increments residue ID by 1
@@ -256,11 +297,11 @@ if __name__ == "__main__":
 
     # display_arrays_as_video() tests
     residue_selection_query = 'resi 90 to 215'
-    frames_to_include = [1]
+    frames_to_include = [1,2,3,4,5]
 
     trj_sub = trj.atom_slice(trj.top.select(residue_selection_query))
     resSeqs = [res.resSeq for res in trj_sub.topology.residues]
-    frames = [get_residue_distance_for_frame(trj_sub, i) for i in frames_to_include]
+    frames = get_residue_distance_for_trajectory(trj_sub, frames_to_include, threads = 5)
     get_top_stacking(trj_sub, frames[0])
     display_arrays_as_video([get_frame_average(frames)], resSeqs, seconds_per_frame=10)
 
