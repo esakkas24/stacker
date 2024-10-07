@@ -221,8 +221,10 @@ def get_frame_average(frames : typing.ArrayLike) -> typing.ArrayLike:
     return avg_frame
 
 if __name__ == "__main__":
+    trajectory_file = 'testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd'
+    topology_file = 'testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop'
     # Load test trajectory and topology
-    trj = md.load('testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', top = 'testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop')
+    trj = md.load(trajectory_file, top = topology_file)
 
     # "Correct" residue distances determined using PyMOL, a standard interface
     # for visualizing 3D molecules (distances limited to 3 decimal places)
@@ -253,11 +255,15 @@ if __name__ == "__main__":
                                                                                                                [11.712, 6.885,   0]])))
 
     # display_arrays_as_video() tests
-    trj_sub = trj.atom_slice(trj.top.select('resi 90 to 215'))
+    residue_selection_query = 'resi 90 to 215'
+    frames_to_include = [1]
+
+    trj_sub = trj.atom_slice(trj.top.select(residue_selection_query))
     resSeqs = [res.resSeq for res in trj_sub.topology.residues]
-    frames = [get_residue_distance_for_frame(trj_sub, i) for i in range(1,2)]
+    frames = [get_residue_distance_for_frame(trj_sub, i) for i in frames_to_include]
     get_top_stacking(trj_sub, frames[0])
     display_arrays_as_video([get_frame_average(frames)], resSeqs, seconds_per_frame=10)
+
     display_arrays_as_video(frames, resSeqs, seconds_per_frame=10)
 
     # All Residues one large matrix

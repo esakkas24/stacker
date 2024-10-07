@@ -72,7 +72,7 @@ def create_axis_labels(res_indicies : typing.ArrayLike, tick_distance : int = 10
 def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies : typing.ArrayLike, 
                             seconds_per_frame : int = 10, tick_distance : int = 10,
                             outfile_prefix : str = '', scale_limits : tuple = (0,7),
-                            scale_style : str = 'bellcurve', xy_line : bool = False) -> None:
+                            scale_style : str = 'bellcurve', xy_line : bool = True) -> None:
     '''Displays list/array of 2D NumPy arrays as matrix heatmaps
 
     Takes list/array of 2D NumPy arrays and treats them as frames 
@@ -120,7 +120,13 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies
         vmin, vmax = scale_limits
         neg = ax.imshow(hist, cmap = newcmp, vmin=vmin, vmax=vmax, interpolation = 'nearest')
         ax.set_title('Distance Between Residues Center of Geometries')
+        ax.set_title('Distance Between Residues Center of Geometries')
+        ax.set_xlabel('Residue Index')  
+        ax.xaxis.set_label_position('top')  
+        ax.set_ylabel('Residue Index')  
         colorbar = fig.colorbar(neg, ax=ax, location='right', anchor=(0, 0.3), shrink=0.7)
+        colorbar.ax.set_title('Center of\nGeometry\nDist. (Å)')
+
         ticks, labels = create_axis_labels(res_indicies, tick_distance)
         plt.xticks(ticks, labels, rotation = 'vertical')
         plt.yticks(ticks, labels)
@@ -274,6 +280,11 @@ def visualize_two_residue_movement_heatmap(csv_filepath : str, plot_outfile : st
     ax = kdeplot(x=theta_values_rad, y=rho_values, fill=True, levels = [0.1*i for i in range(1,11)], cbar = True, cmap = 'gist_earth_r')
     plt.xlabel('')
     plt.ylabel('')
+
+    cbar = ax.collections[-1].colorbar
+    levels = [0.1*i for i in range(1,11)]
+    formatted_labels = ['{:.1f}'.format(level) for level in levels]
+    cbar.set_ticklabels(formatted_labels)
 
     # Draw nucleotide ring in polar plot
     r_for_ring = np.ones(7)*1.3
