@@ -225,8 +225,7 @@ def visualize_two_residue_movement_scatterplot(csv_filepath : str, plot_outfile 
     theta_values = bottaro_values['theta']
     theta_values_rad = np.radians(theta_values)
 
-    # convert rho values from nm to Angstroms
-    rho_values = bottaro_values['rho_dist'] * 10 
+    rho_values = bottaro_values['rho_dist']
 
     ax = set_polar_grid()
     ax.scatter(theta_values_rad, rho_values, color = 'purple', s=1, alpha = 0.5)
@@ -274,7 +273,7 @@ def visualize_two_residue_movement_heatmap(csv_filepath : str, plot_outfile : st
     theta_values_rad = np.radians(theta_values)
 
     # convert rho values from nm to Angstroms
-    rho_values = bottaro_values['rho_dist'] * 10 
+    rho_values = bottaro_values['rho_dist']
 
     ax = set_polar_grid()
     ax = kdeplot(x=theta_values_rad, y=rho_values, fill=True, levels = [0.1*i for i in range(1,11)], cbar = True, cmap = 'gist_earth_r')

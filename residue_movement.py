@@ -36,7 +36,9 @@ def collect_atom_locations_by_frame(traj : md.Trajectory, residue_num : int, ato
     topology = traj.topology
     number_of_frames = traj.n_frames
     atomic_index = topology.select("name " + atom_id + " and residue " + str(residue_num))[0]
-    coords_by_frame = [tuple(traj.xyz[frame_idx, atomic_index,:]) for frame_idx in range(0, number_of_frames)]
+
+    # multiply by 10 to convert nanometer units in trajectory.xyz to Angstroms
+    coords_by_frame = [tuple(traj.xyz[frame_idx, atomic_index,:] * 10) for frame_idx in range(0, number_of_frames)]
     return coords_by_frame
 
 def calc_center_3pts(a : Vector, b : Vector, c : Vector) -> Vector:
