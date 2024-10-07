@@ -159,7 +159,7 @@ def run_python_command() -> None:
         parser.add_argument("-B", "--input_B", metavar="INPUT_FILE", help="Input .txt file containing per-frame stacking information for a second fingerprint, creates fingerprint where top left is initial input, bottom right is second fingerprint.\n Used in lieu of running stacking fingerprint analysis again.\nTXT file can be created by running `python stacker.py -s system -d OUTPUT_FILE`\n-r flag must match the residues used to create the TXT file")
         parser.add_argument("-l", "--limits", metavar="LIMITS", help="limits of the color scale, default = (0,7)", default = '0,7')
         parser.add_argument("-y", "--scale_style", metavar="SCALE_STYLE", help=" style of color scale. {bellcurve, gradient}", default = 'bellcurve')
-        parser.add_argument("-h", "--threads", metavar="N_THREADS", help="Use multithreading with INT worker threads", required = False, default = 1)
+        parser.add_argument("-h", "--threads", metavar="N_THREADS", help="Use multithreading with INT worker threads", type = int, required = False, default = 1)
 
 
     if args.script == 'stack_events':
