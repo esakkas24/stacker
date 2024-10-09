@@ -8,7 +8,7 @@ import seaborn as sns
 ### VARIABLES ###
 
 N_RESIDUES = 127
-N_CLUSTERS = 4
+N_CLUSTERS = 2
 dataset_names = ['tGGG_aCCU_+1GCU', 'tGGG_aCCU_+1CGU', 'tUAG_aCUA_+1GCU', 'tUAG_aCUA_+1CGU']  # Add more dataset names as needed
 indir = '/home66/esakkas/STACKER/DATA/' # Directory with data.txt output from StACKER (created with -d flag)
 outdir = '/home66/esakkas/STACKER/DATA/' # Outdir for clustering results and kmeans plot
@@ -162,8 +162,8 @@ def run_kmeans(blinded_data : typing.ArrayLike, N_CLUSTERS : int = N_CLUSTERS,
                 outfile.write(f'{cluster+1} {name} {count[cluster]}\n')
         outfile.close()
 
-def plot_cluster_trj_data(input_file : str, n_cluster: int, seeded: bool = False, output_dir : str = '') -> None:
-    '''Plots the output of run_kmeans() to a file kmeans_plot.cluster_{n_cluster}.png
+def plot_cluster_trj_data(input_file : str, n_cluster: int, outfile : str, seeded: bool = False) -> None:
+    '''Plots the output of run_kmeans() to a PNG file
     
     Creates a grouped bar plot of the number of frames from each trajectory in each cluster
     following KMeans clustering. Writes the plot output to a PNG file.
@@ -172,11 +172,13 @@ def plot_cluster_trj_data(input_file : str, n_cluster: int, seeded: bool = False
         input_file : str
              Path to the input file containing clustering results.
         n_cluster : int
-             The number of clusters in this KMeans clustering sequence.
-        seeded : bool
-             True if a random seed was assigned during clustering using kseed, False otherwise.
-        output_dir : str
+             The number of clusters in this KMeans clustering sequence
+        outfile : str
              Directory where the output PNG file will be saved.
+        seeded : bool, default = False
+             Set to True if a random seed was assigned during clustering using kseed, False otherwise.
+             Used to label plot title, no other impact.
+        
 
     Returns:
         None
@@ -201,11 +203,12 @@ def plot_cluster_trj_data(input_file : str, n_cluster: int, seeded: bool = False
             
     g.set_titles(col_template="{col_name}")
     plt.tight_layout()
-    plt.savefig(output_dir + f"kmeans_plot.cluster_{n_cluster}.png")
+    plt.savefig(outfile)
 
 if __name__ == "__main__":
-    data_arrays = read_and_preprocess_data(dataset_names, indir, N_RESIDUES)
-    blinded_data = create_kmeans_input(data_arrays)
-    run_kmeans(blinded_data, N_CLUSTERS, outdir = outdir)
+    #data_arrays = read_and_preprocess_data(dataset_names, indir, N_RESIDUES)
+    #blinded_data = create_kmeans_input(data_arrays)
+    #run_kmeans(blinded_data, N_CLUSTERS, outdir = outdir)
     cluster_file = outdir + 'clustering_results_' + str(N_CLUSTERS) + '.txt'
-    plot_cluster_trj_data(cluster_file, n_cluster = N_CLUSTERS, seeded = False, output_dir = outdir)
+    outfile = f"{outdir}kmeans_plot.cluster_{N_CLUSTERS}.png"
+    plot_cluster_trj_data(cluster_file, n_cluster = N_CLUSTERS, seeded = False, outfile = outdir)
