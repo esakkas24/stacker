@@ -587,6 +587,7 @@ def compare_routine() -> None:
 
     subset_data = merged_data[(merged_data['Value' + file1_source] < 4) | (merged_data['Value' + file2_source] < 4)]
     subset_data = subset_data.sort_values(by='Discrepancy', ascending=False)
+    subset_data = subset_data.rename(columns={'Value' + file1_source : 'AvgDist' + file1_source, 'Value' + file2_source : 'AvgDist' + file2_source})
     print(subset_data)
 
 def create_parent_directories(outfile_prefix : str) -> None:
