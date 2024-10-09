@@ -88,8 +88,11 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies
             Number of seconds to display each matrix for.
         tick_distance : int, default = 10
             Distance between ticks in blocks of consecutive residues
+        outfile : str
+            Image output filepath to write a single SSF to. Format infered from file extension.
+                png, pdf, ps, eps and svg supported.
         outfile_prefix : str
-            prefix for filepath of the file to write frames to. Format infered from file extension.
+            prefix for Image filepath to write multiple frames to. Format infered from file extension.
                 png, pdf, ps, eps and svg supported.
         scale_limits : tuple, default = (0,7)
             limits of the color scale
@@ -163,6 +166,8 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies
         plt.pause(seconds_per_frame)
         if outfile_prefix:
             plt.savefig(outfile_prefix + "frame" + str(frame_num) + ".png")
+        elif outfile:
+            plt.savefig(outfile)
         colorbar.remove()
         frame_num+=1
 

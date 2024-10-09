@@ -459,9 +459,35 @@ def system_routine() -> None:
     sorted_res.sort()
 
     create_parent_directories(args.output)
-    display_arrays_as_video(avg_frames, sorted_res, seconds_per_frame=1, outfile_prefix=args.output, scale_limits=scale_limits, scale_style=args.scale_style)
+    display_arrays_as_video(avg_frames, sorted_res, seconds_per_frame=1, outfile=args.output, scale_limits=scale_limits, scale_style=args.scale_style)
 
 def combine_frames(frames_A, frames_B):
+    """Combines two 2D numpy arrays (frames_A and frames_B) into a single array.
+
+    This function takes two 2D numpy arrays of the same shape and combines them
+    into a new array. The upper triangular part (including the diagonal) of the 
+    resulting array is filled with the corresponding elements from frames_A, 
+    while the lower triangular part (including the diagonal) is filled with the 
+    corresponding elements from frames_B.
+
+    Args:
+        frames_A : numpy.ndarray
+            A 2D numpy array.
+        frames_B : numpy.ndarray 
+            A 2D numpy array of the same shape as frames_A.
+
+    Returns:
+        numpy.ndarray 
+            A new 2D numpy array with combined elements from frames_A and frames_B.
+
+    Example:
+    >>> frames_A = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+    >>> frames_B = np.array([[9, 8, 7], [6, 5, 4], [3, 2, 1]])
+    >>> combine_frames(frames_A, frames_B)
+    array([[1., 2., 3.],
+           [6., 5., 6.],
+           [3., 2., 9.]])
+    """
     Am, An = frames_A.shape
     array_to_fill = np.zeros((Am,An))
     for i in range(Am):
@@ -498,11 +524,54 @@ def stack_events_routine() -> None:
     get_top_stacking(trj_sub, frame, output_csv = args.output, n_events = args.n_events, include_adjacent = args.include_adjacent)
 
 def compare_routine() -> None:
-    '''Runs the routine to return the most changed stacking events
+    '''Runs the routine to return the most changed stacking events—the residue pairs with the largest change in average distance between
+        two trajectories.
 
     Example Usage:
     [user]$ python stacker.py -s compare -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997 -SA _tUAG_aCUA_+1GCU -SB _tUAG_aCUA_+1CGU
     '''
+    def find_row_with_header(filename, header):
+        '''Get the row number in file that matches a given header
+
+        Given a filename that represents a spreadsheet, find the row number
+            in the file that contains the passed header string.
+
+        Args:
+            filename : str
+                file path to spreadsheet file
+            header : str
+                string representng a header
+        Returns:
+            row_number : int
+                row number where the header appears in the file
+        '''
+        with open(filename, 'r') as file:
+            for idx, line in enumerate(file):
+                if line.strip() == header:
+                    return idx
+    
+    def preprocess_df(df):
+        '''Preprocess the DataFrame by sorting Row and Column alphabetically
+        
+        Args:
+            df : Pandas Dataframe
+                inputted df with at least columns Row, Column
+        Returns:
+            df : Pandas Dataframe
+                inputted df with rows organized alphabetically at the Row, Column variable
+        '''
+        cols_to_sort = ['Row','Column']
+        df = pd.concat([pd.DataFrame(np.sort(df[cols_to_sort].values), columns=cols_to_sort, index=df.index), df[df.columns[~df.columns.isin(cols_to_sort)]]], axis=1)
+        return df
+    
+    def process_df(filename : str) -> pd.DataFrame:
+        '''Read filename and discard the header to identify the entries.
+        '''
+        row_number = find_row_with_header(filename, header)
+        data = pd.read_csv(filename, sep='\t', skiprows=row_number)
+        data = preprocess_df(data)
+        return data
+
     file1 = args.file_A
     file2 = args.file_B
     file1_source = args.source_A
@@ -510,28 +579,14 @@ def compare_routine() -> None:
 
     header = "Row\tColumn\tValue"
 
-    # Process first file
-    row_number = find_row_with_header(file1,header)
-    data1 = pd.read_csv(file1, sep='\t', skiprows=row_number)
-    data1 = preprocess_df(data1)
-    print(data1.shape)
+    data1 = process_df(file1)
+    data2 = process_df(file2)
 
-    # Read the second file
-    row_number = find_row_with_header(file2,header)
-    data2 = pd.read_csv(file2, sep='\t', skiprows=row_number)
-    data2 = preprocess_df(data2)
-    print(data2.shape)
-
-    # Find discrepancies
     merged_data = pd.merge(data1, data2, on=['Row', 'Column'], suffixes=[file1_source, file2_source], how='inner')
     merged_data['Discrepancy'] = abs(merged_data['Value' + file1_source] - merged_data['Value' + file2_source])
-    print(merged_data.shape)
-
-    print(merged_data[(merged_data['Row'] == 15) & (merged_data['Column'] == 27)])
 
     subset_data = merged_data[(merged_data['Value' + file1_source] < 4) | (merged_data['Value' + file2_source] < 4)]
     subset_data = subset_data.sort_values(by='Discrepancy', ascending=False)
-    print(subset_data.shape)
     print(subset_data)
 
 def create_parent_directories(outfile_prefix : str) -> None:
@@ -539,40 +594,6 @@ def create_parent_directories(outfile_prefix : str) -> None:
     dir_name = os.path.dirname(outfile_prefix)
     if dir_name == '': dir_name = '.'
     os.makedirs(dir_name, exist_ok=True)
-
-def preprocess_df(df):
-    '''Preprocess the DataFrame by sorting Row and Column alphabetically
-    
-    Args:
-        df : Pandas Dataframe
-            inputted df with at least columns Row, Column
-    Returns:
-        df : Pandas Dataframe
-            inputted df with rows organized alphabetically at the Row, Column variable
-    '''
-    cols_to_sort = ['Row','Column']
-    df = pd.concat([pd.DataFrame(np.sort(df[cols_to_sort].values), columns=cols_to_sort, index=df.index), df[df.columns[~df.columns.isin(cols_to_sort)]]], axis=1)
-    return df
-
-def find_row_with_header(filename, header):
-    '''Get the row number in file that matches a given header
-
-    Given a filename that represents a spreadsheet, find the row number
-        in the file that contains the passed header string.
-
-    Args:
-        filename : str
-            file path to spreadsheet file
-        header : str
-            string representng a header
-    Returns:
-        row_number : int
-            row number where the header appears in the file
-    '''
-    with open(filename, 'r') as file:
-        for idx, line in enumerate(file):
-            if line.strip() == header:
-                return idx
 
 if __name__ == '__main__':
     run_python_command()
