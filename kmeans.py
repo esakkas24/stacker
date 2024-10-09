@@ -206,9 +206,9 @@ def plot_cluster_trj_data(input_file : str, n_cluster: int, outfile : str, seede
     plt.savefig(outfile)
 
 if __name__ == "__main__":
-    #data_arrays = read_and_preprocess_data(dataset_names, indir, N_RESIDUES)
-    #blinded_data = create_kmeans_input(data_arrays)
-    #run_kmeans(blinded_data, N_CLUSTERS, outdir = outdir)
+    data_arrays = read_and_preprocess_data(dataset_names, indir, N_RESIDUES)
+    blinded_data = create_kmeans_input(data_arrays)
+    run_kmeans(blinded_data, N_CLUSTERS, outdir = outdir)
     cluster_file = outdir + 'clustering_results_' + str(N_CLUSTERS) + '.txt'
     outfile = f"{outdir}kmeans_plot.cluster_{N_CLUSTERS}.png"
     plot_cluster_trj_data(cluster_file, n_cluster = N_CLUSTERS, seeded = False, outfile = outdir)
