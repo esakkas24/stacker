@@ -5,7 +5,7 @@
 Many of the Features are capable of being run directly from the command line, with various flags indicating the specific functions and inputs to run. The basic method to run a command is to run the following command line prompt:
 
 ```
-python3 stacker.py -s ROUTINE [FLAGS]
+python3 stacker.py -s <ROUTINE> [FLAGS]
 ```
 
 Information on additional flags can be determined by running:
