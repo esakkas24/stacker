@@ -79,6 +79,8 @@ We can test it again with a 3200-frame trajectory and see that the data for 3200
 ```
 [user]$ python3 stacker.py -s pairwise -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb -o command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200fr
 ames.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 
+```
+```
 [user]$ wc -l command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv
     3201 command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv
 ```
@@ -86,7 +88,7 @@ ames.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6
 ### Get Residue Distance
 Users can determine the distance between two residues given an input frame. Below we get the distance between residues 425 and 426 in frame 2.
 ```
-
+python stacker.py -s ROUTINE -trj TRAJECTORY_FILENAME -top TOPOLOGY_FILENAME [-f FRAME_NUM] -r RESIDUES [-b N_FRAMES] [-a ATOM_NAMES] [-h]
 ```
 
 ```
