@@ -71,7 +71,7 @@ def create_axis_labels(res_indicies : typing.ArrayLike, tick_distance : int = 10
         
 def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies : typing.ArrayLike, 
                             seconds_per_frame : int = 10, tick_distance : int = 10,
-                            outfile_prefix : str = '', scale_limits : tuple = (0,7),
+                            outfile_prefix : str = '', scale_limits : tuple = (0,7), outfile : str = '',
                             scale_style : str = 'bellcurve', xy_line : bool = True) -> None:
     '''Displays list/array of 2D NumPy arrays as matrix heatmaps
 
