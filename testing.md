@@ -99,6 +99,7 @@ s 426,427 --atom_names C2,C4,C6
 ```
 
 We can match our output with the third-party software PyMol, which shows the same distance of 6.885 between Res426 and Res427 (1-indexed in PyMol)
+
 ![PIC](docs/images/three_res_distances.png)
 
 ### Create System Stacking Fingerprint (SSF)
