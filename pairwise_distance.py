@@ -1,9 +1,9 @@
 import mdtraj as md
 import numpy as np
 from numpy import typing
-from residue_movement import calc_center_3pts
-from vector import *
-from visualization import NoResidues, create_axis_labels, display_arrays_as_video
+from .residue_movement import calc_center_3pts
+from .vector import *
+from .visualization import NoResidues, create_axis_labels, display_arrays_as_video
 import sys
 import concurrent.futures
 
@@ -13,37 +13,43 @@ class MultiFrameTraj(Exception):
 _NUCLEOTIDE_NAMES = {"A", "A5", "A3", "G", "G5", "G3", "C", "C5", "C3",
                      "T" "T5", "T3", "U", "U5", "U3", "INO"}
 
-def calculate_residue_distance(trajectory : md.Trajectory, 
-                               res1_num : int, res2_num : int, 
-                                res1_atoms : tuple = ("C2","C4","C6"),
-                                res2_atoms : tuple = ("C2","C4","C6"),
-                                frame : int = 1) -> Vector:
-    '''Calculates the vector between two residues with x,y,z units in Angstroms
+def calculate_residue_distance(trajectory: md.Trajectory, 
+                               res1_num: int, 
+                               res2_num: int, 
+                               res1_atoms: tuple = ("C2", "C4", "C6"),
+                               res2_atoms: tuple = ("C2", "C4", "C6"),
+                               frame: int = 1) -> Vector:
+    """
+    Calculates the vector between two residues with x, y, z units in Angstroms.
 
-    Calcualtes the distance between the center of two residues. The center is denoted
-        by the average x,y,z position of three passed atoms for each residue (typically
-        every other carbon on the 6-C ring of the nucleotide base).
+    Calculates the distance between the center of two residues. The center is defined
+    by the average x, y, z position of three passed atoms for each residue (typically
+    every other carbon on the 6-carbon ring of the nucleotide base).
 
-    Args:
-        trajectory : md.Trajectory 
-            single frame trajectory
-        res1_num : int
-            1-indexed residue number of the first residue (PDB Column 5)
-        res2_num : int
-            1-indexed residue number of the second residue (PDB Column 5)
-        res1_atoms : tuple, default = ("C2","C4","C6")
-            a tuple of the atom names of the three atoms whose position
-            to average to find the center of residue 1 
-        res2_atoms : tuple, default = ("C2","C4","C6")
-            a tuple of the atom names of the three atoms whose position
-            to average to find the center of residue 2 [("C2","C4","C6")]
-        frame : int, default = 1
-            1-indexed frame number of trajectory to get distance in
+    Parameters
+    ----------
+    trajectory : md.Trajectory
+        Single frame trajectory.
+    res1_num : int
+        1-indexed residue number of the first residue (PDB Column 5).
+    res2_num : int
+        1-indexed residue number of the second residue (PDB Column 5).
+    res1_atoms : tuple, default=("C2", "C4", "C6")
+        Atom names whose positions are averaged to find the center of residue 1.
+    res2_atoms : tuple, default=("C2", "C4", "C6")
+        Atom names whose positions are averaged to find the center of residue 2.
+    frame : int, default=1
+        1-indexed frame number of trajectory to calculate the distance.
+
+    Returns
+    -------
+    distance_res12 : Vector
+        Vector from the center of geometry of residue 1 to residue 2.
     
-    Returns:
-        distance_res12 : Vector
-            Vector from center of geometry of residue 1 to center of geometry of residue 2
-    '''
+    See Also
+    --------
+    get_residue_distance_for_frame : Calculates pairwise distances between all residues in a given frame.
+    """
     trajectory = trajectory[frame-1]
 
     # Correct for mdtraj 0-indexing
@@ -73,31 +79,33 @@ def calculate_residue_distance(trajectory : md.Trajectory,
     distance_res12 = res2_center_of_geometry - res1_center_of_geometry
     return distance_res12
 
-def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int, 
-                                res1_atoms : tuple = ("C2","C4","C6"),
-                                res2_atoms : tuple = ("C2","C4","C6"),
-                                write_output : bool = True) -> typing.ArrayLike:
-    '''Calculates pairwise the distance between all residues in a given frame
+def get_residue_distance_for_frame(trajectory: md.Trajectory, 
+                                   frame: int, 
+                                   res1_atoms: tuple = ("C2", "C4", "C6"),
+                                   res2_atoms: tuple = ("C2", "C4", "C6"),
+                                   write_output: bool = True) -> typing.ArrayLike:
+    """
+    Calculates pairwise distances between all residues in a given frame.
 
-    Args:
-        trajectory : md.Trajectory
-            trajectory to analyze (must have topology aspect)
-        frame : int
-            1-indexed frame to analyze
-        res1_atoms : tuple, default = ("C2","C4","C6")
-            a tuple of the atom names of the three atoms whose position
-            to average to find the center of residue 1 
-        res2_atoms : tuple, default = ("C2","C4","C6")
-            a tuple of the atom names of the three atoms whose position
-            to average to find the center of residue 2 
-        write_output : bool, default = False
-            Write a loading screen to standard output
+    Parameters
+    ----------
+    trajectory : md.Trajectory
+        Trajectory to analyze (must have a topology).
+    frame : int
+        1-indexed frame to analyze.
+    res1_atoms : tuple, default=("C2", "C4", "C6")
+        Atom names whose positions are averaged to find the center of residue 1.
+    res2_atoms : tuple, default=("C2", "C4", "C6")
+        Atom names whose positions are averaged to find the center of residue 2.
+    write_output : bool, default=True
+        If True, displays a loading screen to standard output.
+
+    Returns
+    -------
+    pairwise_distances : array_like
+        Matrix where position (i, j) represents the distance from residue i to residue j.
     
-    Returns:
-        pairwise_distances : array_like
-            matrix where position i,j represents the distance from 
-            residue i to residue j
-    '''
+    """
     trajectory = trajectory[frame-1]
     topology = trajectory.topology
     n_residues = trajectory.n_residues
@@ -138,32 +146,34 @@ def get_residue_distance_for_frame(trajectory : md.Trajectory, frame : int,
     pairwise_res_magnitudes = get_magnitude(pairwise_distances)
     return(pairwise_res_magnitudes)
 
+def get_residue_distance_for_trajectory(trajectory: md.Trajectory, 
+                                        frames: typing.ArrayLike,
+                                        res1_atoms: tuple = ("C2", "C4", "C6"),
+                                        res2_atoms: tuple = ("C2", "C4", "C6"),
+                                        threads: int = 1) -> typing.ArrayLike:
+    """
+    Calculates pairwise distances for all residues across all frames of a trajectory.
 
-def get_residue_distance_for_trajectory(trajectory : md.Trajectory, frames : typing.ArrayLike,
-                                res1_atoms : tuple = ("C2","C4","C6"),
-                                res2_atoms : tuple = ("C2","C4","C6"),
-                                threads : int = 1) -> typing.ArrayLike:
-    '''Calculates SSF all residues for all frames of a trajectory
+    Parameters
+    ----------
+    trajectory : md.Trajectory
+        Trajectory to analyze (must have a topology).
+    frames : array_like
+        Frame indices to analyze (1-indexed).
+    res1_atoms : tuple, default=("C2", "C4", "C6")
+        Atom names whose positions are averaged to find the center of residue 1.
+    res2_atoms : tuple, default=("C2", "C4", "C6")
+        Atom names whose positions are averaged to find the center of residue 2.
+    threads : int, default=1
+        Number of threads to use for parallel processing.
 
-    Args:
-        trajectory : md.Trajectory
-            trajectory to analyze (must have topology aspect)
-        frames : array_like
-            frame indices to create SSFs for (1-indexed)
-        res1_atoms : tuple, default = ("C2","C4","C6")
-            a tuple of the atom names of the three atoms whose position
-            to average to find the center of residue 1 
-        res2_atoms : tuple, default = ("C2","C4","C6")
-            a tuple of the atom names of the three atoms whose position
-            to average to find the center of residue 2 
-        threads : int, default = 1
-            Use multithreading with INT worker threads
+    Returns
+    -------
+    ssf_per_frame : array_like
+        List where `pairwise_distances[f]` is the output of
+        `get_residue_distance_for_frame(trajectory, f, res1_atoms, res2_atoms)`.
     
-    Returns:
-        ssf_per_frame : array_like
-            list where pairwise_distances[f] is the output of
-            get_residue_distance_for_frame(trajectory, f, res1_atoms, res2_atoms)
-    '''
+    """
     write_output = False
     if threads <= 1:
         write_output = True
@@ -175,19 +185,26 @@ def get_residue_distance_for_trajectory(trajectory : md.Trajectory, frames : typ
 
 
 def increment_residue(residue_id : str) -> str:
-    '''Increments residue ID by 1
+    '''
+    Increments residue ID by 1
     
     Useful when converting from mdtraj 0-index residue naming to 1-indexed
     
-    Args:
-        residue_id : str
-            The residue id given by trajectory.topology.residue(i)
-    Returns:
+    Parameters
+    ----------
+    residue_id : str
+        The residue id given by trajectory.topology.residue(i)
+
+    Returns
+    -------
         incremented_id : str
             The residue id with the sequence number increased by 1
-    Examples:
+
+    Examples
+    --------
     >>> increment_residue('G43')
     'G44'
+
     '''
     letter_part = ''.join(filter(str.isalpha, residue_id))
     number_part = ''.join(filter(str.isdigit, residue_id))
@@ -196,23 +213,26 @@ def increment_residue(residue_id : str) -> str:
 
 def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, output_csv : str = '',
                      n_events : int = 5, include_adjacent : bool = False) -> None:
-    '''Returns top stacking events for a given stacking fingerprint
+    '''
+    Returns top stacking events for a given stacking fingerprint
 
     Given a trajectory and a stacking fingerprint made from get_residue_distance_for_frame(),
-        prints the residue pairings with the strongest stacking events (ie. the residue pairings
-        with center of geometry distance closest to 3.5Å)
+    prints the residue pairings with the strongest stacking events (ie. the residue pairings
+    with center of geometry distance closest to 3.5Å)
 
-    Args:
-        trajectory : md.Trajectory
-            trajectory used to get the stacking fingerprint
-        matrix : typing.ArrayLike
-            stacking fingerprint matrix created by get_residue_distance_for_frame()
-        output_csv : str, default = '',
-            output filename of the tab-separated txt file to write data to. If empty, data printed to standard output
-        n_events : int, default = 5
-            maximum number of stacking events to display, if -1 display all residue pairings
-        include_adjacent : bool, default = False
-            True if adjacent residues should be included in the printed output
+    Parameters
+    ----------    
+    trajectory : md.Trajectory
+        trajectory used to get the stacking fingerprint
+    matrix : typing.ArrayLike
+        stacking fingerprint matrix created by get_residue_distance_for_frame()
+    output_csv : str, default = '',
+        output filename of the tab-separated txt file to write data to. If empty, data printed to standard output
+    n_events : int, default = 5
+        maximum number of stacking events to display, if -1 display all residue pairings
+    include_adjacent : bool, default = False
+        True if adjacent residues should be included in the printed output
+
     '''
     top_stacking_indices = np.argsort(np.abs(matrix - 3.5), axis = None)
     rows, cols = np.unravel_index(top_stacking_indices, matrix.shape)
@@ -246,17 +266,21 @@ def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, outp
             print(f"{res1}\t{res2}\t{value:.2f}")
     
 def get_frame_average(frames : typing.ArrayLike) -> typing.ArrayLike:
-    '''Calculates an average pairwise matrix across multiple frames of a trajectory
+    '''
+    Calculates an average pairwise matrix across multiple frames of a trajectory
 
-    Args:
-        frames : array_like
-            List or array of 2D NumPy arrays representing a pairwise distance matrix
-            of an MD structure. All 2D NumPy arrays must be of the same dimenstions.
-    Returns:
-        avg_frame : array_like
-            A single 2D NumPy array representing a pairwise distance matrix where each
-            position i,j is the average distance from residue i to j across all matrices
-            in frames.
+    Parameters
+    ----------
+    frames : numpy.typing.ArrayLike
+        List or array of 2D NumPy arrays representing a pairwise distance matrix
+        of an MD structure. All 2D NumPy arrays must be of the same dimenstions.
+        
+    Returns
+    -------
+    avg_frame : numpy.typing.ArrayLike
+        A single 2D NumPy array representing a pairwise distance matrix where each
+        position i,j is the average distance from residue i to j across all matrices
+        in frames.
     '''
     avg_frame = np.mean(frames, axis = 0)
     return avg_frame

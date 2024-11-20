@@ -2,28 +2,61 @@ import mdtraj as md
 
 def filter_traj(trajectory_filename : str, topology_filename : str, 
                         residues_desired : set = {}, atomnames_desired : set = {}) -> md.Trajectory:
-    '''Filters an input trajectory to only the specified atoms and residues
+    """
+    Filters an input trajectory to only the specified atoms and residues
 
-    Filteres an input trajectory that contains all of the atoms in a trajectory to only
-        the desired atoms at the desired residues (eg. the atoms necessary to find the 
-        center of geometry of a residue). If residues_desired or atomnames_desired are
-        empty, all residues or atoms are included respectively.
+    Filteres an input trajectory that contains all of the atoms in a topology to only
+    the desired atoms at the desired residues (eg. the atoms necessary to find the 
+    center of geometry of a residue). If residues_desired or atomnames_desired are
+    empty, all residues or atoms are included respectively.
 
-    Args:
-        trajectory_filename : str
-            path to file of the concatenated trajectory. Should be resampled to the
-            1 in 50 frames sampled trajectories for each replicate.
-        topology_filename : str
-            path to file of the topology of the molecule
-        residues_desired : set
-            1-indexed residue numbers of residues to keep in the trajectory
-        atomnames_desired : set 
-            atomnames to keep in the trajectory
+    Parameters
+    ----------
+    trajectory_filename : str
+        filepath of the trajectory
+    topology_filename : str
+        filepath of the topology of the molecule
+    residues_desired : set
+        1-indexed residue numbers of residues to keep in the trajectory
+    atomnames_desired : set 
+        atomnames to keep in the trajectory
 
-    Returns:
-        filtered_trajectory : md.Trajectory
-            a trajectory object representing the filtered structure across all frames
-    '''
+    Returns
+    -------
+    filtered_trajectory : md.Trajectory
+        a trajectory object representing the filtered structure across all frames
+
+    See Also
+    --------
+    file_manipulation.filter_traj_to_pdb : Filters an input trajectory to only the specified 
+                                           atoms and residues and outputs to pdb
+    
+    Notes
+    -----
+    Inputed trajectory should have 1-indexed Residue Indices, 
+    Outputed trajectory object will be 0-indexed.
+
+    Examples
+    --------
+    >>> from stacker.file_manipulation import *
+    >>> filtered_traj = filter_traj('stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 'stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmto\
+    p', {426,427}, {'C2','C4','C6'})
+    WARNING: Residue Indices are expected to be 1-indexed
+    Reading trajectory...
+    Reading topology...
+    Filtering trajectory...
+    WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed
+    >>> table, bonds = filtered_traj.topology.to_dataframe()
+    >>> print(table)
+    serial name element  resSeq resName  chainID segmentID
+    0   None   C6       C     425       G        0          
+    1   None   C2       C     425       G        0          
+    2   None   C4       C     425       G        0          
+    3   None   C6       C     426       C        0          
+    4   None   C4       C     426       C        0          
+    5   None   C2       C     426       C        0       
+
+    """
     print("WARNING: Residue Indices are expected to be 1-indexed")
     
     print("Reading trajectory...")
@@ -56,56 +89,75 @@ def filter_traj(trajectory_filename : str, topology_filename : str,
 
     return filtered_trajectory
 
+
 def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str, 
                        output_pdb_filename : str,
                         residues_desired : set = {},
                         atomnames_desired : set = {}) -> None:
-    '''Filters an input trajectory to only the specified atoms and residues and outputs to pdb
+    """
+    Filters an input trajectory to only the specified atoms and residues and outputs to pdb
 
     Filteres an input trajectory that contains all of the atoms in a trajectory to only
         the desired atoms at the desired residues (eg. the atoms necessary to find the 
         center of geometry of a residue) and writes the output to a specified pdb file.
         If residues_desired or atomnames_desired are empty, all residues or atoms are included respectively.
 
-    Args:
-        trajectory_filename : str
-            path to file of the concatenated trajectory. Should be resampled to the
-            1 in 50 frames sampled trajectories for each replicate.
-        topology_filename : str
-            path to file of the topology of the molecule
-        output_pdb_filename : str
-            path to the output pdb file
-        residues_desired : set
-            1-indexed residue numbers of residues to keep in the trajectory
-        atomnames_desired : set 
-            atomnames to keep in the trajectory
+    Parameters
+    ----------
+    trajectory_filename : str
+        path to file of the concatenated trajectory. Should be resampled to the
+        1 in 50 frames sampled trajectories for each replicate.
+    topology_filename : str
+        path to file of the topology of the molecule
+    output_pdb_filename : str
+        path to the output pdb file
+    residues_desired : set
+        1-indexed residue numbers of residues to keep in the trajectory
+    atomnames_desired : set 
+        atomnames to keep in the trajectory
 
-    Returns:
+    Returns
+    -------
         None
-    '''
+
+    See Also
+    --------
+    file_manipulation.filter_traj : Filters an input trajectory to only the specified atoms and residues
+    
+    Notes
+    -----
+    Inputed trajectory should have 1-indexed Residue Indices, 
+    Outputed trajectory object will be 0-indexed.
+
+    """
     filtered_trajectory = filter_traj(trajectory_filename, topology_filename, residues_desired, atomnames_desired)
     filtered_trajectory.save_pdb(output_pdb_filename)
     print("WARNING: Output file atom, residue, and chain indices are zero-indexed")
     print("Filtered trajectory written to: ", output_pdb_filename)
 
 
-def file_convert(trajectory_filename : str, topology_filename : str, output_file : str) -> None:
-    '''Converts mdcrd trajectory input file to new output type
-    
-    Output filetype determined by output_file extension. Uses mdtraj.save() commands to convert 
-    trajectory files to various filetypes mdtraj.save_mdcrd(), mdtraj.save_pdb(), mdtraj.save_xyz(), etc
+def file_convert(trajectory_filename: str, topology_filename: str, output_file: str) -> None:
+    """
+    Converts an mdcrd trajectory input file to a new output type.
 
-    Args:
-        trajectory_filename : str
-            path to file of the concatenated trajectory (.mdcrd file). Should be resampled to the
-            1 in 50 frames sampled trajectories for each replicate.
-        topology_filename : str
-            path to file of the topology of the molecule (.prmtop file)
-        output_file : str
-            output filename (include .mdcrd, .pdb, etc.)
-    Returns:
-        None
-    '''
+    The output file type is determined by the `output_file` extension. Uses `mdtraj.save()` commands to convert 
+    trajectory files to various file types such as `mdtraj.save_mdcrd()`, `mdtraj.save_pdb()`, `mdtraj.save_xyz()`, etc.
+
+    Parameters
+    ----------
+    trajectory_filename : str
+        Path to the file of the concatenated trajectory (.mdcrd file). Should be resampled to the
+        1 in 50 frames sampled trajectories for each replicate.
+    topology_filename : str
+        Path to the file of the topology of the molecule (.prmtop file).
+    output_file : str
+        Output filename (include .mdcrd, .pdb, etc.).
+
+    Returns
+    -------
+    None
+
+    """
     print("WARNING: Output file atom, residue, and chain indices are zero-indexed")
     trajectory = md.load(trajectory_filename, top = topology_filename)
     trajectory.save(output_file)

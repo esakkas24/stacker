@@ -12,35 +12,41 @@ class NoResidues(Exception):
 def create_parent_directories(outfile_prefix : str) -> None:
     '''Creates necessary parent directories to write an outfile given a prefix'''
     dir_name = os.path.dirname(outfile_prefix)
+    if dir_name == '': dir_name = '.'
     os.makedirs(dir_name, exist_ok=True)
 
-def create_axis_labels(res_indicies : typing.ArrayLike, tick_distance : int = 10) -> list:
-    '''Designates the axis labels to use in the pairwise plot
-    
+def create_axis_labels(res_indicies: typing.ArrayLike, tick_distance: int = 10) -> list:
+    """
+    Designates the axis labels to use in the pairwise plot.
+
     Returns the x-axis tick positions and labels to use on the ticks based on the 
-        residues used in a specific pairwise analysis. Meant to be used when many 
-        disjoint sets of residue indices are used. Ticks will be present every tick_distance 
-        residues in a collection of adjacent residues, and a tick will exist at both
-        ends of any consecutive residue sequence.
+    residues used in a specific pairwise analysis. Meant to be used when many 
+    disjoint sets of residue indices are used. Ticks will be present every `tick_distance` 
+    residues in a collection of adjacent residues, and a tick will exist at both
+    ends of any consecutive residue sequence.
 
-    Args:
-        res_indicies : list
-            The list of residue indices used in the pairwise analysis.
-        tick_distance : int, default = 10
-            Distance between ticks in blocks of consecutive residues
-    Returns:
-        tick_locations : array_like
-            List of tick positions (0-based) to place labels on in the axes
-        tick_labels : array_like
-            List of labels to place at the adjacent tick locations
+    Parameters
+    ----------
+    res_indicies : list
+        The list of residue indices used in the pairwise analysis.
+    tick_distance : int, default = 10
+        Distance between ticks in blocks of consecutive residues.
 
-    Examples:
+    Returns
+    -------
+    tick_locations : list
+        List of tick positions (0-based) to place labels on in the axes.
+    tick_labels : list
+        List of labels to place at the adjacent tick locations.
+
+    Examples
+    --------
     >>> create_axis_labels([0,1,2,3,4,5,6,7,8,9,10,11,12,98,99,100])
-    [0,10,12,13,15], [0,10,12,98,100]
+    [0, 10, 12, 13, 15], [0, 10, 12, 98, 100]
 
     >>> create_axis_labels([94,95,96,97,98,99,100,408,409,410,411,412,413,414,415,416,417,418,419,420,421,422,423,424,425,426,427,428])
-    [0,6,7,17,27], [94,100,408,418,428]
-    '''
+    [0, 6, 7, 17, 27], [94, 100, 408, 418, 428]
+    """
     n_residues = len(res_indicies)
 
     if n_residues < 1: raise NoResidues("pairwise analysis must include at least one residue")
@@ -69,42 +75,45 @@ def create_axis_labels(res_indicies : typing.ArrayLike, tick_distance : int = 10
     
     return tick_locations, tick_labels
         
-def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies : typing.ArrayLike, 
-                            seconds_per_frame : int = 10, tick_distance : int = 10,
-                            outfile_prefix : str = '', scale_limits : tuple = (0,7), outfile : str = '',
-                            scale_style : str = 'bellcurve', xy_line : bool = True) -> None:
-    '''Displays list/array of 2D NumPy arrays as matrix heatmaps
+def display_arrays_as_video(numpy_arrays: list | typing.ArrayLike, res_indicies: typing.ArrayLike, 
+                            seconds_per_frame: int = 10, tick_distance: int = 10,
+                            outfile_prefix: str = '', scale_limits: tuple = (0, 7), outfile: str = '',
+                            scale_style: str = 'bellcurve', xy_line: bool = True) -> None:
+    """
+    Displays list/array of 2D NumPy arrays as matrix heatmaps.
 
     Takes list/array of 2D NumPy arrays and treats them as frames 
-    in a video, filling in a grid at position i,j by the value 
-    at i,j in the array.
+    in a video, filling in a grid at position i, j by the value 
+    at i, j in the array.
 
-    Args:
-        numpy_arrays: array_like
-            List or array of 2D NumPy arrays
-        res_indicies : list
-            The list of residue indices used in the pairwise analysis.
-        seconds_per_frame : int, default = 10
-            Number of seconds to display each matrix for.
-        tick_distance : int, default = 10
-            Distance between ticks in blocks of consecutive residues
-        outfile : str
-            Image output filepath to write a single SSF to. Format infered from file extension.
-                png, pdf, ps, eps and svg supported.
-        outfile_prefix : str
-            prefix for Image filepath to write multiple frames to. Format infered from file extension.
-                png, pdf, ps, eps and svg supported.
-        scale_limits : tuple, default = (0,7)
-            limits of the color scale
-        scale_styles : str, default = 'bellcurve'
-            style of color scale. {bellcurve, gradient}
-        xy_line : bool, default = False
-            draw x = y line to separate matrix halfs
-        
-    Returns:
-        None
-        Displays video of NumPy arrays
-    '''
+    Parameters
+    ----------
+    numpy_arrays : array_like
+        List or array of 2D NumPy arrays.
+    res_indicies : list
+        The list of residue indices used in the pairwise analysis.
+    seconds_per_frame : int, default = 10
+        Number of seconds to display each matrix for.
+    tick_distance : int, default = 10
+        Distance between ticks in blocks of consecutive residues.
+    outfile : str
+        Image output filepath to write a single SSF to. Format inferred from file extension.
+        png, pdf, ps, eps, and svg supported.
+    outfile_prefix : str
+        Prefix for image filepath to write multiple frames to. Format inferred from file extension.
+        png, pdf, ps, eps, and svg supported.
+    scale_limits : tuple, default = (0, 7)
+        Limits of the color scale.
+    scale_style : str, default = 'bellcurve'
+        Style of color scale. {bellcurve, gradient}
+    xy_line : bool, default = True
+        Draw x = y line to separate matrix halves.
+
+    Returns
+    -------
+    None
+        Displays video of NumPy arrays.
+    """
     orange_colormap = mpl.colormaps['Oranges_r'].resampled(100)
 
     if scale_style == 'gradient':
@@ -172,19 +181,23 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indicies
         frame_num+=1
 
 def set_polar_grid() -> mpl.projections.polar.PolarAxes:
-    '''Set up axes for polar plots
+    """
+    Set up axes for polar plots.
 
     Creates polar plot background for two-residue movement comparison
     with theta 0 to 360, a radial maximum of 15 Angstroms, and a visualization 
     of the perspective residue at the center.
 
-    Args:
-        None
-    Returns:
-        ax : matplotlib.projections.polar.PolarAxes
-            axis object for the created polar plot
-    
-    '''
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    ax : matplotlib.projections.polar.PolarAxes
+        Axis object for the created polar plot.
+
+    """
     fig = plt.figure()
     ax = fig.add_subplot(polar=True)
 
@@ -203,25 +216,30 @@ def set_polar_grid() -> mpl.projections.polar.PolarAxes:
     ax.grid(color='gray', linestyle='--', linewidth=0.5)
     return ax
 
-def visualize_two_residue_movement_scatterplot(csv_filepath : str, plot_outfile : str = '', frame_list : set = {}) -> None:
-    '''Creates scatterplot of two-residue movement relative to each other.
+def visualize_two_residue_movement_scatterplot(csv_filepath: str, plot_outfile: str = '', frame_list: set = {}) -> None:
+    """
+    Creates scatterplot of two-residue movement relative to each other.
 
     Takes the data created in residue_movement and visualizes it as a polar coordinate
-        scatterplot similar to the Figure D link in Proposal Feature 4.
+    scatterplot similar to the Figure D link in Proposal Feature 4.
 
-    Args:
-        csv_filepath : str
-            filepath to csv file containing data on the movement
-            of two residues relative to each other (r, rho, and theta values). Created
-            in residue_movement
-        plot_outfile : str
-            filepath of the image file to write to. Format infered from file extension.
-                png, pdf, ps, eps and svg supported.
-        frame_list : set, default = {}
-            Set of frames to use in csv, if empty use all frames
-    Returns:
-        None
-    '''
+    Parameters
+    ----------
+    csv_filepath : str
+        Filepath to csv file containing data on the movement
+        of two residues relative to each other (r, rho, and theta values). Created
+        in residue_movement.
+    plot_outfile : str
+        Filepath of the image file to write to. Format inferred from file extension.
+        png, pdf, ps, eps, and svg supported.
+    frame_list : set, default = {}
+        Set of frames to use in csv, if empty use all frames.
+
+    Returns
+    -------
+    None
+    
+    """
     bottaro_values = pd.read_csv(csv_filepath, sep=',')
 
     if frame_list:
@@ -250,25 +268,30 @@ def visualize_two_residue_movement_scatterplot(csv_filepath : str, plot_outfile 
         plt.show()
 
 
-def visualize_two_residue_movement_heatmap(csv_filepath : str, plot_outfile : str = '', frame_list : set = {}) -> None:
-    '''Creates heatmap of two-residue movement relative to each other.
+def visualize_two_residue_movement_heatmap(csv_filepath: str, plot_outfile: str = '', frame_list: set = {}) -> None:
+    """
+    Creates heatmap of two-residue movement relative to each other.
 
     2D shaded contour plot of the density of points in the 
     visualize_two_residue_movement_scatterplot() scatterplot.
 
-    Args:
-        csv_filepath : str
-            filepath to csv file containing data on the movement
-            of two residues relative to each other (r, rho, and theta values). Created
-            in residue_movement
-        plot_outfile : str
-            filepath of the image file to write to. Format infered from file extension.
-                png, pdf, ps, eps and svg supported.
-        frame_list : set, default = {}
-            Set of frames to use in csv, if empty use all frames
-    Returns:
-        None
-    '''
+    Parameters
+    ----------
+    csv_filepath : str
+        Filepath to csv file containing data on the movement
+        of two residues relative to each other (r, rho, and theta values). Created
+        in residue_movement.
+    plot_outfile : str
+        Filepath of the image file to write to. Format inferred from file extension.
+        png, pdf, ps, eps, and svg supported.
+    frame_list : set, default = {}
+        Set of frames to use in csv, if empty use all frames.
+
+    Returns
+    -------
+    None
+    
+    """
     bottaro_values = pd.read_csv(csv_filepath, sep=',')
 
     if frame_list:

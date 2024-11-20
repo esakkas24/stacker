@@ -2,10 +2,10 @@ import argparse
 import sys, os
 import numpy as np
 import pandas as pd
-from file_manipulation import *
-from residue_movement import write_bottaro_to_csv
-from pairwise_distance import calculate_residue_distance, get_residue_distance_for_frame, get_residue_distance_for_trajectory, get_frame_average, get_top_stacking
-from visualization import display_arrays_as_video, visualize_two_residue_movement_heatmap, visualize_two_residue_movement_scatterplot
+from .file_manipulation import *
+from .residue_movement import write_bottaro_to_csv
+from .pairwise_distance import calculate_residue_distance, get_residue_distance_for_frame, get_residue_distance_for_trajectory, get_frame_average, get_top_stacking
+from .visualization import display_arrays_as_video, visualize_two_residue_movement_heatmap, visualize_two_residue_movement_scatterplot, create_parent_directories
 import random
 
 class InvalidRoutine(Exception):
@@ -208,25 +208,36 @@ class SmartIndexingAction(argparse.Action):
     and generates a list of individual frame numbers. Modifies the namespace by setting the attribute specified by the 'dest' parameter to the
     list of individual frame numbers.
 
-    Args:
-        parser: argparse.ArgumentParser
-            The argparse parser object.
-        namespace: argparse.Namespace
-            The argparse namespace.
-        values: str
-            The input string containing frame numbers and ranges.
-        option_string: str, default=None
-            The option string.
+    Parameters
+    ----------
+    parser: argparse.ArgumentParser
+        The argparse parser object.
+    namespace: argparse.Namespace
+        The argparse namespace.
+    values: str
+        The input string containing frame numbers and ranges.
+    option_string: str, default=None
+        The option string.
 
-    Returns:
-        None
+    Attributes
+    ----------
+    dest : str
+        The attribute name in the namespace where the parsed list will be stored.
 
-    Examples:
-        >>> parser = argparse.ArgumentParser()
-        >>> parser.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze", required=False, action=SmartIndexingAction)
-        >>> args = parser.parse_args(["-fl", "1-20,34,25,50-100"])
-        >>> print(args.frame_list)
-        [1, 2, ..., 20, 34, 25, 50, 51, ..., 100]
+    Methods
+    -------
+    __call__(parser, namespace, values, option_string=None)
+        Parses the provided string of values into a sorted list of integers and
+        sets it as an attribute in the namespace.
+
+    Examples
+    --------
+    >>> parser = argparse.ArgumentParser()
+    >>> parser.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze", required=False, action=SmartIndexingAction)
+    >>> args = parser.parse_args(["-fl", "1-20,34,25,50-100"])
+    >>> print(args.frame_list)
+    [1, 2, ..., 20, 34, 25, 50, 51, ..., 100]
+    
     '''
     def __call__(self, parser, namespace, values, option_string=None):
         frame_list = []
@@ -243,7 +254,7 @@ def convert_to_python_command() -> None:
     '''Converts a parsed command to use to the correct subroutine and runs the routine
 
     Converts the specified script to a python command and runs it with the associated inputs
-        based on the flags.
+    based on the flags.
     '''
     command = args.script
 
@@ -263,14 +274,40 @@ def convert_to_python_command() -> None:
         raise InvalidRoutine(args.script + " is not a valid routine")
     
 def filter_traj_routine() -> None:
-    '''Runs the filter input trajectory to PDB routine
-    
-    Uses the passed in flags to run the filter_traj_to_pdb() script
-        with the determined inputs from passed in flags
-        
-    Example Usage:
-        [user]$ python3 stacker.py -s filter_traj -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -r 426,427 -a C2,C4,C6
-    '''
+    """
+    Executes the routine for filtering an input trajectory file and converting it to a PDB file.
+
+    This function uses provided command-line arguments to call the `filter_traj_to_pdb()` function
+    with specified inputs, such as the trajectory file, topology file, output file location, 
+    residues to retain, and atom names to retain.
+
+    Raises
+    ------
+    ResEmpty
+        If the `--residues` argument is not provided.
+    AtomEmpty
+        If the `--atom_names` argument is not provided.
+
+    Example Usage
+    -------------
+    Command-line usage with sample arguments:
+        $ python3 stacker.py -s filter_traj \
+            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
+            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
+            -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb \
+            -r 426,427 -a C2,C4,C6
+
+    Notes
+    -----
+    - The `args.residues` argument should be a list of residue indices to retain.
+    - The `args.atom_names` argument should be a comma-separated string of atom names to retain.
+    - Output directories are created automatically if they do not exist.
+
+    See Also
+    --------
+    filter_traj_to_pdb : The core function that performs the trajectory filtering and PDB generation.
+
+    """
     if args.residues:
         residues_desired = set(args.residues)
     else:
@@ -285,15 +322,53 @@ def filter_traj_routine() -> None:
     filter_traj_to_pdb(trajectory_filename=args.trajectory, topology_filename=args.topology, output_pdb_filename=args.output, residues_desired=residues_desired, atomnames_desired=atomnames_desired)
 
 def bottaro_routine() -> None:
-    '''Runs the residue movement routine to create a CSV of the Bottaro values for a trajectory
-    
-    Runs the residue movement subroutine. Parses the inputs and creates a CSV containing the 
-        r, rho, and theta values for each frame of the PDB trajectory between the two residues.
-        
-    Example Usage:
-        [user]$ python3 stacker.py -s bottaro -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt scatter
-        [user]$ python3 stacker.py -s pairwise -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat
-        '''
+    """
+    Executes the residue movement routine to generate Bottaro values for a trajectory.
+
+    This routine calculates the `r`, `rho`, and `theta` values for each frame of a PDB trajectory 
+    between two specified residues and stores them in a CSV file. Optionally, it visualizes the 
+    movement using heatmaps or scatter plots.
+
+    Raises
+    ------
+    AtomEmpty
+        If required atom names or residue indices are not provided.
+
+    Parameters
+    ----------
+    None
+        The routine relies on global `args`, which must be set via command-line arguments or 
+        equivalent argument parsing.
+
+    Notes
+    -----
+    - `args.trajectory` and `args.topology` are required for generating an intermediate PDB if one 
+      is not already provided.
+    - Supports heatmap and scatter plot visualizations for residue movement.
+    - Removes intermediate files (`pdb` and `csv`) if `--no_inter` flag is specified.
+
+    Example Usage
+    -------------
+    Command-line usage:
+        $ python3 stacker.py -s bottaro \
+            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
+            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
+            -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb \
+            -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv \
+            -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt scatter
+
+        $ python3 stacker.py -s bottaro \
+            -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb \
+            -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv \
+            -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat
+
+    See Also
+    --------
+    filter_traj_to_pdb : Filters trajectory and generates an intermediate PDB.
+    write_bottaro_to_csv : Writes residue movement calculations to a CSV.
+    visualize_two_residue_movement_heatmap : Creates a heatmap for residue movement.
+    visualize_two_residue_movement_scatterplot : Creates a scatter plot for residue movement.
+    """
     trj_prefix = args.trajectory.rsplit('.', 1)[0] 
 
     if args.pdb_input == '':
@@ -358,11 +433,52 @@ def bottaro_routine() -> None:
             os.remove(output_name)
 
 def res_distance_routine() -> None:
-    '''Runs the Residue distance routine to determine the distance between the center of masses of two given residues
+    """
+    Calculates the distance between the centers of mass of two specified residues.
+
+    This routine filters the trajectory based on the specified residues and atom names, 
+    and calculates the distances for either a single frame or multiple frames if bootstrapping is enabled.
+
+    Raises
+    ------
+    ResEmpty
+        If fewer or more than two residues are specified, or if no residues are provided.
+    AtomEmpty
+        If no atom names are provided.
+
+    Parameters
+    ----------
+    None
+        The routine relies on global `args` for all input values.
+
+    Notes
+    -----
+    - The `args.residues` argument must contain exactly two residues.
+    - The `args.atom_names` argument is required to specify the atoms involved in the calculation.
+    - If the `--bootstrap` argument is provided, distances are calculated across a specified number of randomly sampled frames.
+    - If no bootstrap is performed, the distance is calculated for a single frame.
+
+    Example Usage
+    -------------
+    Command-line usage:
+        $ python3 stacker.py -s res_distance \
+            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
+            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
+            -f 2 --residues 426,427 --atom_names C2,C4,C6
+
+    Outputs
+    -------
+    If bootstrapping is enabled:
+        - Prints the mean distance, standard deviation, and percentiles for the distances.
+    Otherwise:
+        - Prints the calculated distance for the specified frame.
+
+    See Also
+    --------
+    filter_traj : Filters the trajectory for the specified residues and atom names.
+    calculate_residue_distance : Calculates the distance between residues for a given frame.
     
-    Example Usage:
-        [user]$ python3 stacker.py -s res_distance -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -f 2 --residues 426,427 --atom_names C2,C4,C6
-        '''
+    """
     if len(args.residues) != 2:
         raise ResEmpty("Must include only 2 residues")
     elif args.residues:
@@ -403,14 +519,59 @@ def res_distance_routine() -> None:
         print(res_distances[0])
 
 def system_routine() -> None:
-    '''Runs the System Stacking Fingerprint routine to create a single SSF for a chosen frame
+    """
+    Runs the System Stacking Fingerprint (SSF) routine to generate a single SSF for a specified frame or range of frames.
 
-    Runs the routine to create a SSF for a passed in trajectory and frame.
+    This routine processes a trajectory to create SSFs based on inter-residue distances and outputs either visualizations 
+    or raw data for further analysis. The user can provide input fingerprints or generate them from trajectory files.
 
-    Example Usage:
-        [user]$ python3 stacker.py -s system -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2 
-        [user]$ python stacker.py -s ssf -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2 -g 10 -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
-        '''
+    Raises
+    ------
+    FileNotFoundError
+        If the specified trajectory or topology file does not exist.
+    ValueError
+        If the provided input files have incompatible dimensions or unexpected formatting.
+
+    Parameters
+    ----------
+    None
+        The routine relies on global `args` for all input values.
+
+    Notes
+    -----
+    - If `args.input` is provided, the routine will use pre-calculated fingerprint data.
+    - If `args.residues` is specified, only those residues are considered in the calculation.
+    - SSFs can be created for individual frames, a list of frames, or all frames in the trajectory.
+    - If `args.input_B` is provided, two SSFs are combined for analysis.
+
+    Outputs
+    -------
+    - Saves raw SSF data to `args.data_output` if specified.
+    - Generates visualizations of the SSF data as videos saved to `args.output`.
+    - Outputs information about the most stacked residues if `args.get_stacking` is specified.
+
+    Example Usage
+    -------------
+    Command-line usage:
+        $ python3 stacker.py -s system \
+            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
+            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
+            -r 90-215 -fl 1-2 
+        $ python3 stacker.py -s ssf \
+            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
+            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
+            -r 90-215 -fl 1-2 -g 10 \
+            -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png \
+            -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
+
+    See Also
+    --------
+    filter_traj : Filters the trajectory for the specified residues.
+    get_residue_distance_for_trajectory : Computes inter-residue distances for a trajectory.
+    combine_frames : Combines two SSFs into a single array for comparison.
+    display_arrays_as_video : Visualizes SSF arrays and saves them as video files.
+    
+    """
     if args.residues:
         residues_desired = set(args.residues)
     else:
@@ -462,7 +623,8 @@ def system_routine() -> None:
     display_arrays_as_video(avg_frames, sorted_res, seconds_per_frame=1, outfile=args.output, scale_limits=scale_limits, scale_style=args.scale_style)
 
 def combine_frames(frames_A, frames_B):
-    """Combines two 2D numpy arrays (frames_A and frames_B) into a single array.
+    """
+    Combines two 2D numpy arrays (frames_A and frames_B) into a single array.
 
     This function takes two 2D numpy arrays of the same shape and combines them
     into a new array. The upper triangular part (including the diagonal) of the 
@@ -470,23 +632,27 @@ def combine_frames(frames_A, frames_B):
     while the lower triangular part (including the diagonal) is filled with the 
     corresponding elements from frames_B.
 
-    Args:
-        frames_A : numpy.ndarray
-            A 2D numpy array.
-        frames_B : numpy.ndarray 
-            A 2D numpy array of the same shape as frames_A.
+    Parameters
+    ----------
+    frames_A : numpy.ndarray
+        A 2D numpy array.
+    frames_B : numpy.ndarray 
+        A 2D numpy array of the same shape as frames_A.
 
-    Returns:
-        numpy.ndarray 
-            A new 2D numpy array with combined elements from frames_A and frames_B.
+    Returns
+    -------
+    numpy.ndarray 
+        A new 2D numpy array with combined elements from frames_A and frames_B.
 
-    Example:
+    Example
+    -------
     >>> frames_A = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
     >>> frames_B = np.array([[9, 8, 7], [6, 5, 4], [3, 2, 1]])
     >>> combine_frames(frames_A, frames_B)
     array([[1., 2., 3.],
            [6., 5., 6.],
            [3., 2., 9.]])
+
     """
     Am, An = frames_A.shape
     array_to_fill = np.zeros((Am,An))
@@ -497,13 +663,51 @@ def combine_frames(frames_A, frames_B):
     return array_to_fill
 
 def stack_events_routine() -> None:
-    '''Runs the routine to get the residue pairings with the most pi stacking (center of geometry distance closest to 3.5Å)
+    """
+    Identifies residue pairs with the most π-stacking interactions.
 
-    Example Usage:
-    [user]$ python stacker.py -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -f 1 -n 5
-    [user]$ python stacker.py -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-100 -fl 1-10 -n 5
-    [user]$ python stacker.py -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -n 5 -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
-    '''
+    This routine analyzes a molecular dynamics trajectory and identifies residue pairs 
+    with the smallest center of geometry (COG) distances, typically indicating strong 
+    π-stacking. It outputs the top `n_events` residue pairings based on user input.
+
+    Raises
+    ------
+    FileNotFoundError
+        If the trajectory or topology files are not found.
+    ValueError
+        If input parameters are invalid or incompatible with the data.
+
+    Parameters
+    ----------
+    None
+        This function relies on global `args` for input values.
+
+    Outputs
+    -------
+    - CSV file listing the top stacking events (`args.output`), if specified.
+
+    Example Usage
+    -------------
+    Command-line usage:
+        $ python stacker.py -s stack_events \
+            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
+            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
+            -r 90-215 -f 1 -n 5
+        $ python stacker.py -s stack_events \
+            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
+            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
+            -r 90-100 -fl 1-10 -n 5
+        $ python stacker.py -s stack_events \
+            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
+            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
+            -r 90-215 -n 5 -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
+
+    See Also
+    --------
+    filter_traj : Filters trajectory data based on residue selection.
+    get_top_stacking : Extracts top stacking events from a trajectory.
+
+    """
     if args.residues:
         residues_desired = set(args.residues)
     else:
@@ -524,26 +728,69 @@ def stack_events_routine() -> None:
     get_top_stacking(trj_sub, frame, output_csv = args.output, n_events = args.n_events, include_adjacent = args.include_adjacent)
 
 def compare_routine() -> None:
-    '''Runs the routine to return the most changed stacking events—the residue pairs with the largest change in average distance between
-        two trajectories.
+    """
+    Compares π-stacking events between two trajectories.
 
-    Example Usage:
-    [user]$ python stacker.py -s compare -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997 -SA _tUAG_aCUA_+1GCU -SB _tUAG_aCUA_+1CGU
-    '''
+    This routine analyzes two trajectory-derived stacking event files and identifies 
+    residue pairs with the largest change in average distances between the two systems. 
+    It processes the data, merges it, calculates discrepancies, and outputs the sorted 
+    results.
+
+    Raises
+    ------
+    FileNotFoundError
+        If one or both input files are not found.
+    ValueError
+        If the input files have incompatible formats or lack the required headers.
+
+    Parameters
+    ----------
+    None
+        This function relies on global `args` for input values.
+
+    Outputs
+    -------
+    - Printed output of residue pairs with the largest discrepancies.
+
+    Example Usage
+    -------------
+    Command-line usage:
+        $ python stacker.py -s compare \
+            -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 \
+            -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997 \
+            -SA _tUAG_aCUA_+1GCU -SB _tUAG_aCUA_+1CGU
+
+    Notes
+    -----
+    - The input files must contain tab-separated values with the header `Row\tColumn\tValue`.
+    - Residue pairings are sorted alphabetically before comparison to ensure consistent results.
+
+    See Also
+    --------
+    find_row_with_header : Identifies the header row in a data file.
+    preprocess_df : Prepares the input dataframes for comparison.
+    pd.merge : Merges the two dataframes for discrepancy calculations.
+    
+    """
     def find_row_with_header(filename, header):
-        '''Get the row number in file that matches a given header
+        '''
+        Get the row number in file that matches a given header
 
         Given a filename that represents a spreadsheet, find the row number
-            in the file that contains the passed header string.
+        in the file that contains the passed header string.
 
-        Args:
-            filename : str
-                file path to spreadsheet file
-            header : str
-                string representng a header
-        Returns:
-            row_number : int
-                row number where the header appears in the file
+        Parameters
+        ----------
+        filename : str
+            file path to spreadsheet file
+        header : str
+            string representng a header
+
+        Returns
+        -------
+        row_number : int
+            row number where the header appears in the file
+
         '''
         with open(filename, 'r') as file:
             for idx, line in enumerate(file):
@@ -551,22 +798,26 @@ def compare_routine() -> None:
                     return idx
     
     def preprocess_df(df):
-        '''Preprocess the DataFrame by sorting Row and Column alphabetically
+        '''
+        Preprocess the DataFrame by sorting Row and Column alphabetically
         
-        Args:
-            df : Pandas Dataframe
-                inputted df with at least columns Row, Column
-        Returns:
-            df : Pandas Dataframe
-                inputted df with rows organized alphabetically at the Row, Column variable
+        Parameters
+        ----------
+        df : Pandas Dataframe
+            inputted df with at least columns Row, Column
+
+        Returns
+        -------
+        df : Pandas Dataframe
+            inputted df with rows organized alphabetically at the Row, Column variable
+
         '''
         cols_to_sort = ['Row','Column']
         df = pd.concat([pd.DataFrame(np.sort(df[cols_to_sort].values), columns=cols_to_sort, index=df.index), df[df.columns[~df.columns.isin(cols_to_sort)]]], axis=1)
         return df
     
     def process_df(filename : str) -> pd.DataFrame:
-        '''Read filename and discard the header to identify the entries.
-        '''
+        '''Read filename and discard the header to identify the entries'''
         row_number = find_row_with_header(filename, header)
         data = pd.read_csv(filename, sep='\t', skiprows=row_number)
         data = preprocess_df(data)
@@ -589,12 +840,6 @@ def compare_routine() -> None:
     subset_data = subset_data.sort_values(by='Discrepancy', ascending=False)
     subset_data = subset_data.rename(columns={'Value' + file1_source : 'AvgDist' + file1_source, 'Value' + file2_source : 'AvgDist' + file2_source})
     print(subset_data)
-
-def create_parent_directories(outfile_prefix : str) -> None:
-    '''Creates necessary parent directories to write an outfile given a prefix'''
-    dir_name = os.path.dirname(outfile_prefix)
-    if dir_name == '': dir_name = '.'
-    os.makedirs(dir_name, exist_ok=True)
 
 if __name__ == '__main__':
     run_python_command()
