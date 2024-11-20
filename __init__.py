@@ -1,3 +1,9 @@
+"""Command Line Options for StACKER
+
+This module contains the Python routines called when StACKER
+is run in the command line.
+"""
+
 from .residue_movement import *
 from .visualization import *
 from .vector import *

@@ -1,0 +1,1318 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>stacker &#8212; StACKER Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=528dc5d9"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/stacker';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/stackerlogo.png" class="logo__image only-light" alt="StACKER Documentation - Home"/>
+    <img src="../_static/stacker_logo_dark.png" class="logo__image only-dark pst-js-only" alt="StACKER Documentation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/esakkas24/stacker" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for stacker</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.residue_movement</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.visualization</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.vector</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.pairwise_distance</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.file_manipulation</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<div class="viewcode-block" id="InvalidRoutine">
+<a class="viewcode-back" href="../stacker.html#stacker.InvalidRoutine">[docs]</a>
+<span class="k">class</span> <span class="nc">InvalidRoutine</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="ResEmpty">
+<a class="viewcode-back" href="../stacker.html#stacker.ResEmpty">[docs]</a>
+<span class="k">class</span> <span class="nc">ResEmpty</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="AtomEmpty">
+<a class="viewcode-back" href="../stacker.html#stacker.AtomEmpty">[docs]</a>
+<span class="k">class</span> <span class="nc">AtomEmpty</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="FrameEmpty">
+<a class="viewcode-back" href="../stacker.html#stacker.FrameEmpty">[docs]</a>
+<span class="k">class</span> <span class="nc">FrameEmpty</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="block_printing">
+<a class="viewcode-back" href="../stacker.html#stacker.block_printing">[docs]</a>
+<span class="k">def</span> <span class="nf">block_printing</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Disable printing to standard output</span>
+<span class="sd">    </span>
+<span class="sd">    Adapted from https://stackoverflow.com/a/8391735&#39;&#39;&#39;</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">devnull</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="enable_printing">
+<a class="viewcode-back" href="../stacker.html#stacker.enable_printing">[docs]</a>
+<span class="k">def</span> <span class="nf">enable_printing</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Enable printing to standard output</span>
+<span class="sd">    </span>
+<span class="sd">    Adapted from https://stackoverflow.com/a/8391735&#39;&#39;&#39;</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">__stdout__</span></div>
+
+
+<div class="viewcode-block" id="run_python_command">
+<a class="viewcode-back" href="../stacker.html#stacker.run_python_command">[docs]</a>
+<span class="k">def</span> <span class="nf">run_python_command</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Reads the user&#39;s passed in command line and runs the command</span>
+
+<span class="sd">    Reads the command line input, runs the associated command with the</span>
+<span class="sd">        added flags.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">add_help</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawTextHelpFormatter</span><span class="p">,</span> 
+                                     <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Wrapper to run stacker subroutines using the -s flag.</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+                                        <span class="s2">&quot;More info on each routine given by `python stacker.py -s ROUTINE -h`&quot;</span><span class="p">)</span>
+    <span class="k">global</span> <span class="n">args</span><span class="p">;</span>
+    <span class="n">args</span><span class="p">,</span> <span class="n">remaining_args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">()</span>
+    
+    <span class="c1"># If no flags specified at all</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="n">args</span><span class="p">))</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">remaining_args</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;usage: stacker.py -s ROUTINE [-h]</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;Wrapper to run stacker subroutines using the -s flag.</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;More info on each routine given by `python stacker.py -s ROUTINE -h` or `python stacker.py -s ROUTINE --help`</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;options:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+            <span class="s1">&#39;-s ROUTINE, --script ROUTINE</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+            <span class="s1">&#39;            Name of command to use. Options for ROUTINE:</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;              filter_traj:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+            <span class="s1">&#39;                    filters trajectory and topology files to desired residue numbers and atom names</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;              bottaro OR pairwise OR psf:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+            <span class="s1">&#39;                    Create a Pairwise Stacking Fingerprint (PSF): polar plots like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;              res_distance:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;                    Get the distance between two residues in a given frame</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;              system OR ssf:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;                    Create a System Stacking Fingerprint (SSF) with pairwise distances for each residue</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;              stack_events:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;                    Get list of residues with most stacking events (distance closest to 3.5Å)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;              compare:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+            <span class="s1">&#39;                    Get the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+            <span class="s1">&#39;-h, --help            show this help message and exit</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># help when no script specified</span>
+    <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;-s&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">remaining_args</span> <span class="ow">and</span> <span class="s1">&#39;--script&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">remaining_args</span> <span class="ow">and</span> <span class="p">(</span><span class="s1">&#39;--help&#39;</span> <span class="ow">in</span> <span class="n">remaining_args</span> <span class="ow">or</span> <span class="s1">&#39;-h&#39;</span> <span class="ow">in</span> <span class="n">remaining_args</span><span class="p">)):</span> 
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-s&quot;</span><span class="p">,</span> <span class="s2">&quot;--script&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;ROUTINE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Name of command to use. Options for ROUTINE:</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+                            <span class="s2">&quot;  filter_traj:</span><span class="se">\n\t</span><span class="s2">filters trajectory and topology files to desired residue numbers and atom names</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+                            <span class="s2">&quot;  bottaro OR pairwise OR psf:</span><span class="se">\n\t</span><span class="s2">Create Polar Stacking Fingerprint like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+                            <span class="s2">&quot;  res_distance:</span><span class="se">\n\t</span><span class="s2">Get the distance between two residues in a given frame</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>\
+                            <span class="s2">&quot;  system OR ssf:</span><span class="se">\n\t</span><span class="s2">Create a System Stacking Fingerprint of distances by residue</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+                            <span class="s2">&quot;  stack_events:</span><span class="se">\n\t</span><span class="s2">Get list of residues with most stacking events (distance closest to 3.5Å)</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>\
+                            <span class="s2">&quot;  compare:</span><span class="se">\n\t</span><span class="s2">Get the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+                             <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;filter_traj&#39;</span><span class="p">,</span> <span class="s1">&#39;bottaro&#39;</span><span class="p">,</span> <span class="s1">&#39;pairwise&#39;</span><span class="p">,</span> <span class="s1">&#39;psf&#39;</span><span class="p">,</span> <span class="s1">&#39;res_distance&#39;</span><span class="p">,</span> <span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="s1">&#39;ssf&#39;</span><span class="p">,</span> <span class="s1">&#39;stack_events&#39;</span><span class="p">,</span> <span class="s1">&#39;compare&#39;</span><span class="p">])</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-h&quot;</span><span class="p">,</span> <span class="s2">&quot;--help&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;show this help message and exit&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;help&#39;</span><span class="p">)</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-s&quot;</span><span class="p">,</span> <span class="s2">&quot;--script&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;ROUTINE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Name of command to use. Options for ROUTINE:</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+                            <span class="s2">&quot;  filter_traj:</span><span class="se">\n\t</span><span class="s2">filters trajectory and topology files to desired residue numbers and atom names</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+                            <span class="s2">&quot;  bottaro OR pairwise OR psf:</span><span class="se">\n\t</span><span class="s2">Create Polar Stacking Fingerprint like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+                            <span class="s2">&quot;  res_distance:</span><span class="se">\n\t</span><span class="s2">Get the distance between two residues in a given frame</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>\
+                            <span class="s2">&quot;  system OR ssf:</span><span class="se">\n\t</span><span class="s2">Create a System Stacking Fingerprint of distances by residue</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+                            <span class="s2">&quot;  stack_events:</span><span class="se">\n\t</span><span class="s2">Get list of residues with most stacking events (distance closest to 3.5Å)</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>\
+                            <span class="s2">&quot;  compare:</span><span class="se">\n\t</span><span class="s2">Get the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+                             <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;filter_traj&#39;</span><span class="p">,</span> <span class="s1">&#39;bottaro&#39;</span><span class="p">,</span> <span class="s1">&#39;pairwise&#39;</span><span class="p">,</span> <span class="s1">&#39;psf&#39;</span><span class="p">,</span> <span class="s1">&#39;res_distance&#39;</span><span class="p">,</span> <span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="s1">&#39;ssf&#39;</span><span class="p">,</span> <span class="s1">&#39;stack_events&#39;</span><span class="p">,</span> <span class="s1">&#39;compare&#39;</span><span class="p">])</span>
+      
+    <span class="n">args</span><span class="p">,</span> <span class="n">remaining_args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">()</span>
+
+    <span class="c1"># Organizes all possible arguments</span>
+    <span class="c1">## Determines which script/subroutine is to be run</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">script</span> <span class="o">==</span> <span class="s1">&#39;filter_traj&#39;</span><span class="p">:</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Filters trajectory and topology files to desired residue numbers and atom names and outputs to a PDB</span><span class="se">\n\n</span><span class="s1">Examples:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+                            <span class="s1">&#39;[user]$ python3 stacker.py -s filter_traj -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -r 426,427 -a C2,C4,C6&#39;</span>
+        
+        <span class="n">required_group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s1">&#39;Required Arguments&#39;</span><span class="p">)</span>
+        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-trj&quot;</span><span class="p">,</span> <span class="s2">&quot;--trajectory&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;TRAJECTORY_FILENAME&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filepath to trajectory file for the MD simulation&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-top&quot;</span><span class="p">,</span> <span class="s2">&quot;--topology&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;TOPOLOGY_FILENAME&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filepath to Topology file for the MD simulation&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="s2">&quot;--output&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;OUTPUT_FILE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filepath of PDB to output to&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="c1"># optional arguments</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-r&quot;</span><span class="p">,</span> <span class="s2">&quot;--residues&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;RESIDUES&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Smart-indexed list of 1-indexed residues, also accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span> <span class="o">=</span> <span class="n">SmartIndexingAction</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-a&quot;</span><span class="p">,</span> <span class="s2">&quot;--atom_names&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;ATOM_NAMES&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Comma-separated list of atom names to filter&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;C2,C4,C6&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">script</span> <span class="o">==</span> <span class="s1">&#39;bottaro&#39;</span> <span class="ow">or</span> <span class="n">args</span><span class="o">.</span><span class="n">script</span> <span class="o">==</span> <span class="s1">&#39;pairwise&#39;</span> <span class="ow">or</span> <span class="n">args</span><span class="o">.</span><span class="n">script</span> <span class="o">==</span> <span class="s1">&#39;psf&#39;</span><span class="p">:</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Create Polar Stacking Fingerprint (PSF) of the movement of a &quot;viewed residue&quot; from the perspective of a &quot;perspective residue&quot;</span><span class="se">\n</span><span class="s1">like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972). Creates CSV of these values&#39;</span> <span class="o">+</span> \
+                                <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Examples:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+                                <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">[user]$ python3 stacker.py -s bottaro -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt scatter</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+                            <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">[user]$ python3 stacker.py -s bottaro -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat&#39;</span>
+        
+        <span class="n">required_group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s1">&#39;Required Arguments&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-trj&quot;</span><span class="p">,</span> <span class="s2">&quot;--trajectory&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;TRAJECTORY_FILENAME&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filepath to trajectory file for the MD simulation, if empty then 2-residue PDB expected&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-top&quot;</span><span class="p">,</span> <span class="s2">&quot;--topology&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;TOPOLOGY_FILENAME&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filepath to Topology file for the MD simulation, if empty then 2-residue PDB expected&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-pdb&quot;</span><span class="p">,</span> <span class="s2">&quot;--pdb_input&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;PDB_INPUT&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;If trajectory provided: filepath to intermediary PDB file containing two residues, the perspective and viewed nucleotide.</span><span class="se">\n</span><span class="s2">If no trajectory given, PDB is expected to already be 2-residue (use -s filter_traj if needed).</span><span class="se">\n</span><span class="s2">If empty, will use the same prefix as the trajectory file&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="s2">&quot;--output&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;OUTPUT_FILE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filepath to output Bottaro values (frame, r, rho, theta) to. If empty, will use the same prefix as the trajectory file.&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-p&quot;</span><span class="p">,</span> <span class="s2">&quot;--pers_res&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;PERSPECTIVE_RES&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;residue index of the perspective residue whose plane to project onto. 0-/1-indexed based on -i flag (default: 1-indexed)&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-v&quot;</span><span class="p">,</span> <span class="s2">&quot;--view_res&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;VIEWED_RES&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;residue index of the viewed residue whose midpoint will be projected onto perspective residue plane. 0-/1-indexed based on -i flag (default: 1-indexed)&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-pa&quot;</span><span class="p">,</span> <span class="s2">&quot;--pers_atoms&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;PERSPECTIVE_ATOMS&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Comma-separated list of atomnames to use from residue 1 to find center of geometry for perspective nucleotide&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;C2,C4,C6&quot;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-va&quot;</span><span class="p">,</span> <span class="s2">&quot;--view_atoms&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;VIEWED_ATOMS&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Comma-separated list of atomnames to use from residue 2 to find center of geometry for viewed nucleotide&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;C2,C4,C6&quot;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-i&quot;</span><span class="p">,</span> <span class="s2">&quot;--index&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;INDEX&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;index (0-index or 1-index) for perspective/viewed residue numbers (default: 1-indexed)&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-pt&quot;</span><span class="p">,</span> <span class="s2">&quot;--plot_type&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;PLOT_TYPE&quot;</span><span class="p">,</span> <span class="n">choices</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="s1">&#39;heat&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">],</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;plot type (scatter or heat) to visualize Bottaro values. If empty string, then just write to csv with no visualization&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-po&quot;</span><span class="p">,</span> <span class="s2">&quot;--plot_outfile&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;PLOT_OUTFILE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;filename to output plot png to. If empty string, outputs to standard Python vis&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-fl&quot;</span><span class="p">,</span> <span class="s2">&quot;--frame_list&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FRAME_LIST&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,</span><span class="se">\n</span><span class="s2">gets average distance between residues across these frames</span><span class="se">\n</span><span class="s2">if empty all frames are used, cannot be used with -f&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="n">SmartIndexingAction</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-n&quot;</span><span class="p">,</span> <span class="s2">&quot;--no_inter&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Delete intermediate files after command runs&quot;</span><span class="p">,</span> <span class="n">action</span> <span class="o">=</span> <span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">script</span> <span class="o">==</span> <span class="s1">&#39;res_distance&#39;</span><span class="p">:</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Get the distance between two residues in a given frame</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+                                <span class="s1">&#39;Examples:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+                                <span class="s1">&#39;[user]$ python3 stacker.py -s res_distance -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -f 2 --residues 426,427 --atom_names C2,C4,C6&#39;</span>
+        <span class="n">required_group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s1">&#39;Required Arguments&#39;</span><span class="p">)</span>
+        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-trj&quot;</span><span class="p">,</span> <span class="s2">&quot;--trajectory&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;TRAJECTORY_FILENAME&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filepath to trajectory file for the MD simulation&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-top&quot;</span><span class="p">,</span> <span class="s2">&quot;--topology&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;TOPOLOGY_FILENAME&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filepath to Topology file for the MD simulation&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-f&quot;</span><span class="p">,</span> <span class="s2">&quot;--frame&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FRAME_NUM&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;1-indexed Frame Number within trajectory to analyze&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-r&quot;</span><span class="p">,</span> <span class="s2">&quot;--residues&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;RESIDUES&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Smart-indexed list of 1-indexed residues, must provide only 2 residues, accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">action</span> <span class="o">=</span> <span class="n">SmartIndexingAction</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-b&quot;</span><span class="p">,</span> <span class="s2">&quot;--bootstrap&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;N_FRAMES&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Run bootstrap analysis on this residue pairing, sampling N_FRAMES with replacement&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-a&quot;</span><span class="p">,</span> <span class="s2">&quot;--atom_names&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;ATOM_NAMES&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Comma-separated list of atom names. Three required to get center of geometry for a residue. default = C2,C4,C6&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;C2,C4,C6&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">script</span> <span class="o">==</span> <span class="s1">&#39;system&#39;</span> <span class="ow">or</span> <span class="n">args</span><span class="o">.</span><span class="n">script</span> <span class="o">==</span> <span class="s1">&#39;ssf&#39;</span><span class="p">:</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Creates a System Stacking Fingerprint of the average structure across the chosen frames of a trajectory.&#39;</span> <span class="o">+</span> \
+                                <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Examples:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+                                <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">[user]$ python stacker.py -s system -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+                                <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">[user]$ python stacker.py -s ssf -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2 -g 10 -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt</span><span class="se">\n</span><span class="s1">&#39;</span>
+        
+        <span class="n">required_group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s1">&#39;Required Arguments&#39;</span><span class="p">)</span>
+        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-trj&quot;</span><span class="p">,</span> <span class="s2">&quot;--trajectory&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;TRAJECTORY_FILENAME&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filepath to trajectory file for the MD simulation&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-top&quot;</span><span class="p">,</span> <span class="s2">&quot;--topology&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;TOPOLOGY_FILENAME&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filepath to Topology file for the MD simulation&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-r&quot;</span><span class="p">,</span> <span class="s2">&quot;--residues&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;RESIDUES&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Smart-indexed list of 1-indexed residues, also accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span> <span class="o">=</span> <span class="n">SmartIndexingAction</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-i&quot;</span><span class="p">,</span> <span class="s2">&quot;--input&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;INPUT_FILE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Input .txt file containing per-frame stacking information, in lieu of running stacking fingerprint analysis again.</span><span class="se">\n</span><span class="s2">TXT file can be created by running `python stacker.py -s system -d OUTPUT_FILE`</span><span class="se">\n</span><span class="s2">-r flag must match the residues used to create the TXT file&quot;</span><span class="p">)</span>
+        <span class="n">frame_group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_mutually_exclusive_group</span><span class="p">()</span>
+        <span class="n">frame_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-f&quot;</span><span class="p">,</span> <span class="s2">&quot;--frame&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FRAME_NUM&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;1-indexed Frame Number within trajectory to analyze, cannot be used with -fl&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">frame_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-fl&quot;</span><span class="p">,</span> <span class="s2">&quot;--frame_list&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FRAME_LIST&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,</span><span class="se">\n</span><span class="s2">gets average distance between residues across these frames</span><span class="se">\n</span><span class="s2">if empty all frames are used, cannot be used with -f&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="n">SmartIndexingAction</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="s2">&quot;--output&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;OUTPUT_FILE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filename of output PNG to write plot to. If empty, will output displays to Python visual&quot;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-g&quot;</span><span class="p">,</span> <span class="s2">&quot;--get_stacking&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;N_EVENTS&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Get list of N_EVENTS residues with most stacking events (distance closest to 3.5Å) in the average structure across all frames.</span><span class="se">\n</span><span class="s2">Print to standard output. Equivalent to -s stack_events -n N_EVENTS&quot;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-d&quot;</span><span class="p">,</span> <span class="s2">&quot;--data_output&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;OUTPUT_FILE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Output the calculated per-frame numpy arrays that create the stacking fingerprint matrix to a file&quot;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-B&quot;</span><span class="p">,</span> <span class="s2">&quot;--input_B&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;INPUT_FILE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Input .txt file containing per-frame stacking information for a second fingerprint, creates fingerprint where top left is initial input, bottom right is second fingerprint.</span><span class="se">\n</span><span class="s2"> Used in lieu of running stacking fingerprint analysis again.</span><span class="se">\n</span><span class="s2">TXT file can be created by running `python stacker.py -s system -d OUTPUT_FILE`</span><span class="se">\n</span><span class="s2">-r flag must match the residues used to create the TXT file&quot;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-l&quot;</span><span class="p">,</span> <span class="s2">&quot;--limits&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;LIMITS&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;limits of the color scale, default = (0,7)&quot;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;0,7&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-y&quot;</span><span class="p">,</span> <span class="s2">&quot;--scale_style&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;SCALE_STYLE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot; style of color scale. {bellcurve, gradient}&quot;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;bellcurve&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-t&quot;</span><span class="p">,</span> <span class="s2">&quot;--threads&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;N_THREADS&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Use multithreading with INT worker threads&quot;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">script</span> <span class="o">==</span> <span class="s1">&#39;stack_events&#39;</span><span class="p">:</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Get list of residues with most stacking events (distance closest to 3.5Å) in the stacking fingerprint of the average structure across all frames of a trajectory&#39;</span> <span class="o">+</span> \
+                                <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Examples:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+                                <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">[user]$ python stacker.py -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -f 1 -n 5</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+                                <span class="s1">&#39;[user]$ python stacker.py -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-100 -fl 1-10 -n 5</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+                                <span class="s1">&#39;[user]$ python stacker.py -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -n 5 -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt</span><span class="se">\n</span><span class="s1">&#39;</span> 
+
+        <span class="n">required_group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s1">&#39;Required Arguments&#39;</span><span class="p">)</span>
+        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-trj&quot;</span><span class="p">,</span> <span class="s2">&quot;--trajectory&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;TRAJECTORY_FILENAME&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filepath to trajectory file for the MD simulation&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-top&quot;</span><span class="p">,</span> <span class="s2">&quot;--topology&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;TOPOLOGY_FILENAME&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filepath to Topology file for the MD simulation&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-r&quot;</span><span class="p">,</span> <span class="s2">&quot;--residues&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;RESIDUES&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Smart-indexed list of 1-indexed residues to subset trajectory, also accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span> <span class="o">=</span> <span class="n">SmartIndexingAction</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="s2">&quot;--output&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;OUTPUT_FILE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Output tab-separated txt file to write top stacking events to. If empty, will output displays to standard output&quot;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-n&quot;</span><span class="p">,</span> <span class="s2">&quot;--n_events&quot;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;N_EVENTS&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Number of stacking events to display. If -1 display all events&quot;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-i&quot;</span><span class="p">,</span> <span class="s2">&quot;--input&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;INPUT_FILE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Input .txt file containing per-frame stacking information, in lieu of running stacking fingerprint analysis again.</span><span class="se">\n</span><span class="s2">TXT file can be created by running `python stacker.py -s system -d OUTPUT_FILE`</span><span class="se">\n</span><span class="s2">-r flag must match the residues used to create the TXT file&quot;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-j&quot;</span><span class="p">,</span> <span class="s2">&quot;--include_adjacent&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Boolean whether to include adjacent residues in the printed output&quot;</span><span class="p">,</span> <span class="n">action</span> <span class="o">=</span> <span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">frame_group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_mutually_exclusive_group</span><span class="p">()</span>
+        <span class="n">frame_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-f&quot;</span><span class="p">,</span> <span class="s2">&quot;--frame&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FRAME_NUM&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;1-indexed Frame Number within trajectory to analyze, cannot be used with -fl&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">frame_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-fl&quot;</span><span class="p">,</span> <span class="s2">&quot;--frame_list&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FRAME_LIST&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,</span><span class="se">\n</span><span class="s2">gets average distance between residues across these frames</span><span class="se">\n</span><span class="s2">if empty all frames are used, cannot be used with -f&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="n">SmartIndexingAction</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">script</span> <span class="o">==</span> <span class="s1">&#39;compare&#39;</span><span class="p">:</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Print the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events&#39;</span> <span class="o">+</span>\
+                                <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Examples:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+                                <span class="s1">&#39;[user]$ python stacker.py -s compare -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997 -SA _tUAG_aCUA_+1GCU -SB _tUAG_aCUA_+1CGU</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+        <span class="n">required_group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s1">&#39;Required Arguments&#39;</span><span class="p">)</span>
+        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-A&quot;</span><span class="p">,</span> <span class="s2">&quot;--file_A&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FILENAME_A&quot;</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s2">&quot;Filepath to the output log of python stacker.py -s stack_events for the first stacking fingerprint&quot;</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-B&#39;</span><span class="p">,</span> <span class="s1">&#39;--file_B&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FILENAME_B&quot;</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s1">&#39;Filepath to the output log of python stacker.py -s stack_events for the second stacking fingerprint&#39;</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-SA&#39;</span><span class="p">,</span> <span class="s1">&#39;--source_A&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;SOURCE_A&quot;</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s1">&#39;String describing source of file A, e.g. `_tUAG_aCUA_+1GCU`&#39;</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-SB&#39;</span><span class="p">,</span> <span class="s1">&#39;--source_B&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;SOURCE_B&quot;</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s1">&#39;String describing source of file B, e.g. `_tUAG_aCUA_+1CGU`&#39;</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># help for specific scripts</span>
+    <span class="k">if</span> <span class="s1">&#39;--help&#39;</span> <span class="ow">in</span> <span class="n">remaining_args</span> <span class="ow">or</span> <span class="s1">&#39;-h&#39;</span> <span class="ow">in</span> <span class="n">remaining_args</span><span class="p">:</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-h&quot;</span><span class="p">,</span> <span class="s2">&quot;--help&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;show this help message and exit&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;help&#39;</span><span class="p">)</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">convert_to_python_command</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SmartIndexingAction">
+<a class="viewcode-back" href="../stacker.html#stacker.SmartIndexingAction">[docs]</a>
+<span class="k">class</span> <span class="nc">SmartIndexingAction</span><span class="p">(</span><span class="n">argparse</span><span class="o">.</span><span class="n">Action</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Custom argparse action to handle smart indexing of frame numbers.</span>
+
+<span class="sd">    Parses a comma-separated list of frame numbers with optional ranges (e.g., &#39;1-20, 34, 25, 50-100&#39;)</span>
+<span class="sd">    and generates a list of individual frame numbers. Modifies the namespace by setting the attribute specified by the &#39;dest&#39; parameter to the</span>
+<span class="sd">    list of individual frame numbers.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    parser: argparse.ArgumentParser</span>
+<span class="sd">        The argparse parser object.</span>
+<span class="sd">    namespace: argparse.Namespace</span>
+<span class="sd">        The argparse namespace.</span>
+<span class="sd">    values: str</span>
+<span class="sd">        The input string containing frame numbers and ranges.</span>
+<span class="sd">    option_string: str, default=None</span>
+<span class="sd">        The option string.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dest : str</span>
+<span class="sd">        The attribute name in the namespace where the parsed list will be stored.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    __call__(parser, namespace, values, option_string=None)</span>
+<span class="sd">        Parses the provided string of values into a sorted list of integers and</span>
+<span class="sd">        sets it as an attribute in the namespace.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; parser = argparse.ArgumentParser()</span>
+<span class="sd">    &gt;&gt;&gt; parser.add_argument(&quot;-fl&quot;, &quot;--frame_list&quot;, metavar=&quot;FRAME_LIST&quot;, help=&quot;Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze&quot;, required=False, action=SmartIndexingAction)</span>
+<span class="sd">    &gt;&gt;&gt; args = parser.parse_args([&quot;-fl&quot;, &quot;1-20,34,25,50-100&quot;])</span>
+<span class="sd">    &gt;&gt;&gt; print(args.frame_list)</span>
+<span class="sd">    [1, 2, ..., 20, 34, 25, 50, 51, ..., 100]</span>
+<span class="sd">    </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">,</span> <span class="n">namespace</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">option_string</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">frame_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">values</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s1">&#39;-&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+                <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">))</span>
+                <span class="n">frame_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">frame_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+        <span class="n">frame_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">namespace</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dest</span><span class="p">,</span> <span class="n">frame_list</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="convert_to_python_command">
+<a class="viewcode-back" href="../stacker.html#stacker.convert_to_python_command">[docs]</a>
+<span class="k">def</span> <span class="nf">convert_to_python_command</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Converts a parsed command to use to the correct subroutine and runs the routine</span>
+
+<span class="sd">    Converts the specified script to a python command and runs it with the associated inputs</span>
+<span class="sd">    based on the flags.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">command</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">script</span>
+
+    <span class="k">if</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;filter_traj&#39;</span><span class="p">:</span>
+        <span class="n">filter_traj_routine</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;bottaro&#39;</span> <span class="ow">or</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;pairwise&#39;</span> <span class="ow">or</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;psf&#39;</span><span class="p">:</span>
+        <span class="n">bottaro_routine</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;res_distance&#39;</span><span class="p">:</span>
+        <span class="n">res_distance_routine</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;system&#39;</span> <span class="ow">or</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;ssf&#39;</span><span class="p">:</span>
+        <span class="n">system_routine</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;stack_events&#39;</span><span class="p">:</span>
+        <span class="n">stack_events_routine</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;compare&#39;</span><span class="p">:</span>
+        <span class="n">compare_routine</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidRoutine</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">script</span> <span class="o">+</span> <span class="s2">&quot; is not a valid routine&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="filter_traj_routine">
+<a class="viewcode-back" href="../stacker.html#stacker.filter_traj_routine">[docs]</a>
+<span class="k">def</span> <span class="nf">filter_traj_routine</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Executes the routine for filtering an input trajectory file and converting it to a PDB file.</span>
+
+<span class="sd">    This function uses provided command-line arguments to call the `filter_traj_to_pdb()` function</span>
+<span class="sd">    with specified inputs, such as the trajectory file, topology file, output file location, </span>
+<span class="sd">    residues to retain, and atom names to retain.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ResEmpty</span>
+<span class="sd">        If the `--residues` argument is not provided.</span>
+<span class="sd">    AtomEmpty</span>
+<span class="sd">        If the `--atom_names` argument is not provided.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Command-line usage with sample arguments:</span>
+<span class="sd">        $ python3 stacker.py -s filter_traj \</span>
+<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \</span>
+<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \</span>
+<span class="sd">            -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb \</span>
+<span class="sd">            -r 426,427 -a C2,C4,C6</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - The `args.residues` argument should be a list of residue indices to retain.</span>
+<span class="sd">    - The `args.atom_names` argument should be a comma-separated string of atom names to retain.</span>
+<span class="sd">    - Output directories are created automatically if they do not exist.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    filter_traj_to_pdb : The core function that performs the trajectory filtering and PDB generation.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">residues</span><span class="p">:</span>
+        <span class="n">residues_desired</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">residues</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ResEmpty</span><span class="p">(</span><span class="s2">&quot;Must include a list of residues to keep in the trajectory&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">atom_names</span><span class="p">:</span>
+        <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="n">atom</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">atom_names</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">AtomEmpty</span><span class="p">(</span><span class="s2">&quot;Must include a list of atom names to keep in the trajectory&quot;</span><span class="p">)</span>
+
+    <span class="n">create_parent_directories</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+    <span class="n">filter_traj_to_pdb</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">trajectory</span><span class="p">,</span> <span class="n">topology_filename</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">topology</span><span class="p">,</span> <span class="n">output_pdb_filename</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">residues_desired</span><span class="o">=</span><span class="n">residues_desired</span><span class="p">,</span> <span class="n">atomnames_desired</span><span class="o">=</span><span class="n">atomnames_desired</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="bottaro_routine">
+<a class="viewcode-back" href="../stacker.html#stacker.bottaro_routine">[docs]</a>
+<span class="k">def</span> <span class="nf">bottaro_routine</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Executes the residue movement routine to generate Bottaro values for a trajectory.</span>
+
+<span class="sd">    This routine calculates the `r`, `rho`, and `theta` values for each frame of a PDB trajectory </span>
+<span class="sd">    between two specified residues and stores them in a CSV file. Optionally, it visualizes the </span>
+<span class="sd">    movement using heatmaps or scatter plots.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    AtomEmpty</span>
+<span class="sd">        If required atom names or residue indices are not provided.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    None</span>
+<span class="sd">        The routine relies on global `args`, which must be set via command-line arguments or </span>
+<span class="sd">        equivalent argument parsing.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - `args.trajectory` and `args.topology` are required for generating an intermediate PDB if one </span>
+<span class="sd">      is not already provided.</span>
+<span class="sd">    - Supports heatmap and scatter plot visualizations for residue movement.</span>
+<span class="sd">    - Removes intermediate files (`pdb` and `csv`) if `--no_inter` flag is specified.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Command-line usage:</span>
+<span class="sd">        $ python3 stacker.py -s bottaro \</span>
+<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \</span>
+<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \</span>
+<span class="sd">            -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb \</span>
+<span class="sd">            -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv \</span>
+<span class="sd">            -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt scatter</span>
+
+<span class="sd">        $ python3 stacker.py -s bottaro \</span>
+<span class="sd">            -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb \</span>
+<span class="sd">            -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv \</span>
+<span class="sd">            -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    filter_traj_to_pdb : Filters trajectory and generates an intermediate PDB.</span>
+<span class="sd">    write_bottaro_to_csv : Writes residue movement calculations to a CSV.</span>
+<span class="sd">    visualize_two_residue_movement_heatmap : Creates a heatmap for residue movement.</span>
+<span class="sd">    visualize_two_residue_movement_scatterplot : Creates a scatter plot for residue movement.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">trj_prefix</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> 
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">pdb_input</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="n">pdb_filename</span> <span class="o">=</span> <span class="n">trj_prefix</span> <span class="o">+</span> <span class="s1">&#39;.pdb&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pdb_filename</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">pdb_input</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="n">pdb_filename</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> 
+        <span class="n">output_name</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">output_name</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">output</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">pers_atoms</span><span class="p">:</span>
+        <span class="n">perspective_atom_names</span> <span class="o">=</span> <span class="p">{</span><span class="n">res</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">pers_atoms</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">AtomEmpty</span><span class="p">(</span><span class="s2">&quot;Must include a list of atom names to define Pespective Residue center of geometry&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">view_atoms</span><span class="p">:</span>
+        <span class="n">viewed_atom_names</span> <span class="o">=</span> <span class="p">{</span><span class="n">res</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">view_atoms</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">AtomEmpty</span><span class="p">(</span><span class="s2">&quot;Must include a list of atom names to define Viewed Residue center of geometry&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">pers_res</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">pers_res_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">pers_res</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">AtomEmpty</span><span class="p">(</span><span class="s2">&quot;Must include a 1-indexed residue index for the perspective residue&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">view_res</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">view_res_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">view_res</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">AtomEmpty</span><span class="p">(</span><span class="s2">&quot;Must include a 1-indexed residue index for the perspective residue&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">frame_list</span><span class="p">:</span>
+        <span class="n">frame_list</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">frame_list</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">frame_list</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">create_parent_directories</span><span class="p">(</span><span class="n">pdb_filename</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">trajectory</span> <span class="ow">and</span> <span class="n">args</span><span class="o">.</span><span class="n">topology</span><span class="p">:</span>
+        <span class="n">filter_traj_to_pdb</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">trajectory</span><span class="p">,</span> <span class="n">topology_filename</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">topology</span><span class="p">,</span> <span class="n">output_pdb_filename</span><span class="o">=</span><span class="n">pdb_filename</span><span class="p">,</span>
+                           <span class="n">residues_desired</span><span class="o">=</span><span class="p">{</span><span class="n">pers_res_num</span><span class="p">,</span><span class="n">view_res_num</span><span class="p">},</span> <span class="n">atomnames_desired</span><span class="o">=</span><span class="n">perspective_atom_names</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">viewed_atom_names</span><span class="p">))</span>
+    
+    <span class="n">create_parent_directories</span><span class="p">(</span><span class="n">output_name</span><span class="p">)</span>
+
+    <span class="n">write_bottaro_to_csv</span><span class="p">(</span><span class="n">pdb_filename</span><span class="o">=</span><span class="n">pdb_filename</span><span class="p">,</span> 
+                         <span class="n">output_csv_name</span><span class="o">=</span><span class="n">output_name</span><span class="p">,</span> <span class="n">perspective_residue_num</span><span class="o">=</span><span class="n">pers_res_num</span><span class="p">,</span> <span class="n">viewed_residue_num</span><span class="o">=</span><span class="n">view_res_num</span><span class="p">,</span>
+                         <span class="n">res1_atom_names</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">perspective_atom_names</span><span class="p">),</span> 
+                         <span class="n">res2_atom_names</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">viewed_atom_names</span><span class="p">),</span> <span class="n">index</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">plot_type</span> <span class="o">==</span> <span class="s1">&#39;heat&#39;</span><span class="p">:</span>
+        <span class="n">create_parent_directories</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">plot_outfile</span><span class="p">)</span>
+        <span class="n">visualize_two_residue_movement_heatmap</span><span class="p">(</span><span class="n">output_name</span><span class="p">,</span> <span class="n">plot_outfile</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">plot_outfile</span><span class="p">,</span> <span class="n">frame_list</span> <span class="o">=</span> <span class="n">frame_list</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">plot_type</span> <span class="o">==</span> <span class="s1">&#39;scatter&#39;</span><span class="p">:</span>
+        <span class="n">create_parent_directories</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">plot_outfile</span><span class="p">)</span>
+        <span class="n">visualize_two_residue_movement_scatterplot</span><span class="p">(</span><span class="n">output_name</span><span class="p">,</span> <span class="n">plot_outfile</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">plot_outfile</span><span class="p">,</span> <span class="n">frame_list</span> <span class="o">=</span> <span class="n">frame_list</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">no_inter</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">trajectory</span> <span class="ow">and</span> <span class="n">args</span><span class="o">.</span><span class="n">topology</span><span class="p">:</span> <span class="c1">#intermediate pdb created</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">pdb_filename</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">output_name</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">output_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="res_distance_routine">
+<a class="viewcode-back" href="../stacker.html#stacker.res_distance_routine">[docs]</a>
+<span class="k">def</span> <span class="nf">res_distance_routine</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the distance between the centers of mass of two specified residues.</span>
+
+<span class="sd">    This routine filters the trajectory based on the specified residues and atom names, </span>
+<span class="sd">    and calculates the distances for either a single frame or multiple frames if bootstrapping is enabled.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ResEmpty</span>
+<span class="sd">        If fewer or more than two residues are specified, or if no residues are provided.</span>
+<span class="sd">    AtomEmpty</span>
+<span class="sd">        If no atom names are provided.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    None</span>
+<span class="sd">        The routine relies on global `args` for all input values.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - The `args.residues` argument must contain exactly two residues.</span>
+<span class="sd">    - The `args.atom_names` argument is required to specify the atoms involved in the calculation.</span>
+<span class="sd">    - If the `--bootstrap` argument is provided, distances are calculated across a specified number of randomly sampled frames.</span>
+<span class="sd">    - If no bootstrap is performed, the distance is calculated for a single frame.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Command-line usage:</span>
+<span class="sd">        $ python3 stacker.py -s res_distance \</span>
+<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \</span>
+<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \</span>
+<span class="sd">            -f 2 --residues 426,427 --atom_names C2,C4,C6</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    -------</span>
+<span class="sd">    If bootstrapping is enabled:</span>
+<span class="sd">        - Prints the mean distance, standard deviation, and percentiles for the distances.</span>
+<span class="sd">    Otherwise:</span>
+<span class="sd">        - Prints the calculated distance for the specified frame.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    filter_traj : Filters the trajectory for the specified residues and atom names.</span>
+<span class="sd">    calculate_residue_distance : Calculates the distance between residues for a given frame.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">residues</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ResEmpty</span><span class="p">(</span><span class="s2">&quot;Must include only 2 residues&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">residues</span><span class="p">:</span>
+        <span class="n">residues_desired</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">residues</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ResEmpty</span><span class="p">(</span><span class="s2">&quot;Must include a list of residues to keep in the trajectory&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">atom_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="n">atom</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">atom_names</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">AtomEmpty</span><span class="p">(</span><span class="s2">&quot;Must include a list of atom names to keep in the trajectory&quot;</span><span class="p">)</span>
+
+    <span class="n">block_printing</span><span class="p">()</span>
+    <span class="n">filtered_trj</span> <span class="o">=</span> <span class="n">filter_traj</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">trajectory</span><span class="p">,</span> <span class="n">topology_filename</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">topology</span><span class="p">,</span> <span class="n">residues_desired</span><span class="o">=</span><span class="n">residues_desired</span><span class="p">,</span> <span class="n">atomnames_desired</span><span class="o">=</span><span class="n">atomnames_desired</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">bootstrap</span><span class="p">:</span>
+        <span class="n">n_frames</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered_trj</span><span class="p">)</span>
+        <span class="n">frames</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_frames</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">bootstrap</span><span class="p">)]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">frames</span> <span class="o">=</span> <span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">frame</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">residues_desired</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">residues_desired</span><span class="p">)</span>
+    <span class="n">res_distances</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="n">frames</span><span class="p">:</span>
+        <span class="n">trj_frame</span> <span class="o">=</span> <span class="n">filtered_trj</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span>
+        <span class="c1"># Correct that calculate_residue_distance res_nums are 1-indexed</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="n">distance_vector</span> <span class="o">=</span> <span class="n">calculate_residue_distance</span><span class="p">(</span><span class="n">trajectory</span><span class="o">=</span><span class="n">trj_frame</span><span class="p">,</span> <span class="n">res1_num</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">residues_desired</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">res2_num</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">residues_desired</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">res1_atoms</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">atomnames_desired</span><span class="p">),</span> <span class="n">res2_atoms</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">atomnames_desired</span><span class="p">))</span>
+        <span class="n">enable_printing</span><span class="p">()</span>
+        <span class="n">res_distances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">distance_vector</span><span class="o">.</span><span class="n">magnitude</span><span class="p">())</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">bootstrap</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bootstrap Mean Distance:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">res_distances</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bootstrap Standard Deviation:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">res_distances</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bootstrap Percentile:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">res_distances</span><span class="p">,</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">95.0</span><span class="p">,</span> <span class="mf">97.5</span><span class="p">]))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">res_distances</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="system_routine">
+<a class="viewcode-back" href="../stacker.html#stacker.system_routine">[docs]</a>
+<span class="k">def</span> <span class="nf">system_routine</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs the System Stacking Fingerprint (SSF) routine to generate a single SSF for a specified frame or range of frames.</span>
+
+<span class="sd">    This routine processes a trajectory to create SSFs based on inter-residue distances and outputs either visualizations </span>
+<span class="sd">    or raw data for further analysis. The user can provide input fingerprints or generate them from trajectory files.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    FileNotFoundError</span>
+<span class="sd">        If the specified trajectory or topology file does not exist.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If the provided input files have incompatible dimensions or unexpected formatting.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    None</span>
+<span class="sd">        The routine relies on global `args` for all input values.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - If `args.input` is provided, the routine will use pre-calculated fingerprint data.</span>
+<span class="sd">    - If `args.residues` is specified, only those residues are considered in the calculation.</span>
+<span class="sd">    - SSFs can be created for individual frames, a list of frames, or all frames in the trajectory.</span>
+<span class="sd">    - If `args.input_B` is provided, two SSFs are combined for analysis.</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    -------</span>
+<span class="sd">    - Saves raw SSF data to `args.data_output` if specified.</span>
+<span class="sd">    - Generates visualizations of the SSF data as videos saved to `args.output`.</span>
+<span class="sd">    - Outputs information about the most stacked residues if `args.get_stacking` is specified.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Command-line usage:</span>
+<span class="sd">        $ python3 stacker.py -s system \</span>
+<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \</span>
+<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \</span>
+<span class="sd">            -r 90-215 -fl 1-2 </span>
+<span class="sd">        $ python3 stacker.py -s ssf \</span>
+<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \</span>
+<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \</span>
+<span class="sd">            -r 90-215 -fl 1-2 -g 10 \</span>
+<span class="sd">            -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png \</span>
+<span class="sd">            -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    filter_traj : Filters the trajectory for the specified residues.</span>
+<span class="sd">    get_residue_distance_for_trajectory : Computes inter-residue distances for a trajectory.</span>
+<span class="sd">    combine_frames : Combines two SSFs into a single array for comparison.</span>
+<span class="sd">    display_arrays_as_video : Visualizes SSF arrays and saves them as video files.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">residues</span><span class="p">:</span>
+        <span class="n">residues_desired</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">residues</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">residues_desired</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">frame_list</span><span class="p">:</span>
+        <span class="n">frame_list</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">frame_list</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">frame_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">trj_sub</span> <span class="o">=</span> <span class="n">filter_traj</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">trajectory</span><span class="p">,</span> <span class="n">topology_filename</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">topology</span><span class="p">,</span> <span class="n">residues_desired</span><span class="o">=</span><span class="n">residues_desired</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loaded fingerprint data from:&quot;</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">)</span>
+        <span class="n">loaded_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">)</span>
+        <span class="n">frames</span> <span class="o">=</span> <span class="n">loaded_arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">loaded_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">loaded_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="n">trj_sub</span><span class="o">.</span><span class="n">n_residues</span><span class="p">,</span> <span class="n">trj_sub</span><span class="o">.</span><span class="n">n_residues</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">frame_list</span><span class="p">:</span>
+        <span class="n">frames</span> <span class="o">=</span> <span class="n">get_residue_distance_for_trajectory</span><span class="p">(</span><span class="n">trj_sub</span><span class="p">,</span> <span class="n">frame_list</span><span class="p">,</span> <span class="n">threads</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">threads</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">frame</span><span class="p">:</span>
+        <span class="n">frames</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">get_residue_distance_for_frame</span><span class="p">(</span><span class="n">trj_sub</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">frame</span><span class="p">)])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">frames</span> <span class="o">=</span> <span class="n">get_residue_distance_for_trajectory</span><span class="p">(</span><span class="n">trj_sub</span><span class="p">,</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">trj_sub</span><span class="o">.</span><span class="n">n_frames</span><span class="o">+</span><span class="mi">1</span><span class="p">)],</span> <span class="n">threads</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">threads</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">data_output</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of SSFs made:</span><span class="si">{</span><span class="n">frames</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">frames_to_save</span> <span class="o">=</span> <span class="n">frames</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">frames</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">data_output</span><span class="p">,</span> <span class="n">frames_to_save</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">limits</span><span class="p">:</span>
+        <span class="n">scale_limits</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">limits</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">))</span>
+
+    <span class="n">avg_frames</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_frame_average</span><span class="p">(</span><span class="n">frames</span><span class="p">)]</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">input_B</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loaded second fingerprint data from:&quot;</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">input_B</span><span class="p">)</span>
+        <span class="n">loaded_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input_B</span><span class="p">)</span>
+        <span class="n">frames_B</span> <span class="o">=</span> <span class="n">loaded_arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">loaded_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">loaded_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="n">trj_sub</span><span class="o">.</span><span class="n">n_residues</span><span class="p">,</span> <span class="n">trj_sub</span><span class="o">.</span><span class="n">n_residues</span><span class="p">)</span>
+        <span class="n">avg_frames_B</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_frame_average</span><span class="p">(</span><span class="n">frames_B</span><span class="p">)]</span>
+        <span class="n">avg_frames</span> <span class="o">=</span> <span class="p">[</span><span class="n">combine_frames</span><span class="p">(</span><span class="n">avg_frames</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">avg_frames_B</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">avg_frames</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">get_stacking</span><span class="p">:</span>
+        <span class="n">get_top_stacking</span><span class="p">(</span><span class="n">trj_sub</span><span class="p">,</span> <span class="n">avg_frames</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">output_csv</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">n_events</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">get_stacking</span><span class="p">)</span>
+
+    <span class="n">sorted_res</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">residues_desired</span><span class="p">)</span>
+    <span class="n">sorted_res</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+    <span class="n">create_parent_directories</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+    <span class="n">display_arrays_as_video</span><span class="p">(</span><span class="n">avg_frames</span><span class="p">,</span> <span class="n">sorted_res</span><span class="p">,</span> <span class="n">seconds_per_frame</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">scale_limits</span><span class="o">=</span><span class="n">scale_limits</span><span class="p">,</span> <span class="n">scale_style</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">scale_style</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="combine_frames">
+<a class="viewcode-back" href="../stacker.html#stacker.combine_frames">[docs]</a>
+<span class="k">def</span> <span class="nf">combine_frames</span><span class="p">(</span><span class="n">frames_A</span><span class="p">,</span> <span class="n">frames_B</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Combines two 2D numpy arrays (frames_A and frames_B) into a single array.</span>
+
+<span class="sd">    This function takes two 2D numpy arrays of the same shape and combines them</span>
+<span class="sd">    into a new array. The upper triangular part (including the diagonal) of the </span>
+<span class="sd">    resulting array is filled with the corresponding elements from frames_A, </span>
+<span class="sd">    while the lower triangular part (including the diagonal) is filled with the </span>
+<span class="sd">    corresponding elements from frames_B.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    frames_A : numpy.ndarray</span>
+<span class="sd">        A 2D numpy array.</span>
+<span class="sd">    frames_B : numpy.ndarray </span>
+<span class="sd">        A 2D numpy array of the same shape as frames_A.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numpy.ndarray </span>
+<span class="sd">        A new 2D numpy array with combined elements from frames_A and frames_B.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; frames_A = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])</span>
+<span class="sd">    &gt;&gt;&gt; frames_B = np.array([[9, 8, 7], [6, 5, 4], [3, 2, 1]])</span>
+<span class="sd">    &gt;&gt;&gt; combine_frames(frames_A, frames_B)</span>
+<span class="sd">    array([[1., 2., 3.],</span>
+<span class="sd">           [6., 5., 6.],</span>
+<span class="sd">           [3., 2., 9.]])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Am</span><span class="p">,</span> <span class="n">An</span> <span class="o">=</span> <span class="n">frames_A</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">array_to_fill</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Am</span><span class="p">,</span><span class="n">An</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Am</span><span class="p">):</span>
+        <span class="n">array_to_fill</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">:]</span> <span class="o">=</span> <span class="n">frames_A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">:]</span> 
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">An</span><span class="p">):</span>
+        <span class="n">array_to_fill</span><span class="p">[</span><span class="n">j</span><span class="p">:,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">frames_B</span><span class="p">[</span><span class="n">j</span><span class="p">:,</span><span class="n">j</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">array_to_fill</span></div>
+
+
+<div class="viewcode-block" id="stack_events_routine">
+<a class="viewcode-back" href="../stacker.html#stacker.stack_events_routine">[docs]</a>
+<span class="k">def</span> <span class="nf">stack_events_routine</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Identifies residue pairs with the most π-stacking interactions.</span>
+
+<span class="sd">    This routine analyzes a molecular dynamics trajectory and identifies residue pairs </span>
+<span class="sd">    with the smallest center of geometry (COG) distances, typically indicating strong </span>
+<span class="sd">    π-stacking. It outputs the top `n_events` residue pairings based on user input.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    FileNotFoundError</span>
+<span class="sd">        If the trajectory or topology files are not found.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If input parameters are invalid or incompatible with the data.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    None</span>
+<span class="sd">        This function relies on global `args` for input values.</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    -------</span>
+<span class="sd">    - CSV file listing the top stacking events (`args.output`), if specified.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Command-line usage:</span>
+<span class="sd">        $ python stacker.py -s stack_events \</span>
+<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \</span>
+<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \</span>
+<span class="sd">            -r 90-215 -f 1 -n 5</span>
+<span class="sd">        $ python stacker.py -s stack_events \</span>
+<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \</span>
+<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \</span>
+<span class="sd">            -r 90-100 -fl 1-10 -n 5</span>
+<span class="sd">        $ python stacker.py -s stack_events \</span>
+<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \</span>
+<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \</span>
+<span class="sd">            -r 90-215 -n 5 -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    filter_traj : Filters trajectory data based on residue selection.</span>
+<span class="sd">    get_top_stacking : Extracts top stacking events from a trajectory.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">residues</span><span class="p">:</span>
+        <span class="n">residues_desired</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">residues</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">residues_desired</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">trj_sub</span> <span class="o">=</span> <span class="n">filter_traj</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">trajectory</span><span class="p">,</span> <span class="n">topology_filename</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">topology</span><span class="p">,</span> <span class="n">residues_desired</span><span class="o">=</span><span class="n">residues_desired</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">:</span>
+        <span class="n">loaded_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">)</span>
+        <span class="n">frames</span> <span class="o">=</span> <span class="n">loaded_arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">loaded_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">loaded_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="n">trj_sub</span><span class="o">.</span><span class="n">n_residues</span><span class="p">,</span> <span class="n">trj_sub</span><span class="o">.</span><span class="n">n_residues</span><span class="p">)</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">get_frame_average</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">frame</span><span class="p">:</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">get_residue_distance_for_frame</span><span class="p">(</span><span class="n">trj_sub</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">frame_list</span><span class="p">:</span>
+        <span class="n">frames</span> <span class="o">=</span> <span class="n">get_residue_distance_for_trajectory</span><span class="p">(</span><span class="n">trj_sub</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">frame_list</span><span class="p">,</span> <span class="n">threads</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">threads</span><span class="p">)</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">get_frame_average</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
+
+    <span class="n">get_top_stacking</span><span class="p">(</span><span class="n">trj_sub</span><span class="p">,</span> <span class="n">frame</span><span class="p">,</span> <span class="n">output_csv</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">n_events</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">n_events</span><span class="p">,</span> <span class="n">include_adjacent</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">include_adjacent</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="compare_routine">
+<a class="viewcode-back" href="../stacker.html#stacker.compare_routine">[docs]</a>
+<span class="k">def</span> <span class="nf">compare_routine</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compares π-stacking events between two trajectories.</span>
+
+<span class="sd">    This routine analyzes two trajectory-derived stacking event files and identifies </span>
+<span class="sd">    residue pairs with the largest change in average distances between the two systems. </span>
+<span class="sd">    It processes the data, merges it, calculates discrepancies, and outputs the sorted </span>
+<span class="sd">    results.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    FileNotFoundError</span>
+<span class="sd">        If one or both input files are not found.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If the input files have incompatible formats or lack the required headers.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    None</span>
+<span class="sd">        This function relies on global `args` for input values.</span>
+
+<span class="sd">    Outputs</span>
+<span class="sd">    -------</span>
+<span class="sd">    - Printed output of residue pairs with the largest discrepancies.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Command-line usage:</span>
+<span class="sd">        $ python stacker.py -s compare \</span>
+<span class="sd">            -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 \</span>
+<span class="sd">            -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997 \</span>
+<span class="sd">            -SA _tUAG_aCUA_+1GCU -SB _tUAG_aCUA_+1CGU</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - The input files must contain tab-separated values with the header `Row\tColumn\tValue`.</span>
+<span class="sd">    - Residue pairings are sorted alphabetically before comparison to ensure consistent results.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    find_row_with_header : Identifies the header row in a data file.</span>
+<span class="sd">    preprocess_df : Prepares the input dataframes for comparison.</span>
+<span class="sd">    pd.merge : Merges the two dataframes for discrepancy calculations.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">find_row_with_header</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">header</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get the row number in file that matches a given header</span>
+
+<span class="sd">        Given a filename that represents a spreadsheet, find the row number</span>
+<span class="sd">        in the file that contains the passed header string.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename : str</span>
+<span class="sd">            file path to spreadsheet file</span>
+<span class="sd">        header : str</span>
+<span class="sd">            string representng a header</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        row_number : int</span>
+<span class="sd">            row number where the header appears in the file</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="n">header</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">idx</span>
+    
+    <span class="k">def</span> <span class="nf">preprocess_df</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Preprocess the DataFrame by sorting Row and Column alphabetically</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        df : Pandas Dataframe</span>
+<span class="sd">            inputted df with at least columns Row, Column</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        df : Pandas Dataframe</span>
+<span class="sd">            inputted df with rows organized alphabetically at the Row, Column variable</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">cols_to_sort</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Row&#39;</span><span class="p">,</span><span class="s1">&#39;Column&#39;</span><span class="p">]</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">cols_to_sort</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols_to_sort</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">),</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">cols_to_sort</span><span class="p">)]]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">df</span>
+    
+    <span class="k">def</span> <span class="nf">process_df</span><span class="p">(</span><span class="n">filename</span> <span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Read filename and discard the header to identify the entries&#39;&#39;&#39;</span>
+        <span class="n">row_number</span> <span class="o">=</span> <span class="n">find_row_with_header</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="n">row_number</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">preprocess_df</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span>
+
+    <span class="n">file1</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">file_A</span>
+    <span class="n">file2</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">file_B</span>
+    <span class="n">file1_source</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">source_A</span>
+    <span class="n">file2_source</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">source_B</span>
+
+    <span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;Row</span><span class="se">\t</span><span class="s2">Column</span><span class="se">\t</span><span class="s2">Value&quot;</span>
+
+    <span class="n">data1</span> <span class="o">=</span> <span class="n">process_df</span><span class="p">(</span><span class="n">file1</span><span class="p">)</span>
+    <span class="n">data2</span> <span class="o">=</span> <span class="n">process_df</span><span class="p">(</span><span class="n">file2</span><span class="p">)</span>
+
+    <span class="n">merged_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">data1</span><span class="p">,</span> <span class="n">data2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Row&#39;</span><span class="p">,</span> <span class="s1">&#39;Column&#39;</span><span class="p">],</span> <span class="n">suffixes</span><span class="o">=</span><span class="p">[</span><span class="n">file1_source</span><span class="p">,</span> <span class="n">file2_source</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+    <span class="n">merged_data</span><span class="p">[</span><span class="s1">&#39;Discrepancy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">merged_data</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span> <span class="o">+</span> <span class="n">file1_source</span><span class="p">]</span> <span class="o">-</span> <span class="n">merged_data</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span> <span class="o">+</span> <span class="n">file2_source</span><span class="p">])</span>
+
+    <span class="n">subset_data</span> <span class="o">=</span> <span class="n">merged_data</span><span class="p">[(</span><span class="n">merged_data</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span> <span class="o">+</span> <span class="n">file1_source</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">merged_data</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span> <span class="o">+</span> <span class="n">file2_source</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">)]</span>
+    <span class="n">subset_data</span> <span class="o">=</span> <span class="n">subset_data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Discrepancy&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">subset_data</span> <span class="o">=</span> <span class="n">subset_data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Value&#39;</span> <span class="o">+</span> <span class="n">file1_source</span> <span class="p">:</span> <span class="s1">&#39;AvgDist&#39;</span> <span class="o">+</span> <span class="n">file1_source</span><span class="p">,</span> <span class="s1">&#39;Value&#39;</span> <span class="o">+</span> <span class="n">file2_source</span> <span class="p">:</span> <span class="s1">&#39;AvgDist&#39;</span> <span class="o">+</span> <span class="n">file2_source</span><span class="p">})</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">subset_data</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">run_python_command</span><span class="p">()</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Eric D. Sakkas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Eric D. Sakkas.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

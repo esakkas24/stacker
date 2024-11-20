@@ -18,18 +18,15 @@ release = '1.0.0'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    'sphinx.ext.autodoc',
     'numpydoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
     'sphinx.ext.imgmath',
-    'sphinx.ext.intersphinx',
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx.ext.coverage',
     'sphinx.ext.doctest',
-    'sphinx.ext.autosummary',
     'sphinx.ext.graphviz',
     'sphinx.ext.ifconfig',
     'matplotlib.sphinxext.plot_directive',

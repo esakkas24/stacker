@@ -1,0 +1,841 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>visualization &#8212; StACKER Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=528dc5d9"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/stacker.visualization';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="stacker.visualization.create_axis_labels" href="stacker.visualization.create_axis_labels.html" />
+    <link rel="prev" title="Vector" href="stacker.vector.Vector.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/stackerlogo.png" class="logo__image only-light" alt="StACKER Documentation - Home"/>
+    <img src="../_static/stacker_logo_dark.png" class="logo__image only-dark pst-js-only" alt="StACKER Documentation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="stacker.html">stacker</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="stacker.block_printing.html">stacker.block_printing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.bottaro_routine.html">stacker.bottaro_routine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.combine_frames.html">stacker.combine_frames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.compare_routine.html">stacker.compare_routine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.convert_to_python_command.html">stacker.convert_to_python_command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.enable_printing.html">stacker.enable_printing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.filter_traj_routine.html">stacker.filter_traj_routine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.res_distance_routine.html">stacker.res_distance_routine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.run_python_command.html">stacker.run_python_command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.stack_events_routine.html">stacker.stack_events_routine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.system_routine.html">stacker.system_routine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.SmartIndexingAction.html">SmartIndexingAction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.AtomEmpty.html">stacker.AtomEmpty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.FrameEmpty.html">stacker.FrameEmpty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.InvalidRoutine.html">stacker.InvalidRoutine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.ResEmpty.html">stacker.ResEmpty</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="stacker.file_manipulation.html">file_manipulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="stacker.file_manipulation.file_convert.html">stacker.file_manipulation.file_convert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.file_manipulation.filter_traj.html">stacker.file_manipulation.filter_traj</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.file_manipulation.filter_traj_to_pdb.html">stacker.file_manipulation.filter_traj_to_pdb</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="stacker.kmeans.html">kmeans</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="stacker.kmeans.create_kmeans_input.html">stacker.kmeans.create_kmeans_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.kmeans.plot_cluster_trj_data.html">stacker.kmeans.plot_cluster_trj_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.kmeans.read_and_preprocess_data.html">stacker.kmeans.read_and_preprocess_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.kmeans.run_kmeans.html">stacker.kmeans.run_kmeans</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="stacker.pairwise_distance.html">pairwise_distance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.calculate_residue_distance.html">stacker.pairwise_distance.calculate_residue_distance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_frame_average.html">stacker.pairwise_distance.get_frame_average</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_frame.html">stacker.pairwise_distance.get_residue_distance_for_frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="stacker.residue_movement.html">residue_movement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="stacker.residue_movement.calc_center_3pts.html">stacker.residue_movement.calc_center_3pts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.residue_movement.calculate_bottaro_values_for_frame.html">stacker.residue_movement.calculate_bottaro_values_for_frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.residue_movement.collect_atom_locations_by_frame.html">stacker.residue_movement.collect_atom_locations_by_frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.residue_movement.correct_theta_sign.html">stacker.residue_movement.correct_theta_sign</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.residue_movement.create_base_from_coords_list.html">stacker.residue_movement.create_base_from_coords_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.residue_movement.write_bottaro_to_csv.html">stacker.residue_movement.write_bottaro_to_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.residue_movement.Base.html">Base</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="stacker.vector.html">vector</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="stacker.vector.Vector.html">Vector</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.NoResidues.html">stacker.visualization.NoResidues</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/esakkas24/stacker" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>visualization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.NoResidues"><code class="docutils literal notranslate"><span class="pre">NoResidues</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.NoResidues.__init__"><code class="docutils literal notranslate"><span class="pre">NoResidues.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.NoResidues.add_note"><code class="docutils literal notranslate"><span class="pre">NoResidues.add_note()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.NoResidues.args"><code class="docutils literal notranslate"><span class="pre">NoResidues.args</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.NoResidues.with_traceback"><code class="docutils literal notranslate"><span class="pre">NoResidues.with_traceback()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.create_axis_labels"><code class="docutils literal notranslate"><span class="pre">create_axis_labels()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.create_parent_directories"><code class="docutils literal notranslate"><span class="pre">create_parent_directories()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.display_arrays_as_video"><code class="docutils literal notranslate"><span class="pre">display_arrays_as_video()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.set_polar_grid"><code class="docutils literal notranslate"><span class="pre">set_polar_grid()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.visualize_two_residue_movement_heatmap"><code class="docutils literal notranslate"><span class="pre">visualize_two_residue_movement_heatmap()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.visualize_two_residue_movement_scatterplot"><code class="docutils literal notranslate"><span class="pre">visualize_two_residue_movement_scatterplot()</span></code></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-stacker.visualization">
+<span id="visualization"></span><h1>visualization<a class="headerlink" href="#module-stacker.visualization" title="Link to this heading">#</a></h1>
+<p class="rubric">Functions</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="stacker.visualization.create_axis_labels.html#stacker.visualization.create_axis_labels" title="stacker.visualization.create_axis_labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_axis_labels</span></code></a>(res_indicies[, tick_distance])</p></td>
+<td><p>Designates the axis labels to use in the pairwise plot.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="stacker.visualization.create_parent_directories.html#stacker.visualization.create_parent_directories" title="stacker.visualization.create_parent_directories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_parent_directories</span></code></a>(outfile_prefix)</p></td>
+<td><p>Creates necessary parent directories to write an outfile given a prefix</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="stacker.visualization.display_arrays_as_video.html#stacker.visualization.display_arrays_as_video" title="stacker.visualization.display_arrays_as_video"><code class="xref py py-obj docutils literal notranslate"><span class="pre">display_arrays_as_video</span></code></a>(numpy_arrays, ...[, ...])</p></td>
+<td><p>Displays list/array of 2D NumPy arrays as matrix heatmaps.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="stacker.visualization.set_polar_grid.html#stacker.visualization.set_polar_grid" title="stacker.visualization.set_polar_grid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_polar_grid</span></code></a>()</p></td>
+<td><p>Set up axes for polar plots.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_heatmap.html#stacker.visualization.visualize_two_residue_movement_heatmap" title="stacker.visualization.visualize_two_residue_movement_heatmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">visualize_two_residue_movement_heatmap</span></code></a>(...)</p></td>
+<td><p>Creates heatmap of two-residue movement relative to each other.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_scatterplot.html#stacker.visualization.visualize_two_residue_movement_scatterplot" title="stacker.visualization.visualize_two_residue_movement_scatterplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">visualize_two_residue_movement_scatterplot</span></code></a>(...)</p></td>
+<td><p>Creates scatterplot of two-residue movement relative to each other.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Exceptions</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="stacker.visualization.NoResidues.html#stacker.visualization.NoResidues" title="stacker.visualization.NoResidues"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NoResidues</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py exception">
+<dt class="sig sig-object py" id="stacker.visualization.NoResidues">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NoResidues</span></span><a class="reference internal" href="../_modules/stacker/visualization.html#NoResidues"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.NoResidues" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.visualization.NoResidues.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.visualization.NoResidues.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.visualization.NoResidues.add_note">
+<span class="sig-name descname"><span class="pre">add_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.visualization.NoResidues.add_note" title="Link to this definition">#</a></dt>
+<dd><p>Exception.add_note(note) –
+add a note to the exception</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="stacker.visualization.NoResidues.args">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#stacker.visualization.NoResidues.args" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.visualization.NoResidues.with_traceback">
+<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.visualization.NoResidues.with_traceback" title="Link to this definition">#</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.visualization.create_axis_labels">
+<span class="sig-name descname"><span class="pre">create_axis_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res_indicies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tick_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/visualization.html#create_axis_labels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.create_axis_labels" title="Link to this definition">#</a></dt>
+<dd><p>Designates the axis labels to use in the pairwise plot.</p>
+<p>Returns the x-axis tick positions and labels to use on the ticks based on the 
+residues used in a specific pairwise analysis. Meant to be used when many 
+disjoint sets of residue indices are used. Ticks will be present every <cite>tick_distance</cite> 
+residues in a collection of adjacent residues, and a tick will exist at both
+ends of any consecutive residue sequence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>res_indicies</strong><span class="classifier">list</span></dt><dd><p>The list of residue indices used in the pairwise analysis.</p>
+</dd>
+<dt><strong>tick_distance</strong><span class="classifier">int, default = 10</span></dt><dd><p>Distance between ticks in blocks of consecutive residues.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>tick_locations</strong><span class="classifier">list</span></dt><dd><p>List of tick positions (0-based) to place labels on in the axes.</p>
+</dd>
+<dt><strong>tick_labels</strong><span class="classifier">list</span></dt><dd><p>List of labels to place at the adjacent tick locations.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">create_axis_labels</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">98</span><span class="p">,</span><span class="mi">99</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
+<span class="go">[0, 10, 12, 13, 15], [0, 10, 12, 98, 100]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">create_axis_labels</span><span class="p">([</span><span class="mi">94</span><span class="p">,</span><span class="mi">95</span><span class="p">,</span><span class="mi">96</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">98</span><span class="p">,</span><span class="mi">99</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">408</span><span class="p">,</span><span class="mi">409</span><span class="p">,</span><span class="mi">410</span><span class="p">,</span><span class="mi">411</span><span class="p">,</span><span class="mi">412</span><span class="p">,</span><span class="mi">413</span><span class="p">,</span><span class="mi">414</span><span class="p">,</span><span class="mi">415</span><span class="p">,</span><span class="mi">416</span><span class="p">,</span><span class="mi">417</span><span class="p">,</span><span class="mi">418</span><span class="p">,</span><span class="mi">419</span><span class="p">,</span><span class="mi">420</span><span class="p">,</span><span class="mi">421</span><span class="p">,</span><span class="mi">422</span><span class="p">,</span><span class="mi">423</span><span class="p">,</span><span class="mi">424</span><span class="p">,</span><span class="mi">425</span><span class="p">,</span><span class="mi">426</span><span class="p">,</span><span class="mi">427</span><span class="p">,</span><span class="mi">428</span><span class="p">])</span>
+<span class="go">[0, 6, 7, 17, 27], [94, 100, 408, 418, 428]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.visualization.create_parent_directories">
+<span class="sig-name descname"><span class="pre">create_parent_directories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outfile_prefix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/visualization.html#create_parent_directories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.create_parent_directories" title="Link to this definition">#</a></dt>
+<dd><p>Creates necessary parent directories to write an outfile given a prefix</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.visualization.display_arrays_as_video">
+<span class="sig-name descname"><span class="pre">display_arrays_as_video</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numpy_arrays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_indicies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds_per_frame</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tick_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">7)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bellcurve'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xy_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/visualization.html#display_arrays_as_video"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.display_arrays_as_video" title="Link to this definition">#</a></dt>
+<dd><p>Displays list/array of 2D NumPy arrays as matrix heatmaps.</p>
+<p>Takes list/array of 2D NumPy arrays and treats them as frames 
+in a video, filling in a grid at position i, j by the value 
+at i, j in the array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>numpy_arrays</strong><span class="classifier">array_like</span></dt><dd><p>List or array of 2D NumPy arrays.</p>
+</dd>
+<dt><strong>res_indicies</strong><span class="classifier">list</span></dt><dd><p>The list of residue indices used in the pairwise analysis.</p>
+</dd>
+<dt><strong>seconds_per_frame</strong><span class="classifier">int, default = 10</span></dt><dd><p>Number of seconds to display each matrix for.</p>
+</dd>
+<dt><strong>tick_distance</strong><span class="classifier">int, default = 10</span></dt><dd><p>Distance between ticks in blocks of consecutive residues.</p>
+</dd>
+<dt><strong>outfile</strong><span class="classifier">str</span></dt><dd><p>Image output filepath to write a single SSF to. Format inferred from file extension.
+png, pdf, ps, eps, and svg supported.</p>
+</dd>
+<dt><strong>outfile_prefix</strong><span class="classifier">str</span></dt><dd><p>Prefix for image filepath to write multiple frames to. Format inferred from file extension.
+png, pdf, ps, eps, and svg supported.</p>
+</dd>
+<dt><strong>scale_limits</strong><span class="classifier">tuple, default = (0, 7)</span></dt><dd><p>Limits of the color scale.</p>
+</dd>
+<dt><strong>scale_style</strong><span class="classifier">str, default = ‘bellcurve’</span></dt><dd><p>Style of color scale. {bellcurve, gradient}</p>
+</dd>
+<dt><strong>xy_line</strong><span class="classifier">bool, default = True</span></dt><dd><p>Draw x = y line to separate matrix halves.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd><p>Displays video of NumPy arrays.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.visualization.set_polar_grid">
+<span class="sig-name descname"><span class="pre">set_polar_grid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/visualization.html#set_polar_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.set_polar_grid" title="Link to this definition">#</a></dt>
+<dd><p>Set up axes for polar plots.</p>
+<p>Creates polar plot background for two-residue movement comparison
+with theta 0 to 360, a radial maximum of 15 Angstroms, and a visualization 
+of the perspective residue at the center.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>None</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>ax</strong><span class="classifier">matplotlib.projections.polar.PolarAxes</span></dt><dd><p>Axis object for the created polar plot.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.visualization.visualize_two_residue_movement_heatmap">
+<span class="sig-name descname"><span class="pre">visualize_two_residue_movement_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/visualization.html#visualize_two_residue_movement_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.visualize_two_residue_movement_heatmap" title="Link to this definition">#</a></dt>
+<dd><p>Creates heatmap of two-residue movement relative to each other.</p>
+<p>2D shaded contour plot of the density of points in the 
+visualize_two_residue_movement_scatterplot() scatterplot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>csv_filepath</strong><span class="classifier">str</span></dt><dd><p>Filepath to csv file containing data on the movement
+of two residues relative to each other (r, rho, and theta values). Created
+in residue_movement.</p>
+</dd>
+<dt><strong>plot_outfile</strong><span class="classifier">str</span></dt><dd><p>Filepath of the image file to write to. Format inferred from file extension.
+png, pdf, ps, eps, and svg supported.</p>
+</dd>
+<dt><strong>frame_list</strong><span class="classifier">set, default = {}</span></dt><dd><p>Set of frames to use in csv, if empty use all frames.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.visualization.visualize_two_residue_movement_scatterplot">
+<span class="sig-name descname"><span class="pre">visualize_two_residue_movement_scatterplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/visualization.html#visualize_two_residue_movement_scatterplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.visualize_two_residue_movement_scatterplot" title="Link to this definition">#</a></dt>
+<dd><p>Creates scatterplot of two-residue movement relative to each other.</p>
+<p>Takes the data created in residue_movement and visualizes it as a polar coordinate
+scatterplot similar to the Figure D link in Proposal Feature 4.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>csv_filepath</strong><span class="classifier">str</span></dt><dd><p>Filepath to csv file containing data on the movement
+of two residues relative to each other (r, rho, and theta values). Created
+in residue_movement.</p>
+</dd>
+<dt><strong>plot_outfile</strong><span class="classifier">str</span></dt><dd><p>Filepath of the image file to write to. Format inferred from file extension.
+png, pdf, ps, eps, and svg supported.</p>
+</dd>
+<dt><strong>frame_list</strong><span class="classifier">set, default = {}</span></dt><dd><p>Set of frames to use in csv, if empty use all frames.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="stacker.vector.Vector.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Vector</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="stacker.visualization.create_axis_labels.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">stacker.visualization.create_axis_labels</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.NoResidues"><code class="docutils literal notranslate"><span class="pre">NoResidues</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.NoResidues.__init__"><code class="docutils literal notranslate"><span class="pre">NoResidues.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.NoResidues.add_note"><code class="docutils literal notranslate"><span class="pre">NoResidues.add_note()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.NoResidues.args"><code class="docutils literal notranslate"><span class="pre">NoResidues.args</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.NoResidues.with_traceback"><code class="docutils literal notranslate"><span class="pre">NoResidues.with_traceback()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.create_axis_labels"><code class="docutils literal notranslate"><span class="pre">create_axis_labels()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.create_parent_directories"><code class="docutils literal notranslate"><span class="pre">create_parent_directories()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.display_arrays_as_video"><code class="docutils literal notranslate"><span class="pre">display_arrays_as_video()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.set_polar_grid"><code class="docutils literal notranslate"><span class="pre">set_polar_grid()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.visualize_two_residue_movement_heatmap"><code class="docutils literal notranslate"><span class="pre">visualize_two_residue_movement_heatmap()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.visualize_two_residue_movement_scatterplot"><code class="docutils literal notranslate"><span class="pre">visualize_two_residue_movement_scatterplot()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Eric D. Sakkas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Eric D. Sakkas.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

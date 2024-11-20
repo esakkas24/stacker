@@ -1,0 +1,1333 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>stacker &#8212; StACKER Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=528dc5d9"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/stacker';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="stacker.block_printing" href="stacker.block_printing.html" />
+    <link rel="prev" title="StACKER documentation" href="../index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/stackerlogo.png" class="logo__image only-light" alt="StACKER Documentation - Home"/>
+    <img src="../_static/stacker_logo_dark.png" class="logo__image only-dark pst-js-only" alt="StACKER Documentation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">stacker</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="stacker.block_printing.html">stacker.block_printing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.bottaro_routine.html">stacker.bottaro_routine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.combine_frames.html">stacker.combine_frames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.compare_routine.html">stacker.compare_routine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.convert_to_python_command.html">stacker.convert_to_python_command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.enable_printing.html">stacker.enable_printing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.filter_traj_routine.html">stacker.filter_traj_routine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.res_distance_routine.html">stacker.res_distance_routine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.run_python_command.html">stacker.run_python_command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.stack_events_routine.html">stacker.stack_events_routine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.system_routine.html">stacker.system_routine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.SmartIndexingAction.html">SmartIndexingAction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.AtomEmpty.html">stacker.AtomEmpty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.FrameEmpty.html">stacker.FrameEmpty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.InvalidRoutine.html">stacker.InvalidRoutine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.ResEmpty.html">stacker.ResEmpty</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="stacker.file_manipulation.html">file_manipulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="stacker.file_manipulation.file_convert.html">stacker.file_manipulation.file_convert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.file_manipulation.filter_traj.html">stacker.file_manipulation.filter_traj</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.file_manipulation.filter_traj_to_pdb.html">stacker.file_manipulation.filter_traj_to_pdb</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="stacker.kmeans.html">kmeans</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="stacker.kmeans.create_kmeans_input.html">stacker.kmeans.create_kmeans_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.kmeans.plot_cluster_trj_data.html">stacker.kmeans.plot_cluster_trj_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.kmeans.read_and_preprocess_data.html">stacker.kmeans.read_and_preprocess_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.kmeans.run_kmeans.html">stacker.kmeans.run_kmeans</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="stacker.pairwise_distance.html">pairwise_distance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.calculate_residue_distance.html">stacker.pairwise_distance.calculate_residue_distance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_frame_average.html">stacker.pairwise_distance.get_frame_average</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_frame.html">stacker.pairwise_distance.get_residue_distance_for_frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="stacker.residue_movement.html">residue_movement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="stacker.residue_movement.calc_center_3pts.html">stacker.residue_movement.calc_center_3pts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.residue_movement.calculate_bottaro_values_for_frame.html">stacker.residue_movement.calculate_bottaro_values_for_frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.residue_movement.collect_atom_locations_by_frame.html">stacker.residue_movement.collect_atom_locations_by_frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.residue_movement.correct_theta_sign.html">stacker.residue_movement.correct_theta_sign</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.residue_movement.create_base_from_coords_list.html">stacker.residue_movement.create_base_from_coords_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.residue_movement.write_bottaro_to_csv.html">stacker.residue_movement.write_bottaro_to_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.residue_movement.Base.html">Base</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="stacker.vector.html">vector</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="stacker.vector.Vector.html">Vector</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="stacker.visualization.html">visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.NoResidues.html">stacker.visualization.NoResidues</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="stacker.file_manipulation.html">file_manipulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="stacker.file_manipulation.file_convert.html">stacker.file_manipulation.file_convert</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.file_manipulation.filter_traj.html">stacker.file_manipulation.filter_traj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.file_manipulation.filter_traj_to_pdb.html">stacker.file_manipulation.filter_traj_to_pdb</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="stacker.kmeans.html">kmeans</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="stacker.kmeans.create_kmeans_input.html">stacker.kmeans.create_kmeans_input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.kmeans.plot_cluster_trj_data.html">stacker.kmeans.plot_cluster_trj_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.kmeans.read_and_preprocess_data.html">stacker.kmeans.read_and_preprocess_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.kmeans.run_kmeans.html">stacker.kmeans.run_kmeans</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="stacker.pairwise_distance.html">pairwise_distance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.calculate_residue_distance.html">stacker.pairwise_distance.calculate_residue_distance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.get_frame_average.html">stacker.pairwise_distance.get_frame_average</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_frame.html">stacker.pairwise_distance.get_residue_distance_for_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="stacker.vector.html">vector</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="stacker.vector.Vector.html">Vector</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="stacker.visualization.html">visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.NoResidues.html">stacker.visualization.NoResidues</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../stacker.file_manipulation.html">File Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stacker.kmeans.html">KMeans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stacker.pairwise_distance.html">Pairwise Distance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stacker.residue_movement.html">Residue Movement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stacker.vector.html">Vector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stacker.visualization.html">Visualization</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/esakkas24/stacker" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>stacker</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty"><code class="docutils literal notranslate"><span class="pre">AtomEmpty</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.__init__"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.add_note"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.add_note()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.args"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.args</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.with_traceback"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.with_traceback()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty"><code class="docutils literal notranslate"><span class="pre">FrameEmpty</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.__init__"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.add_note"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.add_note()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.args"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.args</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.with_traceback"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.with_traceback()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.InvalidRoutine"><code class="docutils literal notranslate"><span class="pre">InvalidRoutine</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.InvalidRoutine.__init__"><code class="docutils literal notranslate"><span class="pre">InvalidRoutine.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.InvalidRoutine.add_note"><code class="docutils literal notranslate"><span class="pre">InvalidRoutine.add_note()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.InvalidRoutine.args"><code class="docutils literal notranslate"><span class="pre">InvalidRoutine.args</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.InvalidRoutine.with_traceback"><code class="docutils literal notranslate"><span class="pre">InvalidRoutine.with_traceback()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.ResEmpty"><code class="docutils literal notranslate"><span class="pre">ResEmpty</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.ResEmpty.__init__"><code class="docutils literal notranslate"><span class="pre">ResEmpty.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.ResEmpty.add_note"><code class="docutils literal notranslate"><span class="pre">ResEmpty.add_note()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.ResEmpty.args"><code class="docutils literal notranslate"><span class="pre">ResEmpty.args</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.ResEmpty.with_traceback"><code class="docutils literal notranslate"><span class="pre">ResEmpty.with_traceback()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction.__init__"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction._get_args"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction._get_args()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction._get_kwargs"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction._get_kwargs()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction.format_usage"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.format_usage()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.block_printing"><code class="docutils literal notranslate"><span class="pre">block_printing()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.bottaro_routine"><code class="docutils literal notranslate"><span class="pre">bottaro_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.combine_frames"><code class="docutils literal notranslate"><span class="pre">combine_frames()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.compare_routine"><code class="docutils literal notranslate"><span class="pre">compare_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.convert_to_python_command"><code class="docutils literal notranslate"><span class="pre">convert_to_python_command()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.enable_printing"><code class="docutils literal notranslate"><span class="pre">enable_printing()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.filter_traj_routine"><code class="docutils literal notranslate"><span class="pre">filter_traj_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.res_distance_routine"><code class="docutils literal notranslate"><span class="pre">res_distance_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.run_python_command"><code class="docutils literal notranslate"><span class="pre">run_python_command()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.stack_events_routine"><code class="docutils literal notranslate"><span class="pre">stack_events_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.system_routine"><code class="docutils literal notranslate"><span class="pre">system_routine()</span></code></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-stacker">
+<span id="stacker"></span><h1>stacker<a class="headerlink" href="#module-stacker" title="Link to this heading">#</a></h1>
+<p class="rubric">Functions</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.block_printing" title="stacker.block_printing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">block_printing</span></code></a>()</p></td>
+<td><p>Disable printing to standard output</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#stacker.bottaro_routine" title="stacker.bottaro_routine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bottaro_routine</span></code></a>()</p></td>
+<td><p>Executes the residue movement routine to generate Bottaro values for a trajectory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.combine_frames" title="stacker.combine_frames"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combine_frames</span></code></a>(frames_A, frames_B)</p></td>
+<td><p>Combines two 2D numpy arrays (frames_A and frames_B) into a single array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#stacker.compare_routine" title="stacker.compare_routine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compare_routine</span></code></a>()</p></td>
+<td><p>Compares π-stacking events between two trajectories.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.convert_to_python_command" title="stacker.convert_to_python_command"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_to_python_command</span></code></a>()</p></td>
+<td><p>Converts a parsed command to use to the correct subroutine and runs the routine</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#stacker.enable_printing" title="stacker.enable_printing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">enable_printing</span></code></a>()</p></td>
+<td><p>Enable printing to standard output</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.filter_traj_routine" title="stacker.filter_traj_routine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj_routine</span></code></a>()</p></td>
+<td><p>Executes the routine for filtering an input trajectory file and converting it to a PDB file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#stacker.res_distance_routine" title="stacker.res_distance_routine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">res_distance_routine</span></code></a>()</p></td>
+<td><p>Calculates the distance between the centers of mass of two specified residues.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.run_python_command" title="stacker.run_python_command"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_python_command</span></code></a>()</p></td>
+<td><p>Reads the user's passed in command line and runs the command</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#stacker.stack_events_routine" title="stacker.stack_events_routine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stack_events_routine</span></code></a>()</p></td>
+<td><p>Identifies residue pairs with the most π-stacking interactions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.system_routine" title="stacker.system_routine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_routine</span></code></a>()</p></td>
+<td><p>Runs the System Stacking Fingerprint (SSF) routine to generate a single SSF for a specified frame or range of frames.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Classes</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.SmartIndexingAction" title="stacker.SmartIndexingAction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SmartIndexingAction</span></code></a>(option_strings, dest[, ...])</p></td>
+<td><p>Custom argparse action to handle smart indexing of frame numbers.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Exceptions</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.AtomEmpty" title="stacker.AtomEmpty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AtomEmpty</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#stacker.FrameEmpty" title="stacker.FrameEmpty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FrameEmpty</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.InvalidRoutine" title="stacker.InvalidRoutine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InvalidRoutine</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#stacker.ResEmpty" title="stacker.ResEmpty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ResEmpty</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py exception">
+<dt class="sig sig-object py" id="stacker.AtomEmpty">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AtomEmpty</span></span><a class="reference internal" href="../_modules/stacker.html#AtomEmpty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.AtomEmpty" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.AtomEmpty.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.AtomEmpty.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.AtomEmpty.add_note">
+<span class="sig-name descname"><span class="pre">add_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.AtomEmpty.add_note" title="Link to this definition">#</a></dt>
+<dd><p>Exception.add_note(note) –
+add a note to the exception</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="stacker.AtomEmpty.args">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#stacker.AtomEmpty.args" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.AtomEmpty.with_traceback">
+<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.AtomEmpty.with_traceback" title="Link to this definition">#</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="stacker.FrameEmpty">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FrameEmpty</span></span><a class="reference internal" href="../_modules/stacker.html#FrameEmpty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.FrameEmpty" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.FrameEmpty.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.FrameEmpty.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.FrameEmpty.add_note">
+<span class="sig-name descname"><span class="pre">add_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.FrameEmpty.add_note" title="Link to this definition">#</a></dt>
+<dd><p>Exception.add_note(note) –
+add a note to the exception</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="stacker.FrameEmpty.args">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#stacker.FrameEmpty.args" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.FrameEmpty.with_traceback">
+<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.FrameEmpty.with_traceback" title="Link to this definition">#</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="stacker.InvalidRoutine">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">InvalidRoutine</span></span><a class="reference internal" href="../_modules/stacker.html#InvalidRoutine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.InvalidRoutine" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.InvalidRoutine.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.InvalidRoutine.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.InvalidRoutine.add_note">
+<span class="sig-name descname"><span class="pre">add_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.InvalidRoutine.add_note" title="Link to this definition">#</a></dt>
+<dd><p>Exception.add_note(note) –
+add a note to the exception</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="stacker.InvalidRoutine.args">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#stacker.InvalidRoutine.args" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.InvalidRoutine.with_traceback">
+<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.InvalidRoutine.with_traceback" title="Link to this definition">#</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="stacker.ResEmpty">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ResEmpty</span></span><a class="reference internal" href="../_modules/stacker.html#ResEmpty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.ResEmpty" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.ResEmpty.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.ResEmpty.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.ResEmpty.add_note">
+<span class="sig-name descname"><span class="pre">add_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.ResEmpty.add_note" title="Link to this definition">#</a></dt>
+<dd><p>Exception.add_note(note) –
+add a note to the exception</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="stacker.ResEmpty.args">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#stacker.ResEmpty.args" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.ResEmpty.with_traceback">
+<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.ResEmpty.with_traceback" title="Link to this definition">#</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="stacker.SmartIndexingAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SmartIndexingAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option_strings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">const</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">help</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metavar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deprecated</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#SmartIndexingAction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.SmartIndexingAction" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></p>
+<p>Custom argparse action to handle smart indexing of frame numbers.</p>
+<p>Parses a comma-separated list of frame numbers with optional ranges (e.g., ‘1-20, 34, 25, 50-100’)
+and generates a list of individual frame numbers. Modifies the namespace by setting the attribute specified by the ‘dest’ parameter to the
+list of individual frame numbers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parser: argparse.ArgumentParser</strong></dt><dd><p>The argparse parser object.</p>
+</dd>
+<dt><strong>namespace: argparse.Namespace</strong></dt><dd><p>The argparse namespace.</p>
+</dd>
+<dt><strong>values: str</strong></dt><dd><p>The input string containing frame numbers and ranges.</p>
+</dd>
+<dt><strong>option_string: str, default=None</strong></dt><dd><p>The option string.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>dest</strong><span class="classifier">str</span></dt><dd><p>The attribute name in the namespace where the parsed list will be stored.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p><strong>__call__(parser, namespace, values, option_string=None)</strong></p></td>
+<td><p>Parses the provided string of values into a sorted list of integers and sets it as an attribute in the namespace.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-fl&quot;</span><span class="p">,</span> <span class="s2">&quot;--frame_list&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FRAME_LIST&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="n">SmartIndexingAction</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">([</span><span class="s2">&quot;-fl&quot;</span><span class="p">,</span> <span class="s2">&quot;1-20,34,25,50-100&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">frame_list</span><span class="p">)</span>
+<span class="go">[1, 2, ..., 20, 34, 25, 50, 51, ..., 100]</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.SmartIndexingAction.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option_strings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">const</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">help</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metavar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deprecated</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.SmartIndexingAction.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.SmartIndexingAction._get_args">
+<span class="sig-name descname"><span class="pre">_get_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stacker.SmartIndexingAction._get_args" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.SmartIndexingAction._get_kwargs">
+<span class="sig-name descname"><span class="pre">_get_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stacker.SmartIndexingAction._get_kwargs" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.SmartIndexingAction.format_usage">
+<span class="sig-name descname"><span class="pre">format_usage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stacker.SmartIndexingAction.format_usage" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.block_printing">
+<span class="sig-name descname"><span class="pre">block_printing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#block_printing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.block_printing" title="Link to this definition">#</a></dt>
+<dd><p>Disable printing to standard output</p>
+<p>Adapted from <a class="reference external" href="https://stackoverflow.com/a/8391735">https://stackoverflow.com/a/8391735</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.bottaro_routine">
+<span class="sig-name descname"><span class="pre">bottaro_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#bottaro_routine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.bottaro_routine" title="Link to this definition">#</a></dt>
+<dd><p>Executes the residue movement routine to generate Bottaro values for a trajectory.</p>
+<p>This routine calculates the <cite>r</cite>, <cite>rho</cite>, and <cite>theta</cite> values for each frame of a PDB trajectory 
+between two specified residues and stores them in a CSV file. Optionally, it visualizes the 
+movement using heatmaps or scatter plots.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>None</strong></dt><dd><p>The routine relies on global <cite>args</cite>, which must be set via command-line arguments or 
+equivalent argument parsing.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>AtomEmpty</dt><dd><p>If required atom names or residue indices are not provided.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj_to_pdb</span></code></dt><dd><p>Filters trajectory and generates an intermediate PDB.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_bottaro_to_csv</span></code></dt><dd><p>Writes residue movement calculations to a CSV.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">visualize_two_residue_movement_heatmap</span></code></dt><dd><p>Creates a heatmap for residue movement.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">visualize_two_residue_movement_scatterplot</span></code></dt><dd><p>Creates a scatter plot for residue movement.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p><cite>args.trajectory</cite> and <cite>args.topology</cite> are required for generating an intermediate PDB if one 
+is not already provided.</p></li>
+<li><p>Supports heatmap and scatter plot visualizations for residue movement.</p></li>
+<li><p>Removes intermediate files (<cite>pdb</cite> and <cite>csv</cite>) if <cite>–no_inter</cite> flag is specified.</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<dl>
+<dt>Command-line usage:</dt><dd><p>$ python3 stacker.py -s bottaro             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd             -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop             -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb             -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv             -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt scatter</p>
+<p>$ python3 stacker.py -s bottaro             -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb             -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv             -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.combine_frames">
+<span class="sig-name descname"><span class="pre">combine_frames</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frames_A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frames_B</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#combine_frames"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.combine_frames" title="Link to this definition">#</a></dt>
+<dd><p>Combines two 2D numpy arrays (frames_A and frames_B) into a single array.</p>
+<p>This function takes two 2D numpy arrays of the same shape and combines them
+into a new array. The upper triangular part (including the diagonal) of the 
+resulting array is filled with the corresponding elements from frames_A, 
+while the lower triangular part (including the diagonal) is filled with the 
+corresponding elements from frames_B.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>frames_A</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>A 2D numpy array.</p>
+</dd>
+<dt><strong>frames_B</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>A 2D numpy array of the same shape as frames_A.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>numpy.ndarray</dt><dd><p>A new 2D numpy array with combined elements from frames_A and frames_B.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.compare_routine">
+<span class="sig-name descname"><span class="pre">compare_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#compare_routine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.compare_routine" title="Link to this definition">#</a></dt>
+<dd><p>Compares π-stacking events between two trajectories.</p>
+<p>This routine analyzes two trajectory-derived stacking event files and identifies 
+residue pairs with the largest change in average distances between the two systems. 
+It processes the data, merges it, calculates discrepancies, and outputs the sorted 
+results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>None</strong></dt><dd><p>This function relies on global <cite>args</cite> for input values.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>FileNotFoundError</dt><dd><p>If one or both input files are not found.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If the input files have incompatible formats or lack the required headers.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_row_with_header</span></code></dt><dd><p>Identifies the header row in a data file.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">preprocess_df</span></code></dt><dd><p>Prepares the input dataframes for comparison.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pd.merge</span></code></dt><dd><p>Merges the two dataframes for discrepancy calculations.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The input files must contain tab-separated values with the header <cite>Row    Column  Value</cite>.</p></li>
+<li><p>Residue pairings are sorted alphabetically before comparison to ensure consistent results.</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<dl class="simple">
+<dt>Command-line usage:</dt><dd><p>$ python stacker.py -s compare             -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986             -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997             -SA _tUAG_aCUA_+1GCU -SB _tUAG_aCUA_+1CGU</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.convert_to_python_command">
+<span class="sig-name descname"><span class="pre">convert_to_python_command</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#convert_to_python_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.convert_to_python_command" title="Link to this definition">#</a></dt>
+<dd><p>Converts a parsed command to use to the correct subroutine and runs the routine</p>
+<p>Converts the specified script to a python command and runs it with the associated inputs
+based on the flags.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.enable_printing">
+<span class="sig-name descname"><span class="pre">enable_printing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#enable_printing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.enable_printing" title="Link to this definition">#</a></dt>
+<dd><p>Enable printing to standard output</p>
+<p>Adapted from <a class="reference external" href="https://stackoverflow.com/a/8391735">https://stackoverflow.com/a/8391735</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.filter_traj_routine">
+<span class="sig-name descname"><span class="pre">filter_traj_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#filter_traj_routine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.filter_traj_routine" title="Link to this definition">#</a></dt>
+<dd><p>Executes the routine for filtering an input trajectory file and converting it to a PDB file.</p>
+<p>This function uses provided command-line arguments to call the <cite>filter_traj_to_pdb()</cite> function
+with specified inputs, such as the trajectory file, topology file, output file location, 
+residues to retain, and atom names to retain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ResEmpty</dt><dd><p>If the <cite>–residues</cite> argument is not provided.</p>
+</dd>
+<dt>AtomEmpty</dt><dd><p>If the <cite>–atom_names</cite> argument is not provided.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj_to_pdb</span></code></dt><dd><p>The core function that performs the trajectory filtering and PDB generation.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The <cite>args.residues</cite> argument should be a list of residue indices to retain.</p></li>
+<li><p>The <cite>args.atom_names</cite> argument should be a comma-separated string of atom names to retain.</p></li>
+<li><p>Output directories are created automatically if they do not exist.</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<dl class="simple">
+<dt>Command-line usage with sample arguments:</dt><dd><p>$ python3 stacker.py -s filter_traj             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd             -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop             -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb             -r 426,427 -a C2,C4,C6</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.res_distance_routine">
+<span class="sig-name descname"><span class="pre">res_distance_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#res_distance_routine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.res_distance_routine" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the distance between the centers of mass of two specified residues.</p>
+<p>This routine filters the trajectory based on the specified residues and atom names, 
+and calculates the distances for either a single frame or multiple frames if bootstrapping is enabled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>None</strong></dt><dd><p>The routine relies on global <cite>args</cite> for all input values.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>ResEmpty</dt><dd><p>If fewer or more than two residues are specified, or if no residues are provided.</p>
+</dd>
+<dt>AtomEmpty</dt><dd><p>If no atom names are provided.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj</span></code></dt><dd><p>Filters the trajectory for the specified residues and atom names.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_residue_distance</span></code></dt><dd><p>Calculates the distance between residues for a given frame.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The <cite>args.residues</cite> argument must contain exactly two residues.</p></li>
+<li><p>The <cite>args.atom_names</cite> argument is required to specify the atoms involved in the calculation.</p></li>
+<li><p>If the <cite>–bootstrap</cite> argument is provided, distances are calculated across a specified number of randomly sampled frames.</p></li>
+<li><p>If no bootstrap is performed, the distance is calculated for a single frame.</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<dl class="simple">
+<dt>Command-line usage:</dt><dd><p>$ python3 stacker.py -s res_distance             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd             -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop             -f 2 –residues 426,427 –atom_names C2,C4,C6</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.run_python_command">
+<span class="sig-name descname"><span class="pre">run_python_command</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#run_python_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.run_python_command" title="Link to this definition">#</a></dt>
+<dd><p>Reads the user’s passed in command line and runs the command</p>
+<dl class="simple">
+<dt>Reads the command line input, runs the associated command with the</dt><dd><p>added flags.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.stack_events_routine">
+<span class="sig-name descname"><span class="pre">stack_events_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#stack_events_routine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.stack_events_routine" title="Link to this definition">#</a></dt>
+<dd><p>Identifies residue pairs with the most π-stacking interactions.</p>
+<p>This routine analyzes a molecular dynamics trajectory and identifies residue pairs 
+with the smallest center of geometry (COG) distances, typically indicating strong 
+π-stacking. It outputs the top <cite>n_events</cite> residue pairings based on user input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>None</strong></dt><dd><p>This function relies on global <cite>args</cite> for input values.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>FileNotFoundError</dt><dd><p>If the trajectory or topology files are not found.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If input parameters are invalid or incompatible with the data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj</span></code></dt><dd><p>Filters trajectory data based on residue selection.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_top_stacking</span></code></dt><dd><p>Extracts top stacking events from a trajectory.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<dl class="simple">
+<dt>Command-line usage:</dt><dd><p>$ python stacker.py -s stack_events             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd             -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop             -r 90-215 -f 1 -n 5
+$ python stacker.py -s stack_events             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd             -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop             -r 90-100 -fl 1-10 -n 5
+$ python stacker.py -s stack_events             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd             -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop             -r 90-215 -n 5 -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.system_routine">
+<span class="sig-name descname"><span class="pre">system_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#system_routine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.system_routine" title="Link to this definition">#</a></dt>
+<dd><p>Runs the System Stacking Fingerprint (SSF) routine to generate a single SSF for a specified frame or range of frames.</p>
+<p>This routine processes a trajectory to create SSFs based on inter-residue distances and outputs either visualizations 
+or raw data for further analysis. The user can provide input fingerprints or generate them from trajectory files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>None</strong></dt><dd><p>The routine relies on global <cite>args</cite> for all input values.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>FileNotFoundError</dt><dd><p>If the specified trajectory or topology file does not exist.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If the provided input files have incompatible dimensions or unexpected formatting.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj</span></code></dt><dd><p>Filters the trajectory for the specified residues.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory</span></code></dt><dd><p>Computes inter-residue distances for a trajectory.</p>
+</dd>
+<dt><a class="reference internal" href="../stacker.html#stacker.combine_frames" title="stacker.combine_frames"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combine_frames</span></code></a></dt><dd><p>Combines two SSFs into a single array for comparison.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">display_arrays_as_video</span></code></dt><dd><p>Visualizes SSF arrays and saves them as video files.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>If <cite>args.input</cite> is provided, the routine will use pre-calculated fingerprint data.</p></li>
+<li><p>If <cite>args.residues</cite> is specified, only those residues are considered in the calculation.</p></li>
+<li><p>SSFs can be created for individual frames, a list of frames, or all frames in the trajectory.</p></li>
+<li><p>If <cite>args.input_B</cite> is provided, two SSFs are combined for analysis.</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<dl class="simple">
+<dt>Command-line usage:</dt><dd><p>$ python3 stacker.py -s system             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd             -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop             -r 90-215 -fl 1-2 
+$ python3 stacker.py -s ssf             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd             -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop             -r 90-215 -fl 1-2 -g 10             -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png             -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Modules</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.file_manipulation.html#module-stacker.file_manipulation" title="stacker.file_manipulation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">file_manipulation</span></code></a></p></td>
+<td><p>Functions for Manipulating Trajectory Files</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="stacker.kmeans.html#module-stacker.kmeans" title="stacker.kmeans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kmeans</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="stacker.pairwise_distance.html#module-stacker.pairwise_distance" title="stacker.pairwise_distance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pairwise_distance</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.residue_movement.html#module-stacker.residue_movement" title="stacker.residue_movement"><code class="xref py py-obj docutils literal notranslate"><span class="pre">residue_movement</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="stacker.vector.html#module-stacker.vector" title="stacker.vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vector</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="stacker.visualization.html#module-stacker.visualization" title="stacker.visualization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">visualization</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">StACKER documentation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="stacker.block_printing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">stacker.block_printing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty"><code class="docutils literal notranslate"><span class="pre">AtomEmpty</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.__init__"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.add_note"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.add_note()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.args"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.args</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.with_traceback"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.with_traceback()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty"><code class="docutils literal notranslate"><span class="pre">FrameEmpty</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.__init__"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.add_note"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.add_note()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.args"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.args</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.with_traceback"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.with_traceback()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.InvalidRoutine"><code class="docutils literal notranslate"><span class="pre">InvalidRoutine</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.InvalidRoutine.__init__"><code class="docutils literal notranslate"><span class="pre">InvalidRoutine.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.InvalidRoutine.add_note"><code class="docutils literal notranslate"><span class="pre">InvalidRoutine.add_note()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.InvalidRoutine.args"><code class="docutils literal notranslate"><span class="pre">InvalidRoutine.args</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.InvalidRoutine.with_traceback"><code class="docutils literal notranslate"><span class="pre">InvalidRoutine.with_traceback()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.ResEmpty"><code class="docutils literal notranslate"><span class="pre">ResEmpty</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.ResEmpty.__init__"><code class="docutils literal notranslate"><span class="pre">ResEmpty.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.ResEmpty.add_note"><code class="docutils literal notranslate"><span class="pre">ResEmpty.add_note()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.ResEmpty.args"><code class="docutils literal notranslate"><span class="pre">ResEmpty.args</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.ResEmpty.with_traceback"><code class="docutils literal notranslate"><span class="pre">ResEmpty.with_traceback()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction.__init__"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction._get_args"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction._get_args()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction._get_kwargs"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction._get_kwargs()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction.format_usage"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.format_usage()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.block_printing"><code class="docutils literal notranslate"><span class="pre">block_printing()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.bottaro_routine"><code class="docutils literal notranslate"><span class="pre">bottaro_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.combine_frames"><code class="docutils literal notranslate"><span class="pre">combine_frames()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.compare_routine"><code class="docutils literal notranslate"><span class="pre">compare_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.convert_to_python_command"><code class="docutils literal notranslate"><span class="pre">convert_to_python_command()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.enable_printing"><code class="docutils literal notranslate"><span class="pre">enable_printing()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.filter_traj_routine"><code class="docutils literal notranslate"><span class="pre">filter_traj_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.res_distance_routine"><code class="docutils literal notranslate"><span class="pre">res_distance_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.run_python_command"><code class="docutils literal notranslate"><span class="pre">run_python_command()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.stack_events_routine"><code class="docutils literal notranslate"><span class="pre">stack_events_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.system_routine"><code class="docutils literal notranslate"><span class="pre">system_routine()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Eric D. Sakkas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Eric D. Sakkas.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
