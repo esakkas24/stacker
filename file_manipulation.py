@@ -4,14 +4,13 @@ This module contains functions for manipulating trajectory
 files. This includes filtering a trajectory to desired atoms,
 converting trajectory filetype, and outputting Python trajectories
 to other filetypes (eg. prmtop, mdcrd, pdb)
-
 """
 
 import mdtraj as md
 
 def filter_traj(trajectory_filename : str, topology_filename : str, 
                         residues_desired : set = {}, atomnames_desired : set = {}) -> md.Trajectory:
-    """
+    '''
     Filters an input trajectory to only the specified atoms and residues
 
     Filteres an input trajectory that contains all of the atoms in a topology to only
@@ -26,19 +25,21 @@ def filter_traj(trajectory_filename : str, topology_filename : str,
     topology_filename : str
         filepath of the topology of the molecule
     residues_desired : set
-        1-indexed residue numbers of residues to keep in the trajectory
+        1-indexed residue numbers of residues to keep in the trajectory.
+        If Empty, include all residues.
     atomnames_desired : set 
-        atomnames to keep in the trajectory
-
+        atomnames to keep in the trajectory. If Empty, include all atoms.
+        
     Returns
     -------
-    filtered_trajectory : md.Trajectory
+    filtered_trajectory : mdtraj.Trajectory
         a trajectory object representing the filtered structure across all frames
 
     See Also
     --------
-    file_manipulation.filter_traj_to_pdb : Filters an input trajectory to only the specified 
-                                           atoms and residues and outputs to pdb
+    filter_traj_to_pdb : Filters an input trajectory to only the specified 
+                         atoms and residues and outputs to pdb
+    mdtraj.Trajectory : The Trajectory object in mdtraj package
     
     Notes
     -----
@@ -47,9 +48,11 @@ def filter_traj(trajectory_filename : str, topology_filename : str,
 
     Examples
     --------
-    >>> from stacker.file_manipulation import *
-    >>> filtered_traj = filter_traj('stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 'stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmto\
-    p', {426,427}, {'C2','C4','C6'})
+    >>> import stacker as st
+    >>> filtered_traj = st.filter_traj('stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 
+    ...                             'stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', 
+    ...                             residues_desired = {426,427}, 
+    ...                             atomnames_desired = {'C2','C4','C6'})
     WARNING: Residue Indices are expected to be 1-indexed
     Reading trajectory...
     Reading topology...
@@ -65,7 +68,7 @@ def filter_traj(trajectory_filename : str, topology_filename : str,
     4   None   C4       C     426       C        0          
     5   None   C2       C     426       C        0       
 
-    """
+    '''
     print("WARNING: Residue Indices are expected to be 1-indexed")
     
     print("Reading trajectory...")
@@ -107,9 +110,9 @@ def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str,
     Filters an input trajectory to only the specified atoms and residues and outputs to pdb
 
     Filteres an input trajectory that contains all of the atoms in a trajectory to only
-        the desired atoms at the desired residues (eg. the atoms necessary to find the 
-        center of geometry of a residue) and writes the output to a specified pdb file.
-        If residues_desired or atomnames_desired are empty, all residues or atoms are included respectively.
+    the desired atoms at the desired residues (eg. the atoms necessary to find the 
+    center of geometry of a residue) and writes the output to a specified pdb file.
+    If residues_desired or atomnames_desired are empty, all residues or atoms are included respectively.
 
     Parameters
     ----------
@@ -127,11 +130,11 @@ def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str,
 
     Returns
     -------
-        None
+    None
 
     See Also
     --------
-    file_manipulation.filter_traj : Filters an input trajectory to only the specified atoms and residues
+    filter_traj : Filters an input trajectory to only the specified atoms and residues
     
     Notes
     -----
@@ -147,7 +150,7 @@ def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str,
 
 def file_convert(trajectory_filename: str, topology_filename: str, output_file: str) -> None:
     """
-    Converts an mdcrd trajectory input file to a new output type.
+    Converts a trajectory input file to a new output type.
 
     The output file type is determined by the `output_file` extension. Uses `mdtraj.save()` commands to convert 
     trajectory files to various file types such as `mdtraj.save_mdcrd()`, `mdtraj.save_pdb()`, `mdtraj.save_xyz()`, etc.
@@ -155,8 +158,7 @@ def file_convert(trajectory_filename: str, topology_filename: str, output_file: 
     Parameters
     ----------
     trajectory_filename : str
-        Path to the file of the concatenated trajectory (.mdcrd file). Should be resampled to the
-        1 in 50 frames sampled trajectories for each replicate.
+        Path to the file of the concatenated trajectory (eg. .mdcrd file). 
     topology_filename : str
         Path to the file of the topology of the molecule (.prmtop file).
     output_file : str
@@ -165,6 +167,29 @@ def file_convert(trajectory_filename: str, topology_filename: str, output_file: 
     Returns
     -------
     None
+
+    Examples
+    --------
+    >>> import stacker as st
+    >>> import mdtraj as md
+    >>> st.file_convert('stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 
+    ...                 'stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', 
+    ...                 'stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.xyz')
+    WARNING: Output file atom, residue, and chain indices are zero-indexed
+    Trajectory written to: stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.xyz
+    >>> md.load_xyz('stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.xyz', 
+    ...             top='stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop')
+    <mdtraj.Trajectory with 10 frames, 12089 atoms, 494 residues, without unitcells at 0x10bb75cd0>
+
+    Notes
+    -----
+    Output filetype determined from file extension of `output_file` parameter.
+    
+    See Also
+    --------
+    mdtraj.load : Load trajectory files
+    mdtraj.save : Save md.Trajectory to file
+    mdtraj.load_xyz : Load a .xyz trajectory file
 
     """
     print("WARNING: Output file atom, residue, and chain indices are zero-indexed")

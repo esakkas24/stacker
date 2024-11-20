@@ -349,15 +349,6 @@
 </ul>
 </details></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../stacker.file_manipulation.html">File Manipulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../stacker.kmeans.html">KMeans</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../stacker.pairwise_distance.html">Pairwise Distance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../stacker.residue_movement.html">Residue Movement</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../stacker.vector.html">Vector</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../stacker.visualization.html">Visualization</a></li>
-</ul>
 
     </div>
 </nav></div>
@@ -467,7 +458,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for stacker.file_manipulation</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Functions for Manipulating Trajectory Files</span>
+<span></span><span class="sd">&quot;&quot;&quot;Filter Trajectory Files</span>
 
 <span class="sd">This module contains functions for manipulating trajectory</span>
 <span class="sd">files. This includes filtering a trajectory to desired atoms,</span>
@@ -481,7 +472,7 @@
 <a class="viewcode-back" href="../../stacker.file_manipulation.html#stacker.file_manipulation.filter_traj">[docs]</a>
 <span class="k">def</span> <span class="nf">filter_traj</span><span class="p">(</span><span class="n">trajectory_filename</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">topology_filename</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
                         <span class="n">residues_desired</span> <span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">atomnames_desired</span> <span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span> <span class="n">md</span><span class="o">.</span><span class="n">Trajectory</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Filters an input trajectory to only the specified atoms and residues</span>
 
 <span class="sd">    Filteres an input trajectory that contains all of the atoms in a topology to only</span>
@@ -496,19 +487,21 @@
 <span class="sd">    topology_filename : str</span>
 <span class="sd">        filepath of the topology of the molecule</span>
 <span class="sd">    residues_desired : set</span>
-<span class="sd">        1-indexed residue numbers of residues to keep in the trajectory</span>
+<span class="sd">        1-indexed residue numbers of residues to keep in the trajectory.</span>
+<span class="sd">        If Empty, include all residues.</span>
 <span class="sd">    atomnames_desired : set </span>
-<span class="sd">        atomnames to keep in the trajectory</span>
-
+<span class="sd">        atomnames to keep in the trajectory. If Empty, include all atoms.</span>
+<span class="sd">        </span>
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    filtered_trajectory : md.Trajectory</span>
+<span class="sd">    filtered_trajectory : mdtraj.Trajectory</span>
 <span class="sd">        a trajectory object representing the filtered structure across all frames</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
-<span class="sd">    file_manipulation.filter_traj_to_pdb : Filters an input trajectory to only the specified </span>
-<span class="sd">                                           atoms and residues and outputs to pdb</span>
+<span class="sd">    filter_traj_to_pdb : Filters an input trajectory to only the specified </span>
+<span class="sd">                         atoms and residues and outputs to pdb</span>
+<span class="sd">    mdtraj.Trajectory : The Trajectory object in mdtraj package</span>
 <span class="sd">    </span>
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -517,9 +510,11 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; from stacker.file_manipulation import *</span>
-<span class="sd">    &gt;&gt;&gt; filtered_traj = filter_traj(&#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;, &#39;stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmto\</span>
-<span class="sd">    p&#39;, {426,427}, {&#39;C2&#39;,&#39;C4&#39;,&#39;C6&#39;})</span>
+<span class="sd">    &gt;&gt;&gt; import stacker as st</span>
+<span class="sd">    &gt;&gt;&gt; filtered_traj = st.filter_traj(&#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;, </span>
+<span class="sd">    ...                             &#39;stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;, </span>
+<span class="sd">    ...                             residues_desired = {426,427}, </span>
+<span class="sd">    ...                             atomnames_desired = {&#39;C2&#39;,&#39;C4&#39;,&#39;C6&#39;})</span>
 <span class="sd">    WARNING: Residue Indices are expected to be 1-indexed</span>
 <span class="sd">    Reading trajectory...</span>
 <span class="sd">    Reading topology...</span>
@@ -535,7 +530,7 @@
 <span class="sd">    4   None   C4       C     426       C        0          </span>
 <span class="sd">    5   None   C2       C     426       C        0       </span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &#39;&#39;&#39;</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: Residue Indices are expected to be 1-indexed&quot;</span><span class="p">)</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reading trajectory...&quot;</span><span class="p">)</span>
@@ -580,9 +575,9 @@
 <span class="sd">    Filters an input trajectory to only the specified atoms and residues and outputs to pdb</span>
 
 <span class="sd">    Filteres an input trajectory that contains all of the atoms in a trajectory to only</span>
-<span class="sd">        the desired atoms at the desired residues (eg. the atoms necessary to find the </span>
-<span class="sd">        center of geometry of a residue) and writes the output to a specified pdb file.</span>
-<span class="sd">        If residues_desired or atomnames_desired are empty, all residues or atoms are included respectively.</span>
+<span class="sd">    the desired atoms at the desired residues (eg. the atoms necessary to find the </span>
+<span class="sd">    center of geometry of a residue) and writes the output to a specified pdb file.</span>
+<span class="sd">    If residues_desired or atomnames_desired are empty, all residues or atoms are included respectively.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -600,11 +595,11 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">        None</span>
+<span class="sd">    None</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
-<span class="sd">    file_manipulation.filter_traj : Filters an input trajectory to only the specified atoms and residues</span>
+<span class="sd">    filter_traj : Filters an input trajectory to only the specified atoms and residues</span>
 <span class="sd">    </span>
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -623,7 +618,7 @@
 <a class="viewcode-back" href="../../stacker.file_manipulation.html#stacker.file_manipulation.file_convert">[docs]</a>
 <span class="k">def</span> <span class="nf">file_convert</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">topology_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Converts an mdcrd trajectory input file to a new output type.</span>
+<span class="sd">    Converts a trajectory input file to a new output type.</span>
 
 <span class="sd">    The output file type is determined by the `output_file` extension. Uses `mdtraj.save()` commands to convert </span>
 <span class="sd">    trajectory files to various file types such as `mdtraj.save_mdcrd()`, `mdtraj.save_pdb()`, `mdtraj.save_xyz()`, etc.</span>
@@ -631,8 +626,7 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    trajectory_filename : str</span>
-<span class="sd">        Path to the file of the concatenated trajectory (.mdcrd file). Should be resampled to the</span>
-<span class="sd">        1 in 50 frames sampled trajectories for each replicate.</span>
+<span class="sd">        Path to the file of the concatenated trajectory (eg. .mdcrd file). </span>
 <span class="sd">    topology_filename : str</span>
 <span class="sd">        Path to the file of the topology of the molecule (.prmtop file).</span>
 <span class="sd">    output_file : str</span>
@@ -641,6 +635,29 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    None</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import stacker as st</span>
+<span class="sd">    &gt;&gt;&gt; import mdtraj as md</span>
+<span class="sd">    &gt;&gt;&gt; st.file_convert(&#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;, </span>
+<span class="sd">    ...                 &#39;stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;, </span>
+<span class="sd">    ...                 &#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.xyz&#39;)</span>
+<span class="sd">    WARNING: Output file atom, residue, and chain indices are zero-indexed</span>
+<span class="sd">    Trajectory written to: stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.xyz</span>
+<span class="sd">    &gt;&gt;&gt; md.load_xyz(&#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.xyz&#39;, </span>
+<span class="sd">    ...             top=&#39;stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;)</span>
+<span class="sd">    &lt;mdtraj.Trajectory with 10 frames, 12089 atoms, 494 residues, without unitcells at 0x10bb75cd0&gt;</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Output filetype determined from file extension of `output_file` parameter.</span>
+<span class="sd">    </span>
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    mdtraj.load : Load trajectory files</span>
+<span class="sd">    mdtraj.save : Save md.Trajectory to file</span>
+<span class="sd">    mdtraj.load_xyz : Load a .xyz trajectory file</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: Output file atom, residue, and chain indices are zero-indexed&quot;</span><span class="p">)</span>

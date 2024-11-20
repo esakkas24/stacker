@@ -354,15 +354,6 @@
 </ul>
 </details></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../stacker.file_manipulation.html">File Manipulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../stacker.kmeans.html">KMeans</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../stacker.pairwise_distance.html">Pairwise Distance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../stacker.residue_movement.html">Residue Movement</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../stacker.vector.html">Vector</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../stacker.visualization.html">Visualization</a></li>
-</ul>
 
     </div>
 </nav></div>
@@ -546,15 +537,16 @@ empty, all residues or atoms are included respectively.</p>
 </dd>
 <dt><strong>topology_filename</strong><span class="classifier">str</span></dt><dd><p>filepath of the topology of the molecule</p>
 </dd>
-<dt><strong>residues_desired</strong><span class="classifier">set</span></dt><dd><p>1-indexed residue numbers of residues to keep in the trajectory</p>
+<dt><strong>residues_desired</strong><span class="classifier">set</span></dt><dd><p>1-indexed residue numbers of residues to keep in the trajectory.
+If Empty, include all residues.</p>
 </dd>
-<dt><strong>atomnames_desired</strong><span class="classifier">set</span></dt><dd><p>atomnames to keep in the trajectory</p>
+<dt><strong>atomnames_desired</strong><span class="classifier">set</span></dt><dd><p>atomnames to keep in the trajectory. If Empty, include all atoms.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>filtered_trajectory</strong><span class="classifier">md.Trajectory</span></dt><dd><p>a trajectory object representing the filtered structure across all frames</p>
+<dt><strong>filtered_trajectory</strong><span class="classifier">mdtraj.Trajectory</span></dt><dd><p>a trajectory object representing the filtered structure across all frames</p>
 </dd>
 </dl>
 </dd>
@@ -562,7 +554,9 @@ empty, all residues or atoms are included respectively.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">file_manipulation.filter_traj_to_pdb</span></code></dt><dd><p>Filters an input trajectory to only the specified  atoms and residues and outputs to pdb</p>
+<dt><a class="reference internal" href="../stacker.file_manipulation.html#stacker.file_manipulation.filter_traj_to_pdb" title="stacker.file_manipulation.filter_traj_to_pdb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj_to_pdb</span></code></a></dt><dd><p>Filters an input trajectory to only the specified  atoms and residues and outputs to pdb</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">mdtraj.Trajectory</span></code></dt><dd><p>The Trajectory object in mdtraj package</p>
 </dd>
 </dl>
 </div>
@@ -570,8 +564,11 @@ empty, all residues or atoms are included respectively.</p>
 <p>Inputed trajectory should have 1-indexed Residue Indices, 
 Outputed trajectory object will be 0-indexed.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">stacker.file_manipulation</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">filter_traj</span><span class="p">(</span><span class="s1">&#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span><span class="p">,</span> <span class="s1">&#39;stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmto    p&#39;</span><span class="p">,</span> <span class="p">{</span><span class="mi">426</span><span class="p">,</span><span class="mi">427</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span><span class="s1">&#39;C6&#39;</span><span class="p">})</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s1">&#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span><span class="p">,</span> 
+<span class="gp">... </span>                            <span class="s1">&#39;stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span><span class="p">,</span> 
+<span class="gp">... </span>                            <span class="n">residues_desired</span> <span class="o">=</span> <span class="p">{</span><span class="mi">426</span><span class="p">,</span><span class="mi">427</span><span class="p">},</span> 
+<span class="gp">... </span>                            <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span><span class="s1">&#39;C6&#39;</span><span class="p">})</span>
 <span class="go">WARNING: Residue Indices are expected to be 1-indexed</span>
 <span class="go">Reading trajectory...</span>
 <span class="go">Reading topology...</span>

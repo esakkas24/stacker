@@ -23,13 +23,3 @@ documentation for details.
       stacker.vector
       stacker.visualization
 
-.. toctree::
-   :maxdepth: 4
-   :caption: Contents:
-
-   File Manipulation <stacker.file_manipulation>
-   KMeans <stacker.kmeans>
-   Pairwise Distance <stacker.pairwise_distance>
-   Residue Movement <stacker.residue_movement>
-   Vector <stacker.vector>
-   Visualization <stacker.visualization>
