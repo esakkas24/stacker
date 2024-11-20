@@ -18,4 +18,5 @@ stacker.egg-info/PKG-INFO
 stacker.egg-info/SOURCES.txt
 stacker.egg-info/dependency_links.txt
 stacker.egg-info/entry_points.txt
+stacker.egg-info/requires.txt
 stacker.egg-info/top_level.txt

@@ -6,7 +6,7 @@ def read_requirements():
         return req_file.read().splitlines()
 
 setup(
-    name="StACKER",
+    name="pistacker",
     version="1.0.0",
     packages=find_packages(),
     entry_points={
