@@ -13,15 +13,32 @@ Manipulates the outputs of an MD simulation and analyzes the pi-stacking interac
 
 ## Installation Instructions
 
-### Clone StACKER repository to local computer
-A video of the installation is present in `installation/installation.mp4`
+StACKER can be installed through GitHub or through PyPi:
 
+### Install StACKER with pip
+In the command line, run:
+```
+pip install pistacker
+```
+
+This will install StACKER, activate the command line option `stacker`, and install all the necessary dependencies.
+### Clone StACKER repository to local computer
 In the command line, run:
 ```
 git clone https://github.com/esakkas24/stacker.git
 ```
 
-### Download mdtraj
+Descend into the directory and download the neccessary dependencies:
+```
+cd stacker
+pip install -r requirements.txt
+pip install setuptools
+python setup.py install
+```
+This will install StACKER, activate the command line option `stacker`, and install all the necessary dependencies.
+
+If you need to download any of the dependencies individually
+##### Download mdtraj
 
 ```
 pip3 install mdtraj
@@ -48,19 +65,19 @@ If successful, this will also install the NumPy dependency:
 Successfully installed astunparse-1.6.3 mdtraj-1.9.9 numpy-1.24.4 ...
 ```
 
-### Install Pandas
+##### Install Pandas
 ```
 pip3 install pandas
 ```
-### Install matplotlib
+##### Install matplotlib
 ```
 pip3 install matplotlib
 ```
-### Install seaborn
+##### Install seaborn
 ```
 pip3 install seaborn
 ```
-### Install sklearn
+##### Install sklearn
 ```
 pip3 install scikit-learn
 ```
@@ -74,7 +91,6 @@ MD Files are provided for testing convenience in the `testing` folder:
 - `5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb` : A larger Trajectory combined with a Topology file with 3200 frames.
 
 ## Future Features
-- Dependency checks for easier installation, auto installation of dependencies
 - Usage for more trajectory types beyond mdcrd prmtop and pdbs
 
 ## Features
