@@ -16,7 +16,6 @@ Manipulates the outputs of an MD simulation and analyzes the pi-stacking interac
 ### Clone StACKER repository to local computer
 A video of the installation is present in `installation/installation.mp4`
 
-
 In the command line, run:
 ```
 git clone https://github.com/esakkas24/stacker.git
