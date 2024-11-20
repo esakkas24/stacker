@@ -4,6 +4,7 @@ This module contains functions for manipulating trajectory
 files. This includes filtering a trajectory to desired atoms,
 converting trajectory filetype, and outputting Python trajectories
 to other filetypes (eg. prmtop, mdcrd, pdb)
+
 """
 
 import mdtraj as md
