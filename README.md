@@ -61,6 +61,10 @@ pip3 install matplotlib
 ```
 pip3 install seaborn
 ```
+### Install sklearn
+```
+pip3 install scikit-learn
+```
 ## Testing Features
 
 All features can be tested by running the unit tests at the end of each Python script, or by running stacker.py in the command line. All tests are explained in the `testing/testing.md` file.
