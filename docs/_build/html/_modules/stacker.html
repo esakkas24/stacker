@@ -334,6 +334,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../_autosummary/stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../_autosummary/stacker.residue_movement.html">residue_movement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/stacker.residue_movement.calc_center_3pts.html">stacker.residue_movement.calc_center_3pts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/stacker.residue_movement.calculate_bottaro_values_for_frame.html">stacker.residue_movement.calculate_bottaro_values_for_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/stacker.residue_movement.collect_atom_locations_by_frame.html">stacker.residue_movement.collect_atom_locations_by_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/stacker.residue_movement.correct_theta_sign.html">stacker.residue_movement.correct_theta_sign</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/stacker.residue_movement.create_base_from_coords_list.html">stacker.residue_movement.create_base_from_coords_list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/stacker.residue_movement.write_bottaro_to_csv.html">stacker.residue_movement.write_bottaro_to_csv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/stacker.residue_movement.Base.html">Base</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../_autosummary/stacker.vector.html">vector</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../_autosummary/stacker.vector.Vector.html">Vector</a></li>
 </ul>
@@ -478,24 +488,71 @@
 <div class="viewcode-block" id="InvalidRoutine">
 <a class="viewcode-back" href="../stacker.html#stacker.InvalidRoutine">[docs]</a>
 <span class="k">class</span> <span class="nc">InvalidRoutine</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Specified command line routine was invalid</span>
+
+<span class="sd">    This is raised when the `stacker -s ROUTINE` was given</span>
+<span class="sd">    an invalid ROUTINE.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Command Line::</span>
+
+<span class="sd">        $ stacker -s blah</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">pass</span></div>
 
 
 <div class="viewcode-block" id="ResEmpty">
 <a class="viewcode-back" href="../stacker.html#stacker.ResEmpty">[docs]</a>
 <span class="k">class</span> <span class="nc">ResEmpty</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;No Residues to subset to were provided</span>
+
+<span class="sd">    This is raised when a routine is given an invalid</span>
+<span class="sd">    number of residues to subset to.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    Command Line::</span>
+
+<span class="sd">        $ stacker -s filter_traj -r -a C2,C4,C6</span>
+<span class="sd">    </span>
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    fiter_traj_routine</span>
+<span class="sd">    bottaro_routine</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 
 <div class="viewcode-block" id="AtomEmpty">
 <a class="viewcode-back" href="../stacker.html#stacker.AtomEmpty">[docs]</a>
 <span class="k">class</span> <span class="nc">AtomEmpty</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;No Atomnames to subset to were provided</span>
+
+<span class="sd">    This is raised when a routine is given an invalid</span>
+<span class="sd">    number of atomnames to subset to.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    Command Line::</span>
+
+<span class="sd">        $ stacker -s filter_traj -a -r 426,427  </span>
+<span class="sd">    </span>
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    fiter_traj_routine</span>
+<span class="sd">    bottaro_routine</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 
 <div class="viewcode-block" id="FrameEmpty">
 <a class="viewcode-back" href="../stacker.html#stacker.FrameEmpty">[docs]</a>
 <span class="k">class</span> <span class="nc">FrameEmpty</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;No Frames present in trajectory&quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 
@@ -534,7 +591,7 @@
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">add_help</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawTextHelpFormatter</span><span class="p">,</span> 
                                      <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Wrapper to run stacker subroutines using the -s flag.</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
-                                        <span class="s2">&quot;More info on each routine given by `python stacker.py -s ROUTINE -h`&quot;</span><span class="p">)</span>
+                                        <span class="s2">&quot;More info on each routine given by `stacker -s ROUTINE -h`&quot;</span><span class="p">)</span>
     <span class="k">global</span> <span class="n">args</span><span class="p">;</span>
     <span class="n">args</span><span class="p">,</span> <span class="n">remaining_args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">()</span>
     
@@ -542,7 +599,7 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="n">args</span><span class="p">))</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">remaining_args</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;usage: stacker.py -s ROUTINE [-h]</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
             <span class="s1">&#39;Wrapper to run stacker subroutines using the -s flag.</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-            <span class="s1">&#39;More info on each routine given by `python stacker.py -s ROUTINE -h` or `python stacker.py -s ROUTINE --help`</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;More info on each routine given by `stacker -s ROUTINE -h` or `stacker -s ROUTINE --help`</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
             <span class="s1">&#39;options:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
             <span class="s1">&#39;-s ROUTINE, --script ROUTINE</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
             <span class="s1">&#39;            Name of command to use. Options for ROUTINE:</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
@@ -557,7 +614,7 @@
             <span class="s1">&#39;              stack_events:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
             <span class="s1">&#39;                    Get list of residues with most stacking events (distance closest to 3.5Å)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
             <span class="s1">&#39;              compare:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
-            <span class="s1">&#39;                    Get the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+            <span class="s1">&#39;                    Get the most changed stacking events between two fingerprints using the outputs of stacker -s stack_events</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
             <span class="s1">&#39;-h, --help            show this help message and exit</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">return</span>
 
@@ -569,7 +626,7 @@
                             <span class="s2">&quot;  res_distance:</span><span class="se">\n\t</span><span class="s2">Get the distance between two residues in a given frame</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>\
                             <span class="s2">&quot;  system OR ssf:</span><span class="se">\n\t</span><span class="s2">Create a System Stacking Fingerprint of distances by residue</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
                             <span class="s2">&quot;  stack_events:</span><span class="se">\n\t</span><span class="s2">Get list of residues with most stacking events (distance closest to 3.5Å)</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>\
-                            <span class="s2">&quot;  compare:</span><span class="se">\n\t</span><span class="s2">Get the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;  compare:</span><span class="se">\n\t</span><span class="s2">Get the most changed stacking events between two fingerprints using the outputs of stacker -s stack_events</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
                              <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;filter_traj&#39;</span><span class="p">,</span> <span class="s1">&#39;bottaro&#39;</span><span class="p">,</span> <span class="s1">&#39;pairwise&#39;</span><span class="p">,</span> <span class="s1">&#39;psf&#39;</span><span class="p">,</span> <span class="s1">&#39;res_distance&#39;</span><span class="p">,</span> <span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="s1">&#39;ssf&#39;</span><span class="p">,</span> <span class="s1">&#39;stack_events&#39;</span><span class="p">,</span> <span class="s1">&#39;compare&#39;</span><span class="p">])</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-h&quot;</span><span class="p">,</span> <span class="s2">&quot;--help&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;show this help message and exit&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;help&#39;</span><span class="p">)</span>
         <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
@@ -580,7 +637,7 @@
                             <span class="s2">&quot;  res_distance:</span><span class="se">\n\t</span><span class="s2">Get the distance between two residues in a given frame</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>\
                             <span class="s2">&quot;  system OR ssf:</span><span class="se">\n\t</span><span class="s2">Create a System Stacking Fingerprint of distances by residue</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
                             <span class="s2">&quot;  stack_events:</span><span class="se">\n\t</span><span class="s2">Get list of residues with most stacking events (distance closest to 3.5Å)</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>\
-                            <span class="s2">&quot;  compare:</span><span class="se">\n\t</span><span class="s2">Get the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;  compare:</span><span class="se">\n\t</span><span class="s2">Get the most changed stacking events between two fingerprints using the outputs of stacker -s stack_events</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
                              <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;filter_traj&#39;</span><span class="p">,</span> <span class="s1">&#39;bottaro&#39;</span><span class="p">,</span> <span class="s1">&#39;pairwise&#39;</span><span class="p">,</span> <span class="s1">&#39;psf&#39;</span><span class="p">,</span> <span class="s1">&#39;res_distance&#39;</span><span class="p">,</span> <span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="s1">&#39;ssf&#39;</span><span class="p">,</span> <span class="s1">&#39;stack_events&#39;</span><span class="p">,</span> <span class="s1">&#39;compare&#39;</span><span class="p">])</span>
       
     <span class="n">args</span><span class="p">,</span> <span class="n">remaining_args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">()</span>
@@ -636,21 +693,21 @@
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">script</span> <span class="o">==</span> <span class="s1">&#39;system&#39;</span> <span class="ow">or</span> <span class="n">args</span><span class="o">.</span><span class="n">script</span> <span class="o">==</span> <span class="s1">&#39;ssf&#39;</span><span class="p">:</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Creates a System Stacking Fingerprint of the average structure across the chosen frames of a trajectory.&#39;</span> <span class="o">+</span> \
                                 <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Examples:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
-                                <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">[user]$ python stacker.py -s system -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
-                                <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">[user]$ python stacker.py -s ssf -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2 -g 10 -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">[user]$ stacker -s system -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+                                <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">[user]$ stacker -s ssf -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2 -g 10 -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt</span><span class="se">\n</span><span class="s1">&#39;</span>
         
         <span class="n">required_group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s1">&#39;Required Arguments&#39;</span><span class="p">)</span>
         <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-trj&quot;</span><span class="p">,</span> <span class="s2">&quot;--trajectory&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;TRAJECTORY_FILENAME&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filepath to trajectory file for the MD simulation&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-top&quot;</span><span class="p">,</span> <span class="s2">&quot;--topology&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;TOPOLOGY_FILENAME&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filepath to Topology file for the MD simulation&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-r&quot;</span><span class="p">,</span> <span class="s2">&quot;--residues&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;RESIDUES&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Smart-indexed list of 1-indexed residues, also accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span> <span class="o">=</span> <span class="n">SmartIndexingAction</span><span class="p">)</span>
-        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-i&quot;</span><span class="p">,</span> <span class="s2">&quot;--input&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;INPUT_FILE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Input .txt file containing per-frame stacking information, in lieu of running stacking fingerprint analysis again.</span><span class="se">\n</span><span class="s2">TXT file can be created by running `python stacker.py -s system -d OUTPUT_FILE`</span><span class="se">\n</span><span class="s2">-r flag must match the residues used to create the TXT file&quot;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-i&quot;</span><span class="p">,</span> <span class="s2">&quot;--input&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;INPUT_FILE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Input .txt file containing per-frame stacking information, in lieu of running stacking fingerprint analysis again.</span><span class="se">\n</span><span class="s2">TXT file can be created by running `stacker -s system -d OUTPUT_FILE`</span><span class="se">\n</span><span class="s2">-r flag must match the residues used to create the TXT file&quot;</span><span class="p">)</span>
         <span class="n">frame_group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_mutually_exclusive_group</span><span class="p">()</span>
         <span class="n">frame_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-f&quot;</span><span class="p">,</span> <span class="s2">&quot;--frame&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FRAME_NUM&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;1-indexed Frame Number within trajectory to analyze, cannot be used with -fl&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">frame_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-fl&quot;</span><span class="p">,</span> <span class="s2">&quot;--frame_list&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FRAME_LIST&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,</span><span class="se">\n</span><span class="s2">gets average distance between residues across these frames</span><span class="se">\n</span><span class="s2">if empty all frames are used, cannot be used with -f&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="n">SmartIndexingAction</span><span class="p">)</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="s2">&quot;--output&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;OUTPUT_FILE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filename of output PNG to write plot to. If empty, will output displays to Python visual&quot;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-g&quot;</span><span class="p">,</span> <span class="s2">&quot;--get_stacking&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;N_EVENTS&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Get list of N_EVENTS residues with most stacking events (distance closest to 3.5Å) in the average structure across all frames.</span><span class="se">\n</span><span class="s2">Print to standard output. Equivalent to -s stack_events -n N_EVENTS&quot;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-d&quot;</span><span class="p">,</span> <span class="s2">&quot;--data_output&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;OUTPUT_FILE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Output the calculated per-frame numpy arrays that create the stacking fingerprint matrix to a file&quot;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-B&quot;</span><span class="p">,</span> <span class="s2">&quot;--input_B&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;INPUT_FILE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Input .txt file containing per-frame stacking information for a second fingerprint, creates fingerprint where top left is initial input, bottom right is second fingerprint.</span><span class="se">\n</span><span class="s2"> Used in lieu of running stacking fingerprint analysis again.</span><span class="se">\n</span><span class="s2">TXT file can be created by running `python stacker.py -s system -d OUTPUT_FILE`</span><span class="se">\n</span><span class="s2">-r flag must match the residues used to create the TXT file&quot;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-B&quot;</span><span class="p">,</span> <span class="s2">&quot;--input_B&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;INPUT_FILE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Input .txt file containing per-frame stacking information for a second fingerprint, creates fingerprint where top left is initial input, bottom right is second fingerprint.</span><span class="se">\n</span><span class="s2"> Used in lieu of running stacking fingerprint analysis again.</span><span class="se">\n</span><span class="s2">TXT file can be created by running `stacker -s system -d OUTPUT_FILE`</span><span class="se">\n</span><span class="s2">-r flag must match the residues used to create the TXT file&quot;</span><span class="p">)</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-l&quot;</span><span class="p">,</span> <span class="s2">&quot;--limits&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;LIMITS&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;limits of the color scale, default = (0,7)&quot;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;0,7&#39;</span><span class="p">)</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-y&quot;</span><span class="p">,</span> <span class="s2">&quot;--scale_style&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;SCALE_STYLE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot; style of color scale. {bellcurve, gradient}&quot;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;bellcurve&#39;</span><span class="p">)</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-t&quot;</span><span class="p">,</span> <span class="s2">&quot;--threads&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;N_THREADS&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Use multithreading with INT worker threads&quot;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
@@ -659,9 +716,9 @@
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">script</span> <span class="o">==</span> <span class="s1">&#39;stack_events&#39;</span><span class="p">:</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Get list of residues with most stacking events (distance closest to 3.5Å) in the stacking fingerprint of the average structure across all frames of a trajectory&#39;</span> <span class="o">+</span> \
                                 <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Examples:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
-                                <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">[user]$ python stacker.py -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -f 1 -n 5</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
-                                <span class="s1">&#39;[user]$ python stacker.py -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-100 -fl 1-10 -n 5</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
-                                <span class="s1">&#39;[user]$ python stacker.py -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -n 5 -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt</span><span class="se">\n</span><span class="s1">&#39;</span> 
+                                <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">[user]$ stacker -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -f 1 -n 5</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+                                <span class="s1">&#39;[user]$ stacker -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-100 -fl 1-10 -n 5</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+                                <span class="s1">&#39;[user]$ stacker -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -n 5 -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt</span><span class="se">\n</span><span class="s1">&#39;</span> 
 
         <span class="n">required_group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s1">&#39;Required Arguments&#39;</span><span class="p">)</span>
         <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-trj&quot;</span><span class="p">,</span> <span class="s2">&quot;--trajectory&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;TRAJECTORY_FILENAME&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filepath to trajectory file for the MD simulation&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -669,20 +726,20 @@
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-r&quot;</span><span class="p">,</span> <span class="s2">&quot;--residues&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;RESIDUES&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Smart-indexed list of 1-indexed residues to subset trajectory, also accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span> <span class="o">=</span> <span class="n">SmartIndexingAction</span><span class="p">)</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="s2">&quot;--output&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;OUTPUT_FILE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Output tab-separated txt file to write top stacking events to. If empty, will output displays to standard output&quot;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-n&quot;</span><span class="p">,</span> <span class="s2">&quot;--n_events&quot;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;N_EVENTS&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Number of stacking events to display. If -1 display all events&quot;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-i&quot;</span><span class="p">,</span> <span class="s2">&quot;--input&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;INPUT_FILE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Input .txt file containing per-frame stacking information, in lieu of running stacking fingerprint analysis again.</span><span class="se">\n</span><span class="s2">TXT file can be created by running `python stacker.py -s system -d OUTPUT_FILE`</span><span class="se">\n</span><span class="s2">-r flag must match the residues used to create the TXT file&quot;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-i&quot;</span><span class="p">,</span> <span class="s2">&quot;--input&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;INPUT_FILE&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Input .txt file containing per-frame stacking information, in lieu of running stacking fingerprint analysis again.</span><span class="se">\n</span><span class="s2">TXT file can be created by running `stacker -s system -d OUTPUT_FILE`</span><span class="se">\n</span><span class="s2">-r flag must match the residues used to create the TXT file&quot;</span><span class="p">)</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-j&quot;</span><span class="p">,</span> <span class="s2">&quot;--include_adjacent&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Boolean whether to include adjacent residues in the printed output&quot;</span><span class="p">,</span> <span class="n">action</span> <span class="o">=</span> <span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">frame_group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_mutually_exclusive_group</span><span class="p">()</span>
         <span class="n">frame_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-f&quot;</span><span class="p">,</span> <span class="s2">&quot;--frame&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FRAME_NUM&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;1-indexed Frame Number within trajectory to analyze, cannot be used with -fl&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">frame_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-fl&quot;</span><span class="p">,</span> <span class="s2">&quot;--frame_list&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FRAME_LIST&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,</span><span class="se">\n</span><span class="s2">gets average distance between residues across these frames</span><span class="se">\n</span><span class="s2">if empty all frames are used, cannot be used with -f&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="n">SmartIndexingAction</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">script</span> <span class="o">==</span> <span class="s1">&#39;compare&#39;</span><span class="p">:</span>
-        <span class="n">parser</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Print the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events&#39;</span> <span class="o">+</span>\
+        <span class="n">parser</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Print the most changed stacking events between two fingerprints using the outputs of stacker -s stack_events&#39;</span> <span class="o">+</span>\
                                 <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Examples:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
-                                <span class="s1">&#39;[user]$ python stacker.py -s compare -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997 -SA _tUAG_aCUA_+1GCU -SB _tUAG_aCUA_+1CGU</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                <span class="s1">&#39;[user]$ stacker -s compare -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997 -SA _tUAG_aCUA_+1GCU -SB _tUAG_aCUA_+1CGU</span><span class="se">\n</span><span class="s1">&#39;</span>
 
         <span class="n">required_group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s1">&#39;Required Arguments&#39;</span><span class="p">)</span>
-        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-A&quot;</span><span class="p">,</span> <span class="s2">&quot;--file_A&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FILENAME_A&quot;</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s2">&quot;Filepath to the output log of python stacker.py -s stack_events for the first stacking fingerprint&quot;</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-B&#39;</span><span class="p">,</span> <span class="s1">&#39;--file_B&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FILENAME_B&quot;</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s1">&#39;Filepath to the output log of python stacker.py -s stack_events for the second stacking fingerprint&#39;</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-A&quot;</span><span class="p">,</span> <span class="s2">&quot;--file_A&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FILENAME_A&quot;</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s2">&quot;Filepath to the output log of stacker -s stack_events for the first stacking fingerprint&quot;</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-B&#39;</span><span class="p">,</span> <span class="s1">&#39;--file_B&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FILENAME_B&quot;</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s1">&#39;Filepath to the output log of stacker -s stack_events for the second stacking fingerprint&#39;</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
         <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-SA&#39;</span><span class="p">,</span> <span class="s1">&#39;--source_A&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;SOURCE_A&quot;</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s1">&#39;String describing source of file A, e.g. `_tUAG_aCUA_+1GCU`&#39;</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
         <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-SB&#39;</span><span class="p">,</span> <span class="s1">&#39;--source_B&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;SOURCE_B&quot;</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s1">&#39;String describing source of file B, e.g. `_tUAG_aCUA_+1CGU`&#39;</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 
@@ -795,7 +852,8 @@
 <span class="sd">    --------</span>
 <span class="sd">    Command-line usage with sample arguments::</span>
 
-<span class="sd">        $ python3 stacker.py -s filter_traj </span>
+<span class="sd">        $ python3 stacker.py </span>
+<span class="sd">            -s filter_traj </span>
 <span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd </span>
 <span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop </span>
 <span class="sd">            -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb </span>
@@ -856,17 +914,19 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    Command-line usage:</span>
-<span class="sd">        $ python3 stacker.py -s bottaro \</span>
-<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \</span>
-<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \</span>
-<span class="sd">            -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb \</span>
-<span class="sd">            -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv \</span>
+<span class="sd">    Command-line usage::</span>
+
+<span class="sd">        $ python3 stacker.py -s bottaro </span>
+<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd </span>
+<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop </span>
+<span class="sd">            -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb </span>
+<span class="sd">            -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv </span>
 <span class="sd">            -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt scatter</span>
 
-<span class="sd">        $ python3 stacker.py -s bottaro \</span>
-<span class="sd">            -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb \</span>
-<span class="sd">            -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv \</span>
+<span class="sd">    </span>
+<span class="sd">        $ python3 stacker.py -s bottaro </span>
+<span class="sd">            -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb </span>
+<span class="sd">            -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv </span>
 <span class="sd">            -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat</span>
 
 <span class="sd">    See Also</span>
@@ -970,10 +1030,11 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    Command-line usage:</span>
-<span class="sd">        $ python3 stacker.py -s res_distance \</span>
-<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \</span>
-<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \</span>
+<span class="sd">    Command-line usage::</span>
+
+<span class="sd">        $ python3 stacker.py -s res_distance </span>
+<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd </span>
+<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop </span>
 <span class="sd">            -f 2 --residues 426,427 --atom_names C2,C4,C6</span>
 
 <span class="sd">    Outputs</span>
@@ -1065,16 +1126,18 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    Command-line usage:</span>
-<span class="sd">        $ python3 stacker.py -s system \</span>
-<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \</span>
-<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \</span>
+<span class="sd">    Command-line usage::</span>
+
+<span class="sd">        $ python3 stacker.py -s system </span>
+<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd </span>
+<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop </span>
 <span class="sd">            -r 90-215 -fl 1-2 </span>
-<span class="sd">        $ python3 stacker.py -s ssf \</span>
-<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \</span>
-<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \</span>
-<span class="sd">            -r 90-215 -fl 1-2 -g 10 \</span>
-<span class="sd">            -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png \</span>
+
+<span class="sd">        $ python3 stacker.py -s ssf </span>
+<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd </span>
+<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop </span>
+<span class="sd">            -r 90-215 -fl 1-2 -g 10 </span>
+<span class="sd">            -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png </span>
 <span class="sd">            -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt</span>
 
 <span class="sd">    See Also</span>
@@ -1143,7 +1206,7 @@
 <span class="sd">    Combines two 2D numpy arrays (frames_A and frames_B) into a single array.</span>
 
 <span class="sd">    This function takes two 2D numpy arrays of the same shape and combines them</span>
-<span class="sd">    into a new array. The upper triangular part (including the diagonal) of the </span>
+<span class="sd">    into a new array. The upper triangular part (excluding the diagonal) of the </span>
 <span class="sd">    resulting array is filled with the corresponding elements from frames_A, </span>
 <span class="sd">    while the lower triangular part (including the diagonal) is filled with the </span>
 <span class="sd">    corresponding elements from frames_B.</span>
@@ -1160,14 +1223,16 @@
 <span class="sd">    numpy.ndarray </span>
 <span class="sd">        A new 2D numpy array with combined elements from frames_A and frames_B.</span>
 
-<span class="sd">    Example</span>
-<span class="sd">    -------</span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import stacker as st</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; frames_A = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])</span>
 <span class="sd">    &gt;&gt;&gt; frames_B = np.array([[9, 8, 7], [6, 5, 4], [3, 2, 1]])</span>
-<span class="sd">    &gt;&gt;&gt; combine_frames(frames_A, frames_B)</span>
-<span class="sd">    array([[1., 2., 3.],</span>
+<span class="sd">    &gt;&gt;&gt; st.combine_frames(frames_A, frames_B)</span>
+<span class="sd">    array([[9., 2., 3.],</span>
 <span class="sd">           [6., 5., 6.],</span>
-<span class="sd">           [3., 2., 9.]])</span>
+<span class="sd">           [3., 2., 1.]])</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">Am</span><span class="p">,</span> <span class="n">An</span> <span class="o">=</span> <span class="n">frames_A</span><span class="o">.</span><span class="n">shape</span>
@@ -1207,18 +1272,21 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    Command-line usage:</span>
-<span class="sd">        $ python stacker.py -s stack_events \</span>
-<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \</span>
-<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \</span>
+<span class="sd">    Command-line usage::</span>
+
+<span class="sd">        $ stacker -s stack_events </span>
+<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd </span>
+<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop </span>
 <span class="sd">            -r 90-215 -f 1 -n 5</span>
-<span class="sd">        $ python stacker.py -s stack_events \</span>
-<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \</span>
-<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \</span>
+
+<span class="sd">        $ stacker -s stack_events </span>
+<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd </span>
+<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop </span>
 <span class="sd">            -r 90-100 -fl 1-10 -n 5</span>
-<span class="sd">        $ python stacker.py -s stack_events \</span>
-<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \</span>
-<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \</span>
+
+<span class="sd">        $ stacker -s stack_events </span>
+<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd </span>
+<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop </span>
 <span class="sd">            -r 90-215 -n 5 -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt</span>
 
 <span class="sd">    See Also</span>
@@ -1251,7 +1319,7 @@
 <a class="viewcode-back" href="../stacker.html#stacker.compare_routine">[docs]</a>
 <span class="k">def</span> <span class="nf">compare_routine</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compares π-stacking events between two trajectories.</span>
+<span class="sd">    Compares pi-stacking events between two trajectories.</span>
 
 <span class="sd">    This routine analyzes two trajectory-derived stacking event files and identifies </span>
 <span class="sd">    residue pairs with the largest change in average distances between the two systems. </span>
@@ -1276,10 +1344,11 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    Command-line usage:</span>
-<span class="sd">        $ python stacker.py -s compare \</span>
-<span class="sd">            -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 \</span>
-<span class="sd">            -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997 \</span>
+<span class="sd">    Command-line usage::</span>
+
+<span class="sd">        $ stacker -s compare </span>
+<span class="sd">            -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 </span>
+<span class="sd">            -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997 </span>
 <span class="sd">            -SA _tUAG_aCUA_+1GCU -SB _tUAG_aCUA_+1CGU</span>
 
 <span class="sd">    Notes</span>

@@ -1,3 +1,12 @@
+"""
+Create and Analyze System Stacking Fingerprints (SSFs)
+
+This module contains the functions to create and analyze System
+Stacking Fingerprints. It allows the user to generate pairwise
+distance data across a trajectory and compare these matrices across
+different trajectories.
+"""
+
 import mdtraj as md
 import numpy as np
 from numpy import typing

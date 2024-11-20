@@ -4,15 +4,53 @@ stacker package
 Submodules
 ----------
 
-.. toctree::
-   :maxdepth: 4
+stacker.file\_manipulation module
+---------------------------------
 
-   stacker.file_manipulation
-   stacker.kmeans
-   stacker.pairwise_distance
-   stacker.residue_movement
-   stacker.vector
-   stacker.visualization
+.. automodule:: stacker.file_manipulation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+stacker.kmeans module
+---------------------
+
+.. automodule:: stacker.kmeans
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+stacker.pairwise\_distance module
+---------------------------------
+
+.. automodule:: stacker.pairwise_distance
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+stacker.residue\_movement module
+--------------------------------
+
+.. automodule:: stacker.residue_movement
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+stacker.vector module
+---------------------
+
+.. automodule:: stacker.vector
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+stacker.visualization module
+----------------------------
+
+.. automodule:: stacker.visualization
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 Module contents
 ---------------
