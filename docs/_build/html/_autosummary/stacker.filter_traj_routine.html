@@ -526,7 +526,7 @@
 <dt class="sig sig-object py" id="stacker.filter_traj_routine">
 <span class="sig-name descname"><span class="pre">filter_traj_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#filter_traj_routine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.filter_traj_routine" title="Link to this definition">#</a></dt>
 <dd><p>Executes the routine for filtering an input trajectory file and converting it to a PDB file.</p>
-<p>This function uses provided command-line arguments to call the <cite>filter_traj_to_pdb()</cite> function
+<p>This function uses provided command-line arguments to call <cite>filter_traj_to_pdb()</cite> 
 with specified inputs, such as the trajectory file, topology file, output file location, 
 residues to retain, and atom names to retain.</p>
 <dl class="field-list simple">
@@ -553,10 +553,14 @@ residues to retain, and atom names to retain.</p>
 <li><p>Output directories are created automatically if they do not exist.</p></li>
 </ul>
 <p class="rubric">Examples</p>
-<dl class="simple">
-<dt>Command-line usage with sample arguments:</dt><dd><p>$ python3 stacker.py -s filter_traj             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd             -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop             -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb             -r 426,427 -a C2,C4,C6</p>
-</dd>
-</dl>
+<p>Command-line usage with sample arguments:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3 stacker.py -s filter_traj 
+    -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
+    -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
+    -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb 
+    -r 426,427 -a C2,C4,C6
+</pre></div>
+</div>
 </dd></dl>
 
 </section>

@@ -525,20 +525,21 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.kmeans.create_kmeans_input">
 <span class="sig-name descname"><span class="pre">create_kmeans_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_arrays</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#create_kmeans_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.create_kmeans_input" title="Link to this definition">#</a></dt>
-<dd><p>Stacks SSF data into a single 2D Numpy array.</p>
-<p>Creates a 2D numpy array from all frames of all trajectories without
-labels for each frame.</p>
+<dd><p>Blinds SSF Data (removes trajectory labels) for input to K Means</p>
+<p>Stacks SSF data into a single 2D numpy array from all frames of 
+all trajectories without labels for each frame. Used for input to
+KMeans Clustering</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>data_arrays</strong><span class="classifier">dict</span></dt><dd><p>Output of kmeans.read_and_preprocess_data(). Dictionary where keys are dataset 
+<dt><strong>data_arrays</strong><span class="classifier">dict</span></dt><dd><p>Output of read_and_preprocess_data(). Dictionary where keys are dataset 
 names and values are the processed data arrays.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>np.typing.ArrayLike</dt><dd><p>A 2D numpy array containing all frames stacked together.</p>
+<dt><strong>blinded_data</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.</p>
 </dd>
 </dl>
 </dd>
@@ -546,16 +547,17 @@ names and values are the processed data arrays.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">kmeans.read_and_preprocess_data</span></code></dt><dd><p>Reads and preprocesses data for each dataset</p>
+<dt><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>Reads and preprocesses data for each dataset</p>
 </dd>
 </dl>
 </div>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span> <span class="o">=</span> <span class="p">{</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>    <span class="s1">&#39;dataset1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3200</span><span class="p">,</span> <span class="mi">16129</span><span class="p">),</span>
 <span class="gp">... </span>    <span class="s1">&#39;dataset2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3200</span><span class="p">,</span> <span class="mi">16129</span><span class="p">)</span>
 <span class="gp">... </span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans_input</span> <span class="o">=</span> <span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans_input</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">kmeans_input</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="go">(6400, 16129)</span>
 </pre></div>

@@ -525,15 +525,16 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.kmeans.run_kmeans">
 <span class="sig-name descname"><span class="pre">run_kmeans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blinded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_CLUSTERS</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#run_kmeans"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.run_kmeans" title="Link to this definition">#</a></dt>
-<dd><p>Performs KMeans clustering on the provided data and saves the results.</p>
+<dd><p>Performs KMeans clustering on blinded SSF data and saves the results.</p>
 <p>This function applies the KMeans clustering algorithm to the provided
-blinded data, assigns each frame to a cluster, and counts the number of
+blinded SSF data, assigns each frame to a cluster, and counts the number of
 frames in each cluster for each dataset. The results are printed and
 saved to a file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>blinded_data</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.</p>
+<dt><strong>blinded_data</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
+Output of create_kmeans_input()</p>
 </dd>
 <dt><strong>N_CLUSTERS</strong><span class="classifier">int</span></dt><dd><p>The number of clusters to form (default is N_CLUSTERS).</p>
 </dd>
@@ -553,13 +554,23 @@ saved to a file.</p>
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a></dt><dd><p>blinds SSF Data for input to K Means</p>
+</dd>
+<dt><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>reads and preprocesses SSF data for K Means analysis per dataset</p>
+</dd>
+</dl>
+</div>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span> <span class="o">=</span> <span class="p">{</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>    <span class="s1">&#39;dataset1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3200</span><span class="p">,</span> <span class="mi">16129</span><span class="p">),</span>
 <span class="gp">... </span>    <span class="s1">&#39;dataset2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3200</span><span class="p">,</span> <span class="mi">16129</span><span class="p">)</span>
 <span class="gp">... </span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">blinded_data</span> <span class="o">=</span> <span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">run_kmeans</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">,</span> <span class="n">N_CLUSTERS</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blinded_data</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">run_kmeans</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">,</span> <span class="n">N_CLUSTERS</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="go">Reading data: dataset1</span>
 <span class="go">Reading data: dataset2</span>
 <span class="go">(6400, 16129)</span>

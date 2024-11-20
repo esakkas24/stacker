@@ -523,23 +523,28 @@
                   
   <section id="module-stacker.kmeans">
 <span id="stacker-kmeans-module"></span><h1>stacker.kmeans module<a class="headerlink" href="#module-stacker.kmeans" title="Link to this heading">#</a></h1>
+<p>Runs K Means Clustering and Principal Component Analysis</p>
+<p>This module contains functions to run K Means Clustering on SSF
+results and visualize the clusters with barplots, silhouette analysis,
+and PCA scatterplots.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.kmeans.create_kmeans_input">
 <span class="sig-name descname"><span class="pre">create_kmeans_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_arrays</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#create_kmeans_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.create_kmeans_input" title="Link to this definition">#</a></dt>
-<dd><p>Stacks SSF data into a single 2D Numpy array.</p>
-<p>Creates a 2D numpy array from all frames of all trajectories without
-labels for each frame.</p>
+<dd><p>Blinds SSF Data (removes trajectory labels) for input to K Means</p>
+<p>Stacks SSF data into a single 2D numpy array from all frames of 
+all trajectories without labels for each frame. Used for input to
+KMeans Clustering</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>data_arrays</strong><span class="classifier">dict</span></dt><dd><p>Output of kmeans.read_and_preprocess_data(). Dictionary where keys are dataset 
+<dt><strong>data_arrays</strong><span class="classifier">dict</span></dt><dd><p>Output of read_and_preprocess_data(). Dictionary where keys are dataset 
 names and values are the processed data arrays.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>np.typing.ArrayLike</dt><dd><p>A 2D numpy array containing all frames stacked together.</p>
+<dt><strong>blinded_data</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.</p>
 </dd>
 </dl>
 </dd>
@@ -547,16 +552,17 @@ names and values are the processed data arrays.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">kmeans.read_and_preprocess_data</span></code></dt><dd><p>Reads and preprocesses data for each dataset</p>
+<dt><a class="reference internal" href="#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>Reads and preprocesses data for each dataset</p>
 </dd>
 </dl>
 </div>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span> <span class="o">=</span> <span class="p">{</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>    <span class="s1">&#39;dataset1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3200</span><span class="p">,</span> <span class="mi">16129</span><span class="p">),</span>
 <span class="gp">... </span>    <span class="s1">&#39;dataset2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3200</span><span class="p">,</span> <span class="mi">16129</span><span class="p">)</span>
 <span class="gp">... </span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans_input</span> <span class="o">=</span> <span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans_input</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">kmeans_input</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="go">(6400, 16129)</span>
 </pre></div>
@@ -566,19 +572,19 @@ names and values are the processed data arrays.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.kmeans.plot_cluster_trj_data">
 <span class="sig-name descname"><span class="pre">plot_cluster_trj_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_cluster</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seeded</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#plot_cluster_trj_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_cluster_trj_data" title="Link to this definition">#</a></dt>
-<dd><p>Plots the output of <cite>run_kmeans()</cite> to a PNG file.</p>
+<dd><p>Plots the output of run_kmeans() to a PNG file.</p>
 <p>Creates a grouped bar plot of the number of frames from each trajectory in each cluster
 following KMeans clustering. Writes the plot output to a PNG file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>input_file</strong><span class="classifier">str</span></dt><dd><p>Path to the input file containing clustering results.</p>
+<dt><strong>input_file</strong><span class="classifier">str</span></dt><dd><p>Path to clustering results written by run_kmeans()</p>
 </dd>
-<dt><strong>n_cluster</strong><span class="classifier">int</span></dt><dd><p>The number of clusters in this KMeans clustering sequence.</p>
+<dt><strong>n_cluster</strong><span class="classifier">int</span></dt><dd><p>The number of K Means Clusters, given to run_kmeans() as param.</p>
 </dd>
-<dt><strong>outfile</strong><span class="classifier">str</span></dt><dd><p>Filepath where the output PNG file will be saved.</p>
+<dt><strong>outfile</strong><span class="classifier">str</span></dt><dd><p>Filepath where the plot PNG file will be saved.</p>
 </dd>
-<dt><strong>seeded</strong><span class="classifier">bool, default=False</span></dt><dd><p>Set to True if a random seed was assigned during clustering using kseed, False otherwise.
+<dt><strong>seeded</strong><span class="classifier">bool, default=False</span></dt><dd><p>True if a random seed was assigned during clustering using kseed, False otherwise.
 Used to label plot title, no other impact.</p>
 </dd>
 </dl>
@@ -590,40 +596,42 @@ Used to label plot title, no other impact.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plot_cluster_trj_data</span><span class="p">(</span><span class="s1">&#39;clustering_results.txt&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;/path/to/output/&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="go"># This will read the clustering results from &#39;clustering_results.txt&#39;,</span>
-<span class="go"># create a bar plot, and save it as &#39;kmeans_plot.cluster_4.png&#39; in the specified output directory.</span>
+<p>This will read the clustering results from ‘clustering_results.txt’,
+create a bar plot, and save it as ‘kmeans_plot.cluster_4.png’ in the 
+specified output directory.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">plot_cluster_trj_data</span><span class="p">(</span><span class="s1">&#39;clustering_results.txt&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;/path/to/output/&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.kmeans.read_and_preprocess_data">
-<span class="sig-name descname"><span class="pre">read_and_preprocess_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_residues</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#read_and_preprocess_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.read_and_preprocess_data" title="Link to this definition">#</a></dt>
-<dd><p>Reads and preprocesses data for each dataset.</p>
-<p>Reads data from text files for each dataset, decompresses the data, 
+<span class="sig-name descname"><span class="pre">read_and_preprocess_data</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">data1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">...</span></span></em>, <span class="optional">]</span><em class="sig-param"><span class="n"><span class="pre">data_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#read_and_preprocess_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.read_and_preprocess_data" title="Link to this definition">#</a></dt>
+<dd><p>Reads and preprocesses SSF data for K Means analysis per dataset.</p>
+<p>Reads SSF data from txt files for each dataset, decompresses the data, 
 and attaches each Trajectory to its frame-wise SSF results. The values
 are flattened SSF lists, so rather than a 3200 frames x 127 res x 127 res, 
-it’s a 3200 frames x 16129 res-res pairs. For example, an SSF of</p>
-<dl>
-<dt>[ [[1, 2],</dt><dd><p>[3, 4]],</p>
+it’s a 3200 frames x 16129 res-res pairs. For example, a 2-residue, 2-frame
+SSF of</p>
+<blockquote>
+<div><p>[ [[1, 2],
+[3, 4]],</p>
 <p>[[5, 6],
 [7, 8]] ]</p>
-</dd>
-</dl>
-<p>has been flattened to:</p>
-<dl class="simple">
-<dt>[[1, 2, 3, 4],</dt><dd><p>[5, 6, 7, 8]]</p>
-</dd>
-</dl>
+</div></blockquote>
+<p>is flattened to:</p>
+<blockquote>
+<div><p>[[1, 2, 3, 4],
+[5, 6, 7, 8]]</p>
+</div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>dataset_names</strong><span class="classifier">list of str</span></dt><dd><p>List of dataset names to read and preprocess.</p>
+<dt><strong>data1, data2, …</strong><span class="classifier">list of str</span></dt><dd><p>List of dataset names to read and preprocess.</p>
 </dd>
-<dt><strong>data_path</strong><span class="classifier">str</span></dt><dd><p>Base path to the directory containing the data files.</p>
-</dd>
-<dt><strong>n_residues</strong><span class="classifier">int</span></dt><dd><p>Number of residues in each frame of the data.</p>
+<dt><strong>data_path</strong><span class="classifier">str</span></dt><dd><p>path to the directory containing the SSF data
+outputted from <cite>-s ssf -d output.txt</cite></p>
 </dd>
 </dl>
 </dd>
@@ -634,11 +642,18 @@ it’s a 3200 frames x 16129 res-res pairs. For example, an SSF of</p>
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a></dt><dd><p>Stacks SSF data into a single 2D Numpy array.</p>
+</dd>
+</dl>
+</div>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dataset_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;dataset1&#39;</span><span class="p">,</span> <span class="s1">&#39;dataset2&#39;</span><span class="p">]</span>  <span class="c1"># 3200 frames, SSFs of 127 x 127 residues</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;/path/to/data/&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">n_residues</span> <span class="o">=</span> <span class="mi">127</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span> <span class="o">=</span> <span class="n">read_and_preprocess_data</span><span class="p">(</span><span class="n">dataset_names</span><span class="p">,</span> <span class="n">data_path</span><span class="p">,</span> <span class="n">n_residues</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;5JUP_N2_tGGG_aCCU_+1GCU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tGGG_aCCU_+1CGU&#39;</span><span class="p">]</span>  <span class="c1"># 3200 frames, SSFs of 127 x 127 residues</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;/home66/esakkas/STACKER/DATA/&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">read_and_preprocess_data</span><span class="p">(</span><span class="n">dataset_names</span><span class="p">,</span> <span class="n">data_path</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">[</span><span class="s1">&#39;dataset1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="go">(3200, 16129)</span>
 </pre></div>
@@ -648,15 +663,16 @@ it’s a 3200 frames x 16129 res-res pairs. For example, an SSF of</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.kmeans.run_kmeans">
 <span class="sig-name descname"><span class="pre">run_kmeans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blinded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_CLUSTERS</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#run_kmeans"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.run_kmeans" title="Link to this definition">#</a></dt>
-<dd><p>Performs KMeans clustering on the provided data and saves the results.</p>
+<dd><p>Performs KMeans clustering on blinded SSF data and saves the results.</p>
 <p>This function applies the KMeans clustering algorithm to the provided
-blinded data, assigns each frame to a cluster, and counts the number of
+blinded SSF data, assigns each frame to a cluster, and counts the number of
 frames in each cluster for each dataset. The results are printed and
 saved to a file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>blinded_data</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.</p>
+<dt><strong>blinded_data</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
+Output of create_kmeans_input()</p>
 </dd>
 <dt><strong>N_CLUSTERS</strong><span class="classifier">int</span></dt><dd><p>The number of clusters to form (default is N_CLUSTERS).</p>
 </dd>
@@ -676,13 +692,23 @@ saved to a file.</p>
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a></dt><dd><p>blinds SSF Data for input to K Means</p>
+</dd>
+<dt><a class="reference internal" href="#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>reads and preprocesses SSF data for K Means analysis per dataset</p>
+</dd>
+</dl>
+</div>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span> <span class="o">=</span> <span class="p">{</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>    <span class="s1">&#39;dataset1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3200</span><span class="p">,</span> <span class="mi">16129</span><span class="p">),</span>
 <span class="gp">... </span>    <span class="s1">&#39;dataset2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3200</span><span class="p">,</span> <span class="mi">16129</span><span class="p">)</span>
 <span class="gp">... </span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">blinded_data</span> <span class="o">=</span> <span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">run_kmeans</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">,</span> <span class="n">N_CLUSTERS</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blinded_data</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">run_kmeans</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">,</span> <span class="n">N_CLUSTERS</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="go">Reading data: dataset1</span>
 <span class="go">Reading data: dataset2</span>
 <span class="go">(6400, 16129)</span>

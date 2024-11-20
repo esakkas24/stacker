@@ -525,19 +525,19 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.kmeans.plot_cluster_trj_data">
 <span class="sig-name descname"><span class="pre">plot_cluster_trj_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_cluster</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seeded</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#plot_cluster_trj_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_cluster_trj_data" title="Link to this definition">#</a></dt>
-<dd><p>Plots the output of <cite>run_kmeans()</cite> to a PNG file.</p>
+<dd><p>Plots the output of run_kmeans() to a PNG file.</p>
 <p>Creates a grouped bar plot of the number of frames from each trajectory in each cluster
 following KMeans clustering. Writes the plot output to a PNG file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>input_file</strong><span class="classifier">str</span></dt><dd><p>Path to the input file containing clustering results.</p>
+<dt><strong>input_file</strong><span class="classifier">str</span></dt><dd><p>Path to clustering results written by run_kmeans()</p>
 </dd>
-<dt><strong>n_cluster</strong><span class="classifier">int</span></dt><dd><p>The number of clusters in this KMeans clustering sequence.</p>
+<dt><strong>n_cluster</strong><span class="classifier">int</span></dt><dd><p>The number of K Means Clusters, given to run_kmeans() as param.</p>
 </dd>
-<dt><strong>outfile</strong><span class="classifier">str</span></dt><dd><p>Filepath where the output PNG file will be saved.</p>
+<dt><strong>outfile</strong><span class="classifier">str</span></dt><dd><p>Filepath where the plot PNG file will be saved.</p>
 </dd>
-<dt><strong>seeded</strong><span class="classifier">bool, default=False</span></dt><dd><p>Set to True if a random seed was assigned during clustering using kseed, False otherwise.
+<dt><strong>seeded</strong><span class="classifier">bool, default=False</span></dt><dd><p>True if a random seed was assigned during clustering using kseed, False otherwise.
 Used to label plot title, no other impact.</p>
 </dd>
 </dl>
@@ -549,9 +549,11 @@ Used to label plot title, no other impact.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plot_cluster_trj_data</span><span class="p">(</span><span class="s1">&#39;clustering_results.txt&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;/path/to/output/&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="go"># This will read the clustering results from &#39;clustering_results.txt&#39;,</span>
-<span class="go"># create a bar plot, and save it as &#39;kmeans_plot.cluster_4.png&#39; in the specified output directory.</span>
+<p>This will read the clustering results from ‘clustering_results.txt’,
+create a bar plot, and save it as ‘kmeans_plot.cluster_4.png’ in the 
+specified output directory.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">plot_cluster_trj_data</span><span class="p">(</span><span class="s1">&#39;clustering_results.txt&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;/path/to/output/&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>

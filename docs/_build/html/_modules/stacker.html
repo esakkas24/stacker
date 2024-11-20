@@ -504,7 +504,11 @@
 <span class="k">def</span> <span class="nf">block_printing</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Disable printing to standard output</span>
 <span class="sd">    </span>
-<span class="sd">    Adapted from https://stackoverflow.com/a/8391735&#39;&#39;&#39;</span>
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    [1] https://stackoverflow.com/a/8391735</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">devnull</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span></div>
 
 
@@ -513,7 +517,10 @@
 <span class="k">def</span> <span class="nf">enable_printing</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Enable printing to standard output</span>
 <span class="sd">    </span>
-<span class="sd">    Adapted from https://stackoverflow.com/a/8391735&#39;&#39;&#39;</span>
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    [1] https://stackoverflow.com/a/8391735</span>
+<span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">__stdout__</span></div>
 
 
@@ -523,7 +530,7 @@
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Reads the user&#39;s passed in command line and runs the command</span>
 
 <span class="sd">    Reads the command line input, runs the associated command with the</span>
-<span class="sd">        added flags.</span>
+<span class="sd">    added flags.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">add_help</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawTextHelpFormatter</span><span class="p">,</span> 
                                      <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Wrapper to run stacker subroutines using the -s flag.</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
@@ -773,7 +780,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Executes the routine for filtering an input trajectory file and converting it to a PDB file.</span>
 
-<span class="sd">    This function uses provided command-line arguments to call the `filter_traj_to_pdb()` function</span>
+<span class="sd">    This function uses provided command-line arguments to call `filter_traj_to_pdb()` </span>
 <span class="sd">    with specified inputs, such as the trajectory file, topology file, output file location, </span>
 <span class="sd">    residues to retain, and atom names to retain.</span>
 
@@ -786,11 +793,12 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    Command-line usage with sample arguments:</span>
-<span class="sd">        $ python3 stacker.py -s filter_traj \</span>
-<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \</span>
-<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \</span>
-<span class="sd">            -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb \</span>
+<span class="sd">    Command-line usage with sample arguments::</span>
+
+<span class="sd">        $ python3 stacker.py -s filter_traj </span>
+<span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd </span>
+<span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop </span>
+<span class="sd">            -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb </span>
 <span class="sd">            -r 426,427 -a C2,C4,C6</span>
 
 <span class="sd">    Notes</span>

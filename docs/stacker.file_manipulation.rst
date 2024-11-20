@@ -1,4 +1,4 @@
-stacker.file\_manipulation module
+File Manipulation
 =================================
 
 .. automodule:: stacker.file_manipulation

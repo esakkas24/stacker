@@ -30,20 +30,27 @@ class FrameEmpty(Exception):
 def block_printing():
     '''Disable printing to standard output
     
-    Adapted from https://stackoverflow.com/a/8391735'''
+    References
+    ----------
+    [1] https://stackoverflow.com/a/8391735
+
+    '''
     sys.stdout = open(os.devnull, 'w')
 
 def enable_printing():
     '''Enable printing to standard output
     
-    Adapted from https://stackoverflow.com/a/8391735'''
+    References
+    ----------
+    [1] https://stackoverflow.com/a/8391735
+    '''
     sys.stdout = sys.__stdout__
 
 def run_python_command() -> None:
     '''Reads the user's passed in command line and runs the command
 
     Reads the command line input, runs the associated command with the
-        added flags.
+    added flags.
     '''
     parser = argparse.ArgumentParser(add_help=False, formatter_class=argparse.RawTextHelpFormatter, 
                                      description="Wrapper to run stacker subroutines using the -s flag.\n" + \
@@ -284,7 +291,7 @@ def filter_traj_routine() -> None:
     """
     Executes the routine for filtering an input trajectory file and converting it to a PDB file.
 
-    This function uses provided command-line arguments to call the `filter_traj_to_pdb()` function
+    This function uses provided command-line arguments to call `filter_traj_to_pdb()` 
     with specified inputs, such as the trajectory file, topology file, output file location, 
     residues to retain, and atom names to retain.
 
@@ -297,11 +304,13 @@ def filter_traj_routine() -> None:
 
     Examples
     --------
-    Command-line usage with sample arguments:
-        $ python3 stacker.py -s filter_traj \
-            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
-            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
-            -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb \
+    Command-line usage with sample arguments::
+
+        $ python3 stacker.py 
+            -s filter_traj 
+            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
+            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
+            -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb 
             -r 426,427 -a C2,C4,C6
 
     Notes

@@ -458,7 +458,14 @@
                 <article class="bd-article">
                   
   <h1>Source code for stacker.kmeans</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Runs K Means Clustering and Principal Component Analysis</span>
+
+<span class="sd">This module contains functions to run K Means Clustering on SSF</span>
+<span class="sd">results and visualize the clusters with barplots, silhouette analysis,</span>
+<span class="sd">and PCA scatterplots. </span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">typing</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -469,7 +476,7 @@
 
 <span class="n">N_RESIDUES</span> <span class="o">=</span> <span class="mi">127</span>
 <span class="n">N_CLUSTERS</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">dataset_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tGGG_aCCU_+1GCU&#39;</span><span class="p">,</span> <span class="s1">&#39;tGGG_aCCU_+1CGU&#39;</span><span class="p">,</span> <span class="s1">&#39;tUAG_aCUA_+1GCU&#39;</span><span class="p">,</span> <span class="s1">&#39;tUAG_aCUA_+1CGU&#39;</span><span class="p">,</span> <span class="s1">&#39;tGGG_aCCC_+1GCU&#39;</span><span class="p">,</span> <span class="s1">&#39;tGGG_aCCC_+1CGU&#39;</span><span class="p">]</span>  <span class="c1"># Add more dataset names as needed</span>
+<span class="n">dataset_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;5JUP_N2_tGGG_aCCU_+1GCU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tGGG_aCCU_+1CGU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tUAG_aCUA_+1GCU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tUAG_aCUA_+1CGU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tGGG_aCCC_+1GCU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tGGG_aCCC_+1CGU&#39;</span><span class="p">]</span>  <span class="c1"># Add more dataset names as needed</span>
 <span class="n">indir</span> <span class="o">=</span> <span class="s1">&#39;/home66/esakkas/STACKER/DATA/&#39;</span> <span class="c1"># Directory with data.txt output from StACKER (created with -d flag)</span>
 <span class="n">outdir</span> <span class="o">=</span> <span class="s1">&#39;/home66/esakkas/STACKER/DATA/&#39;</span> <span class="c1"># Outdir for clustering results and kmeans plot</span>
 
@@ -478,46 +485,55 @@
 
 <div class="viewcode-block" id="read_and_preprocess_data">
 <a class="viewcode-back" href="../../stacker.kmeans.html#stacker.kmeans.read_and_preprocess_data">[docs]</a>
-<span class="k">def</span> <span class="nf">read_and_preprocess_data</span><span class="p">(</span><span class="n">dataset_names</span><span class="p">,</span> <span class="n">data_path</span><span class="p">,</span> <span class="n">n_residues</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">read_and_preprocess_data</span><span class="p">(</span><span class="n">dataset_names</span><span class="p">,</span> <span class="n">data_path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Reads and preprocesses data for each dataset.</span>
+<span class="sd">    read_and_preprocess_data(</span>
+<span class="sd">        [data1, data2, ...],</span>
+<span class="sd">        data_path</span>
+<span class="sd">    )</span>
 
-<span class="sd">    Reads data from text files for each dataset, decompresses the data, </span>
+<span class="sd">    Reads and preprocesses SSF data for K Means analysis per dataset.</span>
+
+<span class="sd">    Reads SSF data from txt files for each dataset, decompresses the data, </span>
 <span class="sd">    and attaches each Trajectory to its frame-wise SSF results. The values</span>
 <span class="sd">    are flattened SSF lists, so rather than a 3200 frames x 127 res x 127 res, </span>
-<span class="sd">    it&#39;s a 3200 frames x 16129 res-res pairs. For example, an SSF of </span>
+<span class="sd">    it&#39;s a 3200 frames x 16129 res-res pairs. For example, a 2-residue, 2-frame</span>
+<span class="sd">    SSF of </span>
 
-<span class="sd">    [ [[1, 2],</span>
-<span class="sd">       [3, 4]],</span>
-<span class="sd">       </span>
-<span class="sd">       [[5, 6],</span>
-<span class="sd">       [7, 8]] ]</span>
+<span class="sd">        [ [[1, 2],</span>
+<span class="sd">        [3, 4]],</span>
+<span class="sd">        </span>
+<span class="sd">        [[5, 6],</span>
+<span class="sd">        [7, 8]] ]</span>
 
-<span class="sd">    has been flattened to:</span>
+<span class="sd">    is flattened to:</span>
 
-<span class="sd">    [[1, 2, 3, 4],</span>
-<span class="sd">     [5, 6, 7, 8]]</span>
+<span class="sd">        [[1, 2, 3, 4],</span>
+<span class="sd">        [5, 6, 7, 8]]</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    dataset_names : list of str</span>
+<span class="sd">    data1, data2, ... : list of str</span>
 <span class="sd">        List of dataset names to read and preprocess.</span>
 <span class="sd">    data_path : str</span>
-<span class="sd">        Base path to the directory containing the data files.</span>
-<span class="sd">    n_residues : int</span>
-<span class="sd">        Number of residues in each frame of the data.</span>
+<span class="sd">        path to the directory containing the SSF data</span>
+<span class="sd">        outputted from `-s ssf -d output.txt`</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    data_arrays : dict</span>
 <span class="sd">        Dictionary where keys are dataset names and values are the processed data arrays.</span>
 
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    create_kmeans_input : Stacks SSF data into a single 2D Numpy array.    </span>
+<span class="sd">    </span>
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; dataset_names = [&#39;dataset1&#39;, &#39;dataset2&#39;]  # 3200 frames, SSFs of 127 x 127 residues</span>
-<span class="sd">    &gt;&gt;&gt; data_path = &#39;/path/to/data/&#39;</span>
-<span class="sd">    &gt;&gt;&gt; n_residues = 127</span>
-<span class="sd">    &gt;&gt;&gt; data_arrays = read_and_preprocess_data(dataset_names, data_path, n_residues)</span>
+<span class="sd">    &gt;&gt;&gt; import stacker as st</span>
+<span class="sd">    &gt;&gt;&gt; dataset_names = [&#39;5JUP_N2_tGGG_aCCU_+1GCU&#39;, &#39;5JUP_N2_tGGG_aCCU_+1CGU&#39;]  # 3200 frames, SSFs of 127 x 127 residues</span>
+<span class="sd">    &gt;&gt;&gt; data_path = &#39;/home66/esakkas/STACKER/DATA/&#39;</span>
+<span class="sd">    &gt;&gt;&gt; data_arrays = st.read_and_preprocess_data(dataset_names, data_path)</span>
 <span class="sd">    &gt;&gt;&gt; print(data_arrays[&#39;dataset1&#39;].shape)</span>
 <span class="sd">    (3200, 16129)</span>
 
@@ -525,7 +541,7 @@
     <span class="n">data_arrays</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">dataset_names</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reading data:&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">data_path</span><span class="si">}</span><span class="s1">5JUP_N2_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">_data.txt&#39;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">data_path</span><span class="si">}{</span><span class="n">name</span><span class="si">}</span><span class="s1">_data.txt&#39;</span><span class="p">)</span>
         <span class="n">data_arrays</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
     <span class="k">return</span> <span class="n">data_arrays</span></div>
 
@@ -534,33 +550,35 @@
 <a class="viewcode-back" href="../../stacker.kmeans.html#stacker.kmeans.create_kmeans_input">[docs]</a>
 <span class="k">def</span> <span class="nf">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Stacks SSF data into a single 2D Numpy array.</span>
+<span class="sd">    Blinds SSF Data (removes trajectory labels) for input to K Means</span>
 
-<span class="sd">    Creates a 2D numpy array from all frames of all trajectories without</span>
-<span class="sd">    labels for each frame.</span>
+<span class="sd">    Stacks SSF data into a single 2D numpy array from all frames of </span>
+<span class="sd">    all trajectories without labels for each frame. Used for input to</span>
+<span class="sd">    KMeans Clustering</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    data_arrays : dict</span>
-<span class="sd">        Output of kmeans.read_and_preprocess_data(). Dictionary where keys are dataset </span>
+<span class="sd">        Output of read_and_preprocess_data(). Dictionary where keys are dataset </span>
 <span class="sd">        names and values are the processed data arrays.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    np.typing.ArrayLike</span>
+<span class="sd">    blinded_data : np.typing.ArrayLike</span>
 <span class="sd">        A 2D numpy array containing all frames stacked together.</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
-<span class="sd">    kmeans.read_and_preprocess_data : Reads and preprocesses data for each dataset</span>
+<span class="sd">    read_and_preprocess_data : Reads and preprocesses data for each dataset</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import stacker as st</span>
 <span class="sd">    &gt;&gt;&gt; data_arrays = {</span>
 <span class="sd">    ...     &#39;dataset1&#39;: np.random.rand(3200, 16129),</span>
 <span class="sd">    ...     &#39;dataset2&#39;: np.random.rand(3200, 16129)</span>
 <span class="sd">    ... }</span>
-<span class="sd">    &gt;&gt;&gt; kmeans_input = create_kmeans_input(data_arrays)</span>
+<span class="sd">    &gt;&gt;&gt; kmeans_input = st.create_kmeans_input(data_arrays)</span>
 <span class="sd">    &gt;&gt;&gt; print(kmeans_input.shape)</span>
 <span class="sd">    (6400, 16129)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -573,12 +591,12 @@
 <div class="viewcode-block" id="run_kmeans">
 <a class="viewcode-back" href="../../stacker.kmeans.html#stacker.kmeans.run_kmeans">[docs]</a>
 <span class="k">def</span> <span class="nf">run_kmeans</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="n">N_CLUSTERS</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">N_CLUSTERS</span><span class="p">,</span>
-               <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">n_init</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">outdir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+               <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">n_init</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">outdir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span> <span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Performs KMeans clustering on the provided data and saves the results.</span>
+<span class="sd">    Performs KMeans clustering on blinded SSF data and saves the results.</span>
 
 <span class="sd">    This function applies the KMeans clustering algorithm to the provided</span>
-<span class="sd">    blinded data, assigns each frame to a cluster, and counts the number of</span>
+<span class="sd">    blinded SSF data, assigns each frame to a cluster, and counts the number of</span>
 <span class="sd">    frames in each cluster for each dataset. The results are printed and</span>
 <span class="sd">    saved to a file.</span>
 
@@ -586,6 +604,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    blinded_data : np.typing.ArrayLike</span>
 <span class="sd">        A 2D numpy array containing all frames stacked together.</span>
+<span class="sd">        Output of create_kmeans_input()</span>
 <span class="sd">    N_CLUSTERS : int</span>
 <span class="sd">        The number of clusters to form (default is N_CLUSTERS).</span>
 <span class="sd">    max_iter : int, default=1000</span>
@@ -601,14 +620,20 @@
 <span class="sd">    -------</span>
 <span class="sd">    None</span>
 
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    create_kmeans_input : blinds SSF Data for input to K Means</span>
+<span class="sd">    read_and_preprocess_data : reads and preprocesses SSF data for K Means analysis per dataset</span>
+
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import stacker as st</span>
 <span class="sd">    &gt;&gt;&gt; data_arrays = {</span>
 <span class="sd">    ...     &#39;dataset1&#39;: np.random.rand(3200, 16129),</span>
 <span class="sd">    ...     &#39;dataset2&#39;: np.random.rand(3200, 16129)</span>
 <span class="sd">    ... }</span>
-<span class="sd">    &gt;&gt;&gt; blinded_data = create_kmeans_input(data_arrays)</span>
-<span class="sd">    &gt;&gt;&gt; run_kmeans(blinded_data, N_CLUSTERS=4)</span>
+<span class="sd">    &gt;&gt;&gt; blinded_data = st.create_kmeans_input(data_arrays)</span>
+<span class="sd">    &gt;&gt;&gt; st.run_kmeans(blinded_data, N_CLUSTERS=4)</span>
 <span class="sd">    Reading data: dataset1</span>
 <span class="sd">    Reading data: dataset2</span>
 <span class="sd">    (6400, 16129)</span>
@@ -640,7 +665,6 @@
         <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_CLUSTERS</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">Cluster </span><span class="si">{</span><span class="n">cluster</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">count</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span><span class="si">}</span><span class="s1"> matrices&#39;</span><span class="p">)</span>
 
-
     <span class="c1"># Save results to file</span>
     <span class="k">if</span> <span class="n">outdir</span><span class="p">:</span>
         <span class="n">outfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;clustering_results_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">N_CLUSTERS</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
@@ -655,7 +679,7 @@
 <a class="viewcode-back" href="../../stacker.kmeans.html#stacker.kmeans.plot_cluster_trj_data">[docs]</a>
 <span class="k">def</span> <span class="nf">plot_cluster_trj_data</span><span class="p">(</span><span class="n">input_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">n_cluster</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">seeded</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Plots the output of `run_kmeans()` to a PNG file.</span>
+<span class="sd">    Plots the output of run_kmeans() to a PNG file.</span>
 
 <span class="sd">    Creates a grouped bar plot of the number of frames from each trajectory in each cluster</span>
 <span class="sd">    following KMeans clustering. Writes the plot output to a PNG file.</span>
@@ -663,13 +687,13 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    input_file : str</span>
-<span class="sd">        Path to the input file containing clustering results.</span>
+<span class="sd">        Path to clustering results written by run_kmeans()</span>
 <span class="sd">    n_cluster : int</span>
-<span class="sd">        The number of clusters in this KMeans clustering sequence.</span>
+<span class="sd">        The number of K Means Clusters, given to run_kmeans() as param.</span>
 <span class="sd">    outfile : str</span>
-<span class="sd">        Filepath where the output PNG file will be saved.</span>
+<span class="sd">        Filepath where the plot PNG file will be saved.</span>
 <span class="sd">    seeded : bool, default=False</span>
-<span class="sd">        Set to True if a random seed was assigned during clustering using kseed, False otherwise.</span>
+<span class="sd">        True if a random seed was assigned during clustering using kseed, False otherwise.</span>
 <span class="sd">        Used to label plot title, no other impact.</span>
 
 <span class="sd">    Returns</span>
@@ -678,9 +702,13 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; plot_cluster_trj_data(&#39;clustering_results.txt&#39;, 4, &#39;/path/to/output/&#39;, True)</span>
-<span class="sd">    # This will read the clustering results from &#39;clustering_results.txt&#39;,</span>
-<span class="sd">    # create a bar plot, and save it as &#39;kmeans_plot.cluster_4.png&#39; in the specified output directory.</span>
+<span class="sd">    This will read the clustering results from &#39;clustering_results.txt&#39;,</span>
+<span class="sd">    create a bar plot, and save it as &#39;kmeans_plot.cluster_4.png&#39; in the </span>
+<span class="sd">    specified output directory.</span>
+
+<span class="sd">    &gt;&gt;&gt; import stacker as st</span>
+<span class="sd">    &gt;&gt;&gt; st.plot_cluster_trj_data(&#39;clustering_results.txt&#39;, 4, &#39;/path/to/output/&#39;, True)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">cluster_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
     
@@ -702,7 +730,7 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">data_arrays</span> <span class="o">=</span> <span class="n">read_and_preprocess_data</span><span class="p">(</span><span class="n">dataset_names</span><span class="p">,</span> <span class="n">indir</span><span class="p">,</span> <span class="n">N_RESIDUES</span><span class="p">)</span>
+    <span class="n">data_arrays</span> <span class="o">=</span> <span class="n">read_and_preprocess_data</span><span class="p">(</span><span class="n">dataset_names</span><span class="p">,</span> <span class="n">indir</span><span class="p">)</span>
     <span class="n">blinded_data</span> <span class="o">=</span> <span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
     <span class="n">run_kmeans</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">,</span> <span class="n">N_CLUSTERS</span><span class="p">,</span> <span class="n">outdir</span> <span class="o">=</span> <span class="n">outdir</span><span class="p">)</span>
     <span class="n">cluster_file</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;clustering_results_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">N_CLUSTERS</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.txt&#39;</span>

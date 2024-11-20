@@ -827,7 +827,8 @@ list of individual frame numbers.</p>
 <dt class="sig sig-object py" id="stacker.block_printing">
 <span class="sig-name descname"><span class="pre">block_printing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#block_printing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.block_printing" title="Link to this definition">#</a></dt>
 <dd><p>Disable printing to standard output</p>
-<p>Adapted from <a class="reference external" href="https://stackoverflow.com/a/8391735">https://stackoverflow.com/a/8391735</a></p>
+<p class="rubric">References</p>
+<p>[1] <a class="reference external" href="https://stackoverflow.com/a/8391735">https://stackoverflow.com/a/8391735</a></p>
 </dd></dl>
 
 <dl class="py function">
@@ -966,14 +967,15 @@ based on the flags.</p>
 <dt class="sig sig-object py" id="stacker.enable_printing">
 <span class="sig-name descname"><span class="pre">enable_printing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#enable_printing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.enable_printing" title="Link to this definition">#</a></dt>
 <dd><p>Enable printing to standard output</p>
-<p>Adapted from <a class="reference external" href="https://stackoverflow.com/a/8391735">https://stackoverflow.com/a/8391735</a></p>
+<p class="rubric">References</p>
+<p>[1] <a class="reference external" href="https://stackoverflow.com/a/8391735">https://stackoverflow.com/a/8391735</a></p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.filter_traj_routine">
 <span class="sig-name descname"><span class="pre">filter_traj_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#filter_traj_routine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.filter_traj_routine" title="Link to this definition">#</a></dt>
 <dd><p>Executes the routine for filtering an input trajectory file and converting it to a PDB file.</p>
-<p>This function uses provided command-line arguments to call the <cite>filter_traj_to_pdb()</cite> function
+<p>This function uses provided command-line arguments to call <cite>filter_traj_to_pdb()</cite> 
 with specified inputs, such as the trajectory file, topology file, output file location, 
 residues to retain, and atom names to retain.</p>
 <dl class="field-list simple">
@@ -1000,10 +1002,14 @@ residues to retain, and atom names to retain.</p>
 <li><p>Output directories are created automatically if they do not exist.</p></li>
 </ul>
 <p class="rubric">Examples</p>
-<dl class="simple">
-<dt>Command-line usage with sample arguments:</dt><dd><p>$ python3 stacker.py -s filter_traj             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd             -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop             -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb             -r 426,427 -a C2,C4,C6</p>
-</dd>
-</dl>
+<p>Command-line usage with sample arguments:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3 stacker.py -s filter_traj 
+    -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
+    -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
+    -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb 
+    -r 426,427 -a C2,C4,C6
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -1055,10 +1061,8 @@ and calculates the distances for either a single frame or multiple frames if boo
 <dt class="sig sig-object py" id="stacker.run_python_command">
 <span class="sig-name descname"><span class="pre">run_python_command</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#run_python_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.run_python_command" title="Link to this definition">#</a></dt>
 <dd><p>Reads the user’s passed in command line and runs the command</p>
-<dl class="simple">
-<dt>Reads the command line input, runs the associated command with the</dt><dd><p>added flags.</p>
-</dd>
-</dl>
+<p>Reads the command line input, runs the associated command with the
+added flags.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -1159,7 +1163,7 @@ $ python3 stacker.py -s ssf             -trj testing/first10_5JUP_N2_tUAG_aCUA_+
 <td><p>Filter Trajectory Files</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../stacker.kmeans.html#module-stacker.kmeans" title="stacker.kmeans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kmeans</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Runs K Means Clustering and Principal Component Analysis</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../stacker.pairwise_distance.html#module-stacker.pairwise_distance" title="stacker.pairwise_distance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pairwise_distance</span></code></a></p></td>
 <td><p></p></td>
