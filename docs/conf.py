@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../'))
+sys.path.insert(0, os.path.abspath('../../'))
 
 project = 'StACKER'
 copyright = '2024, Eric D. Sakkas'
@@ -18,8 +18,9 @@ release = '1.0.0'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    'sphinx.ext.napoleon',
     'sphinx.ext.autodoc',
+    'numpydoc',
+    'sphinx.ext.autosummary',
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
     'sphinx.ext.imgmath',
@@ -34,6 +35,8 @@ extensions = [
     'matplotlib.sphinxext.plot_directive',
     'sphinx.ext.mathjax'
     ]
+
+autosummary_generate = True
 
 napoleon_google_docstring = True
 napoleon_numpy_docstring = True
@@ -53,8 +56,6 @@ autodoc_default_options = {
     'show-inheritance': True,
 }
 add_module_names = False
-
-templates_path = ['_templates']
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

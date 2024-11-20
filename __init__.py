@@ -1,9 +1,13 @@
 from .residue_movement import *
 from .visualization import *
-from .visualization import *
 from .vector import *
 from .pairwise_distance import *
 from .file_manipulation import *
+import argparse
+import sys, os
+import numpy as np
+import pandas as pd
+import random
 
 class InvalidRoutine(Exception):
     pass
@@ -285,8 +289,8 @@ def filter_traj_routine() -> None:
     AtomEmpty
         If the `--atom_names` argument is not provided.
 
-    Example Usage
-    -------------
+    Examples
+    --------
     Command-line usage with sample arguments:
         $ python3 stacker.py -s filter_traj \
             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
@@ -344,8 +348,8 @@ def bottaro_routine() -> None:
     - Supports heatmap and scatter plot visualizations for residue movement.
     - Removes intermediate files (`pdb` and `csv`) if `--no_inter` flag is specified.
 
-    Example Usage
-    -------------
+    Examples
+    --------
     Command-line usage:
         $ python3 stacker.py -s bottaro \
             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
@@ -455,8 +459,8 @@ def res_distance_routine() -> None:
     - If the `--bootstrap` argument is provided, distances are calculated across a specified number of randomly sampled frames.
     - If no bootstrap is performed, the distance is calculated for a single frame.
 
-    Example Usage
-    -------------
+    Examples
+    --------
     Command-line usage:
         $ python3 stacker.py -s res_distance \
             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
@@ -547,8 +551,8 @@ def system_routine() -> None:
     - Generates visualizations of the SSF data as videos saved to `args.output`.
     - Outputs information about the most stacked residues if `args.get_stacking` is specified.
 
-    Example Usage
-    -------------
+    Examples
+    --------
     Command-line usage:
         $ python3 stacker.py -s system \
             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
@@ -683,8 +687,8 @@ def stack_events_routine() -> None:
     -------
     - CSV file listing the top stacking events (`args.output`), if specified.
 
-    Example Usage
-    -------------
+    Examples
+    --------
     Command-line usage:
         $ python stacker.py -s stack_events \
             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
@@ -749,8 +753,8 @@ def compare_routine() -> None:
     -------
     - Printed output of residue pairs with the largest discrepancies.
 
-    Example Usage
-    -------------
+    Examples
+    --------
     Command-line usage:
         $ python stacker.py -s compare \
             -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 \
