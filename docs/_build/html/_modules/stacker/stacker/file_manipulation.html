@@ -1,0 +1,752 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>stacker.stacker.file_manipulation &#8212; StACKER Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css?v=7f9a90b1" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../../_static/documentation_options.js?v=528dc5d9"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/stacker/stacker/file_manipulation';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/stackerlogo.png" class="logo__image only-light" alt="StACKER Documentation - Home"/>
+    <img src="../../../_static/stacker_logo_dark.png" class="logo__image only-dark pst-js-only" alt="StACKER Documentation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../_autosummary/stacker.html">stacker</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../_autosummary/stacker.stacker.html">stacker</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autosummary/stacker.stacker.block_printing.html">stacker.stacker.block_printing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autosummary/stacker.stacker.bottaro_routine.html">stacker.stacker.bottaro_routine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autosummary/stacker.stacker.combine_frames.html">stacker.stacker.combine_frames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autosummary/stacker.stacker.compare_routine.html">stacker.stacker.compare_routine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autosummary/stacker.stacker.convert_to_python_command.html">stacker.stacker.convert_to_python_command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autosummary/stacker.stacker.enable_printing.html">stacker.stacker.enable_printing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autosummary/stacker.stacker.filter_traj_routine.html">stacker.stacker.filter_traj_routine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autosummary/stacker.stacker.res_distance_routine.html">stacker.stacker.res_distance_routine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autosummary/stacker.stacker.run_python_command.html">stacker.stacker.run_python_command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autosummary/stacker.stacker.stack_events_routine.html">stacker.stacker.stack_events_routine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autosummary/stacker.stacker.system_routine.html">stacker.stacker.system_routine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autosummary/stacker.stacker.SmartIndexingAction.html">SmartIndexingAction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autosummary/stacker.stacker.AtomEmpty.html">stacker.stacker.AtomEmpty</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autosummary/stacker.stacker.FrameEmpty.html">stacker.stacker.FrameEmpty</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autosummary/stacker.stacker.InvalidRoutine.html">stacker.stacker.InvalidRoutine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_autosummary/stacker.stacker.ResEmpty.html">stacker.stacker.ResEmpty</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../_autosummary/stacker.stacker.file_manipulation.html">file_manipulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.file_manipulation.file_convert.html">stacker.stacker.file_manipulation.file_convert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.file_manipulation.filter_traj.html">stacker.stacker.file_manipulation.filter_traj</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.file_manipulation.filter_traj_to_pdb.html">stacker.stacker.file_manipulation.filter_traj_to_pdb</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../_autosummary/stacker.stacker.kmeans.html">kmeans</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.kmeans.create_kmeans_input.html">stacker.stacker.kmeans.create_kmeans_input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.kmeans.plot_cluster_trj_data.html">stacker.stacker.kmeans.plot_cluster_trj_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.kmeans.read_and_preprocess_data.html">stacker.stacker.kmeans.read_and_preprocess_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.kmeans.run_kmeans.html">stacker.stacker.kmeans.run_kmeans</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../_autosummary/stacker.stacker.pairwise_distance.html">pairwise_distance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.pairwise_distance.calculate_residue_distance.html">stacker.stacker.pairwise_distance.calculate_residue_distance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.pairwise_distance.get_frame_average.html">stacker.stacker.pairwise_distance.get_frame_average</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.pairwise_distance.get_residue_distance_for_frame.html">stacker.stacker.pairwise_distance.get_residue_distance_for_frame</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.pairwise_distance.get_top_stacking.html">stacker.stacker.pairwise_distance.get_top_stacking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.pairwise_distance.increment_residue.html">stacker.stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.pairwise_distance.MultiFrameTraj.html">stacker.stacker.pairwise_distance.MultiFrameTraj</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../_autosummary/stacker.stacker.residue_movement.html">residue_movement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.residue_movement.calc_center_3pts.html">stacker.stacker.residue_movement.calc_center_3pts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.residue_movement.calculate_bottaro_values_for_frame.html">stacker.stacker.residue_movement.calculate_bottaro_values_for_frame</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.residue_movement.collect_atom_locations_by_frame.html">stacker.stacker.residue_movement.collect_atom_locations_by_frame</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.residue_movement.correct_theta_sign.html">stacker.stacker.residue_movement.correct_theta_sign</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.residue_movement.create_base_from_coords_list.html">stacker.stacker.residue_movement.create_base_from_coords_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.residue_movement.write_bottaro_to_csv.html">stacker.stacker.residue_movement.write_bottaro_to_csv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.residue_movement.Base.html">Base</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../_autosummary/stacker.stacker.vector.html">vector</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.vector.Vector.html">Vector</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../_autosummary/stacker.stacker.visualization.html">visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.visualization.create_axis_labels.html">stacker.stacker.visualization.create_axis_labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.visualization.create_parent_directories.html">stacker.stacker.visualization.create_parent_directories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.visualization.display_arrays_as_video.html">stacker.stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.visualization.set_polar_grid.html">stacker.stacker.visualization.set_polar_grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_autosummary/stacker.stacker.visualization.NoResidues.html">stacker.stacker.visualization.NoResidues</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../_autosummary/stacker.file_manipulation.html">file_manipulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.file_manipulation.file_convert.html">stacker.file_manipulation.file_convert</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.file_manipulation.filter_traj.html">stacker.file_manipulation.filter_traj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.file_manipulation.filter_traj_to_pdb.html">stacker.file_manipulation.filter_traj_to_pdb</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../_autosummary/stacker.kmeans.html">kmeans</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.kmeans.create_kmeans_input.html">stacker.kmeans.create_kmeans_input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.kmeans.plot_cluster_trj_data.html">stacker.kmeans.plot_cluster_trj_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.kmeans.read_and_preprocess_data.html">stacker.kmeans.read_and_preprocess_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.kmeans.run_kmeans.html">stacker.kmeans.run_kmeans</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../_autosummary/stacker.pairwise_distance.html">pairwise_distance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.pairwise_distance.calculate_residue_distance.html">stacker.pairwise_distance.calculate_residue_distance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.pairwise_distance.get_frame_average.html">stacker.pairwise_distance.get_frame_average</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.pairwise_distance.get_residue_distance_for_frame.html">stacker.pairwise_distance.get_residue_distance_for_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../_autosummary/stacker.vector.html">vector</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.vector.Vector.html">Vector</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../_autosummary/stacker.visualization.html">visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/stacker.visualization.NoResidues.html">stacker.visualization.NoResidues</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/esakkas24/stacker" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for stacker.stacker.file_manipulation</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Filter Trajectory Files</span>
+
+<span class="sd">This module contains functions for manipulating trajectory</span>
+<span class="sd">files. This includes filtering a trajectory to desired atoms,</span>
+<span class="sd">converting trajectory filetype, and outputting Python trajectories</span>
+<span class="sd">to other filetypes (eg. prmtop, mdcrd, pdb)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">mdtraj</span> <span class="k">as</span> <span class="nn">md</span>
+
+<div class="viewcode-block" id="filter_traj">
+<a class="viewcode-back" href="../../../_autosummary/stacker.stacker.file_manipulation.filter_traj.html#stacker.stacker.file_manipulation.filter_traj">[docs]</a>
+<span class="k">def</span> <span class="nf">filter_traj</span><span class="p">(</span><span class="n">trajectory_filename</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">topology_filename</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+                        <span class="n">residues_desired</span> <span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">atomnames_desired</span> <span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span> <span class="n">md</span><span class="o">.</span><span class="n">Trajectory</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Filters an input trajectory to only the specified atoms and residues</span>
+
+<span class="sd">    Filteres an input trajectory that contains all of the atoms in a topology to only</span>
+<span class="sd">    the desired atoms at the desired residues (eg. the atoms necessary to find the </span>
+<span class="sd">    center of geometry of a residue). If residues_desired or atomnames_desired are</span>
+<span class="sd">    empty, all residues or atoms are included respectively.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    trajectory_filename : str</span>
+<span class="sd">        filepath of the trajectory</span>
+<span class="sd">    topology_filename : str</span>
+<span class="sd">        filepath of the topology of the molecule</span>
+<span class="sd">    residues_desired : set</span>
+<span class="sd">        1-indexed residue numbers of residues to keep in the trajectory.</span>
+<span class="sd">        If Empty, include all residues.</span>
+<span class="sd">    atomnames_desired : set </span>
+<span class="sd">        atomnames to keep in the trajectory. If Empty, include all atoms.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    filtered_trajectory : mdtraj.Trajectory</span>
+<span class="sd">        a trajectory object representing the filtered structure across all frames</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    filter_traj_to_pdb : Filters an input trajectory to only the specified </span>
+<span class="sd">                         atoms and residues and outputs to pdb</span>
+<span class="sd">    mdtraj.Trajectory : The Trajectory object in mdtraj package</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Inputed trajectory should have 1-indexed Residue Indices, </span>
+<span class="sd">    Outputed trajectory object will be 0-indexed.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import stacker as st</span>
+<span class="sd">    &gt;&gt;&gt; filtered_traj = st.filter_traj(&#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;, </span>
+<span class="sd">    ...                             &#39;stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;, </span>
+<span class="sd">    ...                             residues_desired = {426,427}, </span>
+<span class="sd">    ...                             atomnames_desired = {&#39;C2&#39;,&#39;C4&#39;,&#39;C6&#39;})</span>
+<span class="sd">    WARNING: Residue Indices are expected to be 1-indexed</span>
+<span class="sd">    Reading trajectory...</span>
+<span class="sd">    Reading topology...</span>
+<span class="sd">    Filtering trajectory...</span>
+<span class="sd">    WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed</span>
+<span class="sd">    &gt;&gt;&gt; table, bonds = filtered_traj.topology.to_dataframe()</span>
+<span class="sd">    &gt;&gt;&gt; print(table)</span>
+<span class="sd">    serial name element  resSeq resName  chainID segmentID</span>
+<span class="sd">    0   None   C6       C     425       G        0          </span>
+<span class="sd">    1   None   C2       C     425       G        0          </span>
+<span class="sd">    2   None   C4       C     425       G        0          </span>
+<span class="sd">    3   None   C6       C     426       C        0          </span>
+<span class="sd">    4   None   C4       C     426       C        0          </span>
+<span class="sd">    5   None   C2       C     426       C        0       </span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: Residue Indices are expected to be 1-indexed&quot;</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reading trajectory...&quot;</span><span class="p">)</span>
+    <span class="n">trajectory</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="p">,</span> <span class="n">top</span> <span class="o">=</span> <span class="n">topology_filename</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reading topology...&quot;</span><span class="p">)</span>
+    <span class="n">topology</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">topology</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Filtering trajectory...&quot;</span><span class="p">)</span>
+    <span class="c1"># make resSeq 0-indexed for mdtraj query</span>
+    <span class="n">residues_desired</span> <span class="o">=</span> <span class="p">{</span><span class="n">resnum</span><span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">resnum</span> <span class="ow">in</span> <span class="n">residues_desired</span><span class="p">}</span> 
+
+    <span class="n">atomnames_query</span> <span class="o">=</span> <span class="s2">&quot; or &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;name == &#39;</span><span class="si">{</span><span class="n">atom</span><span class="si">}</span><span class="s2">&#39;&quot;</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">atomnames_desired</span><span class="p">])</span>
+    <span class="n">residues_query</span> <span class="o">=</span> <span class="s2">&quot; or &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;residue == </span><span class="si">{</span><span class="n">resnum</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">resnum</span> <span class="ow">in</span> <span class="n">residues_desired</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">atomnames_query</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">residues_query</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">filtered_trajectory</span> <span class="o">=</span> <span class="n">trajectory</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">atom_indices_selection</span> <span class="o">=</span> <span class="n">topology</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">residues_query</span><span class="p">)</span>
+            <span class="n">filtered_trajectory</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">atom_slice</span><span class="p">(</span><span class="n">atom_indices_selection</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">residues_query</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">atom_indices_selection</span> <span class="o">=</span> <span class="n">topology</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">atomnames_query</span><span class="p">)</span>
+            <span class="n">filtered_trajectory</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">atom_slice</span><span class="p">(</span><span class="n">atom_indices_selection</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">atom_indices_selection</span> <span class="o">=</span> <span class="n">topology</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;(&#39;</span> <span class="o">+</span> <span class="n">atomnames_query</span> <span class="o">+</span> <span class="s1">&#39;) and (&#39;</span> <span class="o">+</span> <span class="n">residues_query</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span><span class="p">)</span>
+            <span class="n">filtered_trajectory</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">atom_slice</span><span class="p">(</span><span class="n">atom_indices_selection</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">filtered_trajectory</span></div>
+
+
+
+<div class="viewcode-block" id="filter_traj_to_pdb">
+<a class="viewcode-back" href="../../../_autosummary/stacker.stacker.file_manipulation.filter_traj_to_pdb.html#stacker.stacker.file_manipulation.filter_traj_to_pdb">[docs]</a>
+<span class="k">def</span> <span class="nf">filter_traj_to_pdb</span><span class="p">(</span><span class="n">trajectory_filename</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">topology_filename</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+                       <span class="n">output_pdb_filename</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                        <span class="n">residues_desired</span> <span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="p">{},</span>
+                        <span class="n">atomnames_desired</span> <span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filters an input trajectory to only the specified atoms and residues and outputs to pdb</span>
+
+<span class="sd">    Filteres an input trajectory that contains all of the atoms in a trajectory to only</span>
+<span class="sd">    the desired atoms at the desired residues (eg. the atoms necessary to find the </span>
+<span class="sd">    center of geometry of a residue) and writes the output to a specified pdb file.</span>
+<span class="sd">    If residues_desired or atomnames_desired are empty, all residues or atoms are included respectively.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    trajectory_filename : str</span>
+<span class="sd">        path to file of the concatenated trajectory. Should be resampled to the</span>
+<span class="sd">        1 in 50 frames sampled trajectories for each replicate.</span>
+<span class="sd">    topology_filename : str</span>
+<span class="sd">        path to file of the topology of the molecule</span>
+<span class="sd">    output_pdb_filename : str</span>
+<span class="sd">        path to the output pdb file</span>
+<span class="sd">    residues_desired : set</span>
+<span class="sd">        1-indexed residue numbers of residues to keep in the trajectory</span>
+<span class="sd">    atomnames_desired : set </span>
+<span class="sd">        atomnames to keep in the trajectory</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    filter_traj : Filters an input trajectory to only the specified atoms and residues</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Inputed trajectory should have 1-indexed Residue Indices, </span>
+<span class="sd">    Outputed trajectory object will be 0-indexed.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">filtered_trajectory</span> <span class="o">=</span> <span class="n">filter_traj</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="p">,</span> <span class="n">topology_filename</span><span class="p">,</span> <span class="n">residues_desired</span><span class="p">,</span> <span class="n">atomnames_desired</span><span class="p">)</span>
+    <span class="n">filtered_trajectory</span><span class="o">.</span><span class="n">save_pdb</span><span class="p">(</span><span class="n">output_pdb_filename</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: Output file atom, residue, and chain indices are zero-indexed&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Filtered trajectory written to: &quot;</span><span class="p">,</span> <span class="n">output_pdb_filename</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="file_convert">
+<a class="viewcode-back" href="../../../_autosummary/stacker.stacker.file_manipulation.file_convert.html#stacker.stacker.file_manipulation.file_convert">[docs]</a>
+<span class="k">def</span> <span class="nf">file_convert</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">topology_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts a trajectory input file to a new output type.</span>
+
+<span class="sd">    The output file type is determined by the `output_file` extension. Uses `mdtraj.save()` commands to convert </span>
+<span class="sd">    trajectory files to various file types such as `mdtraj.save_mdcrd()`, `mdtraj.save_pdb()`, `mdtraj.save_xyz()`, etc.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    trajectory_filename : str</span>
+<span class="sd">        Path to the file of the concatenated trajectory (eg. .mdcrd file). </span>
+<span class="sd">    topology_filename : str</span>
+<span class="sd">        Path to the file of the topology of the molecule (.prmtop file).</span>
+<span class="sd">    output_file : str</span>
+<span class="sd">        Output filename (include .mdcrd, .pdb, etc.).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import stacker as st</span>
+<span class="sd">    &gt;&gt;&gt; import mdtraj as md</span>
+<span class="sd">    &gt;&gt;&gt; st.file_convert(&#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;, </span>
+<span class="sd">    ...                 &#39;stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;, </span>
+<span class="sd">    ...                 &#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.xyz&#39;)</span>
+<span class="sd">    WARNING: Output file atom, residue, and chain indices are zero-indexed</span>
+<span class="sd">    Trajectory written to: stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.xyz</span>
+<span class="sd">    &gt;&gt;&gt; md.load_xyz(&#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.xyz&#39;, </span>
+<span class="sd">    ...             top=&#39;stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;)</span>
+<span class="sd">    &lt;mdtraj.Trajectory with 10 frames, 12089 atoms, 494 residues, without unitcells at 0x10bb75cd0&gt;</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Output filetype determined from file extension of `output_file` parameter.</span>
+<span class="sd">    </span>
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    mdtraj.load : Load trajectory files</span>
+<span class="sd">    mdtraj.save : Save md.Trajectory to file</span>
+<span class="sd">    mdtraj.load_xyz : Load a .xyz trajectory file</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: Output file atom, residue, and chain indices are zero-indexed&quot;</span><span class="p">)</span>
+    <span class="n">trajectory</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="p">,</span> <span class="n">top</span> <span class="o">=</span> <span class="n">topology_filename</span><span class="p">)</span>
+    <span class="n">trajectory</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_file</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Trajectory written to: &quot;</span><span class="p">,</span> <span class="n">output_file</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># filter_traj tests</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Known Res: 426 = G and 427 = C&#39;</span><span class="p">)</span>
+    <span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">filter_traj</span><span class="p">(</span><span class="s1">&#39;testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span><span class="p">,</span> <span class="s1">&#39;testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span><span class="p">,</span> <span class="p">{</span><span class="mi">426</span><span class="p">,</span><span class="mi">427</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span><span class="s1">&#39;C6&#39;</span><span class="p">})</span>
+    <span class="n">table</span><span class="p">,</span> <span class="n">bonds</span> <span class="o">=</span> <span class="n">filtered_traj</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+
+    <span class="c1">### No Filtering</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No Filtering, known trj has 12089 atoms&quot;</span><span class="p">)</span>
+    <span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">filter_traj</span><span class="p">(</span><span class="s1">&#39;testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span><span class="p">,</span> <span class="s1">&#39;testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span><span class="p">,</span> <span class="n">residues_desired</span><span class="o">=</span><span class="p">{},</span> <span class="n">atomnames_desired</span><span class="o">=</span><span class="p">{})</span>
+    <span class="n">table</span><span class="p">,</span> <span class="n">bonds</span> <span class="o">=</span> <span class="n">filtered_traj</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Eric D. Sakkas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Eric D. Sakkas.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
