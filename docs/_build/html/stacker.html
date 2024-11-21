@@ -803,7 +803,7 @@ If Empty, include all residues.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="stacker.file_manipulation.html#stacker.file_manipulation.filter_traj_to_pdb" title="stacker.file_manipulation.filter_traj_to_pdb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj_to_pdb</span></code></a></dt><dd><p>Filters an input trajectory to only the specified  atoms and residues and outputs to pdb</p>
+<dt><a class="reference internal" href="#stacker.file_manipulation.filter_traj_to_pdb" title="stacker.file_manipulation.filter_traj_to_pdb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj_to_pdb</span></code></a></dt><dd><p>Filters an input trajectory to only the specified  atoms and residues and outputs to pdb</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">mdtraj.Trajectory</span></code></dt><dd><p>The Trajectory object in mdtraj package</p>
 </dd>
@@ -886,7 +886,7 @@ If Empty, include all residues.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="stacker.file_manipulation.html#stacker.file_manipulation.filter_traj" title="stacker.file_manipulation.filter_traj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj</span></code></a></dt><dd><p>Filters an input trajectory to only the specified atoms and residues</p>
+<dt><a class="reference internal" href="#stacker.file_manipulation.filter_traj" title="stacker.file_manipulation.filter_traj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj</span></code></a></dt><dd><p>Filters an input trajectory to only the specified atoms and residues</p>
 </dd>
 </dl>
 </div>
@@ -1637,12 +1637,20 @@ with center of geometry distance closest to 3.5Å).</p>
 </section>
 <section id="module-stacker.residue_movement">
 <span id="stacker-residue-movement-module"></span><h2>stacker.residue_movement module<a class="headerlink" href="#module-stacker.residue_movement" title="Link to this heading">#</a></h2>
+<p>Create and Analyze Pairwise Stacking Fingerprints (PSFs)</p>
+<p>This module contains the functions to create and analyze Pairwise
+Stacking Fingerprints. It allows the user to generate Polar Scatterplots
+and Heatmaps of one residue movement relative to the other.</p>
+<p>This pipeline takes a pdb file with multiple frames and two residues. 
+It then calculates the r, rho, and theta values at each frame
+as defined in the Bottaro paper (<a class="reference external" href="https://doi.org/10.1093/nar/gku972">https://doi.org/10.1093/nar/gku972</a>), 
+and exports these values to a .csv file.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.residue_movement.collect_atom_locations_by_frame">
 <span class="sig-name descname"><span class="pre">collect_atom_locations_by_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">traj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/residue_movement.html#collect_atom_locations_by_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.residue_movement.collect_atom_locations_by_frame" title="Link to this definition">#</a></dt>
 <dd><p>Creates a list of all atom locations for a particular atom and residue number per frame.</p>
-<p>Curates a list coords_by_frame where coords_by_frame[i] is the (x, y, z) positions of a provided atom_id
-of a residue residue_num at the ith frame.</p>
+<p>Curates a list coords_by_frame where coords_by_frame[i] is the (x, y, z) positions 
+of a provided <cite>atom_id</cite> in a residue <cite>residue_num</cite> at the ith frame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -1661,6 +1669,29 @@ of a residue residue_num at the ith frame.</p>
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="stacker.residue_movement.html#stacker.residue_movement.Base" title="stacker.residue_movement.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code></a></dt><dd><p>Python Class that represents a nucleotide base</p>
+</dd>
+<dt><a class="reference internal" href="stacker.residue_movement.html#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a></dt><dd><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p><cite>residue_num</cite> must be 0-indexed to match how mdtraj.Trajectory indexes residues.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s1">&#39;testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span><span class="p">,</span> 
+<span class="gp">... </span>                             <span class="s1">&#39;testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span><span class="p">,</span> 
+<span class="gp">... </span>                             <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span><span class="s1">&#39;C6&#39;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&gt;&gt;&gt;</span> <span class="n">st</span><span class="o">.</span><span class="n">collect_atom_locations_by_frame</span><span class="p">(</span><span class="n">filtered_traj</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">)</span>
+<span class="go">[(58.794, 59.636, 49.695), (59.185005, 58.797, 50.137), (59.379, 58.553005, 49.853), </span>
+<span class="go">(58.76, 59.068, 49.681), (59.003, 59.054, 49.878002), (59.049, 58.967, 50.051), </span>
+<span class="go">(59.219, 58.476006, 49.948), (58.948, 58.588005, 50.085), (58.922, 58.747, 49.766003), </span>
+<span class="go">(59.124, 58.916, 49.978004)]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">

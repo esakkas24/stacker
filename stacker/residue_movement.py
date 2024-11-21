@@ -1,3 +1,16 @@
+"""
+Create and Analyze Pairwise Stacking Fingerprints (PSFs)
+
+This module contains the functions to create and analyze Pairwise
+Stacking Fingerprints. It allows the user to generate Polar Scatterplots
+and Heatmaps of one residue movement relative to the other.
+
+This pipeline takes a pdb file with multiple frames and two residues. 
+It then calculates the r, rho, and theta values at each frame
+as defined in the Bottaro paper (https://doi.org/10.1093/nar/gku972), 
+and exports these values to a .csv file.
+"""
+
 from __future__ import print_function
 import math
 import csv
@@ -7,22 +20,12 @@ from .file_manipulation import filter_traj_to_pdb
 from .visualization import create_parent_directories
 import os
 
-'''
-Eric Sakkas - Weir Lab, Wesleyan University
-Email : esakkas@wesleyan.edu
-
-This code takes a pdb file with multiple frames and two residues. 
-It then calculates the r, rho, and theta values at each frame
-as defined in the Bottaro paper (https://doi.org/10.1093/nar/gku972), 
-and exports these values to a .csv file.
-'''
-
 def collect_atom_locations_by_frame(traj: md.Trajectory, residue_num: int, atom_id: str) -> list:
     """
     Creates a list of all atom locations for a particular atom and residue number per frame.
 
-    Curates a list coords_by_frame where coords_by_frame[i] is the (x, y, z) positions of a provided atom_id
-    of a residue residue_num at the ith frame.
+    Curates a list coords_by_frame where coords_by_frame[i] is the (x, y, z) positions 
+    of a provided `atom_id` in a residue `residue_num` at the ith frame.
 
     Parameters
     ----------
@@ -38,6 +41,28 @@ def collect_atom_locations_by_frame(traj: md.Trajectory, residue_num: int, atom_
     coords_by_frame : list
         List of (x, y, z) coordinates of `atom_id` in `residue_num` for each frame.
 
+    Notes
+    -----
+    `residue_num` must be 0-indexed to match how mdtraj.Trajectory indexes residues.
+
+    See Also
+    --------
+    Base : Python Class that represents a nucleotide base
+    calculate_bottaro_values_for_frame : Calculates the r, rho, and theta values as expressed in the Bottaro paper.
+    create_base_from_coords_list : Combines C2, C4, C6 positions with midpoint positions for a given frame
+    
+    Examples
+    --------
+    >>> import stacker as st
+    >>> filtered_traj = st.filter_traj('testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 
+    ...                              'testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', 
+    ...                              atomnames_desired = {'C2','C4','C6'})
+    >>> >>> st.collect_atom_locations_by_frame(filtered_traj, residue_num = 3, atom_id = "C2")
+    [(58.794, 59.636, 49.695), (59.185005, 58.797, 50.137), (59.379, 58.553005, 49.853), 
+    (58.76, 59.068, 49.681), (59.003, 59.054, 49.878002), (59.049, 58.967, 50.051), 
+    (59.219, 58.476006, 49.948), (58.948, 58.588005, 50.085), (58.922, 58.747, 49.766003), 
+    (59.124, 58.916, 49.978004)]
+
     """
     topology = traj.topology
     number_of_frames = traj.n_frames
@@ -49,7 +74,7 @@ def collect_atom_locations_by_frame(traj: md.Trajectory, residue_num: int, atom_
 
 def calc_center_3pts(a: Vector, b: Vector, c: Vector) -> Vector:
     """
-    Finds the average x, y, z position of three x, y, z Vectors.
+    Finds the average x, y, z position of three (x, y, z) Vectors.
 
     Takes in three Vectors generated using the `pdb.xyz` method and finds their center. Works 
     with three points that make up a triangle (like those within a 6-member ring).
@@ -67,6 +92,20 @@ def calc_center_3pts(a: Vector, b: Vector, c: Vector) -> Vector:
     -------
     midpoint : Vector
         One Vector with (x, y, z) coordinates at the center of the three input Vectors.
+
+    See Also
+    --------
+    Base : Python Class that represents a nucleotide base
+    calculate_bottaro_values_for_frame : Calculates the r, rho, and theta values as expressed in the Bottaro paper.
+    create_base_from_coords_list : Combines C2, C4, C6 positions with midpoint positions for a given frame
+
+    Examples
+    --------
+    >>> import stacker as st
+    >>> print(st.calc_center_3pts(st.Vector(0,0,0), st.Vector(1,1,1), st.Vector(2,2,2)))
+    [ 1.0
+      1.0
+      1.0 ]
 
     """
     vectorized = (a.components + b.components + c.components ) / 3
@@ -139,6 +178,10 @@ def create_base_from_coords_list(frame: int, C2_coords: list, C4_coords: list, C
     Base
         An instance of Base with coordinates at the specified frame.
 
+    See Also
+    --------
+    calc_center_3pts : Finds the average x, y, z position of three (x, y, z) Vectors
+    
     """
     midpoint_tuple = (midpoint_coords[frame].x, midpoint_coords[frame].y, midpoint_coords[frame].z)
     return Base(C2_coords[frame], C4_coords[frame], C6_coords[frame], midpoint_tuple)
