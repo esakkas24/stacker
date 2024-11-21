@@ -7,16 +7,20 @@ and PCA scatterplots.
 
 """
 from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score, silhouette_samples
+from sklearn.decomposition import PCA
 import numpy as np
 from numpy import typing
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
 import seaborn as sns
+
 
 ### VARIABLES ###
 
 N_RESIDUES = 127
-N_CLUSTERS = 3
+RANGE_N_CLUSTERS = [2,3,4,5,6,7,8] # Range of n_clusters to try for kmeans
 dataset_names = ['5JUP_N2_tGGG_aCCU_+1GCU', '5JUP_N2_tGGG_aCCU_+1CGU', '5JUP_N2_tUAG_aCUA_+1GCU', '5JUP_N2_tUAG_aCUA_+1CGU', '5JUP_N2_tGGG_aCCC_+1GCU', '5JUP_N2_tGGG_aCCC_+1CGU']  # Add more dataset names as needed
 indir = '/home66/esakkas/STACKER/DATA/' # Directory with data.txt output from StACKER (created with -d flag)
 outdir = '/home66/esakkas/STACKER/DATA/' # Outdir for clustering results and kmeans plot
@@ -123,6 +127,66 @@ def create_kmeans_input(data_arrays: dict) -> typing.ArrayLike:
     print(data.shape)
     return data
 
+def plot_pca(blinded_data : typing.ArrayLike, n_clusters : int = 0, coloring : str = 'dataset'):
+    '''Creates PCA Plot to compare systems in 2D 
+
+    Args:
+        coloring : str {dataset, kmeans, facet}
+            Method to color the points on the scatterplot. Options:
+            - dataset:  Plot all points on the same scatterplot and color by dataset of origin.
+            - kmeans: Plot all points on the same scatterplot and color by KMeans Cluster with n_clusters
+            - facet: Same as dataset but plot each dataset on a different coordinate grid.
+    '''
+    n_datasets = len(dataset_names)
+    pca = PCA(n_components=2)
+    data_reduced = pca.fit_transform(blinded_data)
+    colors = np.empty(data_reduced.shape[0], dtype="U15")
+    section_size = data_reduced.shape[0] // n_datasets
+    for i in range(n_datasets):
+        colors[i * section_size:(i + 1) * section_size] = dataset_names[i]
+
+    df = pd.DataFrame({
+        'Principal Component 1': data_reduced[:, 0],
+        'Principal Component 2': data_reduced[:, 1],
+        'Color': colors
+    })
+
+    if coloring == 'facet':
+        g = sns.FacetGrid(df, col='Color', col_wrap=2, height=4)
+        g.map_dataframe(sns.scatterplot, x='Principal Component 1', y='Principal Component 2')
+        g.set_titles(col_template='Color {col_name}')
+        g.set_axis_labels('Principal Component 1', 'Principal Component 2')
+        outfile = f"{outdir}pca_plot.by_facet.png"
+        plt.savefig(outfile)
+        plt.close()
+    elif coloring == 'dataset':
+        unique_colors = {name: idx for idx, name in enumerate(dataset_names)}
+        df['Color'] = df['Color'].map(unique_colors)
+        plt.figure(figsize=(10, 7))
+        scatter = plt.scatter(df['Principal Component 1'], df['Principal Component 2'], c=df['Color'], cmap='viridis', s=10)
+        plt.title('PCA-reduced data by dataset')
+        plt.xlabel('Principal Component 1')
+        plt.ylabel('Principal Component 2')
+        plt.colorbar(scatter, label='Dataset')
+        outfile = f"{outdir}pca_plot.by_dataset.png"
+        plt.savefig(outfile)
+        plt.close()
+    else:
+        kmeans = KMeans(n_clusters=n_clusters, random_state=1)
+        cluster_labels = kmeans.fit_predict(data_reduced)
+        df['Color'] = cluster_labels
+
+        plt.figure(figsize=(10, 7))
+        scatter = plt.scatter(df['Principal Component 1'], df['Principal Component 2'], c=df['Color'], cmap='viridis', s=10)
+        plt.title('PCA-reduced data with KMeans clustering')
+        plt.xlabel('Principal Component 1')
+        plt.ylabel('Principal Component 2')
+        plt.colorbar(scatter, label='Cluster Label')
+        outfile = f"{outdir}pca_plot{n_clusters}by_cluster.png"
+        plt.savefig(outfile)
+        plt.close()
+
+
 def run_kmeans(blinded_data: typing.ArrayLike, N_CLUSTERS: int = N_CLUSTERS,
                max_iter: int = 1000, n_init: int = 20, random_state: int = 1, outdir: str = '') -> None :
     """
@@ -183,14 +247,28 @@ def run_kmeans(blinded_data: typing.ArrayLike, N_CLUSTERS: int = N_CLUSTERS,
         Cluster 4: 800 matrices
 
     """
+    global blindframes_labelled_by_cluster
+    global silhouette_avg
+    global sample_silhouette_values
+
     kmeans_func_instance = KMeans(n_clusters=N_CLUSTERS, max_iter=max_iter, n_init=n_init, random_state=random_state)
-    kmeans_func_instance.fit(blinded_data)
-    blindframes_labelled_by_cluster = kmeans_func_instance.labels_
+    blindframes_labelled_by_cluster = kmeans_func_instance.fit_predict(blinded_data)
+    silhouette_avg = silhouette_score(blinded_data, blindframes_labelled_by_cluster)
+
+    print(
+        "For n_clusters =",
+        N_CLUSTERS,
+        "The average silhouette_score is :",
+        silhouette_avg,
+    )
+
+    sample_silhouette_values = silhouette_samples(blinded_data, blindframes_labelled_by_cluster)
 
     counts = {}
+    labels = blindframes_labelled_by_cluster
     for name, arr in data_arrays.items():
-        counts[name] = np.bincount(blindframes_labelled_by_cluster[:len(arr)], minlength=N_CLUSTERS)
-        blindframes_labelled_by_cluster = blindframes_labelled_by_cluster[len(arr):]  # Move to the next dataset
+        counts[name] = np.bincount(labels[:len(arr)], minlength=N_CLUSTERS)
+        labels = labels[len(arr):]  # Move to the next dataset
 
     # Print the results
     for name, count in counts.items():
@@ -206,6 +284,54 @@ def run_kmeans(blinded_data: typing.ArrayLike, N_CLUSTERS: int = N_CLUSTERS,
             for cluster in range(N_CLUSTERS):
                 outfile.write(f'{cluster+1} {name} {count[cluster]}\n')
         outfile.close()
+
+def plot_silhouette(n_clusters, dataset):
+    '''Outputs Silhouette plots to determine the best number of clusters
+
+    '''
+    plt.figure(figsize=(10, 7))
+    plt.xlim([-1, 1])
+    plt.ylim([0, len(dataset) + (n_clusters + 1) * 10])
+
+    y_lower = 10
+    for i in range(n_clusters):
+        # Aggregate the silhouette scores for samples belonging to cluster i, and sort them
+        ith_cluster_silhouette_values = sample_silhouette_values[blindframes_labelled_by_cluster == i]
+        ith_cluster_silhouette_values.sort()
+
+        size_cluster_i = ith_cluster_silhouette_values.shape[0]
+        y_upper = y_lower + size_cluster_i
+
+        color = cm.nipy_spectral(float(i) / n_clusters)
+        plt.fill_betweenx(
+            np.arange(y_lower, y_upper),
+            0,
+            ith_cluster_silhouette_values,
+            facecolor=color,
+            edgecolor=color,
+            alpha=0.7,
+        )
+
+        # Label the silhouette plots with their cluster numbers at the middle
+        plt.text(-0.05, y_lower + 0.5 * size_cluster_i, str(i))
+
+        # Compute the new y_lower for next plot
+        y_lower = y_upper + 10  # 10 for the 0 samples
+
+    plt.title("The silhouette plot for the various clusters.")
+    plt.xlabel("The silhouette coefficient values")
+    plt.ylabel("Cluster label")
+
+    # The vertical line for average silhouette score of all the values
+    plt.axvline(x=silhouette_avg, color="red", linestyle="--")
+
+    plt.yticks([])  # Clear the yaxis labels / ticks
+    plt.xticks(np.arange(-1, 1.1, 0.1))
+
+    plt.tight_layout()
+    plt.savefig(f"{outdir}silhouette{n_clusters}.png")
+    plt.close()
+
 
 def plot_cluster_trj_data(input_file: str, n_cluster: int, outfile: str, seeded: bool = False) -> None:
     """
@@ -257,11 +383,17 @@ def plot_cluster_trj_data(input_file: str, n_cluster: int, outfile: str, seeded:
     plt.tight_layout()
     plt.savefig(outfile)
     print(f"Plot Outputted to {outfile}")
+    plt.close()
 
 if __name__ == "__main__":
-    data_arrays = read_and_preprocess_data(dataset_names, indir)
+    data_arrays = read_and_preprocess_data(dataset_names, indir, N_RESIDUES)
     blinded_data = create_kmeans_input(data_arrays)
-    run_kmeans(blinded_data, N_CLUSTERS, outdir = outdir)
-    cluster_file = outdir + 'clustering_results_' + str(N_CLUSTERS) + '.txt'
-    outfile = f"{outdir}kmeans_plot.cluster_{N_CLUSTERS}.png"
-    plot_cluster_trj_data(cluster_file, n_cluster = N_CLUSTERS, seeded = False, outfile = outfile)
+    plot_pca(blinded_data, 'dataset')
+    plot_pca(blinded_data, 'facet')
+    for N_CLUSTERS in RANGE_N_CLUSTERS:
+        run_kmeans(blinded_data, N_CLUSTERS, outdir = outdir)
+        cluster_file = outdir + 'clustering_results_' + str(N_CLUSTERS) + '.txt'
+        outfile = f"{outdir}kmeans_plot.cluster_{N_CLUSTERS}.png"
+        plot_cluster_trj_data(cluster_file, n_cluster = N_CLUSTERS, seeded = False, outfile = outfile)
+        plot_silhouette(N_CLUSTERS, blinded_data)
+        # plot_pca(blinded_data, N_CLUSTERS, 'kmeans') # Works best with only two systems
