@@ -127,15 +127,36 @@ def create_kmeans_input(data_arrays: dict) -> typing.ArrayLike:
     print(data.shape)
     return data
 
-def plot_pca(blinded_data : typing.ArrayLike, n_clusters : int = 0, coloring : str = 'dataset'):
-    '''Creates PCA Plot to compare systems in 2D 
+def plot_pca(blinded_data : typing.ArrayLike, n_clusters : int = 0, coloring : str = 'dataset') -> None:
+    '''
+    Creates PCA Plot to compare systems in 2D 
 
-    Args:
-        coloring : str {dataset, kmeans, facet}
-            Method to color the points on the scatterplot. Options:
-            - dataset:  Plot all points on the same scatterplot and color by dataset of origin.
-            - kmeans: Plot all points on the same scatterplot and color by KMeans Cluster with n_clusters
-            - facet: Same as dataset but plot each dataset on a different coordinate grid.
+    Creates a PCA plot that can be colored by the KMeans clustering result
+    or by dataset. Compares SSFs similarly to K Means.
+
+    Parameters
+    ----------
+    blinded_data : np.typing.ArrayLike
+        A 2D numpy array containing all frames stacked together.
+        Output of create_kmeans_input()
+    n_clusters : int, default = 0
+        The number of clusters to form.
+    coloring : {'dataset', 'kmeans', 'facet'}
+        Method to color the points on the scatterplot. Options:
+        - dataset:  Plot all points on the same scatterplot and color by dataset of origin.
+        - kmeans: Plot all points on the same scatterplot and color by KMeans Cluster with n_clusters
+        - facet: Same as dataset but plot each dataset on a different coordinate grid.
+
+    Returns
+    -------
+    None
+
+    See Also
+    --------
+    create_kmeans_input : blinds SSF Data for input to K Means
+    read_and_preprocess_data : reads and preprocesses SSF data for K Means analysis per dataset
+    sklearn.decomposition.PCA : Runs PCA
+    
     '''
     n_datasets = len(dataset_names)
     pca = PCA(n_components=2)
@@ -286,8 +307,16 @@ def run_kmeans(blinded_data: typing.ArrayLike, N_CLUSTERS: int = N_CLUSTERS,
         outfile.close()
 
 def plot_silhouette(n_clusters, dataset):
-    '''Outputs Silhouette plots to determine the best number of clusters
+    '''
+    Creates Silhouette plots to determine the best number of clusters
 
+    Parameters
+    ----------
+    n_clusters : int, default = 0
+        The number of clusters to form.
+    dataset : np.typing.ArrayLike
+        A 2D numpy array containing all frames stacked together.
+        Output of create_kmeans_input()
     '''
     plt.figure(figsize=(10, 7))
     plt.xlim([-1, 1])
