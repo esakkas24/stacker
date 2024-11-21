@@ -17,6 +17,12 @@ import sys
 import concurrent.futures
 
 class MultiFrameTraj(Exception):
+    """
+    A multi-frame trajectory is passed to a one-frame function
+
+    Raised if a multi-frame trajectory is passed to a function that
+    only works on one trajectory (eg. calculate_residue_distance_vector())
+    """
     pass
 
 _NUCLEOTIDE_NAMES = {"A", "A5", "A3", "G", "G5", "G3", "C", "C5", "C3",
@@ -94,7 +100,11 @@ def get_residue_distance_for_frame(trajectory: md.Trajectory,
                                    res2_atoms: tuple = ("C2", "C4", "C6"),
                                    write_output: bool = True) -> typing.ArrayLike:
     """
-    Calculates pairwise distances between all residues in a given frame.
+    Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.
+
+    Calculates the distances between all pairs of residues in a given frame
+    of a trajectory. Outputs as a square matrix with all residues on each
+    side. This is the data behind a System Stacking Fingerprint (SSF)
 
     Parameters
     ----------
@@ -111,9 +121,14 @@ def get_residue_distance_for_frame(trajectory: md.Trajectory,
 
     Returns
     -------
-    pairwise_distances : array_like
+    pairwise_distances : np.typing.ArrayLike
         Matrix where position (i, j) represents the distance from residue i to residue j.
     
+    See Also
+    --------
+    get_residue_distance_for_trajectory : Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory
+    filter_traj : Filters an input trajectory to only the specified atoms and residues
+    mdtraj.load : Load a trajectory+topology file
     """
     trajectory = trajectory[frame-1]
     topology = trajectory.topology
@@ -125,9 +140,11 @@ def get_residue_distance_for_frame(trajectory: md.Trajectory,
 
     mat_i = 0
     for i in res_indices:
+
         if write_output:
             percent_done = round((mat_i+1) / n_residues * 100, 2)
             sys.stdout.write(f'\rLoading: [{"#" * int(percent_done)}{" " * (100 - int(percent_done))}] Current Residue: {mat_i+1}/{n_residues} ({percent_done}%)')
+        
         mat_j = 0
         res1_name = topology.residue(mat_i).name
         for j in res_indices:
@@ -161,12 +178,17 @@ def get_residue_distance_for_trajectory(trajectory: md.Trajectory,
                                         res2_atoms: tuple = ("C2", "C4", "C6"),
                                         threads: int = 1) -> typing.ArrayLike:
     """
-    Calculates pairwise distances for all residues across all frames of a trajectory.
+    Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory.
+
+    Calculates the distances between all pairs of residues for all frames
+    of a trajectory. Outputs as a square matrix with all residues on each
+    side. This is the data behind a System Stacking Fingerprint (SSF)
 
     Parameters
     ----------
     trajectory : md.Trajectory
         Trajectory to analyze (must have a topology).
+        Output of st.filter_traj() or mdtraj.load()
     frames : array_like
         Frame indices to analyze (1-indexed).
     res1_atoms : tuple, default=("C2", "C4", "C6")
@@ -182,15 +204,25 @@ def get_residue_distance_for_trajectory(trajectory: md.Trajectory,
         List where `pairwise_distances[f]` is the output of
         `get_residue_distance_for_frame(trajectory, f, res1_atoms, res2_atoms)`.
     
+    See Also
+    --------
+    get_residue_distance_for_frame : Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.
+    filter_traj : Filters an input trajectory to only the specified atoms and residues
+    mdtraj.load : Load a trajectory+topology file
+
+    Examples
+    --------
+    >>> import stacker as st
+    >>> 
     """
     write_output = False
     if threads <= 1:
         write_output = True
 
     with concurrent.futures.ProcessPoolExecutor(max_workers = threads) as executor:            
-        SSFs = np.array(list(executor.map(get_residue_distance_for_frame, [trajectory]*len(frames), frames,
+        ssf_per_frame = np.array(list(executor.map(get_residue_distance_for_frame, [trajectory]*len(frames), frames,
                                     [res1_atoms]*len(frames),[res2_atoms]*len(frames), [write_output]*len(frames))))
-    return SSFs
+    return ssf_per_frame
 
 
 def increment_residue(residue_id : str) -> str:

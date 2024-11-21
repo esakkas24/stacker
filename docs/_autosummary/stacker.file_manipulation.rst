@@ -24,6 +24,14 @@ file_manipulation
 
    
    
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:                                         
+      :template: custom-class-template.rst              
+   
+      SmartIndexingAction
+   
    
 
    

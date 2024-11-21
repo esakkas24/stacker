@@ -261,56 +261,6 @@ def run_python_command() -> None:
     args = parser.parse_args()
     convert_to_python_command()
 
-class SmartIndexingAction(argparse.Action):
-    '''
-    Custom argparse action to handle smart indexing of frame numbers.
-
-    Parses a comma-separated list of frame numbers with optional ranges (e.g., '1-20, 34, 25, 50-100')
-    and generates a list of individual frame numbers. Modifies the namespace by setting the attribute specified by the 'dest' parameter to the
-    list of individual frame numbers.
-
-    Parameters
-    ----------
-    parser: argparse.ArgumentParser
-        The argparse parser object.
-    namespace: argparse.Namespace
-        The argparse namespace.
-    values: str
-        The input string containing frame numbers and ranges.
-    option_string: str, default=None
-        The option string.
-
-    Attributes
-    ----------
-    dest : str
-        The attribute name in the namespace where the parsed list will be stored.
-
-    Methods
-    -------
-    __call__(parser, namespace, values, option_string=None)
-        Parses the provided string of values into a sorted list of integers and
-        sets it as an attribute in the namespace.
-
-    Examples
-    --------
-    >>> parser = argparse.ArgumentParser()
-    >>> parser.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze", required=False, action=SmartIndexingAction)
-    >>> args = parser.parse_args(["-fl", "1-20,34,25,50-100"])
-    >>> print(args.frame_list)
-    [1, 2, ..., 20, 34, 25, 50, 51, ..., 100]
-    
-    '''
-    def __call__(self, parser, namespace, values, option_string=None):
-        frame_list = []
-        for item in values.split(','):
-            if '-' in item:
-                start, end = map(int, item.split('-'))
-                frame_list.extend(range(start, end + 1))
-            else:
-                frame_list.append(int(item))
-        frame_list.sort()
-        setattr(namespace, self.dest, frame_list)
-
 def convert_to_python_command() -> None:
     '''Converts a parsed command to use to the correct subroutine and runs the routine
 

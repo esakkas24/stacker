@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css?v=7f9a90b1" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -262,7 +262,6 @@
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.run_python_command.html">stacker.run_python_command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.stack_events_routine.html">stacker.stack_events_routine</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.system_routine.html">stacker.system_routine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.SmartIndexingAction.html">SmartIndexingAction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.AtomEmpty.html">stacker.AtomEmpty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.FrameEmpty.html">stacker.FrameEmpty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.InvalidRoutine.html">stacker.InvalidRoutine</a></li>
@@ -271,11 +270,14 @@
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.file_manipulation.file_convert.html">stacker.file_manipulation.file_convert</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.file_manipulation.filter_traj.html">stacker.file_manipulation.filter_traj</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.file_manipulation.filter_traj_to_pdb.html">stacker.file_manipulation.filter_traj_to_pdb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.file_manipulation.SmartIndexingAction.html">SmartIndexingAction</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/stacker.kmeans.html">kmeans</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.create_kmeans_input.html">stacker.kmeans.create_kmeans_input</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_cluster_trj_data.html">stacker.kmeans.plot_cluster_trj_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_pca.html">stacker.kmeans.plot_pca</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_silhouette.html">stacker.kmeans.plot_silhouette</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.read_and_preprocess_data.html">stacker.kmeans.read_and_preprocess_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.run_kmeans.html">stacker.kmeans.run_kmeans</a></li>
 </ul>
@@ -320,6 +322,50 @@
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.file_manipulation.file_convert.html">stacker.file_manipulation.file_convert</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.file_manipulation.filter_traj.html">stacker.file_manipulation.filter_traj</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.file_manipulation.filter_traj_to_pdb.html">stacker.file_manipulation.filter_traj_to_pdb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.file_manipulation.SmartIndexingAction.html">SmartIndexingAction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="_autosummary/stacker.kmeans.html">kmeans</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.kmeans.create_kmeans_input.html">stacker.kmeans.create_kmeans_input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_cluster_trj_data.html">stacker.kmeans.plot_cluster_trj_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_pca.html">stacker.kmeans.plot_pca</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_silhouette.html">stacker.kmeans.plot_silhouette</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.kmeans.read_and_preprocess_data.html">stacker.kmeans.read_and_preprocess_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.kmeans.run_kmeans.html">stacker.kmeans.run_kmeans</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.html">pairwise_distance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.calculate_residue_distance.html">stacker.pairwise_distance.calculate_residue_distance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_frame_average.html">stacker.pairwise_distance.get_frame_average</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_residue_distance_for_frame.html">stacker.pairwise_distance.get_residue_distance_for_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="_autosummary/stacker.residue_movement.html">residue_movement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.residue_movement.calc_center_3pts.html">stacker.residue_movement.calc_center_3pts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.residue_movement.calculate_bottaro_values_for_frame.html">stacker.residue_movement.calculate_bottaro_values_for_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.residue_movement.collect_atom_locations_by_frame.html">stacker.residue_movement.collect_atom_locations_by_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.residue_movement.correct_theta_sign.html">stacker.residue_movement.correct_theta_sign</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.residue_movement.create_base_from_coords_list.html">stacker.residue_movement.create_base_from_coords_list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.residue_movement.write_bottaro_to_csv.html">stacker.residue_movement.write_bottaro_to_csv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.residue_movement.Base.html">Base</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="_autosummary/stacker.vector.html">vector</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.vector.Vector.html">Vector</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="_autosummary/stacker.visualization.html">visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.NoResidues.html">stacker.visualization.NoResidues</a></li>
 </ul>
 </details></li>
 </ul>
@@ -479,6 +525,8 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.create_kmeans_input"><code class="docutils literal notranslate"><span class="pre">create_kmeans_input()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_cluster_trj_data"><code class="docutils literal notranslate"><span class="pre">plot_cluster_trj_data()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_pca"><code class="docutils literal notranslate"><span class="pre">plot_pca()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_silhouette"><code class="docutils literal notranslate"><span class="pre">plot_silhouette()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.read_and_preprocess_data"><code class="docutils literal notranslate"><span class="pre">read_and_preprocess_data()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.run_kmeans"><code class="docutils literal notranslate"><span class="pre">run_kmeans()</span></code></a></li>
 </ul>
@@ -577,8 +625,65 @@ specified output directory.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="stacker.kmeans.plot_pca">
+<span class="sig-name descname"><span class="pre">plot_pca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blinded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coloring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dataset'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#plot_pca"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_pca" title="Link to this definition">#</a></dt>
+<dd><p>Creates PCA Plot to compare systems in 2D</p>
+<p>Creates a PCA plot that can be colored by the KMeans clustering result
+or by dataset. Compares SSFs similarly to K Means.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>blinded_data</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
+Output of create_kmeans_input()</p>
+</dd>
+<dt><strong>n_clusters</strong><span class="classifier">int, default = 0</span></dt><dd><p>The number of clusters to form.</p>
+</dd>
+<dt><strong>coloring</strong><span class="classifier">{‘dataset’, ‘kmeans’, ‘facet’}</span></dt><dd><p>Method to color the points on the scatterplot. Options:
+- dataset:  Plot all points on the same scatterplot and color by dataset of origin.
+- kmeans: Plot all points on the same scatterplot and color by KMeans Cluster with n_clusters
+- facet: Same as dataset but plot each dataset on a different coordinate grid.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a></dt><dd><p>blinds SSF Data for input to K Means</p>
+</dd>
+<dt><a class="reference internal" href="#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>reads and preprocesses SSF data for K Means analysis per dataset</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">sklearn.decomposition.PCA</span></code></dt><dd><p>Runs PCA</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.kmeans.plot_silhouette">
+<span class="sig-name descname"><span class="pre">plot_silhouette</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#plot_silhouette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_silhouette" title="Link to this definition">#</a></dt>
+<dd><p>Creates Silhouette plots to determine the best number of clusters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>n_clusters</strong><span class="classifier">int, default = 0</span></dt><dd><p>The number of clusters to form.</p>
+</dd>
+<dt><strong>dataset</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
+Output of create_kmeans_input()</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="stacker.kmeans.read_and_preprocess_data">
-<span class="sig-name descname"><span class="pre">read_and_preprocess_data</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">data1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">...</span></span></em>, <span class="optional">]</span><em class="sig-param"><span class="n"><span class="pre">data_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#read_and_preprocess_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.read_and_preprocess_data" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">read_and_preprocess_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">(name1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">...)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#read_and_preprocess_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.read_and_preprocess_data" title="Link to this definition">#</a></dt>
 <dd><p>Reads and preprocesses SSF data for K Means analysis per dataset.</p>
 <p>Reads SSF data from txt files for each dataset, decompresses the data, 
 and attaches each Trajectory to its frame-wise SSF results. The values
@@ -599,7 +704,7 @@ SSF of</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>data1, data2, …</strong><span class="classifier">list of str</span></dt><dd><p>List of dataset names to read and preprocess.</p>
+<dt><strong>name1, name2, …</strong><span class="classifier">list of str</span></dt><dd><p>List of dataset names to read and preprocess.</p>
 </dd>
 <dt><strong>data_path</strong><span class="classifier">str</span></dt><dd><p>path to the directory containing the SSF data
 outputted from <cite>-s ssf -d output.txt</cite></p>
@@ -633,7 +738,7 @@ outputted from <cite>-s ssf -d output.txt</cite></p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.kmeans.run_kmeans">
-<span class="sig-name descname"><span class="pre">run_kmeans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blinded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_CLUSTERS</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#run_kmeans"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.run_kmeans" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">run_kmeans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blinded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_CLUSTERS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#run_kmeans"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.run_kmeans" title="Link to this definition">#</a></dt>
 <dd><p>Performs KMeans clustering on blinded SSF data and saves the results.</p>
 <p>This function applies the KMeans clustering algorithm to the provided
 blinded SSF data, assigns each frame to a cluster, and counts the number of
@@ -645,7 +750,7 @@ saved to a file.</p>
 <dt><strong>blinded_data</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
 Output of create_kmeans_input()</p>
 </dd>
-<dt><strong>N_CLUSTERS</strong><span class="classifier">int</span></dt><dd><p>The number of clusters to form (default is N_CLUSTERS).</p>
+<dt><strong>N_CLUSTERS</strong><span class="classifier">int</span></dt><dd><p>The number of clusters to form</p>
 </dd>
 <dt><strong>max_iter</strong><span class="classifier">int, default=1000</span></dt><dd><p>Maximum number of iterations of the k-means algorithm for a single run.</p>
 </dd>
@@ -730,6 +835,8 @@ Output of create_kmeans_input()</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.create_kmeans_input"><code class="docutils literal notranslate"><span class="pre">create_kmeans_input()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_cluster_trj_data"><code class="docutils literal notranslate"><span class="pre">plot_cluster_trj_data()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_pca"><code class="docutils literal notranslate"><span class="pre">plot_pca()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_silhouette"><code class="docutils literal notranslate"><span class="pre">plot_silhouette()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.read_and_preprocess_data"><code class="docutils literal notranslate"><span class="pre">read_and_preprocess_data()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.run_kmeans"><code class="docutils literal notranslate"><span class="pre">run_kmeans()</span></code></a></li>
 </ul>

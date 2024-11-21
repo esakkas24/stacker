@@ -1,9 +1,9 @@
-﻿
+
 
 SmartIndexingAction
-===========================
+=============================================
 
-.. currentmodule:: stacker
+.. currentmodule:: stacker.file_manipulation
 
 .. autoclass:: SmartIndexingAction
    :members:

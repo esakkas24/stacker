@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -262,7 +262,6 @@
 <li class="toctree-l2"><a class="reference internal" href="stacker.run_python_command.html">stacker.run_python_command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.stack_events_routine.html">stacker.stack_events_routine</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.system_routine.html">stacker.system_routine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="stacker.SmartIndexingAction.html">SmartIndexingAction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.AtomEmpty.html">stacker.AtomEmpty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.FrameEmpty.html">stacker.FrameEmpty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.InvalidRoutine.html">stacker.InvalidRoutine</a></li>
@@ -271,11 +270,14 @@
 <li class="toctree-l3"><a class="reference internal" href="stacker.file_manipulation.file_convert.html">stacker.file_manipulation.file_convert</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.file_manipulation.filter_traj.html">stacker.file_manipulation.filter_traj</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.file_manipulation.filter_traj_to_pdb.html">stacker.file_manipulation.filter_traj_to_pdb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.file_manipulation.SmartIndexingAction.html">SmartIndexingAction</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="stacker.kmeans.html">kmeans</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="stacker.kmeans.create_kmeans_input.html">stacker.kmeans.create_kmeans_input</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.kmeans.plot_cluster_trj_data.html">stacker.kmeans.plot_cluster_trj_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.kmeans.plot_pca.html">stacker.kmeans.plot_pca</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.kmeans.plot_silhouette.html">stacker.kmeans.plot_silhouette</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.kmeans.read_and_preprocess_data.html">stacker.kmeans.read_and_preprocess_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.kmeans.run_kmeans.html">stacker.kmeans.run_kmeans</a></li>
 </ul>
@@ -320,6 +322,50 @@
 <li class="toctree-l2"><a class="reference internal" href="stacker.file_manipulation.file_convert.html">stacker.file_manipulation.file_convert</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.file_manipulation.filter_traj.html">stacker.file_manipulation.filter_traj</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.file_manipulation.filter_traj_to_pdb.html">stacker.file_manipulation.filter_traj_to_pdb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.file_manipulation.SmartIndexingAction.html">SmartIndexingAction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="stacker.kmeans.html">kmeans</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="stacker.kmeans.create_kmeans_input.html">stacker.kmeans.create_kmeans_input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.kmeans.plot_cluster_trj_data.html">stacker.kmeans.plot_cluster_trj_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.kmeans.plot_pca.html">stacker.kmeans.plot_pca</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.kmeans.plot_silhouette.html">stacker.kmeans.plot_silhouette</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.kmeans.read_and_preprocess_data.html">stacker.kmeans.read_and_preprocess_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.kmeans.run_kmeans.html">stacker.kmeans.run_kmeans</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="stacker.pairwise_distance.html">pairwise_distance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.calculate_residue_distance.html">stacker.pairwise_distance.calculate_residue_distance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.get_frame_average.html">stacker.pairwise_distance.get_frame_average</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_frame.html">stacker.pairwise_distance.get_residue_distance_for_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">residue_movement</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="stacker.residue_movement.calc_center_3pts.html">stacker.residue_movement.calc_center_3pts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.residue_movement.calculate_bottaro_values_for_frame.html">stacker.residue_movement.calculate_bottaro_values_for_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.residue_movement.collect_atom_locations_by_frame.html">stacker.residue_movement.collect_atom_locations_by_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.residue_movement.correct_theta_sign.html">stacker.residue_movement.correct_theta_sign</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.residue_movement.create_base_from_coords_list.html">stacker.residue_movement.create_base_from_coords_list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.residue_movement.write_bottaro_to_csv.html">stacker.residue_movement.write_bottaro_to_csv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.residue_movement.Base.html">Base</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="stacker.vector.html">vector</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="stacker.vector.Vector.html">Vector</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="stacker.visualization.html">visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.NoResidues.html">stacker.visualization.NoResidues</a></li>
 </ul>
 </details></li>
 </ul>

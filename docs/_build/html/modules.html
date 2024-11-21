@@ -258,7 +258,6 @@
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.run_python_command.html">stacker.run_python_command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.stack_events_routine.html">stacker.stack_events_routine</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.system_routine.html">stacker.system_routine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.SmartIndexingAction.html">SmartIndexingAction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.AtomEmpty.html">stacker.AtomEmpty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.FrameEmpty.html">stacker.FrameEmpty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.InvalidRoutine.html">stacker.InvalidRoutine</a></li>
@@ -267,11 +266,14 @@
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.file_manipulation.file_convert.html">stacker.file_manipulation.file_convert</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.file_manipulation.filter_traj.html">stacker.file_manipulation.filter_traj</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.file_manipulation.filter_traj_to_pdb.html">stacker.file_manipulation.filter_traj_to_pdb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.file_manipulation.SmartIndexingAction.html">SmartIndexingAction</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/stacker.kmeans.html">kmeans</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.create_kmeans_input.html">stacker.kmeans.create_kmeans_input</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_cluster_trj_data.html">stacker.kmeans.plot_cluster_trj_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_pca.html">stacker.kmeans.plot_pca</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_silhouette.html">stacker.kmeans.plot_silhouette</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.read_and_preprocess_data.html">stacker.kmeans.read_and_preprocess_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.run_kmeans.html">stacker.kmeans.run_kmeans</a></li>
 </ul>
@@ -316,11 +318,14 @@
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.file_manipulation.file_convert.html">stacker.file_manipulation.file_convert</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.file_manipulation.filter_traj.html">stacker.file_manipulation.filter_traj</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.file_manipulation.filter_traj_to_pdb.html">stacker.file_manipulation.filter_traj_to_pdb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.file_manipulation.SmartIndexingAction.html">SmartIndexingAction</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="_autosummary/stacker.kmeans.html">kmeans</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.kmeans.create_kmeans_input.html">stacker.kmeans.create_kmeans_input</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_cluster_trj_data.html">stacker.kmeans.plot_cluster_trj_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_pca.html">stacker.kmeans.plot_pca</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_silhouette.html">stacker.kmeans.plot_silhouette</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.kmeans.read_and_preprocess_data.html">stacker.kmeans.read_and_preprocess_data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.kmeans.run_kmeans.html">stacker.kmeans.run_kmeans</a></li>
 </ul>
@@ -523,6 +528,14 @@
 <li class="toctree-l1"><a class="reference internal" href="stacker.html">stacker package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="stacker.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.html#module-stacker.file_manipulation">stacker.file_manipulation module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.file_manipulation.SmartIndexingAction"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.file_manipulation.SmartIndexingAction.__init__"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.file_manipulation.SmartIndexingAction._get_args"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction._get_args()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.file_manipulation.SmartIndexingAction._get_kwargs"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction._get_kwargs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.file_manipulation.SmartIndexingAction.format_usage"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.format_usage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.file_manipulation.SmartIndexingAction.parse_smart_index"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.parse_smart_index()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.file_manipulation.file_convert"><code class="docutils literal notranslate"><span class="pre">file_convert()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.file_manipulation.filter_traj"><code class="docutils literal notranslate"><span class="pre">filter_traj()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.file_manipulation.filter_traj_to_pdb"><code class="docutils literal notranslate"><span class="pre">filter_traj_to_pdb()</span></code></a></li>
@@ -531,6 +544,8 @@
 <li class="toctree-l2"><a class="reference internal" href="stacker.html#module-stacker.kmeans">stacker.kmeans module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.kmeans.create_kmeans_input"><code class="docutils literal notranslate"><span class="pre">create_kmeans_input()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.kmeans.plot_cluster_trj_data"><code class="docutils literal notranslate"><span class="pre">plot_cluster_trj_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.kmeans.plot_pca"><code class="docutils literal notranslate"><span class="pre">plot_pca()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.kmeans.plot_silhouette"><code class="docutils literal notranslate"><span class="pre">plot_silhouette()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.kmeans.read_and_preprocess_data"><code class="docutils literal notranslate"><span class="pre">read_and_preprocess_data()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.kmeans.run_kmeans"><code class="docutils literal notranslate"><span class="pre">run_kmeans()</span></code></a></li>
 </ul>
@@ -618,13 +633,6 @@
 <li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.ResEmpty.add_note"><code class="docutils literal notranslate"><span class="pre">ResEmpty.add_note()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.ResEmpty.args"><code class="docutils literal notranslate"><span class="pre">ResEmpty.args</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.ResEmpty.with_traceback"><code class="docutils literal notranslate"><span class="pre">ResEmpty.with_traceback()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.SmartIndexingAction"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.SmartIndexingAction.__init__"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.SmartIndexingAction._get_args"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction._get_args()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.SmartIndexingAction._get_kwargs"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction._get_kwargs()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.SmartIndexingAction.format_usage"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.format_usage()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.block_printing"><code class="docutils literal notranslate"><span class="pre">block_printing()</span></code></a></li>

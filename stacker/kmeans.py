@@ -31,7 +31,7 @@ outdir = '/home66/esakkas/STACKER/DATA/' # Outdir for clustering results and kme
 def read_and_preprocess_data(dataset_names, data_path) -> dict:
     """
     read_and_preprocess_data(
-        [data1, data2, ...],
+        (name1, name2, ...), 
         data_path
     )
 
@@ -56,7 +56,7 @@ def read_and_preprocess_data(dataset_names, data_path) -> dict:
 
     Parameters
     ----------
-    data1, data2, ... : list of str
+    name1, name2, ... : list of str
         List of dataset names to read and preprocess.
     data_path : str
         path to the directory containing the SSF data
@@ -208,7 +208,7 @@ def plot_pca(blinded_data : typing.ArrayLike, n_clusters : int = 0, coloring : s
         plt.close()
 
 
-def run_kmeans(blinded_data: typing.ArrayLike, N_CLUSTERS: int = N_CLUSTERS,
+def run_kmeans(blinded_data: typing.ArrayLike, N_CLUSTERS: int,
                max_iter: int = 1000, n_init: int = 20, random_state: int = 1, outdir: str = '') -> None :
     """
     Performs KMeans clustering on blinded SSF data and saves the results.
@@ -224,7 +224,7 @@ def run_kmeans(blinded_data: typing.ArrayLike, N_CLUSTERS: int = N_CLUSTERS,
         A 2D numpy array containing all frames stacked together.
         Output of create_kmeans_input()
     N_CLUSTERS : int
-        The number of clusters to form (default is N_CLUSTERS).
+        The number of clusters to form 
     max_iter : int, default=1000
         Maximum number of iterations of the k-means algorithm for a single run.
     n_init : int, default=20
