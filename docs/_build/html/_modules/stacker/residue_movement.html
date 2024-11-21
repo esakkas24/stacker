@@ -1,0 +1,879 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>stacker.residue_movement &#8212; StACKER Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../_static/documentation_options.js?v=528dc5d9"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/stacker/residue_movement';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/stackerlogo.png" class="logo__image only-light" alt="StACKER Documentation - Home"/>
+    <img src="../../_static/stacker_logo_dark.png" class="logo__image only-dark pst-js-only" alt="StACKER Documentation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../_autosummary/stacker.html">stacker</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.block_printing.html">stacker.block_printing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.bottaro_routine.html">stacker.bottaro_routine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.combine_frames.html">stacker.combine_frames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.compare_routine.html">stacker.compare_routine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.convert_to_python_command.html">stacker.convert_to_python_command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.enable_printing.html">stacker.enable_printing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.filter_traj_routine.html">stacker.filter_traj_routine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.res_distance_routine.html">stacker.res_distance_routine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.run_python_command.html">stacker.run_python_command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.stack_events_routine.html">stacker.stack_events_routine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.system_routine.html">stacker.system_routine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.SmartIndexingAction.html">SmartIndexingAction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.AtomEmpty.html">stacker.AtomEmpty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.FrameEmpty.html">stacker.FrameEmpty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.InvalidRoutine.html">stacker.InvalidRoutine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.ResEmpty.html">stacker.ResEmpty</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/stacker.file_manipulation.html">file_manipulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.file_manipulation.file_convert.html">stacker.file_manipulation.file_convert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.file_manipulation.filter_traj.html">stacker.file_manipulation.filter_traj</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.file_manipulation.filter_traj_to_pdb.html">stacker.file_manipulation.filter_traj_to_pdb</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/stacker.kmeans.html">kmeans</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.kmeans.create_kmeans_input.html">stacker.kmeans.create_kmeans_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.kmeans.plot_cluster_trj_data.html">stacker.kmeans.plot_cluster_trj_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.kmeans.read_and_preprocess_data.html">stacker.kmeans.read_and_preprocess_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.kmeans.run_kmeans.html">stacker.kmeans.run_kmeans</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.html">pairwise_distance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.calculate_residue_distance.html">stacker.pairwise_distance.calculate_residue_distance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.get_frame_average.html">stacker.pairwise_distance.get_frame_average</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.get_residue_distance_for_frame.html">stacker.pairwise_distance.get_residue_distance_for_frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/stacker.residue_movement.html">residue_movement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.residue_movement.calc_center_3pts.html">stacker.residue_movement.calc_center_3pts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.residue_movement.calculate_bottaro_values_for_frame.html">stacker.residue_movement.calculate_bottaro_values_for_frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.residue_movement.collect_atom_locations_by_frame.html">stacker.residue_movement.collect_atom_locations_by_frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.residue_movement.correct_theta_sign.html">stacker.residue_movement.correct_theta_sign</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.residue_movement.create_base_from_coords_list.html">stacker.residue_movement.create_base_from_coords_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.residue_movement.write_bottaro_to_csv.html">stacker.residue_movement.write_bottaro_to_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.residue_movement.Base.html">Base</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/stacker.vector.html">vector</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.vector.Vector.html">Vector</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/stacker.visualization.html">visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.NoResidues.html">stacker.visualization.NoResidues</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../_autosummary/stacker.file_manipulation.html">file_manipulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.file_manipulation.file_convert.html">stacker.file_manipulation.file_convert</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.file_manipulation.filter_traj.html">stacker.file_manipulation.filter_traj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.file_manipulation.filter_traj_to_pdb.html">stacker.file_manipulation.filter_traj_to_pdb</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/esakkas24/stacker" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for stacker.residue_movement</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">mdtraj</span> <span class="k">as</span> <span class="nn">md</span>
+<span class="kn">from</span> <span class="nn">.vector</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.file_manipulation</span> <span class="kn">import</span> <span class="n">filter_traj_to_pdb</span>
+<span class="kn">from</span> <span class="nn">.visualization</span> <span class="kn">import</span> <span class="n">create_parent_directories</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Eric Sakkas - Weir Lab, Wesleyan University</span>
+<span class="sd">Email : esakkas@wesleyan.edu</span>
+
+<span class="sd">This code takes a pdb file with multiple frames and two residues. </span>
+<span class="sd">It then calculates the r, rho, and theta values at each frame</span>
+<span class="sd">as defined in the Bottaro paper (https://doi.org/10.1093/nar/gku972), </span>
+<span class="sd">and exports these values to a .csv file.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="collect_atom_locations_by_frame">
+<a class="viewcode-back" href="../../stacker.residue_movement.html#stacker.residue_movement.collect_atom_locations_by_frame">[docs]</a>
+<span class="k">def</span> <span class="nf">collect_atom_locations_by_frame</span><span class="p">(</span><span class="n">traj</span><span class="p">:</span> <span class="n">md</span><span class="o">.</span><span class="n">Trajectory</span><span class="p">,</span> <span class="n">residue_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">atom_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a list of all atom locations for a particular atom and residue number per frame.</span>
+
+<span class="sd">    Curates a list coords_by_frame where coords_by_frame[i] is the (x, y, z) positions of a provided atom_id</span>
+<span class="sd">    of a residue residue_num at the ith frame.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    traj : md.Trajectory</span>
+<span class="sd">        Trajectory to analyze.</span>
+<span class="sd">    residue_num : int</span>
+<span class="sd">        The 0-indexed residue number of the residue where `atom_id` is found (PDB Column 5).</span>
+<span class="sd">    atom_id : str</span>
+<span class="sd">        The name of the atom to get coordinates for (PDB Column 2).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    coords_by_frame : list</span>
+<span class="sd">        List of (x, y, z) coordinates of `atom_id` in `residue_num` for each frame.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">topology</span> <span class="o">=</span> <span class="n">traj</span><span class="o">.</span><span class="n">topology</span>
+    <span class="n">number_of_frames</span> <span class="o">=</span> <span class="n">traj</span><span class="o">.</span><span class="n">n_frames</span>
+    <span class="n">atomic_index</span> <span class="o">=</span> <span class="n">topology</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;name &quot;</span> <span class="o">+</span> <span class="n">atom_id</span> <span class="o">+</span> <span class="s2">&quot; and residue &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">residue_num</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># multiply by 10 to convert nanometer units in trajectory.xyz to Angstroms</span>
+    <span class="n">coords_by_frame</span> <span class="o">=</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">traj</span><span class="o">.</span><span class="n">xyz</span><span class="p">[</span><span class="n">frame_idx</span><span class="p">,</span> <span class="n">atomic_index</span><span class="p">,:]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">frame_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">number_of_frames</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">coords_by_frame</span></div>
+
+
+<div class="viewcode-block" id="calc_center_3pts">
+<a class="viewcode-back" href="../../stacker.residue_movement.html#stacker.residue_movement.calc_center_3pts">[docs]</a>
+<span class="k">def</span> <span class="nf">calc_center_3pts</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">Vector</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Vector</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">Vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vector</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the average x, y, z position of three x, y, z Vectors.</span>
+
+<span class="sd">    Takes in three Vectors generated using the `pdb.xyz` method and finds their center. Works </span>
+<span class="sd">    with three points that make up a triangle (like those within a 6-member ring).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : Vector</span>
+<span class="sd">        x, y, z coordinates of the first point.</span>
+<span class="sd">    b : Vector</span>
+<span class="sd">        x, y, z coordinates of the second point.</span>
+<span class="sd">    c : Vector</span>
+<span class="sd">        x, y, z coordinates of the third point.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    midpoint : Vector</span>
+<span class="sd">        One Vector with (x, y, z) coordinates at the center of the three input Vectors.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">vectorized</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">components</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">components</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="n">components</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">3</span>
+    <span class="n">midpoint</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="o">*</span><span class="n">vectorized</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">midpoint</span></div>
+
+
+<div class="viewcode-block" id="Base">
+<a class="viewcode-back" href="../../stacker.residue_movement.html#stacker.residue_movement.Base">[docs]</a>
+<span class="k">class</span> <span class="nc">Base</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a nucleotide base with x, y, z coordinates for C2, C4, and C6 atoms,</span>
+<span class="sd">    and their average position at a single frame.</span>
+
+<span class="sd">    This class defines a data type &#39;Base&#39; that consists of coordinates for the atoms</span>
+<span class="sd">    C2, C4, and C6, as well as the midpoint of these atoms for a single residue at a single frame.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    c2_coords : Vector</span>
+<span class="sd">        (x, y, z) coordinates for the atom C2.</span>
+<span class="sd">    c4_coords : Vector</span>
+<span class="sd">        (x, y, z) coordinates for the atom C4.</span>
+<span class="sd">    c6_coords : Vector</span>
+<span class="sd">        (x, y, z) coordinates for the atom C6.</span>
+<span class="sd">    midpoint_coords : Vector</span>
+<span class="sd">        (x, y, z) coordinates representing the midpoint of C2, C4, and C6.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Base.__init__">
+<a class="viewcode-back" href="../../stacker.residue_movement.html#stacker.residue_movement.Base.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c2_coords</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">c4_coords</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">c6_coords</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">midpoint_coords</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize a Base instance.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        c2_coords : tuple</span>
+<span class="sd">            (x, y, z) coordinates for C2.</span>
+<span class="sd">        c4_coords : tuple</span>
+<span class="sd">            (x, y, z) coordinates for C4.</span>
+<span class="sd">        c6_coords : tuple</span>
+<span class="sd">            (x, y, z) coordinates for C6.</span>
+<span class="sd">        midpoint_coords : tuple</span>
+<span class="sd">            (x, y, z) coordinates for the midpoint.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c2_coords</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="o">*</span><span class="n">c2_coords</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c4_coords</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="o">*</span><span class="n">c4_coords</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c6_coords</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="o">*</span><span class="n">c6_coords</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">midpoint_coords</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="o">*</span><span class="n">midpoint_coords</span><span class="p">)</span></div>
+</div>
+
+
+<div class="viewcode-block" id="create_base_from_coords_list">
+<a class="viewcode-back" href="../../stacker.residue_movement.html#stacker.residue_movement.create_base_from_coords_list">[docs]</a>
+<span class="k">def</span> <span class="nf">create_base_from_coords_list</span><span class="p">(</span><span class="n">frame</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">C2_coords</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">C4_coords</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">C6_coords</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">midpoint_coords</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Base</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Combines C2, C4, C6 positions with midpoint positions for a given frame.</span>
+
+<span class="sd">    Takes a frame (0-indexed) and outputs a Base instance with the x, y, z locations of C2, C4, C6, and midpoint </span>
+<span class="sd">    of the same residue at that frame. </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    frame : int</span>
+<span class="sd">        Frame number (0-indexed).</span>
+<span class="sd">    C2_coords : list</span>
+<span class="sd">        List of (x, y, z) coordinates of C2 atom in some residue for each frame.</span>
+<span class="sd">    C4_coords : list</span>
+<span class="sd">        List of (x, y, z) coordinates of C4 atom in some residue for each frame.</span>
+<span class="sd">    C6_coords : list</span>
+<span class="sd">        List of (x, y, z) coordinates of C6 atom in some residue for each frame.</span>
+<span class="sd">    midpoint_coords : list</span>
+<span class="sd">        List of (x, y, z) coordinates of the midpoint of residue for each frame.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Base</span>
+<span class="sd">        An instance of Base with coordinates at the specified frame.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">midpoint_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="n">midpoint_coords</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">midpoint_coords</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">midpoint_coords</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Base</span><span class="p">(</span><span class="n">C2_coords</span><span class="p">[</span><span class="n">frame</span><span class="p">],</span> <span class="n">C4_coords</span><span class="p">[</span><span class="n">frame</span><span class="p">],</span> <span class="n">C6_coords</span><span class="p">[</span><span class="n">frame</span><span class="p">],</span> <span class="n">midpoint_tuple</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="correct_theta_sign">
+<a class="viewcode-back" href="../../stacker.residue_movement.html#stacker.residue_movement.correct_theta_sign">[docs]</a>
+<span class="k">def</span> <span class="nf">correct_theta_sign</span><span class="p">(</span><span class="n">rho</span><span class="p">:</span> <span class="n">Vector</span><span class="p">,</span> <span class="n">y_axis</span><span class="p">:</span> <span class="n">Vector</span><span class="p">,</span> <span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Corrects the sign of an angle theta with the x-axis within a plane defined by a given y-axis.</span>
+
+<span class="sd">    When calculating the angle theta between two vectors in 3D space, once the vectors move</span>
+<span class="sd">    &gt;180 degrees apart, the angle becomes the shortest path. To have 360 degrees of freedom, we calculate</span>
+<span class="sd">    theta within the plane by checking if it faces the same direction as a vector y, and correcting</span>
+<span class="sd">    otherwise.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    rho : Vector</span>
+<span class="sd">        The vector compared to the x-axis to form theta.</span>
+<span class="sd">    y_axis : Vector</span>
+<span class="sd">        Directional vector to define a plane with x-axis; orthogonal to x-axis.</span>
+<span class="sd">    theta : float</span>
+<span class="sd">        The calculated angle of rho with x-axis to be corrected.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Theta as calculated on the plane.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">proj_rho_on_y</span> <span class="o">=</span> <span class="n">rho</span><span class="o">.</span><span class="n">calculate_projection</span><span class="p">(</span><span class="n">y_axis</span><span class="p">)</span>
+    <span class="n">opposite_direction</span> <span class="o">=</span> <span class="p">(</span><span class="n">proj_rho_on_y</span><span class="o">.</span><span class="n">x</span> <span class="o">/</span> <span class="n">y_axis</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">opposite_direction</span><span class="p">:</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="mi">360</span> <span class="o">-</span> <span class="n">theta</span>
+    <span class="k">return</span> <span class="n">theta</span></div>
+
+
+<div class="viewcode-block" id="calculate_bottaro_values_for_frame">
+<a class="viewcode-back" href="../../stacker.residue_movement.html#stacker.residue_movement.calculate_bottaro_values_for_frame">[docs]</a>
+<span class="k">def</span> <span class="nf">calculate_bottaro_values_for_frame</span><span class="p">(</span><span class="n">perspective_base_coords</span><span class="p">:</span> <span class="n">Base</span><span class="p">,</span> <span class="n">viewed_midpoint</span><span class="p">:</span> <span class="n">Vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the r, rho, and theta values as expressed in the Bottaro paper.</span>
+
+<span class="sd">    Calculates the r, rho, and theta values between two nucleotides in a single frame</span>
+<span class="sd">    as presented in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    perspective_base_coords : Base</span>
+<span class="sd">        List of the x, y, z coords of C2, C4, C6 and their midpoint for </span>
+<span class="sd">        the perspective residue in a single frame.</span>
+<span class="sd">    viewed_midpoint : Vector</span>
+<span class="sd">        x, y, z position of the midpoint of the viewed nucleotide at the same frame.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        A list containing 3 floats from Bottaro; structure: [r_dist, rho_dist, theta].</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r_vector</span> <span class="o">=</span> <span class="n">viewed_midpoint</span> <span class="o">-</span> <span class="n">perspective_base_coords</span><span class="o">.</span><span class="n">midpoint_coords</span>
+    <span class="n">r_magnitude</span> <span class="o">=</span> <span class="n">r_vector</span><span class="o">.</span><span class="n">magnitude</span><span class="p">()</span>
+    
+    <span class="c1"># 2 Vectors define the plane of the perspective nucleotide</span>
+    <span class="n">x_axis</span> <span class="o">=</span> <span class="n">perspective_base_coords</span><span class="o">.</span><span class="n">c2_coords</span> <span class="o">-</span> <span class="n">perspective_base_coords</span><span class="o">.</span><span class="n">midpoint_coords</span>
+    <span class="n">vector_midpoint_to_C4</span> <span class="o">=</span> <span class="n">perspective_base_coords</span><span class="o">.</span><span class="n">c4_coords</span> <span class="o">-</span> <span class="n">perspective_base_coords</span><span class="o">.</span><span class="n">midpoint_coords</span>
+
+    <span class="n">normal_vector_to_plane</span> <span class="o">=</span> <span class="n">x_axis</span><span class="o">.</span><span class="n">calculate_cross_product</span><span class="p">(</span><span class="n">vector_midpoint_to_C4</span><span class="p">)</span>
+    
+    <span class="c1"># y-axis inside plane to get correct theta value in 3D</span>
+    <span class="n">y_axis</span> <span class="o">=</span> <span class="n">x_axis</span><span class="o">.</span><span class="n">calculate_cross_product</span><span class="p">(</span><span class="n">normal_vector_to_plane</span><span class="p">)</span>
+
+    <span class="n">proj_r_on_normal</span> <span class="o">=</span> <span class="n">r_vector</span><span class="o">.</span><span class="n">calculate_projection</span><span class="p">(</span><span class="n">normal_vector_to_plane</span><span class="p">)</span>
+
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">r_vector</span> <span class="o">-</span> <span class="n">proj_r_on_normal</span>
+    <span class="n">rho_dist</span> <span class="o">=</span> <span class="n">rho</span><span class="o">.</span><span class="n">magnitude</span><span class="p">()</span>
+    
+    <span class="n">x_axis_dot_rho</span> <span class="o">=</span> <span class="n">x_axis</span><span class="o">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">rho</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">x_axis</span><span class="o">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">rho</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">x_axis</span><span class="o">.</span><span class="n">z</span> <span class="o">*</span> <span class="n">rho</span><span class="o">.</span><span class="n">z</span>
+    <span class="n">denominator</span> <span class="o">=</span> <span class="n">x_axis</span><span class="o">.</span><span class="n">magnitude</span><span class="p">()</span> <span class="o">*</span> <span class="n">rho_dist</span>
+    <span class="n">cos_theta</span> <span class="o">=</span> <span class="n">x_axis_dot_rho</span> <span class="o">/</span> <span class="n">denominator</span>
+
+    <span class="c1"># edge cases where rounding leads to minor error</span>
+    <span class="k">if</span> <span class="n">cos_theta</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> <span class="n">cos_theta</span> <span class="o">=</span> <span class="mi">1</span> 
+    <span class="k">if</span> <span class="n">cos_theta</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="n">cos_theta</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">cos_theta</span><span class="p">))</span>
+    <span class="n">corrected_theta</span> <span class="o">=</span> <span class="n">correct_theta_sign</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">y_axis</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+    
+    <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">r_magnitude</span><span class="p">,</span> <span class="n">rho_dist</span><span class="p">,</span> <span class="n">corrected_theta</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">values</span></div>
+
+
+<div class="viewcode-block" id="write_bottaro_to_csv">
+<a class="viewcode-back" href="../../stacker.residue_movement.html#stacker.residue_movement.write_bottaro_to_csv">[docs]</a>
+<span class="k">def</span> <span class="nf">write_bottaro_to_csv</span><span class="p">(</span><span class="n">pdb_filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> 
+                         <span class="n">output_csv_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> 
+                         <span class="n">perspective_residue_num</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> 
+                         <span class="n">viewed_residue_num</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                         <span class="n">res1_atom_names</span><span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">},</span> 
+                         <span class="n">res2_atom_names</span><span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">},</span> 
+                         <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Write the Bottaro r, rho, and theta values from a trajectory PDB to a CSV.</span>
+
+<span class="sd">    Calculates the r, rho, and theta values as described in Bottaro et al. from a</span>
+<span class="sd">    perspective nucleotide residue to a viewed nucleotide residue per frame. Writes the </span>
+<span class="sd">    results to a CSV file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pdb_filename : str</span>
+<span class="sd">        Name of PDB containing information for ONLY two residues (perspective and viewed</span>
+<span class="sd">        nucleotide) at each frame.</span>
+<span class="sd">    output_csv_name : str</span>
+<span class="sd">        Filename of CSV file to write to.</span>
+<span class="sd">    perspective_residue_num : int, default = -1</span>
+<span class="sd">        Residue index of the perspective residue whose plane to project onto (0-/1-index changed by</span>
+<span class="sd">        index variable, default 1-indexed). If -1, a 2-residue PDB is assumed and perspective id is</span>
+<span class="sd">        the first res_id.</span>
+<span class="sd">    viewed_residue_num : int, default = -1</span>
+<span class="sd">        Residue index of the viewed residue whose midpoint to project to pers_res plane (0-/1-index changed by</span>
+<span class="sd">        index variable, default 1-indexed). If -1, a 2-residue PDB is assumed and viewed id is</span>
+<span class="sd">        the second res_id.</span>
+<span class="sd">    res1_atom_names : set, default = {&quot;C2&quot;, &quot;C4&quot;, &quot;C6&quot;}</span>
+<span class="sd">        Set of the atom names (e.g., &quot;C2&quot;, &quot;C4&quot;, &quot;C6&quot;) to use from</span>
+<span class="sd">        residue 1 to find center of geometry for perspective nucleotide.</span>
+<span class="sd">    res2_atom_names : set, default = {&quot;C2&quot;, &quot;C4&quot;, &quot;C6&quot;}</span>
+<span class="sd">        Set of the atom names (e.g., &quot;C2&quot;, &quot;C4&quot;, &quot;C6&quot;) to use from</span>
+<span class="sd">        residue 2 to find center of geometry for viewed nucleotide.</span>
+<span class="sd">    index : int, default = 1</span>
+<span class="sd">        Index of the residues. 1-indexed (default) means residue ids start at 1.</span>
+<span class="sd">        cpptraj uses 1-indexed residues. mdtraj PDB outputs will be 0-indexed.</span>
+<span class="sd">        </span>
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    [1] Sandro Bottaro, Francesco Di Palma, Giovanni Bussi, The role of nucleobase interactions in </span>
+<span class="sd">    RNA structure and dynamics, Nucleic Acids Research, Volume 42, Issue 21, 1 December 2014, </span>
+<span class="sd">    Pages 13306–13314, https://doi.org/10.1093/nar/gku972</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Keep atomname order consistent between runs</span>
+    <span class="n">res1_atom_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">res1_atom_names</span><span class="p">)</span>
+    <span class="n">res2_atom_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">res2_atom_names</span><span class="p">)</span>
+    <span class="n">res1_atom_names</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">res2_atom_names</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+    <span class="n">res1_atom1</span><span class="p">,</span><span class="n">res1_atom2</span><span class="p">,</span><span class="n">res1_atom3</span> <span class="o">=</span> <span class="n">res1_atom_names</span>
+    <span class="n">res2_atom1</span><span class="p">,</span><span class="n">res2_atom2</span><span class="p">,</span><span class="n">res2_atom3</span> <span class="o">=</span> <span class="n">res2_atom_names</span>
+    
+    <span class="n">pdb</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">pdb_filename</span><span class="p">)</span>
+    <span class="n">number_of_frames</span> <span class="o">=</span> <span class="n">pdb</span><span class="o">.</span><span class="n">n_frames</span>
+
+    <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># correct for 0-index res_id of mdtraj</span>
+        <span class="n">perspective_residue_num</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">viewed_residue_num</span> <span class="o">-=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">perspective_residue_num</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">perspective_residue_num</span> <span class="o">==</span> <span class="o">-</span><span class="mi">2</span><span class="p">:</span>
+        <span class="n">topology</span> <span class="o">=</span> <span class="n">pdb</span><span class="o">.</span><span class="n">topology</span>
+        <span class="n">perspective_residue_num</span> <span class="o">=</span> <span class="p">[</span><span class="n">residue</span> <span class="k">for</span> <span class="n">residue</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">residues</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">resSeq</span>
+
+    <span class="k">if</span> <span class="n">viewed_residue_num</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">viewed_residue_num</span> <span class="o">==</span> <span class="o">-</span><span class="mi">2</span><span class="p">:</span>
+        <span class="n">topology</span> <span class="o">=</span> <span class="n">pdb</span><span class="o">.</span><span class="n">topology</span>
+        <span class="n">viewed_residue_num</span> <span class="o">=</span> <span class="p">[</span><span class="n">residue</span> <span class="k">for</span> <span class="n">residue</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">residues</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">resSeq</span>
+
+    <span class="n">residue1_C2_list</span> <span class="o">=</span> <span class="n">collect_atom_locations_by_frame</span><span class="p">(</span><span class="n">pdb</span><span class="p">,</span> <span class="n">perspective_residue_num</span><span class="p">,</span> <span class="n">res1_atom1</span><span class="p">)</span>
+    <span class="n">residue1_C4_list</span> <span class="o">=</span> <span class="n">collect_atom_locations_by_frame</span><span class="p">(</span><span class="n">pdb</span><span class="p">,</span> <span class="n">perspective_residue_num</span><span class="p">,</span> <span class="n">res1_atom2</span><span class="p">)</span>
+    <span class="n">residue1_C6_list</span> <span class="o">=</span> <span class="n">collect_atom_locations_by_frame</span><span class="p">(</span><span class="n">pdb</span><span class="p">,</span> <span class="n">perspective_residue_num</span><span class="p">,</span> <span class="n">res1_atom3</span><span class="p">)</span>
+    <span class="n">residue2_C2_list</span> <span class="o">=</span> <span class="n">collect_atom_locations_by_frame</span><span class="p">(</span><span class="n">pdb</span><span class="p">,</span> <span class="n">viewed_residue_num</span><span class="p">,</span> <span class="n">res2_atom1</span><span class="p">)</span>
+    <span class="n">residue2_C4_list</span> <span class="o">=</span> <span class="n">collect_atom_locations_by_frame</span><span class="p">(</span><span class="n">pdb</span><span class="p">,</span> <span class="n">viewed_residue_num</span><span class="p">,</span> <span class="n">res2_atom2</span><span class="p">)</span>
+    <span class="n">residue2_C6_list</span> <span class="o">=</span> <span class="n">collect_atom_locations_by_frame</span><span class="p">(</span><span class="n">pdb</span><span class="p">,</span> <span class="n">viewed_residue_num</span><span class="p">,</span> <span class="n">res2_atom3</span><span class="p">)</span>
+    
+    <span class="n">residue1_midpoint_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">calc_center_3pts</span><span class="p">(</span><span class="n">Vector</span><span class="p">(</span><span class="o">*</span><span class="n">residue1_C2_list</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
+                                               <span class="n">Vector</span><span class="p">(</span><span class="o">*</span><span class="n">residue1_C4_list</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
+                                               <span class="n">Vector</span><span class="p">(</span><span class="o">*</span><span class="n">residue1_C6_list</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">number_of_frames</span><span class="p">)]</span>
+    
+    <span class="n">residue2_midpoint_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">calc_center_3pts</span><span class="p">(</span><span class="n">Vector</span><span class="p">(</span><span class="o">*</span><span class="n">residue2_C2_list</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
+                                               <span class="n">Vector</span><span class="p">(</span><span class="o">*</span><span class="n">residue2_C4_list</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
+                                               <span class="n">Vector</span><span class="p">(</span><span class="o">*</span><span class="n">residue2_C6_list</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">number_of_frames</span><span class="p">)]</span>
+    
+    <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;frame&#39;</span><span class="p">,</span><span class="s1">&#39;r_dist&#39;</span><span class="p">,</span><span class="s1">&#39;rho_dist&#39;</span><span class="p">,</span> <span class="s1">&#39;theta&#39;</span><span class="p">]</span>
+    <span class="n">rows</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">number_of_frames</span><span class="p">):</span>
+        <span class="n">residue1_base</span> <span class="o">=</span> <span class="n">create_base_from_coords_list</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">residue1_C2_list</span><span class="p">,</span> <span class="n">residue1_C4_list</span><span class="p">,</span> <span class="n">residue1_C6_list</span><span class="p">,</span> <span class="n">residue1_midpoint_list</span><span class="p">)</span>
+        <span class="n">frame_values</span> <span class="o">=</span> <span class="n">calculate_bottaro_values_for_frame</span><span class="p">(</span><span class="n">residue1_base</span><span class="p">,</span><span class="n">residue2_midpoint_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">frame_values</span>
+        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">output_csv_name</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+        <span class="n">csvwriter</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">csvfile</span><span class="p">)</span> 
+        <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span> 
+        <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Output values written to &quot;</span> <span class="o">+</span> <span class="n">output_csv_name</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">trajectory_file</span> <span class="o">=</span> <span class="s1">&#39;testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span>
+    <span class="n">topology_file</span> <span class="o">=</span> <span class="s1">&#39;testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span>
+    <span class="n">output_csv_name</span> <span class="o">=</span> <span class="s2">&quot;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&quot;</span>
+    <span class="n">perspective_residue</span> <span class="o">=</span> <span class="mi">426</span> <span class="c1"># 1-indexed</span>
+    <span class="n">viewed_residue</span> <span class="o">=</span> <span class="mi">427</span> <span class="c1"># 1-indexed</span>
+    <span class="n">create_parent_directories</span><span class="p">(</span><span class="n">output_csv_name</span><span class="p">)</span>
+
+    <span class="c1">########OPTIONAL VARS#######</span>
+    <span class="n">perspective_atom1_name</span> <span class="o">=</span> <span class="s2">&quot;C2&quot;</span>
+    <span class="n">perspective_atom2_name</span> <span class="o">=</span> <span class="s2">&quot;C4&quot;</span>
+    <span class="n">perspective_atom3_name</span> <span class="o">=</span> <span class="s2">&quot;C6&quot;</span>
+    <span class="n">viewed_atom1_name</span> <span class="o">=</span> <span class="s2">&quot;C2&quot;</span>
+    <span class="n">viewed_atom2_name</span> <span class="o">=</span> <span class="s2">&quot;C4&quot;</span>
+    <span class="n">viewed_atom3_name</span> <span class="o">=</span> <span class="s2">&quot;C6&quot;</span>
+    <span class="c1">############################</span>
+
+    <span class="n">pdb_filename</span> <span class="o">=</span> <span class="s1">&#39;testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb&#39;</span>
+    <span class="n">filter_traj_to_pdb</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="o">=</span><span class="n">trajectory_file</span><span class="p">,</span> <span class="n">topology_filename</span><span class="o">=</span><span class="n">topology_file</span><span class="p">,</span> <span class="n">output_pdb_filename</span><span class="o">=</span><span class="n">pdb_filename</span><span class="p">,</span>
+                       <span class="n">residues_desired</span><span class="o">=</span><span class="p">{</span><span class="n">perspective_residue</span><span class="p">,</span><span class="n">viewed_residue</span><span class="p">},</span> <span class="n">atomnames_desired</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
+
+    <span class="c1"># Two Residue movement test 10 frames</span>
+    <span class="n">write_bottaro_to_csv</span><span class="p">(</span><span class="n">pdb_filename</span><span class="p">,</span> 
+                         <span class="n">output_csv_name</span><span class="p">,</span> <span class="n">perspective_residue_num</span><span class="o">=</span><span class="n">perspective_residue</span><span class="p">,</span> <span class="n">viewed_residue_num</span><span class="o">=</span><span class="n">viewed_residue</span><span class="p">,</span>
+                         <span class="n">res1_atom_names</span><span class="o">=</span><span class="p">{</span><span class="n">perspective_atom1_name</span><span class="p">,</span> <span class="n">perspective_atom2_name</span><span class="p">,</span> <span class="n">perspective_atom3_name</span><span class="p">},</span> 
+                         <span class="n">res2_atom_names</span><span class="o">=</span><span class="p">{</span><span class="n">viewed_atom1_name</span><span class="p">,</span><span class="n">viewed_atom2_name</span><span class="p">,</span><span class="n">viewed_atom3_name</span><span class="p">})</span>
+    
+    <span class="n">multiframe_pdb</span> <span class="o">=</span> <span class="s1">&#39;testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb&#39;</span>
+    <span class="n">multiframe_csv</span> <span class="o">=</span> <span class="s1">&#39;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv&#39;</span>
+    <span class="n">write_bottaro_to_csv</span><span class="p">(</span><span class="n">multiframe_pdb</span><span class="p">,</span> <span class="n">multiframe_csv</span><span class="p">)</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Eric D. Sakkas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Eric D. Sakkas.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

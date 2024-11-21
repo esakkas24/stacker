@@ -1,0 +1,2 @@
+[console_scripts]
+stacker = stacker.__init__:run_python_command

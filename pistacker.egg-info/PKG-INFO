@@ -1,0 +1,10 @@
+Metadata-Version: 2.1
+Name: pistacker
+Version: 1.0.0
+License-File: LICENSE
+Requires-Dist: scikit-learn
+Requires-Dist: mdtraj
+Requires-Dist: pandas
+Requires-Dist: numpy
+Requires-Dist: matplotlib
+Requires-Dist: seaborn
