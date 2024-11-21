@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -311,6 +311,7 @@
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -364,6 +365,7 @@
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -546,10 +548,14 @@
                   
   <section id="module-stacker.vector">
 <span id="vector"></span><h1>vector<a class="headerlink" href="#module-stacker.vector" title="Link to this heading">#</a></h1>
+<p>Vector class used for SSF and PSF Calculation</p>
+<p>This module defines the Vector datatype that’s used to 
+store position (x,y,z) information for the atoms and residues
+in an MD Simulation. Documentation is provided for reference.</p>
 <p class="rubric">Classes</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.vector.html#stacker.vector.Vector" title="stacker.vector.Vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Vector</span></code></a>(x, y, z)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.vector.Vector" title="stacker.vector.Vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Vector</span></code></a>(x, y, z)</p></td>
 <td><p>Represents a 3D vector with x, y, and z components.</p></td>
 </tr>
 </tbody>
@@ -561,7 +567,8 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Represents a 3D vector with x, y, and z components.</p>
 <p>This class defines a data type ‘Vector’ that represents a 3D vector with
-x, y, and z components, assuming the vector originates at the origin (0,0,0).</p>
+x, y, and z components, assuming the vector originates at the origin (0,0,0).
+Expands the numpy.array object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -577,16 +584,16 @@ x, y, and z components, assuming the vector originates at the origin (0,0,0).</p
 <p class="rubric">Methods</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.vector.html#stacker.vector.Vector.calculate_cross_product" title="stacker.vector.Vector.calculate_cross_product"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_cross_product</span></code></a>(b)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.vector.Vector.calculate_cross_product" title="stacker.vector.Vector.calculate_cross_product"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_cross_product</span></code></a>(b)</p></td>
 <td><p>Calculate the cross product of two vectors.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../stacker.vector.html#stacker.vector.Vector.calculate_projection" title="stacker.vector.Vector.calculate_projection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_projection</span></code></a>(b)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#stacker.vector.Vector.calculate_projection" title="stacker.vector.Vector.calculate_projection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_projection</span></code></a>(b)</p></td>
 <td><p>Calculate the projection of this vector onto vector b.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.vector.html#stacker.vector.Vector.magnitude" title="stacker.vector.Vector.magnitude"><code class="xref py py-obj docutils literal notranslate"><span class="pre">magnitude</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.vector.Vector.magnitude" title="stacker.vector.Vector.magnitude"><code class="xref py py-obj docutils literal notranslate"><span class="pre">magnitude</span></code></a>()</p></td>
 <td><p>Calculate the magnitude (length) of the vector.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../stacker.vector.html#stacker.vector.Vector.scale" title="stacker.vector.Vector.scale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale</span></code></a>(a)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#stacker.vector.Vector.scale" title="stacker.vector.Vector.scale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale</span></code></a>(a)</p></td>
 <td><p>Scale the vector by a scalar a.</p></td>
 </tr>
 </tbody>

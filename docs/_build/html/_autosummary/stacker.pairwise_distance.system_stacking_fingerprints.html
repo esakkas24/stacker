@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -311,6 +311,7 @@
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -364,6 +365,7 @@
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -578,13 +580,15 @@ threads &gt; 1.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>Alias for this function</p>
+<dt><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>Alias for this function</p>
 </dd>
-<dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p>
+<dt><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj</span></code></dt><dd><p>Filters an input trajectory to only the specified atoms and residues</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">mdtraj.load</span></code></dt><dd><p>Load a trajectory+topology file</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">display_arrays_as_video</span></code></dt><dd><p>Displays this data as an SSF.</p>
 </dd>
 </dl>
 </div>

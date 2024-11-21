@@ -323,7 +323,7 @@ def write_bottaro_to_csv(pdb_filename: str = '',
     --------
     filter_traj_to_pdb : convert a trajectory and topology file into a single filtered PDB file to input here
     visualize_two_residue_movement_scatterplot : Visualize Output CSV data as a PSF scatterplot from this data
-    visualize_two_residue_movement_heatmat : Visualize Output CSV data as a PSF heatmap from this data
+    visualize_two_residue_movement_heatmap : Visualize Output CSV data as a PSF heatmap from this data
         
     Examples
     --------

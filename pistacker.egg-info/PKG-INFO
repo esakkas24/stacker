@@ -1,12 +1,11 @@
 Metadata-Version: 2.1
 Name: pistacker
-Version: 1.0.1
+Version: 1.0.2
 Summary: Analyzes Pi-Stacking in Molecular Dynamics Trajectories
 Home-page: https://github.com/esakkas24/stacker
 Author: Eric D. Sakkas
 Author-email: esakkas@wesleyan.edu
-Classifier: Programming Language :: Python :: 3
-Requires-Python: >=3.5
+Requires-Python: >=3.10
 Description-Content-Type: text/markdown
 License-File: LICENSE
 Requires-Dist: scikit-learn

@@ -8,6 +8,7 @@ to other filetypes (eg. prmtop, mdcrd, pdb)
 
 
 import mdtraj as md
+from numpy import typing
 import argparse
 
 class SmartIndexingAction(argparse.Action):
@@ -61,14 +62,14 @@ class SmartIndexingAction(argparse.Action):
         setattr(namespace, self.dest, frame_list)
     
     @staticmethod
-    def parse_smart_index(value):
+    def parse_smart_index(value : str | set | typing.ArrayLike):
         """
         Checks that an inputted variable is a list that can be smart indexed
         and indexes it if necessary.
 
         Parameters
         ----------
-        value : str or set
+        value : {str, set, list}
             The input string containing ranges (e.g., "1-5,10,15-20")
             or a set of integers.
 
@@ -99,8 +100,10 @@ class SmartIndexingAction(argparse.Action):
             return parsed_set
         elif isinstance(value, set):
             return value
+        elif isinstance(value, typing.ArrayLike):
+            return value
         else:
-            raise ValueError("Input must be a string or set of integers.")
+            raise ValueError("Input must be a string, list, or set of integers.")
 
 def filter_traj(trajectory_filename : str, topology_filename : str, 
                         residues_desired : str | set = {}, atomnames_desired : set = {}) -> md.Trajectory:

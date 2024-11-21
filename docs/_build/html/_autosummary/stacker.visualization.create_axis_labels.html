@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -311,6 +311,7 @@
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -364,6 +365,7 @@
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -542,16 +544,18 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.visualization.create_axis_labels">
 <span class="sig-name descname"><span class="pre">create_axis_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res_indicies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tick_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/visualization.html#create_axis_labels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.create_axis_labels" title="Link to this definition">#</a></dt>
-<dd><p>Designates the axis labels to use in the pairwise plot.</p>
-<p>Returns the x-axis tick positions and labels to use on the ticks based on the 
-residues used in a specific pairwise analysis. Meant to be used when many 
+<dd><p>Designates the axis labels to use in the SSF plot.</p>
+<p>Helper function for visualizing SSFs.
+Returns the x-axis tick positions and labels to use on the ticks based on the 
+residues used in a specific SSF analysis. Meant to be used when many 
 disjoint sets of residue indices are used. Ticks will be present every <cite>tick_distance</cite> 
 residues in a collection of adjacent residues, and a tick will exist at both
 ends of any consecutive residue sequence.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>res_indicies</strong><span class="classifier">list</span></dt><dd><p>The list of residue indices used in the pairwise analysis.</p>
+<dt><strong>res_indicies</strong><span class="classifier">list</span></dt><dd><p>The list of residue indices used in the pairwise analysis.
+Parameter <cite>residue_desired</cite> passed to <cite>filter_traj()</cite></p>
 </dd>
 <dt><strong>tick_distance</strong><span class="classifier">int, default = 10</span></dt><dd><p>Distance between ticks in blocks of consecutive residues.</p>
 </dd>
@@ -566,7 +570,17 @@ ends of any consecutive residue sequence.</p>
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj</span></code></dt><dd><p>Filters an input trajectory to desired residues</p>
+</dd>
+</dl>
+</div>
 <p class="rubric">Examples</p>
+<p>Residues 0-12,98-100 were used. The SSF will label 0,10,12,98,100,
+provided in the second returned list. The first returned list gives 
+the positions on the axes to place each label.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">create_axis_labels</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">98</span><span class="p">,</span><span class="mi">99</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
 <span class="go">[0, 10, 12, 13, 15], [0, 10, 12, 98, 100]</span>
 </pre></div>

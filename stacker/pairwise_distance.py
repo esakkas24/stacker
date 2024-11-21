@@ -252,6 +252,7 @@ def get_residue_distance_for_trajectory(trajectory: md.Trajectory,
     get_residue_distance_for_frame : Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.
     filter_traj : Filters an input trajectory to only the specified atoms and residues
     mdtraj.load : Load a trajectory+topology file
+    display_arrays_as_video : Displays this data as an SSF.
 
     Examples
     --------

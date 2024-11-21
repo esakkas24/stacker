@@ -23,4 +23,3 @@ documentation for details.
       stacker.residue_movement
       stacker.vector
       stacker.visualization
-

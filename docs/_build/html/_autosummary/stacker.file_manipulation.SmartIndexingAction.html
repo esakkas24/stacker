@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -311,6 +311,7 @@
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -364,6 +365,7 @@
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -596,10 +598,10 @@ list of individual frame numbers.</p>
 <p class="rubric">Methods Summary</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.file_manipulation.html#stacker.file_manipulation.SmartIndexingAction.format_usage" title="stacker.file_manipulation.SmartIndexingAction.format_usage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_usage</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.file_manipulation.SmartIndexingAction.format_usage" title="stacker.file_manipulation.SmartIndexingAction.format_usage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_usage</span></code></a>()</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../stacker.file_manipulation.html#stacker.file_manipulation.SmartIndexingAction.parse_smart_index" title="stacker.file_manipulation.SmartIndexingAction.parse_smart_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_smart_index</span></code></a>(value)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#stacker.file_manipulation.SmartIndexingAction.parse_smart_index" title="stacker.file_manipulation.SmartIndexingAction.parse_smart_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_smart_index</span></code></a>(value)</p></td>
 <td><p>Checks that an inputted variable is a list that can be smart indexed and indexes it if necessary.</p></td>
 </tr>
 </tbody>
@@ -619,7 +621,7 @@ and indexes it if necessary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>value</strong><span class="classifier">str or set</span></dt><dd><p>The input string containing ranges (e.g., “1-5,10,15-20”)
+<dt><strong>value</strong><span class="classifier">{str, set, list}</span></dt><dd><p>The input string containing ranges (e.g., “1-5,10,15-20”)
 or a set of integers.</p>
 </dd>
 </dl>
@@ -653,7 +655,7 @@ and indexes it if necessary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>value</strong><span class="classifier">str or set</span></dt><dd><p>The input string containing ranges (e.g., “1-5,10,15-20”)
+<dt><strong>value</strong><span class="classifier">{str, set, list}</span></dt><dd><p>The input string containing ranges (e.g., “1-5,10,15-20”)
 or a set of integers.</p>
 </dd>
 </dl>

@@ -12,9 +12,11 @@ import numpy as np
 from numpy import typing
 from .residue_movement import calc_center_3pts
 from .vector import *
+from .file_manipulation import SmartIndexingAction
 from .visualization import NoResidues, create_axis_labels, display_arrays_as_video
 import sys
 import concurrent.futures
+import functools
 
 class MultiFrameTraj(Exception):
     """
@@ -64,6 +66,29 @@ def calculate_residue_distance(trajectory: md.Trajectory,
     See Also
     --------
     get_residue_distance_for_frame : Calculates pairwise distances between all residues in a given frame.
+
+    Examples
+    --------
+    >>> import stacker as st
+    >>> filtered_traj = st.filter_traj('testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 
+    ...                              'testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', 
+    ...                              residues_desired = {426,427}, 
+    ...                              atomnames_desired = {'C2','C4','C6'})
+    WARNING: Residue Indices are expected to be 1-indexed
+    Reading trajectory...
+    Reading topology...
+    Filtering trajectory...
+    WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed
+    >>> distance_vec = st.calculate_residue_distance(
+    ...     trajectory=filtered_traj, 
+    ...     res1_num=426, 
+    ...     res2_num=427, 
+    ...     res1_atoms=("C2", "C4", "C6"), 
+    ...     res2_atoms=("C2", "C4", "C6"), 
+    ...     frame=1
+    ... )
+    >>> distance_vec.magnitude()
+    7.5253396
     """
     trajectory = trajectory[frame-1]
 
@@ -129,6 +154,18 @@ def get_residue_distance_for_frame(trajectory: md.Trajectory,
     get_residue_distance_for_trajectory : Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory
     filter_traj : Filters an input trajectory to only the specified atoms and residues
     mdtraj.load : Load a trajectory+topology file
+
+    Examples
+    --------
+    >>> import stacker as st
+    >>> filtered_traj = st.filter_traj('stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 
+    ...                             'stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', 
+    ...                             residues_desired = '2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430', 
+    ...                             atomnames_desired = {'C2','C4','C6'})
+    >>> ssf = st.get_residue_distance_for_frame(filtered_traj, frame = 2, write_output = False)
+    >>> ssf.shape
+    (127, 127)
+
     """
     trajectory = trajectory[frame-1]
     topology = trajectory.topology
@@ -176,7 +213,8 @@ def get_residue_distance_for_trajectory(trajectory: md.Trajectory,
                                         frames: typing.ArrayLike,
                                         res1_atoms: tuple = ("C2", "C4", "C6"),
                                         res2_atoms: tuple = ("C2", "C4", "C6"),
-                                        threads: int = 1) -> typing.ArrayLike:
+                                        threads: int = 1,
+                                        write_output: bool = True) -> typing.ArrayLike:
     """
     Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory.
 
@@ -189,14 +227,18 @@ def get_residue_distance_for_trajectory(trajectory: md.Trajectory,
     trajectory : md.Trajectory
         Trajectory to analyze (must have a topology).
         Output of st.filter_traj() or mdtraj.load()
-    frames : array_like
-        Frame indices to analyze (1-indexed).
+    frames : array_like or str
+        list of frame indices to analyze (1-indexed).
+        Accepts smart-indexed str representing a list of frames (e.g '1-5,6,39-48')
     res1_atoms : tuple, default=("C2", "C4", "C6")
         Atom names whose positions are averaged to find the center of residue 1.
     res2_atoms : tuple, default=("C2", "C4", "C6")
         Atom names whose positions are averaged to find the center of residue 2.
     threads : int, default=1
         Number of threads to use for parallel processing.
+    write_output : bool, default=True
+        If True, displays a loading screen to standard output. Do not use if
+        threads > 1.
 
     Returns
     -------
@@ -206,73 +248,144 @@ def get_residue_distance_for_trajectory(trajectory: md.Trajectory,
     
     See Also
     --------
+    system_stacking_fingerprints : Alias for this function
     get_residue_distance_for_frame : Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.
     filter_traj : Filters an input trajectory to only the specified atoms and residues
     mdtraj.load : Load a trajectory+topology file
+    display_arrays_as_video : Displays this data as an SSF.
 
     Examples
     --------
     >>> import stacker as st
-    >>> 
+    >>> filtered_traj = st.filter_traj('stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 
+    ...                             'stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', 
+    ...                             residues_desired = '2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430', 
+    ...                             atomnames_desired = {'C2','C4','C6'})
+    >>> ssfs = st.get_residue_distance_for_trajectory(filtered_traj, frames = '1-3', write_output = False)
+    >>> ssfs.shape
+    (3, 127, 127)
     """
-    write_output = False
-    if threads <= 1:
-        write_output = True
+    frames = SmartIndexingAction.parse_smart_index(frames)
 
     with concurrent.futures.ProcessPoolExecutor(max_workers = threads) as executor:            
         ssf_per_frame = np.array(list(executor.map(get_residue_distance_for_frame, [trajectory]*len(frames), frames,
                                     [res1_atoms]*len(frames),[res2_atoms]*len(frames), [write_output]*len(frames))))
     return ssf_per_frame
 
+@functools.wraps(get_residue_distance_for_trajectory)
+def system_stacking_fingerprints(*args, **kwargs):
+    return get_residue_distance_for_trajectory(*args, **kwargs)
 
-def increment_residue(residue_id : str) -> str:
+system_stacking_fingerprints.__doc__ = f"""
+Alias for `get_residue_distance_for_trajectory()`.
+
+{get_residue_distance_for_trajectory.__doc__}
+"""
+
+def get_frame_average(frames : typing.ArrayLike) -> typing.ArrayLike:
     '''
-    Increments residue ID by 1
-    
-    Useful when converting from mdtraj 0-index residue naming to 1-indexed
-    
+    Calculates an average System Stacking Fingerprint (SSF) across multiple SSFs
+
+    Used to calculate an average SSF across multiple frames of a trajectory. Can
+    average the result of `get_residue_distance_for_trajectory`
+
     Parameters
     ----------
-    residue_id : str
-        The residue id given by trajectory.topology.residue(i)
-
+    frames : numpy.typing.ArrayLike
+        List or array of 2D NumPy arrays representing a pairwise distance matrix
+        of an MD structure. All 2D NumPy arrays must be of the same dimenstions.
+        
     Returns
     -------
-        incremented_id : str
-            The residue id with the sequence number increased by 1
+    avg_frame : numpy.typing.ArrayLike
+        A single 2D NumPy array representing a pairwise distance matrix where each
+        position i,j is the average distance from residue i to j across all matrices
+        in frames.
+
+    See Also
+    --------
+    get_residue_distance_for_trajectory : Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory
+    system_stacking_fingerprints : Alias for get_residue_distance_for_trajectory
 
     Examples
     --------
-    >>> increment_residue('G43')
-    'G44'
-
+    >>> import stacker as st
+    >>> filtered_traj = st.filter_traj('stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 
+    ...                             'stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', 
+    ...                             residues_desired = '2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430', 
+    ...                             atomnames_desired = {'C2','C4','C6'})
+    >>> ssfs = st.get_residue_distance_for_trajectory(filtered_traj, frames = '1-3', write_output = False)
+    >>> avg_ssf = st.get_frame_average(ssfs)
+    >>> avg_ssf.shape
+    [FILL]
     '''
-    letter_part = ''.join(filter(str.isalpha, residue_id))
-    number_part = ''.join(filter(str.isdigit, residue_id))
-    incremented_number = str(int(number_part) + 1)
-    return letter_part + incremented_number
+    avg_frame = np.mean(frames, axis = 0)
+    return avg_frame 
 
 def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, output_csv : str = '',
                      n_events : int = 5, include_adjacent : bool = False) -> None:
     '''
-    Returns top stacking events for a given stacking fingerprint
+    Returns top stacking residue pairs for a given System Stacking Fingerprint (SSF)
 
-    Given a trajectory and a stacking fingerprint made from get_residue_distance_for_frame(),
+    Given a trajectory and a SSF made from `get_residue_distance_for_frame()` or `get_frame_average()`
     prints the residue pairings with the strongest stacking events (ie. the residue pairings
-    with center of geometry distance closest to 3.5Å)
+    with center of geometry distance closest to 3.5Å). 
 
     Parameters
     ----------    
     trajectory : md.Trajectory
         trajectory used to get the stacking fingerprint
     matrix : typing.ArrayLike
-        stacking fingerprint matrix created by get_residue_distance_for_frame()
+        Single-frame SSF created by get_residue_distance_for_frame() or get_frame_average()
     output_csv : str, default = '',
         output filename of the tab-separated txt file to write data to. If empty, data printed to standard output
     n_events : int, default = 5
         maximum number of stacking events to display, if -1 display all residue pairings
     include_adjacent : bool, default = False
         True if adjacent residues should be included in the printed output
+
+    See Also
+    --------
+    get_residue_distance_for_frame : Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.
+    get_residue_distance_for_trajectory : Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory
+    system_stacking_fingerprints : Alias for get_residue_distance_for_trajectory
+
+    Examples
+    --------
+    We can calculate the stacking events for a single frame:
+
+    >>> import stacker as st
+    >>> filtered_traj = st.filter_traj('stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 
+    ...                             'stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', 
+    ...                             atomnames_desired = {'C2','C4','C6'})
+    >>> ssf = st.get_residue_distance_for_frame(filtered_traj, frame = 2, write_output = False)
+    >>> ssf.shape
+    (252,252)
+    >>> st.get_top_stacking(filtered_traj, ssf)
+    Row     Column  Value
+    197     195     3.50
+    420     413     3.51
+    94      127     3.51
+    93      130     3.53
+    117     108     3.38
+
+    Or we can get most residue pairs that had the most stacking across many frames of a trajectory:
+
+    >>> import stacker as st
+    >>> filtered_traj = st.filter_traj('stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 
+    ...                             'stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', 
+    ...                             atomnames_desired = {'C2','C4','C6'})
+    >>> ssfs = st.get_residue_distance_for_trajectory(filtered_traj, frames = '1-3', write_output = False)
+    >>> avg_ssf = st.get_frame_average(ssfs)
+    >>> avg_ssf.shape
+    (252, 252)
+    >>> st.get_top_stacking(filtered_traj, ssf)
+    Row     Column  Value
+    130     93      3.56
+    108     117     3.44
+    195     197     3.61
+    127     94      3.65
+    47      167     3.66
 
     '''
     top_stacking_indices = np.argsort(np.abs(matrix - 3.5), axis = None)
@@ -294,41 +407,48 @@ def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, outp
 
     if output_csv:
         with open(output_csv, 'w') as csv_file:
-            csv_file.write('Row\tColumn\tValue\n')
+            csv_file.write('Res1\tRes2\tAvg_Dist\n')
             for row, col, value in no_mirrored_indices:
                 res1 = increment_residue(str(trajectory.topology.residue(row).resSeq))
                 res2 = increment_residue(str(trajectory.topology.residue(col).resSeq))
                 csv_file.write(f"{res1}\t{res2}\t{value:.2f}\n")
     else:
-        print('\nRow\tColumn\tValue')
+        print('Res1\tRes2\tAvg_Dist')
         for row, col, value in no_mirrored_indices:
             res1 = increment_residue(str(trajectory.topology.residue(row).resSeq))
             res2 = increment_residue(str(trajectory.topology.residue(col).resSeq))
             print(f"{res1}\t{res2}\t{value:.2f}")
     
-def get_frame_average(frames : typing.ArrayLike) -> typing.ArrayLike:
+def increment_residue(residue_id : str) -> str:
     '''
-    Calculates an average pairwise matrix across multiple frames of a trajectory
-
+    Increments residue ID by 1
+    
+    Useful when converting from mdtraj 0-index residue naming to 1-indexed
+    
     Parameters
     ----------
-    frames : numpy.typing.ArrayLike
-        List or array of 2D NumPy arrays representing a pairwise distance matrix
-        of an MD structure. All 2D NumPy arrays must be of the same dimenstions.
-        
+    residue_id : str
+        The residue id given by trajectory.topology.residue(i)
+
     Returns
     -------
-    avg_frame : numpy.typing.ArrayLike
-        A single 2D NumPy array representing a pairwise distance matrix where each
-        position i,j is the average distance from residue i to j across all matrices
-        in frames.
+    incremented_id : str
+        The residue id with the sequence number increased by 1
+
+    Examples
+    --------
+    >>> increment_residue('G43')
+    'G44'
+
     '''
-    avg_frame = np.mean(frames, axis = 0)
-    return avg_frame
+    letter_part = ''.join(filter(str.isalpha, residue_id))
+    number_part = ''.join(filter(str.isdigit, residue_id))
+    incremented_number = str(int(number_part) + 1)
+    return letter_part + incremented_number
 
 if __name__ == "__main__":
-    trajectory_file = 'testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd'
-    topology_file = 'testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop'
+    trajectory_file = '../testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd'
+    topology_file = '../testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop'
     # Load test trajectory and topology
     trj = md.load(trajectory_file, top = topology_file)
 

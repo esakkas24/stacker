@@ -311,6 +311,7 @@
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -364,6 +365,7 @@
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -546,13 +548,18 @@
                   
   <section id="module-stacker.vector">
 <span id="stacker-vector-module"></span><h1>stacker.vector module<a class="headerlink" href="#module-stacker.vector" title="Link to this heading">#</a></h1>
+<p>Vector class used for SSF and PSF Calculation</p>
+<p>This module defines the Vector datatype that’s used to 
+store position (x,y,z) information for the atoms and residues
+in an MD Simulation. Documentation is provided for reference.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="stacker.vector.Vector">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/vector.html#Vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.vector.Vector" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Represents a 3D vector with x, y, and z components.</p>
 <p>This class defines a data type ‘Vector’ that represents a 3D vector with
-x, y, and z components, assuming the vector originates at the origin (0,0,0).</p>
+x, y, and z components, assuming the vector originates at the origin (0,0,0).
+Expands the numpy.array object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">

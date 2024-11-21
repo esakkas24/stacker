@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css?v=7f9a90b1" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
   
   <!-- So that users can add custom icons -->
   <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -306,6 +306,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -359,6 +360,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -496,7 +498,7 @@
 <span class="kn">import</span> <span class="nn">functools</span>
 
 <div class="viewcode-block" id="MultiFrameTraj">
-<a class="viewcode-back" href="../../stacker.pairwise_distance.html#stacker.pairwise_distance.MultiFrameTraj">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.pairwise_distance.MultiFrameTraj">[docs]</a>
 <span class="k">class</span> <span class="nc">MultiFrameTraj</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A multi-frame trajectory is passed to a one-frame function</span>
@@ -511,7 +513,7 @@
                      <span class="s2">&quot;T&quot;</span> <span class="s2">&quot;T5&quot;</span><span class="p">,</span> <span class="s2">&quot;T3&quot;</span><span class="p">,</span> <span class="s2">&quot;U&quot;</span><span class="p">,</span> <span class="s2">&quot;U5&quot;</span><span class="p">,</span> <span class="s2">&quot;U3&quot;</span><span class="p">,</span> <span class="s2">&quot;INO&quot;</span><span class="p">}</span>
 
 <div class="viewcode-block" id="calculate_residue_distance">
-<a class="viewcode-back" href="../../stacker.pairwise_distance.html#stacker.pairwise_distance.calculate_residue_distance">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.pairwise_distance.calculate_residue_distance">[docs]</a>
 <span class="k">def</span> <span class="nf">calculate_residue_distance</span><span class="p">(</span><span class="n">trajectory</span><span class="p">:</span> <span class="n">md</span><span class="o">.</span><span class="n">Trajectory</span><span class="p">,</span> 
                                <span class="n">res1_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> 
                                <span class="n">res2_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> 
@@ -603,7 +605,7 @@
 
 
 <div class="viewcode-block" id="get_residue_distance_for_frame">
-<a class="viewcode-back" href="../../stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_frame">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.pairwise_distance.get_residue_distance_for_frame">[docs]</a>
 <span class="k">def</span> <span class="nf">get_residue_distance_for_frame</span><span class="p">(</span><span class="n">trajectory</span><span class="p">:</span> <span class="n">md</span><span class="o">.</span><span class="n">Trajectory</span><span class="p">,</span> 
                                    <span class="n">frame</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> 
                                    <span class="n">res1_atoms</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">),</span>
@@ -696,7 +698,7 @@
 
 
 <div class="viewcode-block" id="get_residue_distance_for_trajectory">
-<a class="viewcode-back" href="../../stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_trajectory">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.pairwise_distance.get_residue_distance_for_trajectory">[docs]</a>
 <span class="k">def</span> <span class="nf">get_residue_distance_for_trajectory</span><span class="p">(</span><span class="n">trajectory</span><span class="p">:</span> <span class="n">md</span><span class="o">.</span><span class="n">Trajectory</span><span class="p">,</span> 
                                         <span class="n">frames</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span>
                                         <span class="n">res1_atoms</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">),</span>
@@ -740,6 +742,7 @@
 <span class="sd">    get_residue_distance_for_frame : Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</span>
 <span class="sd">    filter_traj : Filters an input trajectory to only the specified atoms and residues</span>
 <span class="sd">    mdtraj.load : Load a trajectory+topology file</span>
+<span class="sd">    display_arrays_as_video : Displays this data as an SSF.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -761,7 +764,7 @@
 
 
 <div class="viewcode-block" id="system_stacking_fingerprints">
-<a class="viewcode-back" href="../../stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.pairwise_distance.system_stacking_fingerprints">[docs]</a>
 <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">get_residue_distance_for_trajectory</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">system_stacking_fingerprints</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">get_residue_distance_for_trajectory</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
@@ -774,7 +777,7 @@
 <span class="s2">&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="get_frame_average">
-<a class="viewcode-back" href="../../stacker.pairwise_distance.html#stacker.pairwise_distance.get_frame_average">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.pairwise_distance.get_frame_average">[docs]</a>
 <span class="k">def</span> <span class="nf">get_frame_average</span><span class="p">(</span><span class="n">frames</span> <span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Calculates an average System Stacking Fingerprint (SSF) across multiple SSFs</span>
@@ -817,7 +820,7 @@
 
 
 <div class="viewcode-block" id="get_top_stacking">
-<a class="viewcode-back" href="../../stacker.pairwise_distance.html#stacker.pairwise_distance.get_top_stacking">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.pairwise_distance.get_top_stacking">[docs]</a>
 <span class="k">def</span> <span class="nf">get_top_stacking</span><span class="p">(</span><span class="n">trajectory</span> <span class="p">:</span> <span class="n">md</span><span class="o">.</span><span class="n">Trajectory</span><span class="p">,</span> <span class="n">matrix</span> <span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="n">output_csv</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
                      <span class="n">n_events</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">include_adjacent</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
@@ -917,7 +920,7 @@
 
     
 <div class="viewcode-block" id="increment_residue">
-<a class="viewcode-back" href="../../stacker.pairwise_distance.html#stacker.pairwise_distance.increment_residue">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.pairwise_distance.increment_residue">[docs]</a>
 <span class="k">def</span> <span class="nf">increment_residue</span><span class="p">(</span><span class="n">residue_id</span> <span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Increments residue ID by 1</span>

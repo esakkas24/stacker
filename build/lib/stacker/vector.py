@@ -1,4 +1,11 @@
-import math
+"""
+Vector class used for SSF and PSF Calculation
+
+This module defines the Vector datatype that's used to 
+store position (x,y,z) information for the atoms and residues
+in an MD Simulation. Documentation is provided for reference.
+"""
+
 import numpy as np
 
 class Vector:
@@ -7,6 +14,7 @@ class Vector:
 
     This class defines a data type 'Vector' that represents a 3D vector with
     x, y, and z components, assuming the vector originates at the origin (0,0,0).
+    Expands the numpy.array object.
 
     Attributes
     ----------
@@ -16,6 +24,7 @@ class Vector:
         The y-component of the vector.
     z : float
         The z-component of the vector.
+    
     """
     def __init__(self, x: float, y: float, z: float) -> None:
         """
@@ -81,7 +90,7 @@ class Vector:
         bool
             True if vectors are equal, False otherwise.
         """
-        return np.all(self.components == other.components)
+        return np.array_equal(self.components, other.components)
         
     def calculate_cross_product(self, b: 'Vector') -> 'Vector':
         """

@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css?v=7f9a90b1" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
   
   <!-- So that users can add custom icons -->
   <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -306,6 +306,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -359,6 +360,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -475,37 +477,63 @@
                 <article class="bd-article">
                   
   <h1>Source code for stacker.visualization</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Visualize the SSFs, PSFs, and other analyses</span>
+
+<span class="sd">This module includes the functions used to visualize plots,</span>
+<span class="sd">including SSFs and PSFs. The data inputs to these plot functions</span>
+<span class="sd">are provided by the other modules.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">typing</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">seaborn</span> <span class="kn">import</span> <span class="n">kdeplot</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">.file_manipulation</span> <span class="kn">import</span> <span class="n">SmartIndexingAction</span>
 
 <div class="viewcode-block" id="NoResidues">
-<a class="viewcode-back" href="../../stacker.visualization.html#stacker.visualization.NoResidues">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.visualization.NoResidues">[docs]</a>
 <span class="k">class</span> <span class="nc">NoResidues</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised if user tries to make SSF with a trajectory of &lt;1 residue&quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 
 <div class="viewcode-block" id="create_parent_directories">
-<a class="viewcode-back" href="../../stacker.visualization.html#stacker.visualization.create_parent_directories">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.visualization.create_parent_directories">[docs]</a>
 <span class="k">def</span> <span class="nf">create_parent_directories</span><span class="p">(</span><span class="n">outfile_prefix</span> <span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;Creates necessary parent directories to write an outfile given a prefix&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Creates necessary parent directories to write an outfile given a prefix</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    outfile_prefix : str</span>
+<span class="sd">        The filepath of the output file, including the path where the file will be saved.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; create_parent_directories(&#39;/path/to/output/file.txt&#39;)</span>
+<span class="sd">    # This will create the directories &#39;/path/to/output&#39; if they do not exist.</span>
+<span class="sd">    &gt;&gt;&gt; create_parent_directories(&#39;output/file.txt&#39;)</span>
+<span class="sd">    # This will create the directory &#39;output&#39; if it does not exist.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">dir_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">outfile_prefix</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">dir_name</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span> <span class="n">dir_name</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span>
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dir_name</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="create_axis_labels">
-<a class="viewcode-back" href="../../stacker.visualization.html#stacker.visualization.create_axis_labels">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.visualization.create_axis_labels">[docs]</a>
 <span class="k">def</span> <span class="nf">create_axis_labels</span><span class="p">(</span><span class="n">res_indicies</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="n">tick_distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Designates the axis labels to use in the pairwise plot.</span>
+<span class="sd">    Designates the axis labels to use in the SSF plot.</span>
 
+<span class="sd">    Helper function for visualizing SSFs.</span>
 <span class="sd">    Returns the x-axis tick positions and labels to use on the ticks based on the </span>
-<span class="sd">    residues used in a specific pairwise analysis. Meant to be used when many </span>
+<span class="sd">    residues used in a specific SSF analysis. Meant to be used when many </span>
 <span class="sd">    disjoint sets of residue indices are used. Ticks will be present every `tick_distance` </span>
 <span class="sd">    residues in a collection of adjacent residues, and a tick will exist at both</span>
 <span class="sd">    ends of any consecutive residue sequence.</span>
@@ -514,6 +542,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    res_indicies : list</span>
 <span class="sd">        The list of residue indices used in the pairwise analysis.</span>
+<span class="sd">        Parameter `residue_desired` passed to `filter_traj()`</span>
 <span class="sd">    tick_distance : int, default = 10</span>
 <span class="sd">        Distance between ticks in blocks of consecutive residues.</span>
 
@@ -524,8 +553,16 @@
 <span class="sd">    tick_labels : list</span>
 <span class="sd">        List of labels to place at the adjacent tick locations.</span>
 
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    filter_traj : Filters an input trajectory to desired residues</span>
+
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
+<span class="sd">    Residues 0-12,98-100 were used. The SSF will label 0,10,12,98,100,</span>
+<span class="sd">    provided in the second returned list. The first returned list gives </span>
+<span class="sd">    the positions on the axes to place each label.</span>
+
 <span class="sd">    &gt;&gt;&gt; create_axis_labels([0,1,2,3,4,5,6,7,8,9,10,11,12,98,99,100])</span>
 <span class="sd">    [0, 10, 12, 13, 15], [0, 10, 12, 98, 100]</span>
 
@@ -562,15 +599,18 @@
 
         
 <div class="viewcode-block" id="display_arrays_as_video">
-<a class="viewcode-back" href="../../stacker.visualization.html#stacker.visualization.display_arrays_as_video">[docs]</a>
-<span class="k">def</span> <span class="nf">display_arrays_as_video</span><span class="p">(</span><span class="n">numpy_arrays</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="n">res_indicies</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span> 
+<a class="viewcode-back" href="../../stacker.html#stacker.visualization.display_arrays_as_video">[docs]</a>
+<span class="k">def</span> <span class="nf">display_arrays_as_video</span><span class="p">(</span><span class="n">numpy_arrays</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="n">res_indicies</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> 
                             <span class="n">seconds_per_frame</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">tick_distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
                             <span class="n">outfile_prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">scale_limits</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">outfile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
                             <span class="n">scale_style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;bellcurve&#39;</span><span class="p">,</span> <span class="n">xy_line</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Displays list/array of 2D NumPy arrays as matrix heatmaps.</span>
+<span class="sd">    Displays SSF data to output or writes SSF as a PNG</span>
 
-<span class="sd">    Takes list/array of 2D NumPy arrays and treats them as frames </span>
+<span class="sd">    Visualizes the data for an SSF for a trajectory or a single frame.</span>
+<span class="sd">    Takes an SSF array outputted from `get_residue_distance_for_frame`,</span>
+<span class="sd">    `get_residue_distance_for_trajectory`,</span>
+<span class="sd">    or `system_stacking_fingerprints` and treats them as frames </span>
 <span class="sd">    in a video, filling in a grid at position i, j by the value </span>
 <span class="sd">    at i, j in the array.</span>
 
@@ -578,8 +618,10 @@
 <span class="sd">    ----------</span>
 <span class="sd">    numpy_arrays : array_like</span>
 <span class="sd">        List or array of 2D NumPy arrays.</span>
-<span class="sd">    res_indicies : list</span>
+<span class="sd">    res_indicies : list or str</span>
 <span class="sd">        The list of residue indices used in the pairwise analysis.</span>
+<span class="sd">        Parameter `residue_desired` passed to `filter_traj()`</span>
+<span class="sd">        Accepts smart-indexed str representing a list of residues (e.g &#39;1-5,6,39-48&#39;)</span>
 <span class="sd">    seconds_per_frame : int, default = 10</span>
 <span class="sd">        Number of seconds to display each matrix for.</span>
 <span class="sd">    tick_distance : int, default = 10</span>
@@ -601,6 +643,40 @@
 <span class="sd">    -------</span>
 <span class="sd">    None</span>
 <span class="sd">        Displays video of NumPy arrays.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    create_axis_labels : Designates the axis labels to use in the SSF plot.</span>
+<span class="sd">    get_residue_distance_for_frame : Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</span>
+<span class="sd">    get_residue_distance_for_trajectory : get SSF data for all frames of a trajectory</span>
+<span class="sd">    system_stacking_fingerprints : Alias for this `get_residue_distance_for_trajectory`</span>
+<span class="sd">    display_ssfs : Alias for this function.</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import stacker as st</span>
+<span class="sd">    &gt;&gt;&gt; import mdtraj as md</span>
+<span class="sd">    &gt;&gt;&gt; trajectory_file = &#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span>
+<span class="sd">    &gt;&gt;&gt; topology_file = &#39;stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span>
+<span class="sd">    &gt;&gt;&gt; trj = md.load(trajectory_file, top = topology_file)</span>
+<span class="sd">    &gt;&gt;&gt; residue_selection_query = &#39;resi 90 to 215&#39;</span>
+<span class="sd">    &gt;&gt;&gt; frames_to_include = [1,2,3,4,5]</span>
+<span class="sd">    &gt;&gt;&gt; trj_sub = trj.atom_slice(trj.top.select(residue_selection_query))</span>
+<span class="sd">    &gt;&gt;&gt; resSeqs = [res.resSeq for res in trj_sub.topology.residues]</span>
+<span class="sd">    &gt;&gt;&gt; frames = st.get_residue_distance_for_trajectory(trj_sub, frames_to_include, threads = 5)</span>
+
+<span class="sd">    Frame 2 done.</span>
+
+<span class="sd">    Frame 3 done.</span>
+
+<span class="sd">    Frame 1 done.</span>
+
+<span class="sd">    Frame 5 done.</span>
+
+<span class="sd">    Frame 4 done.</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; st.display_arrays_as_video([st.get_frame_average(frames)], resSeqs, seconds_per_frame=10)</span>
+<span class="sd">    # Displays SSF for each frame of this trajectory to standard output</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">orange_colormap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="s1">&#39;Oranges_r&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">resampled</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 
@@ -627,6 +703,7 @@
         <span class="n">colorbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">neg</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
         <span class="n">colorbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Center of</span><span class="se">\n</span><span class="s1">Geometry</span><span class="se">\n</span><span class="s1">Dist. (Å)&#39;</span><span class="p">)</span>
 
+        <span class="n">res_indicies</span> <span class="o">=</span> <span class="n">SmartIndexingAction</span><span class="o">.</span><span class="n">parse_smart_index</span><span class="p">(</span><span class="n">res_indicies</span><span class="p">)</span>
         <span class="n">ticks</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">create_axis_labels</span><span class="p">(</span><span class="n">res_indicies</span><span class="p">,</span> <span class="n">tick_distance</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">ticks</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">rotation</span> <span class="o">=</span> <span class="s1">&#39;vertical&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">ticks</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
@@ -669,11 +746,22 @@
         <span class="n">frame_num</span><span class="o">+=</span><span class="mi">1</span></div>
 
 
+<div class="viewcode-block" id="display_ssfs">
+<a class="viewcode-back" href="../../stacker.html#stacker.visualization.display_ssfs">[docs]</a>
+<span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">display_arrays_as_video</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">display_ssfs</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">display_arrays_as_video</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<span class="n">display_ssfs</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Alias for `display_arrays_as_video()`.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
 <div class="viewcode-block" id="set_polar_grid">
-<a class="viewcode-back" href="../../stacker.visualization.html#stacker.visualization.set_polar_grid">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.visualization.set_polar_grid">[docs]</a>
 <span class="k">def</span> <span class="nf">set_polar_grid</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">mpl</span><span class="o">.</span><span class="n">projections</span><span class="o">.</span><span class="n">polar</span><span class="o">.</span><span class="n">PolarAxes</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Set up axes for polar plots.</span>
+<span class="sd">    Set up axes for PSF.</span>
 
 <span class="sd">    Creates polar plot background for two-residue movement comparison</span>
 <span class="sd">    with theta 0 to 360, a radial maximum of 15 Angstroms, and a visualization </span>
@@ -709,7 +797,7 @@
 
 
 <div class="viewcode-block" id="visualize_two_residue_movement_scatterplot">
-<a class="viewcode-back" href="../../stacker.visualization.html#stacker.visualization.visualize_two_residue_movement_scatterplot">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.visualization.visualize_two_residue_movement_scatterplot">[docs]</a>
 <span class="k">def</span> <span class="nf">visualize_two_residue_movement_scatterplot</span><span class="p">(</span><span class="n">csv_filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">plot_outfile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">frame_list</span><span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Creates scatterplot of two-residue movement relative to each other.</span>
@@ -736,6 +824,29 @@
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
 <span class="sd">    write_bottaro_to_csv : Creates CSV file that is inputted here</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import stacker as st</span>
+<span class="sd">    &gt;&gt;&gt; trajectory_file = &#39;testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span>
+<span class="sd">    &gt;&gt;&gt; topology_file = &#39;testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span>
+<span class="sd">    &gt;&gt;&gt; pdb_filename = &#39;testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb&#39;</span>
+<span class="sd">    &gt;&gt;&gt; output_csv_name = &quot;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&quot;</span>
+<span class="sd">    &gt;&gt;&gt; perspective_residue = 426 # 1-indexed</span>
+<span class="sd">    &gt;&gt;&gt; viewed_residue = 427 # 1-indexed</span>
+<span class="sd">    &gt;&gt;&gt; st.filter_traj_to_pdb(trajectory_filename=trajectory_file, topology_filename=topology_file, output_pdb_filename=pdb_filename,</span>
+<span class="sd">    ...                        residues_desired={perspective_residue,viewed_residue}, atomnames_desired={&quot;C2&quot;, &quot;C4&quot;, &quot;C6&quot;})</span>
+<span class="sd">    WARNING: Residue Indices are expected to be 1-indexed</span>
+<span class="sd">    Reading trajectory...</span>
+<span class="sd">    Reading topology...</span>
+<span class="sd">    Filtering trajectory...</span>
+<span class="sd">    WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed</span>
+<span class="sd">    WARNING: Output file atom, residue, and chain indices are zero-indexed</span>
+<span class="sd">    Filtered trajectory written to:  testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb</span>
+<span class="sd">    &gt;&gt;&gt; st.write_bottaro_to_csv(pdb_filename, output_csv_name, perspective_residue_num=perspective_residue, viewed_residue_num=viewed_residue)</span>
+<span class="sd">    Output values written to testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv</span>
+<span class="sd">    &gt;&gt;&gt; st.visualize_two_residue_movement_scatterplot(&#39;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&#39;, </span>
+<span class="sd">    ...                                                 plot_outfile=&#39;testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_10frames_scatter.png&#39;)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">bottaro_values</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">csv_filepath</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
@@ -768,7 +879,7 @@
 
 
 <div class="viewcode-block" id="visualize_two_residue_movement_heatmap">
-<a class="viewcode-back" href="../../stacker.visualization.html#stacker.visualization.visualize_two_residue_movement_heatmap">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.visualization.visualize_two_residue_movement_heatmap">[docs]</a>
 <span class="k">def</span> <span class="nf">visualize_two_residue_movement_heatmap</span><span class="p">(</span><span class="n">csv_filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">plot_outfile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">frame_list</span><span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Creates heatmap of two-residue movement relative to each other.</span>
@@ -796,6 +907,29 @@
 <span class="sd">    --------</span>
 <span class="sd">    write_bottaro_to_csv : Creates CSV file that is inputted here</span>
 <span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import stacker as st</span>
+<span class="sd">    &gt;&gt;&gt; trajectory_file = &#39;testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span>
+<span class="sd">    &gt;&gt;&gt; topology_file = &#39;testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span>
+<span class="sd">    &gt;&gt;&gt; pdb_filename = &#39;testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb&#39;</span>
+<span class="sd">    &gt;&gt;&gt; output_csv_name = &quot;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&quot;</span>
+<span class="sd">    &gt;&gt;&gt; perspective_residue = 426 # 1-indexed</span>
+<span class="sd">    &gt;&gt;&gt; viewed_residue = 427 # 1-indexed</span>
+<span class="sd">    &gt;&gt;&gt; st.filter_traj_to_pdb(trajectory_filename=trajectory_file, topology_filename=topology_file, output_pdb_filename=pdb_filename,</span>
+<span class="sd">    ...                        residues_desired={perspective_residue,viewed_residue}, atomnames_desired={&quot;C2&quot;, &quot;C4&quot;, &quot;C6&quot;})</span>
+<span class="sd">    WARNING: Residue Indices are expected to be 1-indexed</span>
+<span class="sd">    Reading trajectory...</span>
+<span class="sd">    Reading topology...</span>
+<span class="sd">    Filtering trajectory...</span>
+<span class="sd">    WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed</span>
+<span class="sd">    WARNING: Output file atom, residue, and chain indices are zero-indexed</span>
+<span class="sd">    Filtered trajectory written to:  testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb</span>
+<span class="sd">    &gt;&gt;&gt; st.write_bottaro_to_csv(pdb_filename, output_csv_name, perspective_residue_num=perspective_residue, viewed_residue_num=viewed_residue)</span>
+<span class="sd">    Output values written to testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv</span>
+<span class="sd">    &gt;&gt;&gt; st.visualize_two_residue_movement_heatmap(&#39;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&#39;, </span>
+<span class="sd">    ...                                                 plot_outfile=&#39;testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_10frames_heat.png&#39;)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">bottaro_values</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">csv_filepath</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
 

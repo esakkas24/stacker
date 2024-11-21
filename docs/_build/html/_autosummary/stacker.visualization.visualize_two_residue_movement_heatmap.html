@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -311,6 +311,7 @@
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -364,6 +365,7 @@
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -571,6 +573,29 @@ png, pdf, ps, eps, and svg supported.</p>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_bottaro_to_csv</span></code></dt><dd><p>Creates CSV file that is inputted here</p>
 </dd>
 </dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trajectory_file</span> <span class="o">=</span> <span class="s1">&#39;testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">topology_file</span> <span class="o">=</span> <span class="s1">&#39;testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pdb_filename</span> <span class="o">=</span> <span class="s1">&#39;testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output_csv_name</span> <span class="o">=</span> <span class="s2">&quot;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">perspective_residue</span> <span class="o">=</span> <span class="mi">426</span> <span class="c1"># 1-indexed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viewed_residue</span> <span class="o">=</span> <span class="mi">427</span> <span class="c1"># 1-indexed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="o">=</span><span class="n">trajectory_file</span><span class="p">,</span> <span class="n">topology_filename</span><span class="o">=</span><span class="n">topology_file</span><span class="p">,</span> <span class="n">output_pdb_filename</span><span class="o">=</span><span class="n">pdb_filename</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">residues_desired</span><span class="o">=</span><span class="p">{</span><span class="n">perspective_residue</span><span class="p">,</span><span class="n">viewed_residue</span><span class="p">},</span> <span class="n">atomnames_desired</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
+<span class="go">WARNING: Residue Indices are expected to be 1-indexed</span>
+<span class="go">Reading trajectory...</span>
+<span class="go">Reading topology...</span>
+<span class="go">Filtering trajectory...</span>
+<span class="go">WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed</span>
+<span class="go">WARNING: Output file atom, residue, and chain indices are zero-indexed</span>
+<span class="go">Filtered trajectory written to:  testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">write_bottaro_to_csv</span><span class="p">(</span><span class="n">pdb_filename</span><span class="p">,</span> <span class="n">output_csv_name</span><span class="p">,</span> <span class="n">perspective_residue_num</span><span class="o">=</span><span class="n">perspective_residue</span><span class="p">,</span> <span class="n">viewed_residue_num</span><span class="o">=</span><span class="n">viewed_residue</span><span class="p">)</span>
+<span class="go">Output values written to testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">visualize_two_residue_movement_heatmap</span><span class="p">(</span><span class="s1">&#39;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&#39;</span><span class="p">,</span> 
+<span class="gp">... </span>                                                <span class="n">plot_outfile</span><span class="o">=</span><span class="s1">&#39;testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_10frames_heat.png&#39;</span><span class="p">)</span>
+</pre></div>
 </div>
 </dd></dl>
 

@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css?v=7f9a90b1" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
   
   <!-- So that users can add custom icons -->
   <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -306,6 +306,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -359,6 +360,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -498,7 +500,7 @@
 <span class="kn">import</span> <span class="nn">os</span>
 
 <div class="viewcode-block" id="collect_atom_locations_by_frame">
-<a class="viewcode-back" href="../../stacker.residue_movement.html#stacker.residue_movement.collect_atom_locations_by_frame">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.residue_movement.collect_atom_locations_by_frame">[docs]</a>
 <span class="k">def</span> <span class="nf">collect_atom_locations_by_frame</span><span class="p">(</span><span class="n">traj</span><span class="p">:</span> <span class="n">md</span><span class="o">.</span><span class="n">Trajectory</span><span class="p">,</span> <span class="n">residue_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">atom_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Creates a list of all atom locations for a particular atom and residue number per frame.</span>
@@ -553,7 +555,7 @@
 
 
 <div class="viewcode-block" id="calc_center_3pts">
-<a class="viewcode-back" href="../../stacker.residue_movement.html#stacker.residue_movement.calc_center_3pts">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.residue_movement.calc_center_3pts">[docs]</a>
 <span class="k">def</span> <span class="nf">calc_center_3pts</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">Vector</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Vector</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">Vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vector</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Finds the average x, y, z position of three (x, y, z) Vectors.</span>
@@ -596,7 +598,7 @@
 
 
 <div class="viewcode-block" id="Base">
-<a class="viewcode-back" href="../../stacker.residue_movement.html#stacker.residue_movement.Base">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.residue_movement.Base">[docs]</a>
 <span class="k">class</span> <span class="nc">Base</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents a nucleotide base with x, y, z coordinates for C2, C4, and C6 atoms,</span>
@@ -618,7 +620,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="Base.__init__">
-<a class="viewcode-back" href="../../stacker.residue_movement.html#stacker.residue_movement.Base.__init__">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.residue_movement.Base.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c2_coords</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">c4_coords</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">c6_coords</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">midpoint_coords</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize a Base instance.</span>
@@ -643,7 +645,7 @@
 
 
 <div class="viewcode-block" id="create_base_from_coords_list">
-<a class="viewcode-back" href="../../stacker.residue_movement.html#stacker.residue_movement.create_base_from_coords_list">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.residue_movement.create_base_from_coords_list">[docs]</a>
 <span class="k">def</span> <span class="nf">create_base_from_coords_list</span><span class="p">(</span><span class="n">frame</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">C2_coords</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">C4_coords</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">C6_coords</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">midpoint_coords</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Base</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Combines C2, C4, C6 positions with midpoint positions for a given frame.</span>
@@ -673,13 +675,17 @@
 <span class="sd">    --------</span>
 <span class="sd">    calc_center_3pts : Finds the average x, y, z position of three (x, y, z) Vectors</span>
 
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    `frame` is 0-indexed because this is how `mdtraj` handles mdtraj.Trajectory</span>
+<span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">midpoint_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="n">midpoint_coords</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">midpoint_coords</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">midpoint_coords</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">Base</span><span class="p">(</span><span class="n">C2_coords</span><span class="p">[</span><span class="n">frame</span><span class="p">],</span> <span class="n">C4_coords</span><span class="p">[</span><span class="n">frame</span><span class="p">],</span> <span class="n">C6_coords</span><span class="p">[</span><span class="n">frame</span><span class="p">],</span> <span class="n">midpoint_tuple</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="correct_theta_sign">
-<a class="viewcode-back" href="../../stacker.residue_movement.html#stacker.residue_movement.correct_theta_sign">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.residue_movement.correct_theta_sign">[docs]</a>
 <span class="k">def</span> <span class="nf">correct_theta_sign</span><span class="p">(</span><span class="n">rho</span><span class="p">:</span> <span class="n">Vector</span><span class="p">,</span> <span class="n">y_axis</span><span class="p">:</span> <span class="n">Vector</span><span class="p">,</span> <span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Corrects the sign of an angle theta with the x-axis within a plane defined by a given y-axis.</span>
@@ -713,7 +719,7 @@
 
 
 <div class="viewcode-block" id="calculate_bottaro_values_for_frame">
-<a class="viewcode-back" href="../../stacker.residue_movement.html#stacker.residue_movement.calculate_bottaro_values_for_frame">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.residue_movement.calculate_bottaro_values_for_frame">[docs]</a>
 <span class="k">def</span> <span class="nf">calculate_bottaro_values_for_frame</span><span class="p">(</span><span class="n">perspective_base_coords</span><span class="p">:</span> <span class="n">Base</span><span class="p">,</span> <span class="n">viewed_midpoint</span><span class="p">:</span> <span class="n">Vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates the r, rho, and theta values as expressed in the Bottaro paper.</span>
@@ -774,7 +780,7 @@
 
 
 <div class="viewcode-block" id="write_bottaro_to_csv">
-<a class="viewcode-back" href="../../stacker.residue_movement.html#stacker.residue_movement.write_bottaro_to_csv">[docs]</a>
+<a class="viewcode-back" href="../../stacker.html#stacker.residue_movement.write_bottaro_to_csv">[docs]</a>
 <span class="k">def</span> <span class="nf">write_bottaro_to_csv</span><span class="p">(</span><span class="n">pdb_filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> 
                          <span class="n">output_csv_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> 
                          <span class="n">perspective_residue_num</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> 
@@ -819,7 +825,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    filter_traj_to_pdb : convert a trajectory and topology file into a single filtered PDB file to input here</span>
 <span class="sd">    visualize_two_residue_movement_scatterplot : Visualize Output CSV data as a PSF scatterplot from this data</span>
-<span class="sd">    visualize_two_residue_movement_heatmat : Visualize Output CSV data as a PSF heatmap from this data</span>
+<span class="sd">    visualize_two_residue_movement_heatmap : Visualize Output CSV data as a PSF heatmap from this data</span>
 <span class="sd">        </span>
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>

@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -48,7 +48,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/stacker.visualization.display_arrays_as_video';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="stacker.visualization.set_polar_grid" href="stacker.visualization.set_polar_grid.html" />
+    <link rel="next" title="stacker.visualization.display_ssfs" href="stacker.visualization.display_ssfs.html" />
     <link rel="prev" title="stacker.visualization.create_parent_directories" href="stacker.visualization.create_parent_directories.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -311,6 +311,7 @@
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -364,6 +365,7 @@
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
@@ -542,8 +544,11 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.visualization.display_arrays_as_video">
 <span class="sig-name descname"><span class="pre">display_arrays_as_video</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numpy_arrays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_indicies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds_per_frame</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tick_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">7)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bellcurve'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xy_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/visualization.html#display_arrays_as_video"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.display_arrays_as_video" title="Link to this definition">#</a></dt>
-<dd><p>Displays list/array of 2D NumPy arrays as matrix heatmaps.</p>
-<p>Takes list/array of 2D NumPy arrays and treats them as frames 
+<dd><p>Displays SSF data to output or writes SSF as a PNG</p>
+<p>Visualizes the data for an SSF for a trajectory or a single frame.
+Takes an SSF array outputted from <cite>get_residue_distance_for_frame</cite>,
+<cite>get_residue_distance_for_trajectory</cite>,
+or <cite>system_stacking_fingerprints</cite> and treats them as frames 
 in a video, filling in a grid at position i, j by the value 
 at i, j in the array.</p>
 <dl class="field-list simple">
@@ -551,7 +556,9 @@ at i, j in the array.</p>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>numpy_arrays</strong><span class="classifier">array_like</span></dt><dd><p>List or array of 2D NumPy arrays.</p>
 </dd>
-<dt><strong>res_indicies</strong><span class="classifier">list</span></dt><dd><p>The list of residue indices used in the pairwise analysis.</p>
+<dt><strong>res_indicies</strong><span class="classifier">list or str</span></dt><dd><p>The list of residue indices used in the pairwise analysis.
+Parameter <cite>residue_desired</cite> passed to <cite>filter_traj()</cite>
+Accepts smart-indexed str representing a list of residues (e.g ‘1-5,6,39-48’)</p>
 </dd>
 <dt><strong>seconds_per_frame</strong><span class="classifier">int, default = 10</span></dt><dd><p>Number of seconds to display each matrix for.</p>
 </dd>
@@ -578,6 +585,43 @@ png, pdf, ps, eps, and svg supported.</p>
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../stacker.html#stacker.visualization.create_axis_labels" title="stacker.visualization.create_axis_labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_axis_labels</span></code></a></dt><dd><p>Designates the axis labels to use in the SSF plot.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></dt><dd><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory</span></code></dt><dd><p>get SSF data for all frames of a trajectory</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></dt><dd><p>Alias for this <cite>get_residue_distance_for_trajectory</cite></p>
+</dd>
+<dt><a class="reference internal" href="../stacker.html#stacker.visualization.display_ssfs" title="stacker.visualization.display_ssfs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">display_ssfs</span></code></a></dt><dd><p>Alias for this function.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mdtraj</span> <span class="k">as</span> <span class="nn">md</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trajectory_file</span> <span class="o">=</span> <span class="s1">&#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">topology_file</span> <span class="o">=</span> <span class="s1">&#39;stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trj</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">trajectory_file</span><span class="p">,</span> <span class="n">top</span> <span class="o">=</span> <span class="n">topology_file</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">residue_selection_query</span> <span class="o">=</span> <span class="s1">&#39;resi 90 to 215&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frames_to_include</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trj_sub</span> <span class="o">=</span> <span class="n">trj</span><span class="o">.</span><span class="n">atom_slice</span><span class="p">(</span><span class="n">trj</span><span class="o">.</span><span class="n">top</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">residue_selection_query</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resSeqs</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">resSeq</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">trj_sub</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">residues</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frames</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">get_residue_distance_for_trajectory</span><span class="p">(</span><span class="n">trj_sub</span><span class="p">,</span> <span class="n">frames_to_include</span><span class="p">,</span> <span class="n">threads</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Frame 2 done.</p>
+<p>Frame 3 done.</p>
+<p>Frame 1 done.</p>
+<p>Frame 5 done.</p>
+<p>Frame 4 done.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">display_arrays_as_video</span><span class="p">([</span><span class="n">st</span><span class="o">.</span><span class="n">get_frame_average</span><span class="p">(</span><span class="n">frames</span><span class="p">)],</span> <span class="n">resSeqs</span><span class="p">,</span> <span class="n">seconds_per_frame</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="go"># Displays SSF for each frame of this trajectory to standard output</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
@@ -603,11 +647,11 @@ png, pdf, ps, eps, and svg supported.</p>
       </div>
     </a>
     <a class="right-next"
-       href="stacker.visualization.set_polar_grid.html"
+       href="stacker.visualization.display_ssfs.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">stacker.visualization.set_polar_grid</p>
+        <p class="prev-next-title">stacker.visualization.display_ssfs</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

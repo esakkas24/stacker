@@ -1,26 +1,52 @@
+"""
+Visualize the SSFs, PSFs, and other analyses
+
+This module includes the functions used to visualize plots,
+including SSFs and PSFs. The data inputs to these plot functions
+are provided by the other modules.
+"""
+
+import os
+import functools
 import numpy as np
 from numpy import typing
+import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-import pandas as pd
 from seaborn import kdeplot
-import os
+from .file_manipulation import SmartIndexingAction
 
 class NoResidues(Exception):
+    """Raised if user tries to make SSF with a trajectory of <1 residue"""
     pass
 
 def create_parent_directories(outfile_prefix : str) -> None:
-    '''Creates necessary parent directories to write an outfile given a prefix'''
+    '''
+    Creates necessary parent directories to write an outfile given a prefix
+    
+    Parameters
+    ----------
+    outfile_prefix : str
+        The filepath of the output file, including the path where the file will be saved.
+
+    Examples
+    --------
+    >>> create_parent_directories('/path/to/output/file.txt')
+    # This will create the directories '/path/to/output' if they do not exist.
+    >>> create_parent_directories('output/file.txt')
+    # This will create the directory 'output' if it does not exist.
+    '''
     dir_name = os.path.dirname(outfile_prefix)
     if dir_name == '': dir_name = '.'
     os.makedirs(dir_name, exist_ok=True)
 
 def create_axis_labels(res_indicies: typing.ArrayLike, tick_distance: int = 10) -> list:
     """
-    Designates the axis labels to use in the pairwise plot.
+    Designates the axis labels to use in the SSF plot.
 
+    Helper function for visualizing SSFs.
     Returns the x-axis tick positions and labels to use on the ticks based on the 
-    residues used in a specific pairwise analysis. Meant to be used when many 
+    residues used in a specific SSF analysis. Meant to be used when many 
     disjoint sets of residue indices are used. Ticks will be present every `tick_distance` 
     residues in a collection of adjacent residues, and a tick will exist at both
     ends of any consecutive residue sequence.
@@ -29,6 +55,7 @@ def create_axis_labels(res_indicies: typing.ArrayLike, tick_distance: int = 10) 
     ----------
     res_indicies : list
         The list of residue indices used in the pairwise analysis.
+        Parameter `residue_desired` passed to `filter_traj()`
     tick_distance : int, default = 10
         Distance between ticks in blocks of consecutive residues.
 
@@ -39,8 +66,16 @@ def create_axis_labels(res_indicies: typing.ArrayLike, tick_distance: int = 10) 
     tick_labels : list
         List of labels to place at the adjacent tick locations.
 
+    See Also
+    --------
+    filter_traj : Filters an input trajectory to desired residues
+
     Examples
     --------
+    Residues 0-12,98-100 were used. The SSF will label 0,10,12,98,100,
+    provided in the second returned list. The first returned list gives 
+    the positions on the axes to place each label.
+
     >>> create_axis_labels([0,1,2,3,4,5,6,7,8,9,10,11,12,98,99,100])
     [0, 10, 12, 13, 15], [0, 10, 12, 98, 100]
 
@@ -75,14 +110,17 @@ def create_axis_labels(res_indicies: typing.ArrayLike, tick_distance: int = 10) 
     
     return tick_locations, tick_labels
         
-def display_arrays_as_video(numpy_arrays: list | typing.ArrayLike, res_indicies: typing.ArrayLike, 
+def display_arrays_as_video(numpy_arrays: list | typing.ArrayLike, res_indicies: typing.ArrayLike | str, 
                             seconds_per_frame: int = 10, tick_distance: int = 10,
                             outfile_prefix: str = '', scale_limits: tuple = (0, 7), outfile: str = '',
                             scale_style: str = 'bellcurve', xy_line: bool = True) -> None:
     """
-    Displays list/array of 2D NumPy arrays as matrix heatmaps.
+    Displays SSF data to output or writes SSF as a PNG
 
-    Takes list/array of 2D NumPy arrays and treats them as frames 
+    Visualizes the data for an SSF for a trajectory or a single frame.
+    Takes an SSF array outputted from `get_residue_distance_for_frame`,
+    `get_residue_distance_for_trajectory`,
+    or `system_stacking_fingerprints` and treats them as frames 
     in a video, filling in a grid at position i, j by the value 
     at i, j in the array.
 
@@ -90,8 +128,10 @@ def display_arrays_as_video(numpy_arrays: list | typing.ArrayLike, res_indicies:
     ----------
     numpy_arrays : array_like
         List or array of 2D NumPy arrays.
-    res_indicies : list
+    res_indicies : list or str
         The list of residue indices used in the pairwise analysis.
+        Parameter `residue_desired` passed to `filter_traj()`
+        Accepts smart-indexed str representing a list of residues (e.g '1-5,6,39-48')
     seconds_per_frame : int, default = 10
         Number of seconds to display each matrix for.
     tick_distance : int, default = 10
@@ -113,6 +153,40 @@ def display_arrays_as_video(numpy_arrays: list | typing.ArrayLike, res_indicies:
     -------
     None
         Displays video of NumPy arrays.
+
+    See Also
+    --------
+    create_axis_labels : Designates the axis labels to use in the SSF plot.
+    get_residue_distance_for_frame : Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.
+    get_residue_distance_for_trajectory : get SSF data for all frames of a trajectory
+    system_stacking_fingerprints : Alias for this `get_residue_distance_for_trajectory`
+    display_ssfs : Alias for this function.
+    
+    Examples
+    --------
+    >>> import stacker as st
+    >>> import mdtraj as md
+    >>> trajectory_file = 'stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd'
+    >>> topology_file = 'stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop'
+    >>> trj = md.load(trajectory_file, top = topology_file)
+    >>> residue_selection_query = 'resi 90 to 215'
+    >>> frames_to_include = [1,2,3,4,5]
+    >>> trj_sub = trj.atom_slice(trj.top.select(residue_selection_query))
+    >>> resSeqs = [res.resSeq for res in trj_sub.topology.residues]
+    >>> frames = st.get_residue_distance_for_trajectory(trj_sub, frames_to_include, threads = 5)
+
+    Frame 2 done.
+
+    Frame 3 done.
+
+    Frame 1 done.
+
+    Frame 5 done.
+
+    Frame 4 done.
+    
+    >>> st.display_arrays_as_video([st.get_frame_average(frames)], resSeqs, seconds_per_frame=10)
+    # Displays SSF for each frame of this trajectory to standard output
     """
     orange_colormap = mpl.colormaps['Oranges_r'].resampled(100)
 
@@ -139,6 +213,7 @@ def display_arrays_as_video(numpy_arrays: list | typing.ArrayLike, res_indicies:
         colorbar = fig.colorbar(neg, ax=ax, location='right', anchor=(0, 0.3), shrink=0.7)
         colorbar.ax.set_title('Center of\nGeometry\nDist. (Å)')
 
+        res_indicies = SmartIndexingAction.parse_smart_index(res_indicies)
         ticks, labels = create_axis_labels(res_indicies, tick_distance)
         plt.xticks(ticks, labels, rotation = 'vertical')
         plt.yticks(ticks, labels)
@@ -180,9 +255,17 @@ def display_arrays_as_video(numpy_arrays: list | typing.ArrayLike, res_indicies:
         colorbar.remove()
         frame_num+=1
 
+@functools.wraps(display_arrays_as_video)
+def display_ssfs(*args, **kwargs):
+    return display_arrays_as_video(*args, **kwargs)
+
+display_ssfs.__doc__ = f"""
+Alias for `display_arrays_as_video()`.
+"""
+
 def set_polar_grid() -> mpl.projections.polar.PolarAxes:
     """
-    Set up axes for polar plots.
+    Set up axes for PSF.
 
     Creates polar plot background for two-residue movement comparison
     with theta 0 to 360, a radial maximum of 15 Angstroms, and a visualization 
@@ -243,6 +326,29 @@ def visualize_two_residue_movement_scatterplot(csv_filepath: str, plot_outfile: 
     --------
     write_bottaro_to_csv : Creates CSV file that is inputted here
 
+    Examples
+    --------
+    >>> import stacker as st
+    >>> trajectory_file = 'testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd'
+    >>> topology_file = 'testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop'
+    >>> pdb_filename = 'testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb'
+    >>> output_csv_name = "testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv"
+    >>> perspective_residue = 426 # 1-indexed
+    >>> viewed_residue = 427 # 1-indexed
+    >>> st.filter_traj_to_pdb(trajectory_filename=trajectory_file, topology_filename=topology_file, output_pdb_filename=pdb_filename,
+    ...                        residues_desired={perspective_residue,viewed_residue}, atomnames_desired={"C2", "C4", "C6"})
+    WARNING: Residue Indices are expected to be 1-indexed
+    Reading trajectory...
+    Reading topology...
+    Filtering trajectory...
+    WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed
+    WARNING: Output file atom, residue, and chain indices are zero-indexed
+    Filtered trajectory written to:  testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb
+    >>> st.write_bottaro_to_csv(pdb_filename, output_csv_name, perspective_residue_num=perspective_residue, viewed_residue_num=viewed_residue)
+    Output values written to testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv
+    >>> st.visualize_two_residue_movement_scatterplot('testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv', 
+    ...                                                 plot_outfile='testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_10frames_scatter.png')
+
     """
     bottaro_values = pd.read_csv(csv_filepath, sep=',')
 
@@ -299,6 +405,29 @@ def visualize_two_residue_movement_heatmap(csv_filepath: str, plot_outfile: str 
     --------
     write_bottaro_to_csv : Creates CSV file that is inputted here
     
+    Examples
+    --------
+    >>> import stacker as st
+    >>> trajectory_file = 'testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd'
+    >>> topology_file = 'testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop'
+    >>> pdb_filename = 'testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb'
+    >>> output_csv_name = "testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv"
+    >>> perspective_residue = 426 # 1-indexed
+    >>> viewed_residue = 427 # 1-indexed
+    >>> st.filter_traj_to_pdb(trajectory_filename=trajectory_file, topology_filename=topology_file, output_pdb_filename=pdb_filename,
+    ...                        residues_desired={perspective_residue,viewed_residue}, atomnames_desired={"C2", "C4", "C6"})
+    WARNING: Residue Indices are expected to be 1-indexed
+    Reading trajectory...
+    Reading topology...
+    Filtering trajectory...
+    WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed
+    WARNING: Output file atom, residue, and chain indices are zero-indexed
+    Filtered trajectory written to:  testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb
+    >>> st.write_bottaro_to_csv(pdb_filename, output_csv_name, perspective_residue_num=perspective_residue, viewed_residue_num=viewed_residue)
+    Output values written to testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv
+    >>> st.visualize_two_residue_movement_heatmap('testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv', 
+    ...                                                 plot_outfile='testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_10frames_heat.png')
+
     """
     bottaro_values = pd.read_csv(csv_filepath, sep=',')
 
