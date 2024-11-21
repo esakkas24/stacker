@@ -570,6 +570,8 @@ of a provided <cite>atom_id</cite> in a residue <cite>residue_num</cite> at the 
 </dd>
 <dt><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a></dt><dd><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p>
 </dd>
+<dt><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a></dt><dd><p>Combines C2, C4, C6 positions with midpoint positions for a given frame</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Notes</p>
@@ -579,7 +581,7 @@ of a provided <cite>atom_id</cite> in a residue <cite>residue_num</cite> at the 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s1">&#39;testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span><span class="p">,</span> 
 <span class="gp">... </span>                             <span class="s1">&#39;testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span><span class="p">,</span> 
 <span class="gp">... </span>                             <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span><span class="s1">&#39;C6&#39;</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="o">&gt;&gt;&gt;</span> <span class="n">st</span><span class="o">.</span><span class="n">collect_atom_locations_by_frame</span><span class="p">(</span><span class="n">filtered_traj</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&gt;&gt;&gt;</span> <span class="n">st</span><span class="o">.</span><span class="n">collect_atom_locations_by_frame</span><span class="p">(</span><span class="n">filtered_traj</span><span class="p">,</span> <span class="n">residue_num</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">atom_id</span> <span class="o">=</span> <span class="s2">&quot;C2&quot;</span><span class="p">)</span>
 <span class="go">[(58.794, 59.636, 49.695), (59.185005, 58.797, 50.137), (59.379, 58.553005, 49.853), </span>
 <span class="go">(58.76, 59.068, 49.681), (59.003, 59.054, 49.878002), (59.049, 58.967, 50.051), </span>
 <span class="go">(59.219, 58.476006, 49.948), (58.948, 58.588005, 50.085), (58.922, 58.747, 49.766003), </span>

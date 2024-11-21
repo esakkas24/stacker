@@ -1676,6 +1676,8 @@ of a provided <cite>atom_id</cite> in a residue <cite>residue_num</cite> at the 
 </dd>
 <dt><a class="reference internal" href="stacker.residue_movement.html#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a></dt><dd><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p>
 </dd>
+<dt><a class="reference internal" href="stacker.residue_movement.html#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a></dt><dd><p>Combines C2, C4, C6 positions with midpoint positions for a given frame</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Notes</p>
@@ -1685,7 +1687,7 @@ of a provided <cite>atom_id</cite> in a residue <cite>residue_num</cite> at the 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s1">&#39;testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span><span class="p">,</span> 
 <span class="gp">... </span>                             <span class="s1">&#39;testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span><span class="p">,</span> 
 <span class="gp">... </span>                             <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span><span class="s1">&#39;C6&#39;</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="o">&gt;&gt;&gt;</span> <span class="n">st</span><span class="o">.</span><span class="n">collect_atom_locations_by_frame</span><span class="p">(</span><span class="n">filtered_traj</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&gt;&gt;&gt;</span> <span class="n">st</span><span class="o">.</span><span class="n">collect_atom_locations_by_frame</span><span class="p">(</span><span class="n">filtered_traj</span><span class="p">,</span> <span class="n">residue_num</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">atom_id</span> <span class="o">=</span> <span class="s2">&quot;C2&quot;</span><span class="p">)</span>
 <span class="go">[(58.794, 59.636, 49.695), (59.185005, 58.797, 50.137), (59.379, 58.553005, 49.853), </span>
 <span class="go">(58.76, 59.068, 49.681), (59.003, 59.054, 49.878002), (59.049, 58.967, 50.051), </span>
 <span class="go">(59.219, 58.476006, 49.948), (58.948, 58.588005, 50.085), (58.922, 58.747, 49.766003), </span>
@@ -1697,7 +1699,7 @@ of a provided <cite>atom_id</cite> in a residue <cite>residue_num</cite> at the 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.residue_movement.calc_center_3pts">
 <span class="sig-name descname"><span class="pre">calc_center_3pts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/residue_movement.html#calc_center_3pts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.residue_movement.calc_center_3pts" title="Link to this definition">#</a></dt>
-<dd><p>Finds the average x, y, z position of three x, y, z Vectors.</p>
+<dd><p>Finds the average x, y, z position of three (x, y, z) Vectors.</p>
 <p>Takes in three Vectors generated using the <cite>pdb.xyz</cite> method and finds their center. Works 
 with three points that make up a triangle (like those within a 6-member ring).</p>
 <dl class="field-list simple">
@@ -1718,6 +1720,25 @@ with three points that make up a triangle (like those within a 6-member ring).</
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="stacker.residue_movement.html#stacker.residue_movement.Base" title="stacker.residue_movement.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code></a></dt><dd><p>Python Class that represents a nucleotide base</p>
+</dd>
+<dt><a class="reference internal" href="stacker.residue_movement.html#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a></dt><dd><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p>
+</dd>
+<dt><a class="reference internal" href="stacker.residue_movement.html#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a></dt><dd><p>Combines C2, C4, C6 positions with midpoint positions for a given frame</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">calc_center_3pts</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">st</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">st</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+<span class="go">[ 1.0</span>
+<span class="go">  1.0</span>
+<span class="go">  1.0 ]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py class">
@@ -1792,6 +1813,13 @@ of the same residue at that frame.</p>
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="stacker.residue_movement.html#stacker.residue_movement.calc_center_3pts" title="stacker.residue_movement.calc_center_3pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_center_3pts</span></code></a></dt><dd><p>Finds the average x, y, z position of three (x, y, z) Vectors</p>
+</dd>
+</dl>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -1845,30 +1873,35 @@ the perspective residue in a single frame.</p>
 </dl>
 </dd>
 </dl>
+<p class="rubric">References</p>
+<p>[1] Sandro Bottaro, Francesco Di Palma, Giovanni Bussi, The role of nucleobase interactions in 
+RNA structure and dynamics, Nucleic Acids Research, Volume 42, Issue 21, 1 December 2014, 
+Pages 13306–13314, <a class="reference external" href="https://doi.org/10.1093/nar/gku972">https://doi.org/10.1093/nar/gku972</a></p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.residue_movement.write_bottaro_to_csv">
 <span class="sig-name descname"><span class="pre">write_bottaro_to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdb_filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_csv_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">perspective_residue_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">viewed_residue_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res1_atom_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'C2',</span> <span class="pre">'C4',</span> <span class="pre">'C6'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res2_atom_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'C2',</span> <span class="pre">'C4',</span> <span class="pre">'C6'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/residue_movement.html#write_bottaro_to_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.residue_movement.write_bottaro_to_csv" title="Link to this definition">#</a></dt>
-<dd><p>Write the Bottaro r, rho, and theta values from a trajectory PDB to a CSV.</p>
+<dd><p>Write the r, rho, and theta values used to make a Pairwise Stacking Fingerprint (PSF)
+from a trajectory PDB to a CSV.</p>
 <p>Calculates the r, rho, and theta values as described in Bottaro et al. from a
 perspective nucleotide residue to a viewed nucleotide residue per frame. Writes the 
 results to a CSV file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>pdb_filename</strong><span class="classifier">str</span></dt><dd><p>Name of PDB containing information for ONLY two residues (perspective and viewed
+<dt><strong>pdb_filename</strong><span class="classifier">str</span></dt><dd><p>Filename of PDB containing information for ONLY two residues (perspective and viewed
 nucleotide) at each frame.</p>
 </dd>
 <dt><strong>output_csv_name</strong><span class="classifier">str</span></dt><dd><p>Filename of CSV file to write to.</p>
 </dd>
 <dt><strong>perspective_residue_num</strong><span class="classifier">int, default = -1</span></dt><dd><p>Residue index of the perspective residue whose plane to project onto (0-/1-index changed by
-index variable, default 1-indexed). If -1, a 2-residue PDB is assumed and perspective id is
+<cite>index</cite> variable, default 1-indexed). If -1, a 2-residue PDB is assumed and perspective id is
 the first res_id.</p>
 </dd>
-<dt><strong>viewed_residue_num</strong><span class="classifier">int, default = -1</span></dt><dd><p>Residue index of the viewed residue whose midpoint to project to pers_res plane (0-/1-index changed by
-index variable, default 1-indexed). If -1, a 2-residue PDB is assumed and viewed id is
-the second res_id.</p>
+<dt><strong>viewed_residue_num</strong><span class="classifier">int, default = -1</span></dt><dd><p>Residue index of the viewed residue whose midpoint to project to perspective residue plane 
+(0-/1-index changed by index variable, default 1-indexed). If -1, a 2-residue PDB is assumed 
+and viewed id is the second res_id.</p>
 </dd>
 <dt><strong>res1_atom_names</strong><span class="classifier">set, default = {“C2”, “C4”, “C6”}</span></dt><dd><p>Set of the atom names (e.g., “C2”, “C4”, “C6”) to use from
 residue 1 to find center of geometry for perspective nucleotide.</p>
@@ -1882,10 +1915,53 @@ cpptraj uses 1-indexed residues. mdtraj PDB outputs will be 0-indexed.</p>
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj_to_pdb</span></code></dt><dd><p>convert a trajectory and topology file into a single filtered PDB file to input here</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">visualize_two_residue_movement_scatterplot</span></code></dt><dd><p>Visualize Output CSV data as a PSF scatterplot from this data</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">visualize_two_residue_movement_heatmat</span></code></dt><dd><p>Visualize Output CSV data as a PSF heatmap from this data</p>
+</dd>
+</dl>
+</div>
 <p class="rubric">References</p>
 <p>[1] Sandro Bottaro, Francesco Di Palma, Giovanni Bussi, The role of nucleobase interactions in 
 RNA structure and dynamics, Nucleic Acids Research, Volume 42, Issue 21, 1 December 2014, 
 Pages 13306–13314, <a class="reference external" href="https://doi.org/10.1093/nar/gku972">https://doi.org/10.1093/nar/gku972</a></p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trajectory_file</span> <span class="o">=</span> <span class="s1">&#39;testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">topology_file</span> <span class="o">=</span> <span class="s1">&#39;testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pdb_filename</span> <span class="o">=</span> <span class="s1">&#39;testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output_csv_name</span> <span class="o">=</span> <span class="s2">&quot;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">perspective_residue</span> <span class="o">=</span> <span class="mi">426</span> <span class="c1"># 1-indexed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viewed_residue</span> <span class="o">=</span> <span class="mi">427</span> <span class="c1"># 1-indexed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="o">=</span><span class="n">trajectory_file</span><span class="p">,</span> <span class="n">topology_filename</span><span class="o">=</span><span class="n">topology_file</span><span class="p">,</span> <span class="n">output_pdb_filename</span><span class="o">=</span><span class="n">pdb_filename</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">residues_desired</span><span class="o">=</span><span class="p">{</span><span class="n">perspective_residue</span><span class="p">,</span><span class="n">viewed_residue</span><span class="p">},</span> <span class="n">atomnames_desired</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
+<span class="go">WARNING: Residue Indices are expected to be 1-indexed</span>
+<span class="go">Reading trajectory...</span>
+<span class="go">Reading topology...</span>
+<span class="go">Filtering trajectory...</span>
+<span class="go">WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed</span>
+<span class="go">WARNING: Output file atom, residue, and chain indices are zero-indexed</span>
+<span class="go">Filtered trajectory written to:  testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">write_bottaro_to_csv</span><span class="p">(</span><span class="n">pdb_filename</span><span class="p">,</span> <span class="n">output_csv_name</span><span class="p">,</span> <span class="n">perspective_residue_num</span><span class="o">=</span><span class="n">perspective_residue</span><span class="p">,</span> <span class="n">viewed_residue_num</span><span class="o">=</span><span class="n">viewed_residue</span><span class="p">)</span>
+<span class="go">Output values written to testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">output_csv_name</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()[:</span><span class="mi">10</span><span class="p">]))</span>
+<span class="go">frame,r_dist,rho_dist,theta</span>
+<span class="go">0,7.5253415,6.5321836,204.02934901525177</span>
+<span class="go">1,6.884639,6.0513134,199.40647902703924</span>
+<span class="go">2,7.301847,6.151191,205.1906453260924</span>
+<span class="go">3,6.5815425,5.461494,199.5421877249345</span>
+<span class="go">4,7.0760417,5.3919506,204.0150121540755</span>
+<span class="go">5,7.2589145,6.3483577,201.32674968542617</span>
+<span class="go">6,7.4929285,6.414151,205.92967194025135</span>
+<span class="go">7,7.1484976,6.035165,202.88441276229827</span>
+<span class="go">8,7.344863,5.541237,217.30043061558888</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
@@ -2190,6 +2266,13 @@ png, pdf, ps, eps, and svg supported.</p>
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_bottaro_to_csv</span></code></dt><dd><p>Creates CSV file that is inputted here</p>
+</dd>
+</dl>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -2218,6 +2301,13 @@ png, pdf, ps, eps, and svg supported.</p>
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_bottaro_to_csv</span></code></dt><dd><p>Creates CSV file that is inputted here</p>
+</dd>
+</dl>
+</div>
 </dd></dl>
 
 </section>

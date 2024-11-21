@@ -238,7 +238,11 @@ def visualize_two_residue_movement_scatterplot(csv_filepath: str, plot_outfile: 
     Returns
     -------
     None
-    
+
+    See Also
+    --------
+    write_bottaro_to_csv : Creates CSV file that is inputted here
+
     """
     bottaro_values = pd.read_csv(csv_filepath, sep=',')
 
@@ -290,6 +294,10 @@ def visualize_two_residue_movement_heatmap(csv_filepath: str, plot_outfile: str 
     Returns
     -------
     None
+
+    See Also
+    --------
+    write_bottaro_to_csv : Creates CSV file that is inputted here
     
     """
     bottaro_values = pd.read_csv(csv_filepath, sep=',')
@@ -329,17 +337,17 @@ def visualize_two_residue_movement_heatmap(csv_filepath: str, plot_outfile: str 
 
 if __name__ == '__main__':
     # 10 frame test
-    visualize_two_residue_movement_scatterplot('testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv')
+    visualize_two_residue_movement_scatterplot('stacker/testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv')
 
     # Multi-frame test
-    visualize_two_residue_movement_scatterplot('testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv')
+    visualize_two_residue_movement_scatterplot('stacker/testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv')
 
     # Multi-frame heatmap test
-    visualize_two_residue_movement_heatmap('testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv')
+    visualize_two_residue_movement_heatmap('stacker/testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv')
 
     # Write to outfile tests
-    output = "testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_3200frames_scatter.png"
+    output = "stacker/testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_3200frames_scatter.png"
     create_parent_directories(output)
-    visualize_two_residue_movement_scatterplot('testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv', plot_outfile='testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_3200frames_scatter.png')
-    visualize_two_residue_movement_heatmap('testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv', plot_outfile='testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_3200frames_heatmap.png')
+    visualize_two_residue_movement_scatterplot('stacker/testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv', plot_outfile='testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_3200frames_scatter.png')
+    visualize_two_residue_movement_heatmap('stacker/testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv', plot_outfile='testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_3200frames_heatmap.png')
 

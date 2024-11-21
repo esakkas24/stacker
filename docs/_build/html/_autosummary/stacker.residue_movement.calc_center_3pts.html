@@ -542,7 +542,7 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.residue_movement.calc_center_3pts">
 <span class="sig-name descname"><span class="pre">calc_center_3pts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/residue_movement.html#calc_center_3pts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.residue_movement.calc_center_3pts" title="Link to this definition">#</a></dt>
-<dd><p>Finds the average x, y, z position of three x, y, z Vectors.</p>
+<dd><p>Finds the average x, y, z position of three (x, y, z) Vectors.</p>
 <p>Takes in three Vectors generated using the <cite>pdb.xyz</cite> method and finds their center. Works 
 with three points that make up a triangle (like those within a 6-member ring).</p>
 <dl class="field-list simple">
@@ -563,6 +563,25 @@ with three points that make up a triangle (like those within a 6-member ring).</
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.Base" title="stacker.residue_movement.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code></a></dt><dd><p>Python Class that represents a nucleotide base</p>
+</dd>
+<dt><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a></dt><dd><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p>
+</dd>
+<dt><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a></dt><dd><p>Combines C2, C4, C6 positions with midpoint positions for a given frame</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">calc_center_3pts</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">st</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">st</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+<span class="go">[ 1.0</span>
+<span class="go">  1.0</span>
+<span class="go">  1.0 ]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
