@@ -30,7 +30,8 @@ extensions = [
     'sphinx.ext.graphviz',
     'sphinx.ext.ifconfig',
     'matplotlib.sphinxext.plot_directive',
-    'sphinx.ext.mathjax'
+    'sphinx.ext.mathjax',
+    'sphinx_design',
     ]
 
 autosummary_generate = True
@@ -65,32 +66,25 @@ html_use_modindex = True
 html_copy_source = False
 html_domain_indices = False
 html_file_suffix = '.html'
-html_logo = 'images/stackerlogo.png'
 html_title = "StACKER Documentation"
 
 html_theme_options = {
-    "logo" : {
-        "image_light" : "images/stackerlogo.png",
-        "image_dark" : "images/stacker_logo_dark.png"
+    "logo": {
+        "image_light": "images/stackerlogo.svg",
+        "image_dark": "images/stacker_logo_dark.png",
     },
+    "home_page_in_toc": True,
     "icon_links" : [
         {
             "name" : "PyPI",
             "url" : "https://pypi.org/project/pistacker/",
-            "type": "fontawesome",
-            
+            "type": "url",
+            "icon" : "https://raw.githubusercontent.com/esakkas24/stacker/refs/heads/main/docs/images/pypi.svg"
         }
     ],
     "github_url" : "https://github.com/esakkas24/stacker",
     "repository_url" : "https://github.com/esakkas24/stacker",
     "use_repository_button" : True,
     "collapse_navigation": True,
-    "header_links_before_dropdown": 6,
-    # Add light/dark mode and documentation version switcher:
-    "navbar_end": [
-        "search-button",
-        "theme-switcher",
-        "navbar-icon-links"
-    ],
-    "navbar_persistent": []
 }
+

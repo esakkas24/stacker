@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -45,6 +46,7 @@
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/stacker.pairwise_distance.MultiFrameTraj';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -93,61 +95,6 @@
 
   
     <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-<div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    
-    <div class="navbar-header-items__end">
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button></div>
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">GitHub</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
-</div>
-
     </header>
   
 
@@ -165,40 +112,6 @@
     
     
     
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button></div>
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">GitHub</span></a>
-        </li>
-</ul></div>
-        
-      </div>
     
   </div>
   
@@ -220,7 +133,7 @@
       
     
     
-    <img src="../_static/stackerlogo.png" class="logo__image only-light" alt="StACKER Documentation - Home"/>
+    <img src="../_static/stackerlogo.svg" class="logo__image only-light" alt="StACKER Documentation - Home"/>
     <img src="../_static/stacker_logo_dark.png" class="logo__image only-dark pst-js-only" alt="StACKER Documentation - Home"/>
   
   
@@ -239,6 +152,17 @@
           <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/pistacker/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://raw.githubusercontent.com/esakkas24/stacker/refs/heads/main/docs/images/pypi.svg" class="icon-link-image" alt="PyPI"/></a>
+        </li>
 </ul></div>
         <div class="sidebar-primary-item">
 
@@ -249,7 +173,23 @@
 </button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="current nav bd-sidenav">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    StACKER documentation
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../stacker.html">Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stacker.file_manipulation.html">Load and Filter Trajectories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stacker.pairwise_distance.html">Create System Stacking Fingerprints (SSFs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stacker.residue_movement.html">Create Pairwise Stacking Fingerprints (PSFs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stacker.visualization.html">Visualize Data</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="stacker.html">stacker</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="stacker.block_printing.html">stacker.block_printing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.bottaro_routine.html">stacker.bottaro_routine</a></li>
