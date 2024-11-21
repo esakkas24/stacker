@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -585,17 +585,25 @@ is not already provided.</p></li>
 </ul>
 <p class="rubric">Examples</p>
 <p>Command-line usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3 stacker.py -s bottaro 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ stacker -s bottaro 
     -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
     -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
     -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb 
     -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv 
-    -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt scatter
+    -p 426 
+    -v 427 
+    -pa C2,C4,C6 
+    -va C2,C4,C6 
+    -pt scatter
 
-$ python3 stacker.py -s bottaro 
+$ stacker -s bottaro 
     -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb 
     -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv 
-    -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat
+    -p 426 
+    -v 427 
+    -pa C2,C4,C6 
+    -va C2,C4,C6 
+    -pt heat
 </pre></div>
 </div>
 </dd></dl>

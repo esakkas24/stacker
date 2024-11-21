@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -581,10 +581,12 @@ and calculates the distances for either a single frame or multiple frames if boo
 </ul>
 <p class="rubric">Examples</p>
 <p>Command-line usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3 stacker.py -s res_distance 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ stacker -s res_distance 
     -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
     -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
-    -f 2 --residues 426,427 --atom_names C2,C4,C6
+    -f 2 
+    --residues 426,427 
+    --atom_names C2,C4,C6
 </pre></div>
 </div>
 </dd></dl>

@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -494,102 +494,6 @@
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">random</span>
 
-<div class="viewcode-block" id="InvalidRoutine">
-<a class="viewcode-back" href="../stacker.html#stacker.InvalidRoutine">[docs]</a>
-<span class="k">class</span> <span class="nc">InvalidRoutine</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;Specified command line routine was invalid</span>
-
-<span class="sd">    This is raised when the `stacker -s ROUTINE` was given</span>
-<span class="sd">    an invalid ROUTINE.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    Command Line::</span>
-
-<span class="sd">        $ stacker -s blah</span>
-
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">pass</span></div>
-
-
-<div class="viewcode-block" id="ResEmpty">
-<a class="viewcode-back" href="../stacker.html#stacker.ResEmpty">[docs]</a>
-<span class="k">class</span> <span class="nc">ResEmpty</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;No Residues to subset to were provided</span>
-
-<span class="sd">    This is raised when a routine is given an invalid</span>
-<span class="sd">    number of residues to subset to.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-
-<span class="sd">    Command Line::</span>
-
-<span class="sd">        $ stacker -s filter_traj -r -a C2,C4,C6</span>
-<span class="sd">    </span>
-<span class="sd">    See Also</span>
-<span class="sd">    --------</span>
-<span class="sd">    fiter_traj_routine</span>
-<span class="sd">    bottaro_routine</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">pass</span></div>
-
-
-<div class="viewcode-block" id="AtomEmpty">
-<a class="viewcode-back" href="../stacker.html#stacker.AtomEmpty">[docs]</a>
-<span class="k">class</span> <span class="nc">AtomEmpty</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;No Atomnames to subset to were provided</span>
-
-<span class="sd">    This is raised when a routine is given an invalid</span>
-<span class="sd">    number of atomnames to subset to.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-
-<span class="sd">    Command Line::</span>
-
-<span class="sd">        $ stacker -s filter_traj -a -r 426,427  </span>
-<span class="sd">    </span>
-<span class="sd">    See Also</span>
-<span class="sd">    --------</span>
-<span class="sd">    fiter_traj_routine</span>
-<span class="sd">    bottaro_routine</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">pass</span></div>
-
-
-<div class="viewcode-block" id="FrameEmpty">
-<a class="viewcode-back" href="../stacker.html#stacker.FrameEmpty">[docs]</a>
-<span class="k">class</span> <span class="nc">FrameEmpty</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;No Frames present in trajectory&quot;&quot;&quot;</span>
-    <span class="k">pass</span></div>
-
-
-<div class="viewcode-block" id="block_printing">
-<a class="viewcode-back" href="../stacker.html#stacker.block_printing">[docs]</a>
-<span class="k">def</span> <span class="nf">block_printing</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;Disable printing to standard output</span>
-<span class="sd">    </span>
-<span class="sd">    References</span>
-<span class="sd">    ----------</span>
-<span class="sd">    [1] https://stackoverflow.com/a/8391735</span>
-
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">devnull</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="enable_printing">
-<a class="viewcode-back" href="../stacker.html#stacker.enable_printing">[docs]</a>
-<span class="k">def</span> <span class="nf">enable_printing</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;Enable printing to standard output</span>
-<span class="sd">    </span>
-<span class="sd">    References</span>
-<span class="sd">    ----------</span>
-<span class="sd">    [1] https://stackoverflow.com/a/8391735</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">__stdout__</span></div>
-
-
 <div class="viewcode-block" id="run_python_command">
 <a class="viewcode-back" href="../stacker.html#stacker.run_python_command">[docs]</a>
 <span class="k">def</span> <span class="nf">run_python_command</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -655,7 +559,7 @@
     <span class="c1">## Determines which script/subroutine is to be run</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">script</span> <span class="o">==</span> <span class="s1">&#39;filter_traj&#39;</span><span class="p">:</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Filters trajectory and topology files to desired residue numbers and atom names and outputs to a PDB</span><span class="se">\n\n</span><span class="s1">Examples:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
-                            <span class="s1">&#39;[user]$ python3 stacker.py -s filter_traj -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -r 426,427 -a C2,C4,C6&#39;</span>
+                            <span class="s1">&#39;[user]$ stacker -s filter_traj -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -r 426,427 -a C2,C4,C6&#39;</span>
         
         <span class="n">required_group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s1">&#39;Required Arguments&#39;</span><span class="p">)</span>
         <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-trj&quot;</span><span class="p">,</span> <span class="s2">&quot;--trajectory&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;TRAJECTORY_FILENAME&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filepath to trajectory file for the MD simulation&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -669,8 +573,8 @@
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">script</span> <span class="o">==</span> <span class="s1">&#39;bottaro&#39;</span> <span class="ow">or</span> <span class="n">args</span><span class="o">.</span><span class="n">script</span> <span class="o">==</span> <span class="s1">&#39;pairwise&#39;</span> <span class="ow">or</span> <span class="n">args</span><span class="o">.</span><span class="n">script</span> <span class="o">==</span> <span class="s1">&#39;psf&#39;</span><span class="p">:</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Create Polar Stacking Fingerprint (PSF) of the movement of a &quot;viewed residue&quot; from the perspective of a &quot;perspective residue&quot;</span><span class="se">\n</span><span class="s1">like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972). Creates CSV of these values&#39;</span> <span class="o">+</span> \
                                 <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Examples:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
-                                <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">[user]$ python3 stacker.py -s bottaro -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt scatter</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
-                            <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">[user]$ python3 stacker.py -s bottaro -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat&#39;</span>
+                                <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">[user]$ stacker -s bottaro -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt scatter</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
+                            <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">[user]$ stacker -s bottaro -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat&#39;</span>
         
         <span class="n">required_group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s1">&#39;Required Arguments&#39;</span><span class="p">)</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-trj&quot;</span><span class="p">,</span> <span class="s2">&quot;--trajectory&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;TRAJECTORY_FILENAME&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filepath to trajectory file for the MD simulation, if empty then 2-residue PDB expected&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
@@ -690,7 +594,7 @@
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">script</span> <span class="o">==</span> <span class="s1">&#39;res_distance&#39;</span><span class="p">:</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Get the distance between two residues in a given frame</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
                                 <span class="s1">&#39;Examples:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
-                                <span class="s1">&#39;[user]$ python3 stacker.py -s res_distance -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -f 2 --residues 426,427 --atom_names C2,C4,C6&#39;</span>
+                                <span class="s1">&#39;[user]$ stacker -s res_distance -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -f 2 --residues 426,427 --atom_names C2,C4,C6&#39;</span>
         <span class="n">required_group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s1">&#39;Required Arguments&#39;</span><span class="p">)</span>
         <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-trj&quot;</span><span class="p">,</span> <span class="s2">&quot;--trajectory&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;TRAJECTORY_FILENAME&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filepath to trajectory file for the MD simulation&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">required_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-top&quot;</span><span class="p">,</span> <span class="s2">&quot;--topology&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;TOPOLOGY_FILENAME&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filepath to Topology file for the MD simulation&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -808,7 +712,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    Command-line usage with sample arguments::</span>
 
-<span class="sd">        $ python3 stacker.py </span>
+<span class="sd">        $ stacker </span>
 <span class="sd">            -s filter_traj </span>
 <span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd </span>
 <span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop </span>
@@ -872,18 +776,26 @@
 <span class="sd">    --------</span>
 <span class="sd">    Command-line usage::</span>
 
-<span class="sd">        $ python3 stacker.py -s bottaro </span>
+<span class="sd">        $ stacker -s bottaro </span>
 <span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd </span>
 <span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop </span>
 <span class="sd">            -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb </span>
 <span class="sd">            -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv </span>
-<span class="sd">            -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt scatter</span>
+<span class="sd">            -p 426 </span>
+<span class="sd">            -v 427 </span>
+<span class="sd">            -pa C2,C4,C6 </span>
+<span class="sd">            -va C2,C4,C6 </span>
+<span class="sd">            -pt scatter</span>
 
 <span class="sd">    </span>
-<span class="sd">        $ python3 stacker.py -s bottaro </span>
+<span class="sd">        $ stacker -s bottaro </span>
 <span class="sd">            -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb </span>
 <span class="sd">            -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv </span>
-<span class="sd">            -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat</span>
+<span class="sd">            -p 426 </span>
+<span class="sd">            -v 427 </span>
+<span class="sd">            -pa C2,C4,C6 </span>
+<span class="sd">            -va C2,C4,C6 </span>
+<span class="sd">            -pt heat</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
@@ -891,6 +803,8 @@
 <span class="sd">    write_bottaro_to_csv : Writes residue movement calculations to a CSV.</span>
 <span class="sd">    visualize_two_residue_movement_heatmap : Creates a heatmap for residue movement.</span>
 <span class="sd">    visualize_two_residue_movement_scatterplot : Creates a scatter plot for residue movement.</span>
+
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">trj_prefix</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> 
 
@@ -988,10 +902,12 @@
 <span class="sd">    --------</span>
 <span class="sd">    Command-line usage::</span>
 
-<span class="sd">        $ python3 stacker.py -s res_distance </span>
+<span class="sd">        $ stacker -s res_distance </span>
 <span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd </span>
 <span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop </span>
-<span class="sd">            -f 2 --residues 426,427 --atom_names C2,C4,C6</span>
+<span class="sd">            -f 2 </span>
+<span class="sd">            --residues 426,427 </span>
+<span class="sd">            --atom_names C2,C4,C6</span>
 
 <span class="sd">    Outputs</span>
 <span class="sd">    -------</span>
@@ -1084,15 +1000,18 @@
 <span class="sd">    --------</span>
 <span class="sd">    Command-line usage::</span>
 
-<span class="sd">        $ python3 stacker.py -s system </span>
+<span class="sd">        $ stacker -s system </span>
 <span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd </span>
 <span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop </span>
-<span class="sd">            -r 90-215 -fl 1-2 </span>
+<span class="sd">            -r 90-215 </span>
+<span class="sd">            -fl 1-2 </span>
 
-<span class="sd">        $ python3 stacker.py -s ssf </span>
+<span class="sd">        $ stacker -s ssf </span>
 <span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd </span>
 <span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop </span>
-<span class="sd">            -r 90-215 -fl 1-2 -g 10 </span>
+<span class="sd">            -r 90-215 </span>
+<span class="sd">            -fl 1-2 </span>
+<span class="sd">            -g 10 </span>
 <span class="sd">            -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png </span>
 <span class="sd">            -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt</span>
 
@@ -1188,6 +1107,7 @@
 <span class="sd">    &gt;&gt;&gt; st.combine_frames(frames_A, frames_B)</span>
 <span class="sd">    array([[9., 2., 3.],</span>
 <span class="sd">           [6., 5., 6.],</span>
+
 <span class="sd">           [3., 2., 1.]])</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1233,17 +1153,23 @@
 <span class="sd">        $ stacker -s stack_events </span>
 <span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd </span>
 <span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop </span>
-<span class="sd">            -r 90-215 -f 1 -n 5</span>
+<span class="sd">            -r 90-215 </span>
+<span class="sd">            -f 1 </span>
+<span class="sd">            -n 5</span>
 
 <span class="sd">        $ stacker -s stack_events </span>
 <span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd </span>
 <span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop </span>
-<span class="sd">            -r 90-100 -fl 1-10 -n 5</span>
+<span class="sd">            -r 90-100 </span>
+<span class="sd">            -fl 1-10 </span>
+<span class="sd">            -n 5</span>
 
 <span class="sd">        $ stacker -s stack_events </span>
 <span class="sd">            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd </span>
 <span class="sd">            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop </span>
-<span class="sd">            -r 90-215 -n 5 -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt</span>
+<span class="sd">            -r 90-215 </span>
+<span class="sd">            -n 5 </span>
+<span class="sd">            -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
@@ -1305,7 +1231,8 @@
 <span class="sd">        $ stacker -s compare </span>
 <span class="sd">            -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 </span>
 <span class="sd">            -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997 </span>
-<span class="sd">            -SA _tUAG_aCUA_+1GCU -SB _tUAG_aCUA_+1CGU</span>
+<span class="sd">            -SA _tUAG_aCUA_+1GCU </span>
+<span class="sd">            -SB _tUAG_aCUA_+1CGU</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -1387,6 +1314,103 @@
     <span class="n">subset_data</span> <span class="o">=</span> <span class="n">subset_data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Discrepancy&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">subset_data</span> <span class="o">=</span> <span class="n">subset_data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Value&#39;</span> <span class="o">+</span> <span class="n">file1_source</span> <span class="p">:</span> <span class="s1">&#39;AvgDist&#39;</span> <span class="o">+</span> <span class="n">file1_source</span><span class="p">,</span> <span class="s1">&#39;Value&#39;</span> <span class="o">+</span> <span class="n">file2_source</span> <span class="p">:</span> <span class="s1">&#39;AvgDist&#39;</span> <span class="o">+</span> <span class="n">file2_source</span><span class="p">})</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">subset_data</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="InvalidRoutine">
+<a class="viewcode-back" href="../stacker.html#stacker.InvalidRoutine">[docs]</a>
+<span class="k">class</span> <span class="nc">InvalidRoutine</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Specified command line routine was invalid</span>
+
+<span class="sd">    This is raised when the `stacker -s ROUTINE` was given</span>
+<span class="sd">    an invalid ROUTINE.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Command Line::</span>
+
+<span class="sd">        $ stacker -s blah</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="ResEmpty">
+<a class="viewcode-back" href="../stacker.html#stacker.ResEmpty">[docs]</a>
+<span class="k">class</span> <span class="nc">ResEmpty</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;No Residues to subset to were provided</span>
+
+<span class="sd">    This is raised when a routine is given an invalid</span>
+<span class="sd">    number of residues to subset to.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    Command Line::</span>
+
+<span class="sd">        $ stacker -s filter_traj -r -a C2,C4,C6</span>
+<span class="sd">    </span>
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    fiter_traj_routine</span>
+<span class="sd">    bottaro_routine</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="AtomEmpty">
+<a class="viewcode-back" href="../stacker.html#stacker.AtomEmpty">[docs]</a>
+<span class="k">class</span> <span class="nc">AtomEmpty</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;No Atomnames to subset to were provided</span>
+
+<span class="sd">    This is raised when a routine is given an invalid</span>
+<span class="sd">    number of atomnames to subset to.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    Command Line::</span>
+
+<span class="sd">        $ stacker -s filter_traj -a -r 426,427  </span>
+<span class="sd">    </span>
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    fiter_traj_routine</span>
+<span class="sd">    bottaro_routine</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="FrameEmpty">
+<a class="viewcode-back" href="../stacker.html#stacker.FrameEmpty">[docs]</a>
+<span class="k">class</span> <span class="nc">FrameEmpty</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;No Frames present in trajectory&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="block_printing">
+<a class="viewcode-back" href="../stacker.html#stacker.block_printing">[docs]</a>
+<span class="k">def</span> <span class="nf">block_printing</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Disable printing to standard output</span>
+<span class="sd">    </span>
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    [1] https://stackoverflow.com/a/8391735</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">devnull</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="enable_printing">
+<a class="viewcode-back" href="../stacker.html#stacker.enable_printing">[docs]</a>
+<span class="k">def</span> <span class="nf">enable_printing</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Enable printing to standard output</span>
+<span class="sd">    </span>
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    [1] https://stackoverflow.com/a/8391735</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">__stdout__</span></div>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>

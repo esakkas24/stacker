@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css?v=7f9a90b1" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -532,6 +532,9 @@
 <li class="toctree-l1"><a class="reference internal" href="stacker.html">stacker package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="stacker.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.html#module-stacker.file_manipulation">stacker.file_manipulation module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.file_manipulation.filter_traj"><code class="docutils literal notranslate"><span class="pre">filter_traj()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.file_manipulation.filter_traj_to_pdb"><code class="docutils literal notranslate"><span class="pre">filter_traj_to_pdb()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.file_manipulation.file_convert"><code class="docutils literal notranslate"><span class="pre">file_convert()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.file_manipulation.SmartIndexingAction"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.file_manipulation.SmartIndexingAction.parse_smart_index"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.parse_smart_index()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.file_manipulation.SmartIndexingAction.__init__"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.__init__()</span></code></a></li>
@@ -540,9 +543,6 @@
 <li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.file_manipulation.SmartIndexingAction.format_usage"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.format_usage()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.file_manipulation.filter_traj"><code class="docutils literal notranslate"><span class="pre">filter_traj()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.file_manipulation.filter_traj_to_pdb"><code class="docutils literal notranslate"><span class="pre">filter_traj_to_pdb()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.file_manipulation.file_convert"><code class="docutils literal notranslate"><span class="pre">file_convert()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.html#module-stacker.kmeans">stacker.kmeans module</a><ul>
@@ -555,13 +555,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.html#module-stacker.pairwise_distance">stacker.pairwise_distance module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.pairwise_distance.MultiFrameTraj"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.pairwise_distance.MultiFrameTraj.__init__"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.pairwise_distance.MultiFrameTraj.add_note"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.add_note()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.pairwise_distance.MultiFrameTraj.args"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.args</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.pairwise_distance.MultiFrameTraj.with_traceback"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.with_traceback()</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.pairwise_distance.calculate_residue_distance"><code class="docutils literal notranslate"><span class="pre">calculate_residue_distance()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_residue_distance_for_frame"><code class="docutils literal notranslate"><span class="pre">get_residue_distance_for_frame()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_residue_distance_for_trajectory"><code class="docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory()</span></code></a></li>
@@ -569,6 +562,13 @@
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_frame_average"><code class="docutils literal notranslate"><span class="pre">get_frame_average()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_top_stacking"><code class="docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.pairwise_distance.increment_residue"><code class="docutils literal notranslate"><span class="pre">increment_residue()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.pairwise_distance.MultiFrameTraj"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.pairwise_distance.MultiFrameTraj.__init__"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.pairwise_distance.MultiFrameTraj.add_note"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.add_note()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.pairwise_distance.MultiFrameTraj.args"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.args</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.pairwise_distance.MultiFrameTraj.with_traceback"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.with_traceback()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.html#module-stacker.residue_movement">stacker.residue_movement module</a><ul>
@@ -596,13 +596,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.html#module-stacker.visualization">stacker.visualization module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.visualization.NoResidues"><code class="docutils literal notranslate"><span class="pre">NoResidues</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.visualization.NoResidues.__init__"><code class="docutils literal notranslate"><span class="pre">NoResidues.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.visualization.NoResidues.add_note"><code class="docutils literal notranslate"><span class="pre">NoResidues.add_note()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.visualization.NoResidues.args"><code class="docutils literal notranslate"><span class="pre">NoResidues.args</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.visualization.NoResidues.with_traceback"><code class="docutils literal notranslate"><span class="pre">NoResidues.with_traceback()</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.visualization.create_parent_directories"><code class="docutils literal notranslate"><span class="pre">create_parent_directories()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.visualization.create_axis_labels"><code class="docutils literal notranslate"><span class="pre">create_axis_labels()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.visualization.display_arrays_as_video"><code class="docutils literal notranslate"><span class="pre">display_arrays_as_video()</span></code></a></li>
@@ -610,9 +603,25 @@
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.visualization.set_polar_grid"><code class="docutils literal notranslate"><span class="pre">set_polar_grid()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.visualization.visualize_two_residue_movement_scatterplot"><code class="docutils literal notranslate"><span class="pre">visualize_two_residue_movement_scatterplot()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.visualization.visualize_two_residue_movement_heatmap"><code class="docutils literal notranslate"><span class="pre">visualize_two_residue_movement_heatmap()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.visualization.NoResidues"><code class="docutils literal notranslate"><span class="pre">NoResidues</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.visualization.NoResidues.__init__"><code class="docutils literal notranslate"><span class="pre">NoResidues.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.visualization.NoResidues.add_note"><code class="docutils literal notranslate"><span class="pre">NoResidues.add_note()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.visualization.NoResidues.args"><code class="docutils literal notranslate"><span class="pre">NoResidues.args</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.visualization.NoResidues.with_traceback"><code class="docutils literal notranslate"><span class="pre">NoResidues.with_traceback()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.html#module-stacker">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.run_python_command"><code class="docutils literal notranslate"><span class="pre">run_python_command()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.convert_to_python_command"><code class="docutils literal notranslate"><span class="pre">convert_to_python_command()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.filter_traj_routine"><code class="docutils literal notranslate"><span class="pre">filter_traj_routine()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.bottaro_routine"><code class="docutils literal notranslate"><span class="pre">bottaro_routine()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.res_distance_routine"><code class="docutils literal notranslate"><span class="pre">res_distance_routine()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.system_routine"><code class="docutils literal notranslate"><span class="pre">system_routine()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.combine_frames"><code class="docutils literal notranslate"><span class="pre">combine_frames()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.stack_events_routine"><code class="docutils literal notranslate"><span class="pre">stack_events_routine()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.compare_routine"><code class="docutils literal notranslate"><span class="pre">compare_routine()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.InvalidRoutine"><code class="docutils literal notranslate"><span class="pre">InvalidRoutine</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.InvalidRoutine.__init__"><code class="docutils literal notranslate"><span class="pre">InvalidRoutine.__init__()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.html#stacker.InvalidRoutine.add_note"><code class="docutils literal notranslate"><span class="pre">InvalidRoutine.add_note()</span></code></a></li>
@@ -643,15 +652,6 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.block_printing"><code class="docutils literal notranslate"><span class="pre">block_printing()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.enable_printing"><code class="docutils literal notranslate"><span class="pre">enable_printing()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.run_python_command"><code class="docutils literal notranslate"><span class="pre">run_python_command()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.convert_to_python_command"><code class="docutils literal notranslate"><span class="pre">convert_to_python_command()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.filter_traj_routine"><code class="docutils literal notranslate"><span class="pre">filter_traj_routine()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.bottaro_routine"><code class="docutils literal notranslate"><span class="pre">bottaro_routine()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.res_distance_routine"><code class="docutils literal notranslate"><span class="pre">res_distance_routine()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.system_routine"><code class="docutils literal notranslate"><span class="pre">system_routine()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.combine_frames"><code class="docutils literal notranslate"><span class="pre">combine_frames()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.stack_events_routine"><code class="docutils literal notranslate"><span class="pre">stack_events_routine()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="stacker.html#stacker.compare_routine"><code class="docutils literal notranslate"><span class="pre">compare_routine()</span></code></a></li>
 </ul>
 </li>
 </ul>

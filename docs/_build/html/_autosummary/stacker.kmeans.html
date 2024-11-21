@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -546,29 +546,29 @@
                   
   <section id="module-stacker.kmeans">
 <span id="kmeans"></span><h1>kmeans<a class="headerlink" href="#module-stacker.kmeans" title="Link to this heading">#</a></h1>
-<p>Runs K Means Clustering and Principal Component Analysis</p>
+<p>Run K Means Clustering and Principal Component Analysis</p>
 <p>This module contains functions to run K Means Clustering on SSF
 results and visualize the clusters with barplots, silhouette analysis,
 and PCA scatterplots.</p>
 <p class="rubric">Functions</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a>(data_arrays)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a>(data_arrays)</p></td>
 <td><p>Blinds SSF Data (removes trajectory labels) for input to K Means</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#stacker.kmeans.plot_cluster_trj_data" title="stacker.kmeans.plot_cluster_trj_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_cluster_trj_data</span></code></a>(input_file, n_cluster, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.plot_cluster_trj_data" title="stacker.kmeans.plot_cluster_trj_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_cluster_trj_data</span></code></a>(input_file, n_cluster, ...)</p></td>
 <td><p>Plots the output of run_kmeans() to a PNG file.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.kmeans.plot_pca" title="stacker.kmeans.plot_pca"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_pca</span></code></a>(blinded_data[, n_clusters, coloring])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.plot_pca" title="stacker.kmeans.plot_pca"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_pca</span></code></a>(blinded_data[, n_clusters, coloring])</p></td>
 <td><p>Creates PCA Plot to compare systems in 2D</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#stacker.kmeans.plot_silhouette" title="stacker.kmeans.plot_silhouette"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_silhouette</span></code></a>(n_clusters, dataset)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.plot_silhouette" title="stacker.kmeans.plot_silhouette"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_silhouette</span></code></a>(n_clusters, dataset)</p></td>
 <td><p>Creates Silhouette plots to determine the best number of clusters</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a>(, data_path)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a>(, data_path)</p></td>
 <td><p>Reads and preprocesses SSF data for K Means analysis per dataset.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#stacker.kmeans.run_kmeans" title="stacker.kmeans.run_kmeans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_kmeans</span></code></a>(blinded_data, N_CLUSTERS[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.run_kmeans" title="stacker.kmeans.run_kmeans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_kmeans</span></code></a>(blinded_data, N_CLUSTERS[, ...])</p></td>
 <td><p>Performs KMeans clustering on blinded SSF data and saves the results.</p></td>
 </tr>
 </tbody>
@@ -614,7 +614,7 @@ outputted from <cite>-s ssf -d output.txt</cite></p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="../stacker.html#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a></dt><dd><p>Stacks SSF data into a single 2D Numpy array.</p>
+<dt><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a></dt><dd><p>Stacks SSF data into a single 2D Numpy array.</p>
 </dd>
 </dl>
 </div>
@@ -654,7 +654,7 @@ names and values are the processed data arrays.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="../stacker.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>Reads and preprocesses data for each dataset</p>
+<dt><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>Reads and preprocesses data for each dataset</p>
 </dd>
 </dl>
 </div>
@@ -701,9 +701,9 @@ Output of create_kmeans_input()</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="../stacker.html#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a></dt><dd><p>blinds SSF Data for input to K Means</p>
+<dt><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a></dt><dd><p>blinds SSF Data for input to K Means</p>
 </dd>
-<dt><a class="reference internal" href="../stacker.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>reads and preprocesses SSF data for K Means analysis per dataset</p>
+<dt><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>reads and preprocesses SSF data for K Means analysis per dataset</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">sklearn.decomposition.PCA</span></code></dt><dd><p>Runs PCA</p>
 </dd>
@@ -746,9 +746,9 @@ Output of create_kmeans_input()</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="../stacker.html#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a></dt><dd><p>blinds SSF Data for input to K Means</p>
+<dt><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a></dt><dd><p>blinds SSF Data for input to K Means</p>
 </dd>
-<dt><a class="reference internal" href="../stacker.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>reads and preprocesses SSF data for K Means analysis per dataset</p>
+<dt><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>reads and preprocesses SSF data for K Means analysis per dataset</p>
 </dd>
 </dl>
 </div>

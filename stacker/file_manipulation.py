@@ -6,104 +6,9 @@ converting trajectory filetype, and outputting Python trajectories
 to other filetypes (eg. prmtop, mdcrd, pdb)
 """
 
-
 import mdtraj as md
 from numpy import typing
 import argparse
-
-class SmartIndexingAction(argparse.Action):
-    '''
-    Custom argparse action to handle smart indexing of frame numbers.
-
-    Parses a comma-separated list of frame numbers with optional ranges (e.g., '1-20, 34, 25, 50-100')
-    and generates a list of individual frame numbers. Modifies the namespace by setting the attribute specified by the 'dest' parameter to the
-    list of individual frame numbers.
-
-    Parameters
-    ----------
-    parser: argparse.ArgumentParser
-        The argparse parser object.
-    namespace: argparse.Namespace
-        The argparse namespace.
-    values: str
-        The input string containing frame numbers and ranges.
-    option_string: str, default=None
-        The option string.
-
-    Attributes
-    ----------
-    dest : str
-        The attribute name in the namespace where the parsed list will be stored.
-
-    Methods
-    -------
-    __call__(parser, namespace, values, option_string=None)
-        Parses the provided string of values into a sorted list of integers and
-        sets it as an attribute in the namespace.
-
-    Examples
-    --------
-    >>> parser = argparse.ArgumentParser()
-    >>> parser.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze", required=False, action=SmartIndexingAction)
-    >>> args = parser.parse_args(["-fl", "1-20,34,25,50-100"])
-    >>> print(args.frame_list)
-    [1, 2, ..., 20, 34, 25, 50, 51, ..., 100]
-    
-    '''
-    def __call__(self, parser, namespace, values, option_string=None):
-        frame_list = []
-        for item in values.split(','):
-            if '-' in item:
-                start, end = map(int, item.split('-'))
-                frame_list.extend(range(start, end + 1))
-            else:
-                frame_list.append(int(item))
-        frame_list.sort()
-        setattr(namespace, self.dest, frame_list)
-    
-    @staticmethod
-    def parse_smart_index(value : str | set | typing.ArrayLike):
-        """
-        Checks that an inputted variable is a list that can be smart indexed
-        and indexes it if necessary.
-
-        Parameters
-        ----------
-        value : {str, set, list}
-            The input string containing ranges (e.g., "1-5,10,15-20")
-            or a set of integers.
-
-        Returns
-        -------
-        set
-            A set of integers parsed from the input.
-
-        Examples
-        --------
-        >>> import stacker as st
-        >>> st.SmartIndexingAction.parse_smart_index('1-5,8,12-17')
-        {1, 2, 3, 4, 5, 8, 12, 13, 14, 15, 16, 17}
-
-        Raises
-        ------
-        ValueError
-            If the input is not a string or set.
-        """
-        if isinstance(value, str):
-            parsed_set = set()
-            for item in value.split(','):
-                if '-' in item:
-                    start, end = map(int, item.split('-'))
-                    parsed_set.update(range(start, end + 1))
-                else:
-                    parsed_set.add(int(item))
-            return parsed_set
-        elif isinstance(value, set):
-            return value
-        elif isinstance(value, typing.ArrayLike):
-            return value
-        else:
-            raise ValueError("Input must be a string, list, or set of integers.")
 
 def filter_traj(trajectory_filename : str, topology_filename : str, 
                         residues_desired : str | set = {}, atomnames_desired : set = {}) -> md.Trajectory:
@@ -314,6 +219,101 @@ def file_convert(trajectory_filename: str, topology_filename: str, output_file: 
     trajectory = md.load(trajectory_filename, top = topology_filename)
     trajectory.save(output_file)
     print("Trajectory written to: ", output_file)
+
+class SmartIndexingAction(argparse.Action):
+    '''
+    Custom argparse action to handle smart indexing of frame numbers.
+
+    Parses a comma-separated list of frame numbers with optional ranges (e.g., '1-20, 34, 25, 50-100')
+    and generates a list of individual frame numbers. Modifies the namespace by setting the attribute specified by the 'dest' parameter to the
+    list of individual frame numbers.
+
+    Parameters
+    ----------
+    parser: argparse.ArgumentParser
+        The argparse parser object.
+    namespace: argparse.Namespace
+        The argparse namespace.
+    values: str
+        The input string containing frame numbers and ranges.
+    option_string: str, default=None
+        The option string.
+
+    Attributes
+    ----------
+    dest : str
+        The attribute name in the namespace where the parsed list will be stored.
+
+    Methods
+    -------
+    __call__(parser, namespace, values, option_string=None)
+        Parses the provided string of values into a sorted list of integers and
+        sets it as an attribute in the namespace.
+
+    Examples
+    --------
+    >>> parser = argparse.ArgumentParser()
+    >>> parser.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze", required=False, action=SmartIndexingAction)
+    >>> args = parser.parse_args(["-fl", "1-20,34,25,50-100"])
+    >>> print(args.frame_list)
+    [1, 2, ..., 20, 34, 25, 50, 51, ..., 100]
+    
+    '''
+    def __call__(self, parser, namespace, values, option_string=None):
+        frame_list = []
+        for item in values.split(','):
+            if '-' in item:
+                start, end = map(int, item.split('-'))
+                frame_list.extend(range(start, end + 1))
+            else:
+                frame_list.append(int(item))
+        frame_list.sort()
+        setattr(namespace, self.dest, frame_list)
+    
+    @staticmethod
+    def parse_smart_index(value : str | set | typing.ArrayLike):
+        """
+        Checks that an inputted variable is a list that can be smart indexed
+        and indexes it if necessary.
+
+        Parameters
+        ----------
+        value : {str, set, list}
+            The input string containing ranges (e.g., "1-5,10,15-20")
+            or a set of integers.
+
+        Returns
+        -------
+        set
+            A set of integers parsed from the input.
+
+        Examples
+        --------
+        >>> import stacker as st
+        >>> st.SmartIndexingAction.parse_smart_index('1-5,8,12-17')
+        {1, 2, 3, 4, 5, 8, 12, 13, 14, 15, 16, 17}
+
+        Raises
+        ------
+        ValueError
+            If the input is not a string or set.
+        """
+        if isinstance(value, str):
+            parsed_set = set()
+            for item in value.split(','):
+                if '-' in item:
+                    start, end = map(int, item.split('-'))
+                    parsed_set.update(range(start, end + 1))
+                else:
+                    parsed_set.add(int(item))
+            return parsed_set
+        elif isinstance(value, set):
+            return value
+        elif isinstance(value, typing.ArrayLike):
+            return value
+        else:
+            raise ValueError("Input must be a string, list, or set of integers.")
+
 
 if __name__ == "__main__":
     # filter_traj tests

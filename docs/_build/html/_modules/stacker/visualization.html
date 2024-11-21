@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css?v=7f9a90b1" />
   
   <!-- So that users can add custom icons -->
   <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -495,15 +495,8 @@
 <span class="kn">from</span> <span class="nn">seaborn</span> <span class="kn">import</span> <span class="n">kdeplot</span>
 <span class="kn">from</span> <span class="nn">.file_manipulation</span> <span class="kn">import</span> <span class="n">SmartIndexingAction</span>
 
-<div class="viewcode-block" id="NoResidues">
-<a class="viewcode-back" href="../../stacker.html#stacker.visualization.NoResidues">[docs]</a>
-<span class="k">class</span> <span class="nc">NoResidues</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised if user tries to make SSF with a trajectory of &lt;1 residue&quot;&quot;&quot;</span>
-    <span class="k">pass</span></div>
-
-
 <div class="viewcode-block" id="create_parent_directories">
-<a class="viewcode-back" href="../../stacker.html#stacker.visualization.create_parent_directories">[docs]</a>
+<a class="viewcode-back" href="../../stacker.visualization.html#stacker.visualization.create_parent_directories">[docs]</a>
 <span class="k">def</span> <span class="nf">create_parent_directories</span><span class="p">(</span><span class="n">outfile_prefix</span> <span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Creates necessary parent directories to write an outfile given a prefix</span>
@@ -526,7 +519,7 @@
 
 
 <div class="viewcode-block" id="create_axis_labels">
-<a class="viewcode-back" href="../../stacker.html#stacker.visualization.create_axis_labels">[docs]</a>
+<a class="viewcode-back" href="../../stacker.visualization.html#stacker.visualization.create_axis_labels">[docs]</a>
 <span class="k">def</span> <span class="nf">create_axis_labels</span><span class="p">(</span><span class="n">res_indicies</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="n">tick_distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Designates the axis labels to use in the SSF plot.</span>
@@ -599,7 +592,7 @@
 
         
 <div class="viewcode-block" id="display_arrays_as_video">
-<a class="viewcode-back" href="../../stacker.html#stacker.visualization.display_arrays_as_video">[docs]</a>
+<a class="viewcode-back" href="../../stacker.visualization.html#stacker.visualization.display_arrays_as_video">[docs]</a>
 <span class="k">def</span> <span class="nf">display_arrays_as_video</span><span class="p">(</span><span class="n">numpy_arrays</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="n">res_indicies</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> 
                             <span class="n">seconds_per_frame</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">tick_distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
                             <span class="n">outfile_prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">scale_limits</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">outfile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
@@ -677,6 +670,16 @@
 <span class="sd">    </span>
 <span class="sd">    &gt;&gt;&gt; st.display_arrays_as_video([st.get_frame_average(frames)], resSeqs, seconds_per_frame=10)</span>
 <span class="sd">    # Displays SSF for each frame of this trajectory to standard output</span>
+
+<span class="sd">    ```{figure} ../docs/images/pairwise_matrix.png</span>
+<span class="sd">    ---</span>
+<span class="sd">    width: 60%</span>
+<span class="sd">    figclass: margin-caption</span>
+<span class="sd">    alt: My figure text</span>
+<span class="sd">    name: myfig5</span>
+<span class="sd">    ---</span>
+<span class="sd">    And here is my figure caption, if you look to the left, you can see that COOL is in big red letters. But you probably already noticed that, really I am just taking up space to see how the margin caption looks like when it is really long :-).</span>
+<span class="sd">    ```</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">orange_colormap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="s1">&#39;Oranges_r&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">resampled</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 
@@ -747,7 +750,7 @@
 
 
 <div class="viewcode-block" id="display_ssfs">
-<a class="viewcode-back" href="../../stacker.html#stacker.visualization.display_ssfs">[docs]</a>
+<a class="viewcode-back" href="../../stacker.visualization.html#stacker.visualization.display_ssfs">[docs]</a>
 <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">display_arrays_as_video</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">display_ssfs</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">display_arrays_as_video</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
@@ -758,7 +761,7 @@
 <span class="s2">&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="set_polar_grid">
-<a class="viewcode-back" href="../../stacker.html#stacker.visualization.set_polar_grid">[docs]</a>
+<a class="viewcode-back" href="../../stacker.visualization.html#stacker.visualization.set_polar_grid">[docs]</a>
 <span class="k">def</span> <span class="nf">set_polar_grid</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">mpl</span><span class="o">.</span><span class="n">projections</span><span class="o">.</span><span class="n">polar</span><span class="o">.</span><span class="n">PolarAxes</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Set up axes for PSF.</span>
@@ -797,7 +800,7 @@
 
 
 <div class="viewcode-block" id="visualize_two_residue_movement_scatterplot">
-<a class="viewcode-back" href="../../stacker.html#stacker.visualization.visualize_two_residue_movement_scatterplot">[docs]</a>
+<a class="viewcode-back" href="../../stacker.visualization.html#stacker.visualization.visualize_two_residue_movement_scatterplot">[docs]</a>
 <span class="k">def</span> <span class="nf">visualize_two_residue_movement_scatterplot</span><span class="p">(</span><span class="n">csv_filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">plot_outfile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">frame_list</span><span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Creates scatterplot of two-residue movement relative to each other.</span>
@@ -879,7 +882,7 @@
 
 
 <div class="viewcode-block" id="visualize_two_residue_movement_heatmap">
-<a class="viewcode-back" href="../../stacker.html#stacker.visualization.visualize_two_residue_movement_heatmap">[docs]</a>
+<a class="viewcode-back" href="../../stacker.visualization.html#stacker.visualization.visualize_two_residue_movement_heatmap">[docs]</a>
 <span class="k">def</span> <span class="nf">visualize_two_residue_movement_heatmap</span><span class="p">(</span><span class="n">csv_filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">plot_outfile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">frame_list</span><span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Creates heatmap of two-residue movement relative to each other.</span>
@@ -965,6 +968,13 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plot_outfile</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="NoResidues">
+<a class="viewcode-back" href="../../stacker.visualization.html#stacker.visualization.NoResidues">[docs]</a>
+<span class="k">class</span> <span class="nc">NoResidues</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised if user tries to make SSF with a trajectory of &lt;1 residue&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>

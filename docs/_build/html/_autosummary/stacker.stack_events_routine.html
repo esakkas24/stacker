@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -578,17 +578,23 @@ with the smallest center of geometry (COG) distances, typically indicating stron
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ stacker -s stack_events 
     -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
     -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
-    -r 90-215 -f 1 -n 5
+    -r 90-215 
+    -f 1 
+    -n 5
 
 $ stacker -s stack_events 
     -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
     -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
-    -r 90-100 -fl 1-10 -n 5
+    -r 90-100 
+    -fl 1-10 
+    -n 5
 
 $ stacker -s stack_events 
     -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
     -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
-    -r 90-215 -n 5 -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
+    -r 90-215 
+    -n 5 
+    -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
 </pre></div>
 </div>
 </dd></dl>

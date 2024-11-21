@@ -18,15 +18,6 @@ import sys
 import concurrent.futures
 import functools
 
-class MultiFrameTraj(Exception):
-    """
-    A multi-frame trajectory is passed to a one-frame function
-
-    Raised if a multi-frame trajectory is passed to a function that
-    only works on one trajectory (eg. calculate_residue_distance_vector())
-    """
-    pass
-
 _NUCLEOTIDE_NAMES = {"A", "A5", "A3", "G", "G5", "G3", "C", "C5", "C3",
                      "T" "T5", "T3", "U", "U5", "U3", "INO"}
 
@@ -445,6 +436,16 @@ def increment_residue(residue_id : str) -> str:
     number_part = ''.join(filter(str.isdigit, residue_id))
     incremented_number = str(int(number_part) + 1)
     return letter_part + incremented_number
+
+
+class MultiFrameTraj(Exception):
+    """
+    A multi-frame trajectory is passed to a one-frame function
+
+    Raised if a multi-frame trajectory is passed to a function that
+    only works on one trajectory (eg. calculate_residue_distance_vector())
+    """
+    pass
 
 if __name__ == "__main__":
     trajectory_file = '../testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd'

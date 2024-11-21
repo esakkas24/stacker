@@ -16,10 +16,6 @@ import matplotlib.pyplot as plt
 from seaborn import kdeplot
 from .file_manipulation import SmartIndexingAction
 
-class NoResidues(Exception):
-    """Raised if user tries to make SSF with a trajectory of <1 residue"""
-    pass
-
 def create_parent_directories(outfile_prefix : str) -> None:
     '''
     Creates necessary parent directories to write an outfile given a prefix
@@ -187,6 +183,7 @@ def display_arrays_as_video(numpy_arrays: list | typing.ArrayLike, res_indicies:
     
     >>> st.display_arrays_as_video([st.get_frame_average(frames)], resSeqs, seconds_per_frame=10)
     # Displays SSF for each frame of this trajectory to standard output
+
     """
     orange_colormap = mpl.colormaps['Oranges_r'].resampled(100)
 
@@ -463,6 +460,10 @@ def visualize_two_residue_movement_heatmap(csv_filepath: str, plot_outfile: str 
         plt.savefig(plot_outfile)
     else:
         plt.show()
+
+class NoResidues(Exception):
+    """Raised if user tries to make SSF with a trajectory of <1 residue"""
+    pass
 
 if __name__ == '__main__':
     # 10 frame test

@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -585,15 +585,18 @@ or raw data for further analysis. The user can provide input fingerprints or gen
 </ul>
 <p class="rubric">Examples</p>
 <p>Command-line usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3 stacker.py -s system 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ stacker -s system 
     -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
     -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
-    -r 90-215 -fl 1-2 
+    -r 90-215 
+    -fl 1-2 
 
-$ python3 stacker.py -s ssf 
+$ stacker -s ssf 
     -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
     -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
-    -r 90-215 -fl 1-2 -g 10 
+    -r 90-215 
+    -fl 1-2 
+    -g 10 
     -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png 
     -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
 </pre></div>

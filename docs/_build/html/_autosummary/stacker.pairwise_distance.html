@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -527,13 +527,6 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj.__init__"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.__init__()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj.add_note"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.add_note()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj.args"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.args</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj.with_traceback"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.with_traceback()</span></code></a></li>
-</ul>
-</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.calculate_residue_distance"><code class="docutils literal notranslate"><span class="pre">calculate_residue_distance()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.get_residue_distance_for_frame"><code class="docutils literal notranslate"><span class="pre">get_residue_distance_for_frame()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.get_residue_distance_for_trajectory"><code class="docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory()</span></code></a></li>
@@ -541,6 +534,13 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.get_frame_average"><code class="docutils literal notranslate"><span class="pre">get_frame_average()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.get_top_stacking"><code class="docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.increment_residue"><code class="docutils literal notranslate"><span class="pre">increment_residue()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj.__init__"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj.add_note"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.add_note()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj.args"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.args</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj.with_traceback"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.with_traceback()</span></code></a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -562,25 +562,25 @@ different trajectories.</p>
 <p class="rubric">Functions</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.calculate_residue_distance" title="stacker.pairwise_distance.calculate_residue_distance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_residue_distance</span></code></a>(trajectory, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.calculate_residue_distance" title="stacker.pairwise_distance.calculate_residue_distance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_residue_distance</span></code></a>(trajectory, ...)</p></td>
 <td><p>Calculates the vector between two residues with x, y, z units in Angstroms.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.get_frame_average" title="stacker.pairwise_distance.get_frame_average"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_frame_average</span></code></a>(frames)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.get_frame_average" title="stacker.pairwise_distance.get_frame_average"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_frame_average</span></code></a>(frames)</p></td>
 <td><p>Calculates an average System Stacking Fingerprint (SSF) across multiple SSFs</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a>(trajectory, frame)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a>(trajectory, frame)</p></td>
 <td><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.get_residue_distance_for_trajectory" title="stacker.pairwise_distance.get_residue_distance_for_trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory</span></code></a>(...[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_trajectory" title="stacker.pairwise_distance.get_residue_distance_for_trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory</span></code></a>(...[, ...])</p></td>
 <td><p>Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_top_stacking</span></code></a>(trajectory, matrix[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_top_stacking</span></code></a>(trajectory, matrix[, ...])</p></td>
 <td><p>Returns top stacking residue pairs for a given System Stacking Fingerprint (SSF)</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.increment_residue" title="stacker.pairwise_distance.increment_residue"><code class="xref py py-obj docutils literal notranslate"><span class="pre">increment_residue</span></code></a>(residue_id)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.increment_residue" title="stacker.pairwise_distance.increment_residue"><code class="xref py py-obj docutils literal notranslate"><span class="pre">increment_residue</span></code></a>(residue_id)</p></td>
 <td><p>Increments residue ID by 1</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a>(trajectory, frames)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a>(trajectory, frames)</p></td>
 <td><p>Alias for <cite>get_residue_distance_for_trajectory()</cite>.</p></td>
 </tr>
 </tbody>
@@ -589,45 +589,12 @@ different trajectories.</p>
 <p class="rubric">Exceptions</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.MultiFrameTraj" title="stacker.pairwise_distance.MultiFrameTraj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiFrameTraj</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.MultiFrameTraj" title="stacker.pairwise_distance.MultiFrameTraj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiFrameTraj</span></code></a></p></td>
 <td><p>A multi-frame trajectory is passed to a one-frame function</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<dl class="py exception">
-<dt class="sig sig-object py" id="stacker.pairwise_distance.MultiFrameTraj">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultiFrameTraj</span></span><a class="reference internal" href="../_modules/stacker/pairwise_distance.html#MultiFrameTraj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.pairwise_distance.MultiFrameTraj" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
-<p>A multi-frame trajectory is passed to a one-frame function</p>
-<p>Raised if a multi-frame trajectory is passed to a function that
-only works on one trajectory (eg. calculate_residue_distance_vector())</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="stacker.pairwise_distance.MultiFrameTraj.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.pairwise_distance.MultiFrameTraj.__init__" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="stacker.pairwise_distance.MultiFrameTraj.add_note">
-<span class="sig-name descname"><span class="pre">add_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.pairwise_distance.MultiFrameTraj.add_note" title="Link to this definition">#</a></dt>
-<dd><p>Exception.add_note(note) –
-add a note to the exception</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="stacker.pairwise_distance.MultiFrameTraj.args">
-<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#stacker.pairwise_distance.MultiFrameTraj.args" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="stacker.pairwise_distance.MultiFrameTraj.with_traceback">
-<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.pairwise_distance.MultiFrameTraj.with_traceback" title="Link to this definition">#</a></dt>
-<dd><p>Exception.with_traceback(tb) –
-set self.__traceback__ to tb and return self.</p>
-</dd></dl>
-
-</dd></dl>
-
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.pairwise_distance.calculate_residue_distance">
 <span class="sig-name descname"><span class="pre">calculate_residue_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res1_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res2_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res1_atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('C2',</span> <span class="pre">'C4',</span> <span class="pre">'C6')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res2_atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('C2',</span> <span class="pre">'C4',</span> <span class="pre">'C6')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/pairwise_distance.html#calculate_residue_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.pairwise_distance.calculate_residue_distance" title="Link to this definition">#</a></dt>
@@ -662,7 +629,7 @@ every other carbon on the 6-carbon ring of the nucleotide base).</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates pairwise distances between all residues in a given frame.</p>
+<dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates pairwise distances between all residues in a given frame.</p>
 </dd>
 </dl>
 </div>
@@ -723,7 +690,7 @@ side. This is the data behind a System Stacking Fingerprint (SSF)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.get_residue_distance_for_trajectory" title="stacker.pairwise_distance.get_residue_distance_for_trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory</span></code></a></dt><dd><p>Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory</p>
+<dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_trajectory" title="stacker.pairwise_distance.get_residue_distance_for_trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory</span></code></a></dt><dd><p>Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj</span></code></dt><dd><p>Filters an input trajectory to only the specified atoms and residues</p>
 </dd>
@@ -782,9 +749,9 @@ threads &gt; 1.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>Alias for this function</p>
+<dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>Alias for this function</p>
 </dd>
-<dt><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p>
+<dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj</span></code></dt><dd><p>Filters an input trajectory to only the specified atoms and residues</p>
 </dd>
@@ -846,9 +813,9 @@ threads &gt; 1.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>Alias for this function</p>
+<dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>Alias for this function</p>
 </dd>
-<dt><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p>
+<dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj</span></code></dt><dd><p>Filters an input trajectory to only the specified atoms and residues</p>
 </dd>
@@ -897,9 +864,9 @@ in frames.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.get_residue_distance_for_trajectory" title="stacker.pairwise_distance.get_residue_distance_for_trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory</span></code></a></dt><dd><p>Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory</p>
+<dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_trajectory" title="stacker.pairwise_distance.get_residue_distance_for_trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory</span></code></a></dt><dd><p>Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory</p>
 </dd>
-<dt><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>Alias for get_residue_distance_for_trajectory</p>
+<dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>Alias for get_residue_distance_for_trajectory</p>
 </dd>
 </dl>
 </div>
@@ -943,11 +910,11 @@ with center of geometry distance closest to 3.5Å).</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p>
+<dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p>
 </dd>
-<dt><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.get_residue_distance_for_trajectory" title="stacker.pairwise_distance.get_residue_distance_for_trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory</span></code></a></dt><dd><p>Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory</p>
+<dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_trajectory" title="stacker.pairwise_distance.get_residue_distance_for_trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory</span></code></a></dt><dd><p>Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory</p>
 </dd>
-<dt><a class="reference internal" href="../stacker.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>Alias for get_residue_distance_for_trajectory</p>
+<dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>Alias for get_residue_distance_for_trajectory</p>
 </dd>
 </dl>
 </div>
@@ -1015,6 +982,39 @@ with center of geometry distance closest to 3.5Å).</p>
 </div>
 </dd></dl>
 
+<dl class="py exception">
+<dt class="sig sig-object py" id="stacker.pairwise_distance.MultiFrameTraj">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultiFrameTraj</span></span><a class="reference internal" href="../_modules/stacker/pairwise_distance.html#MultiFrameTraj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.pairwise_distance.MultiFrameTraj" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>A multi-frame trajectory is passed to a one-frame function</p>
+<p>Raised if a multi-frame trajectory is passed to a function that
+only works on one trajectory (eg. calculate_residue_distance_vector())</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.pairwise_distance.MultiFrameTraj.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.pairwise_distance.MultiFrameTraj.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.pairwise_distance.MultiFrameTraj.add_note">
+<span class="sig-name descname"><span class="pre">add_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.pairwise_distance.MultiFrameTraj.add_note" title="Link to this definition">#</a></dt>
+<dd><p>Exception.add_note(note) –
+add a note to the exception</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="stacker.pairwise_distance.MultiFrameTraj.args">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#stacker.pairwise_distance.MultiFrameTraj.args" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.pairwise_distance.MultiFrameTraj.with_traceback">
+<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.pairwise_distance.MultiFrameTraj.with_traceback" title="Link to this definition">#</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -1063,13 +1063,6 @@ with center of geometry distance closest to 3.5Å).</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj.__init__"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.__init__()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj.add_note"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.add_note()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj.args"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.args</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj.with_traceback"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.with_traceback()</span></code></a></li>
-</ul>
-</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.calculate_residue_distance"><code class="docutils literal notranslate"><span class="pre">calculate_residue_distance()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.get_residue_distance_for_frame"><code class="docutils literal notranslate"><span class="pre">get_residue_distance_for_frame()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.get_residue_distance_for_trajectory"><code class="docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory()</span></code></a></li>
@@ -1077,6 +1070,13 @@ with center of geometry distance closest to 3.5Å).</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.get_frame_average"><code class="docutils literal notranslate"><span class="pre">get_frame_average()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.get_top_stacking"><code class="docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.increment_residue"><code class="docutils literal notranslate"><span class="pre">increment_residue()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj.__init__"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj.add_note"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.add_note()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj.args"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.args</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.MultiFrameTraj.with_traceback"><code class="docutils literal notranslate"><span class="pre">MultiFrameTraj.with_traceback()</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

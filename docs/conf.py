@@ -73,6 +73,14 @@ html_theme_options = {
         "image_light" : "images/stackerlogo.png",
         "image_dark" : "images/stacker_logo_dark.png"
     },
+    "icon_links" : [
+        {
+            "name" : "PyPI",
+            "url" : "https://pypi.org/project/pistacker/",
+            "type": "fontawesome",
+            
+        }
+    ],
     "github_url" : "https://github.com/esakkas24/stacker",
     "repository_url" : "https://github.com/esakkas24/stacker",
     "use_repository_button" : True,

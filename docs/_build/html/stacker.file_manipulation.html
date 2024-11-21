@@ -527,6 +527,9 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.filter_traj"><code class="docutils literal notranslate"><span class="pre">filter_traj()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.filter_traj_to_pdb"><code class="docutils literal notranslate"><span class="pre">filter_traj_to_pdb()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.file_convert"><code class="docutils literal notranslate"><span class="pre">file_convert()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction.parse_smart_index"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.parse_smart_index()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction.__init__"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.__init__()</span></code></a></li>
@@ -535,9 +538,6 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction.format_usage"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.format_usage()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.filter_traj"><code class="docutils literal notranslate"><span class="pre">filter_traj()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.filter_traj_to_pdb"><code class="docutils literal notranslate"><span class="pre">filter_traj_to_pdb()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.file_convert"><code class="docutils literal notranslate"><span class="pre">file_convert()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -556,107 +556,6 @@
 files. This includes filtering a trajectory to desired atoms,
 converting trajectory filetype, and outputting Python trajectories
 to other filetypes (eg. prmtop, mdcrd, pdb)</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="stacker.file_manipulation.SmartIndexingAction">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SmartIndexingAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option_strings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">const</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">help</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metavar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deprecated</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/file_manipulation.html#SmartIndexingAction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.file_manipulation.SmartIndexingAction" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></p>
-<p>Custom argparse action to handle smart indexing of frame numbers.</p>
-<p>Parses a comma-separated list of frame numbers with optional ranges (e.g., ‘1-20, 34, 25, 50-100’)
-and generates a list of individual frame numbers. Modifies the namespace by setting the attribute specified by the ‘dest’ parameter to the
-list of individual frame numbers.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>parser: argparse.ArgumentParser</strong></dt><dd><p>The argparse parser object.</p>
-</dd>
-<dt><strong>namespace: argparse.Namespace</strong></dt><dd><p>The argparse namespace.</p>
-</dd>
-<dt><strong>values: str</strong></dt><dd><p>The input string containing frame numbers and ranges.</p>
-</dd>
-<dt><strong>option_string: str, default=None</strong></dt><dd><p>The option string.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Attributes<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>dest</strong><span class="classifier">str</span></dt><dd><p>The attribute name in the namespace where the parsed list will be stored.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<tbody>
-<tr class="row-odd"><td><p><strong>__call__(parser, namespace, values, option_string=None)</strong></p></td>
-<td><p>Parses the provided string of values into a sorted list of integers and sets it as an attribute in the namespace.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-fl&quot;</span><span class="p">,</span> <span class="s2">&quot;--frame_list&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FRAME_LIST&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="n">SmartIndexingAction</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">([</span><span class="s2">&quot;-fl&quot;</span><span class="p">,</span> <span class="s2">&quot;1-20,34,25,50-100&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">frame_list</span><span class="p">)</span>
-<span class="go">[1, 2, ..., 20, 34, 25, 50, 51, ..., 100]</span>
-</pre></div>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="stacker.file_manipulation.SmartIndexingAction.parse_smart_index">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parse_smart_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/file_manipulation.html#SmartIndexingAction.parse_smart_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.file_manipulation.SmartIndexingAction.parse_smart_index" title="Link to this definition">#</a></dt>
-<dd><p>Checks that an inputted variable is a list that can be smart indexed
-and indexes it if necessary.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>value</strong><span class="classifier">{str, set, list}</span></dt><dd><p>The input string containing ranges (e.g., “1-5,10,15-20”)
-or a set of integers.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>set</dt><dd><p>A set of integers parsed from the input.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>ValueError</dt><dd><p>If the input is not a string or set.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">SmartIndexingAction</span><span class="o">.</span><span class="n">parse_smart_index</span><span class="p">(</span><span class="s1">&#39;1-5,8,12-17&#39;</span><span class="p">)</span>
-<span class="go">{1, 2, 3, 4, 5, 8, 12, 13, 14, 15, 16, 17}</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="stacker.file_manipulation.SmartIndexingAction.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option_strings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">const</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">help</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metavar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deprecated</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.file_manipulation.SmartIndexingAction.__init__" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="stacker.file_manipulation.SmartIndexingAction._get_args">
-<span class="sig-name descname"><span class="pre">_get_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stacker.file_manipulation.SmartIndexingAction._get_args" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="stacker.file_manipulation.SmartIndexingAction._get_kwargs">
-<span class="sig-name descname"><span class="pre">_get_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stacker.file_manipulation.SmartIndexingAction._get_kwargs" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="stacker.file_manipulation.SmartIndexingAction.format_usage">
-<span class="sig-name descname"><span class="pre">format_usage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stacker.file_manipulation.SmartIndexingAction.format_usage" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.file_manipulation.filter_traj">
 <span class="sig-name descname"><span class="pre">filter_traj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectory_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topology_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residues_desired</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atomnames_desired</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/file_manipulation.html#filter_traj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.file_manipulation.filter_traj" title="Link to this definition">#</a></dt>
@@ -833,6 +732,107 @@ trajectory files to various file types such as <cite>mdtraj.save_mdcrd()</cite>,
 </div>
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="stacker.file_manipulation.SmartIndexingAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SmartIndexingAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option_strings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">const</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">help</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metavar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deprecated</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/file_manipulation.html#SmartIndexingAction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.file_manipulation.SmartIndexingAction" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></p>
+<p>Custom argparse action to handle smart indexing of frame numbers.</p>
+<p>Parses a comma-separated list of frame numbers with optional ranges (e.g., ‘1-20, 34, 25, 50-100’)
+and generates a list of individual frame numbers. Modifies the namespace by setting the attribute specified by the ‘dest’ parameter to the
+list of individual frame numbers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parser: argparse.ArgumentParser</strong></dt><dd><p>The argparse parser object.</p>
+</dd>
+<dt><strong>namespace: argparse.Namespace</strong></dt><dd><p>The argparse namespace.</p>
+</dd>
+<dt><strong>values: str</strong></dt><dd><p>The input string containing frame numbers and ranges.</p>
+</dd>
+<dt><strong>option_string: str, default=None</strong></dt><dd><p>The option string.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>dest</strong><span class="classifier">str</span></dt><dd><p>The attribute name in the namespace where the parsed list will be stored.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p><strong>__call__(parser, namespace, values, option_string=None)</strong></p></td>
+<td><p>Parses the provided string of values into a sorted list of integers and sets it as an attribute in the namespace.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-fl&quot;</span><span class="p">,</span> <span class="s2">&quot;--frame_list&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FRAME_LIST&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="n">SmartIndexingAction</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">([</span><span class="s2">&quot;-fl&quot;</span><span class="p">,</span> <span class="s2">&quot;1-20,34,25,50-100&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">frame_list</span><span class="p">)</span>
+<span class="go">[1, 2, ..., 20, 34, 25, 50, 51, ..., 100]</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.file_manipulation.SmartIndexingAction.parse_smart_index">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parse_smart_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/file_manipulation.html#SmartIndexingAction.parse_smart_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.file_manipulation.SmartIndexingAction.parse_smart_index" title="Link to this definition">#</a></dt>
+<dd><p>Checks that an inputted variable is a list that can be smart indexed
+and indexes it if necessary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>value</strong><span class="classifier">{str, set, list}</span></dt><dd><p>The input string containing ranges (e.g., “1-5,10,15-20”)
+or a set of integers.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>set</dt><dd><p>A set of integers parsed from the input.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError</dt><dd><p>If the input is not a string or set.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">SmartIndexingAction</span><span class="o">.</span><span class="n">parse_smart_index</span><span class="p">(</span><span class="s1">&#39;1-5,8,12-17&#39;</span><span class="p">)</span>
+<span class="go">{1, 2, 3, 4, 5, 8, 12, 13, 14, 15, 16, 17}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.file_manipulation.SmartIndexingAction.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option_strings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">const</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">help</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metavar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deprecated</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.file_manipulation.SmartIndexingAction.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.file_manipulation.SmartIndexingAction._get_args">
+<span class="sig-name descname"><span class="pre">_get_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stacker.file_manipulation.SmartIndexingAction._get_args" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.file_manipulation.SmartIndexingAction._get_kwargs">
+<span class="sig-name descname"><span class="pre">_get_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stacker.file_manipulation.SmartIndexingAction._get_kwargs" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.file_manipulation.SmartIndexingAction.format_usage">
+<span class="sig-name descname"><span class="pre">format_usage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stacker.file_manipulation.SmartIndexingAction.format_usage" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -863,6 +863,9 @@ trajectory files to various file types such as <cite>mdtraj.save_mdcrd()</cite>,
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.filter_traj"><code class="docutils literal notranslate"><span class="pre">filter_traj()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.filter_traj_to_pdb"><code class="docutils literal notranslate"><span class="pre">filter_traj_to_pdb()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.file_convert"><code class="docutils literal notranslate"><span class="pre">file_convert()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction.parse_smart_index"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.parse_smart_index()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction.__init__"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.__init__()</span></code></a></li>
@@ -871,9 +874,6 @@ trajectory files to various file types such as <cite>mdtraj.save_mdcrd()</cite>,
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction.format_usage"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.format_usage()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.filter_traj"><code class="docutils literal notranslate"><span class="pre">filter_traj()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.filter_traj_to_pdb"><code class="docutils literal notranslate"><span class="pre">filter_traj_to_pdb()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.file_convert"><code class="docutils literal notranslate"><span class="pre">file_convert()</span></code></a></li>
 </ul>
   </nav></div>
 
