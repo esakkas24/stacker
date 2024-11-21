@@ -52,6 +52,7 @@ autodoc_default_options = {
     'inherited-members': True,
     'show-inheritance': True,
 }
+autodoc_member_order = 'bysource'
 add_module_names = False
 
 # -- Options for HTML output -------------------------------------------------

@@ -289,6 +289,7 @@
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
 </details></li>
@@ -341,6 +342,7 @@
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
 </details></li>
@@ -526,11 +528,11 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction.format_usage"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.format_usage()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction.parse_smart_index"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.parse_smart_index()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.parse_smart_index()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction.__init__"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction._get_args"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction._get_args()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction._get_kwargs"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction._get_kwargs()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.format_usage()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.parse_smart_index()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.format_usage()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -644,28 +646,8 @@ or a set of integers.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="stacker.file_manipulation.SmartIndexingAction.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option_strings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">const</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">help</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metavar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deprecated</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.file_manipulation.SmartIndexingAction.__init__" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="stacker.file_manipulation.SmartIndexingAction._get_args">
-<span class="sig-name descname"><span class="pre">_get_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stacker.file_manipulation.SmartIndexingAction._get_args" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="stacker.file_manipulation.SmartIndexingAction._get_kwargs">
-<span class="sig-name descname"><span class="pre">_get_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stacker.file_manipulation.SmartIndexingAction._get_kwargs" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="id0">
-<span class="sig-name descname"><span class="pre">format_usage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="id1">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parse_smart_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/file_manipulation.html#SmartIndexingAction.parse_smart_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parse_smart_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/file_manipulation.html#SmartIndexingAction.parse_smart_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition">#</a></dt>
 <dd><p>Checks that an inputted variable is a list that can be smart indexed
 and indexes it if necessary.</p>
 <dl class="field-list simple">
@@ -696,6 +678,26 @@ or a set of integers.</p>
 </pre></div>
 </div>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.file_manipulation.SmartIndexingAction.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option_strings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">const</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">help</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metavar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deprecated</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.file_manipulation.SmartIndexingAction.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.file_manipulation.SmartIndexingAction._get_args">
+<span class="sig-name descname"><span class="pre">_get_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stacker.file_manipulation.SmartIndexingAction._get_args" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.file_manipulation.SmartIndexingAction._get_kwargs">
+<span class="sig-name descname"><span class="pre">_get_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stacker.file_manipulation.SmartIndexingAction._get_kwargs" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">format_usage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -750,11 +752,11 @@ or a set of integers.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction.format_usage"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.format_usage()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction.parse_smart_index"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.parse_smart_index()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.parse_smart_index()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction.__init__"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction._get_args"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction._get_args()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.file_manipulation.SmartIndexingAction._get_kwargs"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction._get_kwargs()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.format_usage()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.parse_smart_index()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.format_usage()</span></code></a></li>
 </ul>
 </li>
 </ul>

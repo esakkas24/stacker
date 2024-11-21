@@ -289,6 +289,7 @@
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
 </details></li>
@@ -341,6 +342,7 @@
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
 </details></li>
@@ -574,6 +576,29 @@ every other carbon on the 6-carbon ring of the nucleotide base).</p>
 <dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates pairwise distances between all residues in a given frame.</p>
 </dd>
 </dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s1">&#39;testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span><span class="p">,</span> 
+<span class="gp">... </span>                             <span class="s1">&#39;testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span><span class="p">,</span> 
+<span class="gp">... </span>                             <span class="n">residues_desired</span> <span class="o">=</span> <span class="p">{</span><span class="mi">426</span><span class="p">,</span><span class="mi">427</span><span class="p">},</span> 
+<span class="gp">... </span>                             <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span><span class="s1">&#39;C6&#39;</span><span class="p">})</span>
+<span class="go">WARNING: Residue Indices are expected to be 1-indexed</span>
+<span class="go">Reading trajectory...</span>
+<span class="go">Reading topology...</span>
+<span class="go">Filtering trajectory...</span>
+<span class="go">WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">distance_vec</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">calculate_residue_distance</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">trajectory</span><span class="o">=</span><span class="n">filtered_traj</span><span class="p">,</span> 
+<span class="gp">... </span>    <span class="n">res1_num</span><span class="o">=</span><span class="mi">426</span><span class="p">,</span> 
+<span class="gp">... </span>    <span class="n">res2_num</span><span class="o">=</span><span class="mi">427</span><span class="p">,</span> 
+<span class="gp">... </span>    <span class="n">res1_atoms</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">),</span> 
+<span class="gp">... </span>    <span class="n">res2_atoms</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">),</span> 
+<span class="gp">... </span>    <span class="n">frame</span><span class="o">=</span><span class="mi">1</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">distance_vec</span><span class="o">.</span><span class="n">magnitude</span><span class="p">()</span>
+<span class="go">7.5253396</span>
+</pre></div>
 </div>
 </dd></dl>
 

@@ -289,6 +289,7 @@
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
 </details></li>
@@ -341,6 +342,7 @@
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
 </details></li>
@@ -523,20 +525,6 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty"><code class="docutils literal notranslate"><span class="pre">AtomEmpty</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.__init__"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.__init__()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.add_note"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.add_note()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.args"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.args</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.with_traceback"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.with_traceback()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty"><code class="docutils literal notranslate"><span class="pre">FrameEmpty</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.__init__"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.__init__()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.add_note"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.add_note()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.args"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.args</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.with_traceback"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.with_traceback()</span></code></a></li>
-</ul>
-</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.InvalidRoutine"><code class="docutils literal notranslate"><span class="pre">InvalidRoutine</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.InvalidRoutine.__init__"><code class="docutils literal notranslate"><span class="pre">InvalidRoutine.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.InvalidRoutine.add_note"><code class="docutils literal notranslate"><span class="pre">InvalidRoutine.add_note()</span></code></a></li>
@@ -551,17 +539,31 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.ResEmpty.with_traceback"><code class="docutils literal notranslate"><span class="pre">ResEmpty.with_traceback()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty"><code class="docutils literal notranslate"><span class="pre">AtomEmpty</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.__init__"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.add_note"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.add_note()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.args"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.args</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.with_traceback"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.with_traceback()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty"><code class="docutils literal notranslate"><span class="pre">FrameEmpty</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.__init__"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.add_note"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.add_note()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.args"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.args</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.with_traceback"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.with_traceback()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.block_printing"><code class="docutils literal notranslate"><span class="pre">block_printing()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.bottaro_routine"><code class="docutils literal notranslate"><span class="pre">bottaro_routine()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.combine_frames"><code class="docutils literal notranslate"><span class="pre">combine_frames()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.compare_routine"><code class="docutils literal notranslate"><span class="pre">compare_routine()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.convert_to_python_command"><code class="docutils literal notranslate"><span class="pre">convert_to_python_command()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.enable_printing"><code class="docutils literal notranslate"><span class="pre">enable_printing()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.filter_traj_routine"><code class="docutils literal notranslate"><span class="pre">filter_traj_routine()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.res_distance_routine"><code class="docutils literal notranslate"><span class="pre">res_distance_routine()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.run_python_command"><code class="docutils literal notranslate"><span class="pre">run_python_command()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.stack_events_routine"><code class="docutils literal notranslate"><span class="pre">stack_events_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.convert_to_python_command"><code class="docutils literal notranslate"><span class="pre">convert_to_python_command()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.filter_traj_routine"><code class="docutils literal notranslate"><span class="pre">filter_traj_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.bottaro_routine"><code class="docutils literal notranslate"><span class="pre">bottaro_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.res_distance_routine"><code class="docutils literal notranslate"><span class="pre">res_distance_routine()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.system_routine"><code class="docutils literal notranslate"><span class="pre">system_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.combine_frames"><code class="docutils literal notranslate"><span class="pre">combine_frames()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.stack_events_routine"><code class="docutils literal notranslate"><span class="pre">stack_events_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.compare_routine"><code class="docutils literal notranslate"><span class="pre">compare_routine()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -635,82 +637,6 @@ is run in the command line.</p>
 </tbody>
 </table>
 </div>
-<dl class="py exception">
-<dt class="sig sig-object py" id="stacker.AtomEmpty">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AtomEmpty</span></span><a class="reference internal" href="../_modules/stacker.html#AtomEmpty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.AtomEmpty" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
-<p>No Atomnames to subset to were provided</p>
-<p>This is raised when a routine is given an invalid
-number of atomnames to subset to.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">fiter_traj_routine</span></code></dt><dd></dd>
-<dt><a class="reference internal" href="../stacker.html#stacker.bottaro_routine" title="stacker.bottaro_routine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bottaro_routine</span></code></a></dt><dd></dd>
-</dl>
-</div>
-<p class="rubric">Examples</p>
-<p>Command Line:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ stacker -s filter_traj -a -r 426,427  
-</pre></div>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="stacker.AtomEmpty.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.AtomEmpty.__init__" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="stacker.AtomEmpty.add_note">
-<span class="sig-name descname"><span class="pre">add_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.AtomEmpty.add_note" title="Link to this definition">#</a></dt>
-<dd><p>Exception.add_note(note) –
-add a note to the exception</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="stacker.AtomEmpty.args">
-<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#stacker.AtomEmpty.args" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="stacker.AtomEmpty.with_traceback">
-<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.AtomEmpty.with_traceback" title="Link to this definition">#</a></dt>
-<dd><p>Exception.with_traceback(tb) –
-set self.__traceback__ to tb and return self.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="stacker.FrameEmpty">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FrameEmpty</span></span><a class="reference internal" href="../_modules/stacker.html#FrameEmpty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.FrameEmpty" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
-<p>No Frames present in trajectory</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="stacker.FrameEmpty.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.FrameEmpty.__init__" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="stacker.FrameEmpty.add_note">
-<span class="sig-name descname"><span class="pre">add_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.FrameEmpty.add_note" title="Link to this definition">#</a></dt>
-<dd><p>Exception.add_note(note) –
-add a note to the exception</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="stacker.FrameEmpty.args">
-<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#stacker.FrameEmpty.args" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="stacker.FrameEmpty.with_traceback">
-<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.FrameEmpty.with_traceback" title="Link to this definition">#</a></dt>
-<dd><p>Exception.with_traceback(tb) –
-set self.__traceback__ to tb and return self.</p>
-</dd></dl>
-
-</dd></dl>
-
 <dl class="py exception">
 <dt class="sig sig-object py" id="stacker.InvalidRoutine">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">InvalidRoutine</span></span><a class="reference internal" href="../_modules/stacker.html#InvalidRoutine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.InvalidRoutine" title="Link to this definition">#</a></dt>
@@ -794,12 +720,154 @@ set self.__traceback__ to tb and return self.</p>
 
 </dd></dl>
 
+<dl class="py exception">
+<dt class="sig sig-object py" id="stacker.AtomEmpty">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AtomEmpty</span></span><a class="reference internal" href="../_modules/stacker.html#AtomEmpty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.AtomEmpty" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>No Atomnames to subset to were provided</p>
+<p>This is raised when a routine is given an invalid
+number of atomnames to subset to.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">fiter_traj_routine</span></code></dt><dd></dd>
+<dt><a class="reference internal" href="../stacker.html#stacker.bottaro_routine" title="stacker.bottaro_routine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bottaro_routine</span></code></a></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<p>Command Line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ stacker -s filter_traj -a -r 426,427  
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.AtomEmpty.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.AtomEmpty.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.AtomEmpty.add_note">
+<span class="sig-name descname"><span class="pre">add_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.AtomEmpty.add_note" title="Link to this definition">#</a></dt>
+<dd><p>Exception.add_note(note) –
+add a note to the exception</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="stacker.AtomEmpty.args">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#stacker.AtomEmpty.args" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.AtomEmpty.with_traceback">
+<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.AtomEmpty.with_traceback" title="Link to this definition">#</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="stacker.FrameEmpty">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FrameEmpty</span></span><a class="reference internal" href="../_modules/stacker.html#FrameEmpty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.FrameEmpty" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>No Frames present in trajectory</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.FrameEmpty.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.FrameEmpty.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.FrameEmpty.add_note">
+<span class="sig-name descname"><span class="pre">add_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.FrameEmpty.add_note" title="Link to this definition">#</a></dt>
+<dd><p>Exception.add_note(note) –
+add a note to the exception</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="stacker.FrameEmpty.args">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#stacker.FrameEmpty.args" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stacker.FrameEmpty.with_traceback">
+<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stacker.FrameEmpty.with_traceback" title="Link to this definition">#</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.block_printing">
 <span class="sig-name descname"><span class="pre">block_printing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#block_printing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.block_printing" title="Link to this definition">#</a></dt>
 <dd><p>Disable printing to standard output</p>
 <p class="rubric">References</p>
 <p>[1] <a class="reference external" href="https://stackoverflow.com/a/8391735">https://stackoverflow.com/a/8391735</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.enable_printing">
+<span class="sig-name descname"><span class="pre">enable_printing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#enable_printing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.enable_printing" title="Link to this definition">#</a></dt>
+<dd><p>Enable printing to standard output</p>
+<p class="rubric">References</p>
+<p>[1] <a class="reference external" href="https://stackoverflow.com/a/8391735">https://stackoverflow.com/a/8391735</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.run_python_command">
+<span class="sig-name descname"><span class="pre">run_python_command</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#run_python_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.run_python_command" title="Link to this definition">#</a></dt>
+<dd><p>Reads the user’s passed in command line and runs the command</p>
+<p>Reads the command line input, runs the associated command with the
+added flags.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.convert_to_python_command">
+<span class="sig-name descname"><span class="pre">convert_to_python_command</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#convert_to_python_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.convert_to_python_command" title="Link to this definition">#</a></dt>
+<dd><p>Converts a parsed command to use to the correct subroutine and runs the routine</p>
+<p>Converts the specified script to a python command and runs it with the associated inputs
+based on the flags.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.filter_traj_routine">
+<span class="sig-name descname"><span class="pre">filter_traj_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#filter_traj_routine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.filter_traj_routine" title="Link to this definition">#</a></dt>
+<dd><p>Executes the routine for filtering an input trajectory file and converting it to a PDB file.</p>
+<p>This function uses provided command-line arguments to call <cite>filter_traj_to_pdb()</cite> 
+with specified inputs, such as the trajectory file, topology file, output file location, 
+residues to retain, and atom names to retain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ResEmpty</dt><dd><p>If the <cite>–residues</cite> argument is not provided.</p>
+</dd>
+<dt>AtomEmpty</dt><dd><p>If the <cite>–atom_names</cite> argument is not provided.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj_to_pdb</span></code></dt><dd><p>The core function that performs the trajectory filtering and PDB generation.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The <cite>args.residues</cite> argument should be a list of residue indices to retain.</p></li>
+<li><p>The <cite>args.atom_names</cite> argument should be a comma-separated string of atom names to retain.</p></li>
+<li><p>Output directories are created automatically if they do not exist.</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<p>Command-line usage with sample arguments:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3 stacker.py 
+    -s filter_traj 
+    -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
+    -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
+    -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb 
+    -r 426,427 -a C2,C4,C6
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -862,152 +930,6 @@ $ python3 stacker.py -s bottaro
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="stacker.combine_frames">
-<span class="sig-name descname"><span class="pre">combine_frames</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frames_A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frames_B</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#combine_frames"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.combine_frames" title="Link to this definition">#</a></dt>
-<dd><p>Combines two 2D numpy arrays (frames_A and frames_B) into a single array.</p>
-<p>This function takes two 2D numpy arrays of the same shape and combines them
-into a new array. The upper triangular part (excluding the diagonal) of the 
-resulting array is filled with the corresponding elements from frames_A, 
-while the lower triangular part (including the diagonal) is filled with the 
-corresponding elements from frames_B.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>frames_A</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>A 2D numpy array.</p>
-</dd>
-<dt><strong>frames_B</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>A 2D numpy array of the same shape as frames_A.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>numpy.ndarray</dt><dd><p>A new 2D numpy array with combined elements from frames_A and frames_B.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">frames_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">frames_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">combine_frames</span><span class="p">(</span><span class="n">frames_A</span><span class="p">,</span> <span class="n">frames_B</span><span class="p">)</span>
-<span class="go">array([[9., 2., 3.],</span>
-<span class="go">       [6., 5., 6.],</span>
-<span class="go">       [3., 2., 1.]])</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="stacker.compare_routine">
-<span class="sig-name descname"><span class="pre">compare_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#compare_routine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.compare_routine" title="Link to this definition">#</a></dt>
-<dd><p>Compares pi-stacking events between two trajectories.</p>
-<p>This routine analyzes two trajectory-derived stacking event files and identifies 
-residue pairs with the largest change in average distances between the two systems. 
-It processes the data, merges it, calculates discrepancies, and outputs the sorted 
-results.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>None</strong></dt><dd><p>This function relies on global <cite>args</cite> for input values.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>FileNotFoundError</dt><dd><p>If one or both input files are not found.</p>
-</dd>
-<dt>ValueError</dt><dd><p>If the input files have incompatible formats or lack the required headers.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_row_with_header</span></code></dt><dd><p>Identifies the header row in a data file.</p>
-</dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">preprocess_df</span></code></dt><dd><p>Prepares the input dataframes for comparison.</p>
-</dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pd.merge</span></code></dt><dd><p>Merges the two dataframes for discrepancy calculations.</p>
-</dd>
-</dl>
-</div>
-<p class="rubric">Notes</p>
-<ul class="simple">
-<li><p>The input files must contain tab-separated values with the header <cite>Row    Column  Value</cite>.</p></li>
-<li><p>Residue pairings are sorted alphabetically before comparison to ensure consistent results.</p></li>
-</ul>
-<p class="rubric">Examples</p>
-<p>Command-line usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ stacker -s compare 
-    -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 
-    -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997 
-    -SA _tUAG_aCUA_+1GCU -SB _tUAG_aCUA_+1CGU
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="stacker.convert_to_python_command">
-<span class="sig-name descname"><span class="pre">convert_to_python_command</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#convert_to_python_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.convert_to_python_command" title="Link to this definition">#</a></dt>
-<dd><p>Converts a parsed command to use to the correct subroutine and runs the routine</p>
-<p>Converts the specified script to a python command and runs it with the associated inputs
-based on the flags.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="stacker.enable_printing">
-<span class="sig-name descname"><span class="pre">enable_printing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#enable_printing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.enable_printing" title="Link to this definition">#</a></dt>
-<dd><p>Enable printing to standard output</p>
-<p class="rubric">References</p>
-<p>[1] <a class="reference external" href="https://stackoverflow.com/a/8391735">https://stackoverflow.com/a/8391735</a></p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="stacker.filter_traj_routine">
-<span class="sig-name descname"><span class="pre">filter_traj_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#filter_traj_routine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.filter_traj_routine" title="Link to this definition">#</a></dt>
-<dd><p>Executes the routine for filtering an input trajectory file and converting it to a PDB file.</p>
-<p>This function uses provided command-line arguments to call <cite>filter_traj_to_pdb()</cite> 
-with specified inputs, such as the trajectory file, topology file, output file location, 
-residues to retain, and atom names to retain.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>ResEmpty</dt><dd><p>If the <cite>–residues</cite> argument is not provided.</p>
-</dd>
-<dt>AtomEmpty</dt><dd><p>If the <cite>–atom_names</cite> argument is not provided.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj_to_pdb</span></code></dt><dd><p>The core function that performs the trajectory filtering and PDB generation.</p>
-</dd>
-</dl>
-</div>
-<p class="rubric">Notes</p>
-<ul class="simple">
-<li><p>The <cite>args.residues</cite> argument should be a list of residue indices to retain.</p></li>
-<li><p>The <cite>args.atom_names</cite> argument should be a comma-separated string of atom names to retain.</p></li>
-<li><p>Output directories are created automatically if they do not exist.</p></li>
-</ul>
-<p class="rubric">Examples</p>
-<p>Command-line usage with sample arguments:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3 stacker.py 
-    -s filter_traj 
-    -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
-    -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
-    -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb 
-    -r 426,427 -a C2,C4,C6
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="stacker.res_distance_routine">
 <span class="sig-name descname"><span class="pre">res_distance_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#res_distance_routine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.res_distance_routine" title="Link to this definition">#</a></dt>
 <dd><p>Calculates the distance between the centers of mass of two specified residues.</p>
@@ -1051,66 +973,6 @@ and calculates the distances for either a single frame or multiple frames if boo
     -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
     -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
     -f 2 --residues 426,427 --atom_names C2,C4,C6
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="stacker.run_python_command">
-<span class="sig-name descname"><span class="pre">run_python_command</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#run_python_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.run_python_command" title="Link to this definition">#</a></dt>
-<dd><p>Reads the user’s passed in command line and runs the command</p>
-<p>Reads the command line input, runs the associated command with the
-added flags.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="stacker.stack_events_routine">
-<span class="sig-name descname"><span class="pre">stack_events_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#stack_events_routine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.stack_events_routine" title="Link to this definition">#</a></dt>
-<dd><p>Identifies residue pairs with the most π-stacking interactions.</p>
-<p>This routine analyzes a molecular dynamics trajectory and identifies residue pairs 
-with the smallest center of geometry (COG) distances, typically indicating strong 
-π-stacking. It outputs the top <cite>n_events</cite> residue pairings based on user input.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>None</strong></dt><dd><p>This function relies on global <cite>args</cite> for input values.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>FileNotFoundError</dt><dd><p>If the trajectory or topology files are not found.</p>
-</dd>
-<dt>ValueError</dt><dd><p>If input parameters are invalid or incompatible with the data.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj</span></code></dt><dd><p>Filters trajectory data based on residue selection.</p>
-</dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_top_stacking</span></code></dt><dd><p>Extracts top stacking events from a trajectory.</p>
-</dd>
-</dl>
-</div>
-<p class="rubric">Examples</p>
-<p>Command-line usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ stacker -s stack_events 
-    -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
-    -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
-    -r 90-215 -f 1 -n 5
-
-$ stacker -s stack_events 
-    -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
-    -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
-    -r 90-100 -fl 1-10 -n 5
-
-$ stacker -s stack_events 
-    -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
-    -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
-    -r 90-215 -n 5 -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
 </pre></div>
 </div>
 </dd></dl>
@@ -1174,6 +1036,146 @@ $ python3 stacker.py -s ssf
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.combine_frames">
+<span class="sig-name descname"><span class="pre">combine_frames</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frames_A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frames_B</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#combine_frames"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.combine_frames" title="Link to this definition">#</a></dt>
+<dd><p>Combines two 2D numpy arrays (frames_A and frames_B) into a single array.</p>
+<p>This function takes two 2D numpy arrays of the same shape and combines them
+into a new array. The upper triangular part (excluding the diagonal) of the 
+resulting array is filled with the corresponding elements from frames_A, 
+while the lower triangular part (including the diagonal) is filled with the 
+corresponding elements from frames_B.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>frames_A</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>A 2D numpy array.</p>
+</dd>
+<dt><strong>frames_B</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>A 2D numpy array of the same shape as frames_A.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>numpy.ndarray</dt><dd><p>A new 2D numpy array with combined elements from frames_A and frames_B.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frames_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frames_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">combine_frames</span><span class="p">(</span><span class="n">frames_A</span><span class="p">,</span> <span class="n">frames_B</span><span class="p">)</span>
+<span class="go">array([[9., 2., 3.],</span>
+<span class="go">       [6., 5., 6.],</span>
+<span class="go">       [3., 2., 1.]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.stack_events_routine">
+<span class="sig-name descname"><span class="pre">stack_events_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#stack_events_routine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.stack_events_routine" title="Link to this definition">#</a></dt>
+<dd><p>Identifies residue pairs with the most π-stacking interactions.</p>
+<p>This routine analyzes a molecular dynamics trajectory and identifies residue pairs 
+with the smallest center of geometry (COG) distances, typically indicating strong 
+π-stacking. It outputs the top <cite>n_events</cite> residue pairings based on user input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>None</strong></dt><dd><p>This function relies on global <cite>args</cite> for input values.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>FileNotFoundError</dt><dd><p>If the trajectory or topology files are not found.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If input parameters are invalid or incompatible with the data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj</span></code></dt><dd><p>Filters trajectory data based on residue selection.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_top_stacking</span></code></dt><dd><p>Extracts top stacking events from a trajectory.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<p>Command-line usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ stacker -s stack_events 
+    -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
+    -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
+    -r 90-215 -f 1 -n 5
+
+$ stacker -s stack_events 
+    -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
+    -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
+    -r 90-100 -fl 1-10 -n 5
+
+$ stacker -s stack_events 
+    -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
+    -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
+    -r 90-215 -n 5 -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.compare_routine">
+<span class="sig-name descname"><span class="pre">compare_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#compare_routine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.compare_routine" title="Link to this definition">#</a></dt>
+<dd><p>Compares pi-stacking events between two trajectories.</p>
+<p>This routine analyzes two trajectory-derived stacking event files and identifies 
+residue pairs with the largest change in average distances between the two systems. 
+It processes the data, merges it, calculates discrepancies, and outputs the sorted 
+results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>None</strong></dt><dd><p>This function relies on global <cite>args</cite> for input values.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>FileNotFoundError</dt><dd><p>If one or both input files are not found.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If the input files have incompatible formats or lack the required headers.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_row_with_header</span></code></dt><dd><p>Identifies the header row in a data file.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">preprocess_df</span></code></dt><dd><p>Prepares the input dataframes for comparison.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pd.merge</span></code></dt><dd><p>Merges the two dataframes for discrepancy calculations.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The input files must contain tab-separated values with the header <cite>Row    Column  Value</cite>.</p></li>
+<li><p>Residue pairings are sorted alphabetically before comparison to ensure consistent results.</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<p>Command-line usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ stacker -s compare 
+    -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 
+    -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997 
+    -SA _tUAG_aCUA_+1GCU -SB _tUAG_aCUA_+1CGU
+</pre></div>
+</div>
+</dd></dl>
+
 <p class="rubric">Modules</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
@@ -1183,7 +1185,7 @@ $ python3 stacker.py -s ssf
 <tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#module-stacker.kmeans" title="stacker.kmeans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kmeans</span></code></a></p></td>
 <td><p>Runs K Means Clustering and Principal Component Analysis</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#module-stacker.pairwise_distance" title="stacker.pairwise_distance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pairwise_distance</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.pairwise_distance.html#module-stacker.pairwise_distance" title="stacker.pairwise_distance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pairwise_distance</span></code></a></p></td>
 <td><p>Create and Analyze System Stacking Fingerprints (SSFs)</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../stacker.residue_movement.html#module-stacker.residue_movement" title="stacker.residue_movement"><code class="xref py py-obj docutils literal notranslate"><span class="pre">residue_movement</span></code></a></p></td>
@@ -1246,20 +1248,6 @@ $ python3 stacker.py -s ssf
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty"><code class="docutils literal notranslate"><span class="pre">AtomEmpty</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.__init__"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.__init__()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.add_note"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.add_note()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.args"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.args</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.with_traceback"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.with_traceback()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty"><code class="docutils literal notranslate"><span class="pre">FrameEmpty</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.__init__"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.__init__()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.add_note"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.add_note()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.args"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.args</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.with_traceback"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.with_traceback()</span></code></a></li>
-</ul>
-</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.InvalidRoutine"><code class="docutils literal notranslate"><span class="pre">InvalidRoutine</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.InvalidRoutine.__init__"><code class="docutils literal notranslate"><span class="pre">InvalidRoutine.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.InvalidRoutine.add_note"><code class="docutils literal notranslate"><span class="pre">InvalidRoutine.add_note()</span></code></a></li>
@@ -1274,17 +1262,31 @@ $ python3 stacker.py -s ssf
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.ResEmpty.with_traceback"><code class="docutils literal notranslate"><span class="pre">ResEmpty.with_traceback()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty"><code class="docutils literal notranslate"><span class="pre">AtomEmpty</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.__init__"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.add_note"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.add_note()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.args"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.args</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.AtomEmpty.with_traceback"><code class="docutils literal notranslate"><span class="pre">AtomEmpty.with_traceback()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty"><code class="docutils literal notranslate"><span class="pre">FrameEmpty</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.__init__"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.add_note"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.add_note()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.args"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.args</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.FrameEmpty.with_traceback"><code class="docutils literal notranslate"><span class="pre">FrameEmpty.with_traceback()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.block_printing"><code class="docutils literal notranslate"><span class="pre">block_printing()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.bottaro_routine"><code class="docutils literal notranslate"><span class="pre">bottaro_routine()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.combine_frames"><code class="docutils literal notranslate"><span class="pre">combine_frames()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.compare_routine"><code class="docutils literal notranslate"><span class="pre">compare_routine()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.convert_to_python_command"><code class="docutils literal notranslate"><span class="pre">convert_to_python_command()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.enable_printing"><code class="docutils literal notranslate"><span class="pre">enable_printing()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.filter_traj_routine"><code class="docutils literal notranslate"><span class="pre">filter_traj_routine()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.res_distance_routine"><code class="docutils literal notranslate"><span class="pre">res_distance_routine()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.run_python_command"><code class="docutils literal notranslate"><span class="pre">run_python_command()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.stack_events_routine"><code class="docutils literal notranslate"><span class="pre">stack_events_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.convert_to_python_command"><code class="docutils literal notranslate"><span class="pre">convert_to_python_command()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.filter_traj_routine"><code class="docutils literal notranslate"><span class="pre">filter_traj_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.bottaro_routine"><code class="docutils literal notranslate"><span class="pre">bottaro_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.res_distance_routine"><code class="docutils literal notranslate"><span class="pre">res_distance_routine()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.system_routine"><code class="docutils literal notranslate"><span class="pre">system_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.combine_frames"><code class="docutils literal notranslate"><span class="pre">combine_frames()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.stack_events_routine"><code class="docutils literal notranslate"><span class="pre">stack_events_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.compare_routine"><code class="docutils literal notranslate"><span class="pre">compare_routine()</span></code></a></li>
 </ul>
   </nav></div>
 

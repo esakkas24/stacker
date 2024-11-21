@@ -289,6 +289,7 @@
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
 </details></li>
@@ -341,6 +342,7 @@
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
 </details></li>
@@ -540,16 +542,16 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.pairwise_distance.get_top_stacking">
 <span class="sig-name descname"><span class="pre">get_top_stacking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_csv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_events</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_adjacent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/pairwise_distance.html#get_top_stacking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.pairwise_distance.get_top_stacking" title="Link to this definition">#</a></dt>
-<dd><p>Returns top stacking events for a given stacking fingerprint</p>
-<p>Given a trajectory and a stacking fingerprint made from get_residue_distance_for_frame(),
+<dd><p>Returns top stacking residue pairs for a given System Stacking Fingerprint (SSF)</p>
+<p>Given a trajectory and a SSF made from <cite>get_residue_distance_for_frame()</cite> or <cite>get_frame_average()</cite>
 prints the residue pairings with the strongest stacking events (ie. the residue pairings
-with center of geometry distance closest to 3.5Å)</p>
+with center of geometry distance closest to 3.5Å).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>trajectory</strong><span class="classifier">md.Trajectory</span></dt><dd><p>trajectory used to get the stacking fingerprint</p>
 </dd>
-<dt><strong>matrix</strong><span class="classifier">typing.ArrayLike</span></dt><dd><p>stacking fingerprint matrix created by get_residue_distance_for_frame()</p>
+<dt><strong>matrix</strong><span class="classifier">typing.ArrayLike</span></dt><dd><p>Single-frame SSF created by get_residue_distance_for_frame() or get_frame_average()</p>
 </dd>
 <dt><strong>output_csv</strong><span class="classifier">str, default = ‘’,</span></dt><dd><p>output filename of the tab-separated txt file to write data to. If empty, data printed to standard output</p>
 </dd>
@@ -560,6 +562,53 @@ with center of geometry distance closest to 3.5Å)</p>
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p>
+</dd>
+<dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_trajectory" title="stacker.pairwise_distance.get_residue_distance_for_trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory</span></code></a></dt><dd><p>Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory</p>
+</dd>
+<dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>Alias for get_residue_distance_for_trajectory</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<p>We can calculate the stacking events for a single frame:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s1">&#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span><span class="p">,</span> 
+<span class="gp">... </span>                            <span class="s1">&#39;stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span><span class="p">,</span> 
+<span class="gp">... </span>                            <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span><span class="s1">&#39;C6&#39;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">get_residue_distance_for_frame</span><span class="p">(</span><span class="n">filtered_traj</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">write_output</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssf</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(252,252)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">get_top_stacking</span><span class="p">(</span><span class="n">filtered_traj</span><span class="p">,</span> <span class="n">ssf</span><span class="p">)</span>
+<span class="go">Row     Column  Value</span>
+<span class="go">197     195     3.50</span>
+<span class="go">420     413     3.51</span>
+<span class="go">94      127     3.51</span>
+<span class="go">93      130     3.53</span>
+<span class="go">117     108     3.38</span>
+</pre></div>
+</div>
+<p>Or we can get most residue pairs that had the most stacking across many frames of a trajectory:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s1">&#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span><span class="p">,</span> 
+<span class="gp">... </span>                            <span class="s1">&#39;stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span><span class="p">,</span> 
+<span class="gp">... </span>                            <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span><span class="s1">&#39;C6&#39;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssfs</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">get_residue_distance_for_trajectory</span><span class="p">(</span><span class="n">filtered_traj</span><span class="p">,</span> <span class="n">frames</span> <span class="o">=</span> <span class="s1">&#39;1-3&#39;</span><span class="p">,</span> <span class="n">write_output</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avg_ssf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">get_frame_average</span><span class="p">(</span><span class="n">ssfs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avg_ssf</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(252, 252)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">get_top_stacking</span><span class="p">(</span><span class="n">filtered_traj</span><span class="p">,</span> <span class="n">ssf</span><span class="p">)</span>
+<span class="go">Row     Column  Value</span>
+<span class="go">130     93      3.56</span>
+<span class="go">108     117     3.44</span>
+<span class="go">195     197     3.61</span>
+<span class="go">127     94      3.65</span>
+<span class="go">47      167     3.66</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>

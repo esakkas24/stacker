@@ -16,15 +16,62 @@ import pandas as pd
 import random
 
 class InvalidRoutine(Exception):
+    '''Specified command line routine was invalid
+
+    This is raised when the `stacker -s ROUTINE` was given
+    an invalid ROUTINE.
+
+    Examples
+    --------
+    Command Line::
+
+        $ stacker -s blah
+
+    '''
     pass
 
 class ResEmpty(Exception):
+    """No Residues to subset to were provided
+
+    This is raised when a routine is given an invalid
+    number of residues to subset to.
+
+    Examples
+    --------
+
+    Command Line::
+
+        $ stacker -s filter_traj -r -a C2,C4,C6
+    
+    See Also
+    --------
+    fiter_traj_routine
+    bottaro_routine
+    """
     pass
 
 class AtomEmpty(Exception):
+    """No Atomnames to subset to were provided
+
+    This is raised when a routine is given an invalid
+    number of atomnames to subset to.
+
+    Examples
+    --------
+
+    Command Line::
+
+        $ stacker -s filter_traj -a -r 426,427  
+    
+    See Also
+    --------
+    fiter_traj_routine
+    bottaro_routine
+    """
     pass
 
 class FrameEmpty(Exception):
+    """No Frames present in trajectory"""
     pass
 
 def block_printing():
@@ -54,7 +101,7 @@ def run_python_command() -> None:
     '''
     parser = argparse.ArgumentParser(add_help=False, formatter_class=argparse.RawTextHelpFormatter, 
                                      description="Wrapper to run stacker subroutines using the -s flag.\n" + \
-                                        "More info on each routine given by `python stacker.py -s ROUTINE -h`")
+                                        "More info on each routine given by `stacker -s ROUTINE -h`")
     global args;
     args, remaining_args = parser.parse_known_args()
     
@@ -62,7 +109,7 @@ def run_python_command() -> None:
     if not any(vars(args)) and not remaining_args:
         print('usage: stacker.py -s ROUTINE [-h]\n\n' + \
             'Wrapper to run stacker subroutines using the -s flag.\n' + \
-            'More info on each routine given by `python stacker.py -s ROUTINE -h` or `python stacker.py -s ROUTINE --help`\n\n' + \
+            'More info on each routine given by `stacker -s ROUTINE -h` or `stacker -s ROUTINE --help`\n\n' + \
             'options:\n' +\
             '-s ROUTINE, --script ROUTINE\n' +\
             '            Name of command to use. Options for ROUTINE:\n\n' + \
@@ -77,7 +124,7 @@ def run_python_command() -> None:
             '              stack_events:\n' + \
             '                    Get list of residues with most stacking events (distance closest to 3.5Å)\n' + \
             '              compare:\n' +\
-            '                    Get the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events\n\n' +\
+            '                    Get the most changed stacking events between two fingerprints using the outputs of stacker -s stack_events\n\n' +\
             '-h, --help            show this help message and exit\n')
         return
 
@@ -89,7 +136,7 @@ def run_python_command() -> None:
                             "  res_distance:\n\tGet the distance between two residues in a given frame\n" +\
                             "  system OR ssf:\n\tCreate a System Stacking Fingerprint of distances by residue\n" + \
                             "  stack_events:\n\tGet list of residues with most stacking events (distance closest to 3.5Å)\n" +\
-                            "  compare:\n\tGet the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events\n",
+                            "  compare:\n\tGet the most changed stacking events between two fingerprints using the outputs of stacker -s stack_events\n",
                              required=True, default='', choices=['filter_traj', 'bottaro', 'pairwise', 'psf', 'res_distance', 'system', 'ssf', 'stack_events', 'compare'])
         parser.add_argument("-h", "--help", help="show this help message and exit", action='help')
         args = parser.parse_args()
@@ -100,7 +147,7 @@ def run_python_command() -> None:
                             "  res_distance:\n\tGet the distance between two residues in a given frame\n" +\
                             "  system OR ssf:\n\tCreate a System Stacking Fingerprint of distances by residue\n" + \
                             "  stack_events:\n\tGet list of residues with most stacking events (distance closest to 3.5Å)\n" +\
-                            "  compare:\n\tGet the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events\n",
+                            "  compare:\n\tGet the most changed stacking events between two fingerprints using the outputs of stacker -s stack_events\n",
                              required=True, default='', choices=['filter_traj', 'bottaro', 'pairwise', 'psf', 'res_distance', 'system', 'ssf', 'stack_events', 'compare'])
       
     args, remaining_args = parser.parse_known_args()
@@ -156,21 +203,21 @@ def run_python_command() -> None:
     if args.script == 'system' or args.script == 'ssf':
         parser.description = 'Creates a System Stacking Fingerprint of the average structure across the chosen frames of a trajectory.' + \
                                 '\n\nExamples:\n' +\
-                                '\n[user]$ python stacker.py -s system -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2\n' +\
-                                '\n[user]$ python stacker.py -s ssf -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2 -g 10 -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt\n'
+                                '\n[user]$ stacker -s system -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2\n' +\
+                                '\n[user]$ stacker -s ssf -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2 -g 10 -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt\n'
         
         required_group = parser.add_argument_group('Required Arguments')
         required_group.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=True)
         required_group.add_argument("-top", "--topology", metavar="TOPOLOGY_FILENAME", help="Filepath to Topology file for the MD simulation", required=True)
         parser.add_argument("-r", "--residues", metavar="RESIDUES", help="Smart-indexed list of 1-indexed residues, also accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)", required=False, action = SmartIndexingAction)
-        parser.add_argument("-i", "--input", metavar="INPUT_FILE", help="Input .txt file containing per-frame stacking information, in lieu of running stacking fingerprint analysis again.\nTXT file can be created by running `python stacker.py -s system -d OUTPUT_FILE`\n-r flag must match the residues used to create the TXT file")
+        parser.add_argument("-i", "--input", metavar="INPUT_FILE", help="Input .txt file containing per-frame stacking information, in lieu of running stacking fingerprint analysis again.\nTXT file can be created by running `stacker -s system -d OUTPUT_FILE`\n-r flag must match the residues used to create the TXT file")
         frame_group = parser.add_mutually_exclusive_group()
         frame_group.add_argument("-f", "--frame", type=int, metavar="FRAME_NUM", help="1-indexed Frame Number within trajectory to analyze, cannot be used with -fl", required=False)
         frame_group.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,\ngets average distance between residues across these frames\nif empty all frames are used, cannot be used with -f", required=False, action=SmartIndexingAction)
         parser.add_argument("-o", "--output", metavar="OUTPUT_FILE", help="Filename of output PNG to write plot to. If empty, will output displays to Python visual", default = '', required=False)
         parser.add_argument("-g", "--get_stacking", metavar="N_EVENTS", help="Get list of N_EVENTS residues with most stacking events (distance closest to 3.5Å) in the average structure across all frames.\nPrint to standard output. Equivalent to -s stack_events -n N_EVENTS", type = int, required=False, default = -1)
         parser.add_argument("-d", "--data_output", metavar="OUTPUT_FILE", help="Output the calculated per-frame numpy arrays that create the stacking fingerprint matrix to a file", default = '', required=False)
-        parser.add_argument("-B", "--input_B", metavar="INPUT_FILE", help="Input .txt file containing per-frame stacking information for a second fingerprint, creates fingerprint where top left is initial input, bottom right is second fingerprint.\n Used in lieu of running stacking fingerprint analysis again.\nTXT file can be created by running `python stacker.py -s system -d OUTPUT_FILE`\n-r flag must match the residues used to create the TXT file")
+        parser.add_argument("-B", "--input_B", metavar="INPUT_FILE", help="Input .txt file containing per-frame stacking information for a second fingerprint, creates fingerprint where top left is initial input, bottom right is second fingerprint.\n Used in lieu of running stacking fingerprint analysis again.\nTXT file can be created by running `stacker -s system -d OUTPUT_FILE`\n-r flag must match the residues used to create the TXT file")
         parser.add_argument("-l", "--limits", metavar="LIMITS", help="limits of the color scale, default = (0,7)", default = '0,7')
         parser.add_argument("-y", "--scale_style", metavar="SCALE_STYLE", help=" style of color scale. {bellcurve, gradient}", default = 'bellcurve')
         parser.add_argument("-t", "--threads", metavar="N_THREADS", help="Use multithreading with INT worker threads", type = int, required = False, default = 1)
@@ -179,9 +226,9 @@ def run_python_command() -> None:
     if args.script == 'stack_events':
         parser.description = 'Get list of residues with most stacking events (distance closest to 3.5Å) in the stacking fingerprint of the average structure across all frames of a trajectory' + \
                                 '\n\nExamples:\n' +\
-                                '\n[user]$ python stacker.py -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -f 1 -n 5\n' +\
-                                '[user]$ python stacker.py -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-100 -fl 1-10 -n 5\n' +\
-                                '[user]$ python stacker.py -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -n 5 -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt\n' 
+                                '\n[user]$ stacker -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -f 1 -n 5\n' +\
+                                '[user]$ stacker -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-100 -fl 1-10 -n 5\n' +\
+                                '[user]$ stacker -s stack_events -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -n 5 -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt\n' 
 
         required_group = parser.add_argument_group('Required Arguments')
         required_group.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=True)
@@ -189,20 +236,20 @@ def run_python_command() -> None:
         parser.add_argument("-r", "--residues", metavar="RESIDUES", help="Smart-indexed list of 1-indexed residues to subset trajectory, also accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)", required=False, action = SmartIndexingAction)
         parser.add_argument("-o", "--output", metavar="OUTPUT_FILE", help="Output tab-separated txt file to write top stacking events to. If empty, will output displays to standard output", default = '', required=False)
         parser.add_argument("-n", "--n_events", type = int, metavar="N_EVENTS", help="Number of stacking events to display. If -1 display all events", default = -1, required=False)
-        parser.add_argument("-i", "--input", metavar="INPUT_FILE", help="Input .txt file containing per-frame stacking information, in lieu of running stacking fingerprint analysis again.\nTXT file can be created by running `python stacker.py -s system -d OUTPUT_FILE`\n-r flag must match the residues used to create the TXT file")
+        parser.add_argument("-i", "--input", metavar="INPUT_FILE", help="Input .txt file containing per-frame stacking information, in lieu of running stacking fingerprint analysis again.\nTXT file can be created by running `stacker -s system -d OUTPUT_FILE`\n-r flag must match the residues used to create the TXT file")
         parser.add_argument("-j", "--include_adjacent", help="Boolean whether to include adjacent residues in the printed output", action = 'store_true', default=False)
         frame_group = parser.add_mutually_exclusive_group()
         frame_group.add_argument("-f", "--frame", type=int, metavar="FRAME_NUM", help="1-indexed Frame Number within trajectory to analyze, cannot be used with -fl", required=False)
         frame_group.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,\ngets average distance between residues across these frames\nif empty all frames are used, cannot be used with -f", required=False, action=SmartIndexingAction)
 
     if args.script == 'compare':
-        parser.description = 'Print the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events' +\
+        parser.description = 'Print the most changed stacking events between two fingerprints using the outputs of stacker -s stack_events' +\
                                 '\n\nExamples:\n' +\
-                                '[user]$ python stacker.py -s compare -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997 -SA _tUAG_aCUA_+1GCU -SB _tUAG_aCUA_+1CGU\n'
+                                '[user]$ stacker -s compare -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997 -SA _tUAG_aCUA_+1GCU -SB _tUAG_aCUA_+1CGU\n'
 
         required_group = parser.add_argument_group('Required Arguments')
-        required_group.add_argument("-A", "--file_A", metavar="FILENAME_A", help = "Filepath to the output log of python stacker.py -s stack_events for the first stacking fingerprint", required = True)
-        required_group.add_argument('-B', '--file_B', metavar="FILENAME_B", help = 'Filepath to the output log of python stacker.py -s stack_events for the second stacking fingerprint', required = True)
+        required_group.add_argument("-A", "--file_A", metavar="FILENAME_A", help = "Filepath to the output log of stacker -s stack_events for the first stacking fingerprint", required = True)
+        required_group.add_argument('-B', '--file_B', metavar="FILENAME_B", help = 'Filepath to the output log of stacker -s stack_events for the second stacking fingerprint', required = True)
         required_group.add_argument('-SA', '--source_A', metavar="SOURCE_A", help = 'String describing source of file A, e.g. `_tUAG_aCUA_+1GCU`', required = True)
         required_group.add_argument('-SB', '--source_B', metavar="SOURCE_B", help = 'String describing source of file B, e.g. `_tUAG_aCUA_+1CGU`', required = True)
 
@@ -213,56 +260,6 @@ def run_python_command() -> None:
 
     args = parser.parse_args()
     convert_to_python_command()
-
-class SmartIndexingAction(argparse.Action):
-    '''
-    Custom argparse action to handle smart indexing of frame numbers.
-
-    Parses a comma-separated list of frame numbers with optional ranges (e.g., '1-20, 34, 25, 50-100')
-    and generates a list of individual frame numbers. Modifies the namespace by setting the attribute specified by the 'dest' parameter to the
-    list of individual frame numbers.
-
-    Parameters
-    ----------
-    parser: argparse.ArgumentParser
-        The argparse parser object.
-    namespace: argparse.Namespace
-        The argparse namespace.
-    values: str
-        The input string containing frame numbers and ranges.
-    option_string: str, default=None
-        The option string.
-
-    Attributes
-    ----------
-    dest : str
-        The attribute name in the namespace where the parsed list will be stored.
-
-    Methods
-    -------
-    __call__(parser, namespace, values, option_string=None)
-        Parses the provided string of values into a sorted list of integers and
-        sets it as an attribute in the namespace.
-
-    Examples
-    --------
-    >>> parser = argparse.ArgumentParser()
-    >>> parser.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze", required=False, action=SmartIndexingAction)
-    >>> args = parser.parse_args(["-fl", "1-20,34,25,50-100"])
-    >>> print(args.frame_list)
-    [1, 2, ..., 20, 34, 25, 50, 51, ..., 100]
-    
-    '''
-    def __call__(self, parser, namespace, values, option_string=None):
-        frame_list = []
-        for item in values.split(','):
-            if '-' in item:
-                start, end = map(int, item.split('-'))
-                frame_list.extend(range(start, end + 1))
-            else:
-                frame_list.append(int(item))
-        frame_list.sort()
-        setattr(namespace, self.dest, frame_list)
 
 def convert_to_python_command() -> None:
     '''Converts a parsed command to use to the correct subroutine and runs the routine
@@ -365,17 +362,19 @@ def bottaro_routine() -> None:
 
     Examples
     --------
-    Command-line usage:
-        $ python3 stacker.py -s bottaro \
-            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
-            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
-            -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb \
-            -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv \
+    Command-line usage::
+
+        $ python3 stacker.py -s bottaro 
+            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
+            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
+            -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb 
+            -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv 
             -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt scatter
 
-        $ python3 stacker.py -s bottaro \
-            -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb \
-            -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv \
+    
+        $ python3 stacker.py -s bottaro 
+            -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb 
+            -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv 
             -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat
 
     See Also
@@ -476,10 +475,11 @@ def res_distance_routine() -> None:
 
     Examples
     --------
-    Command-line usage:
-        $ python3 stacker.py -s res_distance \
-            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
-            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
+    Command-line usage::
+
+        $ python3 stacker.py -s res_distance 
+            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
+            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
             -f 2 --residues 426,427 --atom_names C2,C4,C6
 
     Outputs
@@ -568,16 +568,18 @@ def system_routine() -> None:
 
     Examples
     --------
-    Command-line usage:
-        $ python3 stacker.py -s system \
-            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
-            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
+    Command-line usage::
+
+        $ python3 stacker.py -s system 
+            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
+            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
             -r 90-215 -fl 1-2 
-        $ python3 stacker.py -s ssf \
-            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
-            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
-            -r 90-215 -fl 1-2 -g 10 \
-            -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png \
+
+        $ python3 stacker.py -s ssf 
+            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
+            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
+            -r 90-215 -fl 1-2 -g 10 
+            -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png 
             -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
 
     See Also
@@ -643,7 +645,7 @@ def combine_frames(frames_A, frames_B):
     Combines two 2D numpy arrays (frames_A and frames_B) into a single array.
 
     This function takes two 2D numpy arrays of the same shape and combines them
-    into a new array. The upper triangular part (including the diagonal) of the 
+    into a new array. The upper triangular part (excluding the diagonal) of the 
     resulting array is filled with the corresponding elements from frames_A, 
     while the lower triangular part (including the diagonal) is filled with the 
     corresponding elements from frames_B.
@@ -660,14 +662,16 @@ def combine_frames(frames_A, frames_B):
     numpy.ndarray 
         A new 2D numpy array with combined elements from frames_A and frames_B.
 
-    Example
-    -------
+    Examples
+    --------
+    >>> import stacker as st
+    >>> import numpy as np
     >>> frames_A = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
     >>> frames_B = np.array([[9, 8, 7], [6, 5, 4], [3, 2, 1]])
-    >>> combine_frames(frames_A, frames_B)
-    array([[1., 2., 3.],
+    >>> st.combine_frames(frames_A, frames_B)
+    array([[9., 2., 3.],
            [6., 5., 6.],
-           [3., 2., 9.]])
+           [3., 2., 1.]])
 
     """
     Am, An = frames_A.shape
@@ -704,18 +708,21 @@ def stack_events_routine() -> None:
 
     Examples
     --------
-    Command-line usage:
-        $ python stacker.py -s stack_events \
-            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
-            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
+    Command-line usage::
+
+        $ stacker -s stack_events 
+            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
+            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
             -r 90-215 -f 1 -n 5
-        $ python stacker.py -s stack_events \
-            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
-            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
+
+        $ stacker -s stack_events 
+            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
+            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
             -r 90-100 -fl 1-10 -n 5
-        $ python stacker.py -s stack_events \
-            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
-            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
+
+        $ stacker -s stack_events 
+            -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
+            -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
             -r 90-215 -n 5 -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
 
     See Also
@@ -745,7 +752,7 @@ def stack_events_routine() -> None:
 
 def compare_routine() -> None:
     """
-    Compares π-stacking events between two trajectories.
+    Compares pi-stacking events between two trajectories.
 
     This routine analyzes two trajectory-derived stacking event files and identifies 
     residue pairs with the largest change in average distances between the two systems. 
@@ -770,10 +777,11 @@ def compare_routine() -> None:
 
     Examples
     --------
-    Command-line usage:
-        $ python stacker.py -s compare \
-            -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 \
-            -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997 \
+    Command-line usage::
+
+        $ stacker -s compare 
+            -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 
+            -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997 
             -SA _tUAG_aCUA_+1GCU -SB _tUAG_aCUA_+1CGU
 
     Notes

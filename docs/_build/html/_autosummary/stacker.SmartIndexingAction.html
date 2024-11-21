@@ -289,6 +289,7 @@
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
 </details></li>
@@ -341,6 +342,7 @@
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
 </details></li>
@@ -526,11 +528,11 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction.format_usage"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.format_usage()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction.parse_smart_index"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.parse_smart_index()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.parse_smart_index()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction.__init__"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction._get_args"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction._get_args()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction._get_kwargs"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction._get_kwargs()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.format_usage()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.parse_smart_index()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.format_usage()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -594,10 +596,10 @@ list of individual frame numbers.</p>
 <p class="rubric">Methods Summary</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#id0" title="stacker.SmartIndexingAction.format_usage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_usage</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id1" title="stacker.SmartIndexingAction.format_usage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_usage</span></code></a>()</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#id1" title="stacker.SmartIndexingAction.parse_smart_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_smart_index</span></code></a>(value)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#id0" title="stacker.SmartIndexingAction.parse_smart_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_smart_index</span></code></a>(value)</p></td>
 <td><p>Checks that an inputted variable is a list that can be smart indexed and indexes it if necessary.</p></td>
 </tr>
 </tbody>
@@ -612,6 +614,40 @@ list of individual frame numbers.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="stacker.SmartIndexingAction.parse_smart_index">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parse_smart_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/file_manipulation.html#SmartIndexingAction.parse_smart_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.SmartIndexingAction.parse_smart_index" title="Link to this definition">#</a></dt>
+<dd><p>Checks that an inputted variable is a list that can be smart indexed
+and indexes it if necessary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>value</strong><span class="classifier">str or set</span></dt><dd><p>The input string containing ranges (e.g., “1-5,10,15-20”)
+or a set of integers.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>set</dt><dd><p>A set of integers parsed from the input.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError</dt><dd><p>If the input is not a string or set.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">SmartIndexingAction</span><span class="o">.</span><span class="n">parse_smart_index</span><span class="p">(</span><span class="s1">&#39;1-5,8,12-17&#39;</span><span class="p">)</span>
+<span class="go">{1, 2, 3, 4, 5, 8, 12, 13, 14, 15, 16, 17}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parse_smart_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/file_manipulation.html#SmartIndexingAction.parse_smart_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition">#</a></dt>
 <dd><p>Checks that an inputted variable is a list that can be smart indexed
 and indexes it if necessary.</p>
 <dl class="field-list simple">
@@ -659,43 +695,9 @@ or a set of integers.</p>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="id0">
-<span class="sig-name descname"><span class="pre">format_usage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="id1">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parse_smart_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/file_manipulation.html#SmartIndexingAction.parse_smart_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition">#</a></dt>
-<dd><p>Checks that an inputted variable is a list that can be smart indexed
-and indexes it if necessary.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>value</strong><span class="classifier">str or set</span></dt><dd><p>The input string containing ranges (e.g., “1-5,10,15-20”)
-or a set of integers.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>set</dt><dd><p>A set of integers parsed from the input.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>ValueError</dt><dd><p>If the input is not a string or set.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">SmartIndexingAction</span><span class="o">.</span><span class="n">parse_smart_index</span><span class="p">(</span><span class="s1">&#39;1-5,8,12-17&#39;</span><span class="p">)</span>
-<span class="go">{1, 2, 3, 4, 5, 8, 12, 13, 14, 15, 16, 17}</span>
-</pre></div>
-</div>
-</dd></dl>
+<span class="sig-name descname"><span class="pre">format_usage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -732,11 +734,11 @@ or a set of integers.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction.format_usage"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.format_usage()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction.parse_smart_index"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.parse_smart_index()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.parse_smart_index()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction.__init__"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction._get_args"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction._get_args()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.SmartIndexingAction._get_kwargs"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction._get_kwargs()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.format_usage()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.parse_smart_index()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">SmartIndexingAction.format_usage()</span></code></a></li>
 </ul>
 </li>
 </ul>

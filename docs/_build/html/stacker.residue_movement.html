@@ -289,6 +289,7 @@
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
 </details></li>
@@ -341,6 +342,7 @@
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
 </details></li>
@@ -523,15 +525,15 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.collect_atom_locations_by_frame"><code class="docutils literal notranslate"><span class="pre">collect_atom_locations_by_frame()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.calc_center_3pts"><code class="docutils literal notranslate"><span class="pre">calc_center_3pts()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.Base"><code class="docutils literal notranslate"><span class="pre">Base</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.Base.__init__"><code class="docutils literal notranslate"><span class="pre">Base.__init__()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.calc_center_3pts"><code class="docutils literal notranslate"><span class="pre">calc_center_3pts()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.collect_atom_locations_by_frame"><code class="docutils literal notranslate"><span class="pre">collect_atom_locations_by_frame()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.correct_theta_sign"><code class="docutils literal notranslate"><span class="pre">correct_theta_sign()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.create_base_from_coords_list"><code class="docutils literal notranslate"><span class="pre">create_base_from_coords_list()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.correct_theta_sign"><code class="docutils literal notranslate"><span class="pre">correct_theta_sign()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.write_bottaro_to_csv"><code class="docutils literal notranslate"><span class="pre">write_bottaro_to_csv()</span></code></a></li>
 </ul>
             </nav>
@@ -546,6 +548,58 @@
                   
   <section id="module-stacker.residue_movement">
 <span id="stacker-residue-movement-module"></span><h1>stacker.residue_movement module<a class="headerlink" href="#module-stacker.residue_movement" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.residue_movement.collect_atom_locations_by_frame">
+<span class="sig-name descname"><span class="pre">collect_atom_locations_by_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">traj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/residue_movement.html#collect_atom_locations_by_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.residue_movement.collect_atom_locations_by_frame" title="Link to this definition">#</a></dt>
+<dd><p>Creates a list of all atom locations for a particular atom and residue number per frame.</p>
+<p>Curates a list coords_by_frame where coords_by_frame[i] is the (x, y, z) positions of a provided atom_id
+of a residue residue_num at the ith frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>traj</strong><span class="classifier">md.Trajectory</span></dt><dd><p>Trajectory to analyze.</p>
+</dd>
+<dt><strong>residue_num</strong><span class="classifier">int</span></dt><dd><p>The 0-indexed residue number of the residue where <cite>atom_id</cite> is found (PDB Column 5).</p>
+</dd>
+<dt><strong>atom_id</strong><span class="classifier">str</span></dt><dd><p>The name of the atom to get coordinates for (PDB Column 2).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>coords_by_frame</strong><span class="classifier">list</span></dt><dd><p>List of (x, y, z) coordinates of <cite>atom_id</cite> in <cite>residue_num</cite> for each frame.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.residue_movement.calc_center_3pts">
+<span class="sig-name descname"><span class="pre">calc_center_3pts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/residue_movement.html#calc_center_3pts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.residue_movement.calc_center_3pts" title="Link to this definition">#</a></dt>
+<dd><p>Finds the average x, y, z position of three x, y, z Vectors.</p>
+<p>Takes in three Vectors generated using the <cite>pdb.xyz</cite> method and finds their center. Works 
+with three points that make up a triangle (like those within a 6-member ring).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>a</strong><span class="classifier">Vector</span></dt><dd><p>x, y, z coordinates of the first point.</p>
+</dd>
+<dt><strong>b</strong><span class="classifier">Vector</span></dt><dd><p>x, y, z coordinates of the second point.</p>
+</dd>
+<dt><strong>c</strong><span class="classifier">Vector</span></dt><dd><p>x, y, z coordinates of the third point.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>midpoint</strong><span class="classifier">Vector</span></dt><dd><p>One Vector with (x, y, z) coordinates at the center of the three input Vectors.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="stacker.residue_movement.Base">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Base</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c2_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c4_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c6_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">midpoint_coords</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/residue_movement.html#Base"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.residue_movement.Base" title="Link to this definition">#</a></dt>
@@ -591,76 +645,29 @@ C2, C4, and C6, as well as the midpoint of these atoms for a single residue at a
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="stacker.residue_movement.calc_center_3pts">
-<span class="sig-name descname"><span class="pre">calc_center_3pts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/residue_movement.html#calc_center_3pts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.residue_movement.calc_center_3pts" title="Link to this definition">#</a></dt>
-<dd><p>Finds the average x, y, z position of three x, y, z Vectors.</p>
-<p>Takes in three Vectors generated using the <cite>pdb.xyz</cite> method and finds their center. Works 
-with three points that make up a triangle (like those within a 6-member ring).</p>
+<dt class="sig sig-object py" id="stacker.residue_movement.create_base_from_coords_list">
+<span class="sig-name descname"><span class="pre">create_base_from_coords_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C2_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C4_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C6_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">midpoint_coords</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/residue_movement.html#create_base_from_coords_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.residue_movement.create_base_from_coords_list" title="Link to this definition">#</a></dt>
+<dd><p>Combines C2, C4, C6 positions with midpoint positions for a given frame.</p>
+<p>Takes a frame (0-indexed) and outputs a Base instance with the x, y, z locations of C2, C4, C6, and midpoint 
+of the same residue at that frame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>a</strong><span class="classifier">Vector</span></dt><dd><p>x, y, z coordinates of the first point.</p>
+<dt><strong>frame</strong><span class="classifier">int</span></dt><dd><p>Frame number (0-indexed).</p>
 </dd>
-<dt><strong>b</strong><span class="classifier">Vector</span></dt><dd><p>x, y, z coordinates of the second point.</p>
+<dt><strong>C2_coords</strong><span class="classifier">list</span></dt><dd><p>List of (x, y, z) coordinates of C2 atom in some residue for each frame.</p>
 </dd>
-<dt><strong>c</strong><span class="classifier">Vector</span></dt><dd><p>x, y, z coordinates of the third point.</p>
+<dt><strong>C4_coords</strong><span class="classifier">list</span></dt><dd><p>List of (x, y, z) coordinates of C4 atom in some residue for each frame.</p>
+</dd>
+<dt><strong>C6_coords</strong><span class="classifier">list</span></dt><dd><p>List of (x, y, z) coordinates of C6 atom in some residue for each frame.</p>
+</dd>
+<dt><strong>midpoint_coords</strong><span class="classifier">list</span></dt><dd><p>List of (x, y, z) coordinates of the midpoint of residue for each frame.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>midpoint</strong><span class="classifier">Vector</span></dt><dd><p>One Vector with (x, y, z) coordinates at the center of the three input Vectors.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="stacker.residue_movement.calculate_bottaro_values_for_frame">
-<span class="sig-name descname"><span class="pre">calculate_bottaro_values_for_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">perspective_base_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">viewed_midpoint</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/residue_movement.html#calculate_bottaro_values_for_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.residue_movement.calculate_bottaro_values_for_frame" title="Link to this definition">#</a></dt>
-<dd><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p>
-<p>Calculates the r, rho, and theta values between two nucleotides in a single frame
-as presented in Figure 1 of Bottaro et. al (<a class="reference external" href="https://doi.org/10.1093/nar/gku972">https://doi.org/10.1093/nar/gku972</a>).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>perspective_base_coords</strong><span class="classifier">Base</span></dt><dd><p>List of the x, y, z coords of C2, C4, C6 and their midpoint for 
-the perspective residue in a single frame.</p>
-</dd>
-<dt><strong>viewed_midpoint</strong><span class="classifier">Vector</span></dt><dd><p>x, y, z position of the midpoint of the viewed nucleotide at the same frame.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>list</dt><dd><p>A list containing 3 floats from Bottaro; structure: [r_dist, rho_dist, theta].</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="stacker.residue_movement.collect_atom_locations_by_frame">
-<span class="sig-name descname"><span class="pre">collect_atom_locations_by_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">traj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/residue_movement.html#collect_atom_locations_by_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.residue_movement.collect_atom_locations_by_frame" title="Link to this definition">#</a></dt>
-<dd><p>Creates a list of all atom locations for a particular atom and residue number per frame.</p>
-<p>Curates a list coords_by_frame where coords_by_frame[i] is the (x, y, z) positions of a provided atom_id
-of a residue residue_num at the ith frame.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>traj</strong><span class="classifier">md.Trajectory</span></dt><dd><p>Trajectory to analyze.</p>
-</dd>
-<dt><strong>residue_num</strong><span class="classifier">int</span></dt><dd><p>The 0-indexed residue number of the residue where <cite>atom_id</cite> is found (PDB Column 5).</p>
-</dd>
-<dt><strong>atom_id</strong><span class="classifier">str</span></dt><dd><p>The name of the atom to get coordinates for (PDB Column 2).</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>coords_by_frame</strong><span class="classifier">list</span></dt><dd><p>List of (x, y, z) coordinates of <cite>atom_id</cite> in <cite>residue_num</cite> for each frame.</p>
+<dt>Base</dt><dd><p>An instance of Base with coordinates at the specified frame.</p>
 </dd>
 </dl>
 </dd>
@@ -696,29 +703,24 @@ otherwise.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="stacker.residue_movement.create_base_from_coords_list">
-<span class="sig-name descname"><span class="pre">create_base_from_coords_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C2_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C4_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C6_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">midpoint_coords</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/residue_movement.html#create_base_from_coords_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.residue_movement.create_base_from_coords_list" title="Link to this definition">#</a></dt>
-<dd><p>Combines C2, C4, C6 positions with midpoint positions for a given frame.</p>
-<p>Takes a frame (0-indexed) and outputs a Base instance with the x, y, z locations of C2, C4, C6, and midpoint 
-of the same residue at that frame.</p>
+<dt class="sig sig-object py" id="stacker.residue_movement.calculate_bottaro_values_for_frame">
+<span class="sig-name descname"><span class="pre">calculate_bottaro_values_for_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">perspective_base_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">viewed_midpoint</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/residue_movement.html#calculate_bottaro_values_for_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.residue_movement.calculate_bottaro_values_for_frame" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p>
+<p>Calculates the r, rho, and theta values between two nucleotides in a single frame
+as presented in Figure 1 of Bottaro et. al (<a class="reference external" href="https://doi.org/10.1093/nar/gku972">https://doi.org/10.1093/nar/gku972</a>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>frame</strong><span class="classifier">int</span></dt><dd><p>Frame number (0-indexed).</p>
+<dt><strong>perspective_base_coords</strong><span class="classifier">Base</span></dt><dd><p>List of the x, y, z coords of C2, C4, C6 and their midpoint for 
+the perspective residue in a single frame.</p>
 </dd>
-<dt><strong>C2_coords</strong><span class="classifier">list</span></dt><dd><p>List of (x, y, z) coordinates of C2 atom in some residue for each frame.</p>
-</dd>
-<dt><strong>C4_coords</strong><span class="classifier">list</span></dt><dd><p>List of (x, y, z) coordinates of C4 atom in some residue for each frame.</p>
-</dd>
-<dt><strong>C6_coords</strong><span class="classifier">list</span></dt><dd><p>List of (x, y, z) coordinates of C6 atom in some residue for each frame.</p>
-</dd>
-<dt><strong>midpoint_coords</strong><span class="classifier">list</span></dt><dd><p>List of (x, y, z) coordinates of the midpoint of residue for each frame.</p>
+<dt><strong>viewed_midpoint</strong><span class="classifier">Vector</span></dt><dd><p>x, y, z position of the midpoint of the viewed nucleotide at the same frame.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>Base</dt><dd><p>An instance of Base with coordinates at the specified frame.</p>
+<dt>list</dt><dd><p>A list containing 3 floats from Bottaro; structure: [r_dist, rho_dist, theta].</p>
 </dd>
 </dl>
 </dd>
@@ -796,15 +798,15 @@ Pages 13306–13314, <a class="reference external" href="https://doi.org/10.1093
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.collect_atom_locations_by_frame"><code class="docutils literal notranslate"><span class="pre">collect_atom_locations_by_frame()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.calc_center_3pts"><code class="docutils literal notranslate"><span class="pre">calc_center_3pts()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.Base"><code class="docutils literal notranslate"><span class="pre">Base</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.Base.__init__"><code class="docutils literal notranslate"><span class="pre">Base.__init__()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.calc_center_3pts"><code class="docutils literal notranslate"><span class="pre">calc_center_3pts()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.collect_atom_locations_by_frame"><code class="docutils literal notranslate"><span class="pre">collect_atom_locations_by_frame()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.correct_theta_sign"><code class="docutils literal notranslate"><span class="pre">correct_theta_sign()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.create_base_from_coords_list"><code class="docutils literal notranslate"><span class="pre">create_base_from_coords_list()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.correct_theta_sign"><code class="docutils literal notranslate"><span class="pre">correct_theta_sign()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.residue_movement.write_bottaro_to_csv"><code class="docutils literal notranslate"><span class="pre">write_bottaro_to_csv()</span></code></a></li>
 </ul>
   </nav></div>

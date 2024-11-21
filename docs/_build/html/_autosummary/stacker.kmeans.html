@@ -289,6 +289,7 @@
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
 </details></li>
@@ -341,6 +342,7 @@
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
 </details></li>
@@ -523,12 +525,12 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.create_kmeans_input"><code class="docutils literal notranslate"><span class="pre">create_kmeans_input()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_cluster_trj_data"><code class="docutils literal notranslate"><span class="pre">plot_cluster_trj_data()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_pca"><code class="docutils literal notranslate"><span class="pre">plot_pca()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_silhouette"><code class="docutils literal notranslate"><span class="pre">plot_silhouette()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.read_and_preprocess_data"><code class="docutils literal notranslate"><span class="pre">read_and_preprocess_data()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.create_kmeans_input"><code class="docutils literal notranslate"><span class="pre">create_kmeans_input()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_pca"><code class="docutils literal notranslate"><span class="pre">plot_pca()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.run_kmeans"><code class="docutils literal notranslate"><span class="pre">run_kmeans()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_silhouette"><code class="docutils literal notranslate"><span class="pre">plot_silhouette()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_cluster_trj_data"><code class="docutils literal notranslate"><span class="pre">plot_cluster_trj_data()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -570,141 +572,6 @@ and PCA scatterplots.</p>
 </tbody>
 </table>
 </div>
-<dl class="py function">
-<dt class="sig sig-object py" id="stacker.kmeans.create_kmeans_input">
-<span class="sig-name descname"><span class="pre">create_kmeans_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_arrays</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#create_kmeans_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.create_kmeans_input" title="Link to this definition">#</a></dt>
-<dd><p>Blinds SSF Data (removes trajectory labels) for input to K Means</p>
-<p>Stacks SSF data into a single 2D numpy array from all frames of 
-all trajectories without labels for each frame. Used for input to
-KMeans Clustering</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>data_arrays</strong><span class="classifier">dict</span></dt><dd><p>Output of read_and_preprocess_data(). Dictionary where keys are dataset 
-names and values are the processed data arrays.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>blinded_data</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>Reads and preprocesses data for each dataset</p>
-</dd>
-</dl>
-</div>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">... </span>    <span class="s1">&#39;dataset1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3200</span><span class="p">,</span> <span class="mi">16129</span><span class="p">),</span>
-<span class="gp">... </span>    <span class="s1">&#39;dataset2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3200</span><span class="p">,</span> <span class="mi">16129</span><span class="p">)</span>
-<span class="gp">... </span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans_input</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">kmeans_input</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="go">(6400, 16129)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="stacker.kmeans.plot_cluster_trj_data">
-<span class="sig-name descname"><span class="pre">plot_cluster_trj_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_cluster</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seeded</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#plot_cluster_trj_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_cluster_trj_data" title="Link to this definition">#</a></dt>
-<dd><p>Plots the output of run_kmeans() to a PNG file.</p>
-<p>Creates a grouped bar plot of the number of frames from each trajectory in each cluster
-following KMeans clustering. Writes the plot output to a PNG file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>input_file</strong><span class="classifier">str</span></dt><dd><p>Path to clustering results written by run_kmeans()</p>
-</dd>
-<dt><strong>n_cluster</strong><span class="classifier">int</span></dt><dd><p>The number of K Means Clusters, given to run_kmeans() as param.</p>
-</dd>
-<dt><strong>outfile</strong><span class="classifier">str</span></dt><dd><p>Filepath where the plot PNG file will be saved.</p>
-</dd>
-<dt><strong>seeded</strong><span class="classifier">bool, default=False</span></dt><dd><p>True if a random seed was assigned during clustering using kseed, False otherwise.
-Used to label plot title, no other impact.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<p>This will read the clustering results from ‘clustering_results.txt’,
-create a bar plot, and save it as ‘kmeans_plot.cluster_4.png’ in the 
-specified output directory.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">plot_cluster_trj_data</span><span class="p">(</span><span class="s1">&#39;clustering_results.txt&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;/path/to/output/&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="stacker.kmeans.plot_pca">
-<span class="sig-name descname"><span class="pre">plot_pca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blinded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coloring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dataset'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#plot_pca"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_pca" title="Link to this definition">#</a></dt>
-<dd><p>Creates PCA Plot to compare systems in 2D</p>
-<p>Creates a PCA plot that can be colored by the KMeans clustering result
-or by dataset. Compares SSFs similarly to K Means.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>blinded_data</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
-Output of create_kmeans_input()</p>
-</dd>
-<dt><strong>n_clusters</strong><span class="classifier">int, default = 0</span></dt><dd><p>The number of clusters to form.</p>
-</dd>
-<dt><strong>coloring</strong><span class="classifier">{‘dataset’, ‘kmeans’, ‘facet’}</span></dt><dd><p>Method to color the points on the scatterplot. Options:
-- dataset:  Plot all points on the same scatterplot and color by dataset of origin.
-- kmeans: Plot all points on the same scatterplot and color by KMeans Cluster with n_clusters
-- facet: Same as dataset but plot each dataset on a different coordinate grid.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a></dt><dd><p>blinds SSF Data for input to K Means</p>
-</dd>
-<dt><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>reads and preprocesses SSF data for K Means analysis per dataset</p>
-</dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">sklearn.decomposition.PCA</span></code></dt><dd><p>Runs PCA</p>
-</dd>
-</dl>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="stacker.kmeans.plot_silhouette">
-<span class="sig-name descname"><span class="pre">plot_silhouette</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#plot_silhouette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_silhouette" title="Link to this definition">#</a></dt>
-<dd><p>Creates Silhouette plots to determine the best number of clusters</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>n_clusters</strong><span class="classifier">int, default = 0</span></dt><dd><p>The number of clusters to form.</p>
-</dd>
-<dt><strong>dataset</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
-Output of create_kmeans_input()</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.kmeans.read_and_preprocess_data">
 <span class="sig-name descname"><span class="pre">read_and_preprocess_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">(name1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">...)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#read_and_preprocess_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.read_and_preprocess_data" title="Link to this definition">#</a></dt>
@@ -757,6 +624,88 @@ outputted from <cite>-s ssf -d output.txt</cite></p>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">[</span><span class="s1">&#39;dataset1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="go">(3200, 16129)</span>
 </pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.kmeans.create_kmeans_input">
+<span class="sig-name descname"><span class="pre">create_kmeans_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_arrays</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#create_kmeans_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.create_kmeans_input" title="Link to this definition">#</a></dt>
+<dd><p>Blinds SSF Data (removes trajectory labels) for input to K Means</p>
+<p>Stacks SSF data into a single 2D numpy array from all frames of 
+all trajectories without labels for each frame. Used for input to
+KMeans Clustering</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_arrays</strong><span class="classifier">dict</span></dt><dd><p>Output of read_and_preprocess_data(). Dictionary where keys are dataset 
+names and values are the processed data arrays.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>blinded_data</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>Reads and preprocesses data for each dataset</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s1">&#39;dataset1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3200</span><span class="p">,</span> <span class="mi">16129</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="s1">&#39;dataset2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3200</span><span class="p">,</span> <span class="mi">16129</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans_input</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">kmeans_input</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(6400, 16129)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.kmeans.plot_pca">
+<span class="sig-name descname"><span class="pre">plot_pca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blinded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coloring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dataset'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#plot_pca"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_pca" title="Link to this definition">#</a></dt>
+<dd><p>Creates PCA Plot to compare systems in 2D</p>
+<p>Creates a PCA plot that can be colored by the KMeans clustering result
+or by dataset. Compares SSFs similarly to K Means.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>blinded_data</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
+Output of create_kmeans_input()</p>
+</dd>
+<dt><strong>n_clusters</strong><span class="classifier">int, default = 0</span></dt><dd><p>The number of clusters to form.</p>
+</dd>
+<dt><strong>coloring</strong><span class="classifier">{‘dataset’, ‘kmeans’, ‘facet’}</span></dt><dd><p>Method to color the points on the scatterplot. Options:
+- dataset:  Plot all points on the same scatterplot and color by dataset of origin.
+- kmeans: Plot all points on the same scatterplot and color by KMeans Cluster with n_clusters
+- facet: Same as dataset but plot each dataset on a different coordinate grid.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a></dt><dd><p>blinds SSF Data for input to K Means</p>
+</dd>
+<dt><a class="reference internal" href="../stacker.kmeans.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>reads and preprocesses SSF data for K Means analysis per dataset</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">sklearn.decomposition.PCA</span></code></dt><dd><p>Runs PCA</p>
+</dd>
+</dl>
 </div>
 </dd></dl>
 
@@ -827,6 +776,59 @@ Output of create_kmeans_input()</p>
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.kmeans.plot_silhouette">
+<span class="sig-name descname"><span class="pre">plot_silhouette</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#plot_silhouette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_silhouette" title="Link to this definition">#</a></dt>
+<dd><p>Creates Silhouette plots to determine the best number of clusters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>n_clusters</strong><span class="classifier">int, default = 0</span></dt><dd><p>The number of clusters to form.</p>
+</dd>
+<dt><strong>dataset</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
+Output of create_kmeans_input()</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.kmeans.plot_cluster_trj_data">
+<span class="sig-name descname"><span class="pre">plot_cluster_trj_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_cluster</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seeded</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#plot_cluster_trj_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_cluster_trj_data" title="Link to this definition">#</a></dt>
+<dd><p>Plots the output of run_kmeans() to a PNG file.</p>
+<p>Creates a grouped bar plot of the number of frames from each trajectory in each cluster
+following KMeans clustering. Writes the plot output to a PNG file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>input_file</strong><span class="classifier">str</span></dt><dd><p>Path to clustering results written by run_kmeans()</p>
+</dd>
+<dt><strong>n_cluster</strong><span class="classifier">int</span></dt><dd><p>The number of K Means Clusters, given to run_kmeans() as param.</p>
+</dd>
+<dt><strong>outfile</strong><span class="classifier">str</span></dt><dd><p>Filepath where the plot PNG file will be saved.</p>
+</dd>
+<dt><strong>seeded</strong><span class="classifier">bool, default=False</span></dt><dd><p>True if a random seed was assigned during clustering using kseed, False otherwise.
+Used to label plot title, no other impact.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>This will read the clustering results from ‘clustering_results.txt’,
+create a bar plot, and save it as ‘kmeans_plot.cluster_4.png’ in the 
+specified output directory.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">plot_cluster_trj_data</span><span class="p">(</span><span class="s1">&#39;clustering_results.txt&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;/path/to/output/&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 
 
@@ -875,12 +877,12 @@ Output of create_kmeans_input()</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.create_kmeans_input"><code class="docutils literal notranslate"><span class="pre">create_kmeans_input()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_cluster_trj_data"><code class="docutils literal notranslate"><span class="pre">plot_cluster_trj_data()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_pca"><code class="docutils literal notranslate"><span class="pre">plot_pca()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_silhouette"><code class="docutils literal notranslate"><span class="pre">plot_silhouette()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.read_and_preprocess_data"><code class="docutils literal notranslate"><span class="pre">read_and_preprocess_data()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.create_kmeans_input"><code class="docutils literal notranslate"><span class="pre">create_kmeans_input()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_pca"><code class="docutils literal notranslate"><span class="pre">plot_pca()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.run_kmeans"><code class="docutils literal notranslate"><span class="pre">run_kmeans()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_silhouette"><code class="docutils literal notranslate"><span class="pre">plot_silhouette()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_cluster_trj_data"><code class="docutils literal notranslate"><span class="pre">plot_cluster_trj_data()</span></code></a></li>
 </ul>
   </nav></div>
 
