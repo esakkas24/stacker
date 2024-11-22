@@ -1,3 +1,4 @@
+.. _getting_started:
 
 ***************
 Getting Started
@@ -8,7 +9,7 @@ Getting Started
 Welcome to getting started with StACKER!
 
 StACKER (**St**\ acking **A**\ nalysis and **C**\ onformational **K**\ inetics for **E**\ xamining 
-**R**\ esidues) is an open source Python library for nalyzing pi-stacking interactions 
+**R**\ esidues) is an open source Python library for analyzing pi-stacking interactions 
 between residues in Molecular Dynamics (MD) trajectories.
 
 Installing StACKER
@@ -36,10 +37,8 @@ Descend into the directory and download the neccessary dependencies::
     pip install setuptools
     python setup.py install
 
-This will install StACKER, activate the command line option `stacker`, 
+This will install StACKER, activate the command line option ``stacker``, 
 and install all the necessary dependencies.
-
-Read more about StACKER's :ref:`Command Line Options <command_line_options>`.
 
 StACKER in the Command Line
 ---------------------------
@@ -73,6 +72,7 @@ command line will show the Command Line Options for StACKER::
 
     -h, --help            show this help message and exit
 
+Read more about StACKER's :ref:`Command Line Options <command_line_options>`.
 
 Importing StACKER to Python
 ---------------------------
@@ -82,10 +82,10 @@ code like::
 
     import stacker as st
 
-Although StACKER's functions are further subsetted into :ref:`modules <index>`,
+Although StACKER's functions are further subsetted into :ref:`modules <modules>`,
 all functions are accessible through ``st.________``::
 
-    st.<Tab>
+    >>> st.<Tab>
     st.AtomEmpty(                                   st.create_axis_labels(                          st.os                                           
     st.Base(                                        st.create_base_from_coords_list(                st.pairwise_distance                            
     st.FrameEmpty(                                  st.create_parent_directories(                   st.pd                                           
@@ -108,32 +108,43 @@ all functions are accessible through ``st.________``::
     st.convert_to_python_command()                  st.mpl                                                                                          
     3 more... 
 
+Read more about StACKER's :ref:`Python Options <modules>`.
+
 Reading the example code
 ------------------------
 
-Throughout the NumPy documentation, you will find blocks that look like::
+StACKER documents python examples like::
 
-  >>> a = np.array([[1, 2, 3],
-  ...               [4, 5, 6]])
-  >>> a.shape
-  (2, 3)
+    >>> import stacker as st
+    >>> st.increment_residue("G43")
+    'G44'
 
 Text preceded by ``>>>`` or ``...`` is **input**, the code that you would
 enter in a script or at a Python prompt. Everything else is **output**, the
 results of running your code. Note that ``>>>`` and ``...`` are not part of the
 code and may cause an error if entered at a Python prompt.
 
-Why use NumPy?
---------------
+Molecular Dynamics (MD)
+-----------------------
 
-Python lists are excellent, general-purpose containers. They can be
-"heterogeneous", meaning that they can contain elements of a variety of types,
-and they are quite fast when used to perform individual operations on a handful
-of elements.
+Currently, StACKER supports ``.mdcrd`` trajectory files, ``.prmtop`` topology
+files, and ``.pdb`` files. 
 
-Depending on the characteristics of the data and the types of operations that
-need to be performed, other containers may be more appropriate; by exploiting
-these characteristics, we can improve speed, reduce memory consumption, and
-offer a high-level syntax for performing a variety of common processing tasks.
-NumPy shines when there are large quantities of "homogeneous" (same-type) data
-to be processed on the CPU.
+``.mdcrd`` files are the standard trajectory output of the 
+`AMBER MD Software Package <https://ambermd.org/>`_. They are equivalent to 
+``.trj`` files, change the file extension to ``.mdcrd`` before inputting to StACKER.
+
+``.prmtop`` files are the Parameter-Topology file outputted by AMBER tLEaP.
+
+``.pdb`` files are a standard filetype for molecular structures (Cryo-EM, X-Ray Crystollography, etc.)
+and include both trajectory and topology information.
+
+You can convert between these using :func:`stacker.file_manipulation.filter_traj_to_pdb`
+
+These can be imported into python using the ``mdtraj`` package, which is automatically 
+installed with StACKER.::
+
+    import mdtraj as md
+    md.load("traj.mdcrd", top = "top.prmtop")
+
+Alternatively, the trajectories can be loaded in, pre-filtered using :func:`stacker.file_manipulation.filter_traj`

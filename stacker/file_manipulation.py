@@ -28,7 +28,7 @@ def filter_traj(trajectory_filename : str, topology_filename : str,
         filepath of the topology of the molecule
     residues_desired : set or str
         1-indexed residue numbers of residues to keep in the trajectory.
-        Accepts smart-indexed str representing a list of residues (e.g '1-5,6,39-48')
+        Accepts smart-indexed str representing a list of residues (e.g '1-5,6,39-48').
         If Empty, include all residues.
     atomnames_desired : set 
         atomnames to keep in the trajectory. If Empty, include all atoms.

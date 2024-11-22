@@ -1,4 +1,4 @@
-"""Command Line Options for StACKER
+"""The Python Functions that control Command Line Options
 
 This module contains the Python routines called when StACKER
 is run in the command line.

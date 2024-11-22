@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/numpy.css?v=f033eccb" />
+    <link rel="stylesheet" type="text/css" href="../_static/numpy.css?v=93bf2a1f" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -180,15 +180,7 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../stacker.html">Command Line Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../stacker.file_manipulation.html">Load and Filter Trajectories</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../stacker.pairwise_distance.html">Create System Stacking Fingerprints (SSFs)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../stacker.residue_movement.html">Create Pairwise Stacking Fingerprints (PSFs)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../stacker.visualization.html">Visualize Data</a></li>
-</ul>
-
+        
     </div>
 </nav></div>
     </div>
@@ -372,7 +364,7 @@ empty, all residues or atoms are included respectively.</p>
 <dt><strong>topology_filename</strong><span class="classifier">str</span></dt><dd><p>filepath of the topology of the molecule</p>
 </dd>
 <dt><strong>residues_desired</strong><span class="classifier">set or str</span></dt><dd><p>1-indexed residue numbers of residues to keep in the trajectory.
-Accepts smart-indexed str representing a list of residues (e.g ‘1-5,6,39-48’)
+Accepts smart-indexed str representing a list of residues (e.g ‘1-5,6,39-48’).
 If Empty, include all residues.</p>
 </dd>
 <dt><strong>atomnames_desired</strong><span class="classifier">set</span></dt><dd><p>atomnames to keep in the trajectory. If Empty, include all atoms.</p>

@@ -53,6 +53,14 @@ button.btn.version-switcher__button:hover {
   margin-top: 10px;
 }
 
+.large-image {
+  height: 100px;
+  width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
 /* Main index page overview images */
 
 html[data-theme=dark] .sd-card img[src*='.svg'] {
@@ -72,3 +80,4 @@ div.admonition-legacy>.admonition-title::after {
 div.admonition-legacy>.admonition-title {
   background-color: var(--pst-color-warning-bg);
 }
+

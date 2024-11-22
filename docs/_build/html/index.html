@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="_static/plot_directive.css?v=7f9a90b1" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="_static/numpy.css?v=f033eccb" />
+    <link rel="stylesheet" type="text/css" href="_static/numpy.css?v=93bf2a1f" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -51,7 +51,6 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Getting Started" href="getting_started.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -183,15 +182,7 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stacker.file_manipulation.html">Load and Filter Trajectories</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stacker.pairwise_distance.html">Create System Stacking Fingerprints (SSFs)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stacker.residue_movement.html">Create Pairwise Stacking Fingerprints (PSFs)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stacker.visualization.html">Visualize Data</a></li>
-</ul>
-
+        
     </div>
 </nav></div>
     </div>
@@ -348,7 +339,7 @@
                 <article class="bd-article">
                   
   <section id="stacker-documentation">
-<span id="stacker-docs-mainpage"></span><h1>StACKER documentation<a class="headerlink" href="#stacker-documentation" title="Link to this heading">#</a></h1>
+<span id="index"></span><h1>StACKER documentation<a class="headerlink" href="#stacker-documentation" title="Link to this heading">#</a></h1>
 <p>StACKER manipulates the outputs of an MD simulation and analyzes
 the pi-stacking interactions. Creates a “Pi-Stacking Fingerprint”
 for a structure at each frame. Presents Pi-stacking interactions between
@@ -357,13 +348,12 @@ two residues through analysis of their relevant movement.</p>
 <div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-2 sd-row-cols-lg-2 sd-g-2 sd-g-xs-2 sd-g-sm-3 sd-g-md-4 sd-g-lg-4 docutils">
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
-<img alt="" class="sd-card-img-top" src="_images/getting_started.svg" />
 <div class="sd-card-header docutils">
-<p class="sd-card-text">Getting Started</p>
+<img src="_static/index_images/getting_started.svg" style="height: 60px; width: 60px; margin-left: auto; margin-right: auto; margin-top: 10px;" /><p class="sd-card-text">Getting Started</p>
 </div>
 <div class="sd-card-body docutils">
-<p class="sd-card-text">Learn how to install and use
-the basic StACKER functions</p>
+<p class="sd-card-text">Learn how to install StACKER and
+prepare Molecular Dynamics Data</p>
 </div>
 <div class="sd-card-footer docutils">
 <p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="getting_started.html"><span class="doc">To the installation instructions</span></a></span></p>
@@ -372,9 +362,8 @@ the basic StACKER functions</p>
 </div>
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
-<img alt="" class="sd-card-img-top" src="_images/python_logo.webp" />
 <div class="sd-card-header docutils">
-<p class="sd-card-text">Python Modules</p>
+<img src="_static/index_images/python_logo.webp" style="height: 60px; width: 60px; margin-left: auto; margin-right: auto; margin-top: 10px;" /><p class="sd-card-text">Python Modules</p>
 </div>
 <div class="sd-card-body docutils">
 <p class="sd-card-text">See detailed instructions on StACKER’s
@@ -387,61 +376,49 @@ functions and modules when using Python</p>
 </div>
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
-<img alt="" class="sd-card-img-top" src="_images/system_stacking_fingerprint.png" />
 <div class="sd-card-header docutils">
-<p class="sd-card-text">Create System Stacking Fingerprints (SSFs)</p>
+<img src="_static/index_images/system_stacking_fingerprint.png" style="height: 200px; width: 200px; margin-left: auto; margin-right: auto; margin-top: 10px;" /><p class="sd-card-text">Create System Stacking Fingerprints (SSFs)</p>
 </div>
 <div class="sd-card-body docutils">
 <p class="sd-card-text">Pipeline to create System Stacking Fingerprints (SSFs)
-using the Python and Command Line Options</p>
+using the Python Options</p>
 </div>
 <div class="sd-card-footer docutils">
-<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="stacker.pairwise_distance.html"><span class="doc">To the SSF creation guide</span></a></span></p>
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="system_stacking.html"><span class="doc">To the SSF creation guide</span></a></span></p>
 </div>
 </div>
 </div>
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
-<img alt="" class="sd-card-img-top" src="_images/system_stacking_fingerprint.png" />
 <div class="sd-card-header docutils">
-<p class="sd-card-text">Create Pairwise Stacking Fingerprints (PSFs)</p>
+<img src="_static/index_images/pairwise_stacking_fingerprint.png" style="height: 200px; width: 250px; margin-left: auto; margin-right: auto; margin-top: 10px;" /><p class="sd-card-text">Create Pairwise Stacking Fingerprints (PSFs)</p>
 </div>
 <div class="sd-card-body docutils">
 <p class="sd-card-text">Pipeline to create Pairwise Stacking Fingerprints (PSFs)
-using the Python and Command Line Options</p>
+using the Python Options</p>
 </div>
 <div class="sd-card-footer docutils">
-<p class="sd-card-text"><span class="sd-d-grid"><span class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link">To the PSF creation guide</span></span></p>
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="pairwise_stacking.html"><span class="doc">To the PSF creation guide</span></a></span></p>
 </div>
 </div>
 </div>
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
-<img alt="" class="sd-card-img-top" src="_static/index_images/visualize_data.svg" />
 <div class="sd-card-header docutils">
-<p class="sd-card-text">Command Line Options</p>
+<img src="_static/index_images/command_line.png" style="height: 60px; width: 60px; margin-left: auto; margin-right: auto; margin-top: 10px;" /><p class="sd-card-text">Command Line Options</p>
 </div>
 <div class="sd-card-body docutils">
-<p class="sd-card-text">See detailed instructions on StACKER’s
-functions and modules when using
-the Command Line</p>
+<p class="sd-card-text">See a detailed pipeline to generate SSFs
+and PSFs using the Command Line Options</p>
 </div>
 <div class="sd-card-footer docutils">
-<p class="sd-card-text"><span class="sd-d-grid"><span class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link">To the Command Line user guide</span></span></p>
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="command_line_options.html"><span class="doc">To the Command Line user guide</span></a></span></p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stacker.file_manipulation.html">Load and Filter Trajectories</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stacker.pairwise_distance.html">Create System Stacking Fingerprints (SSFs)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stacker.residue_movement.html">Create Pairwise Stacking Fingerprints (PSFs)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stacker.visualization.html">Visualize Data</a></li>
-</ul>
 </div>
 </section>
 
@@ -456,15 +433,6 @@ the Command Line</p>
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="right-next"
-       href="getting_started.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Getting Started</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               

@@ -1,9 +1,8 @@
-.. _stacker_docs_mainpage:
+.. _index:
 
 ##########################
 StACKER documentation
 ##########################
-
 
 StACKER manipulates the outputs of an MD simulation and analyzes 
 the pi-stacking interactions. Creates a "Pi-Stacking Fingerprint" 
@@ -14,14 +13,17 @@ two residues through analysis of their relevant movement.
     :gutter: 2 3 4 4
 
     .. grid-item-card::
-        :img-top: _static/index_images/getting_started.svg
         :text-align: center
+
+        .. raw:: html
+
+            <img src="_static/index_images/getting_started.svg" style="height: 60px; width: 60px; margin-left: auto; margin-right: auto; margin-top: 10px;" />
 
         Getting Started
         ^^^
 
-        Learn how to install and use
-        the basic StACKER functions
+        Learn how to install StACKER and
+        prepare Molecular Dynamics Data
 
         +++
 
@@ -33,8 +35,11 @@ two residues through analysis of their relevant movement.
             To the installation instructions
 
     .. grid-item-card::
-        :img-top: _static/index_images/python_logo.webp
         :text-align: center
+
+        .. raw:: html
+
+            <img src="_static/index_images/python_logo.webp" style="height: 60px; width: 60px; margin-left: auto; margin-right: auto; margin-top: 10px;" />
 
         Python Modules
         ^^^
@@ -52,18 +57,21 @@ two residues through analysis of their relevant movement.
             To the Python user guide
 
     .. grid-item-card::
-        :img-top: _static/index_images/system_stacking_fingerprint.png
         :text-align: center
+
+        .. raw:: html
+
+            <img src="_static/index_images/system_stacking_fingerprint.png" style="height: 200px; width: 200px; margin-left: auto; margin-right: auto; margin-top: 10px;" />
 
         Create System Stacking Fingerprints (SSFs)
         ^^^
 
         Pipeline to create System Stacking Fingerprints (SSFs)
-        using the Python and Command Line Options
+        using the Python Options
 
         +++
 
-        .. button-ref:: stacker.pairwise_distance
+        .. button-ref:: system_stacking
             :expand:
             :color: secondary
             :click-parent:
@@ -71,18 +79,21 @@ two residues through analysis of their relevant movement.
             To the SSF creation guide
 
     .. grid-item-card::
-        :img-top: _static/index_images/system_stacking_fingerprint.png
         :text-align: center
+
+        .. raw:: html
+
+            <img src="_static/index_images/pairwise_stacking_fingerprint.png" style="height: 200px; width: 250px; margin-left: auto; margin-right: auto; margin-top: 10px;" />
 
         Create Pairwise Stacking Fingerprints (PSFs)
         ^^^
 
         Pipeline to create Pairwise Stacking Fingerprints (PSFs)
-        using the Python and Command Line Options
+        using the Python Options
 
         +++
 
-        .. button-ref:: stacker/create_psf
+        .. button-ref:: pairwise_stacking
             :expand:
             :color: secondary
             :click-parent:
@@ -90,18 +101,20 @@ two residues through analysis of their relevant movement.
             To the PSF creation guide
 
     .. grid-item-card::
-        :img-top: _static/index_images/visualize_data.svg
         :text-align: center
+
+        .. raw:: html
+
+            <img src="_static/index_images/command_line.png" style="height: 60px; width: 60px; margin-left: auto; margin-right: auto; margin-top: 10px;" />
 
         Command Line Options
         ^^^
 
-        See detailed instructions on StACKER's 
-        functions and modules when using 
-        the Command Line
+        See a detailed pipeline to generate SSFs
+        and PSFs using the Command Line Options
         +++
 
-        .. button-ref:: stacker/visualize_data
+        .. button-ref:: command_line_options
             :expand:
             :color: secondary
             :click-parent:
@@ -112,11 +125,10 @@ two residues through analysis of their relevant movement.
    :maxdepth: 1
    :caption: Contents:
 
-   Getting Started <getting_started>
-   Command Line Options <command_line_options>
-   Python Options <python_options>
-   Load and Filter Trajectories <stacker.file_manipulation>
-   Create System Stacking Fingerprints (SSFs) <stacker.pairwise_distance>
-   Create Pairwise Stacking Fingerprints (PSFs) <stacker.residue_movement>
-   Visualize Data <stacker.visualization>
-
+   Getting Started 
+   Command Line Options 
+   Python Options 
+   Load and Filter Trajectories 
+   Create System Stacking Fingerprints (SSFs) 
+   Create Pairwise Stacking Fingerprints (PSFs) 
+   Visualize Data

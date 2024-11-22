@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="_static/plot_directive.css?v=7f9a90b1" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="_static/numpy.css?v=f033eccb" />
+    <link rel="stylesheet" type="text/css" href="_static/numpy.css?v=93bf2a1f" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -182,15 +182,7 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="stacker.html">Command Line Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stacker.file_manipulation.html">Load and Filter Trajectories</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stacker.pairwise_distance.html">Create System Stacking Fingerprints (SSFs)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stacker.residue_movement.html">Create Pairwise Stacking Fingerprints (PSFs)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stacker.visualization.html">Visualize Data</a></li>
-</ul>
-
+        
     </div>
 </nav></div>
     </div>
@@ -348,7 +340,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker-in-the-command-line">StACKER in the Command Line</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-stacker-to-python">Importing StACKER to Python</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-the-example-code">Reading the example code</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-numpy">Why use NumPy?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#molecular-dynamics-md">Molecular Dynamics (MD)</a></li>
 </ul>
             </nav>
         </div>
@@ -361,7 +353,7 @@
                 <article class="bd-article">
                   
   <section id="getting-started">
-<h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h1>
+<span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h1>
 <p>Welcome to getting started with StACKER!</p>
 <p>StACKER (<strong>St</strong>acking <strong>A</strong>nalysis and <strong>C</strong>onformational <strong>K</strong>inetics for <strong>E</strong>xamining
 <strong>R</strong>esidues) is an open source Python library for nalyzing pi-stacking interactions
@@ -387,9 +379,8 @@ and install all the necessary dependencies.</p>
 <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
 </pre></div>
 </div>
-<p>This will install StACKER, activate the command line option <cite>stacker</cite>,
+<p>This will install StACKER, activate the command line option <code class="docutils literal notranslate"><span class="pre">stacker</span></code>,
 and install all the necessary dependencies.</p>
-<p>Read more about StACKER’s <span class="xref std std-ref">Command Line Options</span>.</p>
 </section>
 <section id="stacker-in-the-command-line">
 <h2>StACKER in the Command Line<a class="headerlink" href="#stacker-in-the-command-line" title="Link to this heading">#</a></h2>
@@ -422,6 +413,7 @@ options:
 -h, --help            show this help message and exit
 </pre></div>
 </div>
+<p>Read more about StACKER’s <a class="reference internal" href="command_line_options.html#command-line-options"><span class="std std-ref">Command Line Options</span></a>.</p>
 </section>
 <section id="importing-stacker-to-python">
 <h2>Importing StACKER to Python<a class="headerlink" href="#importing-stacker-to-python" title="Link to this heading">#</a></h2>
@@ -430,40 +422,40 @@ code like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 </pre></div>
 </div>
-<p>Although StACKER’s functions are further subsetted into <span class="xref std std-ref">modules</span>,
+<p>Although StACKER’s functions are further subsetted into <a class="reference internal" href="modules.html#modules"><span class="std std-ref">modules</span></a>,
 all functions are accessible through <code class="docutils literal notranslate"><span class="pre">st.________</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.&lt;</span><span class="n">Tab</span><span class="o">&gt;</span>
-<span class="n">st</span><span class="o">.</span><span class="n">AtomEmpty</span><span class="p">(</span>                                   <span class="n">st</span><span class="o">.</span><span class="n">create_axis_labels</span><span class="p">(</span>                          <span class="n">st</span><span class="o">.</span><span class="n">os</span>
-<span class="n">st</span><span class="o">.</span><span class="n">Base</span><span class="p">(</span>                                        <span class="n">st</span><span class="o">.</span><span class="n">create_base_from_coords_list</span><span class="p">(</span>                <span class="n">st</span><span class="o">.</span><span class="n">pairwise_distance</span>
-<span class="n">st</span><span class="o">.</span><span class="n">FrameEmpty</span><span class="p">(</span>                                  <span class="n">st</span><span class="o">.</span><span class="n">create_parent_directories</span><span class="p">(</span>                   <span class="n">st</span><span class="o">.</span><span class="n">pd</span>
-<span class="n">st</span><span class="o">.</span><span class="n">InvalidRoutine</span><span class="p">(</span>                              <span class="n">st</span><span class="o">.</span><span class="n">csv</span>                                          <span class="n">st</span><span class="o">.</span><span class="n">plt</span>
-<span class="n">st</span><span class="o">.</span><span class="n">MultiFrameTraj</span><span class="p">(</span>                              <span class="n">st</span><span class="o">.</span><span class="n">display_arrays_as_video</span><span class="p">(</span>                     <span class="n">st</span><span class="o">.</span><span class="n">print_function</span>
-<span class="n">st</span><span class="o">.</span><span class="n">NoResidues</span><span class="p">(</span>                                  <span class="n">st</span><span class="o">.</span><span class="n">enable_printing</span><span class="p">()</span>                            <span class="n">st</span><span class="o">.</span><span class="n">random</span>
-<span class="n">st</span><span class="o">.</span><span class="n">ResEmpty</span><span class="p">(</span>                                    <span class="n">st</span><span class="o">.</span><span class="n">file_convert</span><span class="p">(</span>                                <span class="n">st</span><span class="o">.</span><span class="n">res_distance_routine</span><span class="p">()</span>
-<span class="n">st</span><span class="o">.</span><span class="n">SmartIndexingAction</span><span class="p">(</span>                         <span class="n">st</span><span class="o">.</span><span class="n">file_manipulation</span>                            <span class="n">st</span><span class="o">.</span><span class="n">residue_movement</span>
-<span class="n">st</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span>                                      <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span>                                 <span class="n">st</span><span class="o">.</span><span class="n">run_python_command</span><span class="p">()</span>
-<span class="n">st</span><span class="o">.</span><span class="n">argparse</span>                                     <span class="n">st</span><span class="o">.</span><span class="n">filter_traj_routine</span><span class="p">()</span>                        <span class="n">st</span><span class="o">.</span><span class="n">set_polar_grid</span><span class="p">()</span>
-<span class="n">st</span><span class="o">.</span><span class="n">block_printing</span><span class="p">()</span>                             <span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span>                          <span class="n">st</span><span class="o">.</span><span class="n">stack_events_routine</span><span class="p">()</span>
-<span class="n">st</span><span class="o">.</span><span class="n">bottaro_routine</span><span class="p">()</span>                            <span class="n">st</span><span class="o">.</span><span class="n">get_frame_average</span><span class="p">(</span>                           <span class="n">st</span><span class="o">.</span><span class="n">sys</span>
-<span class="n">st</span><span class="o">.</span><span class="n">calc_center_3pts</span><span class="p">(</span>                            <span class="n">st</span><span class="o">.</span><span class="n">get_residue_distance_for_frame</span><span class="p">(</span>              <span class="n">st</span><span class="o">.</span><span class="n">system_routine</span><span class="p">()</span>
-<span class="n">st</span><span class="o">.</span><span class="n">calculate_bottaro_values_for_frame</span><span class="p">(</span>          <span class="n">st</span><span class="o">.</span><span class="n">get_residue_distance_for_trajectory</span><span class="p">(</span>         <span class="n">st</span><span class="o">.</span><span class="n">typing</span>
-<span class="n">st</span><span class="o">.</span><span class="n">calculate_residue_distance</span><span class="p">(</span>                  <span class="n">st</span><span class="o">.</span><span class="n">get_top_stacking</span><span class="p">(</span>                            <span class="n">st</span><span class="o">.</span><span class="n">vector</span>
-<span class="n">st</span><span class="o">.</span><span class="n">collect_atom_locations_by_frame</span><span class="p">(</span>             <span class="n">st</span><span class="o">.</span><span class="n">increment_residue</span><span class="p">(</span>                           <span class="n">st</span><span class="o">.</span><span class="n">visualization</span>
-<span class="n">st</span><span class="o">.</span><span class="n">combine_frames</span><span class="p">(</span>                              <span class="n">st</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span>                                     <span class="n">st</span><span class="o">.</span><span class="n">visualize_two_residue_movement_heatmap</span><span class="p">(</span>
-<span class="n">st</span><span class="o">.</span><span class="n">compare_routine</span><span class="p">()</span>                            <span class="n">st</span><span class="o">.</span><span class="n">math</span>                                         <span class="n">st</span><span class="o">.</span><span class="n">visualize_two_residue_movement_scatterplot</span><span class="p">(</span>
-<span class="n">st</span><span class="o">.</span><span class="n">concurrent</span>                                   <span class="n">st</span><span class="o">.</span><span class="n">md</span>                                           <span class="n">st</span><span class="o">.</span><span class="n">write_bottaro_to_csv</span><span class="p">(</span>
-<span class="n">st</span><span class="o">.</span><span class="n">convert_to_python_command</span><span class="p">()</span>                  <span class="n">st</span><span class="o">.</span><span class="n">mpl</span>
-<span class="mi">3</span> <span class="n">more</span><span class="o">...</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.&lt;</span><span class="n">Tab</span><span class="o">&gt;</span>
+<span class="go">st.AtomEmpty(                                   st.create_axis_labels(                          st.os</span>
+<span class="go">st.Base(                                        st.create_base_from_coords_list(                st.pairwise_distance</span>
+<span class="go">st.FrameEmpty(                                  st.create_parent_directories(                   st.pd</span>
+<span class="go">st.InvalidRoutine(                              st.csv                                          st.plt</span>
+<span class="go">st.MultiFrameTraj(                              st.display_arrays_as_video(                     st.print_function</span>
+<span class="go">st.NoResidues(                                  st.enable_printing()                            st.random</span>
+<span class="go">st.ResEmpty(                                    st.file_convert(                                st.res_distance_routine()</span>
+<span class="go">st.SmartIndexingAction(                         st.file_manipulation                            st.residue_movement</span>
+<span class="go">st.Vector(                                      st.filter_traj(                                 st.run_python_command()</span>
+<span class="go">st.argparse                                     st.filter_traj_routine()                        st.set_polar_grid()</span>
+<span class="go">st.block_printing()                             st.filter_traj_to_pdb(                          st.stack_events_routine()</span>
+<span class="go">st.bottaro_routine()                            st.get_frame_average(                           st.sys</span>
+<span class="go">st.calc_center_3pts(                            st.get_residue_distance_for_frame(              st.system_routine()</span>
+<span class="go">st.calculate_bottaro_values_for_frame(          st.get_residue_distance_for_trajectory(         st.typing</span>
+<span class="go">st.calculate_residue_distance(                  st.get_top_stacking(                            st.vector</span>
+<span class="go">st.collect_atom_locations_by_frame(             st.increment_residue(                           st.visualization</span>
+<span class="go">st.combine_frames(                              st.kdeplot(                                     st.visualize_two_residue_movement_heatmap(</span>
+<span class="go">st.compare_routine()                            st.math                                         st.visualize_two_residue_movement_scatterplot(</span>
+<span class="go">st.concurrent                                   st.md                                           st.write_bottaro_to_csv(</span>
+<span class="go">st.convert_to_python_command()                  st.mpl</span>
+<span class="go">3 more...</span>
 </pre></div>
 </div>
+<p>Read more about StACKER’s <a class="reference internal" href="modules.html#modules"><span class="std std-ref">Python Options</span></a>.</p>
 </section>
 <section id="reading-the-example-code">
 <h2>Reading the example code<a class="headerlink" href="#reading-the-example-code" title="Link to this heading">#</a></h2>
-<p>Throughout the NumPy documentation, you will find blocks that look like:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
-<span class="gp">... </span>              <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">shape</span>
-<span class="go">(2, 3)</span>
+<p>StACKER documents python examples like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">increment_residue</span><span class="p">(</span><span class="s2">&quot;G43&quot;</span><span class="p">)</span>
+<span class="go">&#39;G44&#39;</span>
 </pre></div>
 </div>
 <p>Text preceded by <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">...</span></code> is <strong>input</strong>, the code that you would
@@ -471,18 +463,24 @@ enter in a script or at a Python prompt. Everything else is <strong>output</stro
 results of running your code. Note that <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">...</span></code> are not part of the
 code and may cause an error if entered at a Python prompt.</p>
 </section>
-<section id="why-use-numpy">
-<h2>Why use NumPy?<a class="headerlink" href="#why-use-numpy" title="Link to this heading">#</a></h2>
-<p>Python lists are excellent, general-purpose containers. They can be
-“heterogeneous”, meaning that they can contain elements of a variety of types,
-and they are quite fast when used to perform individual operations on a handful
-of elements.</p>
-<p>Depending on the characteristics of the data and the types of operations that
-need to be performed, other containers may be more appropriate; by exploiting
-these characteristics, we can improve speed, reduce memory consumption, and
-offer a high-level syntax for performing a variety of common processing tasks.
-NumPy shines when there are large quantities of “homogeneous” (same-type) data
-to be processed on the CPU.</p>
+<section id="molecular-dynamics-md">
+<h2>Molecular Dynamics (MD)<a class="headerlink" href="#molecular-dynamics-md" title="Link to this heading">#</a></h2>
+<p>Currently, StACKER supports <code class="docutils literal notranslate"><span class="pre">.mdcrd</span></code> trajectory files, <code class="docutils literal notranslate"><span class="pre">.prmtop</span></code> topology
+files, and <code class="docutils literal notranslate"><span class="pre">.pdb</span></code> files.</p>
+<p><code class="docutils literal notranslate"><span class="pre">.mdcrd</span></code> files are the standard trajectory output of the
+<a class="reference external" href="https://ambermd.org/">AMBER MD Software Package</a>. They are equivalent to
+<code class="docutils literal notranslate"><span class="pre">.trj</span></code> files, change the file extension to <code class="docutils literal notranslate"><span class="pre">.mdcrd</span></code> before inputting to StACKER.</p>
+<p><code class="docutils literal notranslate"><span class="pre">.prmtop</span></code> files are the Parameter-Topology file outputted by AMBER tLEaP.</p>
+<p><code class="docutils literal notranslate"><span class="pre">.pdb</span></code> files are a standard filetype for molecular structures (Cryo-EM, X-Ray Crystollography, etc.)
+and include both trajectory and topology information.</p>
+<p>You can convert between these using <a class="reference internal" href="stacker.html#stacker.file_manipulation.filter_traj_to_pdb" title="stacker.file_manipulation.filter_traj_to_pdb"><code class="xref py py-func docutils literal notranslate"><span class="pre">stacker.file_manipulation.filter_traj_to_pdb()</span></code></a></p>
+<p>These can be imported into python using the <code class="docutils literal notranslate"><span class="pre">mdtraj</span></code> package, which is automatically
+installed with StACKER.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mdtraj</span> <span class="k">as</span> <span class="nn">md</span>
+<span class="n">md</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;traj.mdcrd&quot;</span><span class="p">,</span> <span class="n">top</span> <span class="o">=</span> <span class="s2">&quot;top.prmtop&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Alternatively, the trajectories can be loaded in, pre-filtered using <a class="reference internal" href="stacker.html#stacker.file_manipulation.filter_traj" title="stacker.file_manipulation.filter_traj"><code class="xref py py-func docutils literal notranslate"><span class="pre">stacker.file_manipulation.filter_traj()</span></code></a></p>
 </section>
 </section>
 
@@ -518,7 +516,7 @@ to be processed on the CPU.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker-in-the-command-line">StACKER in the Command Line</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-stacker-to-python">Importing StACKER to Python</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-the-example-code">Reading the example code</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-numpy">Why use NumPy?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#molecular-dynamics-md">Molecular Dynamics (MD)</a></li>
 </ul>
   </nav></div>
 
