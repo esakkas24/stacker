@@ -336,9 +336,10 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identifying-a-pi-stacking-pair">Identifying a Pi-Stacking Pair</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identify-a-pi-stacking-pair">Identify a Pi-Stacking Pair</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-molecular-dynamics-trajectory">Filter Molecular Dynamics Trajectory</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-psf-data-to-csv">Write PSF Data to CSV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-psf-data">Visualize PSF Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-pi-stacking-pairs">Comparing Pi-Stacking Pairs</a></li>
 </ul>
             </nav>
@@ -353,14 +354,16 @@
                   
   <section id="making-pairwise-stacking-fingerprints-psfs">
 <span id="pairwise-stacking"></span><h1>Making Pairwise Stacking Fingerprints (PSFs)<a class="headerlink" href="#making-pairwise-stacking-fingerprints-psfs" title="Link to this heading">#</a></h1>
-<section id="identifying-a-pi-stacking-pair">
-<h2>Identifying a Pi-Stacking Pair<a class="headerlink" href="#identifying-a-pi-stacking-pair" title="Link to this heading">#</a></h2>
+<p>Once you’ve identified a pi-stacking residue pair, you can use StACKER to
+characterize the type of stacking occuring using Pairwise Stacking Fingerprints (PSFs).</p>
+<section id="identify-a-pi-stacking-pair">
+<h2>Identify a Pi-Stacking Pair<a class="headerlink" href="#identify-a-pi-stacking-pair" title="Link to this heading">#</a></h2>
 <p>Users can identify a residue pair engaging in pi-stacking
 by using the <a class="reference internal" href="system_stacking.html#system-stacking"><span class="std std-ref">System Stacking Fingerprint Pipeline</span></a>.</p>
 </section>
 <section id="filter-molecular-dynamics-trajectory">
 <h2>Filter Molecular Dynamics Trajectory<a class="headerlink" href="#filter-molecular-dynamics-trajectory" title="Link to this heading">#</a></h2>
-<p>In this example Pipeline, we use a trajectory of the
+<p>In this example pipeline, we use a trajectory of the
 <a class="reference external" href="https://www.mdpi.com/1422-0067/23/3/1417">Ribosome CAR-mRNA Interaction Surface</a>
 found in the <a class="reference external" href="https://github.com/esakkas24/stacker/tree/main/testing">StACKER GitHub Repository</a>.
 We filter this trajectory to the pi-stacking residue pair.</p>
@@ -396,15 +399,45 @@ residues 426 and 427 for the first 10 frames.</p>
 <a class="reference external" href="https://github.com/esakkas24/stacker/tree/main/testing">GitHub testing</a>
 repository includes:</p>
 <ul class="simple">
-<li><p>5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb : A trajectory PDB of residues 426+427 with 3200 frames.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb</span></code> : A trajectory PDB of residues 426+427 with 3200 frames.</p></li>
 </ul>
-<p>The data for a Pairwise Stacking Fingerprint (PSF) is outlined in <a href="#id1"><span class="problematic" id="id2">`Bottaro et al &lt;&gt;`_</span></a>.</p>
-<dl>
-<dt>We use <a class="reference internal" href="stacker.residue_movement.html#stacker.residue_movement.write_bottaro_to_csv" title="stacker.residue_movement.write_bottaro_to_csv"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_bottaro_to_csv()</span></code></a> to extract this data from the PDB to a CSV.::</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">write_bottaro_to_csv</span>
+<p>The data for a Pairwise Stacking Fingerprint (PSF) is outlined in <a class="reference external" href="https://doi.org/10.1093/nar/gku972">Bottaro et al</a>
+and labelled in the image below. Briefly, we characterize the movement of one residue relative to another by
+getting the per-frame rho and theta value, which projects the center of geometry (COG) of the “viewed residue” onto the
+plane of the “perspective residue.”</p>
+<img alt="_images/bottaro_values.png" src="_images/bottaro_values.png" />
+<p>We use <a class="reference internal" href="stacker.residue_movement.html#stacker.residue_movement.write_bottaro_to_csv" title="stacker.residue_movement.write_bottaro_to_csv"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_bottaro_to_csv()</span></code></a> to extract this data from the PDB to a CSV:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">write_bottaro_to_csv</span><span class="p">(</span><span class="s2">&quot;5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">output_csv_name</span> <span class="o">=</span> <span class="s2">&quot;script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">perspective_residue_num</span> <span class="o">=</span> <span class="mi">426</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">viewed_residue_num</span> <span class="o">=</span> <span class="mi">427</span><span class="p">)</span>
+<span class="go">Output values written to script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()[:</span><span class="mi">10</span><span class="p">]))</span>
+<span class="go">frame,r_dist,rho_dist,theta</span>
+<span class="go">0,7.5253415,6.5321836,204.02934901525177</span>
+<span class="go">1,6.884639,6.0513134,199.40647902703924</span>
+<span class="go">2,7.301847,6.151191,205.1906453260924</span>
+<span class="go">3,6.5815425,5.461494,199.5421877249345</span>
+<span class="go">4,7.0760417,5.3919506,204.0150121540755</span>
+<span class="go">5,7.2589145,6.3483577,201.32674968542617</span>
+<span class="go">6,7.4929285,6.414151,205.92967194025135</span>
+<span class="go">7,7.1484976,6.035165,202.88441276229827</span>
+<span class="go">8,7.344863,5.541237,217.30043061558888</span>
 </pre></div>
 </div>
-</dd>
-</dl>
+<p>The PSF values are written to <code class="docutils literal notranslate"><span class="pre">script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv</span></code></p>
+</section>
+<section id="visualize-psf-data">
+<h2>Visualize PSF Data<a class="headerlink" href="#visualize-psf-data" title="Link to this heading">#</a></h2>
+<p>The PSF data can be visualized as a scatterplot using <a class="reference internal" href="stacker.visualization.html#stacker.visualization.visualize_two_residue_movement_scatterplot" title="stacker.visualization.visualize_two_residue_movement_scatterplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">visualize_two_residue_movement_scatterplot()</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">visualize_two_residue_movement_scatterplot</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">plot_outfile</span><span class="o">=</span><span class="s1">&#39;script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_scatter.png&#39;</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/tUAG_aCUA_%2B1GCU_GC_plot_scatter.png" src="_images/tUAG_aCUA_%2B1GCU_GC_plot_scatter.png" />
 </section>
 <section id="comparing-pi-stacking-pairs">
 <h2>Comparing Pi-Stacking Pairs<a class="headerlink" href="#comparing-pi-stacking-pairs" title="Link to this heading">#</a></h2>
@@ -439,9 +472,10 @@ repository includes:</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identifying-a-pi-stacking-pair">Identifying a Pi-Stacking Pair</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identify-a-pi-stacking-pair">Identify a Pi-Stacking Pair</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-molecular-dynamics-trajectory">Filter Molecular Dynamics Trajectory</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-psf-data-to-csv">Write PSF Data to CSV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-psf-data">Visualize PSF Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-pi-stacking-pairs">Comparing Pi-Stacking Pairs</a></li>
 </ul>
   </nav></div>
