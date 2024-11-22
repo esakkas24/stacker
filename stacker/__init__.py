@@ -29,7 +29,7 @@ def run_python_command() -> None:
     
     # If no flags specified at all
     if not any(vars(args)) and not remaining_args:
-        print('usage: stacker.py -s ROUTINE [-h]\n\n' + \
+        print('usage: stacker -s ROUTINE [-h]\n\n' + \
             'Wrapper to run stacker subroutines using the -s flag.\n' + \
             'More info on each routine given by `stacker -s ROUTINE -h` or `stacker -s ROUTINE --help`\n\n' + \
             'options:\n' +\

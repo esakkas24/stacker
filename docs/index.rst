@@ -14,53 +14,56 @@ two residues through analysis of their relevant movement.
     :gutter: 2 3 4 4
 
     .. grid-item-card::
-        :img-top: _static/images/command_line_options.png
+        :img-top: _static/index_images/getting_started.svg
         :text-align: center
 
-        Command Line Options
+        Getting Started
         ^^^
 
-        Learn how to use the command line options for StACKER.
+        Learn how to install and use
+        the basic StACKER functions
 
         +++
 
-        .. button-ref:: stacker/command_line_options
+        .. button-ref:: getting_started
             :expand:
             :color: secondary
             :click-parent:
 
-            To the command line options
+            To the installation instructions
 
     .. grid-item-card::
-        :img-top: _static/images/load_filter_trajectories.png
+        :img-top: _static/index_images/python_logo.webp
         :text-align: center
 
-        Load and Filter Trajectories
+        Python Modules
         ^^^
 
-        Instructions on loading and filtering trajectories.
+        See detailed instructions on StACKER's 
+        functions and modules when using Python
 
         +++
 
-        .. button-ref:: stacker/load_filter_trajectories
+        .. button-ref:: modules
             :expand:
             :color: secondary
             :click-parent:
 
-            To the loading and filtering trajectories
+            To the Python user guide
 
     .. grid-item-card::
-        :img-top: _static/images/create_ssf.png
+        :img-top: _static/index_images/system_stacking_fingerprint.png
         :text-align: center
 
         Create System Stacking Fingerprints (SSFs)
         ^^^
 
-        Steps to create System Stacking Fingerprints.
+        Pipeline to create System Stacking Fingerprints (SSFs)
+        using the Python and Command Line Options
 
         +++
 
-        .. button-ref:: stacker/create_ssf
+        .. button-ref:: stacker.pairwise_distance
             :expand:
             :color: secondary
             :click-parent:
@@ -68,13 +71,14 @@ two residues through analysis of their relevant movement.
             To the SSF creation guide
 
     .. grid-item-card::
-        :img-top: _static/images/create_psf.svg
+        :img-top: _static/index_images/system_stacking_fingerprint.png
         :text-align: center
 
         Create Pairwise Stacking Fingerprints (PSFs)
         ^^^
 
-        Steps to create Pairwise Stacking Fingerprints.
+        Pipeline to create Pairwise Stacking Fingerprints (PSFs)
+        using the Python and Command Line Options
 
         +++
 
@@ -86,14 +90,15 @@ two residues through analysis of their relevant movement.
             To the PSF creation guide
 
     .. grid-item-card::
-        :img-top: _static/images/visualize_data.svg
+        :img-top: _static/index_images/visualize_data.svg
         :text-align: center
 
-        Visualize Data
+        Command Line Options
         ^^^
 
-        Learn how to visualize your data with StACKER.
-
+        See detailed instructions on StACKER's 
+        functions and modules when using 
+        the Command Line
         +++
 
         .. button-ref:: stacker/visualize_data
@@ -101,29 +106,17 @@ two residues through analysis of their relevant movement.
             :color: secondary
             :click-parent:
 
-            To the data visualization guide
+            To the Command Line user guide
 
 .. toctree::
    :maxdepth: 1
    :caption: Contents:
 
-   Command Line Options <stacker>
+   Getting Started <getting_started>
+   Command Line Options <command_line_options>
+   Python Options <python_options>
    Load and Filter Trajectories <stacker.file_manipulation>
    Create System Stacking Fingerprints (SSFs) <stacker.pairwise_distance>
    Create Pairwise Stacking Fingerprints (PSFs) <stacker.residue_movement>
    Visualize Data <stacker.visualization>
-
-
-.. autosummary::
-      :toctree: _autosummary
-      :template: custom-module-template.rst
-      :recursive:
-
-      stacker
-      stacker.file_manipulation
-      stacker.kmeans
-      stacker.pairwise_distance
-      stacker.residue_movement
-      stacker.vector
-      stacker.visualization
 

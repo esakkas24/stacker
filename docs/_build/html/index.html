@@ -35,6 +35,7 @@
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="_static/plot_directive.css?v=7f9a90b1" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/numpy.css?v=f033eccb" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -50,7 +51,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="stacker package" href="stacker.html" />
+    <link rel="next" title="Getting Started" href="getting_started.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -184,135 +185,11 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="stacker.html">Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stacker.file_manipulation.html">Load and Filter Trajectories</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stacker.pairwise_distance.html">Create System Stacking Fingerprints (SSFs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stacker.residue_movement.html">Create Pairwise Stacking Fingerprints (PSFs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stacker.visualization.html">Visualize Data</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="_autosummary/stacker.html">stacker</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.block_printing.html">stacker.block_printing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.bottaro_routine.html">stacker.bottaro_routine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.combine_frames.html">stacker.combine_frames</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.compare_routine.html">stacker.compare_routine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.convert_to_python_command.html">stacker.convert_to_python_command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.enable_printing.html">stacker.enable_printing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.filter_traj_routine.html">stacker.filter_traj_routine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.res_distance_routine.html">stacker.res_distance_routine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.run_python_command.html">stacker.run_python_command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.stack_events_routine.html">stacker.stack_events_routine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.system_routine.html">stacker.system_routine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.AtomEmpty.html">stacker.AtomEmpty</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.FrameEmpty.html">stacker.FrameEmpty</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.InvalidRoutine.html">stacker.InvalidRoutine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.ResEmpty.html">stacker.ResEmpty</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/stacker.file_manipulation.html">file_manipulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.file_manipulation.file_convert.html">stacker.file_manipulation.file_convert</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.file_manipulation.filter_traj.html">stacker.file_manipulation.filter_traj</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.file_manipulation.filter_traj_to_pdb.html">stacker.file_manipulation.filter_traj_to_pdb</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.file_manipulation.SmartIndexingAction.html">SmartIndexingAction</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/stacker.kmeans.html">kmeans</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.create_kmeans_input.html">stacker.kmeans.create_kmeans_input</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_cluster_trj_data.html">stacker.kmeans.plot_cluster_trj_data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_pca.html">stacker.kmeans.plot_pca</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_silhouette.html">stacker.kmeans.plot_silhouette</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.read_and_preprocess_data.html">stacker.kmeans.read_and_preprocess_data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.run_kmeans.html">stacker.kmeans.run_kmeans</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.html">pairwise_distance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.calculate_residue_distance.html">stacker.pairwise_distance.calculate_residue_distance</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_frame_average.html">stacker.pairwise_distance.get_frame_average</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_residue_distance_for_frame.html">stacker.pairwise_distance.get_residue_distance_for_frame</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/stacker.residue_movement.html">residue_movement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.residue_movement.calc_center_3pts.html">stacker.residue_movement.calc_center_3pts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.residue_movement.calculate_bottaro_values_for_frame.html">stacker.residue_movement.calculate_bottaro_values_for_frame</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.residue_movement.collect_atom_locations_by_frame.html">stacker.residue_movement.collect_atom_locations_by_frame</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.residue_movement.correct_theta_sign.html">stacker.residue_movement.correct_theta_sign</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.residue_movement.create_base_from_coords_list.html">stacker.residue_movement.create_base_from_coords_list</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.residue_movement.write_bottaro_to_csv.html">stacker.residue_movement.write_bottaro_to_csv</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.residue_movement.Base.html">Base</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/stacker.vector.html">vector</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.vector.Vector.html">Vector</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/stacker.visualization.html">visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.NoResidues.html">stacker.visualization.NoResidues</a></li>
-</ul>
-</details></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="_autosummary/stacker.file_manipulation.html">file_manipulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.file_manipulation.file_convert.html">stacker.file_manipulation.file_convert</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.file_manipulation.filter_traj.html">stacker.file_manipulation.filter_traj</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.file_manipulation.filter_traj_to_pdb.html">stacker.file_manipulation.filter_traj_to_pdb</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.file_manipulation.SmartIndexingAction.html">SmartIndexingAction</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="_autosummary/stacker.kmeans.html">kmeans</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.kmeans.create_kmeans_input.html">stacker.kmeans.create_kmeans_input</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_cluster_trj_data.html">stacker.kmeans.plot_cluster_trj_data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_pca.html">stacker.kmeans.plot_pca</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_silhouette.html">stacker.kmeans.plot_silhouette</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.kmeans.read_and_preprocess_data.html">stacker.kmeans.read_and_preprocess_data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.kmeans.run_kmeans.html">stacker.kmeans.run_kmeans</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.html">pairwise_distance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.calculate_residue_distance.html">stacker.pairwise_distance.calculate_residue_distance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_frame_average.html">stacker.pairwise_distance.get_frame_average</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_residue_distance_for_frame.html">stacker.pairwise_distance.get_residue_distance_for_frame</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="_autosummary/stacker.residue_movement.html">residue_movement</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.residue_movement.calc_center_3pts.html">stacker.residue_movement.calc_center_3pts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.residue_movement.calculate_bottaro_values_for_frame.html">stacker.residue_movement.calculate_bottaro_values_for_frame</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.residue_movement.collect_atom_locations_by_frame.html">stacker.residue_movement.collect_atom_locations_by_frame</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.residue_movement.correct_theta_sign.html">stacker.residue_movement.correct_theta_sign</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.residue_movement.create_base_from_coords_list.html">stacker.residue_movement.create_base_from_coords_list</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.residue_movement.write_bottaro_to_csv.html">stacker.residue_movement.write_bottaro_to_csv</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.residue_movement.Base.html">Base</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="_autosummary/stacker.vector.html">vector</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.vector.Vector.html">Vector</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="_autosummary/stacker.visualization.html">visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/stacker.visualization.NoResidues.html">stacker.visualization.NoResidues</a></li>
-</ul>
-</details></li>
 </ul>
 
     </div>
@@ -480,54 +357,58 @@ two residues through analysis of their relevant movement.</p>
 <div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-2 sd-row-cols-lg-2 sd-g-2 sd-g-xs-2 sd-g-sm-3 sd-g-md-4 sd-g-lg-4 docutils">
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
-<img alt="" class="sd-card-img-top" src="_images/command_line_options.png" />
+<img alt="" class="sd-card-img-top" src="_images/getting_started.svg" />
 <div class="sd-card-header docutils">
-<p class="sd-card-text">Command Line Options</p>
+<p class="sd-card-text">Getting Started</p>
 </div>
 <div class="sd-card-body docutils">
-<p class="sd-card-text">Learn how to use the command line options for StACKER.</p>
+<p class="sd-card-text">Learn how to install and use
+the basic StACKER functions</p>
 </div>
 <div class="sd-card-footer docutils">
-<p class="sd-card-text"><span class="sd-d-grid"><span class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link">To the command line options</span></span></p>
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="getting_started.html"><span class="doc">To the installation instructions</span></a></span></p>
 </div>
 </div>
 </div>
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
-<img alt="" class="sd-card-img-top" src="_images/load_filter_trajectories.png" />
+<img alt="" class="sd-card-img-top" src="_images/python_logo.webp" />
 <div class="sd-card-header docutils">
-<p class="sd-card-text">Load and Filter Trajectories</p>
+<p class="sd-card-text">Python Modules</p>
 </div>
 <div class="sd-card-body docutils">
-<p class="sd-card-text">Instructions on loading and filtering trajectories.</p>
+<p class="sd-card-text">See detailed instructions on StACKER’s
+functions and modules when using Python</p>
 </div>
 <div class="sd-card-footer docutils">
-<p class="sd-card-text"><span class="sd-d-grid"><span class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link">To the loading and filtering trajectories</span></span></p>
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="modules.html"><span class="doc">To the Python user guide</span></a></span></p>
 </div>
 </div>
 </div>
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
-<img alt="" class="sd-card-img-top" src="_static/images/create_ssf.png" />
+<img alt="" class="sd-card-img-top" src="_images/system_stacking_fingerprint.png" />
 <div class="sd-card-header docutils">
 <p class="sd-card-text">Create System Stacking Fingerprints (SSFs)</p>
 </div>
 <div class="sd-card-body docutils">
-<p class="sd-card-text">Steps to create System Stacking Fingerprints.</p>
+<p class="sd-card-text">Pipeline to create System Stacking Fingerprints (SSFs)
+using the Python and Command Line Options</p>
 </div>
 <div class="sd-card-footer docutils">
-<p class="sd-card-text"><span class="sd-d-grid"><span class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link">To the SSF creation guide</span></span></p>
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="stacker.pairwise_distance.html"><span class="doc">To the SSF creation guide</span></a></span></p>
 </div>
 </div>
 </div>
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
-<img alt="" class="sd-card-img-top" src="_static/images/create_psf.svg" />
+<img alt="" class="sd-card-img-top" src="_images/system_stacking_fingerprint.png" />
 <div class="sd-card-header docutils">
 <p class="sd-card-text">Create Pairwise Stacking Fingerprints (PSFs)</p>
 </div>
 <div class="sd-card-body docutils">
-<p class="sd-card-text">Steps to create Pairwise Stacking Fingerprints.</p>
+<p class="sd-card-text">Pipeline to create Pairwise Stacking Fingerprints (PSFs)
+using the Python and Command Line Options</p>
 </div>
 <div class="sd-card-footer docutils">
 <p class="sd-card-text"><span class="sd-d-grid"><span class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link">To the PSF creation guide</span></span></p>
@@ -536,15 +417,17 @@ two residues through analysis of their relevant movement.</p>
 </div>
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
-<img alt="" class="sd-card-img-top" src="_static/images/visualize_data.svg" />
+<img alt="" class="sd-card-img-top" src="_static/index_images/visualize_data.svg" />
 <div class="sd-card-header docutils">
-<p class="sd-card-text">Visualize Data</p>
+<p class="sd-card-text">Command Line Options</p>
 </div>
 <div class="sd-card-body docutils">
-<p class="sd-card-text">Learn how to visualize your data with StACKER.</p>
+<p class="sd-card-text">See detailed instructions on StACKER’s
+functions and modules when using
+the Command Line</p>
 </div>
 <div class="sd-card-footer docutils">
-<p class="sd-card-text"><span class="sd-d-grid"><span class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link">To the data visualization guide</span></span></p>
+<p class="sd-card-text"><span class="sd-d-grid"><span class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link">To the Command Line user guide</span></span></p>
 </div>
 </div>
 </div>
@@ -553,38 +436,12 @@ two residues through analysis of their relevant movement.</p>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="stacker.html">Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stacker.file_manipulation.html">Load and Filter Trajectories</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stacker.pairwise_distance.html">Create System Stacking Fingerprints (SSFs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stacker.residue_movement.html">Create Pairwise Stacking Fingerprints (PSFs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stacker.visualization.html">Visualize Data</a></li>
 </ul>
-</div>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="stacker.html#module-stacker" title="stacker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacker</span></code></a></p></td>
-<td><p>Command Line Options for StACKER</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="stacker.file_manipulation.html#module-stacker.file_manipulation" title="stacker.file_manipulation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacker.file_manipulation</span></code></a></p></td>
-<td><p>Filter Trajectory Files</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="stacker.kmeans.html#module-stacker.kmeans" title="stacker.kmeans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacker.kmeans</span></code></a></p></td>
-<td><p>Run K Means Clustering and Principal Component Analysis</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="stacker.pairwise_distance.html#module-stacker.pairwise_distance" title="stacker.pairwise_distance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacker.pairwise_distance</span></code></a></p></td>
-<td><p>Create and Analyze System Stacking Fingerprints (SSFs)</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="stacker.residue_movement.html#module-stacker.residue_movement" title="stacker.residue_movement"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacker.residue_movement</span></code></a></p></td>
-<td><p>Create and Analyze Pairwise Stacking Fingerprints (PSFs)</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="stacker.vector.html#module-stacker.vector" title="stacker.vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacker.vector</span></code></a></p></td>
-<td><p>Vector class used for SSF and PSF Calculation</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="stacker.visualization.html#module-stacker.visualization" title="stacker.visualization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacker.visualization</span></code></a></p></td>
-<td><p>Visualize the SSFs, PSFs, and other analyses</p></td>
-</tr>
-</tbody>
-</table>
 </div>
 </section>
 
@@ -600,11 +457,11 @@ two residues through analysis of their relevant movement.</p>
                   
 <div class="prev-next-area">
     <a class="right-next"
-       href="stacker.html"
+       href="getting_started.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">stacker package</p>
+        <p class="prev-next-title">Getting Started</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

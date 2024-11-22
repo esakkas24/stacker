@@ -61,6 +61,9 @@ add_module_names = False
 pygments_style = 'sphinx'
 html_theme = "sphinx_book_theme"
 html_static_path = ['_static']
+html_css_files = [
+    'numpy.css',
+]
 
 html_use_modindex = True
 html_copy_source = False

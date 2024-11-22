@@ -1,0 +1,576 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Getting Started &#8212; StACKER Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css?v=7f9a90b1" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/numpy.css?v=f033eccb" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="_static/documentation_options.js?v=528dc5d9"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/stackerlogo.svg" class="logo__image only-light" alt="StACKER Documentation - Home"/>
+    <img src="_static/stacker_logo_dark.png" class="logo__image only-dark pst-js-only" alt="StACKER Documentation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/pistacker/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://raw.githubusercontent.com/esakkas24/stacker/refs/heads/main/docs/images/pypi.svg" class="icon-link-image" alt="PyPI"/></a>
+        </li>
+</ul></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    StACKER documentation
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="stacker.html">Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stacker.file_manipulation.html">Load and Filter Trajectories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stacker.pairwise_distance.html">Create System Stacking Fingerprints (SSFs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stacker.residue_movement.html">Create Pairwise Stacking Fingerprints (PSFs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stacker.visualization.html">Visualize Data</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/esakkas24/stacker" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Getting Started</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-stacker">Installing StACKER</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker-in-the-command-line">StACKER in the Command Line</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-stacker-to-python">Importing StACKER to Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-the-example-code">Reading the example code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-numpy">Why use NumPy?</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h1>
+<p>Welcome to getting started with StACKER!</p>
+<p>StACKER (<strong>St</strong>acking <strong>A</strong>nalysis and <strong>C</strong>onformational <strong>K</strong>inetics for <strong>E</strong>xamining
+<strong>R</strong>esidues) is an open source Python library for nalyzing pi-stacking interactions
+between residues in Molecular Dynamics (MD) trajectories.</p>
+<section id="installing-stacker">
+<h2>Installing StACKER<a class="headerlink" href="#installing-stacker" title="Link to this heading">#</a></h2>
+<p>StACKER can be installed through GitHub or through PyPi:</p>
+<p>In the command line, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pistacker</span>
+</pre></div>
+</div>
+<p>This will install StACKER, activate the command line option <code class="docutils literal notranslate"><span class="pre">stacker</span></code>,
+and install all the necessary dependencies.</p>
+<p>Alternatively, you can clone the GitHub repository to your local machine.</p>
+<p>In the command line, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">esakkas24</span><span class="o">/</span><span class="n">stacker</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>Descend into the directory and download the neccessary dependencies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">stacker</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">setuptools</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>This will install StACKER, activate the command line option <cite>stacker</cite>,
+and install all the necessary dependencies.</p>
+<p>Read more about StACKER’s <span class="xref std std-ref">Command Line Options</span>.</p>
+</section>
+<section id="stacker-in-the-command-line">
+<h2>StACKER in the Command Line<a class="headerlink" href="#stacker-in-the-command-line" title="Link to this heading">#</a></h2>
+<p>StACKER’s functions are available through a Python import and through
+the Command Line. After installing StACKER, running <code class="docutils literal notranslate"><span class="pre">stacker</span></code> in the
+command line will show the Command Line Options for StACKER:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[user]$ stacker
+usage: stacker -s ROUTINE [-h]
+
+Wrapper to run stacker subroutines using the -s flag.
+More info on each routine given by `stacker -s ROUTINE -h` or `python stacker.py -s ROUTINE --help`
+
+options:
+-s ROUTINE, --script ROUTINE
+            Name of command to use. Options for ROUTINE:
+
+            filter_traj:
+                    filters trajectory and topology files to desired residue numbers and atom names
+            bottaro OR pairwise OR psf:
+                    Create a Pairwise Stacking Fingerprint (PSF): polar plots like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)
+            res_distance:
+                    Get the distance between two residues in a given frame
+            system OR ssf:
+                    Create a System Stacking Fingerprint (SSF) with pairwise distances for each residue
+            stack_events:
+                    Get list of residues with most stacking events (distance closest to 3.5Å)
+            compare:
+                    Get the most changed stacking events between two fingerprints using the outputs of python stacker.py -s stack_events
+
+-h, --help            show this help message and exit
+</pre></div>
+</div>
+</section>
+<section id="importing-stacker-to-python">
+<h2>Importing StACKER to Python<a class="headerlink" href="#importing-stacker-to-python" title="Link to this heading">#</a></h2>
+<p>After installing StACKER, you can import it into Python
+code like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+</pre></div>
+</div>
+<p>Although StACKER’s functions are further subsetted into <span class="xref std std-ref">modules</span>,
+all functions are accessible through <code class="docutils literal notranslate"><span class="pre">st.________</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.&lt;</span><span class="n">Tab</span><span class="o">&gt;</span>
+<span class="n">st</span><span class="o">.</span><span class="n">AtomEmpty</span><span class="p">(</span>                                   <span class="n">st</span><span class="o">.</span><span class="n">create_axis_labels</span><span class="p">(</span>                          <span class="n">st</span><span class="o">.</span><span class="n">os</span>
+<span class="n">st</span><span class="o">.</span><span class="n">Base</span><span class="p">(</span>                                        <span class="n">st</span><span class="o">.</span><span class="n">create_base_from_coords_list</span><span class="p">(</span>                <span class="n">st</span><span class="o">.</span><span class="n">pairwise_distance</span>
+<span class="n">st</span><span class="o">.</span><span class="n">FrameEmpty</span><span class="p">(</span>                                  <span class="n">st</span><span class="o">.</span><span class="n">create_parent_directories</span><span class="p">(</span>                   <span class="n">st</span><span class="o">.</span><span class="n">pd</span>
+<span class="n">st</span><span class="o">.</span><span class="n">InvalidRoutine</span><span class="p">(</span>                              <span class="n">st</span><span class="o">.</span><span class="n">csv</span>                                          <span class="n">st</span><span class="o">.</span><span class="n">plt</span>
+<span class="n">st</span><span class="o">.</span><span class="n">MultiFrameTraj</span><span class="p">(</span>                              <span class="n">st</span><span class="o">.</span><span class="n">display_arrays_as_video</span><span class="p">(</span>                     <span class="n">st</span><span class="o">.</span><span class="n">print_function</span>
+<span class="n">st</span><span class="o">.</span><span class="n">NoResidues</span><span class="p">(</span>                                  <span class="n">st</span><span class="o">.</span><span class="n">enable_printing</span><span class="p">()</span>                            <span class="n">st</span><span class="o">.</span><span class="n">random</span>
+<span class="n">st</span><span class="o">.</span><span class="n">ResEmpty</span><span class="p">(</span>                                    <span class="n">st</span><span class="o">.</span><span class="n">file_convert</span><span class="p">(</span>                                <span class="n">st</span><span class="o">.</span><span class="n">res_distance_routine</span><span class="p">()</span>
+<span class="n">st</span><span class="o">.</span><span class="n">SmartIndexingAction</span><span class="p">(</span>                         <span class="n">st</span><span class="o">.</span><span class="n">file_manipulation</span>                            <span class="n">st</span><span class="o">.</span><span class="n">residue_movement</span>
+<span class="n">st</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span>                                      <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span>                                 <span class="n">st</span><span class="o">.</span><span class="n">run_python_command</span><span class="p">()</span>
+<span class="n">st</span><span class="o">.</span><span class="n">argparse</span>                                     <span class="n">st</span><span class="o">.</span><span class="n">filter_traj_routine</span><span class="p">()</span>                        <span class="n">st</span><span class="o">.</span><span class="n">set_polar_grid</span><span class="p">()</span>
+<span class="n">st</span><span class="o">.</span><span class="n">block_printing</span><span class="p">()</span>                             <span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span>                          <span class="n">st</span><span class="o">.</span><span class="n">stack_events_routine</span><span class="p">()</span>
+<span class="n">st</span><span class="o">.</span><span class="n">bottaro_routine</span><span class="p">()</span>                            <span class="n">st</span><span class="o">.</span><span class="n">get_frame_average</span><span class="p">(</span>                           <span class="n">st</span><span class="o">.</span><span class="n">sys</span>
+<span class="n">st</span><span class="o">.</span><span class="n">calc_center_3pts</span><span class="p">(</span>                            <span class="n">st</span><span class="o">.</span><span class="n">get_residue_distance_for_frame</span><span class="p">(</span>              <span class="n">st</span><span class="o">.</span><span class="n">system_routine</span><span class="p">()</span>
+<span class="n">st</span><span class="o">.</span><span class="n">calculate_bottaro_values_for_frame</span><span class="p">(</span>          <span class="n">st</span><span class="o">.</span><span class="n">get_residue_distance_for_trajectory</span><span class="p">(</span>         <span class="n">st</span><span class="o">.</span><span class="n">typing</span>
+<span class="n">st</span><span class="o">.</span><span class="n">calculate_residue_distance</span><span class="p">(</span>                  <span class="n">st</span><span class="o">.</span><span class="n">get_top_stacking</span><span class="p">(</span>                            <span class="n">st</span><span class="o">.</span><span class="n">vector</span>
+<span class="n">st</span><span class="o">.</span><span class="n">collect_atom_locations_by_frame</span><span class="p">(</span>             <span class="n">st</span><span class="o">.</span><span class="n">increment_residue</span><span class="p">(</span>                           <span class="n">st</span><span class="o">.</span><span class="n">visualization</span>
+<span class="n">st</span><span class="o">.</span><span class="n">combine_frames</span><span class="p">(</span>                              <span class="n">st</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span>                                     <span class="n">st</span><span class="o">.</span><span class="n">visualize_two_residue_movement_heatmap</span><span class="p">(</span>
+<span class="n">st</span><span class="o">.</span><span class="n">compare_routine</span><span class="p">()</span>                            <span class="n">st</span><span class="o">.</span><span class="n">math</span>                                         <span class="n">st</span><span class="o">.</span><span class="n">visualize_two_residue_movement_scatterplot</span><span class="p">(</span>
+<span class="n">st</span><span class="o">.</span><span class="n">concurrent</span>                                   <span class="n">st</span><span class="o">.</span><span class="n">md</span>                                           <span class="n">st</span><span class="o">.</span><span class="n">write_bottaro_to_csv</span><span class="p">(</span>
+<span class="n">st</span><span class="o">.</span><span class="n">convert_to_python_command</span><span class="p">()</span>                  <span class="n">st</span><span class="o">.</span><span class="n">mpl</span>
+<span class="mi">3</span> <span class="n">more</span><span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="reading-the-example-code">
+<h2>Reading the example code<a class="headerlink" href="#reading-the-example-code" title="Link to this heading">#</a></h2>
+<p>Throughout the NumPy documentation, you will find blocks that look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 3)</span>
+</pre></div>
+</div>
+<p>Text preceded by <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">...</span></code> is <strong>input</strong>, the code that you would
+enter in a script or at a Python prompt. Everything else is <strong>output</strong>, the
+results of running your code. Note that <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">...</span></code> are not part of the
+code and may cause an error if entered at a Python prompt.</p>
+</section>
+<section id="why-use-numpy">
+<h2>Why use NumPy?<a class="headerlink" href="#why-use-numpy" title="Link to this heading">#</a></h2>
+<p>Python lists are excellent, general-purpose containers. They can be
+“heterogeneous”, meaning that they can contain elements of a variety of types,
+and they are quite fast when used to perform individual operations on a handful
+of elements.</p>
+<p>Depending on the characteristics of the data and the types of operations that
+need to be performed, other containers may be more appropriate; by exploiting
+these characteristics, we can improve speed, reduce memory consumption, and
+offer a high-level syntax for performing a variety of common processing tasks.
+NumPy shines when there are large quantities of “homogeneous” (same-type) data
+to be processed on the CPU.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-stacker">Installing StACKER</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker-in-the-command-line">StACKER in the Command Line</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-stacker-to-python">Importing StACKER to Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-the-example-code">Reading the example code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-numpy">Why use NumPy?</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Eric D. Sakkas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Eric D. Sakkas.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
