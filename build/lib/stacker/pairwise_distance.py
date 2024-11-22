@@ -18,15 +18,6 @@ import sys
 import concurrent.futures
 import functools
 
-class MultiFrameTraj(Exception):
-    """
-    A multi-frame trajectory is passed to a one-frame function
-
-    Raised if a multi-frame trajectory is passed to a function that
-    only works on one trajectory (eg. calculate_residue_distance_vector())
-    """
-    pass
-
 _NUCLEOTIDE_NAMES = {"A", "A5", "A3", "G", "G5", "G3", "C", "C5", "C3",
                      "T" "T5", "T3", "U", "U5", "U3", "INO"}
 
@@ -210,7 +201,7 @@ def get_residue_distance_for_frame(trajectory: md.Trajectory,
     return(pairwise_res_magnitudes)
 
 def get_residue_distance_for_trajectory(trajectory: md.Trajectory, 
-                                        frames: typing.ArrayLike,
+                                        frames : typing.ArrayLike | str | set = {},
                                         res1_atoms: tuple = ("C2", "C4", "C6"),
                                         res2_atoms: tuple = ("C2", "C4", "C6"),
                                         threads: int = 1,
@@ -230,6 +221,7 @@ def get_residue_distance_for_trajectory(trajectory: md.Trajectory,
     frames : array_like or str
         list of frame indices to analyze (1-indexed).
         Accepts smart-indexed str representing a list of frames (e.g '1-5,6,39-48')
+        If empty, uses all frames.
     res1_atoms : tuple, default=("C2", "C4", "C6")
         Atom names whose positions are averaged to find the center of residue 1.
     res2_atoms : tuple, default=("C2", "C4", "C6")
@@ -266,6 +258,9 @@ def get_residue_distance_for_trajectory(trajectory: md.Trajectory,
     (3, 127, 127)
     """
     frames = SmartIndexingAction.parse_smart_index(frames)
+    
+    if (frames == {}) or (frames == []):
+        frames = [i for i in range(1, trajectory.n_frames + 1)]
 
     with concurrent.futures.ProcessPoolExecutor(max_workers = threads) as executor:            
         ssf_per_frame = np.array(list(executor.map(get_residue_distance_for_frame, [trajectory]*len(frames), frames,
@@ -445,6 +440,16 @@ def increment_residue(residue_id : str) -> str:
     number_part = ''.join(filter(str.isdigit, residue_id))
     incremented_number = str(int(number_part) + 1)
     return letter_part + incremented_number
+
+
+class MultiFrameTraj(Exception):
+    """
+    A multi-frame trajectory is passed to a one-frame function
+
+    Raised if a multi-frame trajectory is passed to a function that
+    only works on one trajectory (eg. calculate_residue_distance_vector())
+    """
+    pass
 
 if __name__ == "__main__":
     trajectory_file = '../testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd'

@@ -6,18 +6,15 @@ including SSFs and PSFs. The data inputs to these plot functions
 are provided by the other modules.
 """
 
+import os
+import functools
 import numpy as np
 from numpy import typing
+import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-import pandas as pd
 from seaborn import kdeplot
-import os
 from .file_manipulation import SmartIndexingAction
-
-class NoResidues(Exception):
-    """Raised if user tries to make SSF with a trajectory of <1 residue"""
-    pass
 
 def create_parent_directories(outfile_prefix : str) -> None:
     '''
@@ -186,6 +183,7 @@ def display_arrays_as_video(numpy_arrays: list | typing.ArrayLike, res_indicies:
     
     >>> st.display_arrays_as_video([st.get_frame_average(frames)], resSeqs, seconds_per_frame=10)
     # Displays SSF for each frame of this trajectory to standard output
+
     """
     orange_colormap = mpl.colormaps['Oranges_r'].resampled(100)
 
@@ -260,6 +258,8 @@ def display_ssfs(*args, **kwargs):
 
 display_ssfs.__doc__ = f"""
 Alias for `display_arrays_as_video()`.
+
+{display_arrays_as_video.__doc__}
 """
 
 def set_polar_grid() -> mpl.projections.polar.PolarAxes:
@@ -462,6 +462,30 @@ def visualize_two_residue_movement_heatmap(csv_filepath: str, plot_outfile: str 
         plt.savefig(plot_outfile)
     else:
         plt.show()
+
+@functools.wraps(visualize_two_residue_movement_scatterplot)
+def display_psf_scatter(*args, **kwargs):
+    return visualize_two_residue_movement_scatterplot(*args, **kwargs)
+
+display_psf_scatter.__doc__ = f"""
+Alias for `visualize_two_residue_movement_scatterplot()`.
+
+{visualize_two_residue_movement_scatterplot.__doc__}
+"""
+
+@functools.wraps(visualize_two_residue_movement_heatmap)
+def display_psf_heatmap(*args, **kwargs):
+    return visualize_two_residue_movement_heatmap(*args, **kwargs)
+
+display_psf_heatmap.__doc__ = f"""
+Alias for `visualize_two_residue_movement_heatmap()`.
+
+{visualize_two_residue_movement_heatmap.__doc__}
+"""
+
+class NoResidues(Exception):
+    """Raised if user tries to make SSF with a trajectory of <1 residue"""
+    pass
 
 if __name__ == '__main__':
     # 10 frame test

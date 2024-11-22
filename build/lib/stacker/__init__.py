@@ -1,4 +1,4 @@
-"""Command Line Options for StACKER
+"""The Python Functions that control Command Line Options
 
 This module contains the Python routines called when StACKER
 is run in the command line.
@@ -15,84 +15,6 @@ import numpy as np
 import pandas as pd
 import random
 
-class InvalidRoutine(Exception):
-    '''Specified command line routine was invalid
-
-    This is raised when the `stacker -s ROUTINE` was given
-    an invalid ROUTINE.
-
-    Examples
-    --------
-    Command Line::
-
-        $ stacker -s blah
-
-    '''
-    pass
-
-class ResEmpty(Exception):
-    """No Residues to subset to were provided
-
-    This is raised when a routine is given an invalid
-    number of residues to subset to.
-
-    Examples
-    --------
-
-    Command Line::
-
-        $ stacker -s filter_traj -r -a C2,C4,C6
-    
-    See Also
-    --------
-    fiter_traj_routine
-    bottaro_routine
-    """
-    pass
-
-class AtomEmpty(Exception):
-    """No Atomnames to subset to were provided
-
-    This is raised when a routine is given an invalid
-    number of atomnames to subset to.
-
-    Examples
-    --------
-
-    Command Line::
-
-        $ stacker -s filter_traj -a -r 426,427  
-    
-    See Also
-    --------
-    fiter_traj_routine
-    bottaro_routine
-    """
-    pass
-
-class FrameEmpty(Exception):
-    """No Frames present in trajectory"""
-    pass
-
-def block_printing():
-    '''Disable printing to standard output
-    
-    References
-    ----------
-    [1] https://stackoverflow.com/a/8391735
-
-    '''
-    sys.stdout = open(os.devnull, 'w')
-
-def enable_printing():
-    '''Enable printing to standard output
-    
-    References
-    ----------
-    [1] https://stackoverflow.com/a/8391735
-    '''
-    sys.stdout = sys.__stdout__
-
 def run_python_command() -> None:
     '''Reads the user's passed in command line and runs the command
 
@@ -107,7 +29,7 @@ def run_python_command() -> None:
     
     # If no flags specified at all
     if not any(vars(args)) and not remaining_args:
-        print('usage: stacker.py -s ROUTINE [-h]\n\n' + \
+        print('usage: stacker -s ROUTINE [-h]\n\n' + \
             'Wrapper to run stacker subroutines using the -s flag.\n' + \
             'More info on each routine given by `stacker -s ROUTINE -h` or `stacker -s ROUTINE --help`\n\n' + \
             'options:\n' +\
@@ -156,7 +78,7 @@ def run_python_command() -> None:
     ## Determines which script/subroutine is to be run
     if args.script == 'filter_traj':
         parser.description = 'Filters trajectory and topology files to desired residue numbers and atom names and outputs to a PDB\n\nExamples:\n' +\
-                            '[user]$ python3 stacker.py -s filter_traj -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -r 426,427 -a C2,C4,C6'
+                            '[user]$ stacker -s filter_traj -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -r 426,427 -a C2,C4,C6'
         
         required_group = parser.add_argument_group('Required Arguments')
         required_group.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=True)
@@ -170,8 +92,8 @@ def run_python_command() -> None:
     if args.script == 'bottaro' or args.script == 'pairwise' or args.script == 'psf':
         parser.description = 'Create Polar Stacking Fingerprint (PSF) of the movement of a "viewed residue" from the perspective of a "perspective residue"\nlike those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972). Creates CSV of these values' + \
                                 '\n\nExamples:\n' +\
-                                '\n[user]$ python3 stacker.py -s bottaro -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt scatter\n' +\
-                            '\n[user]$ python3 stacker.py -s bottaro -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat'
+                                '\n[user]$ stacker -s bottaro -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt scatter\n' +\
+                            '\n[user]$ stacker -s bottaro -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat'
         
         required_group = parser.add_argument_group('Required Arguments')
         parser.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation, if empty then 2-residue PDB expected", required=False, default = '')
@@ -191,7 +113,7 @@ def run_python_command() -> None:
     if args.script == 'res_distance':
         parser.description = 'Get the distance between two residues in a given frame\n\n' + \
                                 'Examples:\n' +\
-                                '[user]$ python3 stacker.py -s res_distance -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -f 2 --residues 426,427 --atom_names C2,C4,C6'
+                                '[user]$ stacker -s res_distance -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -f 2 --residues 426,427 --atom_names C2,C4,C6'
         required_group = parser.add_argument_group('Required Arguments')
         required_group.add_argument("-trj", "--trajectory", metavar="TRAJECTORY_FILENAME", help="Filepath to trajectory file for the MD simulation", required=True)
         required_group.add_argument("-top", "--topology", metavar="TOPOLOGY_FILENAME", help="Filepath to Topology file for the MD simulation", required=True)
@@ -303,7 +225,7 @@ def filter_traj_routine() -> None:
     --------
     Command-line usage with sample arguments::
 
-        $ python3 stacker.py 
+        $ stacker 
             -s filter_traj 
             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
             -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
@@ -364,18 +286,26 @@ def bottaro_routine() -> None:
     --------
     Command-line usage::
 
-        $ python3 stacker.py -s bottaro 
+        $ stacker -s bottaro 
             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
             -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
             -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb 
             -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot.csv 
-            -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt scatter
+            -p 426 
+            -v 427 
+            -pa C2,C4,C6 
+            -va C2,C4,C6 
+            -pt scatter
 
     
-        $ python3 stacker.py -s bottaro 
+        $ stacker -s bottaro 
             -pdb testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb 
             -o testing/command_line_tests/bottaro/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv 
-            -p 426 -v 427 -pa C2,C4,C6 -va C2,C4,C6 -pt heat
+            -p 426 
+            -v 427 
+            -pa C2,C4,C6 
+            -va C2,C4,C6 
+            -pt heat
 
     See Also
     --------
@@ -383,6 +313,8 @@ def bottaro_routine() -> None:
     write_bottaro_to_csv : Writes residue movement calculations to a CSV.
     visualize_two_residue_movement_heatmap : Creates a heatmap for residue movement.
     visualize_two_residue_movement_scatterplot : Creates a scatter plot for residue movement.
+
+
     """
     trj_prefix = args.trajectory.rsplit('.', 1)[0] 
 
@@ -477,10 +409,12 @@ def res_distance_routine() -> None:
     --------
     Command-line usage::
 
-        $ python3 stacker.py -s res_distance 
+        $ stacker -s res_distance 
             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
             -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
-            -f 2 --residues 426,427 --atom_names C2,C4,C6
+            -f 2 
+            --residues 426,427 
+            --atom_names C2,C4,C6
 
     Outputs
     -------
@@ -570,15 +504,18 @@ def system_routine() -> None:
     --------
     Command-line usage::
 
-        $ python3 stacker.py -s system 
+        $ stacker -s system 
             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
             -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
-            -r 90-215 -fl 1-2 
+            -r 90-215 
+            -fl 1-2 
 
-        $ python3 stacker.py -s ssf 
+        $ stacker -s ssf 
             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
             -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
-            -r 90-215 -fl 1-2 -g 10 
+            -r 90-215 
+            -fl 1-2 
+            -g 10 
             -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png 
             -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
 
@@ -671,6 +608,7 @@ def combine_frames(frames_A, frames_B):
     >>> st.combine_frames(frames_A, frames_B)
     array([[9., 2., 3.],
            [6., 5., 6.],
+
            [3., 2., 1.]])
 
     """
@@ -713,17 +651,23 @@ def stack_events_routine() -> None:
         $ stacker -s stack_events 
             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
             -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
-            -r 90-215 -f 1 -n 5
+            -r 90-215 
+            -f 1 
+            -n 5
 
         $ stacker -s stack_events 
             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
             -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
-            -r 90-100 -fl 1-10 -n 5
+            -r 90-100 
+            -fl 1-10 
+            -n 5
 
         $ stacker -s stack_events 
             -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
             -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
-            -r 90-215 -n 5 -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
+            -r 90-215 
+            -n 5 
+            -i testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
 
     See Also
     --------
@@ -782,7 +726,8 @@ def compare_routine() -> None:
         $ stacker -s compare 
             -A /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418986 
             -B /home66/esakkas/STACKER/SCRIPTS/slurmLogs_fingerprint/out_fingerprint_2418997 
-            -SA _tUAG_aCUA_+1GCU -SB _tUAG_aCUA_+1CGU
+            -SA _tUAG_aCUA_+1GCU 
+            -SB _tUAG_aCUA_+1CGU
 
     Notes
     -----
@@ -864,6 +809,85 @@ def compare_routine() -> None:
     subset_data = subset_data.sort_values(by='Discrepancy', ascending=False)
     subset_data = subset_data.rename(columns={'Value' + file1_source : 'AvgDist' + file1_source, 'Value' + file2_source : 'AvgDist' + file2_source})
     print(subset_data)
+
+
+class InvalidRoutine(Exception):
+    '''Specified command line routine was invalid
+
+    This is raised when the `stacker -s ROUTINE` was given
+    an invalid ROUTINE.
+
+    Examples
+    --------
+    Command Line::
+
+        $ stacker -s blah
+
+    '''
+    pass
+
+class ResEmpty(Exception):
+    """No Residues to subset to were provided
+
+    This is raised when a routine is given an invalid
+    number of residues to subset to.
+
+    Examples
+    --------
+
+    Command Line::
+
+        $ stacker -s filter_traj -r -a C2,C4,C6
+    
+    See Also
+    --------
+    fiter_traj_routine
+    bottaro_routine
+    """
+    pass
+
+class AtomEmpty(Exception):
+    """No Atomnames to subset to were provided
+
+    This is raised when a routine is given an invalid
+    number of atomnames to subset to.
+
+    Examples
+    --------
+
+    Command Line::
+
+        $ stacker -s filter_traj -a -r 426,427  
+    
+    See Also
+    --------
+    fiter_traj_routine
+    bottaro_routine
+    """
+    pass
+
+class FrameEmpty(Exception):
+    """No Frames present in trajectory"""
+    pass
+
+def block_printing():
+    '''Disable printing to standard output
+    
+    References
+    ----------
+    [1] https://stackoverflow.com/a/8391735
+
+    '''
+    sys.stdout = open(os.devnull, 'w')
+
+def enable_printing():
+    '''Enable printing to standard output
+    
+    References
+    ----------
+    [1] https://stackoverflow.com/a/8391735
+    '''
+    sys.stdout = sys.__stdout__
 
 if __name__ == '__main__':
     run_python_command()

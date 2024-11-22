@@ -1,19 +1,20 @@
 """
-Runs K Means Clustering and Principal Component Analysis
+Run K Means Clustering and Principal Component Analysis
 
 This module contains functions to run K Means Clustering on SSF
 results and visualize the clusters with barplots, silhouette analysis,
 and PCA scatterplots. 
 
 """
-from sklearn.cluster import KMeans
-from sklearn.metrics import silhouette_score, silhouette_samples
-from sklearn.decomposition import PCA
+
 import numpy as np
 from numpy import typing
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
+from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score, silhouette_samples
+from sklearn.decomposition import PCA
 import seaborn as sns
 
 
