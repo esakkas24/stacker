@@ -69,10 +69,10 @@ plane of the "perspective residue."
 
 .. image:: images/bottaro_values.png
 
-We use :func:`write_bottaro_to_csv` to extract this data from the PDB to a CSV::
+We use :func:`write_psf_data` to extract this data from the PDB to a CSV::
 
     >>> import stacker as st
-    >>> st.write_bottaro_to_csv("5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb",
+    >>> st.write_psf_data("5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb",
     ...                         output_csv_name = "script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv",
     ...                         perspective_residue_num = 426,
     ...                         viewed_residue_num = 427)
@@ -96,9 +96,9 @@ Visualize PSF Data
 
 .. currentmodule:: stacker.visualization
 
-The PSF data can be visualized as a scatterplot using :func:`visualize_two_residue_movement_scatterplot`::
+The PSF data can be visualized as a scatterplot using :func:`display_psf_scatter`::
 
-    >>> st.visualize_two_residue_movement_scatterplot(
+    >>> st.display_psf_scatter(
     ...     'script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv', 
     ...     plot_outfile='script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_scatter.png'
     ...     )
@@ -108,9 +108,9 @@ The scatterplot is outputted to ``script_tests/visualization/tUAG_aCUA_+1GCU_GC_
 .. image:: ../testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_scatter.png
 
 For multi-frame trajectories like this one, the point density can make it hard to interpret the data.
-We can create heatmaps instead with :func:`visualize_two_residue_movement_heatmap`::
+We can create heatmaps instead with :func:`display_psf_heatmap`::
 
-    >>> st.visualize_two_residue_movement_heatmap(
+    >>> st.display_psf_heatmap(
     ...     'script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv',
     ...     plot_outfile='script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_heat.png'
     ...     )
@@ -121,8 +121,8 @@ In this image, we see that COG of the viewed residue often moves away from the p
 the ring outlined on the plot itself. This indicates that they are frequently falling out of pi-stacking,
 and this pairing is a weak pi-stacking pair.
 
-Comparing Pi-Stacking Pairs
-----------------------------
+Comparing PSFs
+--------------
 
 Below are two PSFs of the pi-stacking pair residues 47 and 48, coming from two different trajectories,
 one with a GCU in the +1-mRNA-codon and another with a CGU in the +1-mRNA-codon. Observe how the +1GCU

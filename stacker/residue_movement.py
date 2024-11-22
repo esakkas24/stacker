@@ -19,6 +19,7 @@ from .vector import *
 from .file_manipulation import filter_traj_to_pdb
 from .visualization import create_parent_directories
 import os
+import functools
 
 def collect_atom_locations_by_frame(traj: md.Trajectory, residue_num: int, atom_id: str) -> list:
     """
@@ -417,6 +418,16 @@ def write_bottaro_to_csv(pdb_filename: str = '',
         csvwriter.writerow(fields) 
         csvwriter.writerows(rows)
     print("Output values written to " + output_csv_name)
+
+@functools.wraps(write_bottaro_to_csv)
+def write_psf_data(*args, **kwargs):
+    return write_bottaro_to_csv(*args, **kwargs)
+
+write_psf_data.__doc__ = f"""
+Alias for `write_bottaro_to_csv()`.
+
+{write_bottaro_to_csv.__doc__}
+"""
 
 if __name__ == "__main__":
     trajectory_file = 'stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd'

@@ -236,6 +236,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../_autosummary/stacker.residue_movement.correct_theta_sign.html">stacker.residue_movement.correct_theta_sign</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../_autosummary/stacker.residue_movement.create_base_from_coords_list.html">stacker.residue_movement.create_base_from_coords_list</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../_autosummary/stacker.residue_movement.write_bottaro_to_csv.html">stacker.residue_movement.write_bottaro_to_csv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/stacker.residue_movement.write_psf_data.html">stacker.residue_movement.write_psf_data</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../_autosummary/stacker.residue_movement.Base.html">Base</a></li>
 </ul>
 </details></li>
@@ -247,6 +248,8 @@
 <li class="toctree-l4"><a class="reference internal" href="../_autosummary/stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../_autosummary/stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../_autosummary/stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/stacker.visualization.display_psf_heatmap.html">stacker.visualization.display_psf_heatmap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/stacker.visualization.display_psf_scatter.html">stacker.visualization.display_psf_scatter</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../_autosummary/stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../_autosummary/stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../_autosummary/stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
@@ -290,6 +293,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/stacker.residue_movement.correct_theta_sign.html">stacker.residue_movement.correct_theta_sign</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/stacker.residue_movement.create_base_from_coords_list.html">stacker.residue_movement.create_base_from_coords_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/stacker.residue_movement.write_bottaro_to_csv.html">stacker.residue_movement.write_bottaro_to_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/stacker.residue_movement.write_psf_data.html">stacker.residue_movement.write_psf_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/stacker.residue_movement.Base.html">Base</a></li>
 </ul>
 </details></li>
@@ -301,6 +305,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/stacker.visualization.display_psf_heatmap.html">stacker.visualization.display_psf_heatmap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/stacker.visualization.display_psf_scatter.html">stacker.visualization.display_psf_scatter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
@@ -471,244 +477,78 @@
                   
   <section id="molecular-dynamics-md">
 <span id="molecular-dynamics"></span><h1>Molecular Dynamics (MD)<a class="headerlink" href="#molecular-dynamics-md" title="Link to this heading">#</a></h1>
+<p>The following is taken from my <a class="reference external" href="https://digitalcollections.wesleyan.edu/islandora/stacker-python-package-fingerprinting-base-stacking-systems">Wesleyan University Senior Thesis</a></p>
 <p><strong>1.2 Molecular Dynamics Theory</strong></p>
-<p>Molecular Dynamics (MD) simulations are computer simulations of a molecular structure over a short period of time; used to illuminate biological behavior that is challenging or inaccessible by <em>in vivo</em> methods. Simulating a molecule is an incalculably complex task, oftentimes quite literally, as we will see in this section. Therefore, a number of techniques have been developed to ensure our computational models are physically accurate.</p>
-<p>In mathematics and computer science, it is customary to approach writing as inviting readers through the reasoning process (Su, 2015). I myself learned much of molecular dynamics theory in the preparation of this thesis, and I found it to be as informative as it was technical. Therefore, we will traverse this section as a series of problems and solutions to elucidate how the methods of this thesis developed.</p>
+<p>Molecular Dynamics (MD) simulations are computer simulations of a molecular structure
+over a short period of time; used to illuminate biological behavior that is challenging
+or inaccessible by <em>in vivo</em> methods. Simulating a molecule is an incalculably complex task,
+oftentimes quite literally, as we will see in this section. Therefore, a number of techniques
+have been developed to ensure our computational models are physically accurate.</p>
+<p>In mathematics and computer science, it is customary to approach writing as inviting readers
+through the reasoning process (Su, 2015). I myself learned much of molecular dynamics theory
+in the preparation of this thesis, and I found it to be as informative as it was technical. Therefore,
+we will traverse this section as a series of problems and solutions to elucidate how the methods of this
+thesis developed.</p>
 <p><strong>1.2.1 Force Fields Predict Potential Energy Surfaces</strong></p>
-<p>The molecular structures of the ribosome used throughout this thesis were developed using cryo-EM (Abeyrathne et al., 2016). When we are given this structure, the atoms are resolved to 3.5 angstroms (Å), while a carbon-carbon single bond is 1.5 Å. Therefore, a number of atoms may not be in their true position, but rather in a position with significant energetic strain, which we measure as the total potential energy of the system. This presents us with our first problem: we must move the molecule into its true conformation, the most energetically favorable.</p>
-<p>Doing so requires us to write a potential energy function, which will give us the energy of the system as a function of all the atom coordinates. Finding the most energetically favorable structure means finding the minimum of this function. This is often presented as a Potential Energy Surface (PES). Figure 1.2.1 shows the PES for water, where the potential energy function takes in two values, H-O-H bond angle and bond length, then returns the potential energy. By inputting two numbers and outputting one, we say our potential energy function <em>U</em> is a mapping ℝ²→ℝ. A stable structure would be found at an energy minimum, the lowest point on the surface.</p>
+<p>The molecular structures of the ribosome used throughout this thesis were developed using cryo-EM
+(Abeyrathne et al., 2016). When we are given this structure, the atoms are resolved to 3.5 angstroms (Å),
+while a carbon-carbon single bond is 1.5 Å. Therefore, a number of atoms may not be in their true position,
+but rather in a position with significant energetic strain, which we measure as the total potential energy of the system.
+This presents us with our first problem: we must move the molecule into its true conformation, the most energetically favorable.</p>
+<p>Doing so requires us to write a potential energy function, which will give us the energy of the
+system as a function of all the atom coordinates. Finding the most energetically favorable structure
+means finding the minimum of this function. This is often presented as a Potential Energy Surface (PES).
+Figure 1.2.1 shows the PES for water, where the potential energy function takes in two values, H-O-H bond
+angle and bond length, then returns the potential energy. By inputting two numbers and outputting one,
+we say our potential energy function <em>U</em> is a mapping ℝ²→ℝ. A stable structure would be found at an
+energy minimum, the lowest point on the surface.</p>
 <a class="reference internal image-reference" href="../_images/image1.png"><img alt="../_images/image1.png" src="../_images/image1.png" style="width: 5.65972in; height: 3.60417in;" />
 </a>
-<p><em>Figure 1.2.1:</em> <strong>Potential Energy Surface for Water</strong>. The z-axis shows potential energy as two qualities of the water molecule are varied along the x- and y-axis. The energy minimum is found at an H-O-H angle of 104.5° and a bond length of 0.0958 nm (Scopino, 2020).</p>
-<p>For our ribosome system, that has thousands of atoms, our potential energy function <em>U</em> takes the x-, y-, z-coordinates of all of the atoms as input. With <em>N</em> atoms, this makes <em>U</em> a mapping ℝ³N→ℝ, meaning we need 3N+1 axes to visualize the surface, which is impossible supposing a three-dimensional thesis reader. The lack of visualization does not, however, presuppose the lack of a minimum. A popular example is the function T: ℝ³→ℝ, where T(x, y, z) is the temperature of a room at position (x, y, z) in 3D coordinates. We cannot visualize this function, as we would need all three dimensions for our x-, y-, z-positions and would have none left over for the temperature variable. Yet, this room certainly has an (x, y, z) position with the minimum temperature. Our ribosome PES is much the same; we may not be able to visualize it, but there is a configuration of atoms that begets the lowest potential energy.</p>
+<p><em>Figure 1.2.1:</em> <strong>Potential Energy Surface for Water</strong>. The z-axis shows potential energy as two
+qualities of the water molecule are varied along the x- and y-axis. The energy minimum is found
+at an H-O-H angle of 104.5° and a bond length of 0.0958 nm (Scopino, 2020).</p>
+<p>For our ribosome system, that has thousands of atoms, our potential energy function <em>U</em> takes the x-,
+y-, z-coordinates of all of the atoms as input. With <em>N</em> atoms, this makes <em>U</em> a mapping ℝ³N→ℝ, meaning
+we need 3N+1 axes to visualize the surface, which is impossible supposing a three-dimensional thesis reader.
+The lack of visualization does not, however, presuppose the lack of a minimum. A popular example is the
+function T: ℝ³→ℝ, where T(x, y, z) is the temperature of a room at position (x, y, z) in 3D coordinates.
+We cannot visualize this function, as we would need all three dimensions for our x-, y-, z-positions and
+would have none left over for the temperature variable. Yet, this room certainly has an (x, y, z) position
+with the minimum temperature. Our ribosome PES is much the same; we may not be able to visualize it, but
+there is a configuration of atoms that begets the lowest potential energy.</p>
 <p>We now arrive at the problem of designing our potential energy function.</p>
-<p>Ideally, our function would utilize quantum mechanics to calculate probabilistic electron densities and the interaction of each atom with all other atoms in the system. However, doing so for more than a handful of atoms becomes computationally infeasible. The solution: force fields.</p>
-<p>Force fields utilize experimental data and some quantum mechanics to calculate a highly accurate estimate of the result of the purely quantum mechanical approach. By incorporating as many atomic interactions as possible, and making clever approximations, we can balance accuracy with computational efficiency to arrive at a sufficient heuristic. A number of factors are considered in our simulation’s force field calculations.</p>
+<p>Ideally, our function would utilize quantum mechanics to calculate probabilistic electron densities and
+the interaction of each atom with all other atoms in the system. However, doing so for more than a handful
+of atoms becomes computationally infeasible. The solution: force fields.</p>
+<p>Force fields utilize experimental data and some quantum mechanics to calculate a highly accurate estimate
+of the result of the purely quantum mechanical approach. By incorporating as many atomic interactions as
+possible, and making clever approximations, we can balance accuracy with computational efficiency to arrive
+at a sufficient heuristic. A number of factors are considered in our simulation’s force field calculations.</p>
 <p>In lieu of electron cloud overlap and solving of the complex Schrodinger wave equation, we can treat all bonds as two masses connected by a spring. Then, we can simply use Hooke’s law of spring potential energy to calculate the potential energy induced by the stretching and compressing of all bonds in the structure.</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><blockquote>
-<div><p># = 0 1
-2</p>
-</div></blockquote>
-<p>$%&amp;’(</p>
-</th>
-<th class="head"><p>3k(r - r₀)²</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
 <p>This is a strong start, but we can include a number of other factors. The oscillation of bond angles θ, for instance, can also be modeled using Hooke’s law.</p>
 <p>We then consider torsional potential induced by the bond rotation φ. Adding these to our equation gives us:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><blockquote>
-<div><p># = 0 1
-2</p>
-</div></blockquote>
-<p>$%&amp;’(</p>
-</th>
-<th class="head"><p>3k(r - r₀)²
-+ 0 1 2</p>
-<p>*&amp;+,-(</p>
-</th>
-<th class="head"><p>3k(θ - θ₀)²</p></th>
-<th class="head"><p>0</p></th>
-<th class="head"><p>[1 + cos
-(nφ +
-δ)]</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td></td>
-<td></td>
-<td></td>
-<td><p>/%0(1%&amp;(</p></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
 <p>Finally, we include strain due to improper dihedrals, the force that keeps some atoms in a plane to prevent chiral flips. To account for non-bonding interactions, we calculate van der Waals interactions using the Lennard-Jones potential, and electric potential energy between charged groups using Coulomb’s law. These equations come together to form a complete force field equation to estimate the system’s potential energy (Cowan, 2022).</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><blockquote>
-<div><p>0
-1
-2</p>
-</div></blockquote>
-<p>$
-%&amp;’(</p>
-</th>
-<th class="head"><p>3$(4
-−4
-))!
-+ 0
-1 2</p>
-<p>*&amp;
-+,-(</p>
-</th>
-<th class="head"></th>
-<th class="head"></th>
-<th class="head"></th>
-<th class="head"><p>3.(6
-−6
-))!+</p></th>
-<th class="head"></th>
-<th class="head"><p>0</p></th>
-<th class="head"></th>
-<th class="head"><blockquote>
-<div><dl class="simple">
-<dt>[1</dt><dd><ul class="simple">
-<li></li>
-</ul>
-</dd>
-</dl>
-</div></blockquote>
-<p>cos</p>
-<dl class="simple">
-<dt>(=7</dt><dd><ul class="simple">
-<li></li>
-</ul>
-</dd>
-</dl>
-<p>&gt;)]</p>
-</th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td><p>/%0(
-1%&amp;(</p></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td></td>
-<td><ul class="simple">
-<li></li>
-</ul>
-</td>
-<td><p>0</p></td>
-<td><p>&#64;
-123</p></td>
-<td><p>D14
-5!</p>
-<blockquote>
-<div><ul class="simple">
-<li></li>
-</ul>
-<p>0</p>
-</div></blockquote>
-<dl>
-<dt>4B14</dt><dd><blockquote>
-<div><blockquote>
-<div><p>C</p>
-</div></blockquote>
-<dl class="simple">
-<dt>78</dt><dd><p>4</p>
-</dd>
-</dl>
-<p>14</p>
-</div></blockquote>
-<p>5!−</p>
-</dd>
-</dl>
-</td>
-<td></td>
-<td><blockquote>
-<div><dl class="simple">
-<dt>D14</dt><dd><p>6</p>
-</dd>
-</dl>
-</div></blockquote>
-<p>4 14
-6E</p>
-</td>
-<td></td>
-<td><blockquote>
-<div><div class="line-block">
-<div class="line">+</div>
-</div>
-<blockquote>
-<div><p>0</p>
-</div></blockquote>
-</div></blockquote>
-<p>F1F4</p>
-<blockquote>
-<div><div class="line-block">
-<div class="line"><br /></div>
-</div>
-</div></blockquote>
-<p>-,-9</p>
-<blockquote>
-<div><blockquote>
-<div><p>4</p>
-</div></blockquote>
-<p>14</p>
-</div></blockquote>
-</td>
-<td></td>
-</tr>
-<tr class="row-even"><td></td>
-<td></td>
-<td><p>1230
-%3-0</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>29</p>
-<img alt="../_images/image2.png" src="../_images/image2.png" />
-<dl class="field-list simple">
-<dt class="field-odd">width<span class="colon">:</span></dt>
-<dd class="field-odd"><p>5.5in</p>
-</dd>
-<dt class="field-even">height<span class="colon">:</span></dt>
-<dd class="field-even"><p>2.58333in</p>
-</dd>
-</dl>
+<a class="reference internal image-reference" href="../_images/image2.png"><img alt="../_images/image2.png" src="../_images/image2.png" style="width: 5.5in; height: 2.58333in;" />
+</a>
 <p><em>Figure 1.2.2:</em> <strong>Interactions considered in force fields.</strong> <em>The
 force field equation considers bond length, bond angle, torsions
 (bond twist), and improper dihedrals.</em></p>
-<div class="line-block">
-<div class="line">Once the potential energy is calculated, we can use a number of</div>
-<div class="line">techniques to move to a local energy minimum. We should note two
+<p>Once the potential energy is calculated, we can use a number of
+techniques to move to a local energy minimum. We should note two
 assumptions that we have made before moving to MD simulations.
 First, we assume that the cryo-EM structure is similar to the
 native structure. Second, that the native structure lies at an
 energy minimum. That way, our starting structure already begins in
 a “well” of the PES, and we simply need to adjust to the minima.
 With our energy minimized structure in hand, we can move to
-molecular dynamics.</div>
-</div>
-<div class="line-block">
-<div class="line"><em>1.2.2Computational Genetics</em></div>
-<div class="line">To observe the ribosome/mRNA interactions, we utilize a subsystem
+molecular dynamics.</p>
+<p><em>1.2.2Computational Genetics</em>
+To observe the ribosome/mRNA interactions, we utilize a subsystem
 of the ribosome containing the decoding center (Figure 1.1.4B). As
 will be explained further in the Methods section, the neighborhood
 is a 40 Å sphere centered at the C1054 of CAR, therefore containing
 the A-site codon and anticodon, CAR, the +1 codon, and a number of
-the surrounding residues.</div>
-</div>
-<p>30</p>
+the surrounding residues.</p>
 <p>Our goal is to explore the allosteric effect of +1 codon identity on
 the ribosome. To do so, we need cryo-EM structures with various +1
 codons, ideally in the same stage of translocation. However, our
@@ -734,13 +574,10 @@ novel A-site codons and tRNA anticodons to investigate the impact of
 A-site identity on the overall subsystem conformation.</p>
 <p>These studies are given the name “computational genetics,” and it is
 an apt one. As with many genetics studies, we too are inducing a
-mutation and observing</p>
-<p>31</p>
-<p>a phenotypic change. Our study is <em>in silico</em>, via a computational
+mutation and observing a phenotypic change. Our study is <em>in silico</em>, via a computational
 medium, rather than <em>in vivo.</em></p>
-<div class="line-block">
-<div class="line"><em>1.2.3MD Unveils New Energy Minima</em></div>
-<div class="line">Our desire to explore more complex structures brings new problems,
+<p><em>1.2.3MD Unveils New Energy Minima</em></p>
+<p>Our desire to explore more complex structures brings new problems,
 though we can view these as opportunities for more clever
 solutions. Unlike the PES of water shown in Figure 1.2.1,
 structures as complex as our ribosome have a number of
@@ -749,50 +586,29 @@ minima on the potential energy surface (Figure 1.2.3). However, our
 energy minimum algorithm described in Section 1.2.1 moves directly
 “downhill” to the local minimum. Additionally, interconversion
 between these wells may require overcoming a transition state that
-is too unfavorable.</div>
-</div>
-<div class="line-block">
-<div class="line">Molecular dynamics (MD) overcomes this by heating the system to a
+is too unfavorable.</p>
+<p>Molecular dynamics (MD) overcomes this by heating the system to a
 higher-energy state and running multiple replicates to sample as
-many</div>
-<div class="line">conformations as possible. Heating encompasses distributing initial
+many conformations as possible. Heating encompasses distributing initial
 velocities to all the atoms of the structure based on the
 Maxwell-Boltzmann law (Mozetič et al., 2019). With our heated
 structure now able to roam high-energy positions on the PES, we can
 apply molecular kinematics to quench the system into a new energy
 minimum. The kinematics are simply an expansion of the force field
 potential energy equation in Section 1.2.1, which we convert to
-atomic</div>
-<div class="line">movement. The negative derivative of our potential energy <em>U</em> gives
+atomic movement. The negative derivative of our potential energy <em>U</em> gives
 the force <em>F</em> on an atom, which we input into Newton’s second law
-along with the atomic mass to calculate acceleration <em>a</em>:</div>
-</div>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>−G# [STRIKEOUT:GH]= I = JK ⇒K = I J</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>32</p>
-<div class="line-block">
-<div class="line">We apply each atom’s acceleration to adjust the atomic velocities
+along with the atomic mass to calculate acceleration <em>a</em>:</p>
+<p>We apply each atom’s acceleration to adjust the atomic velocities
 and, therefore, positions at discrete timesteps. The new atomic
 positions create a novel structural conformation, called a frame,
 with an updated potential energy <em>U</em> for each atom. This is the
 cycle of MD simulation: a structure—or “topology”—gives potential
 energy <em>U</em> for each atom<em>,</em> which informs atomic acceleration
-and,</div>
-<div class="line">therefore, atomic position in a new topology frame. We can stitch
+and, therefore, atomic position in a new topology frame. We can stitch
 together a sequence of frames into a “trajectory,” much like the
 frames in a movie. The number of frames and therefore time length
-of each MD replicate is described further in Section 2.1.3.</div>
-</div>
-<p>\</p>
+of each MD replicate is described further in Section 2.1.3.</p>
 <a class="reference internal image-reference" href="../_images/image3.png"><img alt="../_images/image3.png" src="../_images/image3.png" style="width: 5.94583in; height: 3.14722in;" />
 </a>
 <p><em>Figure 1.2.3:</em> <strong>Estimated potential energy surface for lysozyme
@@ -802,7 +618,6 @@ show multiple paths an MD trajectory may take to visit energetically
 favorable states (wells) and overcome transition states.</em> <strong>(B)</strong>
 <em>Top down view of the same surface, illuminating the energy minima
 (Dobson et al., 1998).</em></p>
-<p>33</p>
 </section>
 
 

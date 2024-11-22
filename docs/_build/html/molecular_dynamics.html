@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>StACKER documentation &#8212; StACKER Documentation</title>
+    <title>Molecular Dynamics (MD) &#8212; StACKER Documentation</title>
   
   
   
@@ -48,10 +48,11 @@
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'molecular_dynamics';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Getting Started" href="getting_started.html" />
+    <link rel="next" title="StACKER Python Modules" href="modules.html" />
+    <link rel="prev" title="Getting Started" href="getting_started.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -103,8 +104,6 @@
       
       
       
-        
-      
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
@@ -124,7 +123,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="index.html">
   
   
   
@@ -177,16 +176,16 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
                     StACKER documentation
                 </a>
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="molecular_dynamics.html">Molecular Dynamics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Molecular Dynamics</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">Python Modules</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/stacker.html">stacker</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.block_printing.html">stacker.block_printing</a></li>
@@ -463,7 +462,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>StACKER documentation</h1>
+    <h1>Molecular Dynamics (MD)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -477,96 +476,149 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="stacker-documentation">
-<span id="index"></span><h1>StACKER documentation<a class="headerlink" href="#stacker-documentation" title="Link to this heading">#</a></h1>
-<p>StACKER manipulates the outputs of an MD simulation and analyzes
-the pi-stacking interactions. Creates a “Pi-Stacking Fingerprint”
-for a structure at each frame. Presents Pi-stacking interactions between
-two residues through analysis of their relevant movement.</p>
-<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
-<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-2 sd-row-cols-lg-2 sd-g-2 sd-g-xs-2 sd-g-sm-3 sd-g-md-4 sd-g-lg-4 docutils">
-<div class="sd-col sd-d-flex-row docutils">
-<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
-<div class="sd-card-header docutils">
-<img src="_static/index_images/getting_started.svg" style="height: 60px; width: 60px; margin-left: auto; margin-right: auto; margin-top: 10px;" /><p class="sd-card-text">Getting Started</p>
-</div>
-<div class="sd-card-body docutils">
-<p class="sd-card-text">Learn how to install StACKER and
-prepare Molecular Dynamics Data</p>
-</div>
-<div class="sd-card-footer docutils">
-<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="getting_started.html"><span class="doc">To the installation instructions</span></a></span></p>
-</div>
-</div>
-</div>
-<div class="sd-col sd-d-flex-row docutils">
-<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
-<div class="sd-card-header docutils">
-<img src="_static/index_images/python_logo.webp" style="height: 60px; width: 60px; margin-left: auto; margin-right: auto; margin-top: 10px;" /><p class="sd-card-text">Python Modules</p>
-</div>
-<div class="sd-card-body docutils">
-<p class="sd-card-text">See detailed instructions on StACKER’s
-functions and modules when using Python</p>
-</div>
-<div class="sd-card-footer docutils">
-<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="modules.html"><span class="doc">To the Python user guide</span></a></span></p>
-</div>
-</div>
-</div>
-<div class="sd-col sd-d-flex-row docutils">
-<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
-<div class="sd-card-header docutils">
-<img src="_static/index_images/system_stacking_fingerprint.png" style="height: 200px; width: 200px; margin-left: auto; margin-right: auto; margin-top: 10px;" /><p class="sd-card-text">Create System Stacking Fingerprints (SSFs)</p>
-</div>
-<div class="sd-card-body docutils">
-<p class="sd-card-text">Pipeline to create System Stacking Fingerprints (SSFs)
-using the Python Options</p>
-</div>
-<div class="sd-card-footer docutils">
-<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="system_stacking.html"><span class="doc">To the SSF creation guide</span></a></span></p>
-</div>
-</div>
-</div>
-<div class="sd-col sd-d-flex-row docutils">
-<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
-<div class="sd-card-header docutils">
-<img src="_static/index_images/pairwise_stacking_fingerprint.png" style="height: 200px; width: 250px; margin-left: auto; margin-right: auto; margin-top: 10px;" /><p class="sd-card-text">Create Pairwise Stacking Fingerprints (PSFs)</p>
-</div>
-<div class="sd-card-body docutils">
-<p class="sd-card-text">Pipeline to create Pairwise Stacking Fingerprints (PSFs)
-using the Python Options</p>
-</div>
-<div class="sd-card-footer docutils">
-<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="pairwise_stacking.html"><span class="doc">To the PSF creation guide</span></a></span></p>
-</div>
-</div>
-</div>
-<div class="sd-col sd-d-flex-row docutils">
-<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
-<div class="sd-card-header docutils">
-<img src="_static/index_images/command_line.png" style="height: 60px; width: 60px; margin-left: auto; margin-right: auto; margin-top: 10px;" /><p class="sd-card-text">Command Line Options</p>
-</div>
-<div class="sd-card-body docutils">
-<p class="sd-card-text">See a detailed pipeline to generate SSFs
-and PSFs using the Command Line Options</p>
-</div>
-<div class="sd-card-footer docutils">
-<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="command_line_options.html"><span class="doc">To the Command Line user guide</span></a></span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="molecular_dynamics.html">Molecular Dynamics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">Python Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="system_stacking.html">Create System Stacking Fingerprints (SSFs)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pairwise_stacking.html">Create Pairwise Stacking Fingerprints (PSFs)</a></li>
-</ul>
-</div>
+  <section id="molecular-dynamics-md">
+<span id="molecular-dynamics"></span><h1>Molecular Dynamics (MD)<a class="headerlink" href="#molecular-dynamics-md" title="Link to this heading">#</a></h1>
+<p>The following is taken from my <a class="reference external" href="https://digitalcollections.wesleyan.edu/islandora/stacker-python-package-fingerprinting-base-stacking-systems">Wesleyan University Senior Thesis</a></p>
+<p><strong>1.2 Molecular Dynamics Theory</strong></p>
+<p>Molecular Dynamics (MD) simulations are computer simulations of a molecular structure
+over a short period of time; used to illuminate biological behavior that is challenging
+or inaccessible by <em>in vivo</em> methods. Simulating a molecule is an incalculably complex task,
+oftentimes quite literally, as we will see in this section. Therefore, a number of techniques
+have been developed to ensure our computational models are physically accurate.</p>
+<p>In mathematics and computer science, it is customary to approach writing as inviting readers
+through the reasoning process (Su, 2015). I myself learned much of molecular dynamics theory
+in the preparation of this thesis, and I found it to be as informative as it was technical. Therefore,
+we will traverse this section as a series of problems and solutions to elucidate how the methods of this
+thesis developed.</p>
+<p><strong>1.2.1 Force Fields Predict Potential Energy Surfaces</strong></p>
+<p>The molecular structures of the ribosome used throughout this thesis were developed using cryo-EM
+(Abeyrathne et al., 2016). When we are given this structure, the atoms are resolved to 3.5 angstroms (Å),
+while a carbon-carbon single bond is 1.5 Å. Therefore, a number of atoms may not be in their true position,
+but rather in a position with significant energetic strain, which we measure as the total potential energy of the system.
+This presents us with our first problem: we must move the molecule into its true conformation, the most energetically favorable.</p>
+<p>Doing so requires us to write a potential energy function, which will give us the energy of the
+system as a function of all the atom coordinates. Finding the most energetically favorable structure
+means finding the minimum of this function. This is often presented as a Potential Energy Surface (PES).
+Figure 1.2.1 shows the PES for water, where the potential energy function takes in two values, H-O-H bond
+angle and bond length, then returns the potential energy. By inputting two numbers and outputting one,
+we say our potential energy function <em>U</em> is a mapping ℝ²→ℝ. A stable structure would be found at an
+energy minimum, the lowest point on the surface.</p>
+<a class="reference internal image-reference" href="_images/image1.png"><img alt="_images/image1.png" src="_images/image1.png" style="width: 5.65972in; height: 3.60417in;" />
+</a>
+<p><em>Figure 1.2.1:</em> <strong>Potential Energy Surface for Water</strong>. The z-axis shows potential energy as two
+qualities of the water molecule are varied along the x- and y-axis. The energy minimum is found
+at an H-O-H angle of 104.5° and a bond length of 0.0958 nm (Scopino, 2020).</p>
+<p>For our ribosome system, that has thousands of atoms, our potential energy function <em>U</em> takes the x-,
+y-, z-coordinates of all of the atoms as input. With <em>N</em> atoms, this makes <em>U</em> a mapping ℝ³N→ℝ, meaning
+we need 3N+1 axes to visualize the surface, which is impossible supposing a three-dimensional thesis reader.
+The lack of visualization does not, however, presuppose the lack of a minimum. A popular example is the
+function T: ℝ³→ℝ, where T(x, y, z) is the temperature of a room at position (x, y, z) in 3D coordinates.
+We cannot visualize this function, as we would need all three dimensions for our x-, y-, z-positions and
+would have none left over for the temperature variable. Yet, this room certainly has an (x, y, z) position
+with the minimum temperature. Our ribosome PES is much the same; we may not be able to visualize it, but
+there is a configuration of atoms that begets the lowest potential energy.</p>
+<p>We now arrive at the problem of designing our potential energy function.</p>
+<p>Ideally, our function would utilize quantum mechanics to calculate probabilistic electron densities and
+the interaction of each atom with all other atoms in the system. However, doing so for more than a handful
+of atoms becomes computationally infeasible. The solution: force fields.</p>
+<p>Force fields utilize experimental data and some quantum mechanics to calculate a highly accurate estimate
+of the result of the purely quantum mechanical approach. By incorporating as many atomic interactions as
+possible, and making clever approximations, we can balance accuracy with computational efficiency to arrive
+at a sufficient heuristic. A number of factors are considered in our simulation’s force field calculations.</p>
+<p>In lieu of electron cloud overlap and solving of the complex Schrodinger wave equation, we can treat all bonds as two masses connected by a spring. Then, we can simply use Hooke’s law of spring potential energy to calculate the potential energy induced by the stretching and compressing of all bonds in the structure.</p>
+<p>This is a strong start, but we can include a number of other factors. The oscillation of bond angles θ, for instance, can also be modeled using Hooke’s law.</p>
+<p>We then consider torsional potential induced by the bond rotation φ. Adding these to our equation gives us:</p>
+<p>Finally, we include strain due to improper dihedrals, the force that keeps some atoms in a plane to prevent chiral flips. To account for non-bonding interactions, we calculate van der Waals interactions using the Lennard-Jones potential, and electric potential energy between charged groups using Coulomb’s law. These equations come together to form a complete force field equation to estimate the system’s potential energy (Cowan, 2022).</p>
+<a class="reference internal image-reference" href="_images/image2.png"><img alt="_images/image2.png" src="_images/image2.png" style="width: 5.5in; height: 2.58333in;" />
+</a>
+<p><em>Figure 1.2.2:</em> <strong>Interactions considered in force fields.</strong> <em>The
+force field equation considers bond length, bond angle, torsions
+(bond twist), and improper dihedrals.</em></p>
+<p>Once the potential energy is calculated, we can use a number of
+techniques to move to a local energy minimum. We should note two
+assumptions that we have made before moving to MD simulations.
+First, we assume that the cryo-EM structure is similar to the
+native structure. Second, that the native structure lies at an
+energy minimum. That way, our starting structure already begins in
+a “well” of the PES, and we simply need to adjust to the minima.
+With our energy minimized structure in hand, we can move to
+molecular dynamics.</p>
+<p><em>1.2.2Computational Genetics</em>
+To observe the ribosome/mRNA interactions, we utilize a subsystem
+of the ribosome containing the decoding center (Figure 1.1.4B). As
+will be explained further in the Methods section, the neighborhood
+is a 40 Å sphere centered at the C1054 of CAR, therefore containing
+the A-site codon and anticodon, CAR, the +1 codon, and a number of
+the surrounding residues.</p>
+<p>Our goal is to explore the allosteric effect of +1 codon identity on
+the ribosome. To do so, we need cryo-EM structures with various +1
+codons, ideally in the same stage of translocation. However, our
+structures only have a +1GCU.</p>
+<p>To account for this, we induce the change computationally and observe
+the conformational impact. For instance, to analyze a +1CGU
+structure, we must exchange the +1G1 and +1C2 for a +1C1 and +1G2. We
+delete much of the +1G1 and +1C2 nucleotide base from our cryo-EM
++1GCU structure, keeping only the atoms that are in common with the
++1C1 and +1G2 we are adding. Then, we use AMBER’s tLEaP to “grow in”
+the two new nucleotides: +1C1 and +1G2. We can then implement the
+energy minimization methods discussed in Section 1.2.1 to relax the
+steric tension of this addition and observe the structural changes.</p>
+<p>Recently, the Weir laboratory has found that +1 codon identity may,
+by itself, be too simplified a regulation model. In Sun <em>et al.,</em>
+wehypothesize that codon adjacency—a pair of codons in the A-site and
++1 site—provides a more nuanced regulation story. We found that +1GCU
+codons following an NNU A-site codon had elevated ribosome densities
+(indicating slower translation), more H-bonds with CAR in MD, and
+were overrepresented in yeast reading frames when compared to +1GCU
+following NNC (Sun et al., 2024). Here, we expand this analysis to
+novel A-site codons and tRNA anticodons to investigate the impact of
+A-site identity on the overall subsystem conformation.</p>
+<p>These studies are given the name “computational genetics,” and it is
+an apt one. As with many genetics studies, we too are inducing a
+mutation and observing a phenotypic change. Our study is <em>in silico</em>, via a computational
+medium, rather than <em>in vivo.</em></p>
+<p><em>1.2.3MD Unveils New Energy Minima</em></p>
+<p>Our desire to explore more complex structures brings new problems,
+though we can view these as opportunities for more clever
+solutions. Unlike the PES of water shown in Figure 1.2.1,
+structures as complex as our ribosome have a number of
+conformations that are energetically stable, therefore a number of
+minima on the potential energy surface (Figure 1.2.3). However, our
+energy minimum algorithm described in Section 1.2.1 moves directly
+“downhill” to the local minimum. Additionally, interconversion
+between these wells may require overcoming a transition state that
+is too unfavorable.</p>
+<p>Molecular dynamics (MD) overcomes this by heating the system to a
+higher-energy state and running multiple replicates to sample as
+many conformations as possible. Heating encompasses distributing initial
+velocities to all the atoms of the structure based on the
+Maxwell-Boltzmann law (Mozetič et al., 2019). With our heated
+structure now able to roam high-energy positions on the PES, we can
+apply molecular kinematics to quench the system into a new energy
+minimum. The kinematics are simply an expansion of the force field
+potential energy equation in Section 1.2.1, which we convert to
+atomic movement. The negative derivative of our potential energy <em>U</em> gives
+the force <em>F</em> on an atom, which we input into Newton’s second law
+along with the atomic mass to calculate acceleration <em>a</em>:</p>
+<p>We apply each atom’s acceleration to adjust the atomic velocities
+and, therefore, positions at discrete timesteps. The new atomic
+positions create a novel structural conformation, called a frame,
+with an updated potential energy <em>U</em> for each atom. This is the
+cycle of MD simulation: a structure—or “topology”—gives potential
+energy <em>U</em> for each atom<em>,</em> which informs atomic acceleration
+and, therefore, atomic position in a new topology frame. We can stitch
+together a sequence of frames into a “trajectory,” much like the
+frames in a movie. The number of frames and therefore time length
+of each MD replicate is described further in Section 2.1.3.</p>
+<a class="reference internal image-reference" href="_images/image3.png"><img alt="_images/image3.png" src="_images/image3.png" style="width: 5.94583in; height: 3.14722in;" />
+</a>
+<p><em>Figure 1.2.3:</em> <strong>Estimated potential energy surface for lysozyme
+folding. (A)</strong> <em>The PES shows multiple wells (local energy minima)
+where the energy minimization may settle the structure. The arrows
+show multiple paths an MD trajectory may take to visit energetically
+favorable states (wells) and overcome transition states.</em> <strong>(B)</strong>
+<em>Top down view of the same surface, illuminating the energy minima
+(Dobson et al., 1998).</em></p>
 </section>
 
 
@@ -580,12 +632,21 @@ and PSFs using the Command Line Options</p>
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="right-next"
+    <a class="left-prev"
        href="getting_started.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Getting Started</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="modules.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Getting Started</p>
+        <p class="prev-next-title">StACKER Python Modules</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

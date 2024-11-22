@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>stacker.visualization.set_polar_grid &#8212; StACKER Documentation</title>
+    <title>stacker.visualization.display_psf_scatter &#8212; StACKER Documentation</title>
   
   
   
@@ -48,11 +48,11 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/stacker.visualization.set_polar_grid';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/stacker.visualization.display_psf_scatter';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="stacker.visualization.visualize_two_residue_movement_heatmap" href="stacker.visualization.visualize_two_residue_movement_heatmap.html" />
-    <link rel="prev" title="stacker.visualization.display_ssfs" href="stacker.visualization.display_ssfs.html" />
+    <link rel="next" title="stacker.visualization.display_ssfs" href="stacker.visualization.display_ssfs.html" />
+    <link rel="prev" title="stacker.visualization.display_psf_heatmap" href="stacker.visualization.display_psf_heatmap.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -249,9 +249,9 @@
 <li class="toctree-l4"><a class="reference internal" href="stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.visualization.display_psf_heatmap.html">stacker.visualization.display_psf_heatmap</a></li>
-<li class="toctree-l4"><a class="reference internal" href="stacker.visualization.display_psf_scatter.html">stacker.visualization.display_psf_scatter</a></li>
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">stacker.visualization.display_psf_scatter</a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
-<li class="toctree-l4 current active"><a class="current reference internal" href="#">stacker.visualization.set_polar_grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.visualization.NoResidues.html">stacker.visualization.NoResidues</a></li>
@@ -306,9 +306,9 @@
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.display_arrays_as_video.html">stacker.visualization.display_arrays_as_video</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.display_psf_heatmap.html">stacker.visualization.display_psf_heatmap</a></li>
-<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.display_psf_scatter.html">stacker.visualization.display_psf_scatter</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">stacker.visualization.display_psf_scatter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.display_ssfs.html">stacker.visualization.display_ssfs</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">stacker.visualization.set_polar_grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.visualization.set_polar_grid.html">stacker.visualization.set_polar_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.visualization.NoResidues.html">stacker.visualization.NoResidues</a></li>
@@ -463,7 +463,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>stacker.visualization.set_polar_grid</h1>
+    <h1>stacker.visualization.display_psf_scatter</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -473,7 +473,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.set_polar_grid"><code class="docutils literal notranslate"><span class="pre">set_polar_grid()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.display_psf_scatter"><code class="docutils literal notranslate"><span class="pre">display_psf_scatter()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -485,28 +485,65 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="stacker-visualization-set-polar-grid">
-<h1>stacker.visualization.set_polar_grid<a class="headerlink" href="#stacker-visualization-set-polar-grid" title="Link to this heading">#</a></h1>
+  <section id="stacker-visualization-display-psf-scatter">
+<h1>stacker.visualization.display_psf_scatter<a class="headerlink" href="#stacker-visualization-display-psf-scatter" title="Link to this heading">#</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="stacker.visualization.set_polar_grid">
-<span class="sig-name descname"><span class="pre">set_polar_grid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/visualization.html#set_polar_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.set_polar_grid" title="Link to this definition">#</a></dt>
-<dd><p>Set up axes for PSF.</p>
-<p>Creates polar plot background for two-residue movement comparison
-with theta 0 to 360, a radial maximum of 15 Angstroms, and a visualization 
-of the perspective residue at the center.</p>
+<dt class="sig sig-object py" id="stacker.visualization.display_psf_scatter">
+<span class="sig-name descname"><span class="pre">display_psf_scatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/visualization.html#display_psf_scatter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.display_psf_scatter" title="Link to this definition">#</a></dt>
+<dd><p>Alias for <cite>visualize_two_residue_movement_scatterplot()</cite>.</p>
+<p>Creates scatterplot of two-residue movement relative to each other.</p>
+<p>Takes the data created in residue_movement and visualizes it as a polar coordinate
+scatterplot similar to the Figure D link in Proposal Feature 4.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>None</strong></dt><dd></dd>
+<dt><strong>csv_filepath</strong><span class="classifier">str</span></dt><dd><p>Filepath to csv file containing data on the movement
+of two residues relative to each other (r, rho, and theta values). Created
+in residue_movement.</p>
+</dd>
+<dt><strong>plot_outfile</strong><span class="classifier">str</span></dt><dd><p>Filepath of the image file to write to. Format inferred from file extension.
+png, pdf, ps, eps, and svg supported.</p>
+</dd>
+<dt><strong>frame_list</strong><span class="classifier">set, default = {}</span></dt><dd><p>Set of frames to use in csv, if empty use all frames.</p>
+</dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>ax</strong><span class="classifier">matplotlib.projections.polar.PolarAxes</span></dt><dd><p>Axis object for the created polar plot.</p>
-</dd>
+<dt>None</dt><dd></dd>
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_bottaro_to_csv</span></code></dt><dd><p>Creates CSV file that is inputted here</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trajectory_file</span> <span class="o">=</span> <span class="s1">&#39;testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">topology_file</span> <span class="o">=</span> <span class="s1">&#39;testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pdb_filename</span> <span class="o">=</span> <span class="s1">&#39;testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output_csv_name</span> <span class="o">=</span> <span class="s2">&quot;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">perspective_residue</span> <span class="o">=</span> <span class="mi">426</span> <span class="c1"># 1-indexed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viewed_residue</span> <span class="o">=</span> <span class="mi">427</span> <span class="c1"># 1-indexed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="o">=</span><span class="n">trajectory_file</span><span class="p">,</span> <span class="n">topology_filename</span><span class="o">=</span><span class="n">topology_file</span><span class="p">,</span> <span class="n">output_pdb_filename</span><span class="o">=</span><span class="n">pdb_filename</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">residues_desired</span><span class="o">=</span><span class="p">{</span><span class="n">perspective_residue</span><span class="p">,</span><span class="n">viewed_residue</span><span class="p">},</span> <span class="n">atomnames_desired</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
+<span class="go">WARNING: Residue Indices are expected to be 1-indexed</span>
+<span class="go">Reading trajectory...</span>
+<span class="go">Reading topology...</span>
+<span class="go">Filtering trajectory...</span>
+<span class="go">WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed</span>
+<span class="go">WARNING: Output file atom, residue, and chain indices are zero-indexed</span>
+<span class="go">Filtered trajectory written to:  testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">write_bottaro_to_csv</span><span class="p">(</span><span class="n">pdb_filename</span><span class="p">,</span> <span class="n">output_csv_name</span><span class="p">,</span> <span class="n">perspective_residue_num</span><span class="o">=</span><span class="n">perspective_residue</span><span class="p">,</span> <span class="n">viewed_residue_num</span><span class="o">=</span><span class="n">viewed_residue</span><span class="p">)</span>
+<span class="go">Output values written to testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">visualize_two_residue_movement_scatterplot</span><span class="p">(</span><span class="s1">&#39;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&#39;</span><span class="p">,</span> 
+<span class="gp">... </span>                                                <span class="n">plot_outfile</span><span class="o">=</span><span class="s1">&#39;testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_10frames_scatter.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
@@ -523,20 +560,20 @@ of the perspective residue at the center.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="stacker.visualization.display_ssfs.html"
+       href="stacker.visualization.display_psf_heatmap.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">stacker.visualization.display_ssfs</p>
+        <p class="prev-next-title">stacker.visualization.display_psf_heatmap</p>
       </div>
     </a>
     <a class="right-next"
-       href="stacker.visualization.visualize_two_residue_movement_heatmap.html"
+       href="stacker.visualization.display_ssfs.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">stacker.visualization.visualize_two_residue_movement_heatmap</p>
+        <p class="prev-next-title">stacker.visualization.display_ssfs</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -557,7 +594,7 @@ of the perspective residue at the center.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.set_polar_grid"><code class="docutils literal notranslate"><span class="pre">set_polar_grid()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.visualization.display_psf_scatter"><code class="docutils literal notranslate"><span class="pre">display_psf_scatter()</span></code></a></li>
 </ul>
   </nav></div>
 
