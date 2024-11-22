@@ -132,14 +132,17 @@ files, and ``.pdb`` files.
 
 ``.mdcrd`` files are the standard trajectory output of the 
 `AMBER MD Software Package <https://ambermd.org/>`_. They are equivalent to 
-``.trj`` files, change the file extension to ``.mdcrd`` before inputting to StACKER.
+``.trj`` files. Change the file extension to ``.mdcrd`` before inputting to StACKER.
 
 ``.prmtop`` files are the Parameter-Topology file outputted by AMBER tLEaP.
 
 ``.pdb`` files are a standard filetype for molecular structures (Cryo-EM, X-Ray Crystollography, etc.)
-and include both trajectory and topology information.
+and include both trajectory and topology information. If an MD Software other than AMBER was used to 
+generate your MD Data, nearly all software support converting the trajectory to a PDB.
 
-You can convert between these using :func:`stacker.file_manipulation.filter_traj_to_pdb`
+.. currentmodule:: stacker.file_manipulation
+
+You can convert between these using :func:`filter_traj_to_pdb`
 
 These can be imported into python using the ``mdtraj`` package, which is automatically 
 installed with StACKER.::
@@ -147,4 +150,4 @@ installed with StACKER.::
     import mdtraj as md
     md.load("traj.mdcrd", top = "top.prmtop")
 
-Alternatively, the trajectories can be loaded in, pre-filtered using :func:`stacker.file_manipulation.filter_traj`
+Alternatively, the trajectories can be loaded in, pre-filtered using :func:`filter_traj`
