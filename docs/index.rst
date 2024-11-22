@@ -125,10 +125,9 @@ two residues through analysis of their relevant movement.
    :maxdepth: 1
    :caption: Contents:
 
-   Getting Started 
-   Command Line Options 
-   Python Options 
-   Load and Filter Trajectories 
-   Create System Stacking Fingerprints (SSFs) 
-   Create Pairwise Stacking Fingerprints (PSFs) 
-   Visualize Data
+   Getting Started <getting_started>
+   Molecular Dynamics <molecular_dynamics>
+   Python Modules <modules>
+   Command Line Options <command_line_options>
+   Create System Stacking Fingerprints (SSFs) <system_stacking>
+   Create Pairwise Stacking Fingerprints (PSFs) <pairwise_stacking>

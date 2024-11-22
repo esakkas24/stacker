@@ -58,6 +58,8 @@ repository includes:
 
 - ``5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb`` : A trajectory PDB of residues 426+427 with 3200 frames.
 
+We continue with this PDB to include more frames worth of data.
+
 .. currentmodule:: stacker.residue_movement
 
 The data for a Pairwise Stacking Fingerprint (PSF) is outlined in `Bottaro et al <https://doi.org/10.1093/nar/gku972>`_ 
@@ -101,8 +103,34 @@ The PSF data can be visualized as a scatterplot using :func:`visualize_two_resid
     ...     plot_outfile='script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_scatter.png'
     ...     )
 
+The scatterplot is outputted to ``script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_scatter.png``:
+
 .. image:: ../testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_scatter.png
 
+For multi-frame trajectories like this one, the point density can make it hard to interpret the data.
+We can create heatmaps instead with :func:`visualize_two_residue_movement_heatmap`::
+
+    >>> st.visualize_two_residue_movement_heatmap(
+    ...     'script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv',
+    ...     plot_outfile='script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_heat.png'
+    ...     )
+
+.. image:: ../testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_heat.png
+
+In this image, we see that COG of the viewed residue often moves away from the perspective residue,
+the ring outlined on the plot itself. This indicates that they are frequently falling out of pi-stacking,
+and this pairing is a weak pi-stacking pair.
 
 Comparing Pi-Stacking Pairs
 ----------------------------
+
+Below are two PSFs of the pi-stacking pair residues 47 and 48, coming from two different trajectories,
+one with a GCU in the +1-mRNA-codon and another with a CGU in the +1-mRNA-codon. Observe how the +1GCU
+trajectory has 47 and 48 overlapping more frequently, hence the higher density in the center of the PSF.
+
+.. image:: images/psf_compare.png
+
+When we look at the residues in a trajectory visualizer like PyMOL, we see that the +1GCU case has
+better pi-stacking of residues 47+48, as expected.
+
+.. image:: images/residue_compare.png

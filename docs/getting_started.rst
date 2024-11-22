@@ -127,6 +127,8 @@ code and may cause an error if entered at a Python prompt.
 Molecular Dynamics (MD)
 -----------------------
 
+:ref:`Read a thorough overview of Molecular Dynamics <molecular_dynamics>`
+
 Currently, StACKER supports ``.mdcrd`` trajectory files, ``.prmtop`` topology
 files, and ``.pdb`` files. 
 
