@@ -48,6 +48,8 @@ Now the Python variable ``filtered_traj`` contains 10 frames of C2, C4, C6 infor
 Calculate Distance Between Residues
 ------------------------------------
 
+.. currentmodule:: stacker.pairwise_distance
+
 Immediately, we can check if a residue pair is pi-stacking in a given frame. We calculate 
 the distance between the COG of two residues using :func:`calculate_residue_distance`.
 COG distance close to 3.5 Å indicates pi-stacking. For instance, the A-site mRNA codons 
@@ -77,7 +79,9 @@ The ``filtered_traj`` object has 252 residues, so we create a 252 x 252 SSF::
     >>> ssf.shape
     (252, 252)
 
-We can calculate the SSF for multiple frames of a trajectory using :func:`system_stacking_fingerprints`
+We can calculate the SSF for multiple frames of a trajectory using :func:`system_stacking_fingerprints`::
+
+    
 
 
 

@@ -52,7 +52,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="stacker" href="_autosummary/stacker.html" />
-    <link rel="prev" title="Getting Started" href="getting_started.html" />
+    <link rel="prev" title="Molecular Dynamics (MD)" href="molecular_dynamics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -185,6 +185,7 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="molecular_dynamics.html">Molecular Dynamics</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Python Modules</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/stacker.html">stacker</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.block_printing.html">stacker.block_printing</a></li>
@@ -266,15 +267,6 @@
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.file_manipulation.SmartIndexingAction.html">SmartIndexingAction</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/stacker.kmeans.html">kmeans</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.create_kmeans_input.html">stacker.kmeans.create_kmeans_input</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_cluster_trj_data.html">stacker.kmeans.plot_cluster_trj_data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_pca.html">stacker.kmeans.plot_pca</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_silhouette.html">stacker.kmeans.plot_silhouette</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.read_and_preprocess_data.html">stacker.kmeans.read_and_preprocess_data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.run_kmeans.html">stacker.kmeans.run_kmeans</a></li>
-</ul>
-</details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.html">pairwise_distance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.calculate_residue_distance.html">stacker.pairwise_distance.calculate_residue_distance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_frame_average.html">stacker.pairwise_distance.get_frame_average</a></li>
@@ -297,10 +289,6 @@
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.residue_movement.Base.html">Base</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/stacker.vector.html">vector</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.vector.Vector.html">Vector</a></li>
-</ul>
-</details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/stacker.visualization.html">visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.create_axis_labels.html">stacker.visualization.create_axis_labels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.create_parent_directories.html">stacker.visualization.create_parent_directories</a></li>
@@ -312,6 +300,19 @@
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.visualize_two_residue_movement_heatmap.html">stacker.visualization.visualize_two_residue_movement_heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.visualize_two_residue_movement_scatterplot.html">stacker.visualization.visualize_two_residue_movement_scatterplot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.visualization.NoResidues.html">stacker.visualization.NoResidues</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/stacker.kmeans.html">kmeans</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.create_kmeans_input.html">stacker.kmeans.create_kmeans_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_cluster_trj_data.html">stacker.kmeans.plot_cluster_trj_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_pca.html">stacker.kmeans.plot_pca</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.plot_silhouette.html">stacker.kmeans.plot_silhouette</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.read_and_preprocess_data.html">stacker.kmeans.read_and_preprocess_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.kmeans.run_kmeans.html">stacker.kmeans.run_kmeans</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/stacker.vector.html">vector</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.vector.Vector.html">Vector</a></li>
 </ul>
 </details></li>
 </ul>
@@ -484,23 +485,23 @@ are available through <code class="docutils literal notranslate"><span class="pr
 <tr class="row-odd"><td><p><a class="reference internal" href="stacker.html#module-stacker" title="stacker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacker</span></code></a></p></td>
 <td><p>The Python Functions that control Command Line Options</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="stacker.html#module-stacker.file_manipulation" title="stacker.file_manipulation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacker.file_manipulation</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="stacker.file_manipulation.html#module-stacker.file_manipulation" title="stacker.file_manipulation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacker.file_manipulation</span></code></a></p></td>
 <td><p>Filter Trajectory Files</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="stacker.html#module-stacker.kmeans" title="stacker.kmeans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacker.kmeans</span></code></a></p></td>
-<td><p>Run K Means Clustering and Principal Component Analysis</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="stacker.pairwise_distance.html#module-stacker.pairwise_distance" title="stacker.pairwise_distance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacker.pairwise_distance</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="stacker.pairwise_distance.html#module-stacker.pairwise_distance" title="stacker.pairwise_distance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacker.pairwise_distance</span></code></a></p></td>
 <td><p>Create and Analyze System Stacking Fingerprints (SSFs)</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="stacker.residue_movement.html#module-stacker.residue_movement" title="stacker.residue_movement"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacker.residue_movement</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="stacker.residue_movement.html#module-stacker.residue_movement" title="stacker.residue_movement"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacker.residue_movement</span></code></a></p></td>
 <td><p>Create and Analyze Pairwise Stacking Fingerprints (PSFs)</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="stacker.html#module-stacker.vector" title="stacker.vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacker.vector</span></code></a></p></td>
-<td><p>Vector class used for SSF and PSF Calculation</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="stacker.visualization.html#module-stacker.visualization" title="stacker.visualization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacker.visualization</span></code></a></p></td>
 <td><p>Visualize the SSFs, PSFs, and other analyses</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="stacker.html#module-stacker.kmeans" title="stacker.kmeans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacker.kmeans</span></code></a></p></td>
+<td><p>Run K Means Clustering and Principal Component Analysis</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="stacker.html#module-stacker.vector" title="stacker.vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stacker.vector</span></code></a></p></td>
+<td><p>Vector class used for SSF and PSF Calculation</p></td>
 </tr>
 </tbody>
 </table>
@@ -519,12 +520,12 @@ are available through <code class="docutils literal notranslate"><span class="pr
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="getting_started.html"
+       href="molecular_dynamics.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Getting Started</p>
+        <p class="prev-next-title">Molecular Dynamics (MD)</p>
       </div>
     </a>
     <a class="right-next"
