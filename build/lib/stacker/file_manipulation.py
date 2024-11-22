@@ -300,6 +300,9 @@ class SmartIndexingAction(argparse.Action):
         """
         if isinstance(value, str):
             parsed_set = set()
+            if value == '':
+                return {}
+            
             for item in value.split(','):
                 if '-' in item:
                     start, end = map(int, item.split('-'))
@@ -307,7 +310,7 @@ class SmartIndexingAction(argparse.Action):
                 else:
                     parsed_set.add(int(item))
             return parsed_set
-        elif isinstance(value, set):
+        elif isinstance(value, set) or isinstance(value, set) or isinstance(value, dict):
             return value
         elif isinstance(value, list):
             return value

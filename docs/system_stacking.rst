@@ -79,9 +79,52 @@ The ``filtered_traj`` object has 252 residues, so we create a 252 x 252 SSF::
     >>> ssf.shape
     (252, 252)
 
-We can calculate the SSF for multiple frames of a trajectory using :func:`system_stacking_fingerprints`::
+We can calculate the SSF for multiple frames of a trajectory using :func:`system_stacking_fingerprints`, which
+accepts smart indexing of frames (eg. 1-3,15-17 = 1,2,3,15,16,17)::
 
-    
+    >>> ssfs = st.system_stacking_fingerprints(filtered_traj, frames = '1-3')
+    >>> ssfs.shape
+    (3, 252, 252)
+
+``ssfs`` is now a list, where ``ssfs[i]`` is the SSF for frame ``i`` (0-indexed frame). If ``frames`` is empty,
+the SSF will be calculated for all frames. For multi-frame
+trajectories, it is recommended to use the ``threads`` option to parallelize, calculating the SSF for multiple
+frames at once. When parralelizing, turn off standard output with ``write_output``::
+
+    >>> ssfs = st.system_stacking_fingerprints(
+    ...     filtered_traj,
+    ...     frames = '1-10',
+    ...     threads = 10,
+    ...     write_output = False
+    ... )
+    >>> ssfs.shape
+    (10, 252, 252)
+
+Get the Average SSF for a Trajectory
+------------------------------------------
+
+Single-frame SSFs are rarely as illuminating as the average SSF for all frames
+of a trajectory. Users can create this using :func:`get_frame_average`, using the 
+output from :func:`system_stacking_fingerprints` in the step above::
+
+    >>> ssfs = st.system_stacking_fingerprints(
+    ...     filtered_traj,
+    ...     frames = '1-10',
+    ...     threads = 10,
+    ...     write_output = False
+    ... )
+    >>> avg_ssf = st.get_frame_average(ssfs)
+    >>> avg_ssf.shape
+    (252, 252)
+
+``avg_ssf`` contains averaged stacking information throughout the trajectory.
+The next step shows how to analyze these results.
+
+How to Use an SSF
+-----------------
+
+:func:`get_top_stacking` will give the stacking pairs with the most
+pi-stacking (ie. closest to 3.5Å).
 
 
 
