@@ -309,7 +309,7 @@ class SmartIndexingAction(argparse.Action):
             return parsed_set
         elif isinstance(value, set):
             return value
-        elif isinstance(value, typing.ArrayLike):
+        elif isinstance(value, list):
             return value
         else:
             raise ValueError("Input must be a string, list, or set of integers.")
