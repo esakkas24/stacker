@@ -14,8 +14,9 @@ are available through ``import stacker``
 
       stacker
       stacker.file_manipulation
-      stacker.kmeans
       stacker.pairwise_distance
       stacker.residue_movement
-      stacker.vector
       stacker.visualization
+      stacker.kmeans
+      stacker.vector
+

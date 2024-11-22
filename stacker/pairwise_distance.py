@@ -201,7 +201,7 @@ def get_residue_distance_for_frame(trajectory: md.Trajectory,
     return(pairwise_res_magnitudes)
 
 def get_residue_distance_for_trajectory(trajectory: md.Trajectory, 
-                                        frames: typing.ArrayLike,
+                                        frames : typing.ArrayLike | str | set = {},
                                         res1_atoms: tuple = ("C2", "C4", "C6"),
                                         res2_atoms: tuple = ("C2", "C4", "C6"),
                                         threads: int = 1,
@@ -221,6 +221,7 @@ def get_residue_distance_for_trajectory(trajectory: md.Trajectory,
     frames : array_like or str
         list of frame indices to analyze (1-indexed).
         Accepts smart-indexed str representing a list of frames (e.g '1-5,6,39-48')
+        If empty, uses all frames.
     res1_atoms : tuple, default=("C2", "C4", "C6")
         Atom names whose positions are averaged to find the center of residue 1.
     res2_atoms : tuple, default=("C2", "C4", "C6")
@@ -257,6 +258,9 @@ def get_residue_distance_for_trajectory(trajectory: md.Trajectory,
     (3, 127, 127)
     """
     frames = SmartIndexingAction.parse_smart_index(frames)
+    
+    if (frames == {}) or (frames == []):
+        frames = [i for i in range(1, trajectory.n_frames + 1)]
 
     with concurrent.futures.ProcessPoolExecutor(max_workers = threads) as executor:            
         ssf_per_frame = np.array(list(executor.map(get_residue_distance_for_frame, [trajectory]*len(frames), frames,
