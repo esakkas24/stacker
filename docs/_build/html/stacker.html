@@ -1098,14 +1098,14 @@ following KMeans clustering. Writes the plot output to a PNG file.</p>
 create a bar plot, and save it as ‘kmeans_plot.cluster_4.png’ in the 
 specified output directory.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">plot_cluster_trj_data</span><span class="p">(</span><span class="s1">&#39;clustering_results.txt&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;/path/to/output/&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">plot_cluster_trj_data</span><span class="p">(</span><span class="s1">&#39;clustering_results.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;/path/to/output/&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.kmeans.plot_silhouette">
-<span class="sig-name descname"><span class="pre">plot_silhouette</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#plot_silhouette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_silhouette" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">plot_silhouette</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#plot_silhouette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_silhouette" title="Link to this definition">#</a></dt>
 <dd><p>Creates Silhouette plots to determine the best number of clusters</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1114,6 +1114,8 @@ specified output directory.</p>
 </dd>
 <dt><strong>dataset</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
 Output of create_kmeans_input()</p>
+</dd>
+<dt><strong>outfile</strong><span class="classifier">str</span></dt><dd><p>Filepath where the plot PNG file will be saved.</p>
 </dd>
 </dl>
 </dd>

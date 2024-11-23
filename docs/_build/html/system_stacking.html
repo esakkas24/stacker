@@ -482,6 +482,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-visualize-an-ssf">How to Visualize an SSF</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-analyze-an-ssf">How to Analyze an SSF</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-k-means">Using K Means</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#picking-the-right-number-of-clusters">Picking the Right Number of Clusters</a></li>
 </ul>
             </nav>
         </div>
@@ -763,6 +764,57 @@ We can visualize this with <a class="reference internal" href="stacker.kmeans.ht
 <p>The SSFs still split into distinct clusters (there is no cluster with a significant
 contribution from both trajectories), meaning the structures have different pi-stacking.</p>
 </section>
+<section id="picking-the-right-number-of-clusters">
+<h2>Picking the Right Number of Clusters<a class="headerlink" href="#picking-the-right-number-of-clusters" title="Link to this heading">#</a></h2>
+<p>StACKER is equipped to run <a class="reference external" href="https://scikit-learn.org/1.5/auto_examples/cluster/plot_kmeans_silhouette_analysis.html">Silhouette Analysis</a>
+in order to select the correct number of clusters. <a class="reference internal" href="stacker.kmeans.html#stacker.kmeans.plot_silhouette" title="stacker.kmeans.plot_silhouette"><code class="xref py py-func docutils literal notranslate"><span class="pre">plot_silhouette()</span></code></a>
+can create Silhouette Plots:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span>  <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">read_and_preprocess_data</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s2">&quot;testing/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz&quot;</span><span class="p">]</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="go">Reading data: 5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz</span>
+<span class="go">Reading data: 5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blinded_data</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
+<span class="go">(6400, 16129)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">n_cluster</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">st</span><span class="o">.</span><span class="n">run_kmeans</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">,</span> <span class="n">N_CLUSTERS</span> <span class="o">=</span> <span class="n">n_cluster</span><span class="p">,</span> <span class="n">outdir</span> <span class="o">=</span> <span class="s1">&#39;testing/&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">st</span><span class="o">.</span><span class="n">plot_silhouette</span><span class="p">(</span><span class="n">n_cluster</span><span class="p">,</span> <span class="n">blinded_data</span><span class="p">,</span> <span class="n">outdir</span> <span class="o">=</span> <span class="s1">&#39;testing/&#39;</span><span class="p">)</span>
+<span class="go">(6400, 16129)</span>
+<span class="go">For n_clusters = 2 The average silhouette_score is : 0.10815289849518733</span>
+<span class="go">Dataset: 5JUP_N2_tGGG_aCCU_+1CGU_data</span>
+<span class="go">        Cluster 1: 0 matrices</span>
+<span class="go">        Cluster 2: 3200 matrices</span>
+<span class="go">Dataset: 5JUP_N2_tGGG_aCCU_+1GCU_data</span>
+<span class="go">        Cluster 1: 3120 matrices</span>
+<span class="go">        Cluster 2: 80 matrices</span>
+<span class="go">Results written to: ../testing/clustering_results_2.txt</span>
+<span class="go">File saved to: ../testing/silhouette2.png</span>
+<span class="go">(6400, 16129)</span>
+<span class="go">For n_clusters = 3 The average silhouette_score is : 0.11018525011212786</span>
+<span class="go">Dataset: 5JUP_N2_tGGG_aCCU_+1CGU_data</span>
+<span class="go">        Cluster 1: 720 matrices</span>
+<span class="go">        Cluster 2: 0 matrices</span>
+<span class="go">        Cluster 3: 2480 matrices</span>
+<span class="go">Dataset: 5JUP_N2_tGGG_aCCU_+1GCU_data</span>
+<span class="go">        Cluster 1: 0 matrices</span>
+<span class="go">        Cluster 2: 3194 matrices</span>
+<span class="go">        Cluster 3: 6 matrices</span>
+<span class="go">Results written to: ../testing/clustering_results_3.txt</span>
+<span class="go">File saved to: ../testing/silhouette3.png</span>
+<span class="go">...</span>
+</pre></div>
+</div>
+<p>Silhouette Plots show the distance of all points in a cluster from the cluster’s centroid.
+We want plots with clusters of similar size along the y-axis and with most points around the
+same distance from 0 on the x-axis. A Cluster choice of 6 is appropriate:</p>
+<p><code class="docutils literal notranslate"><span class="pre">testing/silhouette6.png</span></code></p>
+<img alt="_images/silhouette6.png" src="_images/silhouette6.png" />
+<p>While a cluster choice of 7 is not:</p>
+<p><code class="docutils literal notranslate"><span class="pre">testing/silhouette7.png</span></code></p>
+<img alt="_images/silhouette7.png" src="_images/silhouette7.png" />
+</section>
 </section>
 
 
@@ -818,6 +870,7 @@ contribution from both trajectories), meaning the structures have different pi-s
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-visualize-an-ssf">How to Visualize an SSF</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-analyze-an-ssf">How to Analyze an SSF</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-k-means">Using K Means</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#picking-the-right-number-of-clusters">Picking the Right Number of Clusters</a></li>
 </ul>
   </nav></div>
 

@@ -358,3 +358,24 @@ While a cluster choice of 7 is not:
 
 .. image:: images/silhouette7.png
 
+Principal Component Analysis
+-----------------------------
+
+KMeans on SSF is gathering Euclidean Distance on multi-dimensional vectors that are
+impossible to plot. We can however, do a heuristic plotting of these SSFs using
+`Principal Component Analysis (PCA) <https://scikit-learn.org/1.5/modules/decomposition.html#pca>`_.
+
+First, we can plot the un-blinded SSFs and color them by their trajectory of origin. 
+We have 3200 frames worth of SSFs for each trajectory, and we plot them using
+:func:`plot_pca`::
+
+    >>> import stacker as st
+    >>> data_arrays  = st.read_and_preprocess_data(
+    ...     ["testing/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz",
+    ...     "testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz"]
+    ... )
+    Reading data: 5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz
+    Reading data: 5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz
+    >>> blinded_data = st.create_kmeans_input(data_arrays)
+    (6400, 16129)
+    

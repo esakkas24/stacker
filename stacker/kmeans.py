@@ -348,7 +348,8 @@ def plot_silhouette(n_clusters : int, dataset : typing.ArrayLike, outdir : str =
     plt.close()
 
 
-def plot_pca(blinded_data : typing.ArrayLike, n_clusters : int = 0, coloring : str = 'dataset') -> None:
+def plot_pca(blinded_data : typing.ArrayLike, dataset_names : list,  n_clusters : int = 0, 
+             coloring : str = 'dataset', outdir : str = '') -> None:
     '''
     Creates PCA Plot to compare systems in 2D 
 
@@ -360,6 +361,10 @@ def plot_pca(blinded_data : typing.ArrayLike, n_clusters : int = 0, coloring : s
     blinded_data : np.typing.ArrayLike
         A 2D numpy array containing all frames stacked together.
         Output of create_kmeans_input()
+    dataset_names : list of str
+        List of filenams to read and preprocess.
+        Outputted from `stacker -s ssf -d output.txt.gz`.
+        Should be in the format {datapath}/{traj_name}.txt.gz
     n_clusters : int, default = 0
         The number of clusters to form.
     coloring : {'dataset', 'kmeans', 'facet'}
@@ -367,7 +372,9 @@ def plot_pca(blinded_data : typing.ArrayLike, n_clusters : int = 0, coloring : s
         - dataset:  Plot all points on the same scatterplot and color by dataset of origin.
         - kmeans: Plot all points on the same scatterplot and color by KMeans Cluster with n_clusters
         - facet: Same as dataset but plot each dataset on a different coordinate grid.
-
+    outdir : str, default=''
+        Directory to save the clustering results.
+        
     Returns
     -------
     None
@@ -379,13 +386,18 @@ def plot_pca(blinded_data : typing.ArrayLike, n_clusters : int = 0, coloring : s
     sklearn.decomposition.PCA : Runs PCA
     
     '''
+    if outdir and not outdir.endswith('/'):
+        outdir += '/'
+
+    dataset_names = [filepath.split('/')[-1].split('.')[0] for filepath in dataset_names]
+
     n_datasets = len(dataset_names)
     pca = PCA(n_components=2)
     data_reduced = pca.fit_transform(blinded_data)
-    colors = np.empty(data_reduced.shape[0], dtype="U15")
+    colors = []
     section_size = data_reduced.shape[0] // n_datasets
     for i in range(n_datasets):
-        colors[i * section_size:(i + 1) * section_size] = dataset_names[i]
+        colors.extend([dataset_names[i]] * section_size)
 
     df = pd.DataFrame({
         'Principal Component 1': data_reduced[:, 0],
@@ -429,7 +441,7 @@ def plot_pca(blinded_data : typing.ArrayLike, n_clusters : int = 0, coloring : s
         plt.close()
 
 if __name__ == "__main__":
-    data_arrays = read_and_preprocess_data(dataset_names, indir, N_RESIDUES)
+    data_arrays = read_and_preprocess_data(dataset_names)
     blinded_data = create_kmeans_input(data_arrays)
     plot_pca(blinded_data, 'dataset')
     plot_pca(blinded_data, 'facet')

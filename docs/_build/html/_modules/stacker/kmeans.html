@@ -635,6 +635,9 @@
     <span class="k">global</span> <span class="n">silhouette_avg</span>
     <span class="k">global</span> <span class="n">sample_silhouette_values</span>
 
+    <span class="k">if</span> <span class="n">outdir</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">outdir</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">):</span>
+        <span class="n">outdir</span> <span class="o">+=</span> <span class="s1">&#39;/&#39;</span>
+
     <span class="n">blinded_data</span> <span class="o">=</span> <span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
 
     <span class="n">kmeans_func_instance</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">N_CLUSTERS</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="n">max_iter</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="n">n_init</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
@@ -702,7 +705,7 @@
 <span class="sd">    specified output directory.</span>
 
 <span class="sd">    &gt;&gt;&gt; import stacker as st</span>
-<span class="sd">    &gt;&gt;&gt; st.plot_cluster_trj_data(&#39;clustering_results.txt&#39;, 4, &#39;/path/to/output/&#39;, True)</span>
+<span class="sd">    &gt;&gt;&gt; st.plot_cluster_trj_data(&#39;clustering_results.txt&#39;, &#39;/path/to/output/&#39;)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">cluster_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -727,7 +730,7 @@
 
 <div class="viewcode-block" id="plot_silhouette">
 <a class="viewcode-back" href="../../stacker.kmeans.html#stacker.kmeans.plot_silhouette">[docs]</a>
-<span class="k">def</span> <span class="nf">plot_silhouette</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">plot_silhouette</span><span class="p">(</span><span class="n">n_clusters</span> <span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">dataset</span> <span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="n">outdir</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Creates Silhouette plots to determine the best number of clusters</span>
 
@@ -738,7 +741,12 @@
 <span class="sd">    dataset : np.typing.ArrayLike</span>
 <span class="sd">        A 2D numpy array containing all frames stacked together.</span>
 <span class="sd">        Output of create_kmeans_input()</span>
+<span class="sd">    outfile : str</span>
+<span class="sd">        Filepath where the plot PNG file will be saved.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">outdir</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">outdir</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">):</span>
+        <span class="n">outdir</span> <span class="o">+=</span> <span class="s1">&#39;/&#39;</span>
+
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">n_clusters</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">])</span>
@@ -779,7 +787,9 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">))</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">outdir</span><span class="si">}</span><span class="s2">silhouette</span><span class="si">{</span><span class="n">n_clusters</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">)</span>
+    <span class="n">plot_outpath</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">outdir</span><span class="si">}</span><span class="s2">silhouette</span><span class="si">{</span><span class="n">n_clusters</span><span class="si">}</span><span class="s2">.png&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plot_outpath</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File saved to: </span><span class="si">{</span><span class="n">plot_outpath</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 
