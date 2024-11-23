@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css?v=7f9a90b1" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/numpy.css?v=93bf2a1f" />
   
@@ -316,6 +316,7 @@
 </details></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../command_line_options.html">Command Line Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../system_stacking.html">Create System Stacking Fingerprints (SSFs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../pairwise_stacking.html">Create Pairwise Stacking Fingerprints (PSFs)</a></li>
 </ul>
@@ -471,7 +472,7 @@
 
 <div class="viewcode-block" id="create_axis_labels">
 <a class="viewcode-back" href="../../stacker.visualization.html#stacker.visualization.create_axis_labels">[docs]</a>
-<span class="k">def</span> <span class="nf">create_axis_labels</span><span class="p">(</span><span class="n">res_indicies</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="n">tick_distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">create_axis_labels</span><span class="p">(</span><span class="n">res_indices</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="n">tick_distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Designates the axis labels to use in the SSF plot.</span>
 
@@ -484,7 +485,7 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    res_indicies : list</span>
+<span class="sd">    res_indices : list</span>
 <span class="sd">        The list of residue indices used in the pairwise analysis.</span>
 <span class="sd">        Parameter `residue_desired` passed to `filter_traj()`</span>
 <span class="sd">    tick_distance : int, default = 10</span>
@@ -513,42 +514,54 @@
 <span class="sd">    &gt;&gt;&gt; create_axis_labels([94,95,96,97,98,99,100,408,409,410,411,412,413,414,415,416,417,418,419,420,421,422,423,424,425,426,427,428])</span>
 <span class="sd">    [0, 6, 7, 17, 27], [94, 100, 408, 418, 428]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">n_residues</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">res_indicies</span><span class="p">)</span>
+    <span class="n">n_residues</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">res_indices</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">n_residues</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span> <span class="k">raise</span> <span class="n">NoResidues</span><span class="p">(</span><span class="s2">&quot;pairwise analysis must include at least one residue&quot;</span><span class="p">)</span>
 
     <span class="n">tick_locations</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">tick_labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">res_indicies</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="n">tick_labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">res_indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
 
     <span class="n">res_sequence_length</span> <span class="o">=</span> <span class="mi">1</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_residues</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">res_indicies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">res_indicies</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">res_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">res_indices</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">res_sequence_length</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        <span class="k">if</span> <span class="n">res_indicies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">res_indicies</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">res_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">res_indices</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">tick_locations</span> <span class="o">+=</span> <span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
-            <span class="n">tick_labels</span> <span class="o">+=</span> <span class="p">[</span><span class="n">res_indicies</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">res_indicies</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+            <span class="n">tick_labels</span> <span class="o">+=</span> <span class="p">[</span><span class="n">res_indices</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">res_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
             <span class="n">res_sequence_length</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">elif</span> <span class="n">res_sequence_length</span> <span class="o">==</span> <span class="n">tick_distance</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span>
             <span class="n">tick_locations</span> <span class="o">+=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="n">tick_labels</span> <span class="o">+=</span> <span class="p">[</span><span class="n">res_indicies</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+            <span class="n">tick_labels</span> <span class="o">+=</span> <span class="p">[</span><span class="n">res_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
             <span class="n">res_sequence_length</span> <span class="o">=</span> <span class="mi">1</span>
     
     <span class="k">if</span> <span class="n">n_residues</span><span class="o">-</span><span class="mi">1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tick_locations</span><span class="p">:</span>
         <span class="n">tick_locations</span> <span class="o">+=</span> <span class="p">[</span><span class="n">n_residues</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">tick_labels</span> <span class="o">+=</span> <span class="p">[</span><span class="n">res_indicies</span><span class="p">[</span><span class="n">n_residues</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="n">tick_labels</span> <span class="o">+=</span> <span class="p">[</span><span class="n">res_indices</span><span class="p">[</span><span class="n">n_residues</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
     
     <span class="k">return</span> <span class="n">tick_locations</span><span class="p">,</span> <span class="n">tick_labels</span></div>
 
         
 <div class="viewcode-block" id="display_arrays_as_video">
 <a class="viewcode-back" href="../../stacker.visualization.html#stacker.visualization.display_arrays_as_video">[docs]</a>
-<span class="k">def</span> <span class="nf">display_arrays_as_video</span><span class="p">(</span><span class="n">numpy_arrays</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="n">res_indicies</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> 
+<span class="k">def</span> <span class="nf">display_arrays_as_video</span><span class="p">(</span><span class="n">numpy_arrays</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="n">res_indices</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> 
                             <span class="n">seconds_per_frame</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">tick_distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
                             <span class="n">outfile_prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">scale_limits</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">outfile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
                             <span class="n">scale_style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;bellcurve&#39;</span><span class="p">,</span> <span class="n">xy_line</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    display_arrays_as_video(</span>
+<span class="sd">        ssfs,</span>
+<span class="sd">        res_indices,</span>
+<span class="sd">        seconds_per_frame = 10,</span>
+<span class="sd">        tick_distance = 10,</span>
+<span class="sd">        outfile_prefix = &#39;&#39;,</span>
+<span class="sd">        scale_limits = (0,7),</span>
+<span class="sd">        outfile = &#39;&#39;,</span>
+<span class="sd">        scale_style = &#39;bellcurve&#39;,</span>
+<span class="sd">        xy_line = True</span>
+<span class="sd">    )</span>
+
 <span class="sd">    Displays SSF data to output or writes SSF as a PNG</span>
 
 <span class="sd">    Visualizes the data for an SSF for a trajectory or a single frame.</span>
@@ -560,9 +573,10 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    numpy_arrays : array_like</span>
-<span class="sd">        List or array of 2D NumPy arrays.</span>
-<span class="sd">    res_indicies : list or str</span>
+<span class="sd">    ssfs : array_like</span>
+<span class="sd">        List or array of 2D NumPy arrays representing SSFs, </span>
+<span class="sd">        output of ``system_stacking_fingerprints``</span>
+<span class="sd">    res_indices : list or str</span>
 <span class="sd">        The list of residue indices used in the pairwise analysis.</span>
 <span class="sd">        Parameter `residue_desired` passed to `filter_traj()`</span>
 <span class="sd">        Accepts smart-indexed str representing a list of residues (e.g &#39;1-5,6,39-48&#39;)</span>
@@ -578,8 +592,8 @@
 <span class="sd">        png, pdf, ps, eps, and svg supported.</span>
 <span class="sd">    scale_limits : tuple, default = (0, 7)</span>
 <span class="sd">        Limits of the color scale.</span>
-<span class="sd">    scale_style : str, default = &#39;bellcurve&#39;</span>
-<span class="sd">        Style of color scale. {bellcurve, gradient}</span>
+<span class="sd">    scale_style : {&#39;bellcurve&#39;, &#39;gradient&#39;}, default = &#39;bellcurve&#39;</span>
+<span class="sd">        Style of color scale. </span>
 <span class="sd">    xy_line : bool, default = True</span>
 <span class="sd">        Draw x = y line to separate matrix halves.</span>
 
@@ -608,17 +622,11 @@
 <span class="sd">    &gt;&gt;&gt; trj_sub = trj.atom_slice(trj.top.select(residue_selection_query))</span>
 <span class="sd">    &gt;&gt;&gt; resSeqs = [res.resSeq for res in trj_sub.topology.residues]</span>
 <span class="sd">    &gt;&gt;&gt; frames = st.get_residue_distance_for_trajectory(trj_sub, frames_to_include, threads = 5)</span>
-
 <span class="sd">    Frame 2 done.</span>
-
 <span class="sd">    Frame 3 done.</span>
-
 <span class="sd">    Frame 1 done.</span>
-
 <span class="sd">    Frame 5 done.</span>
-
 <span class="sd">    Frame 4 done.</span>
-<span class="sd">    </span>
 <span class="sd">    &gt;&gt;&gt; st.display_arrays_as_video([st.get_frame_average(frames)], resSeqs, seconds_per_frame=10)</span>
 <span class="sd">    # Displays SSF for each frame of this trajectory to standard output</span>
 
@@ -648,8 +656,9 @@
         <span class="n">colorbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">neg</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
         <span class="n">colorbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Center of</span><span class="se">\n</span><span class="s1">Geometry</span><span class="se">\n</span><span class="s1">Dist. (Å)&#39;</span><span class="p">)</span>
 
-        <span class="n">res_indicies</span> <span class="o">=</span> <span class="n">SmartIndexingAction</span><span class="o">.</span><span class="n">parse_smart_index</span><span class="p">(</span><span class="n">res_indicies</span><span class="p">)</span>
-        <span class="n">ticks</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">create_axis_labels</span><span class="p">(</span><span class="n">res_indicies</span><span class="p">,</span> <span class="n">tick_distance</span><span class="p">)</span>
+        <span class="n">res_indices</span> <span class="o">=</span> <span class="n">SmartIndexingAction</span><span class="o">.</span><span class="n">parse_smart_index</span><span class="p">(</span><span class="n">res_indices</span><span class="p">)</span>
+        <span class="n">res_indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">res_indices</span><span class="p">)</span>
+        <span class="n">ticks</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">create_axis_labels</span><span class="p">(</span><span class="n">res_indices</span><span class="p">,</span> <span class="n">tick_distance</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">ticks</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">rotation</span> <span class="o">=</span> <span class="s1">&#39;vertical&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">ticks</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">labeltop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">labelbottom</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>

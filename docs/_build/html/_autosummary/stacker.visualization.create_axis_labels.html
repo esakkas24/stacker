@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/numpy.css?v=93bf2a1f" />
   
@@ -317,6 +317,7 @@
 </details></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../command_line_options.html">Command Line Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../system_stacking.html">Create System Stacking Fingerprints (SSFs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pairwise_stacking.html">Create Pairwise Stacking Fingerprints (PSFs)</a></li>
 </ul>
@@ -490,7 +491,7 @@
 <h1>stacker.visualization.create_axis_labels<a class="headerlink" href="#stacker-visualization-create-axis-labels" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.visualization.create_axis_labels">
-<span class="sig-name descname"><span class="pre">create_axis_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res_indicies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tick_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/visualization.html#create_axis_labels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.create_axis_labels" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">create_axis_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tick_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/visualization.html#create_axis_labels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.create_axis_labels" title="Link to this definition">#</a></dt>
 <dd><p>Designates the axis labels to use in the SSF plot.</p>
 <p>Helper function for visualizing SSFs.
 Returns the x-axis tick positions and labels to use on the ticks based on the 
@@ -501,7 +502,7 @@ ends of any consecutive residue sequence.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>res_indicies</strong><span class="classifier">list</span></dt><dd><p>The list of residue indices used in the pairwise analysis.
+<dt><strong>res_indices</strong><span class="classifier">list</span></dt><dd><p>The list of residue indices used in the pairwise analysis.
 Parameter <cite>residue_desired</cite> passed to <cite>filter_traj()</cite></p>
 </dd>
 <dt><strong>tick_distance</strong><span class="classifier">int, default = 10</span></dt><dd><p>Distance between ticks in blocks of consecutive residues.</p>

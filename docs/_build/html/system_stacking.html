@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css?v=7f9a90b1" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/numpy.css?v=93bf2a1f" />
   
@@ -52,7 +52,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Making Pairwise Stacking Fingerprints (PSFs)" href="pairwise_stacking.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="command_line_options.html" />
+    <link rel="prev" title="Command Line Options" href="command_line_options.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -317,6 +317,7 @@
 </details></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="command_line_options.html">Command Line Options</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Create System Stacking Fingerprints (SSFs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pairwise_stacking.html">Create Pairwise Stacking Fingerprints (PSFs)</a></li>
 </ul>
@@ -478,8 +479,8 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-distance-between-residues">Calculate Distance Between Residues</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-system-stacking-fingerprint-ssf">Create a System Stacking Fingerprint (SSF)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-average-ssf-for-a-trajectory">Get the Average SSF for a Trajectory</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-an-ssf">How to Use an SSF</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-pi-stacking-pairs">Comparing Pi-Stacking Pairs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-visualize-an-ssf">How to Visualize an SSF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-analyze-an-ssf">How to Analyze an SSF</a></li>
 </ul>
             </nav>
         </div>
@@ -500,7 +501,9 @@ to analyze system-wide pi-stacking in a molecular dynamics trajectory.</p>
 <p>To analyze pi-stacking between two nucleotides, we compare their center of
 geometry (COG) distance, the distance between the centers of their 6-membered
 (pyrimidine) rings. For this, the only atoms we need are C2, C4, and C6 to triangulate
-the COG of each ring. For reference, the Carbon Numbering of each nucleotide:</p>
+the COG of each ring. See <code class="docutils literal notranslate"><span class="pre">r</span></code> below:</p>
+<img alt="_images/bottaro_values.png" src="_images/bottaro_values.png" />
+<p>For reference, the Carbon Numbering of each nucleotide:</p>
 <img alt="_images/nucleotide_numbering.png" src="_images/nucleotide_numbering.png" />
 <p>In this example pipeline, we use a trajectory of the
 <a class="reference external" href="https://www.mdpi.com/1422-0067/23/3/1417">Ribosome CAR-mRNA Interaction Surface</a>
@@ -511,7 +514,7 @@ We filter this trajectory to the pi-stacking residue pair.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd</span></code>: A 10-frame trajectory file with all atoms/residues.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop</span></code>: The associated Topology File with the above trajectory.</p></li>
 </ul>
-<p>We filter to atoms C2, C4, and C6 using <a class="reference internal" href="stacker.file_manipulation.html#stacker.file_manipulation.filter_traj" title="stacker.file_manipulation.filter_traj"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_traj()</span></code></a>:</p>
+<p>We filter to atoms C2, C4, and C6 using <a class="reference internal" href="stacker.html#stacker.file_manipulation.filter_traj" title="stacker.file_manipulation.filter_traj"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_traj()</span></code></a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s2">&quot;first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                <span class="n">topology_filename</span> <span class="o">=</span> <span class="s2">&quot;5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&quot;</span><span class="p">,</span>
@@ -598,15 +601,99 @@ output from <a class="reference internal" href="stacker.pairwise_distance.html#s
 <p><code class="docutils literal notranslate"><span class="pre">avg_ssf</span></code> contains averaged stacking information throughout the trajectory.
 The next step shows how to analyze these results.</p>
 </section>
-<section id="how-to-use-an-ssf">
-<h2>How to Use an SSF<a class="headerlink" href="#how-to-use-an-ssf" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a> will give the stacking pairs with the most
-pi-stacking (ie. closest to 3.5Å).</p>
-<p>It is recommended that you parallelize for large trajectories, it calculates the SSF
-per frame in parallel.</p>
+<section id="how-to-visualize-an-ssf">
+<h2>How to Visualize an SSF<a class="headerlink" href="#how-to-visualize-an-ssf" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="stacker.visualization.html#stacker.visualization.display_ssfs" title="stacker.visualization.display_ssfs"><code class="xref py py-func docutils literal notranslate"><span class="pre">display_ssfs()</span></code></a> will visualize SSFs in Python output, with each SSF frame
+as a frame of the video:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s2">&quot;first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="n">topology_filename</span> <span class="o">=</span> <span class="s2">&quot;5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
+<span class="go">WARNING: Residue Indices are expected to be 1-indexed</span>
+<span class="go">Reading trajectory...</span>
+<span class="go">Reading topology...</span>
+<span class="go">Filtering trajectory...</span>
+<span class="go">WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssfs</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">system_stacking_fingerprints</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">filtered_traj</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">frames</span> <span class="o">=</span> <span class="s1">&#39;1-10&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">threads</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">write_output</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resSeqs</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">resSeq</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">filtered_traj</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">residues</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">display_ssfs</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">ssfs</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">res_indicies</span> <span class="o">=</span> <span class="n">resSeqs</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">seconds_per_frame</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is recommended to run <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_frame_average" title="stacker.pairwise_distance.get_frame_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_frame_average()</span></code></a> and then save the output
+as a <code class="docutils literal notranslate"><span class="pre">.png</span></code> for comparison with other trajectories:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s2">&quot;first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="n">topology_filename</span> <span class="o">=</span> <span class="s2">&quot;5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
+<span class="go">WARNING: Residue Indices are expected to be 1-indexed</span>
+<span class="go">Reading trajectory...</span>
+<span class="go">Reading topology...</span>
+<span class="go">Filtering trajectory...</span>
+<span class="go">WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssfs</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">system_stacking_fingerprints</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">filtered_traj</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">frames</span> <span class="o">=</span> <span class="s1">&#39;1-10&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">threads</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">write_output</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avg_ssf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">get_frame_average</span><span class="p">(</span><span class="n">ssfs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssfs</span> <span class="o">=</span> <span class="p">[</span><span class="n">avg_ssf</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resSeqs</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">resSeq</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">filtered_traj</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">residues</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">display_ssfs</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">ssfs</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">resSeqs</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">tick_distance</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">outfile</span> <span class="o">=</span> <span class="s2">&quot;SSF_test.png&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">scale_limits</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">xy_line</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/SSF_test.png" src="_images/SSF_test.png" />
+<p><a class="reference internal" href="command_line_options.html#command-line-options"><span class="std std-ref">Command Line Options</span></a> offers many future analyses,
+including combining SSF images along the x=y line for visual comparison
+with <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">ssf</span> <span class="pre">-B</span></code> and <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">compare</span></code>.</p>
 </section>
-<section id="comparing-pi-stacking-pairs">
-<h2>Comparing Pi-Stacking Pairs<a class="headerlink" href="#comparing-pi-stacking-pairs" title="Link to this heading">#</a></h2>
+<section id="how-to-analyze-an-ssf">
+<h2>How to Analyze an SSF<a class="headerlink" href="#how-to-analyze-an-ssf" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a> will give the stacking pairs with the most
+pi-stacking (ie. closest to 3.5Å):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">get_top_stacking</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">filtered_traj</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">avg_ssf</span><span class="p">)</span>
+<span class="go">Res1    Res2    Avg_Dist</span>
+<span class="go">117     108     3.43</span>
+<span class="go">153     54      3.35</span>
+<span class="go">56      151     3.34</span>
+<span class="go">94      127     3.67</span>
+<span class="go">93      130     3.68</span>
+</pre></div>
+</div>
+<p>It is recommended to save the output to a <code class="docutils literal notranslate"><span class="pre">csv</span></code> and the other parameters
+for <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a> to prepare for future analyses using the
+<a class="reference internal" href="command_line_options.html#command-line-options"><span class="std std-ref">Command Line Options</span></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">get_top_stacking</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">filtered_traj</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">avg_ssf</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">output_csv</span> <span class="o">=</span> <span class="s1">&#39;top_stacking.csv&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">n_events</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">include_adjacent</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the command line, <code class="docutils literal notranslate"><span class="pre">[user]$</span> <span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">compare</span></code> can give the residue
+pairs that changed the most between trajectories, by inputting two <code class="docutils literal notranslate"><span class="pre">csv</span></code>
+outputs from <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a>. Use <code class="docutils literal notranslate"><span class="pre">[user]$</span> <span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">compare</span> <span class="pre">--help</span></code>
+for more information.</p>
 </section>
 </section>
 
@@ -627,7 +714,7 @@ per frame in parallel.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">Command Line Options</p>
       </div>
     </a>
     <a class="right-next"
@@ -660,8 +747,8 @@ per frame in parallel.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-distance-between-residues">Calculate Distance Between Residues</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-system-stacking-fingerprint-ssf">Create a System Stacking Fingerprint (SSF)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-average-ssf-for-a-trajectory">Get the Average SSF for a Trajectory</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-an-ssf">How to Use an SSF</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-pi-stacking-pairs">Comparing Pi-Stacking Pairs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-visualize-an-ssf">How to Visualize an SSF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-analyze-an-ssf">How to Analyze an SSF</a></li>
 </ul>
   </nav></div>
 

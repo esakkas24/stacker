@@ -13,7 +13,11 @@ Load Trajectory
 To analyze pi-stacking between two nucleotides, we compare their center of
 geometry (COG) distance, the distance between the centers of their 6-membered
 (pyrimidine) rings. For this, the only atoms we need are C2, C4, and C6 to triangulate
-the COG of each ring. For reference, the Carbon Numbering of each nucleotide:
+the COG of each ring. See ``r`` below:
+
+.. image:: images/bottaro_values.png
+
+For reference, the Carbon Numbering of each nucleotide:
 
 .. image:: images/nucleotide_numbering.png
 
@@ -120,19 +124,108 @@ output from :func:`system_stacking_fingerprints` in the step above::
 ``avg_ssf`` contains averaged stacking information throughout the trajectory.
 The next step shows how to analyze these results.
 
-How to Use an SSF
------------------
+How to Visualize an SSF
+-----------------------
 
-:func:`get_top_stacking` will give the stacking pairs with the most
-pi-stacking (ie. closest to 3.5Å).
+.. currentmodule:: stacker.visualization
 
+:func:`display_ssfs` will visualize SSFs in Python output, with each SSF frame
+as a frame of the video::
 
-
+    >>> import stacker as st
+    >>> filtered_traj = st.filter_traj("first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd",
+    ...                 topology_filename = "5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop",
+    ...                 atomnames_desired = {"C2", "C4", "C6"})
+    WARNING: Residue Indices are expected to be 1-indexed
+    Reading trajectory...
+    Reading topology...
+    Filtering trajectory...
+    WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed
+    >>> ssfs = st.system_stacking_fingerprints(
+    ...     filtered_traj,
+    ...     frames = '1-10',
+    ...     threads = 10,
+    ...     write_output = False
+    ... )
+    >>> resSeqs = [res.resSeq for res in filtered_traj.topology.residues]
+    >>> st.display_ssfs(
+    ...     ssfs,
+    ...     res_indicies = resSeqs,
+    ...     seconds_per_frame = 2
+    ... )
 
 .. currentmodule:: stacker.pairwise_distance
 
-It is recommended that you parallelize for large trajectories, it calculates the SSF
-per frame in parallel.
+It is recommended to run :func:`get_frame_average` and then save the output
+as a ``.png`` for comparison with other trajectories::
 
-Comparing Pi-Stacking Pairs
-----------------------------
+    >>> import stacker as st
+    >>> filtered_traj = st.filter_traj("first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd",
+    ...                 topology_filename = "5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop",
+    ...                 atomnames_desired = {"C2", "C4", "C6"})
+    WARNING: Residue Indices are expected to be 1-indexed
+    Reading trajectory...
+    Reading topology...
+    Filtering trajectory...
+    WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed
+    >>> ssfs = st.system_stacking_fingerprints(
+    ...     filtered_traj,
+    ...     frames = '1-10',
+    ...     threads = 10,
+    ...     write_output = False
+    ... )
+    >>> avg_ssf = st.get_frame_average(ssfs)
+    >>> ssfs = [avg_ssf]
+    >>> resSeqs = [res.resSeq for res in filtered_traj.topology.residues]
+    >>> st.display_ssfs(
+    ...     ssfs,
+    ...     resSeqs,
+    ...     tick_distance = 20,
+    ...     outfile = "SSF_test.png",
+    ...     scale_limits = (2,5),
+    ...     xy_line = False
+    ... )
+
+.. image:: images/SSF_test.png
+
+:ref:`Command Line Options <command_line_options>` offers many future analyses,
+including combining SSF images along the x=y line for visual comparison
+with ``stacker -s ssf -B`` and ``stacker -s compare``.
+
+How to Analyze an SSF
+-----------------------
+
+.. currentmodule:: stacker.pairwise_distance
+
+:func:`get_top_stacking` will give the stacking pairs with the most
+pi-stacking (ie. closest to 3.5Å)::
+    
+    >>> st.get_top_stacking(
+    ...     filtered_traj,
+    ...     avg_ssf)
+    Res1    Res2    Avg_Dist
+    117     108     3.43
+    153     54      3.35
+    56      151     3.34
+    94      127     3.67
+    93      130     3.68
+
+It is recommended to save the output to a ``csv`` and use the other parameters
+for :func:`get_top_stacking` to prepare for future analyses using the 
+:ref:`Command Line Options <command_line_options>`::
+
+    >>> st.get_top_stacking(
+    ...     filtered_traj,
+    ...     avg_ssf,
+    ...     output_csv = 'top_stacking.csv',
+    ...     n_events = -1,
+    ...     include_adjacent = True
+    ... )
+
+In the command line, ``[user]$ stacker -s compare`` can give the residue
+pairs that changed the most between trajectories, by inputting two ``csv``
+outputs from :func:`get_top_stacking`. Use ``[user]$ stacker -s compare --help``
+for more information.
+
+Using K Means
+-------------

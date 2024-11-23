@@ -36,7 +36,7 @@ def create_parent_directories(outfile_prefix : str) -> None:
     if dir_name == '': dir_name = '.'
     os.makedirs(dir_name, exist_ok=True)
 
-def create_axis_labels(res_indicies: typing.ArrayLike, tick_distance: int = 10) -> list:
+def create_axis_labels(res_indices: typing.ArrayLike, tick_distance: int = 10) -> list:
     """
     Designates the axis labels to use in the SSF plot.
 
@@ -49,7 +49,7 @@ def create_axis_labels(res_indicies: typing.ArrayLike, tick_distance: int = 10) 
 
     Parameters
     ----------
-    res_indicies : list
+    res_indices : list
         The list of residue indices used in the pairwise analysis.
         Parameter `residue_desired` passed to `filter_traj()`
     tick_distance : int, default = 10
@@ -78,39 +78,51 @@ def create_axis_labels(res_indicies: typing.ArrayLike, tick_distance: int = 10) 
     >>> create_axis_labels([94,95,96,97,98,99,100,408,409,410,411,412,413,414,415,416,417,418,419,420,421,422,423,424,425,426,427,428])
     [0, 6, 7, 17, 27], [94, 100, 408, 418, 428]
     """
-    n_residues = len(res_indicies)
+    n_residues = len(res_indices)
 
     if n_residues < 1: raise NoResidues("pairwise analysis must include at least one residue")
 
     tick_locations = [0]
-    tick_labels = [res_indicies[0]]
+    tick_labels = [res_indices[0]]
 
     res_sequence_length = 1
 
     for i in range(1, n_residues):
-        if res_indicies[i] == res_indicies[i-1] + 1:
+        if res_indices[i] == res_indices[i-1] + 1:
             res_sequence_length += 1
 
-        if res_indicies[i] > res_indicies[i-1] + 1:
+        if res_indices[i] > res_indices[i-1] + 1:
             tick_locations += [i-1, i]
-            tick_labels += [res_indicies[i-1], res_indicies[i]]
+            tick_labels += [res_indices[i-1], res_indices[i]]
             res_sequence_length = 1
         elif res_sequence_length == tick_distance+1:
             tick_locations += [i]
-            tick_labels += [res_indicies[i]]
+            tick_labels += [res_indices[i]]
             res_sequence_length = 1
     
     if n_residues-1 not in tick_locations:
         tick_locations += [n_residues-1]
-        tick_labels += [res_indicies[n_residues-1]]
+        tick_labels += [res_indices[n_residues-1]]
     
     return tick_locations, tick_labels
         
-def display_arrays_as_video(numpy_arrays: list | typing.ArrayLike, res_indicies: typing.ArrayLike | str, 
+def display_arrays_as_video(numpy_arrays: list | typing.ArrayLike, res_indices: typing.ArrayLike | str, 
                             seconds_per_frame: int = 10, tick_distance: int = 10,
                             outfile_prefix: str = '', scale_limits: tuple = (0, 7), outfile: str = '',
                             scale_style: str = 'bellcurve', xy_line: bool = True) -> None:
     """
+    display_arrays_as_video(
+        ssfs,
+        res_indices,
+        seconds_per_frame = 10,
+        tick_distance = 10,
+        outfile_prefix = '',
+        scale_limits = (0,7),
+        outfile = '',
+        scale_style = 'bellcurve',
+        xy_line = True
+    )
+
     Displays SSF data to output or writes SSF as a PNG
 
     Visualizes the data for an SSF for a trajectory or a single frame.
@@ -122,9 +134,10 @@ def display_arrays_as_video(numpy_arrays: list | typing.ArrayLike, res_indicies:
 
     Parameters
     ----------
-    numpy_arrays : array_like
-        List or array of 2D NumPy arrays.
-    res_indicies : list or str
+    ssfs : array_like
+        List or array of 2D NumPy arrays representing SSFs, 
+        output of ``system_stacking_fingerprints``
+    res_indices : list or str
         The list of residue indices used in the pairwise analysis.
         Parameter `residue_desired` passed to `filter_traj()`
         Accepts smart-indexed str representing a list of residues (e.g '1-5,6,39-48')
@@ -140,8 +153,8 @@ def display_arrays_as_video(numpy_arrays: list | typing.ArrayLike, res_indicies:
         png, pdf, ps, eps, and svg supported.
     scale_limits : tuple, default = (0, 7)
         Limits of the color scale.
-    scale_style : str, default = 'bellcurve'
-        Style of color scale. {bellcurve, gradient}
+    scale_style : {'bellcurve', 'gradient'}, default = 'bellcurve'
+        Style of color scale. 
     xy_line : bool, default = True
         Draw x = y line to separate matrix halves.
 
@@ -170,17 +183,11 @@ def display_arrays_as_video(numpy_arrays: list | typing.ArrayLike, res_indicies:
     >>> trj_sub = trj.atom_slice(trj.top.select(residue_selection_query))
     >>> resSeqs = [res.resSeq for res in trj_sub.topology.residues]
     >>> frames = st.get_residue_distance_for_trajectory(trj_sub, frames_to_include, threads = 5)
-
     Frame 2 done.
-
     Frame 3 done.
-
     Frame 1 done.
-
     Frame 5 done.
-
     Frame 4 done.
-    
     >>> st.display_arrays_as_video([st.get_frame_average(frames)], resSeqs, seconds_per_frame=10)
     # Displays SSF for each frame of this trajectory to standard output
 
@@ -210,8 +217,9 @@ def display_arrays_as_video(numpy_arrays: list | typing.ArrayLike, res_indicies:
         colorbar = fig.colorbar(neg, ax=ax, location='right', anchor=(0, 0.3), shrink=0.7)
         colorbar.ax.set_title('Center of\nGeometry\nDist. (Å)')
 
-        res_indicies = SmartIndexingAction.parse_smart_index(res_indicies)
-        ticks, labels = create_axis_labels(res_indicies, tick_distance)
+        res_indices = SmartIndexingAction.parse_smart_index(res_indices)
+        res_indices = list(res_indices)
+        ticks, labels = create_axis_labels(res_indices, tick_distance)
         plt.xticks(ticks, labels, rotation = 'vertical')
         plt.yticks(ticks, labels)
         ax.tick_params(top=True, bottom=False, labeltop=True, labelbottom=False)

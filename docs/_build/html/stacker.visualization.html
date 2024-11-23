@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css?v=7f9a90b1" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/numpy.css?v=93bf2a1f" />
   
@@ -317,6 +317,7 @@
 </details></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="command_line_options.html">Command Line Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="system_stacking.html">Create System Stacking Fingerprints (SSFs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pairwise_stacking.html">Create Pairwise Stacking Fingerprints (PSFs)</a></li>
 </ul>
@@ -530,7 +531,7 @@ are provided by the other modules.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.visualization.create_axis_labels">
-<span class="sig-name descname"><span class="pre">create_axis_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res_indicies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tick_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/visualization.html#create_axis_labels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.create_axis_labels" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">create_axis_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tick_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/visualization.html#create_axis_labels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.create_axis_labels" title="Link to this definition">#</a></dt>
 <dd><p>Designates the axis labels to use in the SSF plot.</p>
 <p>Helper function for visualizing SSFs.
 Returns the x-axis tick positions and labels to use on the ticks based on the 
@@ -541,7 +542,7 @@ ends of any consecutive residue sequence.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>res_indicies</strong><span class="classifier">list</span></dt><dd><p>The list of residue indices used in the pairwise analysis.
+<dt><strong>res_indices</strong><span class="classifier">list</span></dt><dd><p>The list of residue indices used in the pairwise analysis.
 Parameter <cite>residue_desired</cite> passed to <cite>filter_traj()</cite></p>
 </dd>
 <dt><strong>tick_distance</strong><span class="classifier">int, default = 10</span></dt><dd><p>Distance between ticks in blocks of consecutive residues.</p>
@@ -580,7 +581,7 @@ the positions on the axes to place each label.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.visualization.display_arrays_as_video">
-<span class="sig-name descname"><span class="pre">display_arrays_as_video</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numpy_arrays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_indicies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds_per_frame</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tick_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">7)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bellcurve'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xy_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/visualization.html#display_arrays_as_video"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.display_arrays_as_video" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">display_arrays_as_video</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ssfs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds_per_frame</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tick_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">7)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bellcurve'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xy_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/visualization.html#display_arrays_as_video"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.display_arrays_as_video" title="Link to this definition">#</a></dt>
 <dd><p>Displays SSF data to output or writes SSF as a PNG</p>
 <p>Visualizes the data for an SSF for a trajectory or a single frame.
 Takes an SSF array outputted from <cite>get_residue_distance_for_frame</cite>,
@@ -591,9 +592,10 @@ at i, j in the array.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>numpy_arrays</strong><span class="classifier">array_like</span></dt><dd><p>List or array of 2D NumPy arrays.</p>
+<dt><strong>ssfs</strong><span class="classifier">array_like</span></dt><dd><p>List or array of 2D NumPy arrays representing SSFs, 
+output of <code class="docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></p>
 </dd>
-<dt><strong>res_indicies</strong><span class="classifier">list or str</span></dt><dd><p>The list of residue indices used in the pairwise analysis.
+<dt><strong>res_indices</strong><span class="classifier">list or str</span></dt><dd><p>The list of residue indices used in the pairwise analysis.
 Parameter <cite>residue_desired</cite> passed to <cite>filter_traj()</cite>
 Accepts smart-indexed str representing a list of residues (e.g ‘1-5,6,39-48’)</p>
 </dd>
@@ -609,7 +611,7 @@ png, pdf, ps, eps, and svg supported.</p>
 </dd>
 <dt><strong>scale_limits</strong><span class="classifier">tuple, default = (0, 7)</span></dt><dd><p>Limits of the color scale.</p>
 </dd>
-<dt><strong>scale_style</strong><span class="classifier">str, default = ‘bellcurve’</span></dt><dd><p>Style of color scale. {bellcurve, gradient}</p>
+<dt><strong>scale_style</strong><span class="classifier">{‘bellcurve’, ‘gradient’}, default = ‘bellcurve’</span></dt><dd><p>Style of color scale.</p>
 </dd>
 <dt><strong>xy_line</strong><span class="classifier">bool, default = True</span></dt><dd><p>Draw x = y line to separate matrix halves.</p>
 </dd>
@@ -648,14 +650,12 @@ png, pdf, ps, eps, and svg supported.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">trj_sub</span> <span class="o">=</span> <span class="n">trj</span><span class="o">.</span><span class="n">atom_slice</span><span class="p">(</span><span class="n">trj</span><span class="o">.</span><span class="n">top</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">residue_selection_query</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">resSeqs</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">resSeq</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">trj_sub</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">residues</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">frames</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">get_residue_distance_for_trajectory</span><span class="p">(</span><span class="n">trj_sub</span><span class="p">,</span> <span class="n">frames_to_include</span><span class="p">,</span> <span class="n">threads</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Frame 2 done.</p>
-<p>Frame 3 done.</p>
-<p>Frame 1 done.</p>
-<p>Frame 5 done.</p>
-<p>Frame 4 done.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">display_arrays_as_video</span><span class="p">([</span><span class="n">st</span><span class="o">.</span><span class="n">get_frame_average</span><span class="p">(</span><span class="n">frames</span><span class="p">)],</span> <span class="n">resSeqs</span><span class="p">,</span> <span class="n">seconds_per_frame</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">Frame 2 done.</span>
+<span class="go">Frame 3 done.</span>
+<span class="go">Frame 1 done.</span>
+<span class="go">Frame 5 done.</span>
+<span class="go">Frame 4 done.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">display_arrays_as_video</span><span class="p">([</span><span class="n">st</span><span class="o">.</span><span class="n">get_frame_average</span><span class="p">(</span><span class="n">frames</span><span class="p">)],</span> <span class="n">resSeqs</span><span class="p">,</span> <span class="n">seconds_per_frame</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="go"># Displays SSF for each frame of this trajectory to standard output</span>
 </pre></div>
 </div>
@@ -663,8 +663,21 @@ png, pdf, ps, eps, and svg supported.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.visualization.display_ssfs">
-<span class="sig-name descname"><span class="pre">display_ssfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numpy_arrays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_indicies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds_per_frame</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tick_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">7)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bellcurve'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xy_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/visualization.html#display_ssfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.display_ssfs" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">display_ssfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numpy_arrays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds_per_frame</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tick_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">7)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bellcurve'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xy_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/visualization.html#display_ssfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.display_ssfs" title="Link to this definition">#</a></dt>
 <dd><p>Alias for <cite>display_arrays_as_video()</cite>.</p>
+<dl class="simple">
+<dt>display_arrays_as_video(</dt><dd><p>ssfs,
+res_indices,
+seconds_per_frame = 10,
+tick_distance = 10,
+outfile_prefix = ‘’,
+scale_limits = (0,7),
+outfile = ‘’,
+scale_style = ‘bellcurve’,
+xy_line = True</p>
+</dd>
+</dl>
+<p>)</p>
 <p>Displays SSF data to output or writes SSF as a PNG</p>
 <p>Visualizes the data for an SSF for a trajectory or a single frame.
 Takes an SSF array outputted from <cite>get_residue_distance_for_frame</cite>,
@@ -675,9 +688,10 @@ at i, j in the array.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>numpy_arrays</strong><span class="classifier">array_like</span></dt><dd><p>List or array of 2D NumPy arrays.</p>
+<dt><strong>ssfs</strong><span class="classifier">array_like</span></dt><dd><p>List or array of 2D NumPy arrays representing SSFs, 
+output of <code class="docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></p>
 </dd>
-<dt><strong>res_indicies</strong><span class="classifier">list or str</span></dt><dd><p>The list of residue indices used in the pairwise analysis.
+<dt><strong>res_indices</strong><span class="classifier">list or str</span></dt><dd><p>The list of residue indices used in the pairwise analysis.
 Parameter <cite>residue_desired</cite> passed to <cite>filter_traj()</cite>
 Accepts smart-indexed str representing a list of residues (e.g ‘1-5,6,39-48’)</p>
 </dd>
@@ -693,7 +707,7 @@ png, pdf, ps, eps, and svg supported.</p>
 </dd>
 <dt><strong>scale_limits</strong><span class="classifier">tuple, default = (0, 7)</span></dt><dd><p>Limits of the color scale.</p>
 </dd>
-<dt><strong>scale_style</strong><span class="classifier">str, default = ‘bellcurve’</span></dt><dd><p>Style of color scale. {bellcurve, gradient}</p>
+<dt><strong>scale_style</strong><span class="classifier">{‘bellcurve’, ‘gradient’}, default = ‘bellcurve’</span></dt><dd><p>Style of color scale.</p>
 </dd>
 <dt><strong>xy_line</strong><span class="classifier">bool, default = True</span></dt><dd><p>Draw x = y line to separate matrix halves.</p>
 </dd>
@@ -732,14 +746,12 @@ png, pdf, ps, eps, and svg supported.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">trj_sub</span> <span class="o">=</span> <span class="n">trj</span><span class="o">.</span><span class="n">atom_slice</span><span class="p">(</span><span class="n">trj</span><span class="o">.</span><span class="n">top</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">residue_selection_query</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">resSeqs</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">resSeq</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">trj_sub</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">residues</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">frames</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">get_residue_distance_for_trajectory</span><span class="p">(</span><span class="n">trj_sub</span><span class="p">,</span> <span class="n">frames_to_include</span><span class="p">,</span> <span class="n">threads</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Frame 2 done.</p>
-<p>Frame 3 done.</p>
-<p>Frame 1 done.</p>
-<p>Frame 5 done.</p>
-<p>Frame 4 done.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">display_arrays_as_video</span><span class="p">([</span><span class="n">st</span><span class="o">.</span><span class="n">get_frame_average</span><span class="p">(</span><span class="n">frames</span><span class="p">)],</span> <span class="n">resSeqs</span><span class="p">,</span> <span class="n">seconds_per_frame</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">Frame 2 done.</span>
+<span class="go">Frame 3 done.</span>
+<span class="go">Frame 1 done.</span>
+<span class="go">Frame 5 done.</span>
+<span class="go">Frame 4 done.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">display_arrays_as_video</span><span class="p">([</span><span class="n">st</span><span class="o">.</span><span class="n">get_frame_average</span><span class="p">(</span><span class="n">frames</span><span class="p">)],</span> <span class="n">resSeqs</span><span class="p">,</span> <span class="n">seconds_per_frame</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="go"># Displays SSF for each frame of this trajectory to standard output</span>
 </pre></div>
 </div>
