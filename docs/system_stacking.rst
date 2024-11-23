@@ -232,4 +232,22 @@ Using K Means
 
 You can compare multiple System Stacking Fingerprints via 
 `K-Means <https://scikit-learn.org/1.5/modules/clustering.html#k-means>`_.
-The algorithm takes multiple SSFs with no knowledge of their trajectory 
+The algorithm takes multiple SSFs with no knowledge of their trajectory and
+groups similar SSFs. Thus, the algorithm groups trajectories via similar 
+system-wide stacking. 
+
+With StACKER's :ref:`Command Line Options <command_line_options>`, the ``.txt``
+files below were created using ``stacker -s ssf -d```:
+
+- ``testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz`` : numpy array with 3200 SSFs 
+- ``testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz`` : numpy array with 3200 SSFs 
+
+These files are too large to provide, 
+
+::
+    >>> import stacker as st
+    >>> data_arrays  = kmeans.read_and_preprocess_data(
+    ...     ["testing/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz",
+    ...     "testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz"]
+    ... )
+    >>> blinded_data = create_kmeans_input(data_arrays)

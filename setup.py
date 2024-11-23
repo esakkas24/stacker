@@ -13,9 +13,9 @@ setup(
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/esakkas24/stacker",
-    version="1.0.7",
+    version="1.0.8",
     packages=find_packages(),
-    python_requires=">=3.9",
+    python_requires=">=3.10",
     entry_points={
         'console_scripts': [
             'stacker=stacker.__init__:run_python_command', 

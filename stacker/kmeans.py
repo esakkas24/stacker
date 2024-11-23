@@ -7,6 +7,7 @@ and PCA scatterplots.
 
 """
 
+
 import numpy as np
 from numpy import typing
 import pandas as pd
@@ -23,17 +24,17 @@ import seaborn as sns
 N_RESIDUES = 127
 RANGE_N_CLUSTERS = [2,3,4,5,6,7,8] # Range of n_clusters to try for kmeans
 dataset_names = ['5JUP_N2_tGGG_aCCU_+1GCU', '5JUP_N2_tGGG_aCCU_+1CGU', '5JUP_N2_tUAG_aCUA_+1GCU', '5JUP_N2_tUAG_aCUA_+1CGU', '5JUP_N2_tGGG_aCCC_+1GCU', '5JUP_N2_tGGG_aCCC_+1CGU']  # Add more dataset names as needed
+filepaths = ['5JUP_N2_tGGG_aCCU_+1GCU', '5JUP_N2_tGGG_aCCU_+1CGU', '5JUP_N2_tUAG_aCUA_+1GCU', '5JUP_N2_tUAG_aCUA_+1CGU', '5JUP_N2_tGGG_aCCC_+1GCU', '5JUP_N2_tGGG_aCCC_+1CGU']  # Add more dataset names as needed
 indir = '/home66/esakkas/STACKER/DATA/' # Directory with data.txt output from StACKER (created with -d flag)
 outdir = '/home66/esakkas/STACKER/DATA/' # Outdir for clustering results and kmeans plot
 
 ##################
 
 
-def read_and_preprocess_data(dataset_names, data_path) -> dict:
+def read_and_preprocess_data(dataset_names) -> dict:
     """
     read_and_preprocess_data(
-        (name1, name2, ...), 
-        data_path
+        (file1, file2, ...)
     )
 
     Reads and preprocesses SSF data for K Means analysis per dataset.
@@ -57,12 +58,11 @@ def read_and_preprocess_data(dataset_names, data_path) -> dict:
 
     Parameters
     ----------
-    name1, name2, ... : list of str
-        List of dataset names to read and preprocess.
-    data_path : str
-        path to the directory containing the SSF data
-        outputted from `-s ssf -d output.txt`
-
+    file1, file2, ... : list of str
+        List of filenams to read and preprocess.
+        Outputted from `-s ssf -d output.txt`.
+        Should be in the format {datapath}/{traj_name}.txt.gz
+        
     Returns
     -------
     data_arrays : dict
@@ -75,17 +75,19 @@ def read_and_preprocess_data(dataset_names, data_path) -> dict:
     Examples
     --------
     >>> import stacker as st
-    >>> dataset_names = ['5JUP_N2_tGGG_aCCU_+1GCU', '5JUP_N2_tGGG_aCCU_+1CGU']  # 3200 frames, SSFs of 127 x 127 residues
-    >>> data_path = '/home66/esakkas/STACKER/DATA/'
-    >>> data_arrays = st.read_and_preprocess_data(dataset_names, data_path)
+    >>> dataset_names = ['testing/5JUP_N2_tGGG_aCCU_+1GCU.txt.gz', 'testing/5JUP_N2_tGGG_aCCU_+1CGU.txt.gz']  # 3200 frames, SSFs of 127 x 127 residues
+    >>> data_arrays = st.read_and_preprocess_data(dataset_names)
     >>> print(data_arrays['dataset1'].shape)
     (3200, 16129)
 
     """
     data_arrays = {}
-    for name in dataset_names:
-        print('Reading data:', name)
-        data = np.loadtxt(f'{data_path}{name}_data.txt')
+    for filepath in dataset_names:
+        file = filepath.split('/')[-1]
+        name = file.split('.')[0]
+
+        print('Reading data:', file)
+        data = np.loadtxt(filepath)
         data_arrays[name] = data
     return data_arrays
 
