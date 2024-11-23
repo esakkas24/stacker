@@ -1,0 +1,7 @@
+cluster trj number
+1 5JUP_N2_tGGG_aCCU_+1CGU_data 720
+2 5JUP_N2_tGGG_aCCU_+1CGU_data 0
+3 5JUP_N2_tGGG_aCCU_+1CGU_data 2480
+1 5JUP_N2_tGGG_aCCU_+1GCU_data 0
+2 5JUP_N2_tGGG_aCCU_+1GCU_data 3194
+3 5JUP_N2_tGGG_aCCU_+1GCU_data 6

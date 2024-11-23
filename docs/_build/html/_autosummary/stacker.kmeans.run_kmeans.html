@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/numpy.css?v=93bf2a1f" />
   
@@ -317,6 +317,7 @@
 </details></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../command_line_options.html">Command Line Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../system_stacking.html">Create System Stacking Fingerprints (SSFs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pairwise_stacking.html">Create Pairwise Stacking Fingerprints (PSFs)</a></li>
 </ul>
@@ -490,7 +491,7 @@
 <h1>stacker.kmeans.run_kmeans<a class="headerlink" href="#stacker-kmeans-run-kmeans" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.kmeans.run_kmeans">
-<span class="sig-name descname"><span class="pre">run_kmeans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blinded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_CLUSTERS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#run_kmeans"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.run_kmeans" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">run_kmeans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_arrays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_CLUSTERS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#run_kmeans"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.run_kmeans" title="Link to this definition">#</a></dt>
 <dd><p>Performs KMeans clustering on blinded SSF data and saves the results.</p>
 <p>This function applies the KMeans clustering algorithm to the provided
 blinded SSF data, assigns each frame to a cluster, and counts the number of
@@ -499,8 +500,8 @@ saved to a file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>blinded_data</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
-Output of create_kmeans_input()</p>
+<dt><strong>data_arrays</strong><span class="classifier">dict</span></dt><dd><p>Output of read_and_preprocess_data(). Dictionary where keys are dataset 
+names and values are the processed data arrays.</p>
 </dd>
 <dt><strong>N_CLUSTERS</strong><span class="classifier">int</span></dt><dd><p>The number of clusters to form</p>
 </dd>
@@ -510,7 +511,8 @@ Output of create_kmeans_input()</p>
 </dd>
 <dt><strong>random_state</strong><span class="classifier">int, default=1</span></dt><dd><p>Determines random number generation for centroid initialization.</p>
 </dd>
-<dt><strong>outdir</strong><span class="classifier">str, default=’’</span></dt><dd><p>Directory to save the clustering results.</p>
+<dt><strong>outdir</strong><span class="classifier">str, default=’’</span></dt><dd><p>Directory to save the clustering results.
+If empty, just prints to standard output.</p>
 </dd>
 </dl>
 </dd>

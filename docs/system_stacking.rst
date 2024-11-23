@@ -236,18 +236,125 @@ The algorithm takes multiple SSFs with no knowledge of their trajectory and
 groups similar SSFs. Thus, the algorithm groups trajectories via similar 
 system-wide stacking. 
 
+**Note:** the SSFs must be comparable, meaning an equal amount of residues.
+
 With StACKER's :ref:`Command Line Options <command_line_options>`, the ``.txt``
-files below were created using ``stacker -s ssf -d```:
+files below were created:
 
 - ``testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz`` : numpy array with 3200 SSFs 
 - ``testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz`` : numpy array with 3200 SSFs 
 
-These files are too large to provide, 
+These files are too large to provide, but can be made with ``stacker -s ssf -d``.
 
-::
+.. currentmodule:: stacker.kmeans
+
+The KMeans Data is prepared with :func:`read_and_preprocess_data` and 
+:func:`run_kmeans`::
+
     >>> import stacker as st
-    >>> data_arrays  = kmeans.read_and_preprocess_data(
+    >>> data_arrays  = st.read_and_preprocess_data(
     ...     ["testing/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz",
     ...     "testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz"]
     ... )
-    >>> blinded_data = create_kmeans_input(data_arrays)
+    >>> st.run_kmeans(data_arrays, N_CLUSTERS = 2)
+    (6400, 16129)
+    For n_clusters = 2 The average silhouette_score is : 0.10815289849518733
+    Dataset: 5JUP_N2_tGGG_aCCU_+1CGU_data
+            Cluster 1: 0 matrices
+            Cluster 2: 3200 matrices
+    Dataset: 5JUP_N2_tGGG_aCCU_+1GCU_data
+            Cluster 1: 3120 matrices
+            Cluster 2: 80 matrices
+
+So the SSFs from the two datasets are distinct enough to separate into two clusters.
+We can visualize this with :func:`plot_cluster_trj_data`::
+
+    >>> import stacker as st
+    >>> data_arrays  = st.read_and_preprocess_data(
+    ...     ["testing/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz",
+    ...     "testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz"]
+    ... )
+    >>> st.run_kmeans(data_arrays, N_CLUSTERS = 7, outdir = 'testing/')
+    (6400, 16129)
+    For n_clusters = 7 The average silhouette_score is : 0.09968523895626617
+    Dataset: 5JUP_N2_tGGG_aCCU_+1CGU_data
+            Cluster 1: 560 matrices
+            Cluster 2: 0 matrices
+            Cluster 3: 240 matrices
+            Cluster 4: 0 matrices
+            Cluster 5: 1138 matrices
+            Cluster 6: 2 matrices
+            Cluster 7: 1260 matrices
+    Dataset: 5JUP_N2_tGGG_aCCU_+1GCU_data
+            Cluster 1: 80 matrices
+            Cluster 2: 1057 matrices
+            Cluster 3: 0 matrices
+            Cluster 4: 738 matrices
+            Cluster 5: 0 matrices
+            Cluster 6: 1245 matrices
+            Cluster 7: 80 matrices
+    Results written to: testing/clustering_results_7.txt
+    >>> st.plot_cluster_trj_data("testing/clustering_results_7.txt", "testing/kmeans_plot.png")
+
+.. image:: images/kmeans_plot.png
+
+The SSFs still split into distinct clusters (there is no cluster with a significant 
+contribution from both trajectories), meaning the structures have different pi-stacking.
+
+Picking the Right Number of Clusters
+-------------------------------------
+
+StACKER is equipped to run `Silhouette Analysis <https://scikit-learn.org/1.5/auto_examples/cluster/plot_kmeans_silhouette_analysis.html>`_
+in order to select the correct number of clusters. :func:`plot_silhouette` 
+can create Silhouette Plots::
+
+    >>> import stacker as st
+    >>> data_arrays  = st.read_and_preprocess_data(
+    ...     ["testing/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz",
+    ...     "testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz"]
+    ... )
+    Reading data: 5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz
+    Reading data: 5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz
+    >>> blinded_data = st.create_kmeans_input(data_arrays)
+    (6400, 16129)
+    >>> for n_cluster in range(2,8):
+    ...     st.run_kmeans(data_arrays, N_CLUSTERS = n_cluster, outdir = 'testing/')
+    ...     st.plot_silhouette(n_cluster, blinded_data, outdir = 'testing/')
+    (6400, 16129)
+    For n_clusters = 2 The average silhouette_score is : 0.10815289849518733
+    Dataset: 5JUP_N2_tGGG_aCCU_+1CGU_data
+            Cluster 1: 0 matrices
+            Cluster 2: 3200 matrices
+    Dataset: 5JUP_N2_tGGG_aCCU_+1GCU_data
+            Cluster 1: 3120 matrices
+            Cluster 2: 80 matrices
+    Results written to: ../testing/clustering_results_2.txt
+    File saved to: ../testing/silhouette2.png
+    (6400, 16129)
+    For n_clusters = 3 The average silhouette_score is : 0.11018525011212786
+    Dataset: 5JUP_N2_tGGG_aCCU_+1CGU_data
+            Cluster 1: 720 matrices
+            Cluster 2: 0 matrices
+            Cluster 3: 2480 matrices
+    Dataset: 5JUP_N2_tGGG_aCCU_+1GCU_data
+            Cluster 1: 0 matrices
+            Cluster 2: 3194 matrices
+            Cluster 3: 6 matrices
+    Results written to: ../testing/clustering_results_3.txt
+    File saved to: ../testing/silhouette3.png
+    ...
+
+Silhouette Plots show the distance of all points in a cluster from the cluster's centroid.
+We want plots with clusters of similar size along the y-axis and with most points around the 
+same distance from 0 on the x-axis. A Cluster choice of 6 is appropriate:
+
+``testing/silhouette6.png``
+
+.. image:: images/silhouette6.png
+
+While a cluster choice of 7 is not:
+
+``testing/silhouette7.png``
+
+.. image:: images/silhouette7.png
+

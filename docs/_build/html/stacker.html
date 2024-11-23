@@ -493,10 +493,10 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-stacker.kmeans">stacker.kmeans module</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.read_and_preprocess_data"><code class="docutils literal notranslate"><span class="pre">read_and_preprocess_data()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.create_kmeans_input"><code class="docutils literal notranslate"><span class="pre">create_kmeans_input()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_pca"><code class="docutils literal notranslate"><span class="pre">plot_pca()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.run_kmeans"><code class="docutils literal notranslate"><span class="pre">run_kmeans()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_silhouette"><code class="docutils literal notranslate"><span class="pre">plot_silhouette()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_cluster_trj_data"><code class="docutils literal notranslate"><span class="pre">plot_cluster_trj_data()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_silhouette"><code class="docutils literal notranslate"><span class="pre">plot_silhouette()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_pca"><code class="docutils literal notranslate"><span class="pre">plot_pca()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-stacker.pairwise_distance">stacker.pairwise_distance module</a><ul class="nav section-nav flex-column">
@@ -911,7 +911,7 @@ results and visualize the clusters with barplots, silhouette analysis,
 and PCA scatterplots.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.kmeans.read_and_preprocess_data">
-<span class="sig-name descname"><span class="pre">read_and_preprocess_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">(name1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">...)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#read_and_preprocess_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.read_and_preprocess_data" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">read_and_preprocess_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">(file1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">...)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#read_and_preprocess_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.read_and_preprocess_data" title="Link to this definition">#</a></dt>
 <dd><p>Reads and preprocesses SSF data for K Means analysis per dataset.</p>
 <p>Reads SSF data from txt files for each dataset, decompresses the data, 
 and attaches each Trajectory to its frame-wise SSF results. The values
@@ -932,10 +932,9 @@ SSF of</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>name1, name2, …</strong><span class="classifier">list of str</span></dt><dd><p>List of dataset names to read and preprocess.</p>
-</dd>
-<dt><strong>data_path</strong><span class="classifier">str</span></dt><dd><p>path to the directory containing the SSF data
-outputted from <cite>-s ssf -d output.txt</cite></p>
+<dt><strong>file1, file2, …</strong><span class="classifier">list of str</span></dt><dd><p>List of filenams to read and preprocess.
+Outputted from <cite>-s ssf -d output.txt</cite>.
+Should be in the format {datapath}/{traj_name}.txt.gz</p>
 </dd>
 </dl>
 </dd>
@@ -949,15 +948,14 @@ outputted from <cite>-s ssf -d output.txt</cite></p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a></dt><dd><p>Stacks SSF data into a single 2D Numpy array.</p>
+<dt><a class="reference internal" href="stacker.kmeans.html#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a></dt><dd><p>Stacks SSF data into a single 2D Numpy array.</p>
 </dd>
 </dl>
 </div>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;5JUP_N2_tGGG_aCCU_+1GCU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tGGG_aCCU_+1CGU&#39;</span><span class="p">]</span>  <span class="c1"># 3200 frames, SSFs of 127 x 127 residues</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;/home66/esakkas/STACKER/DATA/&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">read_and_preprocess_data</span><span class="p">(</span><span class="n">dataset_names</span><span class="p">,</span> <span class="n">data_path</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;testing/5JUP_N2_tGGG_aCCU_+1GCU.txt.gz&#39;</span><span class="p">,</span> <span class="s1">&#39;testing/5JUP_N2_tGGG_aCCU_+1CGU.txt.gz&#39;</span><span class="p">]</span>  <span class="c1"># 3200 frames, SSFs of 127 x 127 residues</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">read_and_preprocess_data</span><span class="p">(</span><span class="n">dataset_names</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">[</span><span class="s1">&#39;dataset1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="go">(3200, 16129)</span>
 </pre></div>
@@ -989,7 +987,7 @@ names and values are the processed data arrays.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>Reads and preprocesses data for each dataset</p>
+<dt><a class="reference internal" href="stacker.kmeans.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>Reads and preprocesses data for each dataset</p>
 </dd>
 </dl>
 </div>
@@ -1004,6 +1002,122 @@ names and values are the processed data arrays.</p>
 <span class="go">(6400, 16129)</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.kmeans.run_kmeans">
+<span class="sig-name descname"><span class="pre">run_kmeans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_arrays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_CLUSTERS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#run_kmeans"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.run_kmeans" title="Link to this definition">#</a></dt>
+<dd><p>Performs KMeans clustering on blinded SSF data and saves the results.</p>
+<p>This function applies the KMeans clustering algorithm to the provided
+blinded SSF data, assigns each frame to a cluster, and counts the number of
+frames in each cluster for each dataset. The results are printed and
+saved to a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_arrays</strong><span class="classifier">dict</span></dt><dd><p>Output of read_and_preprocess_data(). Dictionary where keys are dataset 
+names and values are the processed data arrays.</p>
+</dd>
+<dt><strong>N_CLUSTERS</strong><span class="classifier">int</span></dt><dd><p>The number of clusters to form</p>
+</dd>
+<dt><strong>max_iter</strong><span class="classifier">int, default=1000</span></dt><dd><p>Maximum number of iterations of the k-means algorithm for a single run.</p>
+</dd>
+<dt><strong>n_init</strong><span class="classifier">int, default=20</span></dt><dd><p>Number of times the k-means algorithm will be run with different centroid seeds.</p>
+</dd>
+<dt><strong>random_state</strong><span class="classifier">int, default=1</span></dt><dd><p>Determines random number generation for centroid initialization.</p>
+</dd>
+<dt><strong>outdir</strong><span class="classifier">str, default=’’</span></dt><dd><p>Directory to save the clustering results.
+If empty, just prints to standard output.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="stacker.kmeans.html#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a></dt><dd><p>blinds SSF Data for input to K Means</p>
+</dd>
+<dt><a class="reference internal" href="stacker.kmeans.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>reads and preprocesses SSF data for K Means analysis per dataset</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s1">&#39;dataset1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3200</span><span class="p">,</span> <span class="mi">16129</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="s1">&#39;dataset2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3200</span><span class="p">,</span> <span class="mi">16129</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blinded_data</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">run_kmeans</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">,</span> <span class="n">N_CLUSTERS</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">Reading data: dataset1</span>
+<span class="go">Reading data: dataset2</span>
+<span class="go">(6400, 16129)</span>
+<span class="go">{&#39;dataset1&#39;: array([800, 800, 800, 800]), &#39;dataset2&#39;: array([800, 800, 800, 800])}</span>
+<span class="go">Dataset: dataset1</span>
+<span class="go">    Cluster 1: 800 matrices</span>
+<span class="go">    Cluster 2: 800 matrices</span>
+<span class="go">    Cluster 3: 800 matrices</span>
+<span class="go">    Cluster 4: 800 matrices</span>
+<span class="go">Dataset: dataset2</span>
+<span class="go">    Cluster 1: 800 matrices</span>
+<span class="go">    Cluster 2: 800 matrices</span>
+<span class="go">    Cluster 3: 800 matrices</span>
+<span class="go">    Cluster 4: 800 matrices</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.kmeans.plot_cluster_trj_data">
+<span class="sig-name descname"><span class="pre">plot_cluster_trj_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#plot_cluster_trj_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_cluster_trj_data" title="Link to this definition">#</a></dt>
+<dd><p>Plots the output of run_kmeans() to a PNG file.</p>
+<p>Creates a grouped bar plot of the number of frames from each trajectory in each cluster
+following KMeans clustering. Writes the plot output to a PNG file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>input_file</strong><span class="classifier">str</span></dt><dd><p>Path to clustering results written by run_kmeans()</p>
+</dd>
+<dt><strong>outfile</strong><span class="classifier">str</span></dt><dd><p>Filepath where the plot PNG file will be saved.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>This will read the clustering results from ‘clustering_results.txt’,
+create a bar plot, and save it as ‘kmeans_plot.cluster_4.png’ in the 
+specified output directory.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">plot_cluster_trj_data</span><span class="p">(</span><span class="s1">&#39;clustering_results.txt&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;/path/to/output/&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="stacker.kmeans.plot_silhouette">
+<span class="sig-name descname"><span class="pre">plot_silhouette</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#plot_silhouette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_silhouette" title="Link to this definition">#</a></dt>
+<dd><p>Creates Silhouette plots to determine the best number of clusters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>n_clusters</strong><span class="classifier">int, default = 0</span></dt><dd><p>The number of clusters to form.</p>
+</dd>
+<dt><strong>dataset</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
+Output of create_kmeans_input()</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -1036,133 +1150,13 @@ Output of create_kmeans_input()</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a></dt><dd><p>blinds SSF Data for input to K Means</p>
+<dt><a class="reference internal" href="stacker.kmeans.html#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a></dt><dd><p>blinds SSF Data for input to K Means</p>
 </dd>
-<dt><a class="reference internal" href="#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>reads and preprocesses SSF data for K Means analysis per dataset</p>
+<dt><a class="reference internal" href="stacker.kmeans.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>reads and preprocesses SSF data for K Means analysis per dataset</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">sklearn.decomposition.PCA</span></code></dt><dd><p>Runs PCA</p>
 </dd>
 </dl>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="stacker.kmeans.run_kmeans">
-<span class="sig-name descname"><span class="pre">run_kmeans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blinded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_CLUSTERS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#run_kmeans"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.run_kmeans" title="Link to this definition">#</a></dt>
-<dd><p>Performs KMeans clustering on blinded SSF data and saves the results.</p>
-<p>This function applies the KMeans clustering algorithm to the provided
-blinded SSF data, assigns each frame to a cluster, and counts the number of
-frames in each cluster for each dataset. The results are printed and
-saved to a file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>blinded_data</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
-Output of create_kmeans_input()</p>
-</dd>
-<dt><strong>N_CLUSTERS</strong><span class="classifier">int</span></dt><dd><p>The number of clusters to form</p>
-</dd>
-<dt><strong>max_iter</strong><span class="classifier">int, default=1000</span></dt><dd><p>Maximum number of iterations of the k-means algorithm for a single run.</p>
-</dd>
-<dt><strong>n_init</strong><span class="classifier">int, default=20</span></dt><dd><p>Number of times the k-means algorithm will be run with different centroid seeds.</p>
-</dd>
-<dt><strong>random_state</strong><span class="classifier">int, default=1</span></dt><dd><p>Determines random number generation for centroid initialization.</p>
-</dd>
-<dt><strong>outdir</strong><span class="classifier">str, default=’’</span></dt><dd><p>Directory to save the clustering results.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><a class="reference internal" href="#stacker.kmeans.create_kmeans_input" title="stacker.kmeans.create_kmeans_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_kmeans_input</span></code></a></dt><dd><p>blinds SSF Data for input to K Means</p>
-</dd>
-<dt><a class="reference internal" href="#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_preprocess_data</span></code></a></dt><dd><p>reads and preprocesses SSF data for K Means analysis per dataset</p>
-</dd>
-</dl>
-</div>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">... </span>    <span class="s1">&#39;dataset1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3200</span><span class="p">,</span> <span class="mi">16129</span><span class="p">),</span>
-<span class="gp">... </span>    <span class="s1">&#39;dataset2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3200</span><span class="p">,</span> <span class="mi">16129</span><span class="p">)</span>
-<span class="gp">... </span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">blinded_data</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">run_kmeans</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">,</span> <span class="n">N_CLUSTERS</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-<span class="go">Reading data: dataset1</span>
-<span class="go">Reading data: dataset2</span>
-<span class="go">(6400, 16129)</span>
-<span class="go">{&#39;dataset1&#39;: array([800, 800, 800, 800]), &#39;dataset2&#39;: array([800, 800, 800, 800])}</span>
-<span class="go">Dataset: dataset1</span>
-<span class="go">    Cluster 1: 800 matrices</span>
-<span class="go">    Cluster 2: 800 matrices</span>
-<span class="go">    Cluster 3: 800 matrices</span>
-<span class="go">    Cluster 4: 800 matrices</span>
-<span class="go">Dataset: dataset2</span>
-<span class="go">    Cluster 1: 800 matrices</span>
-<span class="go">    Cluster 2: 800 matrices</span>
-<span class="go">    Cluster 3: 800 matrices</span>
-<span class="go">    Cluster 4: 800 matrices</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="stacker.kmeans.plot_silhouette">
-<span class="sig-name descname"><span class="pre">plot_silhouette</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#plot_silhouette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_silhouette" title="Link to this definition">#</a></dt>
-<dd><p>Creates Silhouette plots to determine the best number of clusters</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>n_clusters</strong><span class="classifier">int, default = 0</span></dt><dd><p>The number of clusters to form.</p>
-</dd>
-<dt><strong>dataset</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
-Output of create_kmeans_input()</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="stacker.kmeans.plot_cluster_trj_data">
-<span class="sig-name descname"><span class="pre">plot_cluster_trj_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_cluster</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seeded</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#plot_cluster_trj_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_cluster_trj_data" title="Link to this definition">#</a></dt>
-<dd><p>Plots the output of run_kmeans() to a PNG file.</p>
-<p>Creates a grouped bar plot of the number of frames from each trajectory in each cluster
-following KMeans clustering. Writes the plot output to a PNG file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>input_file</strong><span class="classifier">str</span></dt><dd><p>Path to clustering results written by run_kmeans()</p>
-</dd>
-<dt><strong>n_cluster</strong><span class="classifier">int</span></dt><dd><p>The number of K Means Clusters, given to run_kmeans() as param.</p>
-</dd>
-<dt><strong>outfile</strong><span class="classifier">str</span></dt><dd><p>Filepath where the plot PNG file will be saved.</p>
-</dd>
-<dt><strong>seeded</strong><span class="classifier">bool, default=False</span></dt><dd><p>True if a random seed was assigned during clustering using kseed, False otherwise.
-Used to label plot title, no other impact.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<p>This will read the clustering results from ‘clustering_results.txt’,
-create a bar plot, and save it as ‘kmeans_plot.cluster_4.png’ in the 
-specified output directory.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">plot_cluster_trj_data</span><span class="p">(</span><span class="s1">&#39;clustering_results.txt&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;/path/to/output/&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-</pre></div>
 </div>
 </dd></dl>
 
@@ -1208,7 +1202,7 @@ every other carbon on the 6-carbon ring of the nucleotide base).</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates pairwise distances between all residues in a given frame.</p>
+<dt><a class="reference internal" href="#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates pairwise distances between all residues in a given frame.</p>
 </dd>
 </dl>
 </div>
@@ -1269,7 +1263,7 @@ side. This is the data behind a System Stacking Fingerprint (SSF)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_trajectory" title="stacker.pairwise_distance.get_residue_distance_for_trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory</span></code></a></dt><dd><p>Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory</p>
+<dt><a class="reference internal" href="#stacker.pairwise_distance.get_residue_distance_for_trajectory" title="stacker.pairwise_distance.get_residue_distance_for_trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory</span></code></a></dt><dd><p>Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj</span></code></dt><dd><p>Filters an input trajectory to only the specified atoms and residues</p>
 </dd>
@@ -1329,9 +1323,9 @@ threads &gt; 1.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>Alias for this function</p>
+<dt><a class="reference internal" href="#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>Alias for this function</p>
 </dd>
-<dt><a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p>
+<dt><a class="reference internal" href="#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj</span></code></dt><dd><p>Filters an input trajectory to only the specified atoms and residues</p>
 </dd>
@@ -1394,9 +1388,9 @@ threads &gt; 1.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>Alias for this function</p>
+<dt><a class="reference internal" href="#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>Alias for this function</p>
 </dd>
-<dt><a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p>
+<dt><a class="reference internal" href="#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj</span></code></dt><dd><p>Filters an input trajectory to only the specified atoms and residues</p>
 </dd>
@@ -1445,9 +1439,9 @@ in frames.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_trajectory" title="stacker.pairwise_distance.get_residue_distance_for_trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory</span></code></a></dt><dd><p>Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory</p>
+<dt><a class="reference internal" href="#stacker.pairwise_distance.get_residue_distance_for_trajectory" title="stacker.pairwise_distance.get_residue_distance_for_trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory</span></code></a></dt><dd><p>Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory</p>
 </dd>
-<dt><a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>Alias for get_residue_distance_for_trajectory</p>
+<dt><a class="reference internal" href="#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>Alias for get_residue_distance_for_trajectory</p>
 </dd>
 </dl>
 </div>
@@ -1491,11 +1485,11 @@ with center of geometry distance closest to 3.5Å).</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p>
+<dt><a class="reference internal" href="#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></a></dt><dd><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p>
 </dd>
-<dt><a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_trajectory" title="stacker.pairwise_distance.get_residue_distance_for_trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory</span></code></a></dt><dd><p>Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory</p>
+<dt><a class="reference internal" href="#stacker.pairwise_distance.get_residue_distance_for_trajectory" title="stacker.pairwise_distance.get_residue_distance_for_trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory</span></code></a></dt><dd><p>Calculates System Stacking Fingerprints (SSFs) for all residues across all frames of a trajectory</p>
 </dd>
-<dt><a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>Alias for get_residue_distance_for_trajectory</p>
+<dt><a class="reference internal" href="#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>Alias for get_residue_distance_for_trajectory</p>
 </dd>
 </dl>
 </div>
@@ -1634,11 +1628,11 @@ of a provided <cite>atom_id</cite> in a residue <cite>residue_num</cite> at the 
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="stacker.residue_movement.html#stacker.residue_movement.Base" title="stacker.residue_movement.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code></a></dt><dd><p>Python Class that represents a nucleotide base</p>
+<dt><a class="reference internal" href="#stacker.residue_movement.Base" title="stacker.residue_movement.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code></a></dt><dd><p>Python Class that represents a nucleotide base</p>
 </dd>
-<dt><a class="reference internal" href="stacker.residue_movement.html#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a></dt><dd><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p>
+<dt><a class="reference internal" href="#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a></dt><dd><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p>
 </dd>
-<dt><a class="reference internal" href="stacker.residue_movement.html#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a></dt><dd><p>Combines C2, C4, C6 positions with midpoint positions for a given frame</p>
+<dt><a class="reference internal" href="#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a></dt><dd><p>Combines C2, C4, C6 positions with midpoint positions for a given frame</p>
 </dd>
 </dl>
 </div>
@@ -1685,11 +1679,11 @@ with three points that make up a triangle (like those within a 6-member ring).</
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="stacker.residue_movement.html#stacker.residue_movement.Base" title="stacker.residue_movement.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code></a></dt><dd><p>Python Class that represents a nucleotide base</p>
+<dt><a class="reference internal" href="#stacker.residue_movement.Base" title="stacker.residue_movement.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code></a></dt><dd><p>Python Class that represents a nucleotide base</p>
 </dd>
-<dt><a class="reference internal" href="stacker.residue_movement.html#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a></dt><dd><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p>
+<dt><a class="reference internal" href="#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a></dt><dd><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p>
 </dd>
-<dt><a class="reference internal" href="stacker.residue_movement.html#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a></dt><dd><p>Combines C2, C4, C6 positions with midpoint positions for a given frame</p>
+<dt><a class="reference internal" href="#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a></dt><dd><p>Combines C2, C4, C6 positions with midpoint positions for a given frame</p>
 </dd>
 </dl>
 </div>
@@ -1778,7 +1772,7 @@ of the same residue at that frame.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="stacker.residue_movement.html#stacker.residue_movement.calc_center_3pts" title="stacker.residue_movement.calc_center_3pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_center_3pts</span></code></a></dt><dd><p>Finds the average x, y, z position of three (x, y, z) Vectors</p>
+<dt><a class="reference internal" href="#stacker.residue_movement.calc_center_3pts" title="stacker.residue_movement.calc_center_3pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_center_3pts</span></code></a></dt><dd><p>Finds the average x, y, z position of three (x, y, z) Vectors</p>
 </dd>
 </dl>
 </div>
@@ -2281,7 +2275,7 @@ png, pdf, ps, eps, and svg supported.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="stacker.visualization.html#stacker.visualization.create_axis_labels" title="stacker.visualization.create_axis_labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_axis_labels</span></code></a></dt><dd><p>Designates the axis labels to use in the SSF plot.</p>
+<dt><a class="reference internal" href="#stacker.visualization.create_axis_labels" title="stacker.visualization.create_axis_labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_axis_labels</span></code></a></dt><dd><p>Designates the axis labels to use in the SSF plot.</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></dt><dd><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p>
 </dd>
@@ -2289,7 +2283,7 @@ png, pdf, ps, eps, and svg supported.</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></dt><dd><p>Alias for this <cite>get_residue_distance_for_trajectory</cite></p>
 </dd>
-<dt><a class="reference internal" href="stacker.visualization.html#stacker.visualization.display_ssfs" title="stacker.visualization.display_ssfs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">display_ssfs</span></code></a></dt><dd><p>Alias for this function.</p>
+<dt><a class="reference internal" href="#stacker.visualization.display_ssfs" title="stacker.visualization.display_ssfs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">display_ssfs</span></code></a></dt><dd><p>Alias for this function.</p>
 </dd>
 </dl>
 </div>
@@ -2377,7 +2371,7 @@ png, pdf, ps, eps, and svg supported.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="stacker.visualization.html#stacker.visualization.create_axis_labels" title="stacker.visualization.create_axis_labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_axis_labels</span></code></a></dt><dd><p>Designates the axis labels to use in the SSF plot.</p>
+<dt><a class="reference internal" href="#stacker.visualization.create_axis_labels" title="stacker.visualization.create_axis_labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_axis_labels</span></code></a></dt><dd><p>Designates the axis labels to use in the SSF plot.</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></dt><dd><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p>
 </dd>
@@ -2385,7 +2379,7 @@ png, pdf, ps, eps, and svg supported.</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></dt><dd><p>Alias for this <cite>get_residue_distance_for_trajectory</cite></p>
 </dd>
-<dt><a class="reference internal" href="stacker.visualization.html#stacker.visualization.display_ssfs" title="stacker.visualization.display_ssfs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">display_ssfs</span></code></a></dt><dd><p>Alias for this function.</p>
+<dt><a class="reference internal" href="#stacker.visualization.display_ssfs" title="stacker.visualization.display_ssfs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">display_ssfs</span></code></a></dt><dd><p>Alias for this function.</p>
 </dd>
 </dl>
 </div>
@@ -2936,7 +2930,7 @@ $ stacker -s ssf
     -fl 1-2 
     -g 10 
     -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png 
-    -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
+    -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt.gz
 </pre></div>
 </div>
 </dd></dl>
@@ -3314,10 +3308,10 @@ set self.__traceback__ to tb and return self.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-stacker.kmeans">stacker.kmeans module</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.read_and_preprocess_data"><code class="docutils literal notranslate"><span class="pre">read_and_preprocess_data()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.create_kmeans_input"><code class="docutils literal notranslate"><span class="pre">create_kmeans_input()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_pca"><code class="docutils literal notranslate"><span class="pre">plot_pca()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.run_kmeans"><code class="docutils literal notranslate"><span class="pre">run_kmeans()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_silhouette"><code class="docutils literal notranslate"><span class="pre">plot_silhouette()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_cluster_trj_data"><code class="docutils literal notranslate"><span class="pre">plot_cluster_trj_data()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_silhouette"><code class="docutils literal notranslate"><span class="pre">plot_silhouette()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.kmeans.plot_pca"><code class="docutils literal notranslate"><span class="pre">plot_pca()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-stacker.pairwise_distance">stacker.pairwise_distance module</a><ul class="nav section-nav flex-column">

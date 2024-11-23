@@ -481,6 +481,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-average-ssf-for-a-trajectory">Get the Average SSF for a Trajectory</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-visualize-an-ssf">How to Visualize an SSF</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-analyze-an-ssf">How to Analyze an SSF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-k-means">Using K Means</a></li>
 </ul>
             </nav>
         </div>
@@ -533,7 +534,7 @@ We filter this trajectory to the pi-stacking residue pair.</p>
 <section id="calculate-distance-between-residues">
 <h2>Calculate Distance Between Residues<a class="headerlink" href="#calculate-distance-between-residues" title="Link to this heading">#</a></h2>
 <p>Immediately, we can check if a residue pair is pi-stacking in a given frame. We calculate
-the distance between the COG of two residues using <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.calculate_residue_distance" title="stacker.pairwise_distance.calculate_residue_distance"><code class="xref py py-func docutils literal notranslate"><span class="pre">calculate_residue_distance()</span></code></a>.
+the distance between the COG of two residues using <a class="reference internal" href="stacker.html#stacker.pairwise_distance.calculate_residue_distance" title="stacker.pairwise_distance.calculate_residue_distance"><code class="xref py py-func docutils literal notranslate"><span class="pre">calculate_residue_distance()</span></code></a>.
 COG distance close to 3.5 Å indicates pi-stacking. For instance, the A-site mRNA codons
 (residues 422, 423, and 424) are likely pi-stacking:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">distance_vec</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">calculate_residue_distance</span><span class="p">(</span>
@@ -551,7 +552,7 @@ COG distance close to 3.5 Å indicates pi-stacking. For instance, the A-site mRN
 <h2>Create a System Stacking Fingerprint (SSF)<a class="headerlink" href="#create-a-system-stacking-fingerprint-ssf" title="Link to this heading">#</a></h2>
 <p>An SSF calculates the COG distance for all nucleotide pairs in a trajectory frame.
 The result is a square matrix where position (i, j) represents the distance
-from residue i to residue j. This is done with <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_residue_distance_for_frame()</span></code></a></p>
+from residue i to residue j. This is done with <a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_residue_distance_for_frame()</span></code></a></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">filtered_traj</span></code> object has 252 residues, so we create a 252 x 252 SSF:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ssf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">get_residue_distance_for_frame</span><span class="p">(</span><span class="n">filtered_traj</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">write_output</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="go">Loading: [####################################################################################################] Current Residue: 252/252 (100.0%)</span>
@@ -560,7 +561,7 @@ from residue i to residue j. This is done with <a class="reference internal" hre
 <span class="go">(252, 252)</span>
 </pre></div>
 </div>
-<p>We can calculate the SSF for multiple frames of a trajectory using <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-func docutils literal notranslate"><span class="pre">system_stacking_fingerprints()</span></code></a>, which
+<p>We can calculate the SSF for multiple frames of a trajectory using <a class="reference internal" href="stacker.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-func docutils literal notranslate"><span class="pre">system_stacking_fingerprints()</span></code></a>, which
 accepts smart indexing of frames (eg. 1-3,15-17 = 1,2,3,15,16,17):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ssfs</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">system_stacking_fingerprints</span><span class="p">(</span><span class="n">filtered_traj</span><span class="p">,</span> <span class="n">frames</span> <span class="o">=</span> <span class="s1">&#39;1-3&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ssfs</span><span class="o">.</span><span class="n">shape</span>
@@ -585,8 +586,8 @@ frames at once. When parralelizing, turn off standard output with <code class="d
 <section id="get-the-average-ssf-for-a-trajectory">
 <h2>Get the Average SSF for a Trajectory<a class="headerlink" href="#get-the-average-ssf-for-a-trajectory" title="Link to this heading">#</a></h2>
 <p>Single-frame SSFs are rarely as illuminating as the average SSF for all frames
-of a trajectory. Users can create this using <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_frame_average" title="stacker.pairwise_distance.get_frame_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_frame_average()</span></code></a>, using the
-output from <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-func docutils literal notranslate"><span class="pre">system_stacking_fingerprints()</span></code></a> in the step above:</p>
+of a trajectory. Users can create this using <a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_frame_average" title="stacker.pairwise_distance.get_frame_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_frame_average()</span></code></a>, using the
+output from <a class="reference internal" href="stacker.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-func docutils literal notranslate"><span class="pre">system_stacking_fingerprints()</span></code></a> in the step above:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ssfs</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">system_stacking_fingerprints</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">filtered_traj</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">frames</span> <span class="o">=</span> <span class="s1">&#39;1-10&#39;</span><span class="p">,</span>
@@ -603,7 +604,7 @@ The next step shows how to analyze these results.</p>
 </section>
 <section id="how-to-visualize-an-ssf">
 <h2>How to Visualize an SSF<a class="headerlink" href="#how-to-visualize-an-ssf" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="stacker.visualization.html#stacker.visualization.display_ssfs" title="stacker.visualization.display_ssfs"><code class="xref py py-func docutils literal notranslate"><span class="pre">display_ssfs()</span></code></a> will visualize SSFs in Python output, with each SSF frame
+<p><a class="reference internal" href="stacker.html#stacker.visualization.display_ssfs" title="stacker.visualization.display_ssfs"><code class="xref py py-func docutils literal notranslate"><span class="pre">display_ssfs()</span></code></a> will visualize SSFs in Python output, with each SSF frame
 as a frame of the video:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s2">&quot;first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&quot;</span><span class="p">,</span>
@@ -628,7 +629,7 @@ as a frame of the video:</p>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
-<p>It is recommended to run <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_frame_average" title="stacker.pairwise_distance.get_frame_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_frame_average()</span></code></a> and then save the output
+<p>It is recommended to run <a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_frame_average" title="stacker.pairwise_distance.get_frame_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_frame_average()</span></code></a> and then save the output
 as a <code class="docutils literal notranslate"><span class="pre">.png</span></code> for comparison with other trajectories:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s2">&quot;first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&quot;</span><span class="p">,</span>
@@ -665,7 +666,7 @@ with <code class="docutils literal notranslate"><span class="pre">stacker</span>
 </section>
 <section id="how-to-analyze-an-ssf">
 <h2>How to Analyze an SSF<a class="headerlink" href="#how-to-analyze-an-ssf" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a> will give the stacking pairs with the most
+<p><a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a> will give the stacking pairs with the most
 pi-stacking (ie. closest to 3.5Å):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">get_top_stacking</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">filtered_traj</span><span class="p">,</span>
@@ -678,8 +679,8 @@ pi-stacking (ie. closest to 3.5Å):</p>
 <span class="go">93      130     3.68</span>
 </pre></div>
 </div>
-<p>It is recommended to save the output to a <code class="docutils literal notranslate"><span class="pre">csv</span></code> and the other parameters
-for <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a> to prepare for future analyses using the
+<p>It is recommended to save the output to a <code class="docutils literal notranslate"><span class="pre">csv</span></code> and use the other parameters
+for <a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a> to prepare for future analyses using the
 <a class="reference internal" href="command_line_options.html#command-line-options"><span class="std std-ref">Command Line Options</span></a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">get_top_stacking</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">filtered_traj</span><span class="p">,</span>
@@ -692,8 +693,75 @@ for <a class="reference internal" href="stacker.pairwise_distance.html#stacker.p
 </div>
 <p>In the command line, <code class="docutils literal notranslate"><span class="pre">[user]$</span> <span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">compare</span></code> can give the residue
 pairs that changed the most between trajectories, by inputting two <code class="docutils literal notranslate"><span class="pre">csv</span></code>
-outputs from <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a>. Use <code class="docutils literal notranslate"><span class="pre">[user]$</span> <span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">compare</span> <span class="pre">--help</span></code>
+outputs from <a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a>. Use <code class="docutils literal notranslate"><span class="pre">[user]$</span> <span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">compare</span> <span class="pre">--help</span></code>
 for more information.</p>
+</section>
+<section id="using-k-means">
+<h2>Using K Means<a class="headerlink" href="#using-k-means" title="Link to this heading">#</a></h2>
+<p>You can compare multiple System Stacking Fingerprints via
+<a class="reference external" href="https://scikit-learn.org/1.5/modules/clustering.html#k-means">K-Means</a>.
+The algorithm takes multiple SSFs with no knowledge of their trajectory and
+groups similar SSFs. Thus, the algorithm groups trajectories via similar
+system-wide stacking.</p>
+<p><strong>Note:</strong> the SSFs must be comparable, meaning an equal amount of residues.</p>
+<p>With StACKER’s <a class="reference internal" href="command_line_options.html#command-line-options"><span class="std std-ref">Command Line Options</span></a>, the <code class="docutils literal notranslate"><span class="pre">.txt</span></code>
+files below were created:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz</span></code> : numpy array with 3200 SSFs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz</span></code> : numpy array with 3200 SSFs</p></li>
+</ul>
+<p>These files are too large to provide, but can be made with <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">ssf</span> <span class="pre">-d</span></code>.</p>
+<p>The KMeans Data is prepared with <a class="reference internal" href="stacker.kmeans.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_and_preprocess_data()</span></code></a> and
+<a class="reference internal" href="stacker.kmeans.html#stacker.kmeans.run_kmeans" title="stacker.kmeans.run_kmeans"><code class="xref py py-func docutils literal notranslate"><span class="pre">run_kmeans()</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span>  <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">read_and_preprocess_data</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s2">&quot;testing/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz&quot;</span><span class="p">]</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">run_kmeans</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">,</span> <span class="n">N_CLUSTERS</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">(6400, 16129)</span>
+<span class="go">For n_clusters = 2 The average silhouette_score is : 0.10815289849518733</span>
+<span class="go">Dataset: 5JUP_N2_tGGG_aCCU_+1CGU_data</span>
+<span class="go">        Cluster 1: 0 matrices</span>
+<span class="go">        Cluster 2: 3200 matrices</span>
+<span class="go">Dataset: 5JUP_N2_tGGG_aCCU_+1GCU_data</span>
+<span class="go">        Cluster 1: 3120 matrices</span>
+<span class="go">        Cluster 2: 80 matrices</span>
+</pre></div>
+</div>
+<p>So the SSFs from the two datasets are distinct enough to separate into two clusters.
+We can visualize this with <a class="reference internal" href="stacker.kmeans.html#stacker.kmeans.plot_cluster_trj_data" title="stacker.kmeans.plot_cluster_trj_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">plot_cluster_trj_data()</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span>  <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">read_and_preprocess_data</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s2">&quot;testing/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz&quot;</span><span class="p">]</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">run_kmeans</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">,</span> <span class="n">N_CLUSTERS</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="n">outdir</span> <span class="o">=</span> <span class="s1">&#39;testing/&#39;</span><span class="p">)</span>
+<span class="go">(6400, 16129)</span>
+<span class="go">For n_clusters = 7 The average silhouette_score is : 0.09968523895626617</span>
+<span class="go">Dataset: 5JUP_N2_tGGG_aCCU_+1CGU_data</span>
+<span class="go">        Cluster 1: 560 matrices</span>
+<span class="go">        Cluster 2: 0 matrices</span>
+<span class="go">        Cluster 3: 240 matrices</span>
+<span class="go">        Cluster 4: 0 matrices</span>
+<span class="go">        Cluster 5: 1138 matrices</span>
+<span class="go">        Cluster 6: 2 matrices</span>
+<span class="go">        Cluster 7: 1260 matrices</span>
+<span class="go">Dataset: 5JUP_N2_tGGG_aCCU_+1GCU_data</span>
+<span class="go">        Cluster 1: 80 matrices</span>
+<span class="go">        Cluster 2: 1057 matrices</span>
+<span class="go">        Cluster 3: 0 matrices</span>
+<span class="go">        Cluster 4: 738 matrices</span>
+<span class="go">        Cluster 5: 0 matrices</span>
+<span class="go">        Cluster 6: 1245 matrices</span>
+<span class="go">        Cluster 7: 80 matrices</span>
+<span class="go">Results written to: testing/clustering_results_7.txt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">plot_cluster_trj_data</span><span class="p">(</span><span class="s2">&quot;testing/clustering_results_7.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;testing/kmeans_plot.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/kmeans_plot.png" src="_images/kmeans_plot.png" />
+<p>The SSFs still split into distinct clusters (there is no cluster with a significant
+contribution from both trajectories), meaning the structures have different pi-stacking.</p>
 </section>
 </section>
 
@@ -749,6 +817,7 @@ for more information.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-average-ssf-for-a-trajectory">Get the Average SSF for a Trajectory</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-visualize-an-ssf">How to Visualize an SSF</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-analyze-an-ssf">How to Analyze an SSF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-k-means">Using K Means</a></li>
 </ul>
   </nav></div>
 
