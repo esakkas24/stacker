@@ -229,3 +229,7 @@ for more information.
 
 Using K Means
 -------------
+
+You can compare multiple System Stacking Fingerprints via 
+`K-Means <https://scikit-learn.org/1.5/modules/clustering.html#k-means>`_.
+The algorithm takes multiple SSFs with no knowledge of their trajectory 

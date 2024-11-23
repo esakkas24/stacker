@@ -15,7 +15,7 @@ setup(
     url="https://github.com/esakkas24/stacker",
     version="1.0.7",
     packages=find_packages(),
-    python_requires=">=3.10",
+    python_requires=">=3.9",
     entry_points={
         'console_scripts': [
             'stacker=stacker.__init__:run_python_command', 
