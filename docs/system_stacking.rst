@@ -361,8 +361,8 @@ While a cluster choice of 7 is not:
 Principal Component Analysis
 -----------------------------
 
-KMeans on SSF is gathering Euclidean Distance on multi-dimensional vectors that are
-impossible to plot. We can however, do a heuristic plotting of these SSFs using
+KMeans on SSF gathers Euclidean Distance on multi-dimensional vectors that are
+impossible to plot. We can, however, do a heuristic plotting of these SSFs using
 `Principal Component Analysis (PCA) <https://scikit-learn.org/1.5/modules/decomposition.html#pca>`_.
 
 First, we can plot the un-blinded SSFs and color them by their trajectory of origin. 
@@ -370,12 +370,61 @@ We have 3200 frames worth of SSFs for each trajectory, and we plot them using
 :func:`plot_pca`::
 
     >>> import stacker as st
-    >>> data_arrays  = st.read_and_preprocess_data(
-    ...     ["testing/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz",
+    >>> dataset_names = ["testing/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz",
     ...     "testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz"]
+    >>> data_arrays  = st.read_and_preprocess_data(
+    ...     dataset_names
     ... )
     Reading data: 5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz
     Reading data: 5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz
     >>> blinded_data = st.create_kmeans_input(data_arrays)
     (6400, 16129)
-    
+    >>> st.plot_pca(blinded_data, dataset_names, 'dataset')
+
+This creates a PCA plot where each point is a frame of a trajectory,
+plotted using the information solely from the SSF. The points are colored
+by the trajectory ``dataset`` of origin. This outputs to a ``.png``:
+
+.. image:: images/pca_plot.by_dataset.png
+
+Here the SSFs from the two datasets separate cleanly, indicating
+significantly different system-wide stacking. The PCA Plots can 
+also be colored by ``kmeans`` result. Here, the frames are colored by 
+their KMeans result with 6 clusters::
+
+    >>> import stacker as st
+    >>> data_arrays  = st.read_and_preprocess_data(
+    ...     ["testing/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz",
+    ...     "testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz"]
+    ...     )
+    Reading data: 5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz
+    Reading data: 5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz
+    >>> blinded_data = st.create_kmeans_input(data_arrays)
+    (6400, 16129)
+    >>> kmeans_results = st.run_kmeans(data_arrays, N_CLUSTERS=6)
+    (6400, 16129)
+    For n_clusters = 6 The average silhouette_score is : 0.09343055568735036
+    Dataset: 5JUP_N2_tGGG_aCCU_+1CGU_data
+            Cluster 1: 0 matrices
+            Cluster 2: 0 matrices
+            Cluster 3: 1459 matrices
+            Cluster 4: 4 matrices
+            Cluster 5: 1017 matrices
+            Cluster 6: 720 matrices
+    Dataset: 5JUP_N2_tGGG_aCCU_+1GCU_data
+            Cluster 1: 1179 matrices
+            Cluster 2: 824 matrices
+            Cluster 3: 0 matrices
+            Cluster 4: 1197 matrices
+            Cluster 5: 0 matrices
+            Cluster 6: 0 matrices
+    >>> st.plot_pca(blinded_data, dataset_names, coloring = 'kmeans', cluster_labels=kmeans_results)
+
+.. image:: images/pca_plot6by_cluster.png
+
+Each trajectory has three clusters, with no cluster capturing significant
+frames from both trajectories.
+
+Finally, they can be colored by dataset but use ``facet`` to show each 
+dataset's points on a separate PCA Grid. This helps with viewing multiple 
+datasets.

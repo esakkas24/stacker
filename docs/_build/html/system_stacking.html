@@ -483,6 +483,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-analyze-an-ssf">How to Analyze an SSF</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-k-means">Using K Means</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#picking-the-right-number-of-clusters">Picking the Right Number of Clusters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis">Principal Component Analysis</a></li>
 </ul>
             </nav>
         </div>
@@ -815,6 +816,32 @@ same distance from 0 on the x-axis. A Cluster choice of 6 is appropriate:</p>
 <p><code class="docutils literal notranslate"><span class="pre">testing/silhouette7.png</span></code></p>
 <img alt="_images/silhouette7.png" src="_images/silhouette7.png" />
 </section>
+<section id="principal-component-analysis">
+<h2>Principal Component Analysis<a class="headerlink" href="#principal-component-analysis" title="Link to this heading">#</a></h2>
+<p>KMeans on SSF is gathering Euclidean Distance on multi-dimensional vectors that are
+impossible to plot. We can however, do a heuristic plotting of these SSFs using
+<a class="reference external" href="https://scikit-learn.org/1.5/modules/decomposition.html#pca">Principal Component Analysis (PCA)</a>.</p>
+<p>First, we can plot the un-blinded SSFs and color them by their trajectory of origin.
+We have 3200 frames worth of SSFs for each trajectory, and we plot them using
+<a class="reference internal" href="stacker.kmeans.html#stacker.kmeans.plot_pca" title="stacker.kmeans.plot_pca"><code class="xref py py-func docutils literal notranslate"><span class="pre">plot_pca()</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;testing/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span>  <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">read_and_preprocess_data</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">dataset_names</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="go">Reading data: 5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz</span>
+<span class="go">Reading data: 5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blinded_data</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
+<span class="go">(6400, 16129)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">plot_pca</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">,</span> <span class="n">dataset_names</span><span class="p">,</span> <span class="s1">&#39;dataset&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This creates a PCA plot where each point is a frame of a trajectory,
+plotted using the information solely from the SSF. The points are colored
+by the trajectory of origin. This outputs to a <code class="docutils literal notranslate"><span class="pre">.png</span></code>:</p>
+<img alt="_images/pca_plot.by_dataset.png" src="_images/pca_plot.by_dataset.png" />
+</section>
 </section>
 
 
@@ -871,6 +898,7 @@ same distance from 0 on the x-axis. A Cluster choice of 6 is appropriate:</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-analyze-an-ssf">How to Analyze an SSF</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-k-means">Using K Means</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#picking-the-right-number-of-clusters">Picking the Right Number of Clusters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis">Principal Component Analysis</a></li>
 </ul>
   </nav></div>
 

@@ -132,7 +132,7 @@ def create_kmeans_input(data_arrays: dict) -> typing.ArrayLike:
 
 
 def run_kmeans(data_arrays : dict, N_CLUSTERS: int,
-               max_iter: int = 1000, n_init: int = 20, random_state: int = 1, outdir: str = '') -> None :
+               max_iter: int = 1000, n_init: int = 20, random_state: int = 1, outdir: str = '') -> np.ndarray :
     """
     Performs KMeans clustering on blinded SSF data and saves the results.
 
@@ -160,7 +160,8 @@ def run_kmeans(data_arrays : dict, N_CLUSTERS: int,
 
     Returns
     -------
-    None
+    np.ndarray
+        The labels of the clusters for each frame.
 
     See Also
     --------
@@ -237,6 +238,7 @@ def run_kmeans(data_arrays : dict, N_CLUSTERS: int,
         outfile.close()
         print(f"Results written to: {outfile_path}")
 
+    return blindframes_labelled_by_cluster
 
 def plot_cluster_trj_data(input_file: str, outfile: str) -> None:
     """
@@ -347,9 +349,8 @@ def plot_silhouette(n_clusters : int, dataset : typing.ArrayLike, outdir : str =
     print(f"File saved to: {plot_outpath}")
     plt.close()
 
-
-def plot_pca(blinded_data : typing.ArrayLike, dataset_names : list,  n_clusters : int = 0, 
-             coloring : str = 'dataset', outdir : str = '') -> None:
+def plot_pca(blinded_data : typing.ArrayLike, dataset_names : list,
+             coloring : str = 'dataset', outdir : str = '', cluster_labels: np.ndarray = None) -> None:
     '''
     Creates PCA Plot to compare systems in 2D 
 
@@ -365,8 +366,6 @@ def plot_pca(blinded_data : typing.ArrayLike, dataset_names : list,  n_clusters 
         List of filenams to read and preprocess.
         Outputted from `stacker -s ssf -d output.txt.gz`.
         Should be in the format {datapath}/{traj_name}.txt.gz
-    n_clusters : int, default = 0
-        The number of clusters to form.
     coloring : {'dataset', 'kmeans', 'facet'}
         Method to color the points on the scatterplot. Options:
         - dataset:  Plot all points on the same scatterplot and color by dataset of origin.
@@ -374,6 +373,9 @@ def plot_pca(blinded_data : typing.ArrayLike, dataset_names : list,  n_clusters 
         - facet: Same as dataset but plot each dataset on a different coordinate grid.
     outdir : str, default=''
         Directory to save the clustering results.
+    cluster_labels : np.ndarray, optional
+        The labels of the clusters for each frame, output from run_kmeans.
+        Used if coloring = "kmeans" to color points by cluster
         
     Returns
     -------
@@ -425,20 +427,21 @@ def plot_pca(blinded_data : typing.ArrayLike, dataset_names : list,  n_clusters 
         outfile = f"{outdir}pca_plot.by_dataset.png"
         plt.savefig(outfile)
         plt.close()
-    else:
-        kmeans = KMeans(n_clusters=n_clusters, random_state=1)
-        cluster_labels = kmeans.fit_predict(data_reduced)
+    elif coloring == "kmeans" and cluster_labels is not None:
         df['Color'] = cluster_labels
-
         plt.figure(figsize=(10, 7))
         scatter = plt.scatter(df['Principal Component 1'], df['Principal Component 2'], c=df['Color'], cmap='viridis', s=10)
         plt.title('PCA-reduced data with KMeans clustering')
         plt.xlabel('Principal Component 1')
         plt.ylabel('Principal Component 2')
         plt.colorbar(scatter, label='Cluster Label')
+        n_clusters = np.unique(cluster_labels).size
         outfile = f"{outdir}pca_plot{n_clusters}by_cluster.png"
         plt.savefig(outfile)
         plt.close()
+    else:
+        print(f"{coloring} not a supported coloring")
+        return None
 
 if __name__ == "__main__":
     data_arrays = read_and_preprocess_data(dataset_names)

@@ -1124,7 +1124,7 @@ Output of create_kmeans_input()</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.kmeans.plot_pca">
-<span class="sig-name descname"><span class="pre">plot_pca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blinded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coloring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dataset'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#plot_pca"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_pca" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">plot_pca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blinded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coloring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dataset'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/kmeans.html#plot_pca"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_pca" title="Link to this definition">#</a></dt>
 <dd><p>Creates PCA Plot to compare systems in 2D</p>
 <p>Creates a PCA plot that can be colored by the KMeans clustering result
 or by dataset. Compares SSFs similarly to K Means.</p>
@@ -1134,12 +1134,18 @@ or by dataset. Compares SSFs similarly to K Means.</p>
 <dt><strong>blinded_data</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
 Output of create_kmeans_input()</p>
 </dd>
+<dt><strong>dataset_names</strong><span class="classifier">list of str</span></dt><dd><p>List of filenams to read and preprocess.
+Outputted from <cite>stacker -s ssf -d output.txt.gz</cite>.
+Should be in the format {datapath}/{traj_name}.txt.gz</p>
+</dd>
 <dt><strong>n_clusters</strong><span class="classifier">int, default = 0</span></dt><dd><p>The number of clusters to form.</p>
 </dd>
 <dt><strong>coloring</strong><span class="classifier">{‘dataset’, ‘kmeans’, ‘facet’}</span></dt><dd><p>Method to color the points on the scatterplot. Options:
 - dataset:  Plot all points on the same scatterplot and color by dataset of origin.
 - kmeans: Plot all points on the same scatterplot and color by KMeans Cluster with n_clusters
 - facet: Same as dataset but plot each dataset on a different coordinate grid.</p>
+</dd>
+<dt><strong>outdir</strong><span class="classifier">str, default=’’</span></dt><dd><p>Directory to save the clustering results.</p>
 </dd>
 </dl>
 </dd>

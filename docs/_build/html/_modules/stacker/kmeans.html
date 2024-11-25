@@ -796,7 +796,8 @@
 
 <div class="viewcode-block" id="plot_pca">
 <a class="viewcode-back" href="../../stacker.kmeans.html#stacker.kmeans.plot_pca">[docs]</a>
-<span class="k">def</span> <span class="nf">plot_pca</span><span class="p">(</span><span class="n">blinded_data</span> <span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="n">n_clusters</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">coloring</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;dataset&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">plot_pca</span><span class="p">(</span><span class="n">blinded_data</span> <span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="n">dataset_names</span> <span class="p">:</span> <span class="nb">list</span><span class="p">,</span>  <span class="n">n_clusters</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
+             <span class="n">coloring</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;dataset&#39;</span><span class="p">,</span> <span class="n">outdir</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Creates PCA Plot to compare systems in 2D </span>
 
@@ -808,6 +809,10 @@
 <span class="sd">    blinded_data : np.typing.ArrayLike</span>
 <span class="sd">        A 2D numpy array containing all frames stacked together.</span>
 <span class="sd">        Output of create_kmeans_input()</span>
+<span class="sd">    dataset_names : list of str</span>
+<span class="sd">        List of filenams to read and preprocess.</span>
+<span class="sd">        Outputted from `stacker -s ssf -d output.txt.gz`.</span>
+<span class="sd">        Should be in the format {datapath}/{traj_name}.txt.gz</span>
 <span class="sd">    n_clusters : int, default = 0</span>
 <span class="sd">        The number of clusters to form.</span>
 <span class="sd">    coloring : {&#39;dataset&#39;, &#39;kmeans&#39;, &#39;facet&#39;}</span>
@@ -815,7 +820,9 @@
 <span class="sd">        - dataset:  Plot all points on the same scatterplot and color by dataset of origin.</span>
 <span class="sd">        - kmeans: Plot all points on the same scatterplot and color by KMeans Cluster with n_clusters</span>
 <span class="sd">        - facet: Same as dataset but plot each dataset on a different coordinate grid.</span>
-
+<span class="sd">    outdir : str, default=&#39;&#39;</span>
+<span class="sd">        Directory to save the clustering results.</span>
+<span class="sd">        </span>
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    None</span>
@@ -827,13 +834,18 @@
 <span class="sd">    sklearn.decomposition.PCA : Runs PCA</span>
 <span class="sd">    </span>
 <span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">outdir</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">outdir</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">):</span>
+        <span class="n">outdir</span> <span class="o">+=</span> <span class="s1">&#39;/&#39;</span>
+
+    <span class="n">dataset_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">filepath</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">filepath</span> <span class="ow">in</span> <span class="n">dataset_names</span><span class="p">]</span>
+
     <span class="n">n_datasets</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset_names</span><span class="p">)</span>
     <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">data_reduced</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">)</span>
-    <span class="n">colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">data_reduced</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;U15&quot;</span><span class="p">)</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">section_size</span> <span class="o">=</span> <span class="n">data_reduced</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="n">n_datasets</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_datasets</span><span class="p">):</span>
-        <span class="n">colors</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">section_size</span><span class="p">:(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">section_size</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataset_names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">colors</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">dataset_names</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">*</span> <span class="n">section_size</span><span class="p">)</span>
 
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
         <span class="s1">&#39;Principal Component 1&#39;</span><span class="p">:</span> <span class="n">data_reduced</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
@@ -878,7 +890,7 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">data_arrays</span> <span class="o">=</span> <span class="n">read_and_preprocess_data</span><span class="p">(</span><span class="n">dataset_names</span><span class="p">,</span> <span class="n">indir</span><span class="p">,</span> <span class="n">N_RESIDUES</span><span class="p">)</span>
+    <span class="n">data_arrays</span> <span class="o">=</span> <span class="n">read_and_preprocess_data</span><span class="p">(</span><span class="n">dataset_names</span><span class="p">)</span>
     <span class="n">blinded_data</span> <span class="o">=</span> <span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
     <span class="n">plot_pca</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">,</span> <span class="s1">&#39;dataset&#39;</span><span class="p">)</span>
     <span class="n">plot_pca</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">,</span> <span class="s1">&#39;facet&#39;</span><span class="p">)</span>
