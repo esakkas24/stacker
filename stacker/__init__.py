@@ -14,6 +14,7 @@ import sys, os
 import numpy as np
 import pandas as pd
 import random
+import math
 
 def run_python_command() -> None:
     '''Reads the user's passed in command line and runs the command
@@ -542,7 +543,7 @@ def system_routine() -> None:
     if args.input:
         print("Loaded fingerprint data from:", args.input)
         loaded_arr = np.loadtxt(args.input)
-        frames = loaded_arr.reshape(loaded_arr.shape[0], loaded_arr.shape[1] // trj_sub.n_residues, trj_sub.n_residues)
+        frames = loaded_arr.reshape(loaded_arr.shape[0], math.isqrt(loaded_arr.shape[1]), math.isqrt(loaded_arr.shape[1]))
     elif args.frame_list:
         frames = get_residue_distance_for_trajectory(trj_sub, frame_list, threads = args.threads)
     elif args.frame:
@@ -563,7 +564,7 @@ def system_routine() -> None:
     if args.input_B:
         print("Loaded second fingerprint data from:", args.input_B)
         loaded_arr = np.loadtxt(args.input_B)
-        frames_B = loaded_arr.reshape(loaded_arr.shape[0], loaded_arr.shape[1] // trj_sub.n_residues, trj_sub.n_residues)
+        frames_B = loaded_arr.reshape(loaded_arr.shape[0], math.isqrt(loaded_arr.shape[1]), math.isqrt(loaded_arr.shape[1]))
         avg_frames_B = [get_frame_average(frames_B)]
         avg_frames = [combine_frames(avg_frames[0], avg_frames_B[0])]
         print(avg_frames)
@@ -684,7 +685,7 @@ def stack_events_routine() -> None:
 
     if args.input:
         loaded_arr = np.loadtxt(args.input)
-        frames = loaded_arr.reshape(loaded_arr.shape[0], loaded_arr.shape[1] // trj_sub.n_residues, trj_sub.n_residues)
+        frames = loaded_arr.reshape(loaded_arr.shape[0], math.isqrt(loaded_arr.shape[1]), math.isqrt(loaded_arr.shape[1]))
         frame = get_frame_average(frames)
     elif args.frame:
         frame = get_residue_distance_for_frame(trj_sub, frame = args.frame)

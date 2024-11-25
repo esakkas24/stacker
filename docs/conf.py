@@ -54,7 +54,7 @@ autodoc_default_options = {
     'show-inheritance': True,
 }
 autodoc_member_order = 'bysource'
-add_module_names = False
+add_module_names = True
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
@@ -64,6 +64,8 @@ html_static_path = ['_static']
 html_css_files = [
     'numpy.css',
 ]
+
+html_logo = "images/stackerlogo.svg"
 
 html_use_modindex = True
 html_copy_source = False
@@ -85,6 +87,13 @@ html_theme_options = {
             "icon" : "https://raw.githubusercontent.com/esakkas24/stacker/refs/heads/main/docs/images/pypi.svg"
         }
     ],
+    "navbar_start" : [],
+    "navbar_center": ["navbar-nav"],
+    "navbar_end": [
+        "navbar-icon-links",
+        "search-button-field"
+    ],
+    "navbar_persistent": [],
     "github_url" : "https://github.com/esakkas24/stacker",
     "repository_url" : "https://github.com/esakkas24/stacker",
     "use_repository_button" : True,

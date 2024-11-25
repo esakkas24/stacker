@@ -497,14 +497,15 @@
                   
   <section id="making-system-stacking-fingerprints-ssfs">
 <span id="system-stacking"></span><h1>Making System Stacking Fingerprints (SSFs)<a class="headerlink" href="#making-system-stacking-fingerprints-ssfs" title="Link to this heading">#</a></h1>
-<p>This pipeline creates System Stacking Fingerprints (SSFs) which can be used
-to analyze system-wide pi-stacking in a molecular dynamics trajectory.</p>
+<p>This pipeline creates System Stacking Fingerprints (SSFs) like the one below
+which can be used to analyze system-wide pi-stacking in a molecular dynamics trajectory.</p>
+<img alt="_images/SSF_test.png" src="_images/SSF_test.png" />
 <section id="load-trajectory">
 <h2>Load Trajectory<a class="headerlink" href="#load-trajectory" title="Link to this heading">#</a></h2>
 <p>To analyze pi-stacking between two nucleotides, we compare their center of
 geometry (COG) distance, the distance between the centers of their 6-membered
-(pyrimidine) rings. For this, the only atoms we need are C2, C4, and C6 to triangulate
-the COG of each ring. See <code class="docutils literal notranslate"><span class="pre">r</span></code> below:</p>
+(pyrimidine) rings (see <code class="docutils literal notranslate"><span class="pre">r</span></code> below). For this, the only atoms we need are C2, C4, and C6 to triangulate
+the COG of each ring.</p>
 <img alt="_images/bottaro_values.png" src="_images/bottaro_values.png" />
 <p>For reference, the Carbon Numbering of each nucleotide:</p>
 <img alt="_images/nucleotide_numbering.png" src="_images/nucleotide_numbering.png" />
@@ -668,11 +669,12 @@ with <code class="docutils literal notranslate"><span class="pre">stacker</span>
 </section>
 <section id="how-to-analyze-an-ssf">
 <h2>How to Analyze an SSF<a class="headerlink" href="#how-to-analyze-an-ssf" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a> will give the stacking pairs with the most
+<p><a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">stacker.pairwise_distance.get_top_stacking()</span></code></a> will give the stacking pairs with the most
 pi-stacking (ie. closest to 3.5Å):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">get_top_stacking</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">filtered_traj</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">avg_ssf</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">avg_ssf</span>
+<span class="gp">... </span>    <span class="p">)</span>
 <span class="go">Res1    Res2    Avg_Dist</span>
 <span class="go">117     108     3.43</span>
 <span class="go">153     54      3.35</span>
@@ -681,8 +683,8 @@ pi-stacking (ie. closest to 3.5Å):</p>
 <span class="go">93      130     3.68</span>
 </pre></div>
 </div>
-<p>It is recommended to save the output to a <code class="docutils literal notranslate"><span class="pre">csv</span></code> and use the other parameters
-for <a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a> to prepare for future analyses using the
+<p>It is recommended to save the output to a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> and use the other parameters
+for <code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code> to prepare for future analyses using the
 <a class="reference internal" href="command_line_options.html#command-line-options"><span class="std std-ref">Command Line Options</span></a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">get_top_stacking</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">filtered_traj</span><span class="p">,</span>
@@ -695,7 +697,7 @@ for <a class="reference internal" href="stacker.html#stacker.pairwise_distance.g
 </div>
 <p>In the command line, <code class="docutils literal notranslate"><span class="pre">[user]$</span> <span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">compare</span></code> can give the residue
 pairs that changed the most between trajectories, by inputting two <code class="docutils literal notranslate"><span class="pre">csv</span></code>
-outputs from <a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a>. Use <code class="docutils literal notranslate"><span class="pre">[user]$</span> <span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">compare</span> <span class="pre">--help</span></code>
+outputs from <code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code>. Use <code class="docutils literal notranslate"><span class="pre">[user]$</span> <span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">compare</span> <span class="pre">--help</span></code>
 for more information.</p>
 </section>
 <section id="using-k-means">
@@ -879,7 +881,34 @@ their KMeans result with 6 clusters:</p>
 frames from both trajectories.</p>
 <p>Finally, they can be colored by dataset but use <code class="docutils literal notranslate"><span class="pre">facet</span></code> to show each
 dataset’s points on a separate PCA Grid. This helps with viewing multiple
-datasets.</p>
+datasets:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCC_+1CGU_data.txt.gz&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCC_+1GCU_data.txt.gz&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCC_+1CGU_data.txt.gz&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCC_+1GCU_data.txt.gz&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blinded_data</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
+<span class="go">(12800, 16129)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">plot_pca</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">,</span> <span class="n">dataset_names</span><span class="p">,</span> <span class="s1">&#39;facet&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/pca_plot.by_facet.png" src="_images/pca_plot.by_facet.png" />
+<p>Here we see that the <code class="docutils literal notranslate"><span class="pre">tGGG_aCCU_+1GCU</span></code> trajectory occupies its own space.
+We can combine this result with the KMeans and PCA plots below to strongly support
+the conclusion that <code class="docutils literal notranslate"><span class="pre">tGGG_aCCU_+1GCU</span></code> has a different system-wide stacking,
+and therefore a different structure, than the other three trajectories. The
+K-Means results with the best silhouette plot is shown here:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">image</span><span class="p">::</span> <span class="n">images</span><span class="o">/</span><span class="n">silhouette5</span><span class="o">.</span><span class="n">png</span>
+</pre></div>
+</div>
+<img alt="_images/kmeans5.png" src="_images/kmeans5.png" />
+<img alt="_images/pca_plot5by_cluster.png" src="_images/pca_plot5by_cluster.png" />
 </section>
 </section>
 

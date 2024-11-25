@@ -197,7 +197,7 @@ with ``stacker -s ssf -B`` and ``stacker -s compare``.
 How to Analyze an SSF
 -----------------------
 
-.. currentmodule:: stacker.pairwise_distance.get_top_stacking
+.. currentmodule:: stacker.pairwise_distance
 
 :func:`get_top_stacking` will give the stacking pairs with the most
 pi-stacking (ie. closest to 3.5Å)::
@@ -251,8 +251,19 @@ These files are too large to provide, but can be made with ``stacker -s ssf -d``
 
 .. currentmodule:: stacker.kmeans
 
-The KMeans Data is prepared with :func:`read_and_preprocess_data` and 
-:func:`run_kmeans`::
+They can be read as Python objects and reshaped::
+
+    >>> import numpy as np
+    >>> import math
+    >>> GCU_3200_flattened_ssfs = np.loadtxt('../testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz')
+    >>> GCU_3200_flattened_ssfs.shape
+    (3200, 16129)
+    >>> GCU_3200_ssfs = GCU_3200_flattened_ssfs.reshape(GCU_3200_flattened_ssfs.shape[0], math.isqrt(GCU_3200_flattened_ssfs.shape[1]), math.isqrt(GCU_3200_flattened_ssfs.shape[1]))
+    >>> GCU_3200_ssfs.shape
+    (3200, 127, 127)
+
+Or the files can be read and prepared for KMeans data
+ with :func:`read_and_preprocess_data` and :func:`run_kmeans`::
 
     >>> import stacker as st
     >>> data_arrays  = st.read_and_preprocess_data(
