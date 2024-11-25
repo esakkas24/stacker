@@ -419,7 +419,7 @@ their KMeans result with 6 clusters::
             Cluster 5: 0 matrices
             Cluster 6: 0 matrices
     >>> st.plot_pca(blinded_data, dataset_names, coloring = 'kmeans', cluster_labels=kmeans_results)
-
+    
 .. image:: images/pca_plot6by_cluster.png
 
 Each trajectory has three clusters, with no cluster capturing significant

@@ -818,8 +818,8 @@ same distance from 0 on the x-axis. A Cluster choice of 6 is appropriate:</p>
 </section>
 <section id="principal-component-analysis">
 <h2>Principal Component Analysis<a class="headerlink" href="#principal-component-analysis" title="Link to this heading">#</a></h2>
-<p>KMeans on SSF is gathering Euclidean Distance on multi-dimensional vectors that are
-impossible to plot. We can however, do a heuristic plotting of these SSFs using
+<p>KMeans on SSF gathers Euclidean Distance on multi-dimensional vectors that are
+impossible to plot. We can, however, do a heuristic plotting of these SSFs using
 <a class="reference external" href="https://scikit-learn.org/1.5/modules/decomposition.html#pca">Principal Component Analysis (PCA)</a>.</p>
 <p>First, we can plot the un-blinded SSFs and color them by their trajectory of origin.
 We have 3200 frames worth of SSFs for each trajectory, and we plot them using
@@ -839,8 +839,47 @@ We have 3200 frames worth of SSFs for each trajectory, and we plot them using
 </div>
 <p>This creates a PCA plot where each point is a frame of a trajectory,
 plotted using the information solely from the SSF. The points are colored
-by the trajectory of origin. This outputs to a <code class="docutils literal notranslate"><span class="pre">.png</span></code>:</p>
+by the trajectory <code class="docutils literal notranslate"><span class="pre">dataset</span></code> of origin. This outputs to a <code class="docutils literal notranslate"><span class="pre">.png</span></code>:</p>
 <img alt="_images/pca_plot.by_dataset.png" src="_images/pca_plot.by_dataset.png" />
+<p>Here the SSFs from the two datasets separate cleanly, indicating
+significantly different system-wide stacking. The PCA Plots can
+also be colored by <code class="docutils literal notranslate"><span class="pre">kmeans</span></code> result. Here, the frames are colored by
+their KMeans result with 6 clusters:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span>  <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">read_and_preprocess_data</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s2">&quot;testing/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz&quot;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="go">Reading data: 5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz</span>
+<span class="go">Reading data: 5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blinded_data</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
+<span class="go">(6400, 16129)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans_results</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">run_kmeans</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">,</span> <span class="n">N_CLUSTERS</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="go">(6400, 16129)</span>
+<span class="go">For n_clusters = 6 The average silhouette_score is : 0.09343055568735036</span>
+<span class="go">Dataset: 5JUP_N2_tGGG_aCCU_+1CGU_data</span>
+<span class="go">        Cluster 1: 0 matrices</span>
+<span class="go">        Cluster 2: 0 matrices</span>
+<span class="go">        Cluster 3: 1459 matrices</span>
+<span class="go">        Cluster 4: 4 matrices</span>
+<span class="go">        Cluster 5: 1017 matrices</span>
+<span class="go">        Cluster 6: 720 matrices</span>
+<span class="go">Dataset: 5JUP_N2_tGGG_aCCU_+1GCU_data</span>
+<span class="go">        Cluster 1: 1179 matrices</span>
+<span class="go">        Cluster 2: 824 matrices</span>
+<span class="go">        Cluster 3: 0 matrices</span>
+<span class="go">        Cluster 4: 1197 matrices</span>
+<span class="go">        Cluster 5: 0 matrices</span>
+<span class="go">        Cluster 6: 0 matrices</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">plot_pca</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">,</span> <span class="n">dataset_names</span><span class="p">,</span> <span class="n">coloring</span> <span class="o">=</span> <span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">cluster_labels</span><span class="o">=</span><span class="n">kmeans_results</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/pca_plot6by_cluster.png" src="_images/pca_plot6by_cluster.png" />
+<p>Each trajectory has three clusters, with no cluster capturing significant
+frames from both trajectories.</p>
+<p>Finally, they can be colored by dataset but use <code class="docutils literal notranslate"><span class="pre">facet</span></code> to show each
+dataset’s points on a separate PCA Grid. This helps with viewing multiple
+datasets.</p>
 </section>
 </section>
 
