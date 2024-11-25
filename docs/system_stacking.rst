@@ -4,16 +4,18 @@
 Making System Stacking Fingerprints (SSFs)
 ********************************************
 
-This pipeline creates System Stacking Fingerprints (SSFs) which can be used 
-to analyze system-wide pi-stacking in a molecular dynamics trajectory.
+This pipeline creates System Stacking Fingerprints (SSFs) like the one below 
+which can be used to analyze system-wide pi-stacking in a molecular dynamics trajectory.
+
+.. image:: images/SSF_test.png
 
 Load Trajectory
 ---------------
 
 To analyze pi-stacking between two nucleotides, we compare their center of
 geometry (COG) distance, the distance between the centers of their 6-membered
-(pyrimidine) rings. For this, the only atoms we need are C2, C4, and C6 to triangulate
-the COG of each ring. See ``r`` below:
+(pyrimidine) rings (see ``r`` below). For this, the only atoms we need are C2, C4, and C6 to triangulate
+the COG of each ring.
 
 .. image:: images/bottaro_values.png
 
@@ -195,14 +197,15 @@ with ``stacker -s ssf -B`` and ``stacker -s compare``.
 How to Analyze an SSF
 -----------------------
 
-.. currentmodule:: stacker.pairwise_distance
+.. currentmodule:: stacker.pairwise_distance.get_top_stacking
 
 :func:`get_top_stacking` will give the stacking pairs with the most
 pi-stacking (ie. closest to 3.5Å)::
     
     >>> st.get_top_stacking(
     ...     filtered_traj,
-    ...     avg_ssf)
+    ...     avg_ssf
+    ...     )
     Res1    Res2    Avg_Dist
     117     108     3.43
     153     54      3.35
@@ -210,7 +213,7 @@ pi-stacking (ie. closest to 3.5Å)::
     94      127     3.67
     93      130     3.68
 
-It is recommended to save the output to a ``csv`` and use the other parameters
+It is recommended to save the output to a ``.csv`` and use the other parameters
 for :func:`get_top_stacking` to prepare for future analyses using the 
 :ref:`Command Line Options <command_line_options>`::
 
@@ -427,4 +430,34 @@ frames from both trajectories.
 
 Finally, they can be colored by dataset but use ``facet`` to show each 
 dataset's points on a separate PCA Grid. This helps with viewing multiple 
-datasets.
+datasets::
+
+    >>> import stacker as st
+    >>> dataset_names = ["/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz",
+    ...     "/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz",
+    ...     "/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCC_+1CGU_data.txt.gz",
+    ...     "/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCC_+1GCU_data.txt.gz",
+    ...     ]
+    >>> dataset_names = ["/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz",
+    ...     "/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz",
+    ...     "/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCC_+1CGU_data.txt.gz",
+    ...     "/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCC_+1GCU_data.txt.gz",
+    ...     ]
+    >>> blinded_data = st.create_kmeans_input(data_arrays)
+    (12800, 16129)
+    >>> st.plot_pca(blinded_data, dataset_names, 'facet')
+
+.. image:: images/pca_plot.by_facet.png
+
+Here we see that the ``tGGG_aCCU_+1GCU`` trajectory occupies its own space.
+We can combine this result with the KMeans and PCA plots below to strongly support
+the conclusion that ``tGGG_aCCU_+1GCU`` has a different system-wide stacking,
+and therefore a different structure, than the other three trajectories. The
+K-Means results with the best silhouette plot is shown here::
+
+.. image:: images/silhouette5.png
+
+.. image:: images/kmeans5.png
+
+.. image:: images/pca_plot5by_cluster.png
+

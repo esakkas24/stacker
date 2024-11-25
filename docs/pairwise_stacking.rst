@@ -5,7 +5,10 @@ Making Pairwise Stacking Fingerprints (PSFs)
 ********************************************
 
 Once you've identified a pi-stacking residue pair, you can use StACKER to 
-characterize the type of stacking occuring using Pairwise Stacking Fingerprints (PSFs).
+characterize the type of stacking occuring using Pairwise Stacking Fingerprints (PSFs)
+like the one below.
+
+.. image:: ../testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_heat.png
 
 .. currentmodule:: stacker.pairwise_distance
 
