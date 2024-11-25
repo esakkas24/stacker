@@ -4,7 +4,7 @@ StACKER Python Modules
 ======================
 
 StACKER functions are accessible through modules, but all functions 
-are available through ``import stacker``
+are available through ``import stacker``.
 
 
 .. autosummary::

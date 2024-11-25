@@ -126,8 +126,9 @@ two residues through analysis of their relevant movement.
    :caption: Contents:
 
    Getting Started <getting_started>
-   Molecular Dynamics <molecular_dynamics>
-   Python Modules <modules>
-   Command Line Options <command_line_options>
+   API Documentation <modules>
    Create System Stacking Fingerprints (SSFs) <system_stacking>
    Create Pairwise Stacking Fingerprints (PSFs) <pairwise_stacking>
+   Command Line Options <command_line_options>
+   Molecular Dynamics <molecular_dynamics>
+

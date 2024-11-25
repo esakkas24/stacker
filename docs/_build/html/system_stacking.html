@@ -52,7 +52,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Making Pairwise Stacking Fingerprints (PSFs)" href="pairwise_stacking.html" />
-    <link rel="prev" title="Command Line Options" href="command_line_options.html" />
+    <link rel="prev" title="stacker.visualization.NoResidues" href="_autosummary/stacker.visualization.NoResidues.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -96,6 +96,126 @@
 
   
     <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="getting_started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="modules.html">
+    API Documentation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Create System Stacking Fingerprints (SSFs)
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="pairwise_stacking.html">
+    Create Pairwise Stacking Fingerprints (PSFs)
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="command_line_options.html">
+    Command Line Options
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="molecular_dynamics.html">
+    Molecular Dynamics
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/pistacker/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://raw.githubusercontent.com/esakkas24/stacker/refs/heads/main/docs/images/pypi.svg" class="icon-link-image" alt="PyPI"/></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
     </header>
   
 
@@ -112,7 +232,101 @@
   <div class="sidebar-header-items sidebar-primary__section">
     
     
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
     
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="getting_started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="modules.html">
+    API Documentation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Create System Stacking Fingerprints (SSFs)
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="pairwise_stacking.html">
+    Create Pairwise Stacking Fingerprints (PSFs)
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="command_line_options.html">
+    Command Line Options
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="molecular_dynamics.html">
+    Molecular Dynamics
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/esakkas24/stacker" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/pistacker/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://raw.githubusercontent.com/esakkas24/stacker/refs/heads/main/docs/images/pypi.svg" class="icon-link-image" alt="PyPI"/></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        
+      </div>
     
   </div>
   
@@ -185,8 +399,7 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="molecular_dynamics.html">Molecular Dynamics</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">Python Modules</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API Documentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/stacker.html">stacker</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.block_printing.html">stacker.block_printing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.bottaro_routine.html">stacker.bottaro_routine</a></li>
@@ -317,9 +530,10 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="command_line_options.html">Command Line Options</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Create System Stacking Fingerprints (SSFs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pairwise_stacking.html">Create Pairwise Stacking Fingerprints (PSFs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_line_options.html">Command Line Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="molecular_dynamics.html">Molecular Dynamics</a></li>
 </ul>
 
     </div>
@@ -518,7 +732,7 @@ We filter this trajectory to the pi-stacking residue pair.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd</span></code>: A 10-frame trajectory file with all atoms/residues.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop</span></code>: The associated Topology File with the above trajectory.</p></li>
 </ul>
-<p>We filter to atoms C2, C4, and C6 using <a class="reference internal" href="stacker.html#stacker.file_manipulation.filter_traj" title="stacker.file_manipulation.filter_traj"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_traj()</span></code></a>:</p>
+<p>We filter to atoms C2, C4, and C6 using <a class="reference internal" href="stacker.file_manipulation.html#stacker.file_manipulation.filter_traj" title="stacker.file_manipulation.filter_traj"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_traj()</span></code></a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s2">&quot;first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                <span class="n">topology_filename</span> <span class="o">=</span> <span class="s2">&quot;5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&quot;</span><span class="p">,</span>
@@ -537,7 +751,7 @@ We filter this trajectory to the pi-stacking residue pair.</p>
 <section id="calculate-distance-between-residues">
 <h2>Calculate Distance Between Residues<a class="headerlink" href="#calculate-distance-between-residues" title="Link to this heading">#</a></h2>
 <p>Immediately, we can check if a residue pair is pi-stacking in a given frame. We calculate
-the distance between the COG of two residues using <a class="reference internal" href="stacker.html#stacker.pairwise_distance.calculate_residue_distance" title="stacker.pairwise_distance.calculate_residue_distance"><code class="xref py py-func docutils literal notranslate"><span class="pre">calculate_residue_distance()</span></code></a>.
+the distance between the COG of two residues using <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.calculate_residue_distance" title="stacker.pairwise_distance.calculate_residue_distance"><code class="xref py py-func docutils literal notranslate"><span class="pre">calculate_residue_distance()</span></code></a>.
 COG distance close to 3.5 Å indicates pi-stacking. For instance, the A-site mRNA codons
 (residues 422, 423, and 424) are likely pi-stacking:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">distance_vec</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">calculate_residue_distance</span><span class="p">(</span>
@@ -555,7 +769,7 @@ COG distance close to 3.5 Å indicates pi-stacking. For instance, the A-site mRN
 <h2>Create a System Stacking Fingerprint (SSF)<a class="headerlink" href="#create-a-system-stacking-fingerprint-ssf" title="Link to this heading">#</a></h2>
 <p>An SSF calculates the COG distance for all nucleotide pairs in a trajectory frame.
 The result is a square matrix where position (i, j) represents the distance
-from residue i to residue j. This is done with <a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_residue_distance_for_frame()</span></code></a></p>
+from residue i to residue j. This is done with <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_residue_distance_for_frame()</span></code></a></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">filtered_traj</span></code> object has 252 residues, so we create a 252 x 252 SSF:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ssf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">get_residue_distance_for_frame</span><span class="p">(</span><span class="n">filtered_traj</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">write_output</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="go">Loading: [####################################################################################################] Current Residue: 252/252 (100.0%)</span>
@@ -564,7 +778,7 @@ from residue i to residue j. This is done with <a class="reference internal" hre
 <span class="go">(252, 252)</span>
 </pre></div>
 </div>
-<p>We can calculate the SSF for multiple frames of a trajectory using <a class="reference internal" href="stacker.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-func docutils literal notranslate"><span class="pre">system_stacking_fingerprints()</span></code></a>, which
+<p>We can calculate the SSF for multiple frames of a trajectory using <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-func docutils literal notranslate"><span class="pre">system_stacking_fingerprints()</span></code></a>, which
 accepts smart indexing of frames (eg. 1-3,15-17 = 1,2,3,15,16,17):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ssfs</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">system_stacking_fingerprints</span><span class="p">(</span><span class="n">filtered_traj</span><span class="p">,</span> <span class="n">frames</span> <span class="o">=</span> <span class="s1">&#39;1-3&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ssfs</span><span class="o">.</span><span class="n">shape</span>
@@ -589,8 +803,8 @@ frames at once. When parralelizing, turn off standard output with <code class="d
 <section id="get-the-average-ssf-for-a-trajectory">
 <h2>Get the Average SSF for a Trajectory<a class="headerlink" href="#get-the-average-ssf-for-a-trajectory" title="Link to this heading">#</a></h2>
 <p>Single-frame SSFs are rarely as illuminating as the average SSF for all frames
-of a trajectory. Users can create this using <a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_frame_average" title="stacker.pairwise_distance.get_frame_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_frame_average()</span></code></a>, using the
-output from <a class="reference internal" href="stacker.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-func docutils literal notranslate"><span class="pre">system_stacking_fingerprints()</span></code></a> in the step above:</p>
+of a trajectory. Users can create this using <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_frame_average" title="stacker.pairwise_distance.get_frame_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_frame_average()</span></code></a>, using the
+output from <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-func docutils literal notranslate"><span class="pre">system_stacking_fingerprints()</span></code></a> in the step above:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ssfs</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">system_stacking_fingerprints</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">filtered_traj</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">frames</span> <span class="o">=</span> <span class="s1">&#39;1-10&#39;</span><span class="p">,</span>
@@ -607,7 +821,7 @@ The next step shows how to analyze these results.</p>
 </section>
 <section id="how-to-visualize-an-ssf">
 <h2>How to Visualize an SSF<a class="headerlink" href="#how-to-visualize-an-ssf" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="stacker.html#stacker.visualization.display_ssfs" title="stacker.visualization.display_ssfs"><code class="xref py py-func docutils literal notranslate"><span class="pre">display_ssfs()</span></code></a> will visualize SSFs in Python output, with each SSF frame
+<p><a class="reference internal" href="stacker.visualization.html#stacker.visualization.display_ssfs" title="stacker.visualization.display_ssfs"><code class="xref py py-func docutils literal notranslate"><span class="pre">display_ssfs()</span></code></a> will visualize SSFs in Python output, with each SSF frame
 as a frame of the video:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s2">&quot;first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&quot;</span><span class="p">,</span>
@@ -632,7 +846,7 @@ as a frame of the video:</p>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
-<p>It is recommended to run <a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_frame_average" title="stacker.pairwise_distance.get_frame_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_frame_average()</span></code></a> and then save the output
+<p>It is recommended to run <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_frame_average" title="stacker.pairwise_distance.get_frame_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_frame_average()</span></code></a> and then save the output
 as a <code class="docutils literal notranslate"><span class="pre">.png</span></code> for comparison with other trajectories:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s2">&quot;first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&quot;</span><span class="p">,</span>
@@ -669,7 +883,7 @@ with <code class="docutils literal notranslate"><span class="pre">stacker</span>
 </section>
 <section id="how-to-analyze-an-ssf">
 <h2>How to Analyze an SSF<a class="headerlink" href="#how-to-analyze-an-ssf" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">stacker.pairwise_distance.get_top_stacking()</span></code></a> will give the stacking pairs with the most
+<p><a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a> will give the stacking pairs with the most
 pi-stacking (ie. closest to 3.5Å):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">get_top_stacking</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">filtered_traj</span><span class="p">,</span>
@@ -684,7 +898,7 @@ pi-stacking (ie. closest to 3.5Å):</p>
 </pre></div>
 </div>
 <p>It is recommended to save the output to a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> and use the other parameters
-for <code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code> to prepare for future analyses using the
+for <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a> to prepare for future analyses using the
 <a class="reference internal" href="command_line_options.html#command-line-options"><span class="std std-ref">Command Line Options</span></a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">get_top_stacking</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">filtered_traj</span><span class="p">,</span>
@@ -697,7 +911,7 @@ for <code class="xref py py-func docutils literal notranslate"><span class="pre"
 </div>
 <p>In the command line, <code class="docutils literal notranslate"><span class="pre">[user]$</span> <span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">compare</span></code> can give the residue
 pairs that changed the most between trajectories, by inputting two <code class="docutils literal notranslate"><span class="pre">csv</span></code>
-outputs from <code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code>. Use <code class="docutils literal notranslate"><span class="pre">[user]$</span> <span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">compare</span> <span class="pre">--help</span></code>
+outputs from <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a>. Use <code class="docutils literal notranslate"><span class="pre">[user]$</span> <span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">compare</span> <span class="pre">--help</span></code>
 for more information.</p>
 </section>
 <section id="using-k-means">
@@ -715,8 +929,19 @@ files below were created:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz</span></code> : numpy array with 3200 SSFs</p></li>
 </ul>
 <p>These files are too large to provide, but can be made with <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">ssf</span> <span class="pre">-d</span></code>.</p>
-<p>The KMeans Data is prepared with <a class="reference internal" href="stacker.kmeans.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_and_preprocess_data()</span></code></a> and
-<a class="reference internal" href="stacker.kmeans.html#stacker.kmeans.run_kmeans" title="stacker.kmeans.run_kmeans"><code class="xref py py-func docutils literal notranslate"><span class="pre">run_kmeans()</span></code></a>:</p>
+<p>They can be read as Python objects and reshaped:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GCU_3200_flattened_ssfs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;../testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GCU_3200_flattened_ssfs</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(3200, 16129)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GCU_3200_ssfs</span> <span class="o">=</span> <span class="n">GCU_3200_flattened_ssfs</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">GCU_3200_flattened_ssfs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">math</span><span class="o">.</span><span class="n">isqrt</span><span class="p">(</span><span class="n">GCU_3200_flattened_ssfs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">math</span><span class="o">.</span><span class="n">isqrt</span><span class="p">(</span><span class="n">GCU_3200_flattened_ssfs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GCU_3200_ssfs</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(3200, 127, 127)</span>
+</pre></div>
+</div>
+<dl>
+<dt>Or the files can be read and prepared for KMeans data</dt><dd><p>with <a class="reference internal" href="stacker.kmeans.html#stacker.kmeans.read_and_preprocess_data" title="stacker.kmeans.read_and_preprocess_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_and_preprocess_data()</span></code></a> and <a class="reference internal" href="stacker.kmeans.html#stacker.kmeans.run_kmeans" title="stacker.kmeans.run_kmeans"><code class="xref py py-func docutils literal notranslate"><span class="pre">run_kmeans()</span></code></a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span>  <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">read_and_preprocess_data</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="p">[</span><span class="s2">&quot;testing/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz&quot;</span><span class="p">,</span>
@@ -733,6 +958,8 @@ files below were created:</p>
 <span class="go">        Cluster 2: 80 matrices</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 <p>So the SSFs from the two datasets are distinct enough to separate into two clusters.
 We can visualize this with <a class="reference internal" href="stacker.kmeans.html#stacker.kmeans.plot_cluster_trj_data" title="stacker.kmeans.plot_cluster_trj_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">plot_cluster_trj_data()</span></code></a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
@@ -924,12 +1151,12 @@ K-Means results with the best silhouette plot is shown here:</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="command_line_options.html"
+       href="_autosummary/stacker.visualization.NoResidues.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Command Line Options</p>
+        <p class="prev-next-title">stacker.visualization.NoResidues</p>
       </div>
     </a>
     <a class="right-next"

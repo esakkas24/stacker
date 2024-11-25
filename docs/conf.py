@@ -22,7 +22,6 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
-    'sphinx.ext.imgmath',
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx.ext.coverage',
@@ -30,8 +29,8 @@ extensions = [
     'sphinx.ext.graphviz',
     'sphinx.ext.ifconfig',
     'matplotlib.sphinxext.plot_directive',
-    'sphinx.ext.mathjax',
     'sphinx_design',
+    'sphinx.ext.imgmath',
     ]
 
 autosummary_generate = True
@@ -53,8 +52,9 @@ autodoc_default_options = {
     'inherited-members': True,
     'show-inheritance': True,
 }
+
 autodoc_member_order = 'bysource'
-add_module_names = True
+add_module_names = False
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
@@ -93,10 +93,12 @@ html_theme_options = {
         "navbar-icon-links",
         "search-button-field"
     ],
+    "header_links_before_dropdown": 4,
     "navbar_persistent": [],
     "github_url" : "https://github.com/esakkas24/stacker",
     "repository_url" : "https://github.com/esakkas24/stacker",
     "use_repository_button" : True,
     "collapse_navigation": True,
 }
+
 
