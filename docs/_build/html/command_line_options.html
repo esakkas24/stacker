@@ -689,7 +689,33 @@
                   
   <section id="command-line-options">
 <span id="id1"></span><h1>Command Line Options<a class="headerlink" href="#command-line-options" title="Link to this heading">#</a></h1>
-<p>In the command line.</p>
+<p>After installing StACKER, the command <code class="docutils literal notranslate"><span class="pre">stacker</span></code> is added
+to terminal. Tunning <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">--help</span></code> will give the subroutine
+options.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>% stacker --help
+usage: stacker -s ROUTINE [-h]
+
+Wrapper to run stacker subroutines using the -s flag.
+More info on each routine given by `stacker -s ROUTINE -h`
+
+options:
+-s, --script ROUTINE  Name of command to use. Options for ROUTINE:
+
+                        filter_traj:
+                                filters trajectory and topology files to desired residue numbers and atom names
+                        bottaro OR pairwise OR psf:
+                                Create Polar Stacking Fingerprint like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)
+                        res_distance:
+                                Get the distance between two residues in a given frame
+                        system OR ssf:
+                                Create a System Stacking Fingerprint of distances by residue
+                        stack_events:
+                                Get list of residues with most stacking events (distance closest to 3.5Å)
+                        compare:
+                                Get the most changed stacking events between two fingerprints using the outputs of stacker -s stack_events
+-h, --help            show this help message and exit
+</pre></div>
+</div>
 </section>
 
 
