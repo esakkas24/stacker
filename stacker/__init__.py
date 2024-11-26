@@ -43,7 +43,7 @@ def run_python_command() -> None:
             '              res_distance:\n' + \
             '                    Get the distance between two residues in a given frame\n' + \
             '              system OR ssf:\n' + \
-            '                    Create a System Stacking Fingerprint (SSF) with pairwise distances for each residue\n' + \
+            '                    Create a System Stacking Fingerprint (SSF) averaged across specified frames\n' + \
             '              stack_events:\n' + \
             '                    Get list of residues with most stacking events (distance closest to 3.5Å)\n' + \
             '              compare:\n' +\
@@ -538,6 +538,7 @@ def system_routine() -> None:
     else:
         frame_list = []
 
+
     trj_sub = filter_traj(trj_file=args.trajectory, top_file=args.topology, residues=residues_desired)
 
     if args.input:
@@ -576,7 +577,7 @@ def system_routine() -> None:
     sorted_res.sort()
 
     create_parent_directories(args.output)
-    display_arrays_as_video(avg_frames, sorted_res, seconds_per_frame=1, outfile=args.output, scale_limits=scale_limits, scale_style=args.scale_style)
+    display_arrays_as_video(avg_frames, sorted_res, seconds_per_frame=10, outfile=args.output, scale_limits=scale_limits, scale_style=args.scale_style)
 
 def combine_frames(frames_A, frames_B):
     """

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>stacker.filter_traj_routine &#8212; StACKER Documentation</title>
+    <title>stacker.pairwise_distance.load_ssfs &#8212; StACKER Documentation</title>
   
   
   
@@ -48,11 +48,11 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/stacker.filter_traj_routine';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/stacker.pairwise_distance.load_ssfs';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="stacker.res_distance_routine" href="stacker.res_distance_routine.html" />
-    <link rel="prev" title="stacker.enable_printing" href="stacker.enable_printing.html" />
+    <link rel="next" title="stacker.pairwise_distance.system_stacking_fingerprints" href="stacker.pairwise_distance.system_stacking_fingerprints.html" />
+    <link rel="prev" title="stacker.pairwise_distance.increment_residue" href="stacker.pairwise_distance.increment_residue.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -407,7 +407,7 @@
 <li class="toctree-l3"><a class="reference internal" href="stacker.compare_routine.html">stacker.compare_routine</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.convert_to_python_command.html">stacker.convert_to_python_command</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.enable_printing.html">stacker.enable_printing</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">stacker.filter_traj_routine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.filter_traj_routine.html">stacker.filter_traj_routine</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.res_distance_routine.html">stacker.res_distance_routine</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.run_python_command.html">stacker.run_python_command</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.stack_events_routine.html">stacker.stack_events_routine</a></li>
@@ -432,14 +432,14 @@
 <li class="toctree-l4"><a class="reference internal" href="stacker.kmeans.run_kmeans.html">stacker.kmeans.run_kmeans</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="stacker.pairwise_distance.html">pairwise_distance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="stacker.pairwise_distance.html">pairwise_distance</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="stacker.pairwise_distance.calculate_residue_distance.html">stacker.pairwise_distance.calculate_residue_distance</a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.pairwise_distance.get_frame_average.html">stacker.pairwise_distance.get_frame_average</a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_frame.html">stacker.pairwise_distance.get_residue_distance_for_frame</a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
-<li class="toctree-l4"><a class="reference internal" href="stacker.pairwise_distance.load_ssfs.html">stacker.pairwise_distance.load_ssfs</a></li>
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">stacker.pairwise_distance.load_ssfs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
@@ -481,14 +481,14 @@
 <li class="toctree-l3"><a class="reference internal" href="stacker.file_manipulation.SmartIndexingAction.html">SmartIndexingAction</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="stacker.pairwise_distance.html">pairwise_distance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="stacker.pairwise_distance.html">pairwise_distance</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.calculate_residue_distance.html">stacker.pairwise_distance.calculate_residue_distance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_frame_average.html">stacker.pairwise_distance.get_frame_average</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_frame.html">stacker.pairwise_distance.get_residue_distance_for_frame</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
-<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.load_ssfs.html">stacker.pairwise_distance.load_ssfs</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">stacker.pairwise_distance.load_ssfs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
@@ -681,7 +681,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>stacker.filter_traj_routine</h1>
+    <h1>stacker.pairwise_distance.load_ssfs</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -691,7 +691,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.filter_traj_routine"><code class="docutils literal notranslate"><span class="pre">filter_traj_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.load_ssfs"><code class="docutils literal notranslate"><span class="pre">load_ssfs()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -703,21 +703,29 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="stacker-filter-traj-routine">
-<h1>stacker.filter_traj_routine<a class="headerlink" href="#stacker-filter-traj-routine" title="Link to this heading">#</a></h1>
+  <section id="stacker-pairwise-distance-load-ssfs">
+<h1>stacker.pairwise_distance.load_ssfs<a class="headerlink" href="#stacker-pairwise-distance-load-ssfs" title="Link to this heading">#</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="stacker.filter_traj_routine">
-<span class="sig-name descname"><span class="pre">filter_traj_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker.html#filter_traj_routine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.filter_traj_routine" title="Link to this definition">#</a></dt>
-<dd><p>Executes the routine for filtering an input trajectory file and converting it to a PDB file.</p>
-<p>This function uses provided command-line arguments to call <cite>filter_traj_to_pdb()</cite> 
-with specified inputs, such as the trajectory file, topology file, output file location, 
-residues to retain, and atom names to retain.</p>
+<dt class="sig sig-object py" id="stacker.pairwise_distance.load_ssfs">
+<span class="sig-name descname"><span class="pre">load_ssfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/pairwise_distance.html#load_ssfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.pairwise_distance.load_ssfs" title="Link to this definition">#</a></dt>
+<dd><p>Loads a list of SSFs created by <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">ssf</span> <span class="pre">-d</span> <span class="pre">OUTFILE</span></code></p>
+<p>Loads a list of SSFs where each element is an SSF from a given
+frame. This is <code class="docutils literal notranslate"><span class="pre">OUTFILE</span></code> when running <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">ssf</span> <span class="pre">-d</span> <span class="pre">OUTFILE</span></code>
+and quickly provides saved SSF data rather than recalculating SSFs
+for a given trajectory.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt>ResEmpty</dt><dd><p>If the <cite>–residues</cite> argument is not provided.</p>
+<dt><strong>file</strong><span class="classifier">str</span></dt><dd><p>outfile from <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">ssf</span> <span class="pre">-d</span> <span class="pre">OUTFILE</span></code>. 
+Must be <code class="docutils literal notranslate"><span class="pre">.txt</span></code> or <code class="docutils literal notranslate"><span class="pre">.txt.gz</span></code>.</p>
 </dd>
-<dt>AtomEmpty</dt><dd><p>If the <cite>–atom_names</cite> argument is not provided.</p>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>ssfs</strong><span class="classifier">numpy.typing.ArrayLike</span></dt><dd><p>List or array of 2D NumPy arrays representing a pairwise distance matrix
+of an MD structure. All 2D NumPy arrays must be of the same dimenstions.
+Output of <code class="docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory()</span></code></p>
 </dd>
 </dl>
 </dd>
@@ -725,25 +733,13 @@ residues to retain, and atom names to retain.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj_to_pdb</span></code></dt><dd><p>The core function that performs the trajectory filtering and PDB generation.</p>
+<dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></a></dt><dd><p>calculates <code class="docutils literal notranslate"><span class="pre">ssfs</span></code> rather than loading it like this function.</p>
+</dd>
+<dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_trajectory" title="stacker.pairwise_distance.get_residue_distance_for_trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory</span></code></a></dt><dd><p>Alias for <a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-func docutils literal notranslate"><span class="pre">system_stacking_fingerprints()</span></code></a></p>
+</dd>
+<dt><a class="reference internal" href="../stacker.pairwise_distance.html#stacker.pairwise_distance.get_frame_average" title="stacker.pairwise_distance.get_frame_average"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_frame_average</span></code></a></dt><dd><p>calculates average SSF for a trajectory. <code class="docutils literal notranslate"><span class="pre">matrix</span></code> parameter is the output of this</p>
 </dd>
 </dl>
-</div>
-<p class="rubric">Notes</p>
-<ul class="simple">
-<li><p>The <cite>args.residues</cite> argument should be a list of residue indices to retain.</p></li>
-<li><p>The <cite>args.atom_names</cite> argument should be a comma-separated string of atom names to retain.</p></li>
-<li><p>Output directories are created automatically if they do not exist.</p></li>
-</ul>
-<p class="rubric">Examples</p>
-<p>Command-line usage with sample arguments:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ stacker 
-    -s filter_traj 
-    -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd 
-    -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop 
-    -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb 
-    -r 426,427 -a C2,C4,C6
-</pre></div>
 </div>
 </dd></dl>
 
@@ -761,20 +757,20 @@ residues to retain, and atom names to retain.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="stacker.enable_printing.html"
+       href="stacker.pairwise_distance.increment_residue.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">stacker.enable_printing</p>
+        <p class="prev-next-title">stacker.pairwise_distance.increment_residue</p>
       </div>
     </a>
     <a class="right-next"
-       href="stacker.res_distance_routine.html"
+       href="stacker.pairwise_distance.system_stacking_fingerprints.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">stacker.res_distance_routine</p>
+        <p class="prev-next-title">stacker.pairwise_distance.system_stacking_fingerprints</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -795,7 +791,7 @@ residues to retain, and atom names to retain.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.filter_traj_routine"><code class="docutils literal notranslate"><span class="pre">filter_traj_routine()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.pairwise_distance.load_ssfs"><code class="docutils literal notranslate"><span class="pre">load_ssfs()</span></code></a></li>
 </ul>
   </nav></div>
 

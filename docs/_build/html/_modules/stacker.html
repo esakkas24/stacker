@@ -434,6 +434,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../_autosummary/stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../_autosummary/stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../_autosummary/stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/stacker.pairwise_distance.load_ssfs.html">stacker.pairwise_distance.load_ssfs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../_autosummary/stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../_autosummary/stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
@@ -482,6 +483,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/stacker.pairwise_distance.load_ssfs.html">stacker.pairwise_distance.load_ssfs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
@@ -686,7 +688,7 @@
             <span class="s1">&#39;              res_distance:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
             <span class="s1">&#39;                    Get the distance between two residues in a given frame</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
             <span class="s1">&#39;              system OR ssf:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-            <span class="s1">&#39;                    Create a System Stacking Fingerprint (SSF) with pairwise distances for each residue</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;                    Create a System Stacking Fingerprint (SSF) averaged across specified frames</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
             <span class="s1">&#39;              stack_events:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
             <span class="s1">&#39;                    Get list of residues with most stacking events (distance closest to 3.5Å)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
             <span class="s1">&#39;              compare:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>\
@@ -1234,7 +1236,7 @@
     <span class="n">sorted_res</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 
     <span class="n">create_parent_directories</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
-    <span class="n">display_arrays_as_video</span><span class="p">(</span><span class="n">avg_frames</span><span class="p">,</span> <span class="n">sorted_res</span><span class="p">,</span> <span class="n">seconds_per_frame</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">scale_limits</span><span class="o">=</span><span class="n">scale_limits</span><span class="p">,</span> <span class="n">scale_style</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">scale_style</span><span class="p">)</span></div>
+    <span class="n">display_arrays_as_video</span><span class="p">(</span><span class="n">avg_frames</span><span class="p">,</span> <span class="n">sorted_res</span><span class="p">,</span> <span class="n">seconds_per_frame</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">scale_limits</span><span class="o">=</span><span class="n">scale_limits</span><span class="p">,</span> <span class="n">scale_style</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">scale_style</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="combine_frames">

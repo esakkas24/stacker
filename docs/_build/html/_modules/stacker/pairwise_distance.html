@@ -434,6 +434,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.load_ssfs.html">stacker.pairwise_distance.load_ssfs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
@@ -482,6 +483,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.load_ssfs.html">stacker.pairwise_distance.load_ssfs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
@@ -658,6 +660,7 @@
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">concurrent.futures</span>
 <span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">import</span> <span class="nn">math</span>
 
 <span class="n">_NUCLEOTIDE_NAMES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;A5&quot;</span><span class="p">,</span> <span class="s2">&quot;A3&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;G5&quot;</span><span class="p">,</span> <span class="s2">&quot;G3&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;C5&quot;</span><span class="p">,</span> <span class="s2">&quot;C3&quot;</span><span class="p">,</span>
                      <span class="s2">&quot;T&quot;</span> <span class="s2">&quot;T5&quot;</span><span class="p">,</span> <span class="s2">&quot;T3&quot;</span><span class="p">,</span> <span class="s2">&quot;U&quot;</span><span class="p">,</span> <span class="s2">&quot;U5&quot;</span><span class="p">,</span> <span class="s2">&quot;U3&quot;</span><span class="p">,</span> <span class="s2">&quot;INO&quot;</span><span class="p">}</span>
@@ -706,8 +709,8 @@
 <span class="sd">    &gt;&gt;&gt; import stacker as st</span>
 <span class="sd">    &gt;&gt;&gt; filtered_traj = st.filter_traj(&#39;testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;, </span>
 <span class="sd">    ...                              &#39;testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;, </span>
-<span class="sd">    ...                              residues_desired = {426,427}, </span>
-<span class="sd">    ...                              atomnames_desired = {&#39;C2&#39;,&#39;C4&#39;,&#39;C6&#39;})</span>
+<span class="sd">    ...                              residues = {426,427}, </span>
+<span class="sd">    ...                              atoms = {&#39;C2&#39;,&#39;C4&#39;,&#39;C6&#39;})</span>
 <span class="sd">    WARNING: Residue Indices are expected to be 1-indexed</span>
 <span class="sd">    Reading trajectory...</span>
 <span class="sd">    Reading topology...</span>
@@ -797,8 +800,8 @@
 <span class="sd">    &gt;&gt;&gt; import stacker as st</span>
 <span class="sd">    &gt;&gt;&gt; filtered_traj = st.filter_traj(&#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;, </span>
 <span class="sd">    ...                             &#39;stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;, </span>
-<span class="sd">    ...                             residues_desired = &#39;2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430&#39;, </span>
-<span class="sd">    ...                             atomnames_desired = {&#39;C2&#39;,&#39;C4&#39;,&#39;C6&#39;})</span>
+<span class="sd">    ...                             residues = &#39;2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430&#39;, </span>
+<span class="sd">    ...                             atoms = {&#39;C2&#39;,&#39;C4&#39;,&#39;C6&#39;})</span>
 <span class="sd">    &gt;&gt;&gt; ssf = st.get_residue_distance_for_frame(filtered_traj, frame = 2, write_output = False)</span>
 <span class="sd">    &gt;&gt;&gt; ssf.shape</span>
 <span class="sd">    (127, 127)</span>
@@ -900,8 +903,8 @@
 <span class="sd">    &gt;&gt;&gt; import stacker as st</span>
 <span class="sd">    &gt;&gt;&gt; filtered_traj = st.filter_traj(&#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;, </span>
 <span class="sd">    ...                             &#39;stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;, </span>
-<span class="sd">    ...                             residues_desired = &#39;2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430&#39;, </span>
-<span class="sd">    ...                             atomnames_desired = {&#39;C2&#39;,&#39;C4&#39;,&#39;C6&#39;})</span>
+<span class="sd">    ...                             residues = &#39;2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430&#39;, </span>
+<span class="sd">    ...                             atoms = {&#39;C2&#39;,&#39;C4&#39;,&#39;C6&#39;})</span>
 <span class="sd">    &gt;&gt;&gt; ssfs = st.get_residue_distance_for_trajectory(filtered_traj, frames = &#39;1-3&#39;, write_output = False)</span>
 <span class="sd">    &gt;&gt;&gt; ssfs.shape</span>
 <span class="sd">    (3, 127, 127)</span>
@@ -963,8 +966,8 @@
 <span class="sd">    &gt;&gt;&gt; import stacker as st</span>
 <span class="sd">    &gt;&gt;&gt; filtered_traj = st.filter_traj(&#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;, </span>
 <span class="sd">    ...                             &#39;stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;, </span>
-<span class="sd">    ...                             residues_desired = &#39;2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430&#39;, </span>
-<span class="sd">    ...                             atomnames_desired = {&#39;C2&#39;,&#39;C4&#39;,&#39;C6&#39;})</span>
+<span class="sd">    ...                             residues = &#39;2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430&#39;, </span>
+<span class="sd">    ...                             atoms = {&#39;C2&#39;,&#39;C4&#39;,&#39;C6&#39;})</span>
 <span class="sd">    &gt;&gt;&gt; ssfs = st.get_residue_distance_for_trajectory(filtered_traj, frames = &#39;1-3&#39;, write_output = False)</span>
 <span class="sd">    &gt;&gt;&gt; avg_ssf = st.get_frame_average(ssfs)</span>
 <span class="sd">    &gt;&gt;&gt; avg_ssf.shape</span>
@@ -1011,7 +1014,7 @@
 <span class="sd">    &gt;&gt;&gt; import stacker as st</span>
 <span class="sd">    &gt;&gt;&gt; filtered_traj = st.filter_traj(&#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;, </span>
 <span class="sd">    ...                             &#39;stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;, </span>
-<span class="sd">    ...                             atomnames_desired = {&#39;C2&#39;,&#39;C4&#39;,&#39;C6&#39;})</span>
+<span class="sd">    ...                             atoms = {&#39;C2&#39;,&#39;C4&#39;,&#39;C6&#39;})</span>
 <span class="sd">    &gt;&gt;&gt; ssf = st.get_residue_distance_for_frame(filtered_traj, frame = 2, write_output = False)</span>
 <span class="sd">    &gt;&gt;&gt; ssf.shape</span>
 <span class="sd">    (252,252)</span>
@@ -1103,6 +1106,40 @@
     <span class="n">incremented_number</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">number_part</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">letter_part</span> <span class="o">+</span> <span class="n">incremented_number</span></div>
 
+
+<div class="viewcode-block" id="load_ssfs">
+<a class="viewcode-back" href="../../stacker.pairwise_distance.html#stacker.pairwise_distance.load_ssfs">[docs]</a>
+<span class="k">def</span> <span class="nf">load_ssfs</span><span class="p">(</span><span class="n">file</span> <span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Loads a list of SSFs created by ``stacker -s ssf -d OUTFILE``</span>
+
+<span class="sd">    Loads a list of SSFs where each element is an SSF from a given</span>
+<span class="sd">    frame. This is ``OUTFILE`` when running ``stacker -s ssf -d OUTFILE``</span>
+<span class="sd">    and quickly provides saved SSF data rather than recalculating SSFs</span>
+<span class="sd">    for a given trajectory.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    file : str </span>
+<span class="sd">        outfile from ``stacker -s ssf -d OUTFILE``. </span>
+<span class="sd">        Must be ``.txt`` or ``.txt.gz``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ssfs : numpy.typing.ArrayLike</span>
+<span class="sd">        List or array of 2D NumPy arrays representing a pairwise distance matrix</span>
+<span class="sd">        of an MD structure. All 2D NumPy arrays must be of the same dimenstions.</span>
+<span class="sd">        Output of ``get_residue_distance_for_trajectory()``</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    system_stacking_fingerprints : calculates ``ssfs`` rather than loading it like this function.</span>
+<span class="sd">    get_residue_distance_for_trajectory : Alias for :func:`system_stacking_fingerprints()`</span>
+<span class="sd">    get_frame_average : calculates average SSF for a trajectory. ``matrix`` parameter is the output of this</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">flattened_ssf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="n">ssfs</span> <span class="o">=</span> <span class="n">flattened_ssf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">flattened_ssf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">math</span><span class="o">.</span><span class="n">isqrt</span><span class="p">(</span><span class="n">flattened_ssf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">math</span><span class="o">.</span><span class="n">isqrt</span><span class="p">(</span><span class="n">flattened_ssf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">ssfs</span></div>
 
 
 <div class="viewcode-block" id="MultiFrameTraj">

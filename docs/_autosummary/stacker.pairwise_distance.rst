@@ -1,4 +1,4 @@
-
+﻿
 
 pairwise_distance
 =========================
@@ -22,6 +22,7 @@ pairwise_distance
       get_residue_distance_for_trajectory
       get_top_stacking
       increment_residue
+      load_ssfs
       system_stacking_fingerprints
    
    

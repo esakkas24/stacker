@@ -439,6 +439,7 @@
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.load_ssfs.html">stacker.pairwise_distance.load_ssfs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
@@ -487,6 +488,7 @@
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.load_ssfs.html">stacker.pairwise_distance.load_ssfs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
@@ -691,6 +693,11 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-trajectory">Filtering Trajectory</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-distance-between-residues">Get Distance Between Residues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-system-stacking-fingerprints-ssfs">Create System Stacking Fingerprints (SSFs)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-average-ssf">Get Average SSF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-output">Data Output</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -775,14 +782,23 @@ Required Arguments:
                         Filepath of PDB to output to
 </pre></div>
 </div>
-<p>This is the command line equivalent of <a class="reference internal" href="stacker.file_manipulation.html#stacker.file_manipulation.filter_traj_to_pdb" title="stacker.file_manipulation.filter_traj_to_pdb"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_traj_to_pdb()</span></code></a>. So, the following are equivalent:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">trajectory_filename</span> <span class="o">=</span> <span class="s2">&quot;../testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topology_filename</span> <span class="o">=</span> <span class="s2">&quot;../testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">output_pdb_filename</span> <span class="o">=</span> <span class="s2">&quot;../testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">residues_desired</span> <span class="o">=</span> <span class="s2">&quot;426,427&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span><span class="s2">&quot;C4&quot;</span><span class="p">,</span><span class="s2">&quot;C6&quot;</span><span class="p">}</span>
+<p>This is the command line equivalent of <a class="reference internal" href="stacker.html#stacker.file_manipulation.filter_traj_to_pdb" title="stacker.file_manipulation.filter_traj_to_pdb"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_traj_to_pdb()</span></code></a>. So, the following are equivalent:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">trj_file</span> <span class="o">=</span> <span class="s2">&quot;first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">top_file</span> <span class="o">=</span> <span class="s2">&quot;5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">pdb</span> <span class="o">=</span> <span class="s2">&quot;5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">residues</span> <span class="o">=</span> <span class="s2">&quot;426,427&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">atoms</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span><span class="s2">&quot;C4&quot;</span><span class="p">,</span><span class="s2">&quot;C6&quot;</span><span class="p">}</span>
 <span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[user] $ stacker -s filter_traj \
+                -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
+                -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
+                -o 5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb \
+                -r 426,427 \
+                -a C2,C4,C6
 </pre></div>
 </div>
 </section>
@@ -831,6 +847,151 @@ Required Arguments:
                         Smart-indexed list of 1-indexed residues, must provide only 2 residues, accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)
 </pre></div>
 </div>
+<p>This is the command line equivalent of <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_residue_distance_for_frame()</span></code></a>.
+So, the following are equivalent:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s1">&#39;first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                             <span class="s1">&#39;5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                             <span class="n">residues</span> <span class="o">=</span> <span class="p">{</span><span class="mi">426</span><span class="p">,</span><span class="mi">427</span><span class="p">},</span>
+<span class="gp">... </span>                             <span class="n">atoms</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span><span class="s1">&#39;C6&#39;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">get_residue_distance_for_frame</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">trj</span> <span class="o">=</span> <span class="n">filtered_traj</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">frame</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">res1_atoms</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">res2_atoms</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">write_output</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="go">...)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[user] $ stacker -s res_distance \
+                -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
+                -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
+                -r 426,427 \
+                -f 3 \
+                -a C2,C4,C6
+</pre></div>
+</div>
+</section>
+<section id="create-system-stacking-fingerprints-ssfs">
+<h2>Create System Stacking Fingerprints (SSFs)<a class="headerlink" href="#create-system-stacking-fingerprints-ssfs" title="Link to this heading">#</a></h2>
+<p>Running <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">ssf</span></code> will create a System Stacking
+Fingerprint (SSF) for the trajectory, with many options to customize
+the plot outputs. Running <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">ssf</span> <span class="pre">--help</span></code> will give
+more flag options:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[user]$ stacker -s ssf --help
+usage: stacker -s ROUTINE -trj TRAJECTORY_FILENAME -top TOPOLOGY_FILENAME [-r RESIDUES] [-i INPUT_FILE] [-f FRAME_NUM | -fl FRAME_LIST] [-o OUTPUT_FILE]
+        [-g N_EVENTS] [-d OUTPUT_FILE] [-B INPUT_FILE] [-l LIMITS] [-y SCALE_STYLE] [-t N_THREADS] [-h]
+
+Creates a System Stacking Fingerprint of the average structure across the chosen frames of a trajectory.
+
+Examples:
+
+[user]$ stacker -s system -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2
+
+[user]$ stacker -s ssf -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-2 -g 10 -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
+
+options:
+-s, --script ROUTINE  Name of command to use. Options for ROUTINE:
+
+                        filter_traj:
+                        filters trajectory and topology files to desired residue numbers and atom names
+                        bottaro OR pairwise OR psf:
+                        Create Polar Stacking Fingerprint like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)
+                        res_distance:
+                        Get the distance between two residues in a given frame
+                        system OR ssf:
+                        Create a System Stacking Fingerprint of distances by residue
+                        stack_events:
+                        Get list of residues with most stacking events (distance closest to 3.5Å)
+                        compare:
+                        Get the most changed stacking events between two fingerprints using the outputs of stacker -s stack_events
+-r, --residues RESIDUES
+                Smart-indexed list of 1-indexed residues, also accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)
+-i, --input INPUT_FILE
+                Input .txt file containing per-frame stacking information, in lieu of running stacking fingerprint analysis again.
+                TXT file can be created by running `stacker -s system -d OUTPUT_FILE`
+                -r flag must match the residues used to create the TXT file
+-f, --frame FRAME_NUM
+                1-indexed Frame Number within trajectory to analyze, cannot be used with -fl
+-fl, --frame_list FRAME_LIST
+                Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,
+                gets average distance between residues across these frames
+                if empty all frames are used, cannot be used with -f
+-o, --output OUTPUT_FILE
+                Filename of output PNG to write plot to. If empty, will output displays to Python visual
+-g, --get_stacking N_EVENTS
+                Get list of N_EVENTS residues with most stacking events (distance closest to 3.5Å) in the average structure across all frames.
+                Print to standard output. Equivalent to -s stack_events -n N_EVENTS
+-d, --data_output OUTPUT_FILE
+                Output the calculated per-frame numpy arrays that create the stacking fingerprint matrix to a file
+-B, --input_B INPUT_FILE
+                Input .txt file containing per-frame stacking information for a second fingerprint, creates fingerprint where top left is initial input, bottom right is second fingerprint.
+                        Used in lieu of running stacking fingerprint analysis again.
+                TXT file can be created by running `stacker -s system -d OUTPUT_FILE`
+                -r flag must match the residues used to create the TXT file
+-l, --limits LIMITS   limits of the color scale, default = (0,7)
+-y, --scale_style SCALE_STYLE
+                        style of color scale. {bellcurve, gradient}
+-t, --threads N_THREADS
+                Use multithreading with INT worker threads
+-h, --help            show this help message and exit
+
+Required Arguments:
+-trj, --trajectory TRAJECTORY_FILENAME
+                Filepath to trajectory file for the MD simulation
+-top, --topology TOPOLOGY_FILENAME
+                Filepath to Topology file for the MD simulation
+</pre></div>
+</div>
+<section id="get-average-ssf">
+<h3>Get Average SSF<a class="headerlink" href="#get-average-ssf" title="Link to this heading">#</a></h3>
+<p>The basic SSF Command Line function runs <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_frame_average" title="stacker.pairwise_distance.get_frame_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_frame_average()</span></code></a> and
+<a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-func docutils literal notranslate"><span class="pre">system_stacking_fingerprints()</span></code></a>, creating an SSF for the
+trajectory averaged across all frames:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s1">&#39;first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span><span class="p">,</span>
+<span class="go">                    &#39;5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;,</span>
+<span class="go">                    residues = &#39;90-215&#39;,</span>
+<span class="go">                    atoms = {&#39;C2&#39;,&#39;C4&#39;,&#39;C6&#39;})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssfs</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">system_stacking_fingerprints</span><span class="p">(</span><span class="n">filtered_traj</span><span class="p">,</span> <span class="n">frames</span> <span class="o">=</span> <span class="s1">&#39;1-2&#39;</span><span class="p">,</span> <span class="n">write_output</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avg_ssf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">get_frame_average</span><span class="p">(</span><span class="n">ssfs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resSeqs</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">resSeq</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">filtered_traj</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">residues</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">display_ssfs</span><span class="p">(</span><span class="n">avg_ssf</span><span class="p">,</span> <span class="n">resSeqs</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[user]$ stacker -s ssf \
+                -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
+                -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
+                -r 90-215 \
+                -fl 1-2
+</pre></div>
+</div>
+</section>
+<section id="data-output">
+<h3>Data Output<a class="headerlink" href="#data-output" title="Link to this heading">#</a></h3>
+<p>There are three important flags to output the SSF data:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-o,</span> <span class="pre">--output</span> <span class="pre">OUTPUT_FILE</span></code> : Save SSF to an output PNG <code class="docutils literal notranslate"><span class="pre">OUTPUT_FILE</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-g,</span> <span class="pre">--get_stacking</span> <span class="pre">N_EVENTS</span></code> : Prints top stacking pairs to standard output.</p></li>
+</ul>
+<p>Equivalent to <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a>, where <code class="docutils literal notranslate"><span class="pre">N_EVENTS</span></code> is the <code class="docutils literal notranslate"><span class="pre">n_events</span></code> parameter.
+- <code class="docutils literal notranslate"><span class="pre">-d,</span> <span class="pre">--data_output</span> <span class="pre">OUTPUT_FILE</span></code> : Output the list of SSFs to <code class="docutils literal notranslate"><span class="pre">.txt.gz</span></code>. You can input
+this SSF data rather than recalculate each time.</p>
+<p>Expanding on the command above, we create SSFs for frames 1-10 and use
+<code class="docutils literal notranslate"><span class="pre">-t</span> <span class="pre">10</span></code> to calculate them in parallel:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">stacker</span> <span class="o">-</span><span class="n">s</span> <span class="n">ssf</span> \
+        <span class="o">-</span><span class="n">trj</span> <span class="n">first10_5JUP_N2_tUAG_aCUA_</span><span class="o">+</span><span class="mi">1</span><span class="n">GCU_nowat</span><span class="o">.</span><span class="n">mdcrd</span> \
+        <span class="o">-</span><span class="n">top</span> <span class="mi">5</span><span class="n">JUP_N2_tUAG_aCUA_</span><span class="o">+</span><span class="mi">1</span><span class="n">GCU_nowat</span><span class="o">.</span><span class="n">prmtop</span> \
+        <span class="o">-</span><span class="n">r</span> <span class="mi">90</span><span class="o">-</span><span class="mi">215</span> \
+        <span class="o">-</span><span class="n">fl</span> <span class="mi">1</span><span class="o">-</span><span class="mi">10</span> \
+        <span class="o">-</span><span class="n">o</span> <span class="mi">5</span><span class="n">JUP_N2_tUAG_aCUA_</span><span class="o">+</span><span class="mi">1</span><span class="n">GCU_nowat</span><span class="o">.</span><span class="n">SSF</span><span class="o">.</span><span class="n">png</span> \
+        <span class="o">-</span><span class="n">d</span> <span class="mi">5</span><span class="n">JUP_N2_tUAG_aCUA_</span><span class="o">+</span><span class="mi">1</span><span class="n">GCU_nowat</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">txt</span><span class="o">.</span><span class="n">gz</span> \
+        <span class="o">-</span><span class="n">g</span> <span class="mi">5</span> \
+        <span class="o">-</span><span class="n">t</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p>This outputs the average SSF for frames 1-10 to <code class="docutils literal notranslate"><span class="pre">5JUP_N2_tUAG_aCUA_+1GCU_nowat.SSF.png</span></code>:</p>
+</section>
 </section>
 </section>
 
@@ -882,6 +1043,11 @@ Required Arguments:
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-trajectory">Filtering Trajectory</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-distance-between-residues">Get Distance Between Residues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-system-stacking-fingerprints-ssfs">Create System Stacking Fingerprints (SSFs)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-average-ssf">Get Average SSF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-output">Data Output</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
