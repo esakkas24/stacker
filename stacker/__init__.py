@@ -255,7 +255,7 @@ def filter_traj_routine() -> None:
         raise AtomEmpty("Must include a list of atom names to keep in the trajectory")
 
     create_parent_directories(args.output)
-    filter_traj_to_pdb(trajectory_filename=args.trajectory, topology_filename=args.topology, output_pdb_filename=args.output, residues_desired=residues_desired, atomnames_desired=atomnames_desired)
+    filter_traj_to_pdb(trj_file=args.trajectory, top_file=args.topology, pdb=args.output, residues=residues_desired, atoms=atomnames_desired)
 
 def bottaro_routine() -> None:
     """
@@ -357,15 +357,15 @@ def bottaro_routine() -> None:
 
     create_parent_directories(pdb_filename)
     if args.trajectory and args.topology:
-        filter_traj_to_pdb(trajectory_filename=args.trajectory, topology_filename=args.topology, output_pdb_filename=pdb_filename,
-                           residues_desired={pers_res_num,view_res_num}, atomnames_desired=perspective_atom_names.union(viewed_atom_names))
+        filter_traj_to_pdb(trj_file=args.trajectory, top_file=args.topology, pdb=pdb_filename,
+                           residues={pers_res_num,view_res_num}, atoms=perspective_atom_names.union(viewed_atom_names))
     
     create_parent_directories(output_name)
 
-    write_bottaro_to_csv(pdb_filename=pdb_filename, 
-                         output_csv_name=output_name, perspective_residue_num=pers_res_num, viewed_residue_num=view_res_num,
-                         res1_atom_names=tuple(perspective_atom_names), 
-                         res2_atom_names=tuple(viewed_atom_names), index = args.index)
+    write_bottaro_to_csv(pdb=pdb_filename, 
+                         csv=output_name, pers_res=pers_res_num, view_res=view_res_num,
+                         res1_atoms=tuple(perspective_atom_names), 
+                         res2_atoms=tuple(viewed_atom_names), index = args.index)
     
     if args.plot_type == 'heat':
         create_parent_directories(args.plot_outfile)
@@ -443,7 +443,7 @@ def res_distance_routine() -> None:
         raise AtomEmpty("Must include a list of atom names to keep in the trajectory")
 
     block_printing()
-    filtered_trj = filter_traj(trajectory_filename=args.trajectory, topology_filename=args.topology, residues_desired=residues_desired, atomnames_desired=atomnames_desired)
+    filtered_trj = filter_traj(trj_file=args.trajectory, top_file=args.topology, residues=residues_desired, atoms=atomnames_desired)
     if args.bootstrap:
         n_frames = len(filtered_trj)
         frames = [random.randint(0, n_frames-1) for _ in range(args.bootstrap)]
@@ -458,7 +458,7 @@ def res_distance_routine() -> None:
         # Correct that calculate_residue_distance res_nums are 1-indexed
         print(i)
         i+=1
-        distance_vector = calculate_residue_distance(trajectory=trj_frame, res1_num=int(residues_desired[0]), res2_num=int(residues_desired[1]), res1_atoms=tuple(atomnames_desired), res2_atoms=tuple(atomnames_desired))
+        distance_vector = calculate_residue_distance(trj=trj_frame, res1=int(residues_desired[0]), res2=int(residues_desired[1]), res1_atoms=tuple(atomnames_desired), res2_atoms=tuple(atomnames_desired))
         enable_printing()
         res_distances.append(distance_vector.magnitude())
 
@@ -538,7 +538,7 @@ def system_routine() -> None:
     else:
         frame_list = []
 
-    trj_sub = filter_traj(trajectory_filename=args.trajectory, topology_filename=args.topology, residues_desired=residues_desired)
+    trj_sub = filter_traj(trj_file=args.trajectory, top_file=args.topology, residues=residues_desired)
 
     if args.input:
         print("Loaded fingerprint data from:", args.input)
@@ -570,7 +570,7 @@ def system_routine() -> None:
         print(avg_frames)
 
     if args.get_stacking:
-        get_top_stacking(trj_sub, avg_frames[0], output_csv = '', n_events = args.get_stacking)
+        get_top_stacking(trj_sub, avg_frames[0], csv = '', n_events = args.get_stacking)
 
     sorted_res = list(residues_desired)
     sorted_res.sort()
@@ -681,7 +681,7 @@ def stack_events_routine() -> None:
     else:
         residues_desired = {}
 
-    trj_sub = filter_traj(trajectory_filename=args.trajectory, topology_filename=args.topology, residues_desired=residues_desired)
+    trj_sub = filter_traj(trj_file=args.trajectory, top_file=args.topology, residues=residues_desired)
 
     if args.input:
         loaded_arr = np.loadtxt(args.input)
@@ -693,7 +693,7 @@ def stack_events_routine() -> None:
         frames = get_residue_distance_for_trajectory(trj_sub, args.frame_list, threads = args.threads)
         frame = get_frame_average(frames)
 
-    get_top_stacking(trj_sub, frame, output_csv = args.output, n_events = args.n_events, include_adjacent = args.include_adjacent)
+    get_top_stacking(trj_sub, frame, csv = args.output, n_events = args.n_events, include_adjacent = args.include_adjacent)
 
 def compare_routine() -> None:
     """

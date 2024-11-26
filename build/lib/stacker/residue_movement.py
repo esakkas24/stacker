@@ -447,8 +447,8 @@ if __name__ == "__main__":
     ############################
 
     pdb_filename = 'stacker/testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb'
-    filter_traj_to_pdb(trajectory_filename=trajectory_file, topology_filename=topology_file, output_pdb_filename=pdb_filename,
-                       residues_desired={perspective_residue,viewed_residue}, atomnames_desired={"C2", "C4", "C6"})
+    filter_traj_to_pdb(trj_file=trajectory_file, top_file=topology_file, pdb=pdb_filename,
+                       residues={perspective_residue,viewed_residue}, atoms={"C2", "C4", "C6"})
 
     # Two Residue movement test 10 frames
     write_bottaro_to_csv(pdb_filename, 

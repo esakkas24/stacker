@@ -39,7 +39,7 @@ We filter to atoms C2, C4, and C6 using :func:`filter_traj`::
 
     >>> import stacker as st
     >>> filtered_traj = st.filter_traj("first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd",
-    ...                 topology_filename = "5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop",
+    ...                 top_file = "5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop",
     ...                 atomnames_desired = {"C2", "C4", "C6"})
     WARNING: Residue Indices are expected to be 1-indexed
     Reading trajectory...

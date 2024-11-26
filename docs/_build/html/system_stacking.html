@@ -735,7 +735,7 @@ We filter this trajectory to the pi-stacking residue pair.</p>
 <p>We filter to atoms C2, C4, and C6 using <a class="reference internal" href="stacker.file_manipulation.html#stacker.file_manipulation.filter_traj" title="stacker.file_manipulation.filter_traj"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_traj()</span></code></a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s2">&quot;first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&quot;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="n">topology_filename</span> <span class="o">=</span> <span class="s2">&quot;5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="n">top_file</span> <span class="o">=</span> <span class="s2">&quot;5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
 <span class="go">WARNING: Residue Indices are expected to be 1-indexed</span>
 <span class="go">Reading trajectory...</span>

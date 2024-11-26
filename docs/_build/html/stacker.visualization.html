@@ -995,14 +995,14 @@ of the perspective residue at the center.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.visualization.visualize_two_residue_movement_scatterplot">
-<span class="sig-name descname"><span class="pre">visualize_two_residue_movement_scatterplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/visualization.html#visualize_two_residue_movement_scatterplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.visualize_two_residue_movement_scatterplot" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">visualize_two_residue_movement_scatterplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/visualization.html#visualize_two_residue_movement_scatterplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.visualize_two_residue_movement_scatterplot" title="Link to this definition">#</a></dt>
 <dd><p>Creates scatterplot of two-residue movement relative to each other.</p>
 <p>Takes the data created in residue_movement and visualizes it as a polar coordinate
 scatterplot similar to the Figure D link in Proposal Feature 4.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>csv_filepath</strong><span class="classifier">str</span></dt><dd><p>Filepath to csv file containing data on the movement
+<dt><strong>csv</strong><span class="classifier">str</span></dt><dd><p>Filepath to csv file containing data on the movement
 of two residues relative to each other (r, rho, and theta values). Created
 in residue_movement.</p>
 </dd>
@@ -1034,7 +1034,7 @@ png, pdf, ps, eps, and svg supported.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">output_csv_name</span> <span class="o">=</span> <span class="s2">&quot;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">perspective_residue</span> <span class="o">=</span> <span class="mi">426</span> <span class="c1"># 1-indexed</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">viewed_residue</span> <span class="o">=</span> <span class="mi">427</span> <span class="c1"># 1-indexed</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="o">=</span><span class="n">trajectory_file</span><span class="p">,</span> <span class="n">topology_filename</span><span class="o">=</span><span class="n">topology_file</span><span class="p">,</span> <span class="n">output_pdb_filename</span><span class="o">=</span><span class="n">pdb_filename</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span><span class="n">trj_file</span><span class="o">=</span><span class="n">trajectory_file</span><span class="p">,</span> <span class="n">top_file</span><span class="o">=</span><span class="n">topology_file</span><span class="p">,</span> <span class="n">output_pdb_filename</span><span class="o">=</span><span class="n">pdb_filename</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="n">residues_desired</span><span class="o">=</span><span class="p">{</span><span class="n">perspective_residue</span><span class="p">,</span><span class="n">viewed_residue</span><span class="p">},</span> <span class="n">atomnames_desired</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
 <span class="go">WARNING: Residue Indices are expected to be 1-indexed</span>
 <span class="go">Reading trajectory...</span>
@@ -1053,14 +1053,14 @@ png, pdf, ps, eps, and svg supported.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.visualization.visualize_two_residue_movement_heatmap">
-<span class="sig-name descname"><span class="pre">visualize_two_residue_movement_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/visualization.html#visualize_two_residue_movement_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.visualize_two_residue_movement_heatmap" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">visualize_two_residue_movement_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/visualization.html#visualize_two_residue_movement_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.visualize_two_residue_movement_heatmap" title="Link to this definition">#</a></dt>
 <dd><p>Creates heatmap of two-residue movement relative to each other.</p>
 <p>2D shaded contour plot of the density of points in the 
 visualize_two_residue_movement_scatterplot() scatterplot.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>csv_filepath</strong><span class="classifier">str</span></dt><dd><p>Filepath to csv file containing data on the movement
+<dt><strong>csv</strong><span class="classifier">str</span></dt><dd><p>Filepath to csv file containing data on the movement
 of two residues relative to each other (r, rho, and theta values). Created
 in residue_movement.</p>
 </dd>
@@ -1092,7 +1092,7 @@ png, pdf, ps, eps, and svg supported.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">output_csv_name</span> <span class="o">=</span> <span class="s2">&quot;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">perspective_residue</span> <span class="o">=</span> <span class="mi">426</span> <span class="c1"># 1-indexed</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">viewed_residue</span> <span class="o">=</span> <span class="mi">427</span> <span class="c1"># 1-indexed</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="o">=</span><span class="n">trajectory_file</span><span class="p">,</span> <span class="n">topology_filename</span><span class="o">=</span><span class="n">topology_file</span><span class="p">,</span> <span class="n">output_pdb_filename</span><span class="o">=</span><span class="n">pdb_filename</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span><span class="n">trj_file</span><span class="o">=</span><span class="n">trajectory_file</span><span class="p">,</span> <span class="n">top_file</span><span class="o">=</span><span class="n">topology_file</span><span class="p">,</span> <span class="n">output_pdb_filename</span><span class="o">=</span><span class="n">pdb_filename</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="n">residues_desired</span><span class="o">=</span><span class="p">{</span><span class="n">perspective_residue</span><span class="p">,</span><span class="n">viewed_residue</span><span class="p">},</span> <span class="n">atomnames_desired</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
 <span class="go">WARNING: Residue Indices are expected to be 1-indexed</span>
 <span class="go">Reading trajectory...</span>
@@ -1111,7 +1111,7 @@ png, pdf, ps, eps, and svg supported.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.visualization.display_psf_scatter">
-<span class="sig-name descname"><span class="pre">display_psf_scatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/visualization.html#display_psf_scatter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.display_psf_scatter" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">display_psf_scatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/visualization.html#display_psf_scatter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.display_psf_scatter" title="Link to this definition">#</a></dt>
 <dd><p>Alias for <cite>visualize_two_residue_movement_scatterplot()</cite>.</p>
 <p>Creates scatterplot of two-residue movement relative to each other.</p>
 <p>Takes the data created in residue_movement and visualizes it as a polar coordinate
@@ -1119,7 +1119,7 @@ scatterplot similar to the Figure D link in Proposal Feature 4.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>csv_filepath</strong><span class="classifier">str</span></dt><dd><p>Filepath to csv file containing data on the movement
+<dt><strong>csv</strong><span class="classifier">str</span></dt><dd><p>Filepath to csv file containing data on the movement
 of two residues relative to each other (r, rho, and theta values). Created
 in residue_movement.</p>
 </dd>
@@ -1151,7 +1151,7 @@ png, pdf, ps, eps, and svg supported.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">output_csv_name</span> <span class="o">=</span> <span class="s2">&quot;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">perspective_residue</span> <span class="o">=</span> <span class="mi">426</span> <span class="c1"># 1-indexed</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">viewed_residue</span> <span class="o">=</span> <span class="mi">427</span> <span class="c1"># 1-indexed</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="o">=</span><span class="n">trajectory_file</span><span class="p">,</span> <span class="n">topology_filename</span><span class="o">=</span><span class="n">topology_file</span><span class="p">,</span> <span class="n">output_pdb_filename</span><span class="o">=</span><span class="n">pdb_filename</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span><span class="n">trj_file</span><span class="o">=</span><span class="n">trajectory_file</span><span class="p">,</span> <span class="n">top_file</span><span class="o">=</span><span class="n">topology_file</span><span class="p">,</span> <span class="n">output_pdb_filename</span><span class="o">=</span><span class="n">pdb_filename</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="n">residues_desired</span><span class="o">=</span><span class="p">{</span><span class="n">perspective_residue</span><span class="p">,</span><span class="n">viewed_residue</span><span class="p">},</span> <span class="n">atomnames_desired</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
 <span class="go">WARNING: Residue Indices are expected to be 1-indexed</span>
 <span class="go">Reading trajectory...</span>
@@ -1170,7 +1170,7 @@ png, pdf, ps, eps, and svg supported.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.visualization.display_psf_heatmap">
-<span class="sig-name descname"><span class="pre">display_psf_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/visualization.html#display_psf_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.display_psf_heatmap" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">display_psf_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stacker/visualization.html#display_psf_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.display_psf_heatmap" title="Link to this definition">#</a></dt>
 <dd><p>Alias for <cite>visualize_two_residue_movement_heatmap()</cite>.</p>
 <p>Creates heatmap of two-residue movement relative to each other.</p>
 <p>2D shaded contour plot of the density of points in the 
@@ -1178,7 +1178,7 @@ visualize_two_residue_movement_scatterplot() scatterplot.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>csv_filepath</strong><span class="classifier">str</span></dt><dd><p>Filepath to csv file containing data on the movement
+<dt><strong>csv</strong><span class="classifier">str</span></dt><dd><p>Filepath to csv file containing data on the movement
 of two residues relative to each other (r, rho, and theta values). Created
 in residue_movement.</p>
 </dd>
@@ -1210,7 +1210,7 @@ png, pdf, ps, eps, and svg supported.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">output_csv_name</span> <span class="o">=</span> <span class="s2">&quot;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">perspective_residue</span> <span class="o">=</span> <span class="mi">426</span> <span class="c1"># 1-indexed</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">viewed_residue</span> <span class="o">=</span> <span class="mi">427</span> <span class="c1"># 1-indexed</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="o">=</span><span class="n">trajectory_file</span><span class="p">,</span> <span class="n">topology_filename</span><span class="o">=</span><span class="n">topology_file</span><span class="p">,</span> <span class="n">output_pdb_filename</span><span class="o">=</span><span class="n">pdb_filename</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span><span class="n">trj_file</span><span class="o">=</span><span class="n">trajectory_file</span><span class="p">,</span> <span class="n">top_file</span><span class="o">=</span><span class="n">topology_file</span><span class="p">,</span> <span class="n">output_pdb_filename</span><span class="o">=</span><span class="n">pdb_filename</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="n">residues_desired</span><span class="o">=</span><span class="p">{</span><span class="n">perspective_residue</span><span class="p">,</span><span class="n">viewed_residue</span><span class="p">},</span> <span class="n">atomnames_desired</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
 <span class="go">WARNING: Residue Indices are expected to be 1-indexed</span>
 <span class="go">Reading trajectory...</span>

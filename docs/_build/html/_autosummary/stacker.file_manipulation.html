@@ -721,13 +721,13 @@ to other filetypes (eg. prmtop, mdcrd, pdb)</p>
 <p class="rubric">Functions</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#stacker.file_manipulation.file_convert" title="stacker.file_manipulation.file_convert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">file_convert</span></code></a>(trajectory_filename, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.file_manipulation.html#stacker.file_manipulation.file_convert" title="stacker.file_manipulation.file_convert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">file_convert</span></code></a>(trj_file, top_file, outfile)</p></td>
 <td><p>Converts a trajectory input file to a new output type.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#stacker.file_manipulation.filter_traj" title="stacker.file_manipulation.filter_traj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj</span></code></a>(trajectory_filename, ...[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.file_manipulation.html#stacker.file_manipulation.filter_traj" title="stacker.file_manipulation.filter_traj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj</span></code></a>(trj_file, top_file[, residues, ...])</p></td>
 <td><p>Filters an input trajectory to only the specified atoms and residues</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#stacker.file_manipulation.filter_traj_to_pdb" title="stacker.file_manipulation.filter_traj_to_pdb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj_to_pdb</span></code></a>(trajectory_filename, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.file_manipulation.html#stacker.file_manipulation.filter_traj_to_pdb" title="stacker.file_manipulation.filter_traj_to_pdb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj_to_pdb</span></code></a>(trj_file, top_file, pdb)</p></td>
 <td><p>Filters an input trajectory to only the specified atoms and residues and outputs to pdb</p></td>
 </tr>
 </tbody>
@@ -736,7 +736,7 @@ to other filetypes (eg. prmtop, mdcrd, pdb)</p>
 <p class="rubric">Classes</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="stacker.file_manipulation.SmartIndexingAction.html#stacker.file_manipulation.SmartIndexingAction" title="stacker.file_manipulation.SmartIndexingAction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SmartIndexingAction</span></code></a>(option_strings, dest[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.file_manipulation.html#stacker.file_manipulation.SmartIndexingAction" title="stacker.file_manipulation.SmartIndexingAction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SmartIndexingAction</span></code></a>(option_strings, dest[, ...])</p></td>
 <td><p>Custom argparse action to handle smart indexing of frame numbers.</p></td>
 </tr>
 </tbody>
@@ -744,24 +744,24 @@ to other filetypes (eg. prmtop, mdcrd, pdb)</p>
 </div>
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.file_manipulation.filter_traj">
-<span class="sig-name descname"><span class="pre">filter_traj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectory_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topology_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residues_desired</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atomnames_desired</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/file_manipulation.html#filter_traj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.file_manipulation.filter_traj" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">filter_traj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trj_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residues</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/file_manipulation.html#filter_traj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.file_manipulation.filter_traj" title="Link to this definition">#</a></dt>
 <dd><p>Filters an input trajectory to only the specified atoms and residues</p>
 <p>Filteres an input trajectory that contains all of the atoms in a topology to only
 the desired atoms at the desired residues (eg. the atoms necessary to find the 
-center of geometry of a residue). If residues_desired or atomnames_desired are
+center of geometry of a residue). If <code class="docutils literal notranslate"><span class="pre">residues</span></code> or <code class="docutils literal notranslate"><span class="pre">atoms</span></code> are
 empty, all residues or atoms are included respectively.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>trajectory_filename</strong><span class="classifier">str</span></dt><dd><p>filepath of the trajectory</p>
+<dt><strong>trj_file</strong><span class="classifier">str</span></dt><dd><p>filepath of the trajectory</p>
 </dd>
-<dt><strong>topology_filename</strong><span class="classifier">str</span></dt><dd><p>filepath of the topology of the molecule</p>
+<dt><strong>top_file</strong><span class="classifier">str</span></dt><dd><p>filepath of the topology of the molecule</p>
 </dd>
-<dt><strong>residues_desired</strong><span class="classifier">set or str</span></dt><dd><p>1-indexed residue numbers of residues to keep in the trajectory.
+<dt><strong>residues</strong><span class="classifier">set or str</span></dt><dd><p>1-indexed residue numbers of residues to keep in the trajectory.
 Accepts smart-indexed str representing a list of residues (e.g ‘1-5,6,39-48’).
 If Empty, include all residues.</p>
 </dd>
-<dt><strong>atomnames_desired</strong><span class="classifier">set</span></dt><dd><p>atomnames to keep in the trajectory. If Empty, include all atoms.</p>
+<dt><strong>atoms</strong><span class="classifier">set</span></dt><dd><p>atomnames to keep in the trajectory. If Empty, include all atoms.</p>
 </dd>
 </dl>
 </dd>
@@ -775,7 +775,7 @@ If Empty, include all residues.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="#stacker.file_manipulation.filter_traj_to_pdb" title="stacker.file_manipulation.filter_traj_to_pdb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj_to_pdb</span></code></a></dt><dd><p>Filters an input trajectory to only the specified  atoms and residues and outputs to pdb</p>
+<dt><a class="reference internal" href="../stacker.file_manipulation.html#stacker.file_manipulation.filter_traj_to_pdb" title="stacker.file_manipulation.filter_traj_to_pdb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj_to_pdb</span></code></a></dt><dd><p>Filters an input trajectory to only the specified  atoms and residues and outputs to pdb</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">mdtraj.Trajectory</span></code></dt><dd><p>The Trajectory object in mdtraj package</p>
 </dd>
@@ -788,8 +788,8 @@ Outputed trajectory object will be 0-indexed.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s1">&#39;stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span><span class="p">,</span> 
 <span class="gp">... </span>                            <span class="s1">&#39;stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span><span class="p">,</span> 
-<span class="gp">... </span>                            <span class="n">residues_desired</span> <span class="o">=</span> <span class="p">{</span><span class="mi">426</span><span class="p">,</span><span class="mi">427</span><span class="p">},</span> 
-<span class="gp">... </span>                            <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span><span class="s1">&#39;C6&#39;</span><span class="p">})</span>
+<span class="gp">... </span>                            <span class="n">residues</span> <span class="o">=</span> <span class="p">{</span><span class="mi">426</span><span class="p">,</span><span class="mi">427</span><span class="p">},</span> 
+<span class="gp">... </span>                            <span class="n">atoms</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span><span class="s1">&#39;C6&#39;</span><span class="p">})</span>
 <span class="go">WARNING: Residue Indices are expected to be 1-indexed</span>
 <span class="go">Reading trajectory...</span>
 <span class="go">Reading topology...</span>
@@ -810,8 +810,8 @@ Outputed trajectory object will be 0-indexed.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s1">&#39;../testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span><span class="p">,</span> 
 <span class="gp">... </span>                            <span class="s1">&#39;../testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span><span class="p">,</span> 
-<span class="gp">... </span>                             <span class="n">residues_desired</span> <span class="o">=</span> <span class="s1">&#39;1-16,25,50-57&#39;</span><span class="p">,</span> 
-<span class="gp">... </span>                             <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span><span class="s1">&#39;C6&#39;</span><span class="p">})</span>
+<span class="gp">... </span>                             <span class="n">residues</span> <span class="o">=</span> <span class="s1">&#39;1-16,25,50-57&#39;</span><span class="p">,</span> 
+<span class="gp">... </span>                             <span class="n">atoms</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span><span class="s1">&#39;C6&#39;</span><span class="p">})</span>
 <span class="go">WARNING: Residue Indices are expected to be 1-indexed</span>
 <span class="go">Reading trajectory...</span>
 <span class="go">Reading topology...</span>
@@ -825,27 +825,27 @@ Outputed trajectory object will be 0-indexed.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.file_manipulation.filter_traj_to_pdb">
-<span class="sig-name descname"><span class="pre">filter_traj_to_pdb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectory_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topology_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_pdb_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residues_desired</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atomnames_desired</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/file_manipulation.html#filter_traj_to_pdb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.file_manipulation.filter_traj_to_pdb" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">filter_traj_to_pdb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trj_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residues</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/file_manipulation.html#filter_traj_to_pdb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.file_manipulation.filter_traj_to_pdb" title="Link to this definition">#</a></dt>
 <dd><p>Filters an input trajectory to only the specified atoms and residues and outputs to pdb</p>
 <p>Filteres an input trajectory that contains all of the atoms in a trajectory to only
 the desired atoms at the desired residues (eg. the atoms necessary to find the 
 center of geometry of a residue) and writes the output to a specified pdb file.
-If residues_desired or atomnames_desired are empty, all residues or atoms are included respectively.</p>
+If residues or atomnames are empty, all residues or atoms are included respectively.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>trajectory_filename</strong><span class="classifier">str</span></dt><dd><p>path to file of the concatenated trajectory. Should be resampled to the
+<dt><strong>trj_file</strong><span class="classifier">str</span></dt><dd><p>path to file of the concatenated trajectory. Should be resampled to the
 1 in 50 frames sampled trajectories for each replicate.</p>
 </dd>
-<dt><strong>topology_filename</strong><span class="classifier">str</span></dt><dd><p>path to file of the topology of the molecule</p>
+<dt><strong>top_file</strong><span class="classifier">str</span></dt><dd><p>path to file of the topology of the molecule</p>
 </dd>
-<dt><strong>output_pdb_filename</strong><span class="classifier">str</span></dt><dd><p>path to the output pdb file</p>
+<dt><strong>pdb</strong><span class="classifier">str</span></dt><dd><p>path to the output pdb file</p>
 </dd>
-<dt><strong>residues_desired</strong><span class="classifier">set or str</span></dt><dd><p>1-indexed residue numbers of residues to keep in the trajectory.
+<dt><strong>residues</strong><span class="classifier">set or str</span></dt><dd><p>1-indexed residue numbers of residues to keep in the trajectory.
 Accepts smart-indexed str representing a list of residues (e.g ‘1-5,6,39-48’)
 If Empty, include all residues.</p>
 </dd>
-<dt><strong>atomnames_desired</strong><span class="classifier">set</span></dt><dd><p>atomnames to keep in the trajectory</p>
+<dt><strong>atomnames</strong><span class="classifier">set</span></dt><dd><p>atomnames to keep in the trajectory</p>
 </dd>
 </dl>
 </dd>
@@ -858,7 +858,7 @@ If Empty, include all residues.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="#stacker.file_manipulation.filter_traj" title="stacker.file_manipulation.filter_traj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj</span></code></a></dt><dd><p>Filters an input trajectory to only the specified atoms and residues</p>
+<dt><a class="reference internal" href="../stacker.file_manipulation.html#stacker.file_manipulation.filter_traj" title="stacker.file_manipulation.filter_traj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_traj</span></code></a></dt><dd><p>Filters an input trajectory to only the specified atoms and residues</p>
 </dd>
 </dl>
 </div>
@@ -869,18 +869,18 @@ Outputed trajectory object will be 0-indexed.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.file_manipulation.file_convert">
-<span class="sig-name descname"><span class="pre">file_convert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectory_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topology_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/file_manipulation.html#file_convert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.file_manipulation.file_convert" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">file_convert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trj_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/file_manipulation.html#file_convert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.file_manipulation.file_convert" title="Link to this definition">#</a></dt>
 <dd><p>Converts a trajectory input file to a new output type.</p>
-<p>The output file type is determined by the <cite>output_file</cite> extension. Uses <cite>mdtraj.save()</cite> commands to convert 
-trajectory files to various file types such as <cite>mdtraj.save_mdcrd()</cite>, <cite>mdtraj.save_pdb()</cite>, <cite>mdtraj.save_xyz()</cite>, etc.</p>
+<p>The output file type is determined by the <code class="docutils literal notranslate"><span class="pre">outfile</span></code> extension. Uses <code class="docutils literal notranslate"><span class="pre">mdtraj.save()</span></code> commands to convert 
+trajectory files to various file types such as <code class="docutils literal notranslate"><span class="pre">mdtraj.save_mdcrd()</span></code>, <code class="docutils literal notranslate"><span class="pre">mdtraj.save_pdb()</span></code>, <code class="docutils literal notranslate"><span class="pre">mdtraj.save_xyz()</span></code>, etc.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>trajectory_filename</strong><span class="classifier">str</span></dt><dd><p>Path to the file of the concatenated trajectory (eg. .mdcrd file).</p>
+<dt><strong>trj_file</strong><span class="classifier">str</span></dt><dd><p>Path to the file of the concatenated trajectory (eg. .mdcrd file).</p>
 </dd>
-<dt><strong>topology_filename</strong><span class="classifier">str</span></dt><dd><p>Path to the file of the topology of the molecule (.prmtop file).</p>
+<dt><strong>top_file</strong><span class="classifier">str</span></dt><dd><p>Path to the file of the topology of the molecule (.prmtop file).</p>
 </dd>
-<dt><strong>output_file</strong><span class="classifier">str</span></dt><dd><p>Output filename (include .mdcrd, .pdb, etc.).</p>
+<dt><strong>outfile</strong><span class="classifier">str</span></dt><dd><p>Output filename (include .mdcrd, .pdb, etc.).</p>
 </dd>
 </dl>
 </dd>

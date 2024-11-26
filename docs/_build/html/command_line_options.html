@@ -210,6 +210,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -662,7 +666,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -678,6 +684,15 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-trajectory">Filtering Trajectory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-distance-between-residues">Get Distance Between Residues</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -690,9 +705,10 @@
   <section id="command-line-options">
 <span id="id1"></span><h1>Command Line Options<a class="headerlink" href="#command-line-options" title="Link to this heading">#</a></h1>
 <p>After installing StACKER, the command <code class="docutils literal notranslate"><span class="pre">stacker</span></code> is added
-to terminal. Tunning <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">--help</span></code> will give the subroutine
-options.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>% stacker --help
+to terminal. Different routines can be run in the command Line
+using <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">ROUTINE</span></code>. Running <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">--help</span></code>
+will give the subroutine options:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[user]$ stacker --help
 usage: stacker -s ROUTINE [-h]
 
 Wrapper to run stacker subroutines using the -s flag.
@@ -716,6 +732,106 @@ options:
 -h, --help            show this help message and exit
 </pre></div>
 </div>
+<section id="filtering-trajectory">
+<h2>Filtering Trajectory<a class="headerlink" href="#filtering-trajectory" title="Link to this heading">#</a></h2>
+<p>Running <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">filter_traj</span></code> will filter a trajectory by
+residue/atom indices and output the trajectory to a <code class="docutils literal notranslate"><span class="pre">.pdb</span></code>.
+Running <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">filter_traj</span> <span class="pre">--help</span></code> will give more flag options:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[user]$ stacker -s filter_traj --help
+usage: stacker -s ROUTINE -trj TRAJECTORY_FILENAME -top TOPOLOGY_FILENAME -o OUTPUT_FILE [-r RESIDUES] [-a ATOM_NAMES] [-h]
+
+Filters trajectory and topology files to desired residue numbers and atom names and outputs to a PDB
+
+Examples:
+[user]$ stacker -s filter_traj -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -o testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb -r 426,427 -a C2,C4,C6
+
+options:
+-s, --script ROUTINE  Name of command to use. Options for ROUTINE:
+
+                        filter_traj:
+                                filters trajectory and topology files to desired residue numbers and atom names
+                        bottaro OR pairwise OR psf:
+                                Create Polar Stacking Fingerprint like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)
+                        res_distance:
+                                Get the distance between two residues in a given frame
+                        system OR ssf:
+                                Create a System Stacking Fingerprint of distances by residue
+                        stack_events:
+                                Get list of residues with most stacking events (distance closest to 3.5Å)
+                        compare:
+                                Get the most changed stacking events between two fingerprints using the outputs of stacker -s stack_events
+-r, --residues RESIDUES
+                        Smart-indexed list of 1-indexed residues, also accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)
+-a, --atom_names ATOM_NAMES
+                        Comma-separated list of atom names to filter
+-h, --help            show this help message and exit
+
+Required Arguments:
+-trj, --trajectory TRAJECTORY_FILENAME
+                        Filepath to trajectory file for the MD simulation
+-top, --topology TOPOLOGY_FILENAME
+                        Filepath to Topology file for the MD simulation
+-o, --output OUTPUT_FILE
+                        Filepath of PDB to output to
+</pre></div>
+</div>
+<p>This is the command line equivalent of <a class="reference internal" href="stacker.file_manipulation.html#stacker.file_manipulation.filter_traj_to_pdb" title="stacker.file_manipulation.filter_traj_to_pdb"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_traj_to_pdb()</span></code></a>. So, the following are equivalent:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">trajectory_filename</span> <span class="o">=</span> <span class="s2">&quot;../testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topology_filename</span> <span class="o">=</span> <span class="s2">&quot;../testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">output_pdb_filename</span> <span class="o">=</span> <span class="s2">&quot;../testing/command_line_tests/filter/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">residues_desired</span> <span class="o">=</span> <span class="s2">&quot;426,427&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span><span class="s2">&quot;C4&quot;</span><span class="p">,</span><span class="s2">&quot;C6&quot;</span><span class="p">}</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="get-distance-between-residues">
+<h2>Get Distance Between Residues<a class="headerlink" href="#get-distance-between-residues" title="Link to this heading">#</a></h2>
+<p>Running <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">res_distance</span></code> will give the distance in Angstroms
+between the center of geometry of two residues for a given frame.
+Running <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">res_distance</span> <span class="pre">--help</span></code> will give more flag options:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[user]$ stacker -s res_distance --help
+usage: stacker -s ROUTINE -trj TRAJECTORY_FILENAME -top TOPOLOGY_FILENAME [-f FRAME_NUM] -r RESIDUES [-b N_FRAMES] [-a ATOM_NAMES] [-h]
+
+Get the distance between two residues in a given frame
+
+Examples:
+[user]$ stacker -s res_distance -trj testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -f 2 --residues 426,427 --atom_names C2,C4,C6
+
+options:
+-s, --script ROUTINE  Name of command to use. Options for ROUTINE:
+
+                        filter_traj:
+                                filters trajectory and topology files to desired residue numbers and atom names
+                        bottaro OR pairwise OR psf:
+                                Create Polar Stacking Fingerprint like those in Figure 1 of Bottaro et. al (https://doi.org/10.1093/nar/gku972)
+                        res_distance:
+                                Get the distance between two residues in a given frame
+                        system OR ssf:
+                                Create a System Stacking Fingerprint of distances by residue
+                        stack_events:
+                                Get list of residues with most stacking events (distance closest to 3.5Å)
+                        compare:
+                                Get the most changed stacking events between two fingerprints using the outputs of stacker -s stack_events
+-f, --frame FRAME_NUM
+                        1-indexed Frame Number within trajectory to analyze
+-b, --bootstrap N_FRAMES
+                        Run bootstrap analysis on this residue pairing, sampling N_FRAMES with replacement
+-a, --atom_names ATOM_NAMES
+                        Comma-separated list of atom names. Three required to get center of geometry for a residue. default = C2,C4,C6
+-h, --help            show this help message and exit
+
+Required Arguments:
+-trj, --trajectory TRAJECTORY_FILENAME
+                        Filepath to trajectory file for the MD simulation
+-top, --topology TOPOLOGY_FILENAME
+                        Filepath to Topology file for the MD simulation
+-r, --residues RESIDUES
+                        Smart-indexed list of 1-indexed residues, must provide only 2 residues, accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -753,6 +869,23 @@ options:
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-trajectory">Filtering Trajectory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-distance-between-residues">Get Distance Between Residues</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

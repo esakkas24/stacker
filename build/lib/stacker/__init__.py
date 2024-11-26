@@ -254,7 +254,7 @@ def filter_traj_routine() -> None:
         raise AtomEmpty("Must include a list of atom names to keep in the trajectory")
 
     create_parent_directories(args.output)
-    filter_traj_to_pdb(trajectory_filename=args.trajectory, topology_filename=args.topology, output_pdb_filename=args.output, residues_desired=residues_desired, atomnames_desired=atomnames_desired)
+    filter_traj_to_pdb(trj_file=args.trajectory, top_file=args.topology, pdb=args.output, residues=residues_desired, atoms=atomnames_desired)
 
 def bottaro_routine() -> None:
     """
@@ -356,8 +356,8 @@ def bottaro_routine() -> None:
 
     create_parent_directories(pdb_filename)
     if args.trajectory and args.topology:
-        filter_traj_to_pdb(trajectory_filename=args.trajectory, topology_filename=args.topology, output_pdb_filename=pdb_filename,
-                           residues_desired={pers_res_num,view_res_num}, atomnames_desired=perspective_atom_names.union(viewed_atom_names))
+        filter_traj_to_pdb(trj_file=args.trajectory, top_file=args.topology, pdb=pdb_filename,
+                           residues={pers_res_num,view_res_num}, atoms=perspective_atom_names.union(viewed_atom_names))
     
     create_parent_directories(output_name)
 

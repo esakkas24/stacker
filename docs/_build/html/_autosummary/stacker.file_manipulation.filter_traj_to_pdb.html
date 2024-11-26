@@ -705,27 +705,27 @@
 <h1>stacker.file_manipulation.filter_traj_to_pdb<a class="headerlink" href="#stacker-file-manipulation-filter-traj-to-pdb" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.file_manipulation.filter_traj_to_pdb">
-<span class="sig-name descname"><span class="pre">filter_traj_to_pdb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectory_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topology_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_pdb_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residues_desired</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atomnames_desired</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/file_manipulation.html#filter_traj_to_pdb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.file_manipulation.filter_traj_to_pdb" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">filter_traj_to_pdb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trj_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residues</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/file_manipulation.html#filter_traj_to_pdb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.file_manipulation.filter_traj_to_pdb" title="Link to this definition">#</a></dt>
 <dd><p>Filters an input trajectory to only the specified atoms and residues and outputs to pdb</p>
 <p>Filteres an input trajectory that contains all of the atoms in a trajectory to only
 the desired atoms at the desired residues (eg. the atoms necessary to find the 
 center of geometry of a residue) and writes the output to a specified pdb file.
-If residues_desired or atomnames_desired are empty, all residues or atoms are included respectively.</p>
+If residues or atomnames are empty, all residues or atoms are included respectively.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>trajectory_filename</strong><span class="classifier">str</span></dt><dd><p>path to file of the concatenated trajectory. Should be resampled to the
+<dt><strong>trj_file</strong><span class="classifier">str</span></dt><dd><p>path to file of the concatenated trajectory. Should be resampled to the
 1 in 50 frames sampled trajectories for each replicate.</p>
 </dd>
-<dt><strong>topology_filename</strong><span class="classifier">str</span></dt><dd><p>path to file of the topology of the molecule</p>
+<dt><strong>top_file</strong><span class="classifier">str</span></dt><dd><p>path to file of the topology of the molecule</p>
 </dd>
-<dt><strong>output_pdb_filename</strong><span class="classifier">str</span></dt><dd><p>path to the output pdb file</p>
+<dt><strong>pdb</strong><span class="classifier">str</span></dt><dd><p>path to the output pdb file</p>
 </dd>
-<dt><strong>residues_desired</strong><span class="classifier">set or str</span></dt><dd><p>1-indexed residue numbers of residues to keep in the trajectory.
+<dt><strong>residues</strong><span class="classifier">set or str</span></dt><dd><p>1-indexed residue numbers of residues to keep in the trajectory.
 Accepts smart-indexed str representing a list of residues (e.g ‘1-5,6,39-48’)
 If Empty, include all residues.</p>
 </dd>
-<dt><strong>atomnames_desired</strong><span class="classifier">set</span></dt><dd><p>atomnames to keep in the trajectory</p>
+<dt><strong>atomnames</strong><span class="classifier">set</span></dt><dd><p>atomnames to keep in the trajectory</p>
 </dd>
 </dl>
 </dd>

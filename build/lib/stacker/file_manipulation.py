@@ -122,9 +122,9 @@ def filter_traj(trajectory_filename : str, topology_filename : str,
     return filtered_trajectory
 
 
-def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str, 
-                       output_pdb_filename : str, residues_desired : str | set = {},
-                        atomnames_desired : set = {}) -> None:
+def filter_traj_to_pdb(trj_file : str, top_file : str, 
+                       pdb : str, residues : str | set = {},
+                        atoms : set = {}) -> None:
     """
     Filters an input trajectory to only the specified atoms and residues and outputs to pdb
 
@@ -163,12 +163,12 @@ def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str,
     Outputed trajectory object will be 0-indexed.
 
     """
-    residues_desired = SmartIndexingAction.parse_smart_index(residues_desired)
+    residues = SmartIndexingAction.parse_smart_index(residues)
 
-    filtered_trajectory = filter_traj(trajectory_filename, topology_filename, residues_desired, atomnames_desired)
-    filtered_trajectory.save_pdb(output_pdb_filename)
+    filtered_trajectory = filter_traj(trj_file, top_file, residues, atoms)
+    filtered_trajectory.save_pdb(pdb)
     print("WARNING: Output file atom, residue, and chain indices are zero-indexed")
-    print("Filtered trajectory written to: ", output_pdb_filename)
+    print("Filtered trajectory written to: ", pdb)
 
 
 def file_convert(trajectory_filename: str, topology_filename: str, output_file: str) -> None:

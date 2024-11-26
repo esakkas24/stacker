@@ -131,7 +131,7 @@ def create_kmeans_input(data_arrays: dict) -> typing.ArrayLike:
     return data
 
 
-def run_kmeans(data_arrays : dict, N_CLUSTERS: int,
+def run_kmeans(data_arrays : dict, n_clusters: int,
                max_iter: int = 1000, n_init: int = 20, random_state: int = 1, outdir: str = '') -> np.ndarray :
     """
     Performs KMeans clustering on blinded SSF data and saves the results.
@@ -202,13 +202,13 @@ def run_kmeans(data_arrays : dict, N_CLUSTERS: int,
 
     blinded_data = create_kmeans_input(data_arrays)
 
-    kmeans_func_instance = KMeans(n_clusters=N_CLUSTERS, max_iter=max_iter, n_init=n_init, random_state=random_state)
+    kmeans_func_instance = KMeans(n_clusters=n_clusters, max_iter=max_iter, n_init=n_init, random_state=random_state)
     blindframes_labelled_by_cluster = kmeans_func_instance.fit_predict(blinded_data)
     silhouette_avg = silhouette_score(blinded_data, blindframes_labelled_by_cluster)
 
     print(
         "For n_clusters =",
-        N_CLUSTERS,
+        n_clusters,
         "The average silhouette_score is :",
         silhouette_avg,
     )
@@ -218,29 +218,29 @@ def run_kmeans(data_arrays : dict, N_CLUSTERS: int,
     counts = {}
     labels = blindframes_labelled_by_cluster
     for name, arr in data_arrays.items():
-        counts[name] = np.bincount(labels[:len(arr)], minlength=N_CLUSTERS)
+        counts[name] = np.bincount(labels[:len(arr)], minlength=n_clusters)
         labels = labels[len(arr):]  # Move to the next dataset
 
     # Print the results
     for name, count in counts.items():
         print(f'Dataset: {name}')
-        for cluster in range(N_CLUSTERS):
+        for cluster in range(n_clusters):
             print(f'\tCluster {cluster+1}: {count[cluster]} matrices')
 
     # Save results to file
     if outdir:
-        outfile_path = outdir + 'clustering_results_' + str(N_CLUSTERS) + '.txt'
+        outfile_path = outdir + 'clustering_results_' + str(n_clusters) + '.txt'
         outfile = open(outfile_path, 'w')
         outfile.write('cluster trj number\n')
         for name, count in counts.items():
-            for cluster in range(N_CLUSTERS):
+            for cluster in range(n_clusters):
                 outfile.write(f'{cluster+1} {name} {count[cluster]}\n')
         outfile.close()
         print(f"Results written to: {outfile_path}")
 
     return blindframes_labelled_by_cluster
 
-def plot_cluster_trj_data(input_file: str, outfile: str) -> None:
+def plot_cluster_trj_data(cluster_file: str, outfile: str) -> None:
     """
     Plots the output of run_kmeans() to a PNG file.
 
@@ -268,7 +268,7 @@ def plot_cluster_trj_data(input_file: str, outfile: str) -> None:
     >>> st.plot_cluster_trj_data('clustering_results.txt', '/path/to/output/')
 
     """
-    cluster_data = pd.read_table(input_file, sep=' ', header=0, quotechar="\"")
+    cluster_data = pd.read_table(cluster_file, sep=' ', header=0, quotechar="\"")
     
     g = sns.FacetGrid(cluster_data.dropna(subset=['trj']), col="cluster", col_wrap=2, height = 6)
 
@@ -287,7 +287,7 @@ def plot_cluster_trj_data(input_file: str, outfile: str) -> None:
     print(f"Plot Outputted to {outfile}")
     plt.close()
 
-def plot_silhouette(n_clusters : int, dataset : typing.ArrayLike, outdir : str = ''):
+def plot_silhouette(n_clusters : int, blind_data : typing.ArrayLike, outdir : str = ''):
     '''
     Creates Silhouette plots to determine the best number of clusters
 
@@ -295,7 +295,7 @@ def plot_silhouette(n_clusters : int, dataset : typing.ArrayLike, outdir : str =
     ----------
     n_clusters : int, default = 0
         The number of clusters to form.
-    dataset : np.typing.ArrayLike
+    blind_data : np.typing.ArrayLike
         A 2D numpy array containing all frames stacked together.
         Output of create_kmeans_input()
     outfile : str
@@ -306,7 +306,7 @@ def plot_silhouette(n_clusters : int, dataset : typing.ArrayLike, outdir : str =
 
     plt.figure(figsize=(10, 7))
     plt.xlim([-1, 1])
-    plt.ylim([0, len(dataset) + (n_clusters + 1) * 10])
+    plt.ylim([0, len(blind_data) + (n_clusters + 1) * 10])
 
     y_lower = 10
     for i in range(n_clusters):

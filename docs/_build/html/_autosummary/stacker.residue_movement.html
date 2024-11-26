@@ -724,25 +724,25 @@ and exports these values to a .csv file.</p>
 <p class="rubric">Functions</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#stacker.residue_movement.calc_center_3pts" title="stacker.residue_movement.calc_center_3pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_center_3pts</span></code></a>(a, b, c)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.calc_center_3pts" title="stacker.residue_movement.calc_center_3pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_center_3pts</span></code></a>(a, b, c)</p></td>
 <td><p>Finds the average x, y, z position of three (x, y, z) Vectors.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a>(...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a>(...)</p></td>
 <td><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#stacker.residue_movement.collect_atom_locations_by_frame" title="stacker.residue_movement.collect_atom_locations_by_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">collect_atom_locations_by_frame</span></code></a>(traj, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.collect_atom_locations_by_frame" title="stacker.residue_movement.collect_atom_locations_by_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">collect_atom_locations_by_frame</span></code></a>(trj, ...)</p></td>
 <td><p>Creates a list of all atom locations for a particular atom and residue number per frame.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#stacker.residue_movement.correct_theta_sign" title="stacker.residue_movement.correct_theta_sign"><code class="xref py py-obj docutils literal notranslate"><span class="pre">correct_theta_sign</span></code></a>(rho, y_axis, theta)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.correct_theta_sign" title="stacker.residue_movement.correct_theta_sign"><code class="xref py py-obj docutils literal notranslate"><span class="pre">correct_theta_sign</span></code></a>(rho, y_axis, theta)</p></td>
 <td><p>Corrects the sign of an angle theta with the x-axis within a plane defined by a given y-axis.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a>(frame, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a>(frame, ...)</p></td>
 <td><p>Combines C2, C4, C6 positions with midpoint positions for a given frame.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#stacker.residue_movement.write_bottaro_to_csv" title="stacker.residue_movement.write_bottaro_to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_bottaro_to_csv</span></code></a>([pdb_filename, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.write_bottaro_to_csv" title="stacker.residue_movement.write_bottaro_to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_bottaro_to_csv</span></code></a>([pdb, csv, pers_res, ...])</p></td>
 <td><p>Write the r, rho, and theta values used to make a Pairwise Stacking Fingerprint (PSF) from a trajectory PDB to a CSV.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#stacker.residue_movement.write_psf_data" title="stacker.residue_movement.write_psf_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_psf_data</span></code></a>([pdb_filename, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.write_psf_data" title="stacker.residue_movement.write_psf_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_psf_data</span></code></a>([pdb, csv, pers_res, ...])</p></td>
 <td><p>Alias for <cite>write_bottaro_to_csv()</cite>.</p></td>
 </tr>
 </tbody>
@@ -751,7 +751,7 @@ and exports these values to a .csv file.</p>
 <p class="rubric">Classes</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="stacker.residue_movement.Base.html#stacker.residue_movement.Base" title="stacker.residue_movement.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code></a>(c2_coords, c4_coords, c6_coords, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.Base" title="stacker.residue_movement.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code></a>(c2_coords, c4_coords, c6_coords, ...)</p></td>
 <td><p>Represents a nucleotide base with x, y, z coordinates for C2, C4, and C6 atoms, and their average position at a single frame.</p></td>
 </tr>
 </tbody>
@@ -759,18 +759,18 @@ and exports these values to a .csv file.</p>
 </div>
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.residue_movement.collect_atom_locations_by_frame">
-<span class="sig-name descname"><span class="pre">collect_atom_locations_by_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">traj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/residue_movement.html#collect_atom_locations_by_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.residue_movement.collect_atom_locations_by_frame" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">collect_atom_locations_by_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/residue_movement.html#collect_atom_locations_by_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.residue_movement.collect_atom_locations_by_frame" title="Link to this definition">#</a></dt>
 <dd><p>Creates a list of all atom locations for a particular atom and residue number per frame.</p>
 <p>Curates a list coords_by_frame where coords_by_frame[i] is the (x, y, z) positions 
-of a provided <cite>atom_id</cite> in a residue <cite>residue_num</cite> at the ith frame.</p>
+of a provided <code class="docutils literal notranslate"><span class="pre">atom</span></code> in a residue <code class="docutils literal notranslate"><span class="pre">residue</span></code> at the ith frame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>traj</strong><span class="classifier">md.Trajectory</span></dt><dd><p>Trajectory to analyze.</p>
+<dt><strong>trj</strong><span class="classifier">md.Trajectory</span></dt><dd><p>Trajectory to analyze.</p>
 </dd>
-<dt><strong>residue_num</strong><span class="classifier">int</span></dt><dd><p>The 0-indexed residue number of the residue where <cite>atom_id</cite> is found (PDB Column 5).</p>
+<dt><strong>residue</strong><span class="classifier">int</span></dt><dd><p>The 0-indexed residue number of the residue where <cite>atom_id</cite> is found (PDB Column 5).</p>
 </dd>
-<dt><strong>atom_id</strong><span class="classifier">str</span></dt><dd><p>The name of the atom to get coordinates for (PDB Column 2).</p>
+<dt><strong>atom</strong><span class="classifier">str</span></dt><dd><p>The name of the atom to get coordinates for (PDB Column 2).</p>
 </dd>
 </dl>
 </dd>
@@ -784,11 +784,11 @@ of a provided <cite>atom_id</cite> in a residue <cite>residue_num</cite> at the 
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="stacker.residue_movement.Base.html#stacker.residue_movement.Base" title="stacker.residue_movement.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code></a></dt><dd><p>Python Class that represents a nucleotide base</p>
+<dt><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.Base" title="stacker.residue_movement.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code></a></dt><dd><p>Python Class that represents a nucleotide base</p>
 </dd>
-<dt><a class="reference internal" href="#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a></dt><dd><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p>
+<dt><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a></dt><dd><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p>
 </dd>
-<dt><a class="reference internal" href="#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a></dt><dd><p>Combines C2, C4, C6 positions with midpoint positions for a given frame</p>
+<dt><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a></dt><dd><p>Combines C2, C4, C6 positions with midpoint positions for a given frame</p>
 </dd>
 </dl>
 </div>
@@ -798,8 +798,8 @@ of a provided <cite>atom_id</cite> in a residue <cite>residue_num</cite> at the 
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s1">&#39;testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span><span class="p">,</span> 
 <span class="gp">... </span>                             <span class="s1">&#39;testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&#39;</span><span class="p">,</span> 
-<span class="gp">... </span>                             <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span><span class="s1">&#39;C6&#39;</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="o">&gt;&gt;&gt;</span> <span class="n">st</span><span class="o">.</span><span class="n">collect_atom_locations_by_frame</span><span class="p">(</span><span class="n">filtered_traj</span><span class="p">,</span> <span class="n">residue_num</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">atom_id</span> <span class="o">=</span> <span class="s2">&quot;C2&quot;</span><span class="p">)</span>
+<span class="gp">... </span>                             <span class="n">atoms</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span><span class="s1">&#39;C6&#39;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&gt;&gt;&gt;</span> <span class="n">st</span><span class="o">.</span><span class="n">collect_atom_locations_by_frame</span><span class="p">(</span><span class="n">filtered_traj</span><span class="p">,</span> <span class="n">residue</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">atom</span> <span class="o">=</span> <span class="s2">&quot;C2&quot;</span><span class="p">)</span>
 <span class="go">[(58.794, 59.636, 49.695), (59.185005, 58.797, 50.137), (59.379, 58.553005, 49.853), </span>
 <span class="go">(58.76, 59.068, 49.681), (59.003, 59.054, 49.878002), (59.049, 58.967, 50.051), </span>
 <span class="go">(59.219, 58.476006, 49.948), (58.948, 58.588005, 50.085), (58.922, 58.747, 49.766003), </span>
@@ -835,11 +835,11 @@ with three points that make up a triangle (like those within a 6-member ring).</
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="stacker.residue_movement.Base.html#stacker.residue_movement.Base" title="stacker.residue_movement.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code></a></dt><dd><p>Python Class that represents a nucleotide base</p>
+<dt><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.Base" title="stacker.residue_movement.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code></a></dt><dd><p>Python Class that represents a nucleotide base</p>
 </dd>
-<dt><a class="reference internal" href="#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a></dt><dd><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p>
+<dt><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a></dt><dd><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p>
 </dd>
-<dt><a class="reference internal" href="#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a></dt><dd><p>Combines C2, C4, C6 positions with midpoint positions for a given frame</p>
+<dt><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a></dt><dd><p>Combines C2, C4, C6 positions with midpoint positions for a given frame</p>
 </dd>
 </dl>
 </div>
@@ -928,7 +928,7 @@ of the same residue at that frame.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="#stacker.residue_movement.calc_center_3pts" title="stacker.residue_movement.calc_center_3pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_center_3pts</span></code></a></dt><dd><p>Finds the average x, y, z position of three (x, y, z) Vectors</p>
+<dt><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.calc_center_3pts" title="stacker.residue_movement.calc_center_3pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_center_3pts</span></code></a></dt><dd><p>Finds the average x, y, z position of three (x, y, z) Vectors</p>
 </dd>
 </dl>
 </div>
@@ -995,7 +995,7 @@ Pages 13306–13314, <a class="reference external" href="https://doi.org/10.1093
 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.residue_movement.write_bottaro_to_csv">
-<span class="sig-name descname"><span class="pre">write_bottaro_to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdb_filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_csv_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">perspective_residue_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">viewed_residue_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res1_atom_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'C2',</span> <span class="pre">'C4',</span> <span class="pre">'C6'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res2_atom_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'C2',</span> <span class="pre">'C4',</span> <span class="pre">'C6'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/residue_movement.html#write_bottaro_to_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.residue_movement.write_bottaro_to_csv" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">write_bottaro_to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">csv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pers_res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res1_atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'C2',</span> <span class="pre">'C4',</span> <span class="pre">'C6'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res2_atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'C2',</span> <span class="pre">'C4',</span> <span class="pre">'C6'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/residue_movement.html#write_bottaro_to_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.residue_movement.write_bottaro_to_csv" title="Link to this definition">#</a></dt>
 <dd><p>Write the r, rho, and theta values used to make a Pairwise Stacking Fingerprint (PSF)
 from a trajectory PDB to a CSV.</p>
 <p>Calculates the r, rho, and theta values as described in Bottaro et al. from a
@@ -1004,23 +1004,23 @@ results to a CSV file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>pdb_filename</strong><span class="classifier">str</span></dt><dd><p>Filename of PDB containing information for ONLY two residues (perspective and viewed
+<dt><strong>pdb</strong><span class="classifier">str</span></dt><dd><p>Filename of PDB containing information for ONLY two residues (perspective and viewed
 nucleotide) at each frame.</p>
 </dd>
-<dt><strong>output_csv_name</strong><span class="classifier">str</span></dt><dd><p>Filename of CSV file to write to.</p>
+<dt><strong>csv</strong><span class="classifier">str</span></dt><dd><p>Filename of CSV file to write to.</p>
 </dd>
-<dt><strong>perspective_residue_num</strong><span class="classifier">int, default = -1</span></dt><dd><p>Residue index of the perspective residue whose plane to project onto (0-/1-index changed by
+<dt><strong>pers_res</strong><span class="classifier">int, default = -1</span></dt><dd><p>Residue index of the perspective residue whose plane to project onto (0-/1-index changed by
 <cite>index</cite> variable, default 1-indexed). If -1, a 2-residue PDB is assumed and perspective id is
 the first res_id.</p>
 </dd>
-<dt><strong>viewed_residue_num</strong><span class="classifier">int, default = -1</span></dt><dd><p>Residue index of the viewed residue whose midpoint to project to perspective residue plane 
+<dt><strong>view_res</strong><span class="classifier">int, default = -1</span></dt><dd><p>Residue index of the viewed residue whose midpoint to project to perspective residue plane 
 (0-/1-index changed by index variable, default 1-indexed). If -1, a 2-residue PDB is assumed 
 and viewed id is the second res_id.</p>
 </dd>
-<dt><strong>res1_atom_names</strong><span class="classifier">set, default = {“C2”, “C4”, “C6”}</span></dt><dd><p>Set of the atom names (e.g., “C2”, “C4”, “C6”) to use from
+<dt><strong>res1_atoms</strong><span class="classifier">set, default = {“C2”, “C4”, “C6”}</span></dt><dd><p>Set of the atom names (e.g., “C2”, “C4”, “C6”) to use from
 residue 1 to find center of geometry for perspective nucleotide.</p>
 </dd>
-<dt><strong>res2_atom_names</strong><span class="classifier">set, default = {“C2”, “C4”, “C6”}</span></dt><dd><p>Set of the atom names (e.g., “C2”, “C4”, “C6”) to use from
+<dt><strong>res2_atoms</strong><span class="classifier">set, default = {“C2”, “C4”, “C6”}</span></dt><dd><p>Set of the atom names (e.g., “C2”, “C4”, “C6”) to use from
 residue 2 to find center of geometry for viewed nucleotide.</p>
 </dd>
 <dt><strong>index</strong><span class="classifier">int, default = 1</span></dt><dd><p>Index of the residues. 1-indexed (default) means residue ids start at 1.
@@ -1052,8 +1052,8 @@ Pages 13306–13314, <a class="reference external" href="https://doi.org/10.1093
 <span class="gp">&gt;&gt;&gt; </span><span class="n">output_csv_name</span> <span class="o">=</span> <span class="s2">&quot;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">perspective_residue</span> <span class="o">=</span> <span class="mi">426</span> <span class="c1"># 1-indexed</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">viewed_residue</span> <span class="o">=</span> <span class="mi">427</span> <span class="c1"># 1-indexed</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="o">=</span><span class="n">trajectory_file</span><span class="p">,</span> <span class="n">topology_filename</span><span class="o">=</span><span class="n">topology_file</span><span class="p">,</span> <span class="n">output_pdb_filename</span><span class="o">=</span><span class="n">pdb_filename</span><span class="p">,</span>
-<span class="gp">... </span>                       <span class="n">residues_desired</span><span class="o">=</span><span class="p">{</span><span class="n">perspective_residue</span><span class="p">,</span><span class="n">viewed_residue</span><span class="p">},</span> <span class="n">atomnames_desired</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span><span class="n">trj_file</span><span class="o">=</span><span class="n">trajectory_file</span><span class="p">,</span> <span class="n">top_file</span><span class="o">=</span><span class="n">topology_file</span><span class="p">,</span> <span class="n">pdb</span><span class="o">=</span><span class="n">pdb_filename</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">residues</span><span class="o">=</span><span class="p">{</span><span class="n">perspective_residue</span><span class="p">,</span><span class="n">viewed_residue</span><span class="p">},</span> <span class="n">atoms</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
 <span class="go">WARNING: Residue Indices are expected to be 1-indexed</span>
 <span class="go">Reading trajectory...</span>
 <span class="go">Reading topology...</span>
@@ -1061,7 +1061,7 @@ Pages 13306–13314, <a class="reference external" href="https://doi.org/10.1093
 <span class="go">WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed</span>
 <span class="go">WARNING: Output file atom, residue, and chain indices are zero-indexed</span>
 <span class="go">Filtered trajectory written to:  testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">write_bottaro_to_csv</span><span class="p">(</span><span class="n">pdb_filename</span><span class="p">,</span> <span class="n">output_csv_name</span><span class="p">,</span> <span class="n">perspective_residue_num</span><span class="o">=</span><span class="n">perspective_residue</span><span class="p">,</span> <span class="n">viewed_residue_num</span><span class="o">=</span><span class="n">viewed_residue</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">write_bottaro_to_csv</span><span class="p">(</span><span class="n">pdb_filename</span><span class="p">,</span> <span class="n">output_csv_name</span><span class="p">,</span> <span class="n">pers_res</span><span class="o">=</span><span class="n">perspective_residue</span><span class="p">,</span> <span class="n">view_res</span><span class="o">=</span><span class="n">viewed_residue</span><span class="p">)</span>
 <span class="go">Output values written to testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">output_csv_name</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()[:</span><span class="mi">10</span><span class="p">]))</span>
 <span class="go">frame,r_dist,rho_dist,theta</span>
@@ -1080,7 +1080,7 @@ Pages 13306–13314, <a class="reference external" href="https://doi.org/10.1093
 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.residue_movement.write_psf_data">
-<span class="sig-name descname"><span class="pre">write_psf_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdb_filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_csv_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">perspective_residue_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">viewed_residue_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res1_atom_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'C2',</span> <span class="pre">'C4',</span> <span class="pre">'C6'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res2_atom_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'C2',</span> <span class="pre">'C4',</span> <span class="pre">'C6'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/residue_movement.html#write_psf_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.residue_movement.write_psf_data" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">write_psf_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">csv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pers_res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res1_atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'C2',</span> <span class="pre">'C4',</span> <span class="pre">'C6'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res2_atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'C2',</span> <span class="pre">'C4',</span> <span class="pre">'C6'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/residue_movement.html#write_psf_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.residue_movement.write_psf_data" title="Link to this definition">#</a></dt>
 <dd><p>Alias for <cite>write_bottaro_to_csv()</cite>.</p>
 <p>Write the r, rho, and theta values used to make a Pairwise Stacking Fingerprint (PSF)
 from a trajectory PDB to a CSV.</p>
@@ -1090,23 +1090,23 @@ results to a CSV file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>pdb_filename</strong><span class="classifier">str</span></dt><dd><p>Filename of PDB containing information for ONLY two residues (perspective and viewed
+<dt><strong>pdb</strong><span class="classifier">str</span></dt><dd><p>Filename of PDB containing information for ONLY two residues (perspective and viewed
 nucleotide) at each frame.</p>
 </dd>
-<dt><strong>output_csv_name</strong><span class="classifier">str</span></dt><dd><p>Filename of CSV file to write to.</p>
+<dt><strong>csv</strong><span class="classifier">str</span></dt><dd><p>Filename of CSV file to write to.</p>
 </dd>
-<dt><strong>perspective_residue_num</strong><span class="classifier">int, default = -1</span></dt><dd><p>Residue index of the perspective residue whose plane to project onto (0-/1-index changed by
+<dt><strong>pers_res</strong><span class="classifier">int, default = -1</span></dt><dd><p>Residue index of the perspective residue whose plane to project onto (0-/1-index changed by
 <cite>index</cite> variable, default 1-indexed). If -1, a 2-residue PDB is assumed and perspective id is
 the first res_id.</p>
 </dd>
-<dt><strong>viewed_residue_num</strong><span class="classifier">int, default = -1</span></dt><dd><p>Residue index of the viewed residue whose midpoint to project to perspective residue plane 
+<dt><strong>view_res</strong><span class="classifier">int, default = -1</span></dt><dd><p>Residue index of the viewed residue whose midpoint to project to perspective residue plane 
 (0-/1-index changed by index variable, default 1-indexed). If -1, a 2-residue PDB is assumed 
 and viewed id is the second res_id.</p>
 </dd>
-<dt><strong>res1_atom_names</strong><span class="classifier">set, default = {“C2”, “C4”, “C6”}</span></dt><dd><p>Set of the atom names (e.g., “C2”, “C4”, “C6”) to use from
+<dt><strong>res1_atoms</strong><span class="classifier">set, default = {“C2”, “C4”, “C6”}</span></dt><dd><p>Set of the atom names (e.g., “C2”, “C4”, “C6”) to use from
 residue 1 to find center of geometry for perspective nucleotide.</p>
 </dd>
-<dt><strong>res2_atom_names</strong><span class="classifier">set, default = {“C2”, “C4”, “C6”}</span></dt><dd><p>Set of the atom names (e.g., “C2”, “C4”, “C6”) to use from
+<dt><strong>res2_atoms</strong><span class="classifier">set, default = {“C2”, “C4”, “C6”}</span></dt><dd><p>Set of the atom names (e.g., “C2”, “C4”, “C6”) to use from
 residue 2 to find center of geometry for viewed nucleotide.</p>
 </dd>
 <dt><strong>index</strong><span class="classifier">int, default = 1</span></dt><dd><p>Index of the residues. 1-indexed (default) means residue ids start at 1.
@@ -1138,8 +1138,8 @@ Pages 13306–13314, <a class="reference external" href="https://doi.org/10.1093
 <span class="gp">&gt;&gt;&gt; </span><span class="n">output_csv_name</span> <span class="o">=</span> <span class="s2">&quot;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">perspective_residue</span> <span class="o">=</span> <span class="mi">426</span> <span class="c1"># 1-indexed</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">viewed_residue</span> <span class="o">=</span> <span class="mi">427</span> <span class="c1"># 1-indexed</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span><span class="n">trajectory_filename</span><span class="o">=</span><span class="n">trajectory_file</span><span class="p">,</span> <span class="n">topology_filename</span><span class="o">=</span><span class="n">topology_file</span><span class="p">,</span> <span class="n">output_pdb_filename</span><span class="o">=</span><span class="n">pdb_filename</span><span class="p">,</span>
-<span class="gp">... </span>                       <span class="n">residues_desired</span><span class="o">=</span><span class="p">{</span><span class="n">perspective_residue</span><span class="p">,</span><span class="n">viewed_residue</span><span class="p">},</span> <span class="n">atomnames_desired</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span><span class="n">trj_file</span><span class="o">=</span><span class="n">trajectory_file</span><span class="p">,</span> <span class="n">top_file</span><span class="o">=</span><span class="n">topology_file</span><span class="p">,</span> <span class="n">pdb</span><span class="o">=</span><span class="n">pdb_filename</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">residues</span><span class="o">=</span><span class="p">{</span><span class="n">perspective_residue</span><span class="p">,</span><span class="n">viewed_residue</span><span class="p">},</span> <span class="n">atoms</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
 <span class="go">WARNING: Residue Indices are expected to be 1-indexed</span>
 <span class="go">Reading trajectory...</span>
 <span class="go">Reading topology...</span>
@@ -1147,7 +1147,7 @@ Pages 13306–13314, <a class="reference external" href="https://doi.org/10.1093
 <span class="go">WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed</span>
 <span class="go">WARNING: Output file atom, residue, and chain indices are zero-indexed</span>
 <span class="go">Filtered trajectory written to:  testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">write_bottaro_to_csv</span><span class="p">(</span><span class="n">pdb_filename</span><span class="p">,</span> <span class="n">output_csv_name</span><span class="p">,</span> <span class="n">perspective_residue_num</span><span class="o">=</span><span class="n">perspective_residue</span><span class="p">,</span> <span class="n">viewed_residue_num</span><span class="o">=</span><span class="n">viewed_residue</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">write_bottaro_to_csv</span><span class="p">(</span><span class="n">pdb_filename</span><span class="p">,</span> <span class="n">output_csv_name</span><span class="p">,</span> <span class="n">pers_res</span><span class="o">=</span><span class="n">perspective_residue</span><span class="p">,</span> <span class="n">view_res</span><span class="o">=</span><span class="n">viewed_residue</span><span class="p">)</span>
 <span class="go">Output values written to testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">output_csv_name</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()[:</span><span class="mi">10</span><span class="p">]))</span>
 <span class="go">frame,r_dist,rho_dist,theta</span>

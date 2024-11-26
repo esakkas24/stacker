@@ -705,15 +705,16 @@
 <h1>stacker.pairwise_distance.get_frame_average<a class="headerlink" href="#stacker-pairwise-distance-get-frame-average" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.pairwise_distance.get_frame_average">
-<span class="sig-name descname"><span class="pre">get_frame_average</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frames</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/pairwise_distance.html#get_frame_average"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.pairwise_distance.get_frame_average" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_frame_average</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ssfs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/pairwise_distance.html#get_frame_average"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.pairwise_distance.get_frame_average" title="Link to this definition">#</a></dt>
 <dd><p>Calculates an average System Stacking Fingerprint (SSF) across multiple SSFs</p>
 <p>Used to calculate an average SSF across multiple frames of a trajectory. Can
 average the result of <cite>get_residue_distance_for_trajectory</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>frames</strong><span class="classifier">numpy.typing.ArrayLike</span></dt><dd><p>List or array of 2D NumPy arrays representing a pairwise distance matrix
-of an MD structure. All 2D NumPy arrays must be of the same dimenstions.</p>
+<dt><strong>ssfs</strong><span class="classifier">numpy.typing.ArrayLike</span></dt><dd><p>List or array of 2D NumPy arrays representing a pairwise distance matrix
+of an MD structure. All 2D NumPy arrays must be of the same dimenstions.
+Output of <code class="docutils literal notranslate"><span class="pre">get_residue_distance_for_trajectory()</span></code></p>
 </dd>
 </dl>
 </dd>

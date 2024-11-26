@@ -10,27 +10,27 @@ import mdtraj as md
 from numpy import typing
 import argparse
 
-def filter_traj(trajectory_filename : str, topology_filename : str, 
-                        residues_desired : str | set = {}, atomnames_desired : set = {}) -> md.Trajectory:
+def filter_traj(trj_file : str, top_file : str, 
+                residues : str | set = {}, atoms : set = {}) -> md.Trajectory:
     '''
     Filters an input trajectory to only the specified atoms and residues
 
     Filteres an input trajectory that contains all of the atoms in a topology to only
     the desired atoms at the desired residues (eg. the atoms necessary to find the 
-    center of geometry of a residue). If residues_desired or atomnames_desired are
+    center of geometry of a residue). If ``residues`` or ``atoms`` are
     empty, all residues or atoms are included respectively.
 
     Parameters
     ----------
-    trajectory_filename : str
+    trj_file : str
         filepath of the trajectory
-    topology_filename : str
+    top_file : str
         filepath of the topology of the molecule
-    residues_desired : set or str
+    residues : set or str
         1-indexed residue numbers of residues to keep in the trajectory.
         Accepts smart-indexed str representing a list of residues (e.g '1-5,6,39-48').
         If Empty, include all residues.
-    atomnames_desired : set 
+    atoms : set 
         atomnames to keep in the trajectory. If Empty, include all atoms.
         
     Returns
@@ -54,8 +54,8 @@ def filter_traj(trajectory_filename : str, topology_filename : str,
     >>> import stacker as st
     >>> filtered_traj = st.filter_traj('stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 
     ...                             'stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', 
-    ...                             residues_desired = {426,427}, 
-    ...                             atomnames_desired = {'C2','C4','C6'})
+    ...                             residues = {426,427}, 
+    ...                             atoms = {'C2','C4','C6'})
     WARNING: Residue Indices are expected to be 1-indexed
     Reading trajectory...
     Reading topology...
@@ -76,8 +76,8 @@ def filter_traj(trajectory_filename : str, topology_filename : str,
     >>> import stacker as st
     >>> filtered_traj = st.filter_traj('../testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 
     ...                             '../testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', 
-    ...                              residues_desired = '1-16,25,50-57', 
-    ...                              atomnames_desired = {'C2','C4','C6'})
+    ...                              residues = '1-16,25,50-57', 
+    ...                              atoms = {'C2','C4','C6'})
     WARNING: Residue Indices are expected to be 1-indexed
     Reading trajectory...
     Reading topology...
@@ -90,19 +90,19 @@ def filter_traj(trajectory_filename : str, topology_filename : str,
     print("WARNING: Residue Indices are expected to be 1-indexed")
     
     print("Reading trajectory...")
-    trajectory = md.load(trajectory_filename, top = topology_filename)
+    trajectory = md.load(trj_file, top = top_file)
     
     print("Reading topology...")
     topology = trajectory.topology
     
     print("Filtering trajectory...")
-    residues_desired = SmartIndexingAction.parse_smart_index(residues_desired)
+    residues = SmartIndexingAction.parse_smart_index(residues)
 
     # make resSeq 0-indexed for mdtraj query
-    residues_desired = {resnum-1 for resnum in residues_desired} 
+    residues = {resnum-1 for resnum in residues} 
 
-    atomnames_query = " or ".join([f"name == '{atom}'" for atom in atomnames_desired])
-    residues_query = " or ".join([f"residue == {resnum}" for resnum in residues_desired])
+    atomnames_query = " or ".join([f"name == '{atom}'" for atom in atoms])
+    residues_query = " or ".join([f"residue == {resnum}" for resnum in residues])
 
     if len(atomnames_query) == 0:
         if len(residues_query) == 0:
@@ -122,31 +122,31 @@ def filter_traj(trajectory_filename : str, topology_filename : str,
     return filtered_trajectory
 
 
-def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str, 
-                       output_pdb_filename : str, residues_desired : str | set = {},
-                        atomnames_desired : set = {}) -> None:
+def filter_traj_to_pdb(trj_file : str, top_file : str, 
+                       pdb : str, residues : str | set = {},
+                        atoms : set = {}) -> None:
     """
     Filters an input trajectory to only the specified atoms and residues and outputs to pdb
 
     Filteres an input trajectory that contains all of the atoms in a trajectory to only
     the desired atoms at the desired residues (eg. the atoms necessary to find the 
     center of geometry of a residue) and writes the output to a specified pdb file.
-    If residues_desired or atomnames_desired are empty, all residues or atoms are included respectively.
+    If residues or atomnames are empty, all residues or atoms are included respectively.
 
     Parameters
     ----------
-    trajectory_filename : str
+    trj_file : str
         path to file of the concatenated trajectory. Should be resampled to the
         1 in 50 frames sampled trajectories for each replicate.
-    topology_filename : str
+    top_file : str
         path to file of the topology of the molecule
-    output_pdb_filename : str
+    pdb : str
         path to the output pdb file
-    residues_desired : set or str
+    residues : set or str
         1-indexed residue numbers of residues to keep in the trajectory.
         Accepts smart-indexed str representing a list of residues (e.g '1-5,6,39-48')
         If Empty, include all residues.
-    atomnames_desired : set 
+    atomnames : set 
         atomnames to keep in the trajectory
 
     Returns
@@ -163,28 +163,28 @@ def filter_traj_to_pdb(trajectory_filename : str, topology_filename : str,
     Outputed trajectory object will be 0-indexed.
 
     """
-    residues_desired = SmartIndexingAction.parse_smart_index(residues_desired)
+    residues = SmartIndexingAction.parse_smart_index(residues)
 
-    filtered_trajectory = filter_traj(trajectory_filename, topology_filename, residues_desired, atomnames_desired)
-    filtered_trajectory.save_pdb(output_pdb_filename)
+    filtered_trajectory = filter_traj(trj_file, top_file, residues, atoms)
+    filtered_trajectory.save_pdb(pdb)
     print("WARNING: Output file atom, residue, and chain indices are zero-indexed")
-    print("Filtered trajectory written to: ", output_pdb_filename)
+    print("Filtered trajectory written to: ", pdb)
 
 
-def file_convert(trajectory_filename: str, topology_filename: str, output_file: str) -> None:
+def file_convert(trj_file: str, top_file: str, outfile: str) -> None:
     """
     Converts a trajectory input file to a new output type.
 
-    The output file type is determined by the `output_file` extension. Uses `mdtraj.save()` commands to convert 
-    trajectory files to various file types such as `mdtraj.save_mdcrd()`, `mdtraj.save_pdb()`, `mdtraj.save_xyz()`, etc.
+    The output file type is determined by the ``outfile`` extension. Uses ``mdtraj.save()`` commands to convert 
+    trajectory files to various file types such as ``mdtraj.save_mdcrd()``, ``mdtraj.save_pdb()``, ``mdtraj.save_xyz()``, etc.
 
     Parameters
     ----------
-    trajectory_filename : str
+    trj_file : str
         Path to the file of the concatenated trajectory (eg. .mdcrd file). 
-    topology_filename : str
+    top_file : str
         Path to the file of the topology of the molecule (.prmtop file).
-    output_file : str
+    outfile : str
         Output filename (include .mdcrd, .pdb, etc.).
 
     Returns
@@ -216,9 +216,9 @@ def file_convert(trajectory_filename: str, topology_filename: str, output_file: 
 
     """
     print("WARNING: Output file atom, residue, and chain indices are zero-indexed")
-    trajectory = md.load(trajectory_filename, top = topology_filename)
-    trajectory.save(output_file)
-    print("Trajectory written to: ", output_file)
+    trajectory = md.load(trj_file, top = top_file)
+    trajectory.save(outfile)
+    print("Trajectory written to: ", outfile)
 
 class SmartIndexingAction(argparse.Action):
     '''
@@ -327,6 +327,6 @@ if __name__ == "__main__":
 
     ### No Filtering
     print("No Filtering, known trj has 12089 atoms")
-    filtered_traj = filter_traj('testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 'testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', residues_desired={}, atomnames_desired={})
+    filtered_traj = filter_traj('testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 'testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', residues={}, atoms={})
     table, bonds = filtered_traj.topology.to_dataframe()
     print(table)

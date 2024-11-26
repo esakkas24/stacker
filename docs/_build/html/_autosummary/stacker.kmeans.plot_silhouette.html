@@ -705,14 +705,14 @@
 <h1>stacker.kmeans.plot_silhouette<a class="headerlink" href="#stacker-kmeans-plot-silhouette" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.kmeans.plot_silhouette">
-<span class="sig-name descname"><span class="pre">plot_silhouette</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#plot_silhouette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_silhouette" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">plot_silhouette</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blind_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#plot_silhouette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_silhouette" title="Link to this definition">#</a></dt>
 <dd><p>Creates Silhouette plots to determine the best number of clusters</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>n_clusters</strong><span class="classifier">int, default = 0</span></dt><dd><p>The number of clusters to form.</p>
 </dd>
-<dt><strong>dataset</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
+<dt><strong>blind_data</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
 Output of create_kmeans_input()</p>
 </dd>
 <dt><strong>outfile</strong><span class="classifier">str</span></dt><dd><p>Filepath where the plot PNG file will be saved.</p>

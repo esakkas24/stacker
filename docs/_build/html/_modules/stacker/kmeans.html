@@ -780,7 +780,7 @@
 
 <div class="viewcode-block" id="run_kmeans">
 <a class="viewcode-back" href="../../stacker.kmeans.html#stacker.kmeans.run_kmeans">[docs]</a>
-<span class="k">def</span> <span class="nf">run_kmeans</span><span class="p">(</span><span class="n">data_arrays</span> <span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">N_CLUSTERS</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="k">def</span> <span class="nf">run_kmeans</span><span class="p">(</span><span class="n">data_arrays</span> <span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">n_clusters</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">n_init</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">outdir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Performs KMeans clustering on blinded SSF data and saves the results.</span>
@@ -851,13 +851,13 @@
 
     <span class="n">blinded_data</span> <span class="o">=</span> <span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
 
-    <span class="n">kmeans_func_instance</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">N_CLUSTERS</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="n">max_iter</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="n">n_init</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+    <span class="n">kmeans_func_instance</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="n">max_iter</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="n">n_init</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
     <span class="n">blindframes_labelled_by_cluster</span> <span class="o">=</span> <span class="n">kmeans_func_instance</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">)</span>
     <span class="n">silhouette_avg</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">,</span> <span class="n">blindframes_labelled_by_cluster</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span>
         <span class="s2">&quot;For n_clusters =&quot;</span><span class="p">,</span>
-        <span class="n">N_CLUSTERS</span><span class="p">,</span>
+        <span class="n">n_clusters</span><span class="p">,</span>
         <span class="s2">&quot;The average silhouette_score is :&quot;</span><span class="p">,</span>
         <span class="n">silhouette_avg</span><span class="p">,</span>
     <span class="p">)</span>
@@ -867,22 +867,22 @@
     <span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">labels</span> <span class="o">=</span> <span class="n">blindframes_labelled_by_cluster</span>
     <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">arr</span> <span class="ow">in</span> <span class="n">data_arrays</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">counts</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">labels</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)],</span> <span class="n">minlength</span><span class="o">=</span><span class="n">N_CLUSTERS</span><span class="p">)</span>
+        <span class="n">counts</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">labels</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)],</span> <span class="n">minlength</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
         <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">):]</span>  <span class="c1"># Move to the next dataset</span>
 
     <span class="c1"># Print the results</span>
     <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">counts</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Dataset: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_CLUSTERS</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">Cluster </span><span class="si">{</span><span class="n">cluster</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">count</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span><span class="si">}</span><span class="s1"> matrices&#39;</span><span class="p">)</span>
 
     <span class="c1"># Save results to file</span>
     <span class="k">if</span> <span class="n">outdir</span><span class="p">:</span>
-        <span class="n">outfile_path</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;clustering_results_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">N_CLUSTERS</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.txt&#39;</span>
+        <span class="n">outfile_path</span> <span class="o">=</span> <span class="n">outdir</span> <span class="o">+</span> <span class="s1">&#39;clustering_results_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.txt&#39;</span>
         <span class="n">outfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">outfile_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;cluster trj number</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">counts</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_CLUSTERS</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">):</span>
                 <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">cluster</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">count</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">outfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Results written to: </span><span class="si">{</span><span class="n">outfile_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -892,7 +892,7 @@
 
 <div class="viewcode-block" id="plot_cluster_trj_data">
 <a class="viewcode-back" href="../../stacker.kmeans.html#stacker.kmeans.plot_cluster_trj_data">[docs]</a>
-<span class="k">def</span> <span class="nf">plot_cluster_trj_data</span><span class="p">(</span><span class="n">input_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">plot_cluster_trj_data</span><span class="p">(</span><span class="n">cluster_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plots the output of run_kmeans() to a PNG file.</span>
 
@@ -920,7 +920,7 @@
 <span class="sd">    &gt;&gt;&gt; st.plot_cluster_trj_data(&#39;clustering_results.txt&#39;, &#39;/path/to/output/&#39;)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">cluster_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">cluster_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">cluster_file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
     
     <span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">cluster_data</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;trj&#39;</span><span class="p">]),</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;cluster&quot;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span>
 
@@ -942,7 +942,7 @@
 
 <div class="viewcode-block" id="plot_silhouette">
 <a class="viewcode-back" href="../../stacker.kmeans.html#stacker.kmeans.plot_silhouette">[docs]</a>
-<span class="k">def</span> <span class="nf">plot_silhouette</span><span class="p">(</span><span class="n">n_clusters</span> <span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">dataset</span> <span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="n">outdir</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">plot_silhouette</span><span class="p">(</span><span class="n">n_clusters</span> <span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">blind_data</span> <span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="n">outdir</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Creates Silhouette plots to determine the best number of clusters</span>
 
@@ -950,7 +950,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    n_clusters : int, default = 0</span>
 <span class="sd">        The number of clusters to form.</span>
-<span class="sd">    dataset : np.typing.ArrayLike</span>
+<span class="sd">    blind_data : np.typing.ArrayLike</span>
 <span class="sd">        A 2D numpy array containing all frames stacked together.</span>
 <span class="sd">        Output of create_kmeans_input()</span>
 <span class="sd">    outfile : str</span>
@@ -961,7 +961,7 @@
 
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">n_clusters</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">blind_data</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">n_clusters</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">])</span>
 
     <span class="n">y_lower</span> <span class="o">=</span> <span class="mi">10</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">):</span>

@@ -705,7 +705,7 @@
 <h1>stacker.pairwise_distance.calculate_residue_distance<a class="headerlink" href="#stacker-pairwise-distance-calculate-residue-distance" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.pairwise_distance.calculate_residue_distance">
-<span class="sig-name descname"><span class="pre">calculate_residue_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res1_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res2_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res1_atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('C2',</span> <span class="pre">'C4',</span> <span class="pre">'C6')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res2_atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('C2',</span> <span class="pre">'C4',</span> <span class="pre">'C6')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/pairwise_distance.html#calculate_residue_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.pairwise_distance.calculate_residue_distance" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">calculate_residue_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res1_atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('C2',</span> <span class="pre">'C4',</span> <span class="pre">'C6')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res2_atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('C2',</span> <span class="pre">'C4',</span> <span class="pre">'C6')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/pairwise_distance.html#calculate_residue_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.pairwise_distance.calculate_residue_distance" title="Link to this definition">#</a></dt>
 <dd><p>Calculates the vector between two residues with x, y, z units in Angstroms.</p>
 <p>Calculates the distance between the center of two residues. The center is defined
 by the average x, y, z position of three passed atoms for each residue (typically
@@ -713,11 +713,11 @@ every other carbon on the 6-carbon ring of the nucleotide base).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>trajectory</strong><span class="classifier">md.Trajectory</span></dt><dd><p>Single frame trajectory.</p>
+<dt><strong>trj</strong><span class="classifier">md.Trajectory</span></dt><dd><p>Single frame trajectory.</p>
 </dd>
-<dt><strong>res1_num</strong><span class="classifier">int</span></dt><dd><p>1-indexed residue number of the first residue (PDB Column 5).</p>
+<dt><strong>res1</strong><span class="classifier">int</span></dt><dd><p>1-indexed residue number of the first residue (PDB Column 5).</p>
 </dd>
-<dt><strong>res2_num</strong><span class="classifier">int</span></dt><dd><p>1-indexed residue number of the second residue (PDB Column 5).</p>
+<dt><strong>res2</strong><span class="classifier">int</span></dt><dd><p>1-indexed residue number of the second residue (PDB Column 5).</p>
 </dd>
 <dt><strong>res1_atoms</strong><span class="classifier">tuple, default=(“C2”, “C4”, “C6”)</span></dt><dd><p>Atom names whose positions are averaged to find the center of residue 1.</p>
 </dd>
