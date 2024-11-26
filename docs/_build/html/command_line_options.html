@@ -696,8 +696,15 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-system-stacking-fingerprints-ssfs">Create System Stacking Fingerprints (SSFs)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-average-ssf">Get Average SSF</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-output">Data Output</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inputting-ssf-data">Inputting SSF Data</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combined-ssfs">Combined SSFs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-ssfs">Customizing SSFs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-top-stacking-events">Get Top Stacking Events</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-stacking-changes">Get Stacking Changes</a></li>
 </ul>
             </nav>
         </div>
@@ -979,19 +986,173 @@ trajectory averaged across all frames:</p>
 this SSF data rather than recalculate each time.</p>
 <p>Expanding on the command above, we create SSFs for frames 1-10 and use
 <code class="docutils literal notranslate"><span class="pre">-t</span> <span class="pre">10</span></code> to calculate them in parallel:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">stacker</span> <span class="o">-</span><span class="n">s</span> <span class="n">ssf</span> \
-        <span class="o">-</span><span class="n">trj</span> <span class="n">first10_5JUP_N2_tUAG_aCUA_</span><span class="o">+</span><span class="mi">1</span><span class="n">GCU_nowat</span><span class="o">.</span><span class="n">mdcrd</span> \
-        <span class="o">-</span><span class="n">top</span> <span class="mi">5</span><span class="n">JUP_N2_tUAG_aCUA_</span><span class="o">+</span><span class="mi">1</span><span class="n">GCU_nowat</span><span class="o">.</span><span class="n">prmtop</span> \
-        <span class="o">-</span><span class="n">r</span> <span class="mi">90</span><span class="o">-</span><span class="mi">215</span> \
-        <span class="o">-</span><span class="n">fl</span> <span class="mi">1</span><span class="o">-</span><span class="mi">10</span> \
-        <span class="o">-</span><span class="n">o</span> <span class="mi">5</span><span class="n">JUP_N2_tUAG_aCUA_</span><span class="o">+</span><span class="mi">1</span><span class="n">GCU_nowat</span><span class="o">.</span><span class="n">SSF</span><span class="o">.</span><span class="n">png</span> \
-        <span class="o">-</span><span class="n">d</span> <span class="mi">5</span><span class="n">JUP_N2_tUAG_aCUA_</span><span class="o">+</span><span class="mi">1</span><span class="n">GCU_nowat</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">txt</span><span class="o">.</span><span class="n">gz</span> \
-        <span class="o">-</span><span class="n">g</span> <span class="mi">5</span> \
-        <span class="o">-</span><span class="n">t</span> <span class="mi">10</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[user]$ stacker -s ssf \
+        -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
+        -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
+        -r 90-215 \
+        -fl 1-10 \
+        -o 5JUP_N2_tUAG_aCUA_+1GCU_nowat.SSF.png \
+        -d 5JUP_N2_tUAG_aCUA_+1GCU_nowat.data.txt.gz \
+        -g 5 \
+        -t 10
+Res1    Res2    Avg_Dist
+117     108     3.43
+127     94      3.67
+93      130     3.68
+177     204     3.80
+197     195     3.85
 </pre></div>
 </div>
 <p>This outputs the average SSF for frames 1-10 to <code class="docutils literal notranslate"><span class="pre">5JUP_N2_tUAG_aCUA_+1GCU_nowat.SSF.png</span></code>:</p>
+<p>The list of top stacking events can be customized much further via the
+<code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">stack_events</span></code> command. See “Get Top Stacking Events” below.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-d</span></code> flag above outputs the SSF data for each frame to
+<code class="docutils literal notranslate"><span class="pre">5JUP_N2_tUAG_aCUA_+1GCU_nowat.data.txt.gz</span></code>. We can read this into a
+Python object representing the 10 frames of 126x126 residue SSFs
+with <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.load_ssfs" title="stacker.pairwise_distance.load_ssfs"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_ssfs()</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssfs</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">load_ssfs</span><span class="p">(</span><span class="s2">&quot;5JUP_N2_tUAG_aCUA_+1GCU_nowat.data.txt.gz&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssfs</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(10, 126, 126)</span>
+</pre></div>
+</div>
 </section>
+<section id="inputting-ssf-data">
+<h3>Inputting SSF Data<a class="headerlink" href="#inputting-ssf-data" title="Link to this heading">#</a></h3>
+<p>In lieu of recalculating SSF data for a trajectory, the <code class="docutils literal notranslate"><span class="pre">.txt.gz</span></code> file
+outputted by <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">ssf</span> <span class="pre">-d</span> <span class="pre">OUTFILE</span></code> can be loaded in using:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-i,</span> <span class="pre">--input</span> <span class="pre">INPUT_FILE</span></code> : A <code class="docutils literal notranslate"><span class="pre">.txt</span></code> or <code class="docutils literal notranslate"><span class="pre">.txt.gz</span></code> containing per-frame SSF</p></li>
+</ul>
+<p>data created by <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">ssf</span> <span class="pre">-d</span> <span class="pre">OUTFILE</span></code>.
+- <code class="docutils literal notranslate"><span class="pre">-B,</span> <span class="pre">--input_B</span> <span class="pre">INPUT_FILE</span></code> : A second <code class="docutils literal notranslate"><span class="pre">.txt</span></code> or <code class="docutils literal notranslate"><span class="pre">.txt.gz</span></code> file that will be displayed
+on the bottom left of the output SSF, allowing comparison between two SSFs. Must be the same
+shape as the data inputted by the <code class="docutils literal notranslate"><span class="pre">-i</span></code> flag.</p>
+<p>When using these, the <code class="docutils literal notranslate"><span class="pre">-trj</span></code>, <code class="docutils literal notranslate"><span class="pre">-top</span></code>, and <code class="docutils literal notranslate"><span class="pre">-r</span></code> flags should be the same as those used
+to create either input. In the code below, we input two <code class="docutils literal notranslate"><span class="pre">.txt.gz</span></code> files representing SSF
+data from the same structure with two different mRNA codons:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[user]$ stacker -s ssf \
+        -trj 5JUP_N2_tGGG_aCCU_+1GCU_nowat_2fpns.mdcrd \
+        -top 5JUP_N2_tGGG_aCCU_+1GCU_nowat.prmtop \
+        -r 2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430 \
+        -i 5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz
+</pre></div>
+</div>
+<img alt="_images/inputted_ssf.png" src="_images/inputted_ssf.png" />
+<p>This will output the average SSF in minutes, as opposed to the hours it took to calculate
+the <code class="docutils literal notranslate"><span class="pre">-i</span> <span class="pre">5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz</span></code> input data.</p>
+</section>
+</section>
+<section id="combined-ssfs">
+<h2>Combined SSFs<a class="headerlink" href="#combined-ssfs" title="Link to this heading">#</a></h2>
+<p>The line over <code class="docutils literal notranslate"><span class="pre">x=y</span></code> indicates that the SSF is symmetrical. This makes sense,
+as the distance from residue <code class="docutils literal notranslate"><span class="pre">i</span></code> to <code class="docutils literal notranslate"><span class="pre">j</span></code> is the same as from <code class="docutils literal notranslate"><span class="pre">j</span></code> to <code class="docutils literal notranslate"><span class="pre">i</span></code>.
+We can remove this redundancy by adding another trajectory’s SSF in the bottom left
+half, for ease of comparison:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[user]$ stacker -s ssf \
+        -trj 5JUP_N2_tGGG_aCCU_+1GCU_nowat_2fpns.mdcrd \
+        -top 5JUP_N2_tGGG_aCCU_+1GCU_nowat.prmtop \
+        -r 2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430 \
+        -i 5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz \
+        -B 5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz
+</pre></div>
+</div>
+<img alt="_images/combined_ssf.png" src="_images/combined_ssf.png" />
+<p>To get the residue pairs whose stacking changed the most between the two SSFs,
+see “Get Stacking Changes”.</p>
+<section id="customizing-ssfs">
+<h3>Customizing SSFs<a class="headerlink" href="#customizing-ssfs" title="Link to this heading">#</a></h3>
+<p>We can customize SSFs to color stacking events more stringently:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-l,</span> <span class="pre">--limits</span> <span class="pre">LIMITS</span></code> : limits of the color scale, default = (0,7). Helps limit the pairings</p></li>
+</ul>
+<p>visualized as pi-stacking.
+- <code class="docutils literal notranslate"><span class="pre">-y,</span> <span class="pre">--scale_style</span> <span class="pre">SCALE_STYLE</span></code> : style of color scale. {bellcurve, gradient}</p>
+<p>The SSFs we’ve displayed so far used the default <code class="docutils literal notranslate"><span class="pre">limits</span> <span class="pre">=</span> <span class="pre">(0,7)</span></code> and <code class="docutils literal notranslate"><span class="pre">scale_style</span> <span class="pre">=</span> <span class="pre">bellcurve</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">scale_style</span></code> parameter can help label rare &lt;3.5Å stacking events as stacking rather than
+the lighter color caused by <code class="docutils literal notranslate"><span class="pre">bellcurve</span></code>. Sterics generally prevent nucleotides from anything &lt;3.4Å,
+so this scale generally changes nothing and is a matter of personal preference.</p>
+<dl class="simple">
+<dt>::</dt><dd><dl class="simple">
+<dt>[user]$ stacker -s ssf </dt><dd><p>-trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-10 -t 10 -l 2,5 -y gradient</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<img alt="_images/scaled_ssf.png" src="_images/scaled_ssf.png" />
+</section>
+</section>
+<section id="get-top-stacking-events">
+<h2>Get Top Stacking Events<a class="headerlink" href="#get-top-stacking-events" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">stack_events</span></code> gives the top pi-stacking events (ie. the residue
+pairs with COG distance closest to 3.5Å) for a given trajectory. A few important
+flags:
+- <code class="docutils literal notranslate"><span class="pre">-i,</span> <span class="pre">--input</span> <span class="pre">INPUT_FILE</span></code> : A <code class="docutils literal notranslate"><span class="pre">.txt</span></code> or <code class="docutils literal notranslate"><span class="pre">.txt.gz</span></code> containing per-frame SSF
+data created by <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">ssf</span> <span class="pre">-d</span> <span class="pre">OUTFILE</span></code>.
+- <code class="docutils literal notranslate"><span class="pre">-o,</span> <span class="pre">--output</span> <span class="pre">OUTPUT_FILE</span></code> : spreadsheet output goes to a <code class="docutils literal notranslate"><span class="pre">.txt</span></code> file. Used for future analysis.
+- <code class="docutils literal notranslate"><span class="pre">-n,</span> <span class="pre">--n_events</span> <span class="pre">N_EVENTS</span></code> : show top <code class="docutils literal notranslate"><span class="pre">N_EVENTS</span></code> stacking events. We use <code class="docutils literal notranslate"><span class="pre">-n</span> <span class="pre">-1</span></code>, which
+outputs all residue pairs and their COG distance.
+- <code class="docutils literal notranslate"><span class="pre">-j,</span> <span class="pre">--include_adjacent</span></code> : Include adjacent residues in the printed output. These
+are much more likely to be stacking, you may be interested in only non-consecutive stacking residues.</p>
+<dl>
+<dt>::</dt><dd><dl class="simple">
+<dt>[user]$ stacker -s stack_events </dt><dd><p>-trj 5JUP_N2_tGGG_aCCU_+1GCU_nowat_2fpns.mdcrd -top TOPOLOGIES/5JUP_N2_tGGG_aCCU_+1GCU_nowat.prmtop -r 2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430 -i 5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz -o stack_events.GCU.txt  -n -1 -j</p>
+</dd>
+</dl>
+<p>WARNING: Residue Indices are expected to be 1-indexed
+Reading trajectory…
+Reading topology…
+Filtering trajectory…
+WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed</p>
+</dd>
+</dl>
+<p>The stacking events are outputted to <code class="docutils literal notranslate"><span class="pre">stack_events.GCU.txt</span></code>. We can look at this file
+to find the residue pairs closest to 3.5Å apart—those that are pi-stacking.</p>
+<dl class="simple">
+<dt>::</dt><dd><p>[user]$ head stack_events.GCU.txt
+Res1    Res2    Avg_Dist
+101     102     3.55
+139     138     3.61
+130     93      3.63
+172     170     3.68
+172     173     3.70
+48      49      3.71
+47      48      3.72
+129     130     3.76
+136     97      3.78</p>
+</dd>
+</dl>
+</section>
+<section id="get-stacking-changes">
+<h2>Get Stacking Changes<a class="headerlink" href="#get-stacking-changes" title="Link to this heading">#</a></h2>
+<p>Once we have used <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">stack_events</span></code> to get the top stacking events
+for a single trajectory, we can run <code class="docutils literal notranslate"><span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">compare</span></code> to get the residue
+pairs that changed the most between two different trajectories. These trajectories
+must be comparable (ie. have the same number of residues). Generally, they should
+be the same structure with very minor tweaks. The two trajectories used below are
+the same ribosome PDB with one codon of the mRNA changed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[user]$ stacker -s compare \
+        -A stack_events.GCU.txt \
+        -B stack_events.CGU.txt \
+        -SA _tGGG_aCCU_+1GCU \
+        -SB _tGGG_aCCU_+1CGU
+
+Res1  Res2  Avg_Dist_tGGG_aCCU_+1GCU  Avg_Dist_tGGG_aCCU_+1CGU  Discrepancy
+47    48                      3.72                      4.30         0.58
+48    49                      3.71                      4.20         0.49
+122   123                      4.23                      3.75         0.48
+66    67                      3.98                      4.31         0.33
+133   134                      4.07                      3.75         0.32
+91    92                      3.91                      4.19         0.28
+95   138                      3.84                      4.11         0.27
+170   172                      3.68                      3.95         0.27
+422   423                      3.87                      4.11         0.24
+138   139                      3.61                      3.82         0.21
+</pre></div>
+</div>
+<p>The output shows the average stacking distance between the residues in one trajectory
+compared to the other, and lists them by the residue pairs whose stacking distance changed
+the most.</p>
 </section>
 </section>
 
@@ -1046,8 +1207,15 @@ this SSF data rather than recalculate each time.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-system-stacking-fingerprints-ssfs">Create System Stacking Fingerprints (SSFs)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-average-ssf">Get Average SSF</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-output">Data Output</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inputting-ssf-data">Inputting SSF Data</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combined-ssfs">Combined SSFs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-ssfs">Customizing SSFs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-top-stacking-events">Get Top Stacking Events</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-stacking-changes">Get Stacking Changes</a></li>
 </ul>
   </nav></div>
 

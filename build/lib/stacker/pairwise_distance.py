@@ -17,13 +17,14 @@ from .visualization import NoResidues, create_axis_labels, display_arrays_as_vid
 import sys
 import concurrent.futures
 import functools
+import math
 
 _NUCLEOTIDE_NAMES = {"A", "A5", "A3", "G", "G5", "G3", "C", "C5", "C3",
                      "T" "T5", "T3", "U", "U5", "U3", "INO"}
 
-def calculate_residue_distance(trajectory: md.Trajectory, 
-                               res1_num: int, 
-                               res2_num: int, 
+def calculate_residue_distance(trj: md.Trajectory, 
+                               res1: int, 
+                               res2: int, 
                                res1_atoms: tuple = ("C2", "C4", "C6"),
                                res2_atoms: tuple = ("C2", "C4", "C6"),
                                frame: int = 1) -> Vector:
@@ -36,11 +37,11 @@ def calculate_residue_distance(trajectory: md.Trajectory,
 
     Parameters
     ----------
-    trajectory : md.Trajectory
+    trj : md.Trajectory
         Single frame trajectory.
-    res1_num : int
+    res1 : int
         1-indexed residue number of the first residue (PDB Column 5).
-    res2_num : int
+    res2 : int
         1-indexed residue number of the second residue (PDB Column 5).
     res1_atoms : tuple, default=("C2", "C4", "C6")
         Atom names whose positions are averaged to find the center of residue 1.
@@ -63,8 +64,8 @@ def calculate_residue_distance(trajectory: md.Trajectory,
     >>> import stacker as st
     >>> filtered_traj = st.filter_traj('testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 
     ...                              'testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', 
-    ...                              residues_desired = {426,427}, 
-    ...                              atomnames_desired = {'C2','C4','C6'})
+    ...                              residues = {426,427}, 
+    ...                              atoms = {'C2','C4','C6'})
     WARNING: Residue Indices are expected to be 1-indexed
     Reading trajectory...
     Reading topology...
@@ -81,27 +82,27 @@ def calculate_residue_distance(trajectory: md.Trajectory,
     >>> distance_vec.magnitude()
     7.5253396
     """
-    trajectory = trajectory[frame-1]
+    trj = trj[frame-1]
 
     # Correct for mdtraj 0-indexing
-    res1_num = res1_num - 1 
-    res2_num = res2_num - 1
+    res1 = res1 - 1 
+    res2 = res2 - 1
 
-    topology = trajectory.topology
-    res1_atom_indices = topology.select("resSeq " + str(res1_num))
-    res2_atom_indices = topology.select("resSeq " + str(res2_num))
+    topology = trj.topology
+    res1_atom_indices = topology.select("resSeq " + str(res1))
+    res2_atom_indices = topology.select("resSeq " + str(res2))
     res1_name = topology.atom(res1_atom_indices[0]).residue.name
     res2_name = topology.atom(res2_atom_indices[0]).residue.name
 
     if (res1_name not in _NUCLEOTIDE_NAMES) or (res2_name not in _NUCLEOTIDE_NAMES):
         return Vector(0,0,0)
     
-    desired_res1_atom_indices = topology.select("(name " + res1_atoms[0] + " or name " + res1_atoms[1] + " or name " + res1_atoms[2] + ") and residue " + str(res1_num))
-    desired_res2_atom_indices = topology.select("(name " + res2_atoms[0] + " or name " + res2_atoms[1] + " or name " + res2_atoms[2] + ") and residue " + str(res2_num))
+    desired_res1_atom_indices = topology.select("(name " + res1_atoms[0] + " or name " + res1_atoms[1] + " or name " + res1_atoms[2] + ") and residue " + str(res1))
+    desired_res2_atom_indices = topology.select("(name " + res2_atoms[0] + " or name " + res2_atoms[1] + " or name " + res2_atoms[2] + ") and residue " + str(res2))
 
     # convert nanometer units in trajectory.xyz to Angstroms
-    res1_atom_xyz = trajectory.xyz[0, desired_res1_atom_indices, :] * 10
-    res2_atom_xyz = trajectory.xyz[0, desired_res2_atom_indices, :] * 10
+    res1_atom_xyz = trj.xyz[0, desired_res1_atom_indices, :] * 10
+    res2_atom_xyz = trj.xyz[0, desired_res2_atom_indices, :] * 10
     vectorized_res1_atom_xyz = [Vector(x,y,z) for [x,y,z] in res1_atom_xyz]
     vectorized_res2_atom_xyz = [Vector(x,y,z) for [x,y,z] in res2_atom_xyz]
     res1_center_of_geometry = calc_center_3pts(*vectorized_res1_atom_xyz)
@@ -110,7 +111,7 @@ def calculate_residue_distance(trajectory: md.Trajectory,
     distance_res12 = res2_center_of_geometry - res1_center_of_geometry
     return distance_res12
 
-def get_residue_distance_for_frame(trajectory: md.Trajectory, 
+def get_residue_distance_for_frame(trj: md.Trajectory, 
                                    frame: int, 
                                    res1_atoms: tuple = ("C2", "C4", "C6"),
                                    res2_atoms: tuple = ("C2", "C4", "C6"),
@@ -124,7 +125,7 @@ def get_residue_distance_for_frame(trajectory: md.Trajectory,
 
     Parameters
     ----------
-    trajectory : md.Trajectory
+    trj : md.Trajectory
         Trajectory to analyze (must have a topology).
     frame : int
         1-indexed frame to analyze.
@@ -151,17 +152,17 @@ def get_residue_distance_for_frame(trajectory: md.Trajectory,
     >>> import stacker as st
     >>> filtered_traj = st.filter_traj('stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 
     ...                             'stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', 
-    ...                             residues_desired = '2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430', 
-    ...                             atomnames_desired = {'C2','C4','C6'})
+    ...                             residues = '2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430', 
+    ...                             atoms = {'C2','C4','C6'})
     >>> ssf = st.get_residue_distance_for_frame(filtered_traj, frame = 2, write_output = False)
     >>> ssf.shape
     (127, 127)
 
     """
-    trajectory = trajectory[frame-1]
-    topology = trajectory.topology
-    n_residues = trajectory.n_residues
-    res_indices = [res.resSeq for res in trajectory.topology.residues]
+    trj = trj[frame-1]
+    topology = trj.topology
+    n_residues = trj.n_residues
+    res_indices = [res.resSeq for res in trj.topology.residues]
     zero_vector = Vector(0,0,0)
 
     pairwise_distances = np.full((n_residues, n_residues), zero_vector)
@@ -191,7 +192,7 @@ def get_residue_distance_for_frame(trajectory: md.Trajectory,
                     pairwise_distances[mat_i,:] = Vector(0,0,0)
                     break
                 else:
-                    pairwise_distances[mat_i,mat_j] = calculate_residue_distance(trajectory, i+1, j+1, res1_atoms, res2_atoms)
+                    pairwise_distances[mat_i,mat_j] = calculate_residue_distance(trj, i+1, j+1, res1_atoms, res2_atoms)
             mat_j+=1
         mat_i+=1
         sys.stdout.flush()
@@ -200,7 +201,7 @@ def get_residue_distance_for_frame(trajectory: md.Trajectory,
     pairwise_res_magnitudes = get_magnitude(pairwise_distances)
     return(pairwise_res_magnitudes)
 
-def get_residue_distance_for_trajectory(trajectory: md.Trajectory, 
+def get_residue_distance_for_trajectory(trj: md.Trajectory, 
                                         frames : typing.ArrayLike | str | set = {},
                                         res1_atoms: tuple = ("C2", "C4", "C6"),
                                         res2_atoms: tuple = ("C2", "C4", "C6"),
@@ -215,7 +216,7 @@ def get_residue_distance_for_trajectory(trajectory: md.Trajectory,
 
     Parameters
     ----------
-    trajectory : md.Trajectory
+    trj : md.Trajectory
         Trajectory to analyze (must have a topology).
         Output of st.filter_traj() or mdtraj.load()
     frames : array_like or str
@@ -251,8 +252,8 @@ def get_residue_distance_for_trajectory(trajectory: md.Trajectory,
     >>> import stacker as st
     >>> filtered_traj = st.filter_traj('stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 
     ...                             'stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', 
-    ...                             residues_desired = '2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430', 
-    ...                             atomnames_desired = {'C2','C4','C6'})
+    ...                             residues = '2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430', 
+    ...                             atoms = {'C2','C4','C6'})
     >>> ssfs = st.get_residue_distance_for_trajectory(filtered_traj, frames = '1-3', write_output = False)
     >>> ssfs.shape
     (3, 127, 127)
@@ -260,10 +261,10 @@ def get_residue_distance_for_trajectory(trajectory: md.Trajectory,
     frames = SmartIndexingAction.parse_smart_index(frames)
     
     if (frames == {}) or (frames == []):
-        frames = [i for i in range(1, trajectory.n_frames + 1)]
+        frames = [i for i in range(1, trj.n_frames + 1)]
 
     with concurrent.futures.ProcessPoolExecutor(max_workers = threads) as executor:            
-        ssf_per_frame = np.array(list(executor.map(get_residue_distance_for_frame, [trajectory]*len(frames), frames,
+        ssf_per_frame = np.array(list(executor.map(get_residue_distance_for_frame, [trj]*len(frames), frames,
                                     [res1_atoms]*len(frames),[res2_atoms]*len(frames), [write_output]*len(frames))))
     return ssf_per_frame
 
@@ -277,7 +278,7 @@ Alias for `get_residue_distance_for_trajectory()`.
 {get_residue_distance_for_trajectory.__doc__}
 """
 
-def get_frame_average(frames : typing.ArrayLike) -> typing.ArrayLike:
+def get_frame_average(ssfs : typing.ArrayLike) -> typing.ArrayLike:
     '''
     Calculates an average System Stacking Fingerprint (SSF) across multiple SSFs
 
@@ -286,9 +287,10 @@ def get_frame_average(frames : typing.ArrayLike) -> typing.ArrayLike:
 
     Parameters
     ----------
-    frames : numpy.typing.ArrayLike
+    ssfs : numpy.typing.ArrayLike
         List or array of 2D NumPy arrays representing a pairwise distance matrix
         of an MD structure. All 2D NumPy arrays must be of the same dimenstions.
+        Output of ``get_residue_distance_for_trajectory()``
         
     Returns
     -------
@@ -307,17 +309,17 @@ def get_frame_average(frames : typing.ArrayLike) -> typing.ArrayLike:
     >>> import stacker as st
     >>> filtered_traj = st.filter_traj('stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 
     ...                             'stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', 
-    ...                             residues_desired = '2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430', 
-    ...                             atomnames_desired = {'C2','C4','C6'})
+    ...                             residues = '2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430', 
+    ...                             atoms = {'C2','C4','C6'})
     >>> ssfs = st.get_residue_distance_for_trajectory(filtered_traj, frames = '1-3', write_output = False)
     >>> avg_ssf = st.get_frame_average(ssfs)
     >>> avg_ssf.shape
     [FILL]
     '''
-    avg_frame = np.mean(frames, axis = 0)
+    avg_frame = np.mean(ssfs, axis = 0)
     return avg_frame 
 
-def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, output_csv : str = '',
+def get_top_stacking(trj : md.Trajectory, matrix : typing.ArrayLike, csv : str = '',
                      n_events : int = 5, include_adjacent : bool = False) -> None:
     '''
     Returns top stacking residue pairs for a given System Stacking Fingerprint (SSF)
@@ -328,11 +330,11 @@ def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, outp
 
     Parameters
     ----------    
-    trajectory : md.Trajectory
+    trj : md.Trajectory
         trajectory used to get the stacking fingerprint
     matrix : typing.ArrayLike
-        Single-frame SSF created by get_residue_distance_for_frame() or get_frame_average()
-    output_csv : str, default = '',
+        Single-frame SSF created by ``get_residue_distance_for_frame()`` or ``get_frame_average()``
+    csv : str, default = '',
         output filename of the tab-separated txt file to write data to. If empty, data printed to standard output
     n_events : int, default = 5
         maximum number of stacking events to display, if -1 display all residue pairings
@@ -352,7 +354,7 @@ def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, outp
     >>> import stacker as st
     >>> filtered_traj = st.filter_traj('stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 
     ...                             'stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', 
-    ...                             atomnames_desired = {'C2','C4','C6'})
+    ...                             atoms = {'C2','C4','C6'})
     >>> ssf = st.get_residue_distance_for_frame(filtered_traj, frame = 2, write_output = False)
     >>> ssf.shape
     (252,252)
@@ -369,7 +371,7 @@ def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, outp
     >>> import stacker as st
     >>> filtered_traj = st.filter_traj('stacker/testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 
     ...                             'stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', 
-    ...                             atomnames_desired = {'C2','C4','C6'})
+    ...                             atoms = {'C2','C4','C6'})
     >>> ssfs = st.get_residue_distance_for_trajectory(filtered_traj, frames = '1-3', write_output = False)
     >>> avg_ssf = st.get_frame_average(ssfs)
     >>> avg_ssf.shape
@@ -400,21 +402,21 @@ def get_top_stacking(trajectory : md.Trajectory, matrix : typing.ArrayLike, outp
     if n_events == -1: n_events = len(no_mirrored_indices) 
     no_mirrored_indices = no_mirrored_indices[:n_events]
 
-    if output_csv:
-        with open(output_csv, 'w') as csv_file:
+    if csv:
+        with open(csv, 'w') as csv_file:
             csv_file.write('Res1\tRes2\tAvg_Dist\n')
             for row, col, value in no_mirrored_indices:
-                res1 = increment_residue(str(trajectory.topology.residue(row).resSeq))
-                res2 = increment_residue(str(trajectory.topology.residue(col).resSeq))
+                res1 = increment_residue(str(trj.topology.residue(row).resSeq))
+                res2 = increment_residue(str(trj.topology.residue(col).resSeq))
                 csv_file.write(f"{res1}\t{res2}\t{value:.2f}\n")
     else:
         print('Res1\tRes2\tAvg_Dist')
         for row, col, value in no_mirrored_indices:
-            res1 = increment_residue(str(trajectory.topology.residue(row).resSeq))
-            res2 = increment_residue(str(trajectory.topology.residue(col).resSeq))
+            res1 = increment_residue(str(trj.topology.residue(row).resSeq))
+            res2 = increment_residue(str(trj.topology.residue(col).resSeq))
             print(f"{res1}\t{res2}\t{value:.2f}")
     
-def increment_residue(residue_id : str) -> str:
+def increment_residue(residue : str) -> str:
     '''
     Increments residue ID by 1
     
@@ -422,7 +424,7 @@ def increment_residue(residue_id : str) -> str:
     
     Parameters
     ----------
-    residue_id : str
+    residue : str
         The residue id given by trajectory.topology.residue(i)
 
     Returns
@@ -436,11 +438,42 @@ def increment_residue(residue_id : str) -> str:
     'G44'
 
     '''
-    letter_part = ''.join(filter(str.isalpha, residue_id))
-    number_part = ''.join(filter(str.isdigit, residue_id))
+    letter_part = ''.join(filter(str.isalpha, residue))
+    number_part = ''.join(filter(str.isdigit, residue))
     incremented_number = str(int(number_part) + 1)
     return letter_part + incremented_number
 
+def load_ssfs(file : str) -> typing.ArrayLike:
+    """
+    Loads a list of SSFs created by ``stacker -s ssf -d OUTFILE``
+
+    Loads a list of SSFs where each element is an SSF from a given
+    frame. This is ``OUTFILE`` when running ``stacker -s ssf -d OUTFILE``
+    and quickly provides saved SSF data rather than recalculating SSFs
+    for a given trajectory.
+
+    Parameters
+    ----------
+    file : str 
+        outfile from ``stacker -s ssf -d OUTFILE``. 
+        Must be ``.txt`` or ``.txt.gz``.
+
+    Returns
+    -------
+    ssfs : numpy.typing.ArrayLike
+        List or array of 2D NumPy arrays representing a pairwise distance matrix
+        of an MD structure. All 2D NumPy arrays must be of the same dimenstions.
+        Output of ``get_residue_distance_for_trajectory()``
+
+    See Also
+    --------
+    system_stacking_fingerprints : calculates ``ssfs`` rather than loading it like this function.
+    get_residue_distance_for_trajectory : Alias for :func:`system_stacking_fingerprints()`
+    get_frame_average : calculates average SSF for a trajectory. ``matrix`` parameter is the output of this
+    """
+    flattened_ssf = np.loadtxt(file)
+    ssfs = flattened_ssf.reshape(flattened_ssf.shape[0], math.isqrt(flattened_ssf.shape[1]), math.isqrt(flattened_ssf.shape[1]))
+    return ssfs
 
 class MultiFrameTraj(Exception):
     """

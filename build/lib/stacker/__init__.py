@@ -14,6 +14,7 @@ import sys, os
 import numpy as np
 import pandas as pd
 import random
+import math
 
 def run_python_command() -> None:
     '''Reads the user's passed in command line and runs the command
@@ -42,7 +43,7 @@ def run_python_command() -> None:
             '              res_distance:\n' + \
             '                    Get the distance between two residues in a given frame\n' + \
             '              system OR ssf:\n' + \
-            '                    Create a System Stacking Fingerprint (SSF) with pairwise distances for each residue\n' + \
+            '                    Create a System Stacking Fingerprint (SSF) averaged across specified frames\n' + \
             '              stack_events:\n' + \
             '                    Get list of residues with most stacking events (distance closest to 3.5Å)\n' + \
             '              compare:\n' +\
@@ -361,10 +362,10 @@ def bottaro_routine() -> None:
     
     create_parent_directories(output_name)
 
-    write_bottaro_to_csv(pdb_filename=pdb_filename, 
-                         output_csv_name=output_name, perspective_residue_num=pers_res_num, viewed_residue_num=view_res_num,
-                         res1_atom_names=tuple(perspective_atom_names), 
-                         res2_atom_names=tuple(viewed_atom_names), index = args.index)
+    write_bottaro_to_csv(pdb=pdb_filename, 
+                         csv=output_name, pers_res=pers_res_num, view_res=view_res_num,
+                         res1_atoms=tuple(perspective_atom_names), 
+                         res2_atoms=tuple(viewed_atom_names), index = args.index)
     
     if args.plot_type == 'heat':
         create_parent_directories(args.plot_outfile)
@@ -442,7 +443,7 @@ def res_distance_routine() -> None:
         raise AtomEmpty("Must include a list of atom names to keep in the trajectory")
 
     block_printing()
-    filtered_trj = filter_traj(trajectory_filename=args.trajectory, topology_filename=args.topology, residues_desired=residues_desired, atomnames_desired=atomnames_desired)
+    filtered_trj = filter_traj(trj_file=args.trajectory, top_file=args.topology, residues=residues_desired, atoms=atomnames_desired)
     if args.bootstrap:
         n_frames = len(filtered_trj)
         frames = [random.randint(0, n_frames-1) for _ in range(args.bootstrap)]
@@ -457,7 +458,7 @@ def res_distance_routine() -> None:
         # Correct that calculate_residue_distance res_nums are 1-indexed
         print(i)
         i+=1
-        distance_vector = calculate_residue_distance(trajectory=trj_frame, res1_num=int(residues_desired[0]), res2_num=int(residues_desired[1]), res1_atoms=tuple(atomnames_desired), res2_atoms=tuple(atomnames_desired))
+        distance_vector = calculate_residue_distance(trj=trj_frame, res1=int(residues_desired[0]), res2=int(residues_desired[1]), res1_atoms=tuple(atomnames_desired), res2_atoms=tuple(atomnames_desired))
         enable_printing()
         res_distances.append(distance_vector.magnitude())
 
@@ -517,7 +518,7 @@ def system_routine() -> None:
             -fl 1-2 
             -g 10 
             -o testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_nowat_pairwise_avg_1to2.png 
-            -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt
+            -d testing/command_line_tests/pairwise/5JUP_N2_tUAG_aCUA_+1GCU_data_1to2.txt.gz
 
     See Also
     --------
@@ -537,12 +538,13 @@ def system_routine() -> None:
     else:
         frame_list = []
 
-    trj_sub = filter_traj(trajectory_filename=args.trajectory, topology_filename=args.topology, residues_desired=residues_desired)
+
+    trj_sub = filter_traj(trj_file=args.trajectory, top_file=args.topology, residues=residues_desired)
 
     if args.input:
         print("Loaded fingerprint data from:", args.input)
         loaded_arr = np.loadtxt(args.input)
-        frames = loaded_arr.reshape(loaded_arr.shape[0], loaded_arr.shape[1] // trj_sub.n_residues, trj_sub.n_residues)
+        frames = loaded_arr.reshape(loaded_arr.shape[0], math.isqrt(loaded_arr.shape[1]), math.isqrt(loaded_arr.shape[1]))
     elif args.frame_list:
         frames = get_residue_distance_for_trajectory(trj_sub, frame_list, threads = args.threads)
     elif args.frame:
@@ -563,19 +565,19 @@ def system_routine() -> None:
     if args.input_B:
         print("Loaded second fingerprint data from:", args.input_B)
         loaded_arr = np.loadtxt(args.input_B)
-        frames_B = loaded_arr.reshape(loaded_arr.shape[0], loaded_arr.shape[1] // trj_sub.n_residues, trj_sub.n_residues)
+        frames_B = loaded_arr.reshape(loaded_arr.shape[0], math.isqrt(loaded_arr.shape[1]), math.isqrt(loaded_arr.shape[1]))
         avg_frames_B = [get_frame_average(frames_B)]
         avg_frames = [combine_frames(avg_frames[0], avg_frames_B[0])]
         print(avg_frames)
 
     if args.get_stacking:
-        get_top_stacking(trj_sub, avg_frames[0], output_csv = '', n_events = args.get_stacking)
+        get_top_stacking(trj_sub, avg_frames[0], csv = '', n_events = args.get_stacking)
 
     sorted_res = list(residues_desired)
     sorted_res.sort()
 
     create_parent_directories(args.output)
-    display_arrays_as_video(avg_frames, sorted_res, seconds_per_frame=1, outfile=args.output, scale_limits=scale_limits, scale_style=args.scale_style)
+    display_arrays_as_video(avg_frames, sorted_res, seconds_per_frame=10, outfile=args.output, scale_limits=scale_limits, scale_style=args.scale_style)
 
 def combine_frames(frames_A, frames_B):
     """
@@ -680,11 +682,11 @@ def stack_events_routine() -> None:
     else:
         residues_desired = {}
 
-    trj_sub = filter_traj(trajectory_filename=args.trajectory, topology_filename=args.topology, residues_desired=residues_desired)
+    trj_sub = filter_traj(trj_file=args.trajectory, top_file=args.topology, residues=residues_desired)
 
     if args.input:
         loaded_arr = np.loadtxt(args.input)
-        frames = loaded_arr.reshape(loaded_arr.shape[0], loaded_arr.shape[1] // trj_sub.n_residues, trj_sub.n_residues)
+        frames = loaded_arr.reshape(loaded_arr.shape[0], math.isqrt(loaded_arr.shape[1]), math.isqrt(loaded_arr.shape[1]))
         frame = get_frame_average(frames)
     elif args.frame:
         frame = get_residue_distance_for_frame(trj_sub, frame = args.frame)
@@ -692,7 +694,7 @@ def stack_events_routine() -> None:
         frames = get_residue_distance_for_trajectory(trj_sub, args.frame_list, threads = args.threads)
         frame = get_frame_average(frames)
 
-    get_top_stacking(trj_sub, frame, output_csv = args.output, n_events = args.n_events, include_adjacent = args.include_adjacent)
+    get_top_stacking(trj_sub, frame, csv = args.output, n_events = args.n_events, include_adjacent = args.include_adjacent)
 
 def compare_routine() -> None:
     """
@@ -781,7 +783,7 @@ def compare_routine() -> None:
             inputted df with rows organized alphabetically at the Row, Column variable
 
         '''
-        cols_to_sort = ['Row','Column']
+        cols_to_sort = ['Res1','Res2']
         df = pd.concat([pd.DataFrame(np.sort(df[cols_to_sort].values), columns=cols_to_sort, index=df.index), df[df.columns[~df.columns.isin(cols_to_sort)]]], axis=1)
         return df
     
@@ -797,18 +799,17 @@ def compare_routine() -> None:
     file1_source = args.source_A
     file2_source = args.source_B
 
-    header = "Row\tColumn\tValue"
+    header = "Res1\tRes2\tAvg_Dist"
 
     data1 = process_df(file1)
     data2 = process_df(file2)
 
-    merged_data = pd.merge(data1, data2, on=['Row', 'Column'], suffixes=[file1_source, file2_source], how='inner')
-    merged_data['Discrepancy'] = abs(merged_data['Value' + file1_source] - merged_data['Value' + file2_source])
+    merged_data = pd.merge(data1, data2, on=['Res1', 'Res2'], suffixes=[file1_source, file2_source], how='inner')
+    merged_data['Discrepancy'] = abs(merged_data['Avg_Dist' + file1_source] - merged_data['Avg_Dist' + file2_source])
 
-    subset_data = merged_data[(merged_data['Value' + file1_source] < 4) | (merged_data['Value' + file2_source] < 4)]
+    subset_data = merged_data[(merged_data['Avg_Dist' + file1_source] < 4) | (merged_data['Avg_Dist' + file2_source] < 4)]
     subset_data = subset_data.sort_values(by='Discrepancy', ascending=False)
-    subset_data = subset_data.rename(columns={'Value' + file1_source : 'AvgDist' + file1_source, 'Value' + file2_source : 'AvgDist' + file2_source})
-    print(subset_data)
+    print(subset_data.to_string(index = False))
 
 
 class InvalidRoutine(Exception):

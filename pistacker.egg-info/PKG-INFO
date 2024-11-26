@@ -1,11 +1,11 @@
 Metadata-Version: 2.1
 Name: pistacker
-Version: 1.0.8
+Version: 1.0.11
 Summary: Analyzes Pi-Stacking in Molecular Dynamics Trajectories
 Home-page: https://github.com/esakkas24/stacker
 Author: Eric D. Sakkas
 Author-email: esakkas@wesleyan.edu
-Requires-Python: >=3.9
+Requires-Python: >=3.10
 Description-Content-Type: text/markdown
 License-File: LICENSE
 Requires-Dist: scikit-learn
@@ -18,6 +18,7 @@ Requires-Dist: sphinx
 Requires-Dist: sphinx_design
 Requires-Dist: sphinx_book_theme
 Requires-Dist: numpydoc
+Requires-Dist: latex
 
 # StACKER
 **St**acking **A**nalysis and **C**onformational **K**inetics for **E**xamining **R**esidues

@@ -437,6 +437,27 @@ for a single trajectory, we can run ``stacker -s compare`` to get the residue
 pairs that changed the most between two different trajectories. These trajectories
 must be comparable (ie. have the same number of residues). Generally, they should
 be the same structure with very minor tweaks. The two trajectories used below are
-the same ribosome PDB with one codon of the mRNA changed.
+the same ribosome PDB with one codon of the mRNA changed::
 
+        [user]$ stacker -s compare \
+                -A stack_events.GCU.txt \
+                -B stack_events.CGU.txt \
+                -SA _tGGG_aCCU_+1GCU \
+                -SB _tGGG_aCCU_+1CGU
+
+        Res1  Res2  Avg_Dist_tGGG_aCCU_+1GCU  Avg_Dist_tGGG_aCCU_+1CGU  Discrepancy
+        47    48                      3.72                      4.30         0.58
+        48    49                      3.71                      4.20         0.49
+        122   123                      4.23                      3.75         0.48
+        66    67                      3.98                      4.31         0.33
+        133   134                      4.07                      3.75         0.32
+        91    92                      3.91                      4.19         0.28
+        95   138                      3.84                      4.11         0.27
+        170   172                      3.68                      3.95         0.27
+        422   423                      3.87                      4.11         0.24
+        138   139                      3.61                      3.82         0.21
+
+The output shows the average stacking distance between the residues in one trajectory
+compared to the other, and lists them by the residue pairs whose stacking distance changed
+the most.
 

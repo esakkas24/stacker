@@ -21,20 +21,20 @@ from .visualization import create_parent_directories
 import os
 import functools
 
-def collect_atom_locations_by_frame(traj: md.Trajectory, residue_num: int, atom_id: str) -> list:
+def collect_atom_locations_by_frame(trj: md.Trajectory, residue: int, atom: str) -> list:
     """
     Creates a list of all atom locations for a particular atom and residue number per frame.
 
     Curates a list coords_by_frame where coords_by_frame[i] is the (x, y, z) positions 
-    of a provided `atom_id` in a residue `residue_num` at the ith frame.
+    of a provided ``atom`` in a residue ``residue`` at the ith frame.
 
     Parameters
     ----------
-    traj : md.Trajectory
+    trj : md.Trajectory
         Trajectory to analyze.
-    residue_num : int
+    residue : int
         The 0-indexed residue number of the residue where `atom_id` is found (PDB Column 5).
-    atom_id : str
+    atom : str
         The name of the atom to get coordinates for (PDB Column 2).
 
     Returns
@@ -57,20 +57,20 @@ def collect_atom_locations_by_frame(traj: md.Trajectory, residue_num: int, atom_
     >>> import stacker as st
     >>> filtered_traj = st.filter_traj('testing/first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd', 
     ...                              'testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop', 
-    ...                              atomnames_desired = {'C2','C4','C6'})
-    >>> >>> st.collect_atom_locations_by_frame(filtered_traj, residue_num = 3, atom_id = "C2")
+    ...                              atoms = {'C2','C4','C6'})
+    >>> >>> st.collect_atom_locations_by_frame(filtered_traj, residue = 3, atom = "C2")
     [(58.794, 59.636, 49.695), (59.185005, 58.797, 50.137), (59.379, 58.553005, 49.853), 
     (58.76, 59.068, 49.681), (59.003, 59.054, 49.878002), (59.049, 58.967, 50.051), 
     (59.219, 58.476006, 49.948), (58.948, 58.588005, 50.085), (58.922, 58.747, 49.766003), 
     (59.124, 58.916, 49.978004)]
 
     """
-    topology = traj.topology
-    number_of_frames = traj.n_frames
-    atomic_index = topology.select("name " + atom_id + " and residue " + str(residue_num))[0]
+    topology = trj.topology
+    number_of_frames = trj.n_frames
+    atomic_index = topology.select("name " + atom + " and residue " + str(residue))[0]
 
     # multiply by 10 to convert nanometer units in trajectory.xyz to Angstroms
-    coords_by_frame = [tuple(traj.xyz[frame_idx, atomic_index,:] * 10) for frame_idx in range(0, number_of_frames)]
+    coords_by_frame = [tuple(trj.xyz[frame_idx, atomic_index,:] * 10) for frame_idx in range(0, number_of_frames)]
     return coords_by_frame
 
 def calc_center_3pts(a: Vector, b: Vector, c: Vector) -> Vector:
@@ -280,12 +280,12 @@ def calculate_bottaro_values_for_frame(perspective_base_coords: Base, viewed_mid
     values = [r_magnitude, rho_dist, corrected_theta]
     return values
 
-def write_bottaro_to_csv(pdb_filename: str = '', 
-                         output_csv_name: str = '', 
-                         perspective_residue_num: int = -1, 
-                         viewed_residue_num: int = -1,
-                         res1_atom_names: set = {"C2", "C4", "C6"}, 
-                         res2_atom_names: set = {"C2", "C4", "C6"}, 
+def write_bottaro_to_csv(pdb: str = '', 
+                         csv: str = '', 
+                         pers_res: int = -1, 
+                         view_res: int = -1,
+                         res1_atoms: set = {"C2", "C4", "C6"}, 
+                         res2_atoms: set = {"C2", "C4", "C6"}, 
                          index: int = 1) -> None:
     """
     Write the r, rho, and theta values used to make a Pairwise Stacking Fingerprint (PSF)
@@ -297,23 +297,23 @@ def write_bottaro_to_csv(pdb_filename: str = '',
 
     Parameters
     ----------
-    pdb_filename : str
+    pdb : str
         Filename of PDB containing information for ONLY two residues (perspective and viewed
         nucleotide) at each frame.
-    output_csv_name : str
+    csv : str
         Filename of CSV file to write to.
-    perspective_residue_num : int, default = -1
+    pers_res : int, default = -1
         Residue index of the perspective residue whose plane to project onto (0-/1-index changed by
         `index` variable, default 1-indexed). If -1, a 2-residue PDB is assumed and perspective id is
         the first res_id.
-    viewed_residue_num : int, default = -1
+    view_res : int, default = -1
         Residue index of the viewed residue whose midpoint to project to perspective residue plane 
         (0-/1-index changed by index variable, default 1-indexed). If -1, a 2-residue PDB is assumed 
         and viewed id is the second res_id.
-    res1_atom_names : set, default = {"C2", "C4", "C6"}
+    res1_atoms : set, default = {"C2", "C4", "C6"}
         Set of the atom names (e.g., "C2", "C4", "C6") to use from
         residue 1 to find center of geometry for perspective nucleotide.
-    res2_atom_names : set, default = {"C2", "C4", "C6"}
+    res2_atoms : set, default = {"C2", "C4", "C6"}
         Set of the atom names (e.g., "C2", "C4", "C6") to use from
         residue 2 to find center of geometry for viewed nucleotide.
     index : int, default = 1
@@ -335,8 +335,8 @@ def write_bottaro_to_csv(pdb_filename: str = '',
     >>> output_csv_name = "testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv"
     >>> perspective_residue = 426 # 1-indexed
     >>> viewed_residue = 427 # 1-indexed
-    >>> st.filter_traj_to_pdb(trajectory_filename=trajectory_file, topology_filename=topology_file, output_pdb_filename=pdb_filename,
-    ...                        residues_desired={perspective_residue,viewed_residue}, atomnames_desired={"C2", "C4", "C6"})
+    >>> st.filter_traj_to_pdb(trj_file=trajectory_file, top_file=topology_file, pdb=pdb_filename,
+    ...                        residues={perspective_residue,viewed_residue}, atoms={"C2", "C4", "C6"})
     WARNING: Residue Indices are expected to be 1-indexed
     Reading trajectory...
     Reading topology...
@@ -344,7 +344,7 @@ def write_bottaro_to_csv(pdb_filename: str = '',
     WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed
     WARNING: Output file atom, residue, and chain indices are zero-indexed
     Filtered trajectory written to:  testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb
-    >>> st.write_bottaro_to_csv(pdb_filename, output_csv_name, perspective_residue_num=perspective_residue, viewed_residue_num=viewed_residue)
+    >>> st.write_bottaro_to_csv(pdb_filename, output_csv_name, pers_res=perspective_residue, view_res=viewed_residue)
     Output values written to testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv
     >>> print("".join(open(output_csv_name).readlines()[:10]))
     frame,r_dist,rho_dist,theta
@@ -366,35 +366,35 @@ def write_bottaro_to_csv(pdb_filename: str = '',
 
     """
     # Keep atomname order consistent between runs
-    res1_atom_names = list(res1_atom_names)
-    res2_atom_names = list(res2_atom_names)
-    res1_atom_names.sort()
-    res2_atom_names.sort()
+    res1_atoms = list(res1_atoms)
+    res2_atoms = list(res2_atoms)
+    res1_atoms.sort()
+    res2_atoms.sort()
 
-    res1_atom1,res1_atom2,res1_atom3 = res1_atom_names
-    res2_atom1,res2_atom2,res2_atom3 = res2_atom_names
+    res1_atom1,res1_atom2,res1_atom3 = res1_atoms
+    res2_atom1,res2_atom2,res2_atom3 = res2_atoms
     
-    pdb = md.load(pdb_filename)
+    pdb = md.load(pdb)
     number_of_frames = pdb.n_frames
 
     if index == 1: # correct for 0-index res_id of mdtraj
-        perspective_residue_num -= 1
-        viewed_residue_num -= 1
+        pers_res -= 1
+        view_res -= 1
 
-    if perspective_residue_num == -1 or perspective_residue_num == -2:
+    if pers_res == -1 or pers_res == -2:
         topology = pdb.topology
-        perspective_residue_num = [residue for residue in topology.residues][0].resSeq
+        pers_res = [residue for residue in topology.residues][0].resSeq
 
-    if viewed_residue_num == -1 or viewed_residue_num == -2:
+    if view_res == -1 or view_res == -2:
         topology = pdb.topology
-        viewed_residue_num = [residue for residue in topology.residues][1].resSeq
+        view_res = [residue for residue in topology.residues][1].resSeq
 
-    residue1_C2_list = collect_atom_locations_by_frame(pdb, perspective_residue_num, res1_atom1)
-    residue1_C4_list = collect_atom_locations_by_frame(pdb, perspective_residue_num, res1_atom2)
-    residue1_C6_list = collect_atom_locations_by_frame(pdb, perspective_residue_num, res1_atom3)
-    residue2_C2_list = collect_atom_locations_by_frame(pdb, viewed_residue_num, res2_atom1)
-    residue2_C4_list = collect_atom_locations_by_frame(pdb, viewed_residue_num, res2_atom2)
-    residue2_C6_list = collect_atom_locations_by_frame(pdb, viewed_residue_num, res2_atom3)
+    residue1_C2_list = collect_atom_locations_by_frame(pdb, pers_res, res1_atom1)
+    residue1_C4_list = collect_atom_locations_by_frame(pdb, pers_res, res1_atom2)
+    residue1_C6_list = collect_atom_locations_by_frame(pdb, pers_res, res1_atom3)
+    residue2_C2_list = collect_atom_locations_by_frame(pdb, view_res, res2_atom1)
+    residue2_C4_list = collect_atom_locations_by_frame(pdb, view_res, res2_atom2)
+    residue2_C6_list = collect_atom_locations_by_frame(pdb, view_res, res2_atom3)
     
     residue1_midpoint_list = [calc_center_3pts(Vector(*residue1_C2_list[i]),
                                                Vector(*residue1_C4_list[i]),
@@ -412,12 +412,12 @@ def write_bottaro_to_csv(pdb_filename: str = '',
         row = [i]+frame_values
         rows.append(row)
     
-    filename = output_csv_name
+    filename = csv
     with open(filename, 'w') as csvfile:
         csvwriter = csv.writer(csvfile) 
         csvwriter.writerow(fields) 
         csvwriter.writerows(rows)
-    print("Output values written to " + output_csv_name)
+    print("Output values written to " + csv)
 
 @functools.wraps(write_bottaro_to_csv)
 def write_psf_data(*args, **kwargs):
@@ -452,9 +452,9 @@ if __name__ == "__main__":
 
     # Two Residue movement test 10 frames
     write_bottaro_to_csv(pdb_filename, 
-                         output_csv_name, perspective_residue_num=perspective_residue, viewed_residue_num=viewed_residue,
-                         res1_atom_names={perspective_atom1_name, perspective_atom2_name, perspective_atom3_name}, 
-                         res2_atom_names={viewed_atom1_name,viewed_atom2_name,viewed_atom3_name})
+                         output_csv_name, pers_res=perspective_residue, view_res=viewed_residue,
+                         res1_atoms={perspective_atom1_name, perspective_atom2_name, perspective_atom3_name}, 
+                         res2_atoms={viewed_atom1_name,viewed_atom2_name,viewed_atom3_name})
     
     multiframe_pdb = 'stacker/testing/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd_3200frames.pdb'
     multiframe_csv = 'stacker/testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot_3200frames.csv'

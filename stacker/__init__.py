@@ -783,7 +783,7 @@ def compare_routine() -> None:
             inputted df with rows organized alphabetically at the Row, Column variable
 
         '''
-        cols_to_sort = ['Row','Column']
+        cols_to_sort = ['Res1','Res2']
         df = pd.concat([pd.DataFrame(np.sort(df[cols_to_sort].values), columns=cols_to_sort, index=df.index), df[df.columns[~df.columns.isin(cols_to_sort)]]], axis=1)
         return df
     
@@ -809,7 +809,7 @@ def compare_routine() -> None:
 
     subset_data = merged_data[(merged_data['Avg_Dist' + file1_source] < 4) | (merged_data['Avg_Dist' + file2_source] < 4)]
     subset_data = subset_data.sort_values(by='Discrepancy', ascending=False)
-    print(subset_data)
+    print(subset_data.to_string(index = False))
 
 
 class InvalidRoutine(Exception):

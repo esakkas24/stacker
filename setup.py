@@ -13,7 +13,7 @@ setup(
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/esakkas24/stacker",
-    version="1.0.8",
+    version="1.0.11",
     packages=find_packages(),
     python_requires=">=3.10",
     entry_points={

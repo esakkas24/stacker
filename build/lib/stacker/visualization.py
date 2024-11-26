@@ -106,7 +106,7 @@ def create_axis_labels(res_indices: typing.ArrayLike, tick_distance: int = 10) -
     
     return tick_locations, tick_labels
         
-def display_arrays_as_video(numpy_arrays: list | typing.ArrayLike, res_indices: typing.ArrayLike | str, 
+def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indices: typing.ArrayLike | str, 
                             seconds_per_frame: int = 10, tick_distance: int = 10,
                             outfile_prefix: str = '', scale_limits: tuple = (0, 7), outfile: str = '',
                             scale_style: str = 'bellcurve', xy_line: bool = True) -> None:
@@ -306,7 +306,7 @@ def set_polar_grid() -> mpl.projections.polar.PolarAxes:
     ax.grid(color='gray', linestyle='--', linewidth=0.5)
     return ax
 
-def visualize_two_residue_movement_scatterplot(csv_filepath: str, plot_outfile: str = '', frame_list: set = {}) -> None:
+def visualize_two_residue_movement_scatterplot(csv: str, plot_outfile: str = '', frame_list: set = {}) -> None:
     """
     Creates scatterplot of two-residue movement relative to each other.
 
@@ -315,7 +315,7 @@ def visualize_two_residue_movement_scatterplot(csv_filepath: str, plot_outfile: 
 
     Parameters
     ----------
-    csv_filepath : str
+    csv : str
         Filepath to csv file containing data on the movement
         of two residues relative to each other (r, rho, and theta values). Created
         in residue_movement.
@@ -342,7 +342,7 @@ def visualize_two_residue_movement_scatterplot(csv_filepath: str, plot_outfile: 
     >>> output_csv_name = "testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv"
     >>> perspective_residue = 426 # 1-indexed
     >>> viewed_residue = 427 # 1-indexed
-    >>> st.filter_traj_to_pdb(trajectory_filename=trajectory_file, topology_filename=topology_file, output_pdb_filename=pdb_filename,
+    >>> st.filter_traj_to_pdb(trj_file=trajectory_file, top_file=topology_file, output_pdb_filename=pdb_filename,
     ...                        residues_desired={perspective_residue,viewed_residue}, atomnames_desired={"C2", "C4", "C6"})
     WARNING: Residue Indices are expected to be 1-indexed
     Reading trajectory...
@@ -357,7 +357,7 @@ def visualize_two_residue_movement_scatterplot(csv_filepath: str, plot_outfile: 
     ...                                                 plot_outfile='testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_10frames_scatter.png')
 
     """
-    bottaro_values = pd.read_csv(csv_filepath, sep=',')
+    bottaro_values = pd.read_csv(csv, sep=',')
 
     if frame_list:
         bottaro_values = bottaro_values[bottaro_values['frame'].isin(frame_list)]
@@ -385,7 +385,7 @@ def visualize_two_residue_movement_scatterplot(csv_filepath: str, plot_outfile: 
         plt.show()
 
 
-def visualize_two_residue_movement_heatmap(csv_filepath: str, plot_outfile: str = '', frame_list: set = {}) -> None:
+def visualize_two_residue_movement_heatmap(csv: str, plot_outfile: str = '', frame_list: set = {}) -> None:
     """
     Creates heatmap of two-residue movement relative to each other.
 
@@ -394,7 +394,7 @@ def visualize_two_residue_movement_heatmap(csv_filepath: str, plot_outfile: str 
 
     Parameters
     ----------
-    csv_filepath : str
+    csv : str
         Filepath to csv file containing data on the movement
         of two residues relative to each other (r, rho, and theta values). Created
         in residue_movement.
@@ -421,7 +421,7 @@ def visualize_two_residue_movement_heatmap(csv_filepath: str, plot_outfile: str 
     >>> output_csv_name = "testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv"
     >>> perspective_residue = 426 # 1-indexed
     >>> viewed_residue = 427 # 1-indexed
-    >>> st.filter_traj_to_pdb(trajectory_filename=trajectory_file, topology_filename=topology_file, output_pdb_filename=pdb_filename,
+    >>> st.filter_traj_to_pdb(trj_file=trajectory_file, top_file=topology_file, output_pdb_filename=pdb_filename,
     ...                        residues_desired={perspective_residue,viewed_residue}, atomnames_desired={"C2", "C4", "C6"})
     WARNING: Residue Indices are expected to be 1-indexed
     Reading trajectory...
@@ -436,7 +436,7 @@ def visualize_two_residue_movement_heatmap(csv_filepath: str, plot_outfile: str 
     ...                                                 plot_outfile='testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_10frames_heat.png')
 
     """
-    bottaro_values = pd.read_csv(csv_filepath, sep=',')
+    bottaro_values = pd.read_csv(csv, sep=',')
 
     if frame_list:
         bottaro_values = bottaro_values[bottaro_values['frame'].isin(frame_list)]
