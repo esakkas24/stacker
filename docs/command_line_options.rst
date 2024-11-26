@@ -300,7 +300,10 @@ This outputs the average SSF for frames 1-10 to ``5JUP_N2_tUAG_aCUA_+1GCU_nowat.
 
 .. image images/5JUP_N2_tUAG_aCUA_+1GCU_nowat.SSF.png
 
-It also outputs the SSF data for each frame to 
+The list of top stacking events can be customized much further via the 
+``stacker -s stack_events`` command. See "Get Top Stacking Events" below.
+
+The ``-d`` flag above outputs the SSF data for each frame to 
 ``5JUP_N2_tUAG_aCUA_+1GCU_nowat.data.txt.gz``. We can read this into a
 Python object representing the 10 frames of 126x126 residue SSFs 
 with :func:`load_ssfs`::
@@ -309,6 +312,7 @@ with :func:`load_ssfs`::
         >>> ssfs = st.load_ssfs("5JUP_N2_tUAG_aCUA_+1GCU_nowat.data.txt.gz")
         >>> ssfs.shape
         (10, 126, 126)
+
 
 Inputting SSF Data
 ==================
@@ -326,17 +330,113 @@ When using these, the ``-trj``, ``-top``, and ``-r`` flags should be the same as
 to create either input. In the code below, we input two ``.txt.gz`` files representing SSF 
 data from the same structure with two different mRNA codons::
         
-        
+        [user]$ stacker -s ssf \
+                -trj 5JUP_N2_tGGG_aCCU_+1GCU_nowat_2fpns.mdcrd \
+                -top 5JUP_N2_tGGG_aCCU_+1GCU_nowat.prmtop \
+                -r 2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430 \
+                -i 5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz 
 
-We must use -r flag and specify the same residues used to create the file
+.. image:: images/inputted_ssf.png
 
--B another data input to compare two df
+This will output the average SSF in minutes, as opposed to the hours it took to calculate 
+the ``-i 5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz`` input data. 
 
+Combined SSFs
+--------------
+The line over ``x=y`` indicates that the SSF is symmetrical. This makes sense,
+as the distance from residue ``i`` to ``j`` is the same as from ``j`` to ``i``.
+We can remove this redundancy by adding another trajectory's SSF in the bottom left 
+half, for ease of comparison::
 
+        [user]$ stacker -s ssf \
+                -trj 5JUP_N2_tGGG_aCCU_+1GCU_nowat_2fpns.mdcrd \
+                -top 5JUP_N2_tGGG_aCCU_+1GCU_nowat.prmtop \
+                -r 2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430 \
+                -i 5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz \
+                -B 5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz 
+
+.. image:: images/combined_ssf.png
+
+To get the residue pairs whose stacking changed the most between the two SSFs,
+see "Get Stacking Changes".
 
 Customizing SSFs
 ================
+We can customize SSFs to color stacking events more stringently:
 
-  -l, --limits LIMITS   limits of the color scale, default = (0,7)
-    -y, --scale_style SCALE_STYLE
-                         style of color scale. {bellcurve, gradient
+- ``-l, --limits LIMITS`` : limits of the color scale, default = (0,7). Helps limit the pairings
+visualized as pi-stacking.
+- ``-y, --scale_style SCALE_STYLE`` : style of color scale. {bellcurve, gradient}
+
+The SSFs we've displayed so far used the default ``limits = (0,7)`` and ``scale_style = bellcurve``.
+The ``scale_style`` parameter can help label rare <3.5Å stacking events as stacking rather than
+the lighter color caused by ``bellcurve``. Sterics generally prevent nucleotides from anything <3.4Å,
+so this scale generally changes nothing and is a matter of personal preference.
+
+::
+        [user]$ stacker -s ssf \
+                -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
+                -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
+                -r 90-215 \
+                -fl 1-10 \
+                -t 10 \
+                -l 2,5 \
+                -y gradient
+
+.. image:: images/scaled_ssf.png
+
+Get Top Stacking Events
+-----------------------
+``stacker -s stack_events`` gives the top pi-stacking events (ie. the residue
+pairs with COG distance closest to 3.5Å) for a given trajectory. A few important
+flags:
+- ``-i, --input INPUT_FILE`` : A ``.txt`` or ``.txt.gz`` containing per-frame SSF
+data created by ``stacker -s ssf -d OUTFILE``.
+- ``-o, --output OUTPUT_FILE`` : spreadsheet output goes to a ``.txt`` file. Used for future analysis.
+- ``-n, --n_events N_EVENTS`` : show top ``N_EVENTS`` stacking events. We use ``-n -1``, which
+outputs all residue pairs and their COG distance.
+- ``-j, --include_adjacent`` : Include adjacent residues in the printed output. These
+are much more likely to be stacking, you may be interested in only non-consecutive stacking residues.
+
+::
+        [user]$ stacker -s stack_events \
+                -trj 5JUP_N2_tGGG_aCCU_+1GCU_nowat_2fpns.mdcrd \
+                -top TOPOLOGIES/5JUP_N2_tGGG_aCCU_+1GCU_nowat.prmtop \
+                -r 2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430 \
+                -i 5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz \
+                -o stack_events.GCU.txt  \
+                -n -1 \
+                -j
+        WARNING: Residue Indices are expected to be 1-indexed
+        Reading trajectory...
+        Reading topology...
+        Filtering trajectory...
+        WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed
+
+The stacking events are outputted to ``stack_events.GCU.txt``. We can look at this file
+to find the residue pairs closest to 3.5Å apart—those that are pi-stacking.
+
+::
+        [user]$ head stack_events.GCU.txt 
+        Res1    Res2    Avg_Dist
+        101     102     3.55
+        139     138     3.61
+        130     93      3.63
+        172     170     3.68
+        172     173     3.70
+        48      49      3.71
+        47      48      3.72
+        129     130     3.76
+        136     97      3.78
+
+Get Stacking Changes
+--------------------
+
+Once we have used ``stacker -s stack_events`` to get the top stacking events
+for a single trajectory, we can run ``stacker -s compare`` to get the residue
+pairs that changed the most between two different trajectories. These trajectories
+must be comparable (ie. have the same number of residues). Generally, they should
+be the same structure with very minor tweaks. The two trajectories used below are
+the same ribosome PDB with one codon of the mRNA changed.
+
+

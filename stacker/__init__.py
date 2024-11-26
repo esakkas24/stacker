@@ -799,17 +799,16 @@ def compare_routine() -> None:
     file1_source = args.source_A
     file2_source = args.source_B
 
-    header = "Row\tColumn\tValue"
+    header = "Res1\tRes2\tAvg_Dist"
 
     data1 = process_df(file1)
     data2 = process_df(file2)
 
-    merged_data = pd.merge(data1, data2, on=['Row', 'Column'], suffixes=[file1_source, file2_source], how='inner')
-    merged_data['Discrepancy'] = abs(merged_data['Value' + file1_source] - merged_data['Value' + file2_source])
+    merged_data = pd.merge(data1, data2, on=['Res1', 'Res2'], suffixes=[file1_source, file2_source], how='inner')
+    merged_data['Discrepancy'] = abs(merged_data['Avg_Dist' + file1_source] - merged_data['Avg_Dist' + file2_source])
 
-    subset_data = merged_data[(merged_data['Value' + file1_source] < 4) | (merged_data['Value' + file2_source] < 4)]
+    subset_data = merged_data[(merged_data['Avg_Dist' + file1_source] < 4) | (merged_data['Avg_Dist' + file2_source] < 4)]
     subset_data = subset_data.sort_values(by='Discrepancy', ascending=False)
-    subset_data = subset_data.rename(columns={'Value' + file1_source : 'AvgDist' + file1_source, 'Value' + file2_source : 'AvgDist' + file2_source})
     print(subset_data)
 
 
