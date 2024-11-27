@@ -14,7 +14,7 @@ residue_movement
    .. rubric:: Functions
 
    .. autosummary::
-      :toctree:                                         
+      :toctree:          
    
       calc_center_3pts
       calculate_bottaro_values_for_frame

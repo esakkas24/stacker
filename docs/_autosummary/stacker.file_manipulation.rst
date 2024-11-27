@@ -14,7 +14,7 @@ file_manipulation
    .. rubric:: Functions
 
    .. autosummary::
-      :toctree:                                         
+      :toctree:          
    
       file_convert
       filter_traj

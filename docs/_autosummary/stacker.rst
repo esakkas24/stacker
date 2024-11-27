@@ -14,7 +14,7 @@ stacker
    .. rubric:: Functions
 
    .. autosummary::
-      :toctree:                                         
+      :toctree:          
    
       block_printing
       bottaro_routine

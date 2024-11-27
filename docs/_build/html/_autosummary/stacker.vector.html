@@ -439,6 +439,7 @@
 <li class="toctree-l4"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="stacker.pairwise_distance.load_ssfs.html">stacker.pairwise_distance.load_ssfs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l4"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
@@ -487,6 +488,7 @@
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_residue_distance_for_trajectory.html">stacker.pairwise_distance.get_residue_distance_for_trajectory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.get_top_stacking.html">stacker.pairwise_distance.get_top_stacking</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.increment_residue.html">stacker.pairwise_distance.increment_residue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.load_ssfs.html">stacker.pairwise_distance.load_ssfs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.system_stacking_fingerprints.html">stacker.pairwise_distance.system_stacking_fingerprints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stacker.pairwise_distance.MultiFrameTraj.html">stacker.pairwise_distance.MultiFrameTraj</a></li>
 </ul>
@@ -690,11 +692,11 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector"><code class="docutils literal notranslate"><span class="pre">Vector</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.__init__"><code class="docutils literal notranslate"><span class="pre">Vector.__init__()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.calculate_cross_product"><code class="docutils literal notranslate"><span class="pre">Vector.calculate_cross_product()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.magnitude"><code class="docutils literal notranslate"><span class="pre">Vector.magnitude()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.calculate_projection"><code class="docutils literal notranslate"><span class="pre">Vector.calculate_projection()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.scale"><code class="docutils literal notranslate"><span class="pre">Vector.scale()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.__init__"><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.calculate_cross_product"><code class="docutils literal notranslate"><span class="pre">calculate_cross_product()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.magnitude"><code class="docutils literal notranslate"><span class="pre">magnitude()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.calculate_projection"><code class="docutils literal notranslate"><span class="pre">calculate_projection()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.scale"><code class="docutils literal notranslate"><span class="pre">scale()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -906,11 +908,11 @@ perpendicular to both vectors.</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector"><code class="docutils literal notranslate"><span class="pre">Vector</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.__init__"><code class="docutils literal notranslate"><span class="pre">Vector.__init__()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.calculate_cross_product"><code class="docutils literal notranslate"><span class="pre">Vector.calculate_cross_product()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.magnitude"><code class="docutils literal notranslate"><span class="pre">Vector.magnitude()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.calculate_projection"><code class="docutils literal notranslate"><span class="pre">Vector.calculate_projection()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.scale"><code class="docutils literal notranslate"><span class="pre">Vector.scale()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.__init__"><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.calculate_cross_product"><code class="docutils literal notranslate"><span class="pre">calculate_cross_product()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.magnitude"><code class="docutils literal notranslate"><span class="pre">magnitude()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.calculate_projection"><code class="docutils literal notranslate"><span class="pre">calculate_projection()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacker.vector.Vector.scale"><code class="docutils literal notranslate"><span class="pre">scale()</span></code></a></li>
 </ul>
 </li>
 </ul>

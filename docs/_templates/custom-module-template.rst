@@ -24,7 +24,7 @@
    .. rubric:: {{ _('Functions') }}
 
    .. autosummary::
-      :toctree:                                         
+      :toctree:          
    {% for item in functions %}
       {{ item }}
    {%- endfor %}

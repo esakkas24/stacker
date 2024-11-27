@@ -14,7 +14,7 @@ kmeans
    .. rubric:: Functions
 
    .. autosummary::
-      :toctree:                                         
+      :toctree:          
    
       create_kmeans_input
       plot_cluster_trj_data

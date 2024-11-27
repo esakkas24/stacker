@@ -789,7 +789,7 @@ Required Arguments:
                         Filepath of PDB to output to
 </pre></div>
 </div>
-<p>This is the command line equivalent of <a class="reference internal" href="stacker.html#stacker.file_manipulation.filter_traj_to_pdb" title="stacker.file_manipulation.filter_traj_to_pdb"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_traj_to_pdb()</span></code></a>. So, the following are equivalent:</p>
+<p>This is the command line equivalent of <a class="reference internal" href="stacker.file_manipulation.html#stacker.file_manipulation.filter_traj_to_pdb" title="stacker.file_manipulation.filter_traj_to_pdb"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_traj_to_pdb()</span></code></a>. So, the following are equivalent:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">trj_file</span> <span class="o">=</span> <span class="s2">&quot;first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&quot;</span><span class="p">,</span>
@@ -1072,13 +1072,16 @@ see “Get Stacking Changes”.</p>
 The <code class="docutils literal notranslate"><span class="pre">scale_style</span></code> parameter can help label rare &lt;3.5Å stacking events as stacking rather than
 the lighter color caused by <code class="docutils literal notranslate"><span class="pre">bellcurve</span></code>. Sterics generally prevent nucleotides from anything &lt;3.4Å,
 so this scale generally changes nothing and is a matter of personal preference.</p>
-<dl class="simple">
-<dt>::</dt><dd><dl class="simple">
-<dt>[user]$ stacker -s ssf </dt><dd><p>-trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop -r 90-215 -fl 1-10 -t 10 -l 2,5 -y gradient</p>
-</dd>
-</dl>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[user]$ stacker -s ssf \
+        -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
+        -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
+        -r 90-215 \
+        -fl 1-10 \
+        -t 10 \
+        -l 2,5 \
+        -y gradient
+</pre></div>
+</div>
 <img alt="_images/scaled_ssf.png" src="_images/scaled_ssf.png" />
 </section>
 </section>
@@ -1094,22 +1097,24 @@ data created by <code class="docutils literal notranslate"><span class="pre">sta
 outputs all residue pairs and their COG distance.
 - <code class="docutils literal notranslate"><span class="pre">-j,</span> <span class="pre">--include_adjacent</span></code> : Include adjacent residues in the printed output. These
 are much more likely to be stacking, you may be interested in only non-consecutive stacking residues.</p>
-<dl>
-<dt>::</dt><dd><dl class="simple">
-<dt>[user]$ stacker -s stack_events </dt><dd><p>-trj 5JUP_N2_tGGG_aCCU_+1GCU_nowat_2fpns.mdcrd -top TOPOLOGIES/5JUP_N2_tGGG_aCCU_+1GCU_nowat.prmtop -r 2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430 -i 5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz -o stack_events.GCU.txt  -n -1 -j</p>
-</dd>
-</dl>
-<p>WARNING: Residue Indices are expected to be 1-indexed
-Reading trajectory…
-Reading topology…
-Filtering trajectory…
-WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed</p>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[user]$ stacker -s stack_events \
+        -trj 5JUP_N2_tGGG_aCCU_+1GCU_nowat_2fpns.mdcrd \
+        -top TOPOLOGIES/5JUP_N2_tGGG_aCCU_+1GCU_nowat.prmtop \
+        -r 2-5,13-16,23-31,46-51,65-76,88-104,122-141,164-175,184-198,288-289,401-415,420-430 \
+        -i 5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz \
+        -o stack_events.GCU.txt  \
+        -n -1 \
+        -j
+WARNING: Residue Indices are expected to be 1-indexed
+Reading trajectory...
+Reading topology...
+Filtering trajectory...
+WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed
+</pre></div>
+</div>
 <p>The stacking events are outputted to <code class="docutils literal notranslate"><span class="pre">stack_events.GCU.txt</span></code>. We can look at this file
 to find the residue pairs closest to 3.5Å apart—those that are pi-stacking.</p>
-<dl class="simple">
-<dt>::</dt><dd><p>[user]$ head stack_events.GCU.txt
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[user]$ head stack_events.GCU.txt
 Res1    Res2    Avg_Dist
 101     102     3.55
 139     138     3.61
@@ -1119,9 +1124,9 @@ Res1    Res2    Avg_Dist
 48      49      3.71
 47      48      3.72
 129     130     3.76
-136     97      3.78</p>
-</dd>
-</dl>
+136     97      3.78
+</pre></div>
+</div>
 </section>
 <section id="get-stacking-changes">
 <h2>Get Stacking Changes<a class="headerlink" href="#get-stacking-changes" title="Link to this heading">#</a></h2>

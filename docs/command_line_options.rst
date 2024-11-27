@@ -374,6 +374,7 @@ the lighter color caused by ``bellcurve``. Sterics generally prevent nucleotides
 so this scale generally changes nothing and is a matter of personal preference.
 
 ::
+        
         [user]$ stacker -s ssf \
                 -trj first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd \
                 -top 5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop \
@@ -399,6 +400,7 @@ outputs all residue pairs and their COG distance.
 are much more likely to be stacking, you may be interested in only non-consecutive stacking residues.
 
 ::
+
         [user]$ stacker -s stack_events \
                 -trj 5JUP_N2_tGGG_aCCU_+1GCU_nowat_2fpns.mdcrd \
                 -top TOPOLOGIES/5JUP_N2_tGGG_aCCU_+1GCU_nowat.prmtop \
@@ -417,6 +419,7 @@ The stacking events are outputted to ``stack_events.GCU.txt``. We can look at th
 to find the residue pairs closest to 3.5Å apart—those that are pi-stacking.
 
 ::
+
         [user]$ head stack_events.GCU.txt 
         Res1    Res2    Avg_Dist
         101     102     3.55

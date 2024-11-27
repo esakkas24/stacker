@@ -1,4 +1,4 @@
-﻿
+
 
 pairwise_distance
 =========================
@@ -14,7 +14,7 @@ pairwise_distance
    .. rubric:: Functions
 
    .. autosummary::
-      :toctree:                                         
+      :toctree:          
    
       calculate_residue_distance
       get_frame_average

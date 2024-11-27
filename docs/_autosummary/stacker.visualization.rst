@@ -14,7 +14,7 @@ visualization
    .. rubric:: Functions
 
    .. autosummary::
-      :toctree:                                         
+      :toctree:          
    
       create_axis_labels
       create_parent_directories

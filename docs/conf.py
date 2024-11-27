@@ -40,6 +40,8 @@ napoleon_numpy_docstring = True
 napoleon_use_param = True
 napoleon_use_ivar = True
 
+toc_object_entries_show_parents = "hide"
+
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
