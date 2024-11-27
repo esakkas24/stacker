@@ -342,8 +342,8 @@ def visualize_two_residue_movement_scatterplot(csv: str, plot_outfile: str = '',
     >>> output_csv_name = "testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv"
     >>> perspective_residue = 426 # 1-indexed
     >>> viewed_residue = 427 # 1-indexed
-    >>> st.filter_traj_to_pdb(trj_file=trajectory_file, top_file=topology_file, output_pdb_filename=pdb_filename,
-    ...                        residues_desired={perspective_residue,viewed_residue}, atomnames_desired={"C2", "C4", "C6"})
+    >>> st.filter_traj_to_pdb(trj_file=trajectory_file, top_file=topology_file, pdb=pdb_filename,
+    ...                        residues={perspective_residue,viewed_residue}, atoms={"C2", "C4", "C6"})
     WARNING: Residue Indices are expected to be 1-indexed
     Reading trajectory...
     Reading topology...
@@ -421,8 +421,8 @@ def visualize_two_residue_movement_heatmap(csv: str, plot_outfile: str = '', fra
     >>> output_csv_name = "testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv"
     >>> perspective_residue = 426 # 1-indexed
     >>> viewed_residue = 427 # 1-indexed
-    >>> st.filter_traj_to_pdb(trj_file=trajectory_file, top_file=topology_file, output_pdb_filename=pdb_filename,
-    ...                        residues_desired={perspective_residue,viewed_residue}, atomnames_desired={"C2", "C4", "C6"})
+    >>> st.filter_traj_to_pdb(trj_file=trajectory_file, top_file=topology_file, pdb=pdb_filename,
+    ...                        residues={perspective_residue,viewed_residue}, atoms={"C2", "C4", "C6"})
     WARNING: Residue Indices are expected to be 1-indexed
     Reading trajectory...
     Reading topology...
@@ -430,7 +430,7 @@ def visualize_two_residue_movement_heatmap(csv: str, plot_outfile: str = '', fra
     WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed
     WARNING: Output file atom, residue, and chain indices are zero-indexed
     Filtered trajectory written to:  testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb
-    >>> st.write_bottaro_to_csv(pdb_filename, output_csv_name, perspective_residue_num=perspective_residue, viewed_residue_num=viewed_residue)
+    >>> st.write_bottaro_to_csv(pdb_filename, output_csv_name, pers_res=perspective_residue, view_res=viewed_residue)
     Output values written to testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv
     >>> st.visualize_two_residue_movement_heatmap('testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv', 
     ...                                                 plot_outfile='testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_10frames_heat.png')
