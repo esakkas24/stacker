@@ -7,6 +7,8 @@ Developed by Eric Sakkas ([esakkas@wesleyan.edu](mailto:esakkas@wesleyan.edu)) i
 
 Runs on Python 3.5.x+ and has the following dependencies: [mdtraj](https://www.mdtraj.org/1.9.8.dev0/index.html), [pandas](https://pandas.pydata.org/), [NumPy](https://numpy.org/doc/stable/index.html), [matplotlib](https://matplotlib.org/stable/), [seaborn](https://seaborn.pydata.org/index.html)
 
+StACKER Documentation is available here: https://esakkas24.github.io/
+
 ## Overview
 
 Manipulates the outputs of an MD simulation and analyzes the pi-stacking interactions. Creates a "Pi-Stacking Fingerprint" for a structure at each frame. Presents Pi-stacking interactions between two residues through analysis of their relevant movement.
