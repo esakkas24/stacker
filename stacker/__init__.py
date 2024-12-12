@@ -9,6 +9,7 @@ from .visualization import *
 from .vector import *
 from .pairwise_distance import *
 from .file_manipulation import *
+from .kmeans import *
 import argparse
 import sys, os
 import numpy as np
