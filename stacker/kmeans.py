@@ -23,10 +23,10 @@ import seaborn as sns
 
 N_RESIDUES = 127
 RANGE_N_CLUSTERS = [2,3,4,5,6,7,8] # Range of n_clusters to try for kmeans
-dataset_names = ['5JUP_N2_tGGG_aCCU_+1GCU', '5JUP_N2_tGGG_aCCU_+1CGU', '5JUP_N2_tUAG_aCUA_+1GCU', '5JUP_N2_tUAG_aCUA_+1CGU', '5JUP_N2_tGGG_aCCC_+1GCU', '5JUP_N2_tGGG_aCCC_+1CGU']  # Add more dataset names as needed
-filepaths = ['5JUP_N2_tGGG_aCCU_+1GCU', '5JUP_N2_tGGG_aCCU_+1CGU', '5JUP_N2_tUAG_aCUA_+1GCU', '5JUP_N2_tUAG_aCUA_+1CGU', '5JUP_N2_tGGG_aCCC_+1GCU', '5JUP_N2_tGGG_aCCC_+1CGU']  # Add more dataset names as needed
-indir = '/home66/esakkas/STACKER/DATA/' # Directory with data.txt output from StACKER (created with -d flag)
-outdir = '/home66/esakkas/STACKER/DATA/' # Outdir for clustering results and kmeans plot
+dataset_names = ['../testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz', '../testing/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz']  # Add more dataset names as needed
+filepaths = ['5JUP_N2_tGGG_aCCU_+1GCU', '5JUP_N2_tGGG_aCCU_+1CGU']  # Add more dataset names as needed
+indir = '~/Downloads/stacker/testing/' # Directory with data.txt output from StACKER (created with -d flag)
+outdir = '~/Downloads/stacker/testing/' # Outdir for clustering results and kmeans plot
 
 ##################
 
@@ -146,7 +146,7 @@ def run_kmeans(data_arrays : dict, n_clusters: int,
     data_arrays : dict
         Output of read_and_preprocess_data(). Dictionary where keys are dataset 
         names and values are the processed data arrays.
-    N_CLUSTERS : int
+    n_clusters : int
         The number of clusters to form 
     max_iter : int, default=1000
         Maximum number of iterations of the k-means algorithm for a single run.
@@ -176,7 +176,7 @@ def run_kmeans(data_arrays : dict, n_clusters: int,
     ...     'dataset2': np.random.rand(3200, 16129)
     ... }
     >>> blinded_data = st.create_kmeans_input(data_arrays)
-    >>> st.run_kmeans(blinded_data, N_CLUSTERS=4)
+    >>> st.run_kmeans(blinded_data, n_clusters=4)
     Reading data: dataset1
     Reading data: dataset2
     (6400, 16129)
@@ -240,7 +240,7 @@ def run_kmeans(data_arrays : dict, n_clusters: int,
 
     return blindframes_labelled_by_cluster
 
-def plot_cluster_trj_data(cluster_file: str, outfile: str) -> None:
+def plot_cluster_trj_data(cluster_file: str, outfile: str, x_labels_map: dict = None) -> None:
     """
     Plots the output of run_kmeans() to a PNG file.
 
@@ -253,6 +253,8 @@ def plot_cluster_trj_data(cluster_file: str, outfile: str) -> None:
         Path to clustering results written by run_kmeans()
     outfile : str
         Filepath where the plot PNG file will be saved.
+    x_labels_map : dict, optional
+        Dictionary to remap x labels. Keys are original labels and values are new labels.
         
     Returns
     -------
@@ -265,25 +267,38 @@ def plot_cluster_trj_data(cluster_file: str, outfile: str) -> None:
     specified output directory.
 
     >>> import stacker as st
-    >>> st.plot_cluster_trj_data('clustering_results.txt', '/path/to/output/')
+    >>> st.plot_cluster_trj_data('clustering_results.txt', "../testing/kmeans_plot.png", {'5JUP_N2_tGGG_aCCU_+1CGU_data': 'tGGG_aCCU_+1CGU', '5JUP_N2_tGGG_aCCU_+1GCU_data': 'tGGG_aCCU_+1GCU'})
 
     """
     cluster_data = pd.read_table(cluster_file, sep=' ', header=0, quotechar="\"")
-    
-    g = sns.FacetGrid(cluster_data.dropna(subset=['trj']), col="cluster", col_wrap=2, height = 6)
+    sns.set_theme(style="white", font_scale=1.2)
 
-    colors = sns.color_palette("husl", len(cluster_data['trj'].unique()))
-
+    g = sns.FacetGrid(cluster_data.dropna(subset=['trj']), col="cluster", col_wrap=2, height=6, despine=False)
+    colors = sns.color_palette("deep", len(cluster_data['trj'].unique()))
     g.map(plt.bar, 'trj', 'number', color=colors) 
 
     for ax in g.axes.flat:
+        if x_labels_map:
+            # Get unique trajectory names
+            unique_trjs = cluster_data['trj'].unique()
+            labels = [x_labels_map.get(trj, trj) for trj in unique_trjs]
+            print(f"Original labels: {unique_trjs}")
+            print(f"Mapped labels: {labels}")
+            ax.set_xticks(range(len(labels)))  # Set fixed ticks
+            ax.set_xticklabels(labels)
+        
         for label in ax.get_xticklabels():
             label.set_rotation(90)
             label.set_ha('right')
-            
-    g.set_titles(col_template="{col_name}")
+
+        ax.set_xlabel("Trajectory")
+        ax.set_ylabel("Number of Frames")  
+
+    for i, ax in enumerate(g.axes.flat):
+        ax.set_title(f"Cluster {i + 1}")
+
     plt.tight_layout()
-    plt.savefig(outfile)
+    plt.savefig(outfile, dpi=300)
     print(f"Plot Outputted to {outfile}")
     plt.close()
 
