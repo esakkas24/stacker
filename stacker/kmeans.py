@@ -364,8 +364,9 @@ def plot_silhouette(n_clusters : int, blind_data : typing.ArrayLike, outdir : st
     print(f"File saved to: {plot_outpath}")
     plt.close()
 
-def plot_pca(blinded_data : typing.ArrayLike, dataset_names : list,
-             coloring : str = 'dataset', outdir : str = '', cluster_labels: np.ndarray = None) -> None:
+def plot_pca(blinded_data: np.ndarray, dataset_names: list,
+             coloring: str = 'dataset', outdir: str = '', 
+             cluster_labels: np.ndarray = None, new_dataset_names: dict = None) -> None:
     '''
     Creates PCA Plot to compare systems in 2D 
 
@@ -374,11 +375,11 @@ def plot_pca(blinded_data : typing.ArrayLike, dataset_names : list,
 
     Parameters
     ----------
-    blinded_data : np.typing.ArrayLike
+    blinded_data : np.ndarray
         A 2D numpy array containing all frames stacked together.
         Output of create_kmeans_input()
     dataset_names : list of str
-        List of filenams to read and preprocess.
+        List of filenames to read and preprocess.
         Outputted from `stacker -s ssf -d output.txt.gz`.
         Should be in the format {datapath}/{traj_name}.txt.gz
     coloring : {'dataset', 'kmeans', 'facet'}
@@ -391,6 +392,8 @@ def plot_pca(blinded_data : typing.ArrayLike, dataset_names : list,
     cluster_labels : np.ndarray, optional
         The labels of the clusters for each frame, output from run_kmeans.
         Used if coloring = "kmeans" to color points by cluster
+    new_dataset_names : dict, optional
+        Dictionary to remap dataset names. Keys are original filenames in ``dataset_names`` and values are shortened names.
         
     Returns
     -------
@@ -406,7 +409,10 @@ def plot_pca(blinded_data : typing.ArrayLike, dataset_names : list,
     if outdir and not outdir.endswith('/'):
         outdir += '/'
 
-    dataset_names = [filepath.split('/')[-1].split('.')[0] for filepath in dataset_names]
+    if new_dataset_names:
+        dataset_names = [new_dataset_names[filepath] for filepath in dataset_names]
+    else:
+        dataset_names = [filepath.split('/')[-1].split('.')[0] for filepath in dataset_names]
 
     n_datasets = len(dataset_names)
     pca = PCA(n_components=2)
@@ -423,36 +429,55 @@ def plot_pca(blinded_data : typing.ArrayLike, dataset_names : list,
     })
 
     if coloring == 'facet':
-        g = sns.FacetGrid(df, col='Color', col_wrap=2, height=4)
-        g.map_dataframe(sns.scatterplot, x='Principal Component 1', y='Principal Component 2')
-        g.set_titles(col_template='Color {col_name}')
+        g = sns.FacetGrid(df, col='Color', col_wrap=2, height=4, despine=False, hue="Color")
+        g.map_dataframe(sns.scatterplot, x='Principal Component 1', y='Principal Component 2', linewidth = 0, s = 10)
+
+
+        g.set_titles(col_template='{col_name}')
         g.set_axis_labels('Principal Component 1', 'Principal Component 2')
+
+
         outfile = f"{outdir}pca_plot.by_facet.png"
         plt.savefig(outfile)
         plt.close()
     elif coloring == 'dataset':
+        plt.figure(figsize=(10, 7))
         unique_colors = {name: idx for idx, name in enumerate(dataset_names)}
         df['Color'] = df['Color'].map(unique_colors)
-        plt.figure(figsize=(10, 7))
-        scatter = plt.scatter(df['Principal Component 1'], df['Principal Component 2'], c=df['Color'], cmap='viridis', s=10)
+        
+        cmap = plt.get_cmap('tab10', len(dataset_names))
+
+        scatter = plt.scatter(df['Principal Component 1'], df['Principal Component 2'], c=df['Color'], cmap=cmap, s=10)
+        
+        handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=cmap(i), markersize=10) for i in range(len(dataset_names))]
+        plt.legend(handles, dataset_names, title='Dataset', bbox_to_anchor=(1.05, 1), loc='upper left')
+        
         plt.title('PCA-reduced data by dataset')
         plt.xlabel('Principal Component 1')
         plt.ylabel('Principal Component 2')
-        plt.colorbar(scatter, label='Dataset')
+        
         outfile = f"{outdir}pca_plot.by_dataset.png"
-        plt.savefig(outfile)
+        plt.savefig(outfile, bbox_inches='tight')
         plt.close()
     elif coloring == "kmeans" and cluster_labels is not None:
         df['Color'] = cluster_labels
         plt.figure(figsize=(10, 7))
-        scatter = plt.scatter(df['Principal Component 1'], df['Principal Component 2'], c=df['Color'], cmap='viridis', s=10)
+        
+        unique_clusters = np.unique(cluster_labels)
+        cmap = plt.get_cmap('tab10', len(unique_clusters))
+        
+        scatter = plt.scatter(df['Principal Component 1'], df['Principal Component 2'], c=df['Color'], cmap=cmap, s=10)
+        
+        handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=cmap(i), markersize=10) for i in range(len(unique_clusters))]
+        plt.legend(handles, unique_clusters, title='Cluster Label', bbox_to_anchor=(1.05, 1), loc='upper left')
+        
         plt.title('PCA-reduced data with KMeans clustering')
         plt.xlabel('Principal Component 1')
         plt.ylabel('Principal Component 2')
-        plt.colorbar(scatter, label='Cluster Label')
+        
         n_clusters = np.unique(cluster_labels).size
         outfile = f"{outdir}pca_plot{n_clusters}by_cluster.png"
-        plt.savefig(outfile)
+        plt.savefig(outfile, bbox_inches='tight')
         plt.close()
     else:
         print(f"{coloring} not a supported coloring")

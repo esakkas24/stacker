@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css?v=7f9a90b1" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/numpy.css?v=93bf2a1f" />
   
@@ -1002,8 +1002,8 @@
 <span class="sd">    &gt;&gt;&gt; output_csv_name = &quot;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&quot;</span>
 <span class="sd">    &gt;&gt;&gt; perspective_residue = 426 # 1-indexed</span>
 <span class="sd">    &gt;&gt;&gt; viewed_residue = 427 # 1-indexed</span>
-<span class="sd">    &gt;&gt;&gt; st.filter_traj_to_pdb(trj_file=trajectory_file, top_file=topology_file, output_pdb_filename=pdb_filename,</span>
-<span class="sd">    ...                        residues_desired={perspective_residue,viewed_residue}, atomnames_desired={&quot;C2&quot;, &quot;C4&quot;, &quot;C6&quot;})</span>
+<span class="sd">    &gt;&gt;&gt; st.filter_traj_to_pdb(trj_file=trajectory_file, top_file=topology_file, pdb=pdb_filename,</span>
+<span class="sd">    ...                        residues={perspective_residue,viewed_residue}, atoms={&quot;C2&quot;, &quot;C4&quot;, &quot;C6&quot;})</span>
 <span class="sd">    WARNING: Residue Indices are expected to be 1-indexed</span>
 <span class="sd">    Reading trajectory...</span>
 <span class="sd">    Reading topology...</span>
@@ -1084,8 +1084,8 @@
 <span class="sd">    &gt;&gt;&gt; output_csv_name = &quot;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&quot;</span>
 <span class="sd">    &gt;&gt;&gt; perspective_residue = 426 # 1-indexed</span>
 <span class="sd">    &gt;&gt;&gt; viewed_residue = 427 # 1-indexed</span>
-<span class="sd">    &gt;&gt;&gt; st.filter_traj_to_pdb(trj_file=trajectory_file, top_file=topology_file, output_pdb_filename=pdb_filename,</span>
-<span class="sd">    ...                        residues_desired={perspective_residue,viewed_residue}, atomnames_desired={&quot;C2&quot;, &quot;C4&quot;, &quot;C6&quot;})</span>
+<span class="sd">    &gt;&gt;&gt; st.filter_traj_to_pdb(trj_file=trajectory_file, top_file=topology_file, pdb=pdb_filename,</span>
+<span class="sd">    ...                        residues={perspective_residue,viewed_residue}, atoms={&quot;C2&quot;, &quot;C4&quot;, &quot;C6&quot;})</span>
 <span class="sd">    WARNING: Residue Indices are expected to be 1-indexed</span>
 <span class="sd">    Reading trajectory...</span>
 <span class="sd">    Reading topology...</span>
@@ -1093,7 +1093,7 @@
 <span class="sd">    WARNING: Output filtered traj atom, residue, and chain indices are zero-indexed</span>
 <span class="sd">    WARNING: Output file atom, residue, and chain indices are zero-indexed</span>
 <span class="sd">    Filtered trajectory written to:  testing/script_tests/residue_movement/5JUP_N2_tUAG_aCUA_+1GCU_nowat_mdcrd.pdb</span>
-<span class="sd">    &gt;&gt;&gt; st.write_bottaro_to_csv(pdb_filename, output_csv_name, perspective_residue_num=perspective_residue, viewed_residue_num=viewed_residue)</span>
+<span class="sd">    &gt;&gt;&gt; st.write_bottaro_to_csv(pdb_filename, output_csv_name, pers_res=perspective_residue, view_res=viewed_residue)</span>
 <span class="sd">    Output values written to testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv</span>
 <span class="sd">    &gt;&gt;&gt; st.visualize_two_residue_movement_heatmap(&#39;testing/script_tests/residue_movement/tUAG_aCUA_+1GCU_GC_plot.csv&#39;, </span>
 <span class="sd">    ...                                                 plot_outfile=&#39;testing/script_tests/visualization/tUAG_aCUA_+1GCU_GC_plot_10frames_heat.png&#39;)</span>

@@ -720,7 +720,56 @@ of this function. This is often presented as a Potential Energy Surface (PES).
 Figure 1.1.1 shows the PES for water, where the potential energy function
 takes in two values, H-O-H bond angle and bond length, then returns the potential
 energy. By inputting two numbers and outputting one, we say our potential
-energy function U is a mapping <span class="math">\(U : \mathbb{R}^2 \to \mathbb{R}\)</span>.
+energy function U is a mapping <aside class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">\(U : \mathbb{R}^2 \to \mathbb{R}\)</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2023-11-01&gt; patch level 1
+L3 programming layer &lt;2024-02-20&gt;
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-dvips.def)
+No file math.aux.
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd)
+
+! LaTeX Error: Bad math environment delimiter.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H &lt;return&gt;  for immediate help.
+ ...                                              
+                                                  
+l.13 \fontsize{12}{14}\selectfont $\(
+                                     U : \mathbb{R}^2 \to \mathbb{R}\)$
+! Missing $ inserted.
+&lt;inserted text&gt; 
+                $
+l.14 \end{document}
+                   
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 436 bytes).
+Transcript written on math.log.
+</p>
+</aside>
+.
 A stable structure would be found at
 an energy minimum, the lowest point on the surface.</p>
 <img alt="_images/PES.png" src="_images/PES.png" />
@@ -730,11 +779,107 @@ along the x- and y-axis. The energy minimum is found at an H-O-H
 angle of 104.5° and a bond length of 0.0958 nm (Scopino, 2020).</em></p>
 <p>For our ribosome system, that has thousands of atoms, our potential energy
 function U takes the x-, y-, z-coordinates of all of the atoms as input.
-With N atoms, this makes U a mapping <span class="math">\(U: \mathbb{R}^{3N}\to\mathbb{R}\)</span>,
+With N atoms, this makes U a mapping <aside class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">\(U: \mathbb{R}^{3N}\to\mathbb{R}\)</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2023-11-01&gt; patch level 1
+L3 programming layer &lt;2024-02-20&gt;
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-dvips.def)
+(./math.aux) (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd)
+
+! LaTeX Error: Bad math environment delimiter.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H &lt;return&gt;  for immediate help.
+ ...                                              
+                                                  
+l.13 \fontsize{12}{14}\selectfont $\(
+                                     U: \mathbb{R}^{3N}\to\mathbb{R}\)$
+! Missing $ inserted.
+&lt;inserted text&gt; 
+                $
+l.14 \end{document}
+                   
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 480 bytes).
+Transcript written on math.log.
+</p>
+</aside>
+,
 meaning we need 3N+1 axes to
 visualize the surface, which is impossible supposing a three-dimensional thesis
 reader. The lack of visualization does not, however, presuppose the lack of a minimum.
-A popular example is the function <span class="math">\(T: \mathbb{R}^{3} \to \mathbb{R}\)</span>, where T(x,y,z)
+A popular example is the function <aside class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">\(T: \mathbb{R}^{3} \to \mathbb{R}\)</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2023-11-01&gt; patch level 1
+L3 programming layer &lt;2024-02-20&gt;
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-dvips.def)
+(./math.aux) (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd)
+
+! LaTeX Error: Bad math environment delimiter.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H &lt;return&gt;  for immediate help.
+ ...                                              
+                                                  
+l.13 \fontsize{12}{14}\selectfont $\(
+                                     T: \mathbb{R}^{3} \to \mathbb{R}\)$
+! Missing $ inserted.
+&lt;inserted text&gt; 
+                $
+l.14 \end{document}
+                   
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 436 bytes).
+Transcript written on math.log.
+</p>
+</aside>
+, where T(x,y,z)
 is the temperature
 of a room at position (x, y, z) in 3D coordinates. We cannot visualize this function,
 as we would need all three dimensions for our x-, y-, z-positions and would have none
@@ -758,29 +903,357 @@ wave equation, we can treat all bonds as two masses connected by a spring.
 Then, we can simply use Hooke’s law of spring potential energy to calculate
 the potential energy induced by the stretching and compressing of all bonds
 in the structure.</p>
-<div class="math">
-<p><span class="math">\(U = \sum_{bonds}\frac{1}{2}k_b(r-r_0)^2\)</span></p>
-</div><p>This is a strong start, but we can include a number of other factors.
+<aside class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">\(U = \sum_{bonds}\frac{1}{2}k_b(r-r_0)^2\)
+
+</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2023-11-01&gt; patch level 1
+L3 programming layer &lt;2024-02-20&gt;
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-dvips.def)
+(./math.aux) (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd)
+
+! LaTeX Error: Bad math environment delimiter.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H &lt;return&gt;  for immediate help.
+ ...                                              
+                                                  
+l.14 ...bonds}\frac{1}{2}k_b(r-r_0)^2\)\end{split}
+                                                  
+! Missing } inserted.
+&lt;inserted text&gt; 
+                }
+l.14 ...bonds}\frac{1}{2}k_b(r-r_0)^2\)\end{split}
+                                                  
+! Missing { inserted.
+&lt;inserted text&gt; 
+                {
+l.14 ...bonds}\frac{1}{2}k_b(r-r_0)^2\)\end{split}
+                                                  
+! Missing $ inserted.
+&lt;inserted text&gt; 
+                $
+l.14 ...bonds}\frac{1}{2}k_b(r-r_0)^2\)\end{split}
+                                                  
+
+! LaTeX Error: Bad math environment delimiter.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H &lt;return&gt;  for immediate help.
+ ...                                              
+                                                  
+l.14 ...bonds}\frac{1}{2}k_b(r-r_0)^2\)\end{split}
+                                                  
+! Missing } inserted.
+&lt;inserted text&gt; 
+                }
+l.14 ...bonds}\frac{1}{2}k_b(r-r_0)^2\)\end{split}
+                                                  
+! Missing { inserted.
+&lt;inserted text&gt; 
+                {
+l.14 ...bonds}\frac{1}{2}k_b(r-r_0)^2\)\end{split}
+                                                  
+! Missing $ inserted.
+&lt;inserted text&gt; 
+                $
+l.14 ...bonds}\frac{1}{2}k_b(r-r_0)^2\)\end{split}
+                                                  
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 620 bytes).
+Transcript written on math.log.
+</p>
+</aside>
+<p>This is a strong start, but we can include a number of other factors.
 The oscillation of bond angles 𝜃, for instance, can also be modeled
 using Hooke’s law. We then consider torsional potential induced by
 the bond rotation 𝜙. Adding these to our equation gives us:</p>
-<div class="math">
-<p><span class="math">\(U = \sum_{bonds}\frac{1}{2}k_b(r-r_0)^2 + \sum_{angles}\frac{1}{2}k_{\theta}(\theta-\theta_0)^2
-+\sum_{torsions}[1+cos(n\phi + \delta)]\)</span></p>
-</div><p>Finally, we include strain due to improper dihedrals, the force that
+<aside class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">\(U = \sum_{bonds}\frac{1}{2}k_b(r-r_0)^2 + \sum_{angles}\frac{1}{2}k_{\theta}(\theta-\theta_0)^2
++\sum_{torsions}[1+cos(n\phi + \delta)]\)
+
+</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2023-11-01&gt; patch level 1
+L3 programming layer &lt;2024-02-20&gt;
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-dvips.def)
+(./math.aux) (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd)
+
+! LaTeX Error: Bad math environment delimiter.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H &lt;return&gt;  for immediate help.
+ ...                                              
+                                                  
+l.15 ...sions}[1+cos(n\phi + \delta)]\)\end{split}
+                                                  
+! Missing } inserted.
+&lt;inserted text&gt; 
+                }
+l.15 ...sions}[1+cos(n\phi + \delta)]\)\end{split}
+                                                  
+! Missing { inserted.
+&lt;inserted text&gt; 
+                {
+l.15 ...sions}[1+cos(n\phi + \delta)]\)\end{split}
+                                                  
+! Missing $ inserted.
+&lt;inserted text&gt; 
+                $
+l.15 ...sions}[1+cos(n\phi + \delta)]\)\end{split}
+                                                  
+
+! LaTeX Error: Bad math environment delimiter.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H &lt;return&gt;  for immediate help.
+ ...                                              
+                                                  
+l.15 ...sions}[1+cos(n\phi + \delta)]\)\end{split}
+                                                  
+! Missing } inserted.
+&lt;inserted text&gt; 
+                }
+l.15 ...sions}[1+cos(n\phi + \delta)]\)\end{split}
+                                                  
+! Missing { inserted.
+&lt;inserted text&gt; 
+                {
+l.15 ...sions}[1+cos(n\phi + \delta)]\)\end{split}
+                                                  
+! Missing $ inserted.
+&lt;inserted text&gt; 
+                $
+l.15 ...sions}[1+cos(n\phi + \delta)]\)\end{split}
+                                                  
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 824 bytes).
+Transcript written on math.log.
+</p>
+</aside>
+<p>Finally, we include strain due to improper dihedrals, the force that
 keeps some atoms in a plane to prevent chiral flips. To account for
 non-bonding interactions, we calculate van der Waals interactions using
 the Lennard-Jones potential, and electric potential energy between
 charged groups using Coulomb’s law. These equations come together to
 form a complete force field equation to estimate the system’s
 potential energy (Cowan, 2022).</p>
-<div class="math">
-<p><span class="math">\(U = \sum_{bonds}\frac{1}{2}k_b(r-r_0)^2 + \sum_{angles}\frac{1}{2}k_{\theta}(\theta-\theta_0)^2
-+\sum_{torsions}[1+cos(n\phi + \delta)]\)</span></p>
-</div><div class="math">
-<p><span class="math">\( + \sum_{improper}V_{imp}+ \sum_{LJ}4\epsilon_{ij}\left(\frac{\sigma_{ij}^{12}}{r_{ij}^{12}}-\frac{\sigma_{ij}^{6}}{r_{ij}^{6}}\right)
-+ \sum_{elec}\frac{q_iq_j}{r_{ij}}\)</span></p>
-</div><img alt="_images/bonds.png" src="_images/bonds.png" />
+<aside class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">\(U = \sum_{bonds}\frac{1}{2}k_b(r-r_0)^2 + \sum_{angles}\frac{1}{2}k_{\theta}(\theta-\theta_0)^2
++\sum_{torsions}[1+cos(n\phi + \delta)]\)
+
+</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2023-11-01&gt; patch level 1
+L3 programming layer &lt;2024-02-20&gt;
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-dvips.def)
+(./math.aux) (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd)
+
+! LaTeX Error: Bad math environment delimiter.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H &lt;return&gt;  for immediate help.
+ ...                                              
+                                                  
+l.15 ...sions}[1+cos(n\phi + \delta)]\)\end{split}
+                                                  
+! Missing } inserted.
+&lt;inserted text&gt; 
+                }
+l.15 ...sions}[1+cos(n\phi + \delta)]\)\end{split}
+                                                  
+! Missing { inserted.
+&lt;inserted text&gt; 
+                {
+l.15 ...sions}[1+cos(n\phi + \delta)]\)\end{split}
+                                                  
+! Missing $ inserted.
+&lt;inserted text&gt; 
+                $
+l.15 ...sions}[1+cos(n\phi + \delta)]\)\end{split}
+                                                  
+
+! LaTeX Error: Bad math environment delimiter.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H &lt;return&gt;  for immediate help.
+ ...                                              
+                                                  
+l.15 ...sions}[1+cos(n\phi + \delta)]\)\end{split}
+                                                  
+! Missing } inserted.
+&lt;inserted text&gt; 
+                }
+l.15 ...sions}[1+cos(n\phi + \delta)]\)\end{split}
+                                                  
+! Missing { inserted.
+&lt;inserted text&gt; 
+                {
+l.15 ...sions}[1+cos(n\phi + \delta)]\)\end{split}
+                                                  
+! Missing $ inserted.
+&lt;inserted text&gt; 
+                $
+l.15 ...sions}[1+cos(n\phi + \delta)]\)\end{split}
+                                                  
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 824 bytes).
+Transcript written on math.log.
+</p>
+</aside>
+<aside class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">\( + \sum_{improper}V_{imp}+ \sum_{LJ}4\epsilon_{ij}\left(\frac{\sigma_{ij}^{12}}{r_{ij}^{12}}-\frac{\sigma_{ij}^{6}}{r_{ij}^{6}}\right)
++ \sum_{elec}\frac{q_iq_j}{r_{ij}}\)
+
+</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2023-11-01&gt; patch level 1
+L3 programming layer &lt;2024-02-20&gt;
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-dvips.def)
+(./math.aux) (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd)
+
+! LaTeX Error: Bad math environment delimiter.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H &lt;return&gt;  for immediate help.
+ ...                                              
+                                                  
+l.15 ...m_{elec}\frac{q_iq_j}{r_{ij}}\)\end{split}
+                                                  
+! Missing } inserted.
+&lt;inserted text&gt; 
+                }
+l.15 ...m_{elec}\frac{q_iq_j}{r_{ij}}\)\end{split}
+                                                  
+! Missing { inserted.
+&lt;inserted text&gt; 
+                {
+l.15 ...m_{elec}\frac{q_iq_j}{r_{ij}}\)\end{split}
+                                                  
+! Missing $ inserted.
+&lt;inserted text&gt; 
+                $
+l.15 ...m_{elec}\frac{q_iq_j}{r_{ij}}\)\end{split}
+                                                  
+
+! LaTeX Error: Bad math environment delimiter.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H &lt;return&gt;  for immediate help.
+ ...                                              
+                                                  
+l.15 ...m_{elec}\frac{q_iq_j}{r_{ij}}\)\end{split}
+                                                  
+! Missing } inserted.
+&lt;inserted text&gt; 
+                }
+l.15 ...m_{elec}\frac{q_iq_j}{r_{ij}}\)\end{split}
+                                                  
+! Missing { inserted.
+&lt;inserted text&gt; 
+                {
+l.15 ...m_{elec}\frac{q_iq_j}{r_{ij}}\)\end{split}
+                                                  
+! Missing $ inserted.
+&lt;inserted text&gt; 
+                $
+l.15 ...m_{elec}\frac{q_iq_j}{r_{ij}}\)\end{split}
+                                                  
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 924 bytes).
+Transcript written on math.log.
+</p>
+</aside>
+<img alt="_images/bonds.png" src="_images/bonds.png" />
 <p><em>Figure 1.1.2: Interactions considered in force fields. The force
 field equation considers bond length, bond angle, torsions (bond twist),
 and improper dihedrals.</em></p>
@@ -851,7 +1324,7 @@ The negative derivative of our potential energy U gives the force F on
 an atom, which we input into Newton’s second law along with the atomic mass
 to calculate acceleration a:</p>
 <div class="math">
-<p><span class="math">-\frac{dU}{dt} = F = ma \Rightarrow a = \frac{F}{m}</span></p>
+<p><img src="_images/math/105119a592df73b019ba792debe53b234c2d69d0.png" alt="-\frac{dU}{dt} = F = ma \Rightarrow a = \frac{F}{m}"/></p>
 </div><p>We apply each atom’s acceleration to adjust the atomic velocities and,
 therefore, positions at discrete timesteps. The new atomic positions
 create a novel structural conformation, called a frame, with an updated

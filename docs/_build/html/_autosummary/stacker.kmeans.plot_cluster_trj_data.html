@@ -707,7 +707,7 @@
 <h1>stacker.kmeans.plot_cluster_trj_data<a class="headerlink" href="#stacker-kmeans-plot-cluster-trj-data" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.kmeans.plot_cluster_trj_data">
-<span class="sig-name descname"><span class="pre">plot_cluster_trj_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cluster_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#plot_cluster_trj_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_cluster_trj_data" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">plot_cluster_trj_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cluster_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_labels_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#plot_cluster_trj_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_cluster_trj_data" title="Link to this definition">#</a></dt>
 <dd><p>Plots the output of run_kmeans() to a PNG file.</p>
 <p>Creates a grouped bar plot of the number of frames from each trajectory in each cluster
 following KMeans clustering. Writes the plot output to a PNG file.</p>
@@ -717,6 +717,8 @@ following KMeans clustering. Writes the plot output to a PNG file.</p>
 <dt><strong>input_file</strong><span class="classifier">str</span></dt><dd><p>Path to clustering results written by run_kmeans()</p>
 </dd>
 <dt><strong>outfile</strong><span class="classifier">str</span></dt><dd><p>Filepath where the plot PNG file will be saved.</p>
+</dd>
+<dt><strong>x_labels_map</strong><span class="classifier">dict, optional</span></dt><dd><p>Dictionary to remap x labels. Keys are original labels and values are new labels.</p>
 </dd>
 </dl>
 </dd>
@@ -731,7 +733,7 @@ following KMeans clustering. Writes the plot output to a PNG file.</p>
 create a bar plot, and save it as ‘kmeans_plot.cluster_4.png’ in the 
 specified output directory.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">plot_cluster_trj_data</span><span class="p">(</span><span class="s1">&#39;clustering_results.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;/path/to/output/&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">plot_cluster_trj_data</span><span class="p">(</span><span class="s1">&#39;clustering_results.txt&#39;</span><span class="p">,</span> <span class="s2">&quot;../testing/kmeans_plot.png&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;5JUP_N2_tGGG_aCCU_+1CGU_data&#39;</span><span class="p">:</span> <span class="s1">&#39;tGGG_aCCU_+1CGU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tGGG_aCCU_+1GCU_data&#39;</span><span class="p">:</span> <span class="s1">&#39;tGGG_aCCU_+1GCU&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
 </dd></dl>

@@ -847,7 +847,7 @@ saved to a file.</p>
 <dt><strong>data_arrays</strong><span class="classifier">dict</span></dt><dd><p>Output of read_and_preprocess_data(). Dictionary where keys are dataset 
 names and values are the processed data arrays.</p>
 </dd>
-<dt><strong>N_CLUSTERS</strong><span class="classifier">int</span></dt><dd><p>The number of clusters to form</p>
+<dt><strong>n_clusters</strong><span class="classifier">int</span></dt><dd><p>The number of clusters to form</p>
 </dd>
 <dt><strong>max_iter</strong><span class="classifier">int, default=1000</span></dt><dd><p>Maximum number of iterations of the k-means algorithm for a single run.</p>
 </dd>
@@ -883,7 +883,7 @@ If empty, just prints to standard output.</p>
 <span class="gp">... </span>    <span class="s1">&#39;dataset2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3200</span><span class="p">,</span> <span class="mi">16129</span><span class="p">)</span>
 <span class="gp">... </span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">blinded_data</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">run_kmeans</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">,</span> <span class="n">N_CLUSTERS</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">run_kmeans</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="go">Reading data: dataset1</span>
 <span class="go">Reading data: dataset2</span>
 <span class="go">(6400, 16129)</span>
@@ -904,7 +904,7 @@ If empty, just prints to standard output.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.kmeans.plot_cluster_trj_data">
-<span class="sig-name descname"><span class="pre">plot_cluster_trj_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cluster_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#plot_cluster_trj_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_cluster_trj_data" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">plot_cluster_trj_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cluster_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_labels_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#plot_cluster_trj_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_cluster_trj_data" title="Link to this definition">#</a></dt>
 <dd><p>Plots the output of run_kmeans() to a PNG file.</p>
 <p>Creates a grouped bar plot of the number of frames from each trajectory in each cluster
 following KMeans clustering. Writes the plot output to a PNG file.</p>
@@ -914,6 +914,8 @@ following KMeans clustering. Writes the plot output to a PNG file.</p>
 <dt><strong>input_file</strong><span class="classifier">str</span></dt><dd><p>Path to clustering results written by run_kmeans()</p>
 </dd>
 <dt><strong>outfile</strong><span class="classifier">str</span></dt><dd><p>Filepath where the plot PNG file will be saved.</p>
+</dd>
+<dt><strong>x_labels_map</strong><span class="classifier">dict, optional</span></dt><dd><p>Dictionary to remap x labels. Keys are original labels and values are new labels.</p>
 </dd>
 </dl>
 </dd>
@@ -928,7 +930,7 @@ following KMeans clustering. Writes the plot output to a PNG file.</p>
 create a bar plot, and save it as ‘kmeans_plot.cluster_4.png’ in the 
 specified output directory.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">plot_cluster_trj_data</span><span class="p">(</span><span class="s1">&#39;clustering_results.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;/path/to/output/&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">plot_cluster_trj_data</span><span class="p">(</span><span class="s1">&#39;clustering_results.txt&#39;</span><span class="p">,</span> <span class="s2">&quot;../testing/kmeans_plot.png&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;5JUP_N2_tGGG_aCCU_+1CGU_data&#39;</span><span class="p">:</span> <span class="s1">&#39;tGGG_aCCU_+1CGU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tGGG_aCCU_+1GCU_data&#39;</span><span class="p">:</span> <span class="s1">&#39;tGGG_aCCU_+1GCU&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -954,17 +956,17 @@ Output of create_kmeans_input()</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.kmeans.plot_pca">
-<span class="sig-name descname"><span class="pre">plot_pca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blinded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coloring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dataset'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#plot_pca"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_pca" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">plot_pca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blinded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coloring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dataset'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_dataset_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#plot_pca"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_pca" title="Link to this definition">#</a></dt>
 <dd><p>Creates PCA Plot to compare systems in 2D</p>
 <p>Creates a PCA plot that can be colored by the KMeans clustering result
 or by dataset. Compares SSFs similarly to K Means.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>blinded_data</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
+<dt><strong>blinded_data</strong><span class="classifier">np.ndarray</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
 Output of create_kmeans_input()</p>
 </dd>
-<dt><strong>dataset_names</strong><span class="classifier">list of str</span></dt><dd><p>List of filenams to read and preprocess.
+<dt><strong>dataset_names</strong><span class="classifier">list of str</span></dt><dd><p>List of filenames to read and preprocess.
 Outputted from <cite>stacker -s ssf -d output.txt.gz</cite>.
 Should be in the format {datapath}/{traj_name}.txt.gz</p>
 </dd>
@@ -977,6 +979,8 @@ Should be in the format {datapath}/{traj_name}.txt.gz</p>
 </dd>
 <dt><strong>cluster_labels</strong><span class="classifier">np.ndarray, optional</span></dt><dd><p>The labels of the clusters for each frame, output from run_kmeans.
 Used if coloring = “kmeans” to color points by cluster</p>
+</dd>
+<dt><strong>new_dataset_names</strong><span class="classifier">dict, optional</span></dt><dd><p>Dictionary to remap dataset names. Keys are original filenames in <code class="docutils literal notranslate"><span class="pre">dataset_names</span></code> and values are shortened names.</p>
 </dd>
 </dl>
 </dd>

@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css?v=7f9a90b1" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/numpy.css?v=93bf2a1f" />
   
@@ -666,10 +666,10 @@
 
 <span class="n">N_RESIDUES</span> <span class="o">=</span> <span class="mi">127</span>
 <span class="n">RANGE_N_CLUSTERS</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span> <span class="c1"># Range of n_clusters to try for kmeans</span>
-<span class="n">dataset_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;5JUP_N2_tGGG_aCCU_+1GCU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tGGG_aCCU_+1CGU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tUAG_aCUA_+1GCU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tUAG_aCUA_+1CGU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tGGG_aCCC_+1GCU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tGGG_aCCC_+1CGU&#39;</span><span class="p">]</span>  <span class="c1"># Add more dataset names as needed</span>
-<span class="n">filepaths</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;5JUP_N2_tGGG_aCCU_+1GCU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tGGG_aCCU_+1CGU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tUAG_aCUA_+1GCU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tUAG_aCUA_+1CGU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tGGG_aCCC_+1GCU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tGGG_aCCC_+1CGU&#39;</span><span class="p">]</span>  <span class="c1"># Add more dataset names as needed</span>
-<span class="n">indir</span> <span class="o">=</span> <span class="s1">&#39;/home66/esakkas/STACKER/DATA/&#39;</span> <span class="c1"># Directory with data.txt output from StACKER (created with -d flag)</span>
-<span class="n">outdir</span> <span class="o">=</span> <span class="s1">&#39;/home66/esakkas/STACKER/DATA/&#39;</span> <span class="c1"># Outdir for clustering results and kmeans plot</span>
+<span class="n">dataset_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;../testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz&#39;</span><span class="p">,</span> <span class="s1">&#39;../testing/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz&#39;</span><span class="p">]</span>  <span class="c1"># Add more dataset names as needed</span>
+<span class="n">filepaths</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;5JUP_N2_tGGG_aCCU_+1GCU&#39;</span><span class="p">,</span> <span class="s1">&#39;5JUP_N2_tGGG_aCCU_+1CGU&#39;</span><span class="p">]</span>  <span class="c1"># Add more dataset names as needed</span>
+<span class="n">indir</span> <span class="o">=</span> <span class="s1">&#39;~/Downloads/stacker/testing/&#39;</span> <span class="c1"># Directory with data.txt output from StACKER (created with -d flag)</span>
+<span class="n">outdir</span> <span class="o">=</span> <span class="s1">&#39;~/Downloads/stacker/testing/&#39;</span> <span class="c1"># Outdir for clustering results and kmeans plot</span>
 
 <span class="c1">##################</span>
 
@@ -797,7 +797,7 @@
 <span class="sd">    data_arrays : dict</span>
 <span class="sd">        Output of read_and_preprocess_data(). Dictionary where keys are dataset </span>
 <span class="sd">        names and values are the processed data arrays.</span>
-<span class="sd">    N_CLUSTERS : int</span>
+<span class="sd">    n_clusters : int</span>
 <span class="sd">        The number of clusters to form </span>
 <span class="sd">    max_iter : int, default=1000</span>
 <span class="sd">        Maximum number of iterations of the k-means algorithm for a single run.</span>
@@ -827,7 +827,7 @@
 <span class="sd">    ...     &#39;dataset2&#39;: np.random.rand(3200, 16129)</span>
 <span class="sd">    ... }</span>
 <span class="sd">    &gt;&gt;&gt; blinded_data = st.create_kmeans_input(data_arrays)</span>
-<span class="sd">    &gt;&gt;&gt; st.run_kmeans(blinded_data, N_CLUSTERS=4)</span>
+<span class="sd">    &gt;&gt;&gt; st.run_kmeans(blinded_data, n_clusters=4)</span>
 <span class="sd">    Reading data: dataset1</span>
 <span class="sd">    Reading data: dataset2</span>
 <span class="sd">    (6400, 16129)</span>
@@ -894,7 +894,7 @@
 
 <div class="viewcode-block" id="plot_cluster_trj_data">
 <a class="viewcode-back" href="../../stacker.kmeans.html#stacker.kmeans.plot_cluster_trj_data">[docs]</a>
-<span class="k">def</span> <span class="nf">plot_cluster_trj_data</span><span class="p">(</span><span class="n">cluster_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">plot_cluster_trj_data</span><span class="p">(</span><span class="n">cluster_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">x_labels_map</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plots the output of run_kmeans() to a PNG file.</span>
 
@@ -907,6 +907,8 @@
 <span class="sd">        Path to clustering results written by run_kmeans()</span>
 <span class="sd">    outfile : str</span>
 <span class="sd">        Filepath where the plot PNG file will be saved.</span>
+<span class="sd">    x_labels_map : dict, optional</span>
+<span class="sd">        Dictionary to remap x labels. Keys are original labels and values are new labels.</span>
 <span class="sd">        </span>
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -919,25 +921,38 @@
 <span class="sd">    specified output directory.</span>
 
 <span class="sd">    &gt;&gt;&gt; import stacker as st</span>
-<span class="sd">    &gt;&gt;&gt; st.plot_cluster_trj_data(&#39;clustering_results.txt&#39;, &#39;/path/to/output/&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; st.plot_cluster_trj_data(&#39;clustering_results.txt&#39;, &quot;../testing/kmeans_plot.png&quot;, {&#39;5JUP_N2_tGGG_aCCU_+1CGU_data&#39;: &#39;tGGG_aCCU_+1CGU&#39;, &#39;5JUP_N2_tGGG_aCCU_+1GCU_data&#39;: &#39;tGGG_aCCU_+1GCU&#39;})</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">cluster_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">cluster_file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
-    
-    <span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">cluster_data</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;trj&#39;</span><span class="p">]),</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;cluster&quot;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
 
-    <span class="n">colors</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;husl&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cluster_data</span><span class="p">[</span><span class="s1">&#39;trj&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span>
-
+    <span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">cluster_data</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;trj&#39;</span><span class="p">]),</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;cluster&quot;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">despine</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;deep&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cluster_data</span><span class="p">[</span><span class="s1">&#39;trj&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span>
     <span class="n">g</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">,</span> <span class="s1">&#39;trj&#39;</span><span class="p">,</span> <span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span> 
 
     <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">x_labels_map</span><span class="p">:</span>
+            <span class="c1"># Get unique trajectory names</span>
+            <span class="n">unique_trjs</span> <span class="o">=</span> <span class="n">cluster_data</span><span class="p">[</span><span class="s1">&#39;trj&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+            <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">x_labels_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">trj</span><span class="p">,</span> <span class="n">trj</span><span class="p">)</span> <span class="k">for</span> <span class="n">trj</span> <span class="ow">in</span> <span class="n">unique_trjs</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original labels: </span><span class="si">{</span><span class="n">unique_trjs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mapped labels: </span><span class="si">{</span><span class="n">labels</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)))</span>  <span class="c1"># Set fixed ticks</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+        
         <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">():</span>
             <span class="n">label</span><span class="o">.</span><span class="n">set_rotation</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
             <span class="n">label</span><span class="o">.</span><span class="n">set_ha</span><span class="p">(</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
-            
-    <span class="n">g</span><span class="o">.</span><span class="n">set_titles</span><span class="p">(</span><span class="n">col_template</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{col_name}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Trajectory&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Number of Frames&quot;</span><span class="p">)</span>  
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cluster </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Plot Outputted to </span><span class="si">{</span><span class="n">outfile</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
@@ -1009,8 +1024,9 @@
 
 <div class="viewcode-block" id="plot_pca">
 <a class="viewcode-back" href="../../stacker.kmeans.html#stacker.kmeans.plot_pca">[docs]</a>
-<span class="k">def</span> <span class="nf">plot_pca</span><span class="p">(</span><span class="n">blinded_data</span> <span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="n">dataset_names</span> <span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
-             <span class="n">coloring</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;dataset&#39;</span><span class="p">,</span> <span class="n">outdir</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">cluster_labels</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">plot_pca</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">dataset_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+             <span class="n">coloring</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;dataset&#39;</span><span class="p">,</span> <span class="n">outdir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> 
+             <span class="n">cluster_labels</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">new_dataset_names</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Creates PCA Plot to compare systems in 2D </span>
 
@@ -1019,11 +1035,11 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    blinded_data : np.typing.ArrayLike</span>
+<span class="sd">    blinded_data : np.ndarray</span>
 <span class="sd">        A 2D numpy array containing all frames stacked together.</span>
 <span class="sd">        Output of create_kmeans_input()</span>
 <span class="sd">    dataset_names : list of str</span>
-<span class="sd">        List of filenams to read and preprocess.</span>
+<span class="sd">        List of filenames to read and preprocess.</span>
 <span class="sd">        Outputted from `stacker -s ssf -d output.txt.gz`.</span>
 <span class="sd">        Should be in the format {datapath}/{traj_name}.txt.gz</span>
 <span class="sd">    coloring : {&#39;dataset&#39;, &#39;kmeans&#39;, &#39;facet&#39;}</span>
@@ -1036,6 +1052,8 @@
 <span class="sd">    cluster_labels : np.ndarray, optional</span>
 <span class="sd">        The labels of the clusters for each frame, output from run_kmeans.</span>
 <span class="sd">        Used if coloring = &quot;kmeans&quot; to color points by cluster</span>
+<span class="sd">    new_dataset_names : dict, optional</span>
+<span class="sd">        Dictionary to remap dataset names. Keys are original filenames in ``dataset_names`` and values are shortened names.</span>
 <span class="sd">        </span>
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -1051,7 +1069,10 @@
     <span class="k">if</span> <span class="n">outdir</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">outdir</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">):</span>
         <span class="n">outdir</span> <span class="o">+=</span> <span class="s1">&#39;/&#39;</span>
 
-    <span class="n">dataset_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">filepath</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">filepath</span> <span class="ow">in</span> <span class="n">dataset_names</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">new_dataset_names</span><span class="p">:</span>
+        <span class="n">dataset_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">new_dataset_names</span><span class="p">[</span><span class="n">filepath</span><span class="p">]</span> <span class="k">for</span> <span class="n">filepath</span> <span class="ow">in</span> <span class="n">dataset_names</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dataset_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">filepath</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">filepath</span> <span class="ow">in</span> <span class="n">dataset_names</span><span class="p">]</span>
 
     <span class="n">n_datasets</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset_names</span><span class="p">)</span>
     <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -1068,36 +1089,55 @@
     <span class="p">})</span>
 
     <span class="k">if</span> <span class="n">coloring</span> <span class="o">==</span> <span class="s1">&#39;facet&#39;</span><span class="p">:</span>
-        <span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;Color&#39;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">map_dataframe</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Principal Component 1&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Principal Component 2&#39;</span><span class="p">)</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">set_titles</span><span class="p">(</span><span class="n">col_template</span><span class="o">=</span><span class="s1">&#39;Color </span><span class="si">{col_name}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;Color&#39;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">despine</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Color&quot;</span><span class="p">)</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">map_dataframe</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Principal Component 1&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Principal Component 2&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+
+
+        <span class="n">g</span><span class="o">.</span><span class="n">set_titles</span><span class="p">(</span><span class="n">col_template</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{col_name}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">g</span><span class="o">.</span><span class="n">set_axis_labels</span><span class="p">(</span><span class="s1">&#39;Principal Component 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Principal Component 2&#39;</span><span class="p">)</span>
+
+
         <span class="n">outfile</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">outdir</span><span class="si">}</span><span class="s2">pca_plot.by_facet.png&quot;</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="k">elif</span> <span class="n">coloring</span> <span class="o">==</span> <span class="s1">&#39;dataset&#39;</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
         <span class="n">unique_colors</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataset_names</span><span class="p">)}</span>
         <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Color&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">unique_colors</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
-        <span class="n">scatter</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Principal Component 1&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Principal Component 2&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Color&#39;</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        
+        <span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;tab10&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset_names</span><span class="p">))</span>
+
+        <span class="n">scatter</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Principal Component 1&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Principal Component 2&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Color&#39;</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        
+        <span class="n">handles</span> <span class="o">=</span> <span class="p">[</span><span class="n">plt</span><span class="o">.</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="n">cmap</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset_names</span><span class="p">))]</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">dataset_names</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Dataset&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+        
         <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;PCA-reduced data by dataset&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Principal Component 1&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Principal Component 2&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">scatter</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Dataset&#39;</span><span class="p">)</span>
+        
         <span class="n">outfile</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">outdir</span><span class="si">}</span><span class="s2">pca_plot.by_dataset.png&quot;</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="k">elif</span> <span class="n">coloring</span> <span class="o">==</span> <span class="s2">&quot;kmeans&quot;</span> <span class="ow">and</span> <span class="n">cluster_labels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster_labels</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
-        <span class="n">scatter</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Principal Component 1&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Principal Component 2&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Color&#39;</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        
+        <span class="n">unique_clusters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">cluster_labels</span><span class="p">)</span>
+        <span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;tab10&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_clusters</span><span class="p">))</span>
+        
+        <span class="n">scatter</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Principal Component 1&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Principal Component 2&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Color&#39;</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        
+        <span class="n">handles</span> <span class="o">=</span> <span class="p">[</span><span class="n">plt</span><span class="o">.</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="n">cmap</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">unique_clusters</span><span class="p">))]</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">unique_clusters</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Cluster Label&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+        
         <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;PCA-reduced data with KMeans clustering&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Principal Component 1&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Principal Component 2&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">scatter</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cluster Label&#39;</span><span class="p">)</span>
+        
         <span class="n">n_clusters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">cluster_labels</span><span class="p">)</span><span class="o">.</span><span class="n">size</span>
         <span class="n">outfile</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">outdir</span><span class="si">}</span><span class="s2">pca_plot</span><span class="si">{</span><span class="n">n_clusters</span><span class="si">}</span><span class="s2">by_cluster.png&quot;</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">coloring</span><span class="si">}</span><span class="s2"> not a supported coloring&quot;</span><span class="p">)</span>

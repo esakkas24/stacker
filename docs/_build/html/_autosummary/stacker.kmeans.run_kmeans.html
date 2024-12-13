@@ -719,7 +719,7 @@ saved to a file.</p>
 <dt><strong>data_arrays</strong><span class="classifier">dict</span></dt><dd><p>Output of read_and_preprocess_data(). Dictionary where keys are dataset 
 names and values are the processed data arrays.</p>
 </dd>
-<dt><strong>N_CLUSTERS</strong><span class="classifier">int</span></dt><dd><p>The number of clusters to form</p>
+<dt><strong>n_clusters</strong><span class="classifier">int</span></dt><dd><p>The number of clusters to form</p>
 </dd>
 <dt><strong>max_iter</strong><span class="classifier">int, default=1000</span></dt><dd><p>Maximum number of iterations of the k-means algorithm for a single run.</p>
 </dd>
@@ -755,7 +755,7 @@ If empty, just prints to standard output.</p>
 <span class="gp">... </span>    <span class="s1">&#39;dataset2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3200</span><span class="p">,</span> <span class="mi">16129</span><span class="p">)</span>
 <span class="gp">... </span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">blinded_data</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">run_kmeans</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">,</span> <span class="n">N_CLUSTERS</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">run_kmeans</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="go">Reading data: dataset1</span>
 <span class="go">Reading data: dataset2</span>
 <span class="go">(6400, 16129)</span>

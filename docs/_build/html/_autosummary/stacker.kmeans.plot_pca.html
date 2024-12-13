@@ -707,17 +707,17 @@
 <h1>stacker.kmeans.plot_pca<a class="headerlink" href="#stacker-kmeans-plot-pca" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.kmeans.plot_pca">
-<span class="sig-name descname"><span class="pre">plot_pca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blinded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coloring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dataset'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#plot_pca"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_pca" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">plot_pca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blinded_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coloring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dataset'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_dataset_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/kmeans.html#plot_pca"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.kmeans.plot_pca" title="Link to this definition">#</a></dt>
 <dd><p>Creates PCA Plot to compare systems in 2D</p>
 <p>Creates a PCA plot that can be colored by the KMeans clustering result
 or by dataset. Compares SSFs similarly to K Means.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>blinded_data</strong><span class="classifier">np.typing.ArrayLike</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
+<dt><strong>blinded_data</strong><span class="classifier">np.ndarray</span></dt><dd><p>A 2D numpy array containing all frames stacked together.
 Output of create_kmeans_input()</p>
 </dd>
-<dt><strong>dataset_names</strong><span class="classifier">list of str</span></dt><dd><p>List of filenams to read and preprocess.
+<dt><strong>dataset_names</strong><span class="classifier">list of str</span></dt><dd><p>List of filenames to read and preprocess.
 Outputted from <cite>stacker -s ssf -d output.txt.gz</cite>.
 Should be in the format {datapath}/{traj_name}.txt.gz</p>
 </dd>
@@ -730,6 +730,8 @@ Should be in the format {datapath}/{traj_name}.txt.gz</p>
 </dd>
 <dt><strong>cluster_labels</strong><span class="classifier">np.ndarray, optional</span></dt><dd><p>The labels of the clusters for each frame, output from run_kmeans.
 Used if coloring = “kmeans” to color points by cluster</p>
+</dd>
+<dt><strong>new_dataset_names</strong><span class="classifier">dict, optional</span></dt><dd><p>Dictionary to remap dataset names. Keys are original filenames in <code class="docutils literal notranslate"><span class="pre">dataset_names</span></code> and values are shortened names.</p>
 </dd>
 </dl>
 </dd>
