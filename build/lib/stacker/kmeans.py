@@ -23,10 +23,10 @@ import seaborn as sns
 
 N_RESIDUES = 127
 RANGE_N_CLUSTERS = [2,3,4,5,6,7,8] # Range of n_clusters to try for kmeans
-dataset_names = ['5JUP_N2_tGGG_aCCU_+1GCU', '5JUP_N2_tGGG_aCCU_+1CGU', '5JUP_N2_tUAG_aCUA_+1GCU', '5JUP_N2_tUAG_aCUA_+1CGU', '5JUP_N2_tGGG_aCCC_+1GCU', '5JUP_N2_tGGG_aCCC_+1CGU']  # Add more dataset names as needed
-filepaths = ['5JUP_N2_tGGG_aCCU_+1GCU', '5JUP_N2_tGGG_aCCU_+1CGU', '5JUP_N2_tUAG_aCUA_+1GCU', '5JUP_N2_tUAG_aCUA_+1CGU', '5JUP_N2_tGGG_aCCC_+1GCU', '5JUP_N2_tGGG_aCCC_+1CGU']  # Add more dataset names as needed
-indir = '/home66/esakkas/STACKER/DATA/' # Directory with data.txt output from StACKER (created with -d flag)
-outdir = '/home66/esakkas/STACKER/DATA/' # Outdir for clustering results and kmeans plot
+dataset_names = ['../testing/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz', '../testing/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz']  # Add more dataset names as needed
+filepaths = ['5JUP_N2_tGGG_aCCU_+1GCU', '5JUP_N2_tGGG_aCCU_+1CGU']  # Add more dataset names as needed
+indir = '~/Downloads/stacker/testing/' # Directory with data.txt output from StACKER (created with -d flag)
+outdir = '~/Downloads/stacker/testing/' # Outdir for clustering results and kmeans plot
 
 ##################
 
@@ -146,7 +146,7 @@ def run_kmeans(data_arrays : dict, n_clusters: int,
     data_arrays : dict
         Output of read_and_preprocess_data(). Dictionary where keys are dataset 
         names and values are the processed data arrays.
-    N_CLUSTERS : int
+    n_clusters : int
         The number of clusters to form 
     max_iter : int, default=1000
         Maximum number of iterations of the k-means algorithm for a single run.
@@ -176,7 +176,7 @@ def run_kmeans(data_arrays : dict, n_clusters: int,
     ...     'dataset2': np.random.rand(3200, 16129)
     ... }
     >>> blinded_data = st.create_kmeans_input(data_arrays)
-    >>> st.run_kmeans(blinded_data, N_CLUSTERS=4)
+    >>> st.run_kmeans(blinded_data, n_clusters=4)
     Reading data: dataset1
     Reading data: dataset2
     (6400, 16129)
@@ -240,7 +240,7 @@ def run_kmeans(data_arrays : dict, n_clusters: int,
 
     return blindframes_labelled_by_cluster
 
-def plot_cluster_trj_data(cluster_file: str, outfile: str) -> None:
+def plot_cluster_trj_data(cluster_file: str, outfile: str, x_labels_map: dict = None) -> None:
     """
     Plots the output of run_kmeans() to a PNG file.
 
@@ -253,6 +253,8 @@ def plot_cluster_trj_data(cluster_file: str, outfile: str) -> None:
         Path to clustering results written by run_kmeans()
     outfile : str
         Filepath where the plot PNG file will be saved.
+    x_labels_map : dict, optional
+        Dictionary to remap x labels. Keys are original labels and values are new labels.
         
     Returns
     -------
@@ -265,25 +267,38 @@ def plot_cluster_trj_data(cluster_file: str, outfile: str) -> None:
     specified output directory.
 
     >>> import stacker as st
-    >>> st.plot_cluster_trj_data('clustering_results.txt', '/path/to/output/')
+    >>> st.plot_cluster_trj_data('clustering_results.txt', "../testing/kmeans_plot.png", {'5JUP_N2_tGGG_aCCU_+1CGU_data': 'tGGG_aCCU_+1CGU', '5JUP_N2_tGGG_aCCU_+1GCU_data': 'tGGG_aCCU_+1GCU'})
 
     """
     cluster_data = pd.read_table(cluster_file, sep=' ', header=0, quotechar="\"")
-    
-    g = sns.FacetGrid(cluster_data.dropna(subset=['trj']), col="cluster", col_wrap=2, height = 6)
+    sns.set_theme(style="white", font_scale=1.2)
 
-    colors = sns.color_palette("husl", len(cluster_data['trj'].unique()))
-
+    g = sns.FacetGrid(cluster_data.dropna(subset=['trj']), col="cluster", col_wrap=2, height=6, despine=False)
+    colors = sns.color_palette("deep", len(cluster_data['trj'].unique()))
     g.map(plt.bar, 'trj', 'number', color=colors) 
 
     for ax in g.axes.flat:
+        if x_labels_map:
+            # Get unique trajectory names
+            unique_trjs = cluster_data['trj'].unique()
+            labels = [x_labels_map.get(trj, trj) for trj in unique_trjs]
+            print(f"Original labels: {unique_trjs}")
+            print(f"Mapped labels: {labels}")
+            ax.set_xticks(range(len(labels)))  # Set fixed ticks
+            ax.set_xticklabels(labels)
+        
         for label in ax.get_xticklabels():
             label.set_rotation(90)
             label.set_ha('right')
-            
-    g.set_titles(col_template="{col_name}")
+
+        ax.set_xlabel("Trajectory")
+        ax.set_ylabel("Number of Frames")  
+
+    for i, ax in enumerate(g.axes.flat):
+        ax.set_title(f"Cluster {i + 1}")
+
     plt.tight_layout()
-    plt.savefig(outfile)
+    plt.savefig(outfile, dpi=300)
     print(f"Plot Outputted to {outfile}")
     plt.close()
 
@@ -349,8 +364,9 @@ def plot_silhouette(n_clusters : int, blind_data : typing.ArrayLike, outdir : st
     print(f"File saved to: {plot_outpath}")
     plt.close()
 
-def plot_pca(blinded_data : typing.ArrayLike, dataset_names : list,
-             coloring : str = 'dataset', outdir : str = '', cluster_labels: np.ndarray = None) -> None:
+def plot_pca(blinded_data: np.ndarray, dataset_names: list,
+             coloring: str = 'dataset', outdir: str = '', 
+             cluster_labels: np.ndarray = None, new_dataset_names: dict = None) -> None:
     '''
     Creates PCA Plot to compare systems in 2D 
 
@@ -359,11 +375,11 @@ def plot_pca(blinded_data : typing.ArrayLike, dataset_names : list,
 
     Parameters
     ----------
-    blinded_data : np.typing.ArrayLike
+    blinded_data : np.ndarray
         A 2D numpy array containing all frames stacked together.
         Output of create_kmeans_input()
     dataset_names : list of str
-        List of filenams to read and preprocess.
+        List of filenames to read and preprocess.
         Outputted from `stacker -s ssf -d output.txt.gz`.
         Should be in the format {datapath}/{traj_name}.txt.gz
     coloring : {'dataset', 'kmeans', 'facet'}
@@ -376,6 +392,8 @@ def plot_pca(blinded_data : typing.ArrayLike, dataset_names : list,
     cluster_labels : np.ndarray, optional
         The labels of the clusters for each frame, output from run_kmeans.
         Used if coloring = "kmeans" to color points by cluster
+    new_dataset_names : dict, optional
+        Dictionary to remap dataset names. Keys are original filenames in ``dataset_names`` and values are shortened names.
         
     Returns
     -------
@@ -391,7 +409,10 @@ def plot_pca(blinded_data : typing.ArrayLike, dataset_names : list,
     if outdir and not outdir.endswith('/'):
         outdir += '/'
 
-    dataset_names = [filepath.split('/')[-1].split('.')[0] for filepath in dataset_names]
+    if new_dataset_names:
+        dataset_names = [new_dataset_names[filepath] for filepath in dataset_names]
+    else:
+        dataset_names = [filepath.split('/')[-1].split('.')[0] for filepath in dataset_names]
 
     n_datasets = len(dataset_names)
     pca = PCA(n_components=2)
@@ -408,36 +429,55 @@ def plot_pca(blinded_data : typing.ArrayLike, dataset_names : list,
     })
 
     if coloring == 'facet':
-        g = sns.FacetGrid(df, col='Color', col_wrap=2, height=4)
-        g.map_dataframe(sns.scatterplot, x='Principal Component 1', y='Principal Component 2')
-        g.set_titles(col_template='Color {col_name}')
+        g = sns.FacetGrid(df, col='Color', col_wrap=2, height=4, despine=False, hue="Color")
+        g.map_dataframe(sns.scatterplot, x='Principal Component 1', y='Principal Component 2', linewidth = 0, s = 10)
+
+
+        g.set_titles(col_template='{col_name}')
         g.set_axis_labels('Principal Component 1', 'Principal Component 2')
+
+
         outfile = f"{outdir}pca_plot.by_facet.png"
         plt.savefig(outfile)
         plt.close()
     elif coloring == 'dataset':
+        plt.figure(figsize=(10, 7))
         unique_colors = {name: idx for idx, name in enumerate(dataset_names)}
         df['Color'] = df['Color'].map(unique_colors)
-        plt.figure(figsize=(10, 7))
-        scatter = plt.scatter(df['Principal Component 1'], df['Principal Component 2'], c=df['Color'], cmap='viridis', s=10)
+        
+        cmap = plt.get_cmap('tab10', len(dataset_names))
+
+        scatter = plt.scatter(df['Principal Component 1'], df['Principal Component 2'], c=df['Color'], cmap=cmap, s=10)
+        
+        handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=cmap(i), markersize=10) for i in range(len(dataset_names))]
+        plt.legend(handles, dataset_names, title='Dataset', bbox_to_anchor=(1.05, 1), loc='upper left')
+        
         plt.title('PCA-reduced data by dataset')
         plt.xlabel('Principal Component 1')
         plt.ylabel('Principal Component 2')
-        plt.colorbar(scatter, label='Dataset')
+        
         outfile = f"{outdir}pca_plot.by_dataset.png"
-        plt.savefig(outfile)
+        plt.savefig(outfile, bbox_inches='tight')
         plt.close()
     elif coloring == "kmeans" and cluster_labels is not None:
         df['Color'] = cluster_labels
         plt.figure(figsize=(10, 7))
-        scatter = plt.scatter(df['Principal Component 1'], df['Principal Component 2'], c=df['Color'], cmap='viridis', s=10)
+        
+        unique_clusters = np.unique(cluster_labels)
+        cmap = plt.get_cmap('tab10', len(unique_clusters))
+        
+        scatter = plt.scatter(df['Principal Component 1'], df['Principal Component 2'], c=df['Color'], cmap=cmap, s=10)
+        
+        handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=cmap(i), markersize=10) for i in range(len(unique_clusters))]
+        plt.legend(handles, unique_clusters, title='Cluster Label', bbox_to_anchor=(1.05, 1), loc='upper left')
+        
         plt.title('PCA-reduced data with KMeans clustering')
         plt.xlabel('Principal Component 1')
         plt.ylabel('Principal Component 2')
-        plt.colorbar(scatter, label='Cluster Label')
+        
         n_clusters = np.unique(cluster_labels).size
         outfile = f"{outdir}pca_plot{n_clusters}by_cluster.png"
-        plt.savefig(outfile)
+        plt.savefig(outfile, bbox_inches='tight')
         plt.close()
     else:
         print(f"{coloring} not a supported coloring")
