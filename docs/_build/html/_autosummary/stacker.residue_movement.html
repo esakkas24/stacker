@@ -726,25 +726,25 @@ and exports these values to a .csv file.</p>
 <p class="rubric">Functions</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.calc_center_3pts" title="stacker.residue_movement.calc_center_3pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_center_3pts</span></code></a>(a, b, c)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.residue_movement.calc_center_3pts" title="stacker.residue_movement.calc_center_3pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_center_3pts</span></code></a>(a, b, c)</p></td>
 <td><p>Finds the average x, y, z position of three (x, y, z) Vectors.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a>(...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a>(...)</p></td>
 <td><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.collect_atom_locations_by_frame" title="stacker.residue_movement.collect_atom_locations_by_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">collect_atom_locations_by_frame</span></code></a>(trj, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.residue_movement.collect_atom_locations_by_frame" title="stacker.residue_movement.collect_atom_locations_by_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">collect_atom_locations_by_frame</span></code></a>(trj, ...)</p></td>
 <td><p>Creates a list of all atom locations for a particular atom and residue number per frame.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.correct_theta_sign" title="stacker.residue_movement.correct_theta_sign"><code class="xref py py-obj docutils literal notranslate"><span class="pre">correct_theta_sign</span></code></a>(rho, y_axis, theta)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#stacker.residue_movement.correct_theta_sign" title="stacker.residue_movement.correct_theta_sign"><code class="xref py py-obj docutils literal notranslate"><span class="pre">correct_theta_sign</span></code></a>(rho, y_axis, theta)</p></td>
 <td><p>Corrects the sign of an angle theta with the x-axis within a plane defined by a given y-axis.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a>(frame, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a>(frame, ...)</p></td>
 <td><p>Combines C2, C4, C6 positions with midpoint positions for a given frame.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.write_bottaro_to_csv" title="stacker.residue_movement.write_bottaro_to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_bottaro_to_csv</span></code></a>([pdb, csv, pers_res, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../stacker.html#stacker.residue_movement.write_bottaro_to_csv" title="stacker.residue_movement.write_bottaro_to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_bottaro_to_csv</span></code></a>([pdb, csv, pers_res, ...])</p></td>
 <td><p>Write the r, rho, and theta values used to make a Pairwise Stacking Fingerprint (PSF) from a trajectory PDB to a CSV.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.write_psf_data" title="stacker.residue_movement.write_psf_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_psf_data</span></code></a>([pdb, csv, pers_res, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.residue_movement.write_psf_data" title="stacker.residue_movement.write_psf_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_psf_data</span></code></a>([pdb, csv, pers_res, ...])</p></td>
 <td><p>Alias for <cite>write_bottaro_to_csv()</cite>.</p></td>
 </tr>
 </tbody>
@@ -753,7 +753,7 @@ and exports these values to a .csv file.</p>
 <p class="rubric">Classes</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.Base" title="stacker.residue_movement.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code></a>(c2_coords, c4_coords, c6_coords, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stacker.html#stacker.residue_movement.Base" title="stacker.residue_movement.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code></a>(c2_coords, c4_coords, c6_coords, ...)</p></td>
 <td><p>Represents a nucleotide base with x, y, z coordinates for C2, C4, and C6 atoms, and their average position at a single frame.</p></td>
 </tr>
 </tbody>
@@ -786,11 +786,11 @@ of a provided <code class="docutils literal notranslate"><span class="pre">atom<
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.Base" title="stacker.residue_movement.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code></a></dt><dd><p>Python Class that represents a nucleotide base</p>
+<dt><a class="reference internal" href="../stacker.html#stacker.residue_movement.Base" title="stacker.residue_movement.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code></a></dt><dd><p>Python Class that represents a nucleotide base</p>
 </dd>
-<dt><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a></dt><dd><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p>
+<dt><a class="reference internal" href="../stacker.html#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a></dt><dd><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p>
 </dd>
-<dt><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a></dt><dd><p>Combines C2, C4, C6 positions with midpoint positions for a given frame</p>
+<dt><a class="reference internal" href="../stacker.html#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a></dt><dd><p>Combines C2, C4, C6 positions with midpoint positions for a given frame</p>
 </dd>
 </dl>
 </div>
@@ -837,11 +837,11 @@ with three points that make up a triangle (like those within a 6-member ring).</
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.Base" title="stacker.residue_movement.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code></a></dt><dd><p>Python Class that represents a nucleotide base</p>
+<dt><a class="reference internal" href="../stacker.html#stacker.residue_movement.Base" title="stacker.residue_movement.Base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code></a></dt><dd><p>Python Class that represents a nucleotide base</p>
 </dd>
-<dt><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a></dt><dd><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p>
+<dt><a class="reference internal" href="../stacker.html#stacker.residue_movement.calculate_bottaro_values_for_frame" title="stacker.residue_movement.calculate_bottaro_values_for_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_bottaro_values_for_frame</span></code></a></dt><dd><p>Calculates the r, rho, and theta values as expressed in the Bottaro paper.</p>
 </dd>
-<dt><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a></dt><dd><p>Combines C2, C4, C6 positions with midpoint positions for a given frame</p>
+<dt><a class="reference internal" href="../stacker.html#stacker.residue_movement.create_base_from_coords_list" title="stacker.residue_movement.create_base_from_coords_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_base_from_coords_list</span></code></a></dt><dd><p>Combines C2, C4, C6 positions with midpoint positions for a given frame</p>
 </dd>
 </dl>
 </div>
@@ -930,7 +930,7 @@ of the same residue at that frame.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="../stacker.residue_movement.html#stacker.residue_movement.calc_center_3pts" title="stacker.residue_movement.calc_center_3pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_center_3pts</span></code></a></dt><dd><p>Finds the average x, y, z position of three (x, y, z) Vectors</p>
+<dt><a class="reference internal" href="../stacker.html#stacker.residue_movement.calc_center_3pts" title="stacker.residue_movement.calc_center_3pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_center_3pts</span></code></a></dt><dd><p>Finds the average x, y, z position of three (x, y, z) Vectors</p>
 </dd>
 </dl>
 </div>

@@ -308,7 +308,7 @@ We can visualize this with :func:`plot_cluster_trj_data`::
             Cluster 6: 1245 matrices
             Cluster 7: 80 matrices
     Results written to: testing/clustering_results_7.txt
-    >>> st.plot_cluster_trj_data("testing/clustering_results_7.txt", "testing/kmeans_plot.png")
+    >>> st.plot_cluster_trj_data("testing/clustering_results_7.txt", "testing/kmeans_plot.png", {'5JUP_N2_tGGG_aCCU_+1CGU_data': 'tGGG_aCCU_+1CGU', '5JUP_N2_tGGG_aCCU_+1GCU_data': 'tGGG_aCCU_+1GCU'})
 
 .. image:: images/kmeans_plot.png
 
@@ -447,13 +447,9 @@ datasets::
     >>> dataset_names = ["/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz",
     ...     "/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz",
     ...     "/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCC_+1CGU_data.txt.gz",
-    ...     "/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCC_+1GCU_data.txt.gz",
+    ...     "/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCC_+1GCU_data.txt.gz"
     ...     ]
-    >>> dataset_names = ["/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCU_+1CGU_data.txt.gz",
-    ...     "/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCU_+1GCU_data.txt.gz",
-    ...     "/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCC_+1CGU_data.txt.gz",
-    ...     "/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCC_+1GCU_data.txt.gz",
-    ...     ]
+    >>> data_arrays = st.read_and_preprocess_data(dataset_names)
     >>> blinded_data = st.create_kmeans_input(data_arrays)
     (12800, 16129)
     >>> st.plot_pca(blinded_data, dataset_names, 'facet')
@@ -464,7 +460,7 @@ Here we see that the ``tGGG_aCCU_+1GCU`` trajectory occupies its own space.
 We can combine this result with the KMeans and PCA plots below to strongly support
 the conclusion that ``tGGG_aCCU_+1GCU`` has a different system-wide stacking,
 and therefore a different structure, than the other three trajectories. The
-K-Means results with the best silhouette plot is shown here::
+K-Means results with the best silhouette plot is shown here:
 
 .. image:: images/silhouette5.png
 
