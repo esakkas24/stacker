@@ -165,6 +165,8 @@ def run_python_command() -> None:
         frame_group = parser.add_mutually_exclusive_group()
         frame_group.add_argument("-f", "--frame", type=int, metavar="FRAME_NUM", help="1-indexed Frame Number within trajectory to analyze, cannot be used with -fl", required=False)
         frame_group.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,\ngets average distance between residues across these frames\nif empty all frames are used, cannot be used with -f", required=False, action=SmartIndexingAction)
+        parser.add_argument("-t", "--threads", metavar="N_THREADS", help="Use multithreading with INT worker threads", type = int, required = False, default = 1)
+
 
     if args.script == 'compare':
         parser.description = 'Print the most changed stacking events between two fingerprints using the outputs of stacker -s stack_events' +\
