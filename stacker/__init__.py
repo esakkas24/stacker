@@ -366,7 +366,7 @@ def bottaro_routine() -> None:
     create_parent_directories(output_name)
 
     write_bottaro_to_csv(pdb=pdb_filename, 
-                         csv=output_name, pers_res=pers_res_num, view_res=view_res_num,
+                         outcsv=output_name, pers_res=pers_res_num, view_res=view_res_num,
                          res1_atoms=tuple(perspective_atom_names), 
                          res2_atoms=tuple(viewed_atom_names), index = args.index)
     
