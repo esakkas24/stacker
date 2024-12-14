@@ -281,7 +281,7 @@ def calculate_bottaro_values_for_frame(perspective_base_coords: Base, viewed_mid
     return values
 
 def write_bottaro_to_csv(pdb: str = '', 
-                         csv: str = '', 
+                         outcsv: str = '', 
                          pers_res: int = -1, 
                          view_res: int = -1,
                          res1_atoms: set = {"C2", "C4", "C6"}, 
@@ -300,7 +300,7 @@ def write_bottaro_to_csv(pdb: str = '',
     pdb : str
         Filename of PDB containing information for ONLY two residues (perspective and viewed
         nucleotide) at each frame.
-    csv : str
+    outcsv : str
         Filename of CSV file to write to.
     pers_res : int, default = -1
         Residue index of the perspective residue whose plane to project onto (0-/1-index changed by
@@ -412,12 +412,12 @@ def write_bottaro_to_csv(pdb: str = '',
         row = [i]+frame_values
         rows.append(row)
     
-    filename = csv
+    filename = outcsv
     with open(filename, 'w') as csvfile:
-        csvwriter = csv.writer(csvfile) 
+        csvwriter = outcsv.writer(csvfile) 
         csvwriter.writerow(fields) 
         csvwriter.writerows(rows)
-    print("Output values written to " + csv)
+    print("Output values written to " + outcsv)
 
 @functools.wraps(write_bottaro_to_csv)
 def write_psf_data(*args, **kwargs):

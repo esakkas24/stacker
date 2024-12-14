@@ -165,6 +165,8 @@ def run_python_command() -> None:
         frame_group = parser.add_mutually_exclusive_group()
         frame_group.add_argument("-f", "--frame", type=int, metavar="FRAME_NUM", help="1-indexed Frame Number within trajectory to analyze, cannot be used with -fl", required=False)
         frame_group.add_argument("-fl", "--frame_list", metavar="FRAME_LIST", default='', help="Smart-indexed list of 1-indexed Frame Numbers within trajectory to analyze,\ngets average distance between residues across these frames\nif empty all frames are used, cannot be used with -f", required=False, action=SmartIndexingAction)
+        parser.add_argument("-t", "--threads", metavar="N_THREADS", help="Use multithreading with INT worker threads", type = int, required = False, default = 1)
+
 
     if args.script == 'compare':
         parser.description = 'Print the most changed stacking events between two fingerprints using the outputs of stacker -s stack_events' +\
@@ -364,7 +366,7 @@ def bottaro_routine() -> None:
     create_parent_directories(output_name)
 
     write_bottaro_to_csv(pdb=pdb_filename, 
-                         csv=output_name, pers_res=pers_res_num, view_res=view_res_num,
+                         outcsv=output_name, pers_res=pers_res_num, view_res=view_res_num,
                          res1_atoms=tuple(perspective_atom_names), 
                          res2_atoms=tuple(viewed_atom_names), index = args.index)
     
@@ -691,7 +693,7 @@ def stack_events_routine() -> None:
         frame = get_frame_average(frames)
     elif args.frame:
         frame = get_residue_distance_for_frame(trj_sub, frame = args.frame)
-    elif args.frame_list:
+    else:
         frames = get_residue_distance_for_trajectory(trj_sub, args.frame_list, threads = args.threads)
         frame = get_frame_average(frames)
 
