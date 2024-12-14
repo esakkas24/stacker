@@ -691,7 +691,7 @@ def stack_events_routine() -> None:
         frame = get_frame_average(frames)
     elif args.frame:
         frame = get_residue_distance_for_frame(trj_sub, frame = args.frame)
-    elif args.frame_list:
+    else:
         frames = get_residue_distance_for_trajectory(trj_sub, args.frame_list, threads = args.threads)
         frame = get_frame_average(frames)
 
