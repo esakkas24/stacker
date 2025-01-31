@@ -414,7 +414,7 @@ def write_bottaro_to_csv(pdb: str = '',
     
     filename = outcsv
     with open(filename, 'w') as csvfile:
-        csvwriter = outcsv.writer(csvfile) 
+        csvwriter = csv.writer(csvfile) 
         csvwriter.writerow(fields) 
         csvwriter.writerows(rows)
     print("Output values written to " + outcsv)

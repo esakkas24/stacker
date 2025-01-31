@@ -707,7 +707,7 @@
 <h1>stacker.visualization.set_polar_grid<a class="headerlink" href="#stacker-visualization-set-polar-grid" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.visualization.set_polar_grid">
-<span class="sig-name descname"><span class="pre">set_polar_grid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/visualization.html#set_polar_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.set_polar_grid" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">set_polar_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/visualization.html#set_polar_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.set_polar_grid" title="Link to this definition">#</a></dt>
 <dd><p>Set up axes for PSF.</p>
 <p>Creates polar plot background for two-residue movement comparison
 with theta 0 to 360, a radial maximum of 15 Angstroms, and a visualization 
@@ -715,7 +715,50 @@ of the perspective residue at the center.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>None</strong></dt><dd></dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Additional keyword arguments to customize the plot:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>fontsize<span class="classifier">int, default = 10</span></dt><dd><p>Font size for all text elements.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>fig_width<span class="classifier">float, default = 5</span></dt><dd><p>Width of the figure in inches.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>fig_height<span class="classifier">float, default = 5</span></dt><dd><p>Height of the figure in inches.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>title_fontsize<span class="classifier">int, default = fontsize</span></dt><dd><p>Font size for the title.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>legend_fontsize<span class="classifier">int, default = fontsize</span></dt><dd><p>Font size for the legend.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>cb_fontsize<span class="classifier">int, default = fontsize</span></dt><dd><p>Font size for the colorbar labels.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>xaxis_fontsize<span class="classifier">int, default = fontsize</span></dt><dd><p>Font size for the x-axis labels.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>yaxis_fontsize<span class="classifier">int, default = fontsize</span></dt><dd><p>Font size for the y-axis labels.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

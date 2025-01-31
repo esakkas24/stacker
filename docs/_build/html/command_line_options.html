@@ -789,7 +789,7 @@ Required Arguments:
                         Filepath of PDB to output to
 </pre></div>
 </div>
-<p>This is the command line equivalent of <a class="reference internal" href="stacker.html#stacker.file_manipulation.filter_traj_to_pdb" title="stacker.file_manipulation.filter_traj_to_pdb"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_traj_to_pdb()</span></code></a>. So, the following are equivalent:</p>
+<p>This is the command line equivalent of <a class="reference internal" href="stacker.file_manipulation.html#stacker.file_manipulation.filter_traj_to_pdb" title="stacker.file_manipulation.filter_traj_to_pdb"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_traj_to_pdb()</span></code></a>. So, the following are equivalent:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">filter_traj_to_pdb</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">trj_file</span> <span class="o">=</span> <span class="s2">&quot;first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&quot;</span><span class="p">,</span>
@@ -854,7 +854,7 @@ Required Arguments:
                         Smart-indexed list of 1-indexed residues, must provide only 2 residues, accepts dash (-) list creation (eg. 1-5,10 = 1,2,3,4,5,10)
 </pre></div>
 </div>
-<p>This is the command line equivalent of <a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_residue_distance_for_frame()</span></code></a>.
+<p>This is the command line equivalent of <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_residue_distance_for_frame()</span></code></a>.
 So, the following are equivalent:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s1">&#39;first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span><span class="p">,</span>
@@ -952,8 +952,8 @@ Required Arguments:
 </div>
 <section id="get-average-ssf">
 <h3>Get Average SSF<a class="headerlink" href="#get-average-ssf" title="Link to this heading">#</a></h3>
-<p>The basic SSF Command Line function runs <a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_frame_average" title="stacker.pairwise_distance.get_frame_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_frame_average()</span></code></a> and
-<a class="reference internal" href="stacker.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-func docutils literal notranslate"><span class="pre">system_stacking_fingerprints()</span></code></a>, creating an SSF for the
+<p>The basic SSF Command Line function runs <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_frame_average" title="stacker.pairwise_distance.get_frame_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_frame_average()</span></code></a> and
+<a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-func docutils literal notranslate"><span class="pre">system_stacking_fingerprints()</span></code></a>, creating an SSF for the
 trajectory averaged across all frames:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s1">&#39;first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&#39;</span><span class="p">,</span>
@@ -981,7 +981,7 @@ trajectory averaged across all frames:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">-o,</span> <span class="pre">--output</span> <span class="pre">OUTPUT_FILE</span></code> : Save SSF to an output PNG <code class="docutils literal notranslate"><span class="pre">OUTPUT_FILE</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-g,</span> <span class="pre">--get_stacking</span> <span class="pre">N_EVENTS</span></code> : Prints top stacking pairs to standard output.</p></li>
 </ul>
-<p>Equivalent to <a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a>, where <code class="docutils literal notranslate"><span class="pre">N_EVENTS</span></code> is the <code class="docutils literal notranslate"><span class="pre">n_events</span></code> parameter.
+<p>Equivalent to <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a>, where <code class="docutils literal notranslate"><span class="pre">N_EVENTS</span></code> is the <code class="docutils literal notranslate"><span class="pre">n_events</span></code> parameter.
 - <code class="docutils literal notranslate"><span class="pre">-d,</span> <span class="pre">--data_output</span> <span class="pre">OUTPUT_FILE</span></code> : Output the list of SSFs to <code class="docutils literal notranslate"><span class="pre">.txt.gz</span></code>. You can input
 this SSF data rather than recalculate each time.</p>
 <p>Expanding on the command above, we create SSFs for frames 1-10 and use
@@ -1009,7 +1009,7 @@ Res1    Res2    Avg_Dist
 <p>The <code class="docutils literal notranslate"><span class="pre">-d</span></code> flag above outputs the SSF data for each frame to
 <code class="docutils literal notranslate"><span class="pre">5JUP_N2_tUAG_aCUA_+1GCU_nowat.data.txt.gz</span></code>. We can read this into a
 Python object representing the 10 frames of 126x126 residue SSFs
-with <a class="reference internal" href="stacker.html#stacker.pairwise_distance.load_ssfs" title="stacker.pairwise_distance.load_ssfs"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_ssfs()</span></code></a>:</p>
+with <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.load_ssfs" title="stacker.pairwise_distance.load_ssfs"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_ssfs()</span></code></a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ssfs</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">load_ssfs</span><span class="p">(</span><span class="s2">&quot;5JUP_N2_tUAG_aCUA_+1GCU_nowat.data.txt.gz&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ssfs</span><span class="o">.</span><span class="n">shape</span>

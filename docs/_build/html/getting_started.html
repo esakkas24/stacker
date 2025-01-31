@@ -830,14 +830,14 @@ files, and <code class="docutils literal notranslate"><span class="pre">.pdb</sp
 <p><code class="docutils literal notranslate"><span class="pre">.pdb</span></code> files are a standard filetype for molecular structures (Cryo-EM, X-Ray Crystollography, etc.)
 and include both trajectory and topology information. If an MD Software other than AMBER was used to
 generate your MD Data, nearly all software support converting the trajectory to a PDB.</p>
-<p>You can convert between these using <a class="reference internal" href="stacker.html#stacker.file_manipulation.filter_traj_to_pdb" title="stacker.file_manipulation.filter_traj_to_pdb"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_traj_to_pdb()</span></code></a></p>
+<p>You can convert between these using <a class="reference internal" href="stacker.file_manipulation.html#stacker.file_manipulation.filter_traj_to_pdb" title="stacker.file_manipulation.filter_traj_to_pdb"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_traj_to_pdb()</span></code></a></p>
 <p>These can be imported into python using the <code class="docutils literal notranslate"><span class="pre">mdtraj</span></code> package, which is automatically
 installed with StACKER.:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mdtraj</span> <span class="k">as</span> <span class="nn">md</span>
 <span class="n">md</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;traj.mdcrd&quot;</span><span class="p">,</span> <span class="n">top</span> <span class="o">=</span> <span class="s2">&quot;top.prmtop&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Alternatively, the trajectories can be loaded in, pre-filtered using <a class="reference internal" href="stacker.html#stacker.file_manipulation.filter_traj" title="stacker.file_manipulation.filter_traj"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_traj()</span></code></a></p>
+<p>Alternatively, the trajectories can be loaded in, pre-filtered using <a class="reference internal" href="stacker.file_manipulation.html#stacker.file_manipulation.filter_traj" title="stacker.file_manipulation.filter_traj"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_traj()</span></code></a></p>
 </section>
 </section>
 

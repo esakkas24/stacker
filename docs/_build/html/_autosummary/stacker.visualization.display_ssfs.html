@@ -707,7 +707,7 @@
 <h1>stacker.visualization.display_ssfs<a class="headerlink" href="#stacker-visualization-display-ssfs" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.visualization.display_ssfs">
-<span class="sig-name descname"><span class="pre">display_ssfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numpy_arrays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds_per_frame</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tick_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">7)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bellcurve'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xy_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/visualization.html#display_ssfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.display_ssfs" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">display_ssfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numpy_arrays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds_per_frame</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tick_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">7)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bellcurve'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xy_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/visualization.html#display_ssfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.display_ssfs" title="Link to this definition">#</a></dt>
 <dd><p>Alias for <cite>display_arrays_as_video()</cite>.</p>
 <dl class="simple">
 <dt>display_arrays_as_video(</dt><dd><p>ssfs,
@@ -718,7 +718,8 @@ outfile_prefix = ‘’,
 scale_limits = (0,7),
 outfile = ‘’,
 scale_style = ‘bellcurve’,
-xy_line = True</p>
+xy_line = True,
+<a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs</p>
 </dd>
 </dl>
 <p>)</p>
@@ -755,6 +756,50 @@ png, pdf, ps, eps, and svg supported.</p>
 </dd>
 <dt><strong>xy_line</strong><span class="classifier">bool, default = True</span></dt><dd><p>Draw x = y line to separate matrix halves.</p>
 </dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Additional keyword arguments to customize the plot:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>fontsize<span class="classifier">int, default = 10</span></dt><dd><p>Font size for all text elements.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>fig_width<span class="classifier">float, default = 8</span></dt><dd><p>Width of the figure in inches.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>fig_height<span class="classifier">float, default = 8</span></dt><dd><p>Height of the figure in inches.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>title_fontsize<span class="classifier">int, default = fontsize</span></dt><dd><p>Font size for the title.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>legend_fontsize<span class="classifier">int, default = fontsize</span></dt><dd><p>Font size for the legend.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>cb_fontsize<span class="classifier">int, default = fontsize</span></dt><dd><p>Font size for the colorbar tick labels.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>xaxis_fontsize<span class="classifier">int, default = fontsize</span></dt><dd><p>Font size for the x-axis tick labels.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>yaxis_fontsize<span class="classifier">int, default = fontsize</span></dt><dd><p>Font size for the y-axis tick labels.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -767,7 +812,7 @@ png, pdf, ps, eps, and svg supported.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="../stacker.html#stacker.visualization.create_axis_labels" title="stacker.visualization.create_axis_labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_axis_labels</span></code></a></dt><dd><p>Designates the axis labels to use in the SSF plot.</p>
+<dt><a class="reference internal" href="../stacker.visualization.html#stacker.visualization.create_axis_labels" title="stacker.visualization.create_axis_labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_axis_labels</span></code></a></dt><dd><p>Designates the axis labels to use in the SSF plot.</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_residue_distance_for_frame</span></code></dt><dd><p>Calculates System Stacking Fingerprint (SSF) between all residues in a given frame.</p>
 </dd>
@@ -775,7 +820,7 @@ png, pdf, ps, eps, and svg supported.</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_stacking_fingerprints</span></code></dt><dd><p>Alias for this <cite>get_residue_distance_for_trajectory</cite></p>
 </dd>
-<dt><a class="reference internal" href="../stacker.html#stacker.visualization.display_ssfs" title="stacker.visualization.display_ssfs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">display_ssfs</span></code></a></dt><dd><p>Alias for this function.</p>
+<dt><a class="reference internal" href="../stacker.visualization.html#stacker.visualization.display_ssfs" title="stacker.visualization.display_ssfs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">display_ssfs</span></code></a></dt><dd><p>Alias for this function.</p>
 </dd>
 </dl>
 </div>

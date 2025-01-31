@@ -734,11 +734,11 @@ We filter this trajectory to the pi-stacking residue pair.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd</span></code>: A 10-frame trajectory file with all atoms/residues.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop</span></code>: The associated Topology File with the above trajectory.</p></li>
 </ul>
-<p>We filter to atoms C2, C4, and C6 using <a class="reference internal" href="stacker.html#stacker.file_manipulation.filter_traj" title="stacker.file_manipulation.filter_traj"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_traj()</span></code></a>:</p>
+<p>We filter to atoms C2, C4, and C6 using <a class="reference internal" href="stacker.file_manipulation.html#stacker.file_manipulation.filter_traj" title="stacker.file_manipulation.filter_traj"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_traj()</span></code></a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s2">&quot;first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                <span class="n">top_file</span> <span class="o">=</span> <span class="s2">&quot;5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&quot;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
+<span class="gp">... </span>                <span class="n">atoms</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
 <span class="go">WARNING: Residue Indices are expected to be 1-indexed</span>
 <span class="go">Reading trajectory...</span>
 <span class="go">Reading topology...</span>
@@ -753,7 +753,7 @@ We filter this trajectory to the pi-stacking residue pair.</p>
 <section id="calculate-distance-between-residues">
 <h2>Calculate Distance Between Residues<a class="headerlink" href="#calculate-distance-between-residues" title="Link to this heading">#</a></h2>
 <p>Immediately, we can check if a residue pair is pi-stacking in a given frame. We calculate
-the distance between the COG of two residues using <a class="reference internal" href="stacker.html#stacker.pairwise_distance.calculate_residue_distance" title="stacker.pairwise_distance.calculate_residue_distance"><code class="xref py py-func docutils literal notranslate"><span class="pre">calculate_residue_distance()</span></code></a>.
+the distance between the COG of two residues using <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.calculate_residue_distance" title="stacker.pairwise_distance.calculate_residue_distance"><code class="xref py py-func docutils literal notranslate"><span class="pre">calculate_residue_distance()</span></code></a>.
 COG distance close to 3.5 Å indicates pi-stacking. For instance, the A-site mRNA codons
 (residues 422, 423, and 424) are likely pi-stacking:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">distance_vec</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">calculate_residue_distance</span><span class="p">(</span>
@@ -771,7 +771,7 @@ COG distance close to 3.5 Å indicates pi-stacking. For instance, the A-site mRN
 <h2>Create a System Stacking Fingerprint (SSF)<a class="headerlink" href="#create-a-system-stacking-fingerprint-ssf" title="Link to this heading">#</a></h2>
 <p>An SSF calculates the COG distance for all nucleotide pairs in a trajectory frame.
 The result is a square matrix where position (i, j) represents the distance
-from residue i to residue j. This is done with <a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_residue_distance_for_frame()</span></code></a></p>
+from residue i to residue j. This is done with <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_residue_distance_for_frame" title="stacker.pairwise_distance.get_residue_distance_for_frame"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_residue_distance_for_frame()</span></code></a></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">filtered_traj</span></code> object has 252 residues, so we create a 252 x 252 SSF:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ssf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">get_residue_distance_for_frame</span><span class="p">(</span><span class="n">filtered_traj</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">write_output</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="go">Loading: [####################################################################################################] Current Residue: 252/252 (100.0%)</span>
@@ -780,7 +780,7 @@ from residue i to residue j. This is done with <a class="reference internal" hre
 <span class="go">(252, 252)</span>
 </pre></div>
 </div>
-<p>We can calculate the SSF for multiple frames of a trajectory using <a class="reference internal" href="stacker.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-func docutils literal notranslate"><span class="pre">system_stacking_fingerprints()</span></code></a>, which
+<p>We can calculate the SSF for multiple frames of a trajectory using <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-func docutils literal notranslate"><span class="pre">system_stacking_fingerprints()</span></code></a>, which
 accepts smart indexing of frames (eg. 1-3,15-17 = 1,2,3,15,16,17):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ssfs</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">system_stacking_fingerprints</span><span class="p">(</span><span class="n">filtered_traj</span><span class="p">,</span> <span class="n">frames</span> <span class="o">=</span> <span class="s1">&#39;1-3&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ssfs</span><span class="o">.</span><span class="n">shape</span>
@@ -805,8 +805,8 @@ frames at once. When parralelizing, turn off standard output with <code class="d
 <section id="get-the-average-ssf-for-a-trajectory">
 <h2>Get the Average SSF for a Trajectory<a class="headerlink" href="#get-the-average-ssf-for-a-trajectory" title="Link to this heading">#</a></h2>
 <p>Single-frame SSFs are rarely as illuminating as the average SSF for all frames
-of a trajectory. Users can create this using <a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_frame_average" title="stacker.pairwise_distance.get_frame_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_frame_average()</span></code></a>, using the
-output from <a class="reference internal" href="stacker.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-func docutils literal notranslate"><span class="pre">system_stacking_fingerprints()</span></code></a> in the step above:</p>
+of a trajectory. Users can create this using <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_frame_average" title="stacker.pairwise_distance.get_frame_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_frame_average()</span></code></a>, using the
+output from <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.system_stacking_fingerprints" title="stacker.pairwise_distance.system_stacking_fingerprints"><code class="xref py py-func docutils literal notranslate"><span class="pre">system_stacking_fingerprints()</span></code></a> in the step above:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ssfs</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">system_stacking_fingerprints</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">filtered_traj</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">frames</span> <span class="o">=</span> <span class="s1">&#39;1-10&#39;</span><span class="p">,</span>
@@ -823,12 +823,12 @@ The next step shows how to analyze these results.</p>
 </section>
 <section id="how-to-visualize-an-ssf">
 <h2>How to Visualize an SSF<a class="headerlink" href="#how-to-visualize-an-ssf" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="stacker.html#stacker.visualization.display_ssfs" title="stacker.visualization.display_ssfs"><code class="xref py py-func docutils literal notranslate"><span class="pre">display_ssfs()</span></code></a> will visualize SSFs in Python output, with each SSF frame
+<p><a class="reference internal" href="stacker.visualization.html#stacker.visualization.display_ssfs" title="stacker.visualization.display_ssfs"><code class="xref py py-func docutils literal notranslate"><span class="pre">display_ssfs()</span></code></a> will visualize SSFs in Python output, with each SSF frame
 as a frame of the video:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s2">&quot;first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&quot;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="n">topology_filename</span> <span class="o">=</span> <span class="s2">&quot;5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&quot;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
+<span class="gp">... </span>                <span class="n">top_file</span> <span class="o">=</span> <span class="s2">&quot;5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="n">atoms</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
 <span class="go">WARNING: Residue Indices are expected to be 1-indexed</span>
 <span class="go">Reading trajectory...</span>
 <span class="go">Reading topology...</span>
@@ -848,12 +848,12 @@ as a frame of the video:</p>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
-<p>It is recommended to run <a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_frame_average" title="stacker.pairwise_distance.get_frame_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_frame_average()</span></code></a> and then save the output
+<p>It is recommended to run <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_frame_average" title="stacker.pairwise_distance.get_frame_average"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_frame_average()</span></code></a> and then save the output
 as a <code class="docutils literal notranslate"><span class="pre">.png</span></code> for comparison with other trajectories:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">stacker</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">filtered_traj</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">filter_traj</span><span class="p">(</span><span class="s2">&quot;first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd&quot;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="n">topology_filename</span> <span class="o">=</span> <span class="s2">&quot;5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&quot;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="n">atomnames_desired</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
+<span class="gp">... </span>                <span class="n">top_file</span> <span class="o">=</span> <span class="s2">&quot;5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="n">atoms</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">})</span>
 <span class="go">WARNING: Residue Indices are expected to be 1-indexed</span>
 <span class="go">Reading trajectory...</span>
 <span class="go">Reading topology...</span>
@@ -885,7 +885,7 @@ with <code class="docutils literal notranslate"><span class="pre">stacker</span>
 </section>
 <section id="how-to-analyze-an-ssf">
 <h2>How to Analyze an SSF<a class="headerlink" href="#how-to-analyze-an-ssf" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a> will give the stacking pairs with the most
+<p><a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a> will give the stacking pairs with the most
 pi-stacking (ie. closest to 3.5Å):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">get_top_stacking</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">filtered_traj</span><span class="p">,</span>
@@ -900,12 +900,12 @@ pi-stacking (ie. closest to 3.5Å):</p>
 </pre></div>
 </div>
 <p>It is recommended to save the output to a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> and use the other parameters
-for <a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a> to prepare for future analyses using the
+for <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a> to prepare for future analyses using the
 <a class="reference internal" href="command_line_options.html#command-line-options"><span class="std std-ref">Command Line Options</span></a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">get_top_stacking</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">filtered_traj</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">avg_ssf</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">output_csv</span> <span class="o">=</span> <span class="s1">&#39;top_stacking.csv&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">csv</span> <span class="o">=</span> <span class="s1">&#39;top_stacking.csv&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">n_events</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">include_adjacent</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="gp">... </span><span class="p">)</span>
@@ -913,7 +913,7 @@ for <a class="reference internal" href="stacker.html#stacker.pairwise_distance.g
 </div>
 <p>In the command line, <code class="docutils literal notranslate"><span class="pre">[user]$</span> <span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">compare</span></code> can give the residue
 pairs that changed the most between trajectories, by inputting two <code class="docutils literal notranslate"><span class="pre">csv</span></code>
-outputs from <a class="reference internal" href="stacker.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a>. Use <code class="docutils literal notranslate"><span class="pre">[user]$</span> <span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">compare</span> <span class="pre">--help</span></code>
+outputs from <a class="reference internal" href="stacker.pairwise_distance.html#stacker.pairwise_distance.get_top_stacking" title="stacker.pairwise_distance.get_top_stacking"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_top_stacking()</span></code></a>. Use <code class="docutils literal notranslate"><span class="pre">[user]$</span> <span class="pre">stacker</span> <span class="pre">-s</span> <span class="pre">compare</span> <span class="pre">--help</span></code>
 for more information.</p>
 </section>
 <section id="using-k-means">
@@ -1117,6 +1117,7 @@ datasets:</p>
 <span class="gp">... </span>    <span class="s2">&quot;/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCC_+1CGU_data.txt.gz&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s2">&quot;/home66/esakkas/STACKER/DATA/5JUP_N2_tGGG_aCCC_+1GCU_data.txt.gz&quot;</span>
 <span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_arrays</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">read_and_preprocess_data</span><span class="p">(</span><span class="n">dataset_names</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">blinded_data</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">create_kmeans_input</span><span class="p">(</span><span class="n">data_arrays</span><span class="p">)</span>
 <span class="go">(12800, 16129)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">plot_pca</span><span class="p">(</span><span class="n">blinded_data</span><span class="p">,</span> <span class="n">dataset_names</span><span class="p">,</span> <span class="s1">&#39;facet&#39;</span><span class="p">)</span>
@@ -1128,9 +1129,7 @@ We can combine this result with the KMeans and PCA plots below to strongly suppo
 the conclusion that <code class="docutils literal notranslate"><span class="pre">tGGG_aCCU_+1GCU</span></code> has a different system-wide stacking,
 and therefore a different structure, than the other three trajectories. The
 K-Means results with the best silhouette plot is shown here:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">image</span><span class="p">::</span> <span class="n">images</span><span class="o">/</span><span class="n">silhouette5</span><span class="o">.</span><span class="n">png</span>
-</pre></div>
-</div>
+<img alt="_images/silhouette5.png" src="_images/silhouette5.png" />
 <img alt="_images/kmeans5.png" src="_images/kmeans5.png" />
 <img alt="_images/pca_plot5by_cluster.png" src="_images/pca_plot5by_cluster.png" />
 </section>

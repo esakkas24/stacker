@@ -109,7 +109,7 @@ def create_axis_labels(res_indices: typing.ArrayLike, tick_distance: int = 10) -
 def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indices: typing.ArrayLike | str, 
                             seconds_per_frame: int = 10, tick_distance: int = 10,
                             outfile_prefix: str = '', scale_limits: tuple = (0, 7), outfile: str = '',
-                            scale_style: str = 'bellcurve', xy_line: bool = True) -> None:
+                            scale_style: str = 'bellcurve', xy_line: bool = True, **kwargs) -> None:
     """
     display_arrays_as_video(
         ssfs,
@@ -120,7 +120,8 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indices:
         scale_limits = (0,7),
         outfile = '',
         scale_style = 'bellcurve',
-        xy_line = True
+        xy_line = True,
+        **kwargs
     )
 
     Displays SSF data to output or writes SSF as a PNG
@@ -157,6 +158,25 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indices:
         Style of color scale. 
     xy_line : bool, default = True
         Draw x = y line to separate matrix halves.
+    **kwargs : dict, optional
+        Additional keyword arguments to customize the plot:
+
+        - fontsize : int, default = 10
+            Font size for all text elements.
+        - fig_width : float, default = 8
+            Width of the figure in inches.
+        - fig_height : float, default = 8
+            Height of the figure in inches.
+        - title_fontsize : int, default = fontsize
+            Font size for the title.
+        - legend_fontsize : int, default = fontsize
+            Font size for the legend.
+        - cb_fontsize : int, default = fontsize
+            Font size for the colorbar tick labels.
+        - xaxis_fontsize : int, default = fontsize
+            Font size for the x-axis tick labels.
+        - yaxis_fontsize : int, default = fontsize
+            Font size for the y-axis tick labels.
 
     Returns
     -------
@@ -192,39 +212,44 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indices:
     # Displays SSF for each frame of this trajectory to standard output
 
     """
-    orange_colormap = mpl.colormaps['Oranges_r'].resampled(100)
+    fontsize = kwargs.get('fontsize', 10)
+    plt.rcParams.update({'font.size': fontsize})
+
+    orange_colormap = plt.cm.get_cmap('Oranges_r', 100)
 
     if scale_style == 'gradient':
         newcolors = np.vstack((orange_colormap(np.linspace(1, 1, 1)), orange_colormap(np.linspace(0, 0, 128)),
                         orange_colormap(np.linspace(0, 1, 128))))
-        newcmp = mpl.colors.ListedColormap(newcolors, name='OrangeBellcurve')
+        newcmp = plt.cm.colors.ListedColormap(newcolors, name='OrangeBellcurve')
     elif scale_style == 'bellcurve':
         newcolors = np.vstack((orange_colormap(np.linspace(1, 0, 128)), orange_colormap(np.linspace(0, 1, 128))))
-        newcmp = mpl.colors.ListedColormap(newcolors, name='OrangeBellcurve')
+        newcmp = plt.cm.colors.ListedColormap(newcolors, name='OrangeBellcurve')
     
-    fig, ax = plt.subplots(figsize=(8,8))
+    fig = plt.figure(figsize=(kwargs.get('fig_width', 8), kwargs.get('fig_height', 8)))
+    ax = fig.add_subplot(111)
     plt.ion()
     frame_num = 1
     for hist in numpy_arrays:
         ax.clear()
         vmin, vmax = scale_limits
-        neg = ax.imshow(hist, cmap = newcmp, vmin=vmin, vmax=vmax, interpolation = 'nearest')
-        ax.set_title('Distance Between Residues Center of Geometries')
-        ax.set_title('Distance Between Residues Center of Geometries')
+        neg = ax.imshow(hist, cmap=newcmp, vmin=vmin, vmax=vmax, interpolation='nearest')
+        ax.set_title('Distance Between Residues Center of Geometries', fontsize=kwargs.get('title_fontsize', fontsize))
         ax.set_xlabel('Residue Index')  
         ax.xaxis.set_label_position('top')  
         ax.set_ylabel('Residue Index')  
         colorbar = fig.colorbar(neg, ax=ax, location='right', anchor=(0, 0.3), shrink=0.7)
-        colorbar.ax.set_title('Center of\nGeometry\nDist. (Å)')
+        colorbar.ax.set_title('Center of\nGeometry\nDist. (Å)', fontsize=kwargs.get('legend_fontsize', fontsize))
+        colorbar.ax.tick_params(labelsize=kwargs.get('cb_fontsize', fontsize))
+
 
         res_indices = SmartIndexingAction.parse_smart_index(res_indices)
         res_indices = list(res_indices)
         ticks, labels = create_axis_labels(res_indices, tick_distance)
-        plt.xticks(ticks, labels, rotation = 'vertical')
-        plt.yticks(ticks, labels)
+        plt.xticks(ticks, labels, rotation='vertical', fontsize=kwargs.get('xaxis_fontsize', fontsize))
+        plt.yticks(ticks, labels, fontsize=kwargs.get('yaxis_fontsize', fontsize))
         ax.tick_params(top=True, bottom=False, labeltop=True, labelbottom=False)
 
-        # seperate ticks by region
+        # separate ticks by region
         last_res = 1
         last_label = 0
         long_tick_region = False
@@ -250,7 +275,7 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indices:
             lims = [np.min([ax.get_xlim(), ax.get_ylim()]),  # min of both axes
                     np.max([ax.get_xlim(), ax.get_ylim()]),  # max of both axes
                     ]
-            ax.plot(lims, lims, 'k-', zorder = 0, alpha = 0.75, linewidth = 0.5) 
+            ax.plot(lims, lims, 'k-', zorder=0, alpha=0.75, linewidth=0.5) 
 
         plt.pause(seconds_per_frame)
         if outfile_prefix:
@@ -258,7 +283,7 @@ def display_arrays_as_video(numpy_arrays : list | typing.ArrayLike, res_indices:
         elif outfile:
             plt.savefig(outfile)
         colorbar.remove()
-        frame_num+=1
+        frame_num += 1
 
 @functools.wraps(display_arrays_as_video)
 def display_ssfs(*args, **kwargs):
@@ -270,7 +295,7 @@ Alias for `display_arrays_as_video()`.
 {display_arrays_as_video.__doc__}
 """
 
-def set_polar_grid() -> mpl.projections.polar.PolarAxes:
+def set_polar_grid(**kwargs) -> mpl.projections.polar.PolarAxes:
     """
     Set up axes for PSF.
 
@@ -280,7 +305,25 @@ def set_polar_grid() -> mpl.projections.polar.PolarAxes:
 
     Parameters
     ----------
-    None
+    **kwargs : dict, optional
+        Additional keyword arguments to customize the plot:
+
+        - fontsize : int, default = 10
+            Font size for all text elements.
+        - fig_width : float, default = 5
+            Width of the figure in inches.
+        - fig_height : float, default = 5
+            Height of the figure in inches.
+        - title_fontsize : int, default = fontsize
+            Font size for the title.
+        - legend_fontsize : int, default = fontsize
+            Font size for the legend.
+        - cb_fontsize : int, default = fontsize
+            Font size for the colorbar labels.
+        - xaxis_fontsize : int, default = fontsize
+            Font size for the x-axis labels.
+        - yaxis_fontsize : int, default = fontsize
+            Font size for the y-axis labels.
 
     Returns
     -------
@@ -288,25 +331,30 @@ def set_polar_grid() -> mpl.projections.polar.PolarAxes:
         Axis object for the created polar plot.
 
     """
-    fig = plt.figure()
-    ax = fig.add_subplot(polar=True)
+    fontsize = kwargs.get('fontsize', 10)
+    plt.rcParams.update({'font.size': fontsize})
+
+    fig = plt.figure(figsize=(kwargs.get('fig_width', 5), kwargs.get('fig_height', 5)))
+    ax = fig.add_subplot(111, polar=True)
 
     ax.set_xticks(np.pi/180. * np.linspace(0,  360, 3, endpoint=False))
-    ax.set_xticklabels([r"$\theta=0^\circ$",r"$\theta=120^\circ$",r"$\theta=240^\circ$"])
-    ax.tick_params(pad = -10)
+    ax.set_xticklabels([r"$\theta=0^\circ$", r"$\theta=120^\circ$", r"$\theta=240^\circ$"], 
+                       fontsize=kwargs.get('xaxis_fontsize', fontsize))
+    ax.tick_params(pad=-10)
 
-    ax.set_rlim(0,10)
-    ax.set_rticks(np.linspace(0,  10, 3, endpoint=True))
-    ax.set_rlabel_position(180)
-    plt.text(x=np.radians(178), y=12, s=r"$\rho\text{ }(\AA)$", ha="center",va='center',fontsize=11)
-    plt.text(x=0, y=2, s="C2", ha="center",va='center',fontsize=7.5)
-    plt.text(x=np.radians(240), y=2, s="C4", ha="center",va='center',fontsize=7.5)
-    plt.text(x=np.radians(120), y=1.8, s="C6", ha="center",va='center',fontsize=7.5)
+    ax.set_rlim(0, 10)
+    ax.set_rticks(np.linspace(0, 10, 3, endpoint=True))
+    ax.tick_params(axis='y', labelsize=kwargs.get('yaxis_fontsize', fontsize))
+    ax.set_rlabel_position(180) 
+    plt.text(x=np.radians(178), y=12, s=r"$\rho\text{ }(\AA)$", ha="center", va='center', fontsize=kwargs.get('fontsize', fontsize))
+    plt.text(x=0, y=2, s="C2", ha="center", va='center', fontsize=kwargs.get('fontsize', fontsize))
+    plt.text(x=np.radians(240), y=2, s="C4", ha="center", va='center', fontsize=kwargs.get('fontsize', fontsize))
+    plt.text(x=np.radians(120), y=1.8, s="C6", ha="center", va='center', fontsize=kwargs.get('fontsize', fontsize))
 
     ax.grid(color='gray', linestyle='--', linewidth=0.5)
     return ax
 
-def visualize_two_residue_movement_scatterplot(csv: str, plot_outfile: str = '', frame_list: set = {}) -> None:
+def visualize_two_residue_movement_scatterplot(csv: str, plot_outfile: str = '', frame_list: set = {}, **kwargs) -> None:
     """
     Creates scatterplot of two-residue movement relative to each other.
 
@@ -324,6 +372,19 @@ def visualize_two_residue_movement_scatterplot(csv: str, plot_outfile: str = '',
         png, pdf, ps, eps, and svg supported.
     frame_list : set, default = {}
         Set of frames to use in csv, if empty use all frames.
+    **kwargs : dict, optional
+        Additional keyword arguments to customize the plot:
+
+        - fontsize : int, default = 10
+            Font size for all text elements.
+        - fig_width : float, default = 5
+            Width of the figure in inches.
+        - fig_height : float, default = 5
+            Height of the figure in inches.
+        - xaxis_fontsize : int, default = fontsize
+            Font size for the theta-axis labels.
+        - yaxis_fontsize : int, default = fontsize
+            Font size for the rho-axis labels.
 
     Returns
     -------
@@ -367,7 +428,7 @@ def visualize_two_residue_movement_scatterplot(csv: str, plot_outfile: str = '',
 
     rho_values = bottaro_values['rho_dist']
 
-    ax = set_polar_grid()
+    ax = set_polar_grid(**kwargs)
     ax.scatter(theta_values_rad, rho_values, color = 'purple', s=1, alpha = 0.5)
 
     # Draw nucleotide ring in polar plot
@@ -384,8 +445,7 @@ def visualize_two_residue_movement_scatterplot(csv: str, plot_outfile: str = '',
     else:
         plt.show()
 
-
-def visualize_two_residue_movement_heatmap(csv: str, plot_outfile: str = '', frame_list: set = {}) -> None:
+def visualize_two_residue_movement_heatmap(csv: str, plot_outfile: str = '', frame_list: set = {}, **kwargs) -> None:
     """
     Creates heatmap of two-residue movement relative to each other.
 
@@ -403,6 +463,21 @@ def visualize_two_residue_movement_heatmap(csv: str, plot_outfile: str = '', fra
         png, pdf, ps, eps, and svg supported.
     frame_list : set, default = {}
         Set of frames to use in csv, if empty use all frames.
+    **kwargs : dict, optional
+        Additional keyword arguments to customize the plot:
+        
+        - fontsize : int, default = 10
+            Font size for all text elements.
+        - fig_width : float, default = 5
+            Width of the figure in inches.
+        - fig_height : float, default = 5
+            Height of the figure in inches.
+        - xaxis_fontsize : int, default = fontsize
+            Font size for the theta-axis labels.
+        - yaxis_fontsize : int, default = fontsize
+            Font size for the rho-axis labels.
+        - cb_fontsize : int, default = 10
+            Font size for the colorbar tick labels.
 
     Returns
     -------
@@ -447,7 +522,7 @@ def visualize_two_residue_movement_heatmap(csv: str, plot_outfile: str = '', fra
     # convert rho values from nm to Angstroms
     rho_values = bottaro_values['rho_dist']
 
-    ax = set_polar_grid()
+    ax = set_polar_grid(**kwargs)
     ax = kdeplot(x=theta_values_rad, y=rho_values, fill=True, levels = [0.1*i for i in range(1,11)], cbar = True, cmap = 'gist_earth_r')
     plt.xlabel('')
     plt.ylabel('')
@@ -456,6 +531,9 @@ def visualize_two_residue_movement_heatmap(csv: str, plot_outfile: str = '', fra
     levels = [0.1*i for i in range(1,11)]
     formatted_labels = ['{:.1f}'.format(level) for level in levels]
     cbar.set_ticklabels(formatted_labels)
+    cbar.ax.tick_params(labelsize=kwargs.get('cb_fontsize', 10))
+    cbar.ax.set_position([0.85, 0.15, 0.05, 0.7])  
+    cbar.ax.set_title('Density', fontsize=kwargs.get('legend_fontsize', 10), pad=15)
 
     # Draw nucleotide ring in polar plot
     r_for_ring = np.ones(7)*1.3

@@ -707,7 +707,7 @@
 <h1>stacker.visualization.visualize_two_residue_movement_heatmap<a class="headerlink" href="#stacker-visualization-visualize-two-residue-movement-heatmap" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="stacker.visualization.visualize_two_residue_movement_heatmap">
-<span class="sig-name descname"><span class="pre">visualize_two_residue_movement_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/visualization.html#visualize_two_residue_movement_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.visualize_two_residue_movement_heatmap" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">visualize_two_residue_movement_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stacker/visualization.html#visualize_two_residue_movement_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#stacker.visualization.visualize_two_residue_movement_heatmap" title="Link to this definition">#</a></dt>
 <dd><p>Creates heatmap of two-residue movement relative to each other.</p>
 <p>2D shaded contour plot of the density of points in the 
 visualize_two_residue_movement_scatterplot() scatterplot.</p>
@@ -722,6 +722,40 @@ in residue_movement.</p>
 png, pdf, ps, eps, and svg supported.</p>
 </dd>
 <dt><strong>frame_list</strong><span class="classifier">set, default = {}</span></dt><dd><p>Set of frames to use in csv, if empty use all frames.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Additional keyword arguments to customize the plot:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>fontsize<span class="classifier">int, default = 10</span></dt><dd><p>Font size for all text elements.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>fig_width<span class="classifier">float, default = 5</span></dt><dd><p>Width of the figure in inches.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>fig_height<span class="classifier">float, default = 5</span></dt><dd><p>Height of the figure in inches.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>xaxis_fontsize<span class="classifier">int, default = fontsize</span></dt><dd><p>Font size for the theta-axis labels.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>yaxis_fontsize<span class="classifier">int, default = fontsize</span></dt><dd><p>Font size for the rho-axis labels.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>cb_fontsize<span class="classifier">int, default = 10</span></dt><dd><p>Font size for the colorbar tick labels.</p>
+</dd>
+</dl>
+</li>
+</ul>
 </dd>
 </dl>
 </dd>

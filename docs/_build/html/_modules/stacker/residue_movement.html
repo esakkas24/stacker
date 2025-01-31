@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css?v=7f9a90b1" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/numpy.css?v=93bf2a1f" />
   
@@ -947,7 +947,7 @@
 <div class="viewcode-block" id="write_bottaro_to_csv">
 <a class="viewcode-back" href="../../stacker.residue_movement.html#stacker.residue_movement.write_bottaro_to_csv">[docs]</a>
 <span class="k">def</span> <span class="nf">write_bottaro_to_csv</span><span class="p">(</span><span class="n">pdb</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> 
-                         <span class="n">csv</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> 
+                         <span class="n">outcsv</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> 
                          <span class="n">pers_res</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> 
                          <span class="n">view_res</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
                          <span class="n">res1_atoms</span><span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">},</span> 
@@ -966,7 +966,7 @@
 <span class="sd">    pdb : str</span>
 <span class="sd">        Filename of PDB containing information for ONLY two residues (perspective and viewed</span>
 <span class="sd">        nucleotide) at each frame.</span>
-<span class="sd">    csv : str</span>
+<span class="sd">    outcsv : str</span>
 <span class="sd">        Filename of CSV file to write to.</span>
 <span class="sd">    pers_res : int, default = -1</span>
 <span class="sd">        Residue index of the perspective residue whose plane to project onto (0-/1-index changed by</span>
@@ -1078,12 +1078,12 @@
         <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">frame_values</span>
         <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
     
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">csv</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">outcsv</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
         <span class="n">csvwriter</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">csvfile</span><span class="p">)</span> 
         <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span> 
         <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Output values written to &quot;</span> <span class="o">+</span> <span class="n">csv</span><span class="p">)</span></div>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Output values written to &quot;</span> <span class="o">+</span> <span class="n">outcsv</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="write_psf_data">

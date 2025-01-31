@@ -40,7 +40,7 @@ We filter to atoms C2, C4, and C6 using :func:`filter_traj`::
     >>> import stacker as st
     >>> filtered_traj = st.filter_traj("first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd",
     ...                 top_file = "5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop",
-    ...                 atomnames_desired = {"C2", "C4", "C6"})
+    ...                 atoms = {"C2", "C4", "C6"})
     WARNING: Residue Indices are expected to be 1-indexed
     Reading trajectory...
     Reading topology...
@@ -136,8 +136,8 @@ as a frame of the video::
 
     >>> import stacker as st
     >>> filtered_traj = st.filter_traj("first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd",
-    ...                 topology_filename = "5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop",
-    ...                 atomnames_desired = {"C2", "C4", "C6"})
+    ...                 top_file = "5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop",
+    ...                 atoms = {"C2", "C4", "C6"})
     WARNING: Residue Indices are expected to be 1-indexed
     Reading trajectory...
     Reading topology...
@@ -163,8 +163,8 @@ as a ``.png`` for comparison with other trajectories::
 
     >>> import stacker as st
     >>> filtered_traj = st.filter_traj("first10_5JUP_N2_tUAG_aCUA_+1GCU_nowat.mdcrd",
-    ...                 topology_filename = "5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop",
-    ...                 atomnames_desired = {"C2", "C4", "C6"})
+    ...                 top_file = "5JUP_N2_tUAG_aCUA_+1GCU_nowat.prmtop",
+    ...                 atoms = {"C2", "C4", "C6"})
     WARNING: Residue Indices are expected to be 1-indexed
     Reading trajectory...
     Reading topology...
@@ -220,7 +220,7 @@ for :func:`get_top_stacking` to prepare for future analyses using the
     >>> st.get_top_stacking(
     ...     filtered_traj,
     ...     avg_ssf,
-    ...     output_csv = 'top_stacking.csv',
+    ...     csv = 'top_stacking.csv',
     ...     n_events = -1,
     ...     include_adjacent = True
     ... )
@@ -467,4 +467,3 @@ K-Means results with the best silhouette plot is shown here:
 .. image:: images/kmeans5.png
 
 .. image:: images/pca_plot5by_cluster.png
-
